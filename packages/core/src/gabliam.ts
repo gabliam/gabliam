@@ -1,38 +1,49 @@
 import * as express from "express";
 import * as inversify from "inversify";
 import * as interfaces from "./interfaces";
-import { TYPE, METADATA_KEY, DEFAULT_ROUTING_ROOT_PATH } from "./constants";
-import { loader } from './loader';
+import { TYPE, METADATA_KEY, DEFAULT_ROUTING_ROOT_PATH, APP_CONFIG } from "./constants";
+import { loadModules, loadConfig } from './loader';
 import { container } from './container';
 import { registry } from './registry';
+
 
 /**
  * Wrapper for the express server.
  */
 export class Gabliam {
     private _plugins: interfaces.ModuleFunction[] = [];
-
+    private _options: interfaces.GabliamOptions;
     private _router: express.Router;
-    public container: inversify.interfaces.Container = container;
     private _app: express.Application = express();
     private _configFn: interfaces.ConfigFunction;
     private _errorConfigFn: interfaces.ConfigFunction;
     private _routingConfig: interfaces.RoutingConfig;
+
+    public container: inversify.interfaces.Container = container;
+    
 
     /**
      * Wrapper for the express server.
      *
      * @param container Container loaded with all controllers and their dependencies.
      */
-    constructor(
-        public discoverPath: string,
-        customRouter?: express.Router,
-        routingConfig?: interfaces.RoutingConfig
-    ) {
-        this._router = customRouter || express.Router();
-        this._routingConfig = routingConfig || {
+    constructor(options: interfaces.GabliamOptions | string) {
+        if (typeof options === 'string'){
+            this._options = {
+                discoverPath: options
+            }
+        } else {
+            this._options = options;
+        }
+        
+        this._router = this._options.customRouter || express.Router();
+        this._routingConfig = this._options.routingConfig || {
             rootPath: DEFAULT_ROUTING_ROOT_PATH
         };
+    }
+
+    get options(): interfaces.GabliamOptions {
+        return this._options;
     }
 
     /**
@@ -70,7 +81,8 @@ export class Gabliam {
      * Applies all routes and configuration to the server, returning the express application.
      */
     public async build(): Promise<express.Application> {
-        loader(this.discoverPath);
+        loadModules(this.options.discoverPath);
+        this._initializeConfig();
         this._loadConfig();
         await Promise.all(this._plugins.map(plugin => plugin(this)));
         
@@ -89,6 +101,11 @@ export class Gabliam {
 
         return this._app;
     }
+
+    private _initializeConfig() {
+        let config = loadConfig(this.options.configPath || this.options.discoverPath);
+        this.container.bind<any>(APP_CONFIG).toConstantValue(config);
+    } 
 
     private _loadConfig() {
         let configIds = registry.get<inversify.interfaces.ServiceIdentifier<any>>(TYPE.Config);

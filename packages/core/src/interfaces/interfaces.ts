@@ -17,11 +17,20 @@ export interface RoutingConfig {
     rootPath: string;
 }
 
-export type ModuleFunction = (framework: Gabliam) => Promise<void>;
+export interface ModuleFunction {
+    (framework: Gabliam): Promise<void>;
+}
 
 export interface Config { }
 
 export interface ConfigRegistry {
     order: number;
     id: interfaces.ServiceIdentifier<any>;
+}
+
+export interface GabliamOptions {
+    discoverPath: string;
+    configPath?: string;
+    customRouter?: express.Router,
+    routingConfig?: RoutingConfig
 }
