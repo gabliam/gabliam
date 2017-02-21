@@ -1,6 +1,6 @@
 import * as express from 'express';
 import { Gabliam } from '../gabliam';
-import { interfaces } from "inversify";
+import { interfaces } from 'inversify';
 
 
 export interface Controller { }
@@ -28,9 +28,9 @@ export interface ConfigRegistry {
     id: interfaces.ServiceIdentifier<any>;
 }
 
-export interface GabliamOptions {
+export interface GabliamConfig {
     discoverPath: string;
     configPath?: string;
-    customRouter?: express.Router,
-    routingConfig?: RoutingConfig
+    customRouter?: express.Router;
+    routingConfig?: RoutingConfig;
 }

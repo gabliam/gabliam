@@ -1,7 +1,8 @@
-import * as express from "express";
-import * as inversify from "inversify";
-import * as interfaces from "./interfaces";
-import { TYPE, METADATA_KEY, DEFAULT_ROUTING_ROOT_PATH, APP_CONFIG } from "./constants";
+import * as express from 'express';
+import * as inversify from 'inversify';
+import * as interfaces from './interfaces';
+import * as _ from 'lodash';
+import { TYPE, METADATA_KEY, DEFAULT_ROUTING_ROOT_PATH, APP_CONFIG } from './constants';
 import { loadModules, loadConfig } from './loader';
 import { container } from './container';
 import { registry } from './registry';
@@ -12,7 +13,7 @@ import { registry } from './registry';
  */
 export class Gabliam {
     private _plugins: interfaces.ModuleFunction[] = [];
-    private _options: interfaces.GabliamOptions;
+    private _options: interfaces.GabliamConfig;
     private _router: express.Router;
     private _app: express.Application = express();
     private _configFn: interfaces.ConfigFunction;
@@ -20,29 +21,33 @@ export class Gabliam {
     private _routingConfig: interfaces.RoutingConfig;
 
     public container: inversify.interfaces.Container = container;
-    
+
 
     /**
      * Wrapper for the express server.
      *
      * @param container Container loaded with all controllers and their dependencies.
      */
-    constructor(options: interfaces.GabliamOptions | string) {
-        if (typeof options === 'string'){
+    constructor(options: interfaces.GabliamConfig | string) {
+        if (typeof options === 'string') {
             this._options = {
                 discoverPath: options
-            }
+            };
         } else {
             this._options = options;
         }
         
+        if (!this.options.configPath) {
+            this.options.configPath = this.options.discoverPath;
+        }
+
         this._router = this._options.customRouter || express.Router();
         this._routingConfig = this._options.routingConfig || {
             rootPath: DEFAULT_ROUTING_ROOT_PATH
         };
     }
 
-    get options(): interfaces.GabliamOptions {
+    get options(): interfaces.GabliamConfig {
         return this._options;
     }
 
@@ -83,9 +88,9 @@ export class Gabliam {
     public async build(): Promise<express.Application> {
         loadModules(this.options.discoverPath);
         this._initializeConfig();
-        this._loadConfig();
+        await this._loadConfig();
         await Promise.all(this._plugins.map(plugin => plugin(this)));
-        
+
 
         // register server-level middleware before anything else
         if (this._configFn) {
@@ -105,24 +110,34 @@ export class Gabliam {
     private _initializeConfig() {
         let config = loadConfig(this.options.configPath || this.options.discoverPath);
         this.container.bind<any>(APP_CONFIG).toConstantValue(config);
-    } 
+    }
 
-    private _loadConfig() {
-        let configIds = registry.get<inversify.interfaces.ServiceIdentifier<any>>(TYPE.Config);
-        configIds.forEach(configId => {
-            let confInstance = this.container.get<interfaces.Config>(configId);
+    private async _loadConfig() {
+        async function callInstance(instance, key) {
+            return Promise.resolve(instance[key]());
+        }
 
-            let methodMetadata: interfaces.ConfigMethodMetadata[] = Reflect.getOwnMetadata(
-                METADATA_KEY.Bean,
-                confInstance.constructor
-            );
+        let configsRegistry = registry.get<interfaces.ConfigRegistry>(TYPE.Config);
+        if (configsRegistry) {
+            configsRegistry = _.sortBy(configsRegistry, 'order');
+            for (let {id: configId} of configsRegistry) {
+                let confInstance = this.container.get<interfaces.Config>(configId);
 
-            if (methodMetadata) {
-                methodMetadata.forEach(metadata => {
-                    this.container.bind<any>(metadata.id).toConstantValue(confInstance[metadata.key]());
-                });
+                let beanMetadata: interfaces.BeanMetadata[] = Reflect.getOwnMetadata(
+                    METADATA_KEY.bean,
+                    confInstance.constructor
+                );
+
+                if (beanMetadata) {
+                    // No promise.all and await because order of beans are important
+                    for (let metadata of beanMetadata) {
+                        this.container
+                            .bind<any>(metadata.id)
+                            .toConstantValue(await callInstance(confInstance, metadata.key));
+                    }
+                }
             }
-        });
+        }
     }
 
     private registerControllers() {

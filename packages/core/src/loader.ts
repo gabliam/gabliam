@@ -21,14 +21,14 @@ export function loadConfig(folder: string): any {
 
     let profile = process.env.PROFILE || null;
     let defaultProfileFile = files.find(file => file === 'application.yml');
-    
+
     if (defaultProfileFile) {
         config = loadYmlFile(`${folder}/${defaultProfileFile}`);
     }
-    
+
     if (profile) {
         let profileFile = files.find(file => file === `application-${profile}.yml`);
-    
+
         if (profileFile) {
             config = _.merge({}, config, loadYmlFile(`${folder}/${profileFile}`));
         }

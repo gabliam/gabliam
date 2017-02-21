@@ -1,5 +1,5 @@
 export class Registry {
-    private registry = new Map<symbol, any>();
+    private registry = new Map<symbol, any[]>();
 
    get<T>(key: symbol):  T[] {
         if (!this.registry.has(key)) {

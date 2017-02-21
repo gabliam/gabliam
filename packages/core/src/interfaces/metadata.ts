@@ -13,8 +13,14 @@ export interface ControllerMethodMetadata extends ControllerMetadata {
     key: string;
 }
 
-export interface ConfigMethodMetadata {
+export interface BeanMetadata {
     id: interfaces.ServiceIdentifier<any>;
+    key: string;
+    target: any;
+}
+
+export interface ValueMetadata {
+    path: string;
     key: string;
     target: any;
 }

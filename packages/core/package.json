@@ -30,6 +30,7 @@
     "@types/express": "^4.0.35",
     "reflect-metadata": "^0.1.9",
     "rimraf": "^2.6.0",
+    "tslint": "^4.4.2",
     "typescript": "^2.1.6"
   },
   "repository": {

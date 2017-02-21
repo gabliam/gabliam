@@ -1,5 +1,5 @@
 export * from './controller';
 export * from './service';
 export * from './bean';
-export * from './config';
+export { Config, PluginConfig } from './config';
 export * from './value';
