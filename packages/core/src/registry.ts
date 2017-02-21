@@ -1,7 +1,9 @@
+import { DecoratorRegistry } from './interfaces';
+
 export class Registry {
     private registry = new Map<symbol, any[]>();
 
-   get<T>(key: symbol):  T[] {
+   get<T extends DecoratorRegistry>(key: symbol):  T[] {
         if (!this.registry.has(key)) {
             this.registry.set(key, []);
         }
@@ -9,7 +11,7 @@ export class Registry {
         return this.registry.get(key);
     }
 
-    add(key: symbol, target: any) {
+    add<T  extends DecoratorRegistry>(key: symbol, target: T) {
         this.get(key).push(target);
     }
 

@@ -22,9 +22,14 @@ export interface PluginDescriptor {
 
 export interface Config { }
 
-export interface ConfigRegistry {
-    order: number;
+export interface DecoratorRegistry {
     id: interfaces.ServiceIdentifier<any>;
+
+    target: any;
+}
+
+export interface ConfigRegistry extends DecoratorRegistry {
+    order: number;
 }
 
 export interface GabliamConfig {

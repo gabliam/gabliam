@@ -8,19 +8,25 @@ export function makeValueMiddleware(container: Container) {
         return (args: interfaces.NextArgs) => {
             let results: any = null;
             results = next(args);
-            let valueMetadata: ValueMetadata[] = Reflect.getOwnMetadata(
-                METADATA_KEY.value,
-                results.constructor
-            );
 
-            if (valueMetadata) {
-                valueMetadata.forEach(({key, path}) => {
-                    let defaultValue = results[key];
-                    let config = container.get(APP_CONFIG);
-                    results[key] = _.get(config, path, defaultValue);
-                });
+            if (results && results.constructor) {
+                let valueMetadata: ValueMetadata[] = Reflect.getOwnMetadata(
+                    METADATA_KEY.value,
+                    results.constructor
+                );
+
+                if (valueMetadata) {
+                    valueMetadata.forEach(({key, path}) => {
+                        try {
+                            let defaultValue = results[key];
+                            let config = container.get<any>(APP_CONFIG);
+                            results[key] = _.get(config, path, defaultValue);
+                        } catch (err) {
+                            // console.log('ValueMiddleware', err);
+                        }
+                    });
+                }
             }
-
             return results;
         };
     }

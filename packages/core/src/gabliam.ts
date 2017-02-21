@@ -87,10 +87,11 @@ export class Gabliam {
      * Applies all routes and configuration to the server, returning the express application.
      */
     public async build(): Promise<express.Application> {
+        this._initializeConfig();
         let discoverPaths = [this.options.discoverPath];
         discoverPaths.unshift(...this._plugins.map(plugin => plugin.discoverPath));
         loadModules(discoverPaths);
-        this._initializeConfig();
+        this._bind();
         await this._loadConfig();
 
         // register server-level middleware before anything else
@@ -111,6 +112,17 @@ export class Gabliam {
     private _initializeConfig() {
         let config = loadConfig(this.options.configPath);
         this.container.bind<any>(APP_CONFIG).toConstantValue(config);
+    }
+
+    private _bind() {
+        registry.get(TYPE.Config)
+            .forEach(({id, target}) => this.container.bind<any>(id).to(target).inSingletonScope());
+
+        registry.get(TYPE.Service)
+            .forEach(({id, target}) => this.container.bind<any>(id).to(target).inSingletonScope());
+
+        registry.get(TYPE.Controller)
+            .forEach(({id, target}) => this.container.bind<any>(id).to(target).inSingletonScope());
     }
 
     private async _loadConfig() {
@@ -151,10 +163,9 @@ export class Gabliam {
 
     private registerControllers() {
         console.log('registerControllers');
-        let controllerIds = registry.get<inversify.interfaces.ServiceIdentifier<any>>(TYPE.Controller);
+        let controllerIds = registry.get(TYPE.Controller);
 
-        controllerIds.forEach((controllerId) => {
-            console.log(this.container);
+        controllerIds.forEach(({id: controllerId}) => {
             let controller = this.container.get<interfaces.Controller>(controllerId);
 
             let controllerMetadata: interfaces.ControllerMetadata = Reflect.getOwnMetadata(

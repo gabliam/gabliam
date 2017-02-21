@@ -1,10 +1,8 @@
 import * as express from 'express';
 import { ControllerMetadata, Controller, HandlerDecorator, ControllerMethodMetadata } from '../interfaces';
 import { METADATA_KEY, TYPE } from '../constants';
-// import { fluentProvider } from '../container';
 import { registry } from '../registry';
 import { interfaces, injectable } from 'inversify';
-import { container } from '../container';
 
 export interface ControllerOptions {
     name?: string;
@@ -41,40 +39,36 @@ function decorateController(options: ControllerOptions | string, target: any, js
 
     let metadata: ControllerMetadata = { path, middlewares, target, json };
     Reflect.defineMetadata(METADATA_KEY.controller, metadata, target);
-    // fluentProvider(id)
-    //     .inSingletonScope()
-    //     .done()(target);
-    container.bind<any>(id).to(target).inSingletonScope();
     injectable()(target);
-    registry.add(TYPE.Controller, id);
+    registry.add(TYPE.Controller, {id, target});
 }
 
 export function All(path: string, ...middlewares: express.RequestHandler[]): HandlerDecorator {
-    return Method("all", path, ...middlewares);
+    return Method('all', path, ...middlewares);
 }
 
 export function Get(path: string, ...middlewares: express.RequestHandler[]): HandlerDecorator {
-    return Method("get", path, ...middlewares);
+    return Method('get', path, ...middlewares);
 }
 
 export function Post(path: string, ...middlewares: express.RequestHandler[]): HandlerDecorator {
-    return Method("post", path, ...middlewares);
+    return Method('post', path, ...middlewares);
 }
 
 export function Put(path: string, ...middlewares: express.RequestHandler[]): HandlerDecorator {
-    return Method("put", path, ...middlewares);
+    return Method('put', path, ...middlewares);
 }
 
 export function Patch(path: string, ...middlewares: express.RequestHandler[]): HandlerDecorator {
-    return Method("patch", path, ...middlewares);
+    return Method('patch', path, ...middlewares);
 }
 
 export function Head(path: string, ...middlewares: express.RequestHandler[]): HandlerDecorator {
-    return Method("head", path, ...middlewares);
+    return Method('head', path, ...middlewares);
 }
 
 export function Delete(path: string, ...middlewares: express.RequestHandler[]): HandlerDecorator {
-    return Method("delete", path, ...middlewares);
+    return Method('delete', path, ...middlewares);
 }
 
 export function Method(method: string, path: string, ...middlewares: express.RequestHandler[]): HandlerDecorator {
