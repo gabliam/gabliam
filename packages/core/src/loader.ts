@@ -4,15 +4,20 @@ import * as yaml from 'js-yaml';
 import * as fs from 'fs';
 import * as _ from 'lodash';
 
-export function loadModules(folder: string) {
-    includeAll({
-        dirname: folder,
-        filter: /.*\.(js|ts)$/,
-        excludeDirs: /^\.(git|svn|node_modules|dist|build)$/
+export function loadModules(folders: string[]) {
+    folders.forEach(folder => {
+        console.log(`load ${folder}`);
+        includeAll({
+            dirname: folder,
+            filter: /^(?!.*d\.ts$).*\.(ts|js)$/,
+            excludeDirs: /^\.(git|svn|node_modules|dist|build)$/
+        });
     });
+    console.log(`end loadModules`);
 }
 
 export function loadConfig(folder: string): any {
+    console.log('loadConfig', folder);
     let files = glob.sync('**/application?(-+([a-zA-Z])).yml', { cwd: folder });
     let config = {};
     if (!files) {

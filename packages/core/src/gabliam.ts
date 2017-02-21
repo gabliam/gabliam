@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as inversify from 'inversify';
 import * as interfaces from './interfaces';
 import * as _ from 'lodash';
-import { TYPE, METADATA_KEY, DEFAULT_ROUTING_ROOT_PATH, APP_CONFIG } from './constants';
+import { TYPE, METADATA_KEY, DEFAULT_ROUTING_ROOT_PATH, APP_CONFIG, CORE_CONFIG } from './constants';
 import { loadModules, loadConfig } from './loader';
 import { container } from './container';
 import { registry } from './registry';
@@ -12,7 +12,7 @@ import { registry } from './registry';
  * Wrapper for the express server.
  */
 export class Gabliam {
-    private _plugins: interfaces.ModuleFunction[] = [];
+    private _plugins: interfaces.PluginDescriptor[] = [];
     private _options: interfaces.GabliamConfig;
     private _router: express.Router;
     private _app: express.Application = express();
@@ -36,11 +36,12 @@ export class Gabliam {
         } else {
             this._options = options;
         }
-        
+
         if (!this.options.configPath) {
             this.options.configPath = this.options.discoverPath;
         }
 
+        this.container.bind<interfaces.GabliamConfig>(CORE_CONFIG).toConstantValue(this.options);
         this._router = this._options.customRouter || express.Router();
         this._routingConfig = this._options.routingConfig || {
             rootPath: DEFAULT_ROUTING_ROOT_PATH
@@ -77,7 +78,7 @@ export class Gabliam {
         return this;
     }
 
-    public addPlugin(fn: interfaces.ModuleFunction): Gabliam {
+    public addPlugin(fn: interfaces.PluginDescriptor): Gabliam {
         this._plugins.push(fn);
         return this;
     }
@@ -86,11 +87,11 @@ export class Gabliam {
      * Applies all routes and configuration to the server, returning the express application.
      */
     public async build(): Promise<express.Application> {
-        loadModules(this.options.discoverPath);
+        let discoverPaths = [this.options.discoverPath];
+        discoverPaths.push(...this._plugins.map(plugin => plugin.discoverPath));
+        loadModules(discoverPaths);
         this._initializeConfig();
         await this._loadConfig();
-        await Promise.all(this._plugins.map(plugin => plugin(this)));
-
 
         // register server-level middleware before anything else
         if (this._configFn) {
@@ -108,18 +109,21 @@ export class Gabliam {
     }
 
     private _initializeConfig() {
-        let config = loadConfig(this.options.configPath || this.options.discoverPath);
+        let config = loadConfig(this.options.configPath);
         this.container.bind<any>(APP_CONFIG).toConstantValue(config);
     }
 
     private async _loadConfig() {
-        async function callInstance(instance, key) {
+        console.log('_loadConfig');
+        function callInstance(instance, key) {
             return Promise.resolve(instance[key]());
         }
 
         let configsRegistry = registry.get<interfaces.ConfigRegistry>(TYPE.Config);
+        console.log('configsRegistry', configsRegistry);
         if (configsRegistry) {
             configsRegistry = _.sortBy(configsRegistry, 'order');
+
             for (let {id: configId} of configsRegistry) {
                 let confInstance = this.container.get<interfaces.Config>(configId);
 
@@ -131,20 +135,25 @@ export class Gabliam {
                 if (beanMetadata) {
                     // No promise.all and await because order of beans are important
                     for (let metadata of beanMetadata) {
+                        console.log('call')
+                        let val = await callInstance(confInstance, metadata.key);
+                        console.log('call end', val);
                         this.container
                             .bind<any>(metadata.id)
-                            .toConstantValue(await callInstance(confInstance, metadata.key));
+                            .toConstantValue(val);
                     }
                 }
             }
         }
+        console.log('_loadConfig end');
     }
 
     private registerControllers() {
+        console.log('registerControllers');
         let controllerIds = registry.get<inversify.interfaces.ServiceIdentifier<any>>(TYPE.Controller);
 
         controllerIds.forEach((controllerId) => {
-
+            console.log('registerControllers', controllerId);
             let controller = this.container.get<interfaces.Controller>(controllerId);
 
             let controllerMetadata: interfaces.ControllerMetadata = Reflect.getOwnMetadata(

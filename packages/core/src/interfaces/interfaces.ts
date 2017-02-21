@@ -1,5 +1,4 @@
 import * as express from 'express';
-import { Gabliam } from '../gabliam';
 import { interfaces } from 'inversify';
 
 
@@ -17,8 +16,8 @@ export interface RoutingConfig {
     rootPath: string;
 }
 
-export interface ModuleFunction {
-    (framework: Gabliam): Promise<void>;
+export interface PluginDescriptor {
+    discoverPath: string;
 }
 
 export interface Config { }
