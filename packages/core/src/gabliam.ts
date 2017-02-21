@@ -6,7 +6,10 @@ import { TYPE, METADATA_KEY, DEFAULT_ROUTING_ROOT_PATH, APP_CONFIG, CORE_CONFIG 
 import { loadModules, loadConfig } from './loader';
 import { container } from './container';
 import { registry } from './registry';
+import * as d from 'debug';
 
+const debug = d('Gabliam:core');
+const debugRoute = d('Gabliam:route');
 
 /**
  * Wrapper for the express server.
@@ -126,13 +129,13 @@ export class Gabliam {
     }
 
     private async _loadConfig() {
-        console.log('_loadConfig');
+        debug('_loadConfig');
         async function callInstance(instance, key) {
             return Promise.resolve(instance[key]());
         }
 
         let configsRegistry = registry.get<interfaces.ConfigRegistry>(TYPE.Config);
-        console.log('configsRegistry', configsRegistry);
+        debug('configsRegistry', configsRegistry);
         if (configsRegistry) {
             configsRegistry = _.sortBy(configsRegistry, 'order');
 
@@ -147,22 +150,18 @@ export class Gabliam {
                 if (beanMetadata) {
                     // No promise.all and await because order of beans are important
                     for (let metadata of beanMetadata) {
-                        console.log('call')
-                        let val = await callInstance(confInstance, metadata.key);
-                        console.log('call end', val);
-                        console.log(this.container);
                         this.container
                             .bind<any>(metadata.id)
-                            .toConstantValue(val);
+                            .toConstantValue(await callInstance(confInstance, metadata.key));
                     }
                 }
             }
         }
-        console.log('_loadConfig end');
+        debug('_loadConfig end');
     }
 
     private registerControllers() {
-        console.log('registerControllers');
+        debug('registerControllers');
         let controllerIds = registry.get(TYPE.Controller);
 
         controllerIds.forEach(({id: controllerId}) => {
@@ -181,7 +180,7 @@ export class Gabliam {
             if (controllerMetadata && methodMetadata) {
 
                 methodMetadata.forEach((metadata: interfaces.ControllerMethodMetadata) => {
-                    console.log(`${controllerMetadata.path}${metadata.path}`);
+                    debugRoute(`${controllerMetadata.path}${metadata.path}`);
                     let handler: express.RequestHandler = this.handlerFactory(controllerId, metadata.key, controllerMetadata.json);
                     this._router[metadata.method](
                         `${controllerMetadata.path}${metadata.path}`,

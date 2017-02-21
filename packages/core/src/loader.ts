@@ -3,21 +3,24 @@ import * as glob from 'glob';
 import * as yaml from 'js-yaml';
 import * as fs from 'fs';
 import * as _ from 'lodash';
+import * as d from 'debug';
+
+const debug = d('Gabliam:loader');
 
 export function loadModules(folders: string[]) {
     folders.forEach(folder => {
-        console.log(`load ${folder}`);
+        debug(`load ${folder}`);
         includeAll({
             dirname: folder,
             filter: /^(?!.*d\.ts$).*\.(ts|js)$/,
             excludeDirs: /^\.(git|svn|node_modules|dist|build)$/
         });
     });
-    console.log(`end loadModules`);
+    debug(`end loadModules`);
 }
 
 export function loadConfig(folder: string): any {
-    console.log('loadConfig', folder);
+    debug('loadConfig', folder);
     let files = glob.sync('**/application?(-+([a-zA-Z])).yml', { cwd: folder });
     let config = {};
     if (!files) {

@@ -21,9 +21,7 @@ export function makeValueMiddleware(container: Container) {
                             let defaultValue = results[key];
                             let config = container.get<any>(APP_CONFIG);
                             results[key] = _.get(config, path, defaultValue);
-                        } catch (err) {
-                            // console.log('ValueMiddleware', err);
-                        }
+                        } catch (err) {}
                     });
                 }
             }
