@@ -1,7 +1,9 @@
 import { PluginConfig, Value, optional, Bean, CORE_CONFIG, inject, interfaces } from '@gabliam/core';
 import { ConnectionOptions, Connection, createConnection } from './typeorm';
 import {ConnectionOptionsBeanId} from './constant';
+import * as d from 'debug';
 
+const debug = d('Gabliam:Plugin:Typeorm');
 
 @PluginConfig()
 export class PluginTypeormConfig {
@@ -16,14 +18,14 @@ export class PluginTypeormConfig {
         @inject(ConnectionOptionsBeanId) @optional() connectionOptions: ConnectionOptions,
         @inject(CORE_CONFIG) config: interfaces.GabliamConfig
     ) {
-        console.log('constructor PluginTypeormConfig', connectionOptions, config);
+        debug('constructor PluginTypeormConfig', connectionOptions, config);
         this.connectionOptions = connectionOptions;
         this.entitiesPath = `${config.discoverPath}/**/*{.js,.ts}`;
     }
 
     @Bean(Connection)
     create() {
-        console.log('connectionOptions', this.connectionOptions);
+        debug('connectionOptions', this.connectionOptions);
         if (!this.connectionOptions){
             throw new Error(`PluginTypeormConfig connectionOptions is mandatory`);
         } 
