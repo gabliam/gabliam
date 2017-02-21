@@ -20,7 +20,7 @@ export function makeValueMiddleware(container: Container) {
                     results[key] = _.get(config, path, defaultValue);
                 });
             }
-            
+
             return results;
         };
     }

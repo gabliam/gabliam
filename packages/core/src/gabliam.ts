@@ -88,7 +88,7 @@ export class Gabliam {
      */
     public async build(): Promise<express.Application> {
         let discoverPaths = [this.options.discoverPath];
-        discoverPaths.push(...this._plugins.map(plugin => plugin.discoverPath));
+        discoverPaths.unshift(...this._plugins.map(plugin => plugin.discoverPath));
         loadModules(discoverPaths);
         this._initializeConfig();
         await this._loadConfig();
@@ -115,7 +115,7 @@ export class Gabliam {
 
     private async _loadConfig() {
         console.log('_loadConfig');
-        function callInstance(instance, key) {
+        async function callInstance(instance, key) {
             return Promise.resolve(instance[key]());
         }
 
@@ -138,6 +138,7 @@ export class Gabliam {
                         console.log('call')
                         let val = await callInstance(confInstance, metadata.key);
                         console.log('call end', val);
+                        console.log(this.container);
                         this.container
                             .bind<any>(metadata.id)
                             .toConstantValue(val);
@@ -153,7 +154,7 @@ export class Gabliam {
         let controllerIds = registry.get<inversify.interfaces.ServiceIdentifier<any>>(TYPE.Controller);
 
         controllerIds.forEach((controllerId) => {
-            console.log('registerControllers', controllerId);
+            console.log(this.container);
             let controller = this.container.get<interfaces.Controller>(controllerId);
 
             let controllerMetadata: interfaces.ControllerMetadata = Reflect.getOwnMetadata(

@@ -1,8 +1,10 @@
 import { TYPE } from '../constants';
-import { fluentProvider } from '../container';
+// import { fluentProvider } from '../container';
 import { registry } from '../registry';
-import { interfaces } from 'inversify';
+import { interfaces, injectable } from 'inversify';
 import { ORDER_CONFIG } from '../constants';
+
+import { container,  } from '../container';
 
 export function Config(order = ORDER_CONFIG.Config) {
     return configDecorator(order);
@@ -19,9 +21,11 @@ export function PluginConfig(order = ORDER_CONFIG.Plugin) {
 function configDecorator(order: number) {
     return function (target: any) {
         let id: interfaces.ServiceIdentifier<any> = target;
-        fluentProvider(id)
-            .inSingletonScope()
-            .done()(target);
+        // fluentProvider(id)
+        //     .inSingletonScope()
+        //     .done()(target);
+        container.bind<any>(id).to(target).inSingletonScope();
+        injectable()(target);
         registry.add(TYPE.Config, { id, order });
     };
 }

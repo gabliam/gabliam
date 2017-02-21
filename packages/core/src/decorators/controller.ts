@@ -1,9 +1,10 @@
 import * as express from 'express';
 import { ControllerMetadata, Controller, HandlerDecorator, ControllerMethodMetadata } from '../interfaces';
 import { METADATA_KEY, TYPE } from '../constants';
-import { fluentProvider } from '../container';
+// import { fluentProvider } from '../container';
 import { registry } from '../registry';
-import { interfaces } from 'inversify';
+import { interfaces, injectable } from 'inversify';
+import { container } from '../container';
 
 export interface ControllerOptions {
     name?: string;
@@ -40,9 +41,11 @@ function decorateController(options: ControllerOptions | string, target: any, js
 
     let metadata: ControllerMetadata = { path, middlewares, target, json };
     Reflect.defineMetadata(METADATA_KEY.controller, metadata, target);
-    fluentProvider(id)
-        .inSingletonScope()
-        .done()(target);
+    // fluentProvider(id)
+    //     .inSingletonScope()
+    //     .done()(target);
+    container.bind<any>(id).to(target).inSingletonScope();
+    injectable()(target);
     registry.add(TYPE.Controller, id);
 }
 
