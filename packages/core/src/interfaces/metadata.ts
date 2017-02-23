@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { interfaces } from "inversify";
+import { interfaces } from 'inversify';
 
 export interface ControllerMetadata {
     path: string;

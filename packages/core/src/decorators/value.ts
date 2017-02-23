@@ -7,11 +7,11 @@ import * as _ from 'lodash';
 export function Value(path: string) {
     return function(target: any, key: string, descriptor?: PropertyDescriptor) {
         if (descriptor === undefined) {
-            valueProperty(path, target, key)
+            valueProperty(path, target, key);
         } else {
             valueGetterSetter(path, target, key, descriptor);
         }
-    }
+    };
 }
 
 function valueProperty(path: string, target: any, key: string) {
@@ -33,5 +33,5 @@ function valueGetterSetter(path: string, target: any, key: string, descriptor: P
     descriptor.get = () => {
         let config = container.get(APP_CONFIG);
         return _.get(config, path, oldGet());
-    }
+    };
 }

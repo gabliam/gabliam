@@ -27,5 +27,5 @@ export function makeValueMiddleware(container: Container) {
             }
             return results;
         };
-    }
+    };
 }

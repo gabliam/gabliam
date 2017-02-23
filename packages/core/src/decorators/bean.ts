@@ -16,5 +16,5 @@ export function Bean(id: interfaces.ServiceIdentifier<any>) {
         }
 
         metadataList.push(metadata);
-    }
+    };
 }
