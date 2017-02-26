@@ -18,4 +18,4 @@ let provide: any = makeProvideDecorator(container);
 let fluentProvider: any = makeFluentProvideDecorator(container);
 
 
-export { container, provide, fluentProvider };
+export { container,  provide, fluentProvider };

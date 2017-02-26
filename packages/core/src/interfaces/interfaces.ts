@@ -1,5 +1,6 @@
 import * as express from 'express';
 import { interfaces } from 'inversify';
+import { Registry } from '../registry';
 
 
 export interface Controller { }
@@ -14,10 +15,6 @@ export interface ConfigFunction {
 
 export interface RoutingConfig {
     rootPath: string;
-}
-
-export interface PluginDescriptor {
-    discoverPath: string;
 }
 
 export interface Config { }
@@ -37,4 +34,16 @@ export interface GabliamConfig {
     configPath?: string;
     customRouter?: express.Router;
     routingConfig?: RoutingConfig;
+}
+
+
+export interface GabliamPlugin {
+
+    build?(registry: Registry, container: interfaces.Container);
+
+    bind?(registry: Registry, container: interfaces.Container);
+
+    addConfig?(): ConfigFunction;
+
+    addErrorConfig?(): ConfigFunction;
 }
