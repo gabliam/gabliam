@@ -101,7 +101,7 @@ export class Gabliam {
 
         this._plugins
             .filter(plugin => typeof plugin.build === 'function')
-            .forEach(plugin => plugin.build(registry, this.container));
+            .forEach(plugin => plugin.build(this._app, registry, this.container));
 
         this.registerControllers();
 

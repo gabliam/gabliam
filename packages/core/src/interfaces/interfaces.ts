@@ -39,7 +39,7 @@ export interface GabliamConfig {
 
 export interface GabliamPlugin {
 
-    build?(registry: Registry, container: interfaces.Container);
+    build?(app: express.Application, registry: Registry, container: interfaces.Container);
 
     bind?(registry: Registry, container: interfaces.Container);
 
