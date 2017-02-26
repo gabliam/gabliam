@@ -1,10 +1,9 @@
-import { interfaces } from '@gabliam/core';
+import { interfaces, Scan } from '@gabliam/core';
 
 export * from './typeorm';
 export * from './constant';
 
-const plugin: interfaces.PluginDescriptor = {
-    discoverPath: __dirname
-};
 
-export { plugin as default }; 
+@Scan(__dirname)
+export default class PluginsTypeOrm implements interfaces.GabliamPlugin {
+}
