@@ -37,11 +37,16 @@ export interface GabliamConfig {
 }
 
 
+export interface GabliamPluginConstructor {
+    new (registry: Registry, container: interfaces.Container): GabliamPlugin;
+}
+
+
 export interface GabliamPlugin {
 
-    build?(app: express.Application, registry: Registry, container: interfaces.Container);
+    build?(app: express.Application);
 
-    bind?(registry: Registry, container: interfaces.Container);
+    bind?();
 
     addConfig?(): ConfigFunction;
 

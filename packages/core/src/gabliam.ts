@@ -79,8 +79,8 @@ export class Gabliam {
         return this;
     }
 
-    public addPlugin(fn: interfaces.GabliamPlugin): Gabliam {
-        this._plugins.push(fn);
+    public addPlugin(ctor: interfaces.GabliamPluginConstructor): Gabliam {
+        this._plugins.push(this._initializePlugin(ctor));
         return this;
     }
 
@@ -89,7 +89,6 @@ export class Gabliam {
      */
     public async build(): Promise<express.Application> {
         this._initializeConfig();
-        this._initializePlugin();
 
         loadModules(registry.getPaths());
 
@@ -101,29 +100,27 @@ export class Gabliam {
 
         this._plugins
             .filter(plugin => typeof plugin.build === 'function')
-            .forEach(plugin => plugin.build(this._app, registry, this.container));
+            .forEach(plugin => plugin.build(this._app));
 
         this.registerControllers();
 
         // register error handlers after controllers
-         this._errorConfigFn.forEach(fn => fn(this._app));
+        this._errorConfigFn.forEach(fn => fn(this._app));
 
         return this._app;
     }
 
-    private _initializePlugin() {
-        this._plugins = this._plugins.map(fn => {
-            let instance = <interfaces.GabliamPlugin>new (fn as any)(this._options);
-            if (typeof instance.addConfig === 'function') {
-                this.addConfig(instance.addConfig());
-            }
+    private _initializePlugin(ctor: interfaces.GabliamPluginConstructor): interfaces.GabliamPlugin {
+        let instance = new ctor(registry, this.container);
+        if (typeof instance.addConfig === 'function') {
+            this.addConfig(instance.addConfig());
+        }
 
-            if (typeof instance.addErrorConfig === 'function') {
-                this.addErrorConfig(instance.addErrorConfig());
-            }
+        if (typeof instance.addErrorConfig === 'function') {
+            this.addErrorConfig(instance.addErrorConfig());
+        }
 
-            return instance;
-        });
+        return instance;
     }
 
     private _initializeConfig() {
@@ -143,7 +140,7 @@ export class Gabliam {
 
         this._plugins
             .filter(plugin => typeof plugin.bind === 'function')
-            .forEach(plugin => plugin.bind(registry, this.container));
+            .forEach(plugin => plugin.bind());
     }
 
     private async _loadConfig() {
