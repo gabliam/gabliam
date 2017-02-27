@@ -1,6 +1,5 @@
 import * as express from 'express';
 import { interfaces } from 'inversify';
-import { Registry } from '../registry';
 
 
 export interface Controller { }
@@ -38,13 +37,13 @@ export interface GabliamConfig {
 
 
 export interface GabliamPluginConstructor {
-    new (registry: Registry, container: interfaces.Container): GabliamPlugin;
+    new (app: express.Application, container: interfaces.Container): GabliamPlugin;
 }
 
 
 export interface GabliamPlugin {
 
-    build?(app: express.Application);
+    build?();
 
     bind?();
 

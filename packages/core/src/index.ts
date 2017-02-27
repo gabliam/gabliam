@@ -3,7 +3,7 @@ export * from './decorators';
 export * from './gabliam';
 export { APP_CONFIG, CORE_CONFIG } from './constants';
 
-export { Registry } from './registry';
+export * from './registry';
 
 export {
     injectable, tagged, named, inject, optional, unmanaged, multiInject, targetName, decorate, interfaces as inversifyInterfaces

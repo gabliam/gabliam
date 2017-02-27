@@ -100,7 +100,7 @@ export class Gabliam {
 
         this._plugins
             .filter(plugin => typeof plugin.build === 'function')
-            .forEach(plugin => plugin.build(this._app));
+            .forEach(plugin => plugin.build());
 
         this.registerControllers();
 
@@ -111,7 +111,7 @@ export class Gabliam {
     }
 
     private _initializePlugin(ctor: interfaces.GabliamPluginConstructor): interfaces.GabliamPlugin {
-        let instance = new ctor(registry, this.container);
+        let instance = new ctor(this._app, this.container);
         if (typeof instance.addConfig === 'function') {
             this.addConfig(instance.addConfig());
         }
@@ -193,21 +193,24 @@ export class Gabliam {
             );
 
             if (controllerMetadata && methodMetadata) {
-
+                let router = express.Router();
+                debugRoute(`New route : "${this._routingConfig.rootPath}${controllerMetadata.path}"`);
                 methodMetadata.forEach((metadata: interfaces.ControllerMethodMetadata) => {
-                    debugRoute(`${controllerMetadata.path}${metadata.path}`);
+                    debugRoute(`${metadata.path}`);
                     let handler: express.RequestHandler = this.handlerFactory(controllerId, metadata.key, controllerMetadata.json);
-                    this._router[metadata.method](
-                        `${controllerMetadata.path}${metadata.path}`,
+                    router[metadata.method](
+                        `${metadata.path}`,
                         ...controllerMetadata.middlewares,
                         ...metadata.middlewares,
                         handler
                     );
                 });
+               let path = `${this._routingConfig.rootPath}${controllerMetadata.path}`.replace(/\/+/gi, '/');
+                this._app.use(path, router);
             }
         });
 
-        this._app.use(this._routingConfig.rootPath, this._router);
+        // this._app.use(this._routingConfig.rootPath, this._router);
     }
 
     private handlerFactory(controllerId: any, key: string, json: boolean): express.RequestHandler {
