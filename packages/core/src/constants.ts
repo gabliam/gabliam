@@ -1,18 +1,13 @@
 /** Type in registry */
 export const TYPE = {
-    Controller: Symbol('Controller'),
-    Service: Symbol('Service'),
-    Config: Symbol('Config'),
+    Service: 'ServiceType',
+    Config: 'ConfigType',
 };
 
 export const METADATA_KEY = {
-    controller: '_controller',
-    controllerMethod: '_controller-method',
     bean: '_bean',
     value: '_value',
 };
-
-export const DEFAULT_ROUTING_ROOT_PATH = '/';
 
 export const ORDER_CONFIG = {
     Core: 50,

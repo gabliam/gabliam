@@ -2,14 +2,13 @@ import * as express from 'express';
 import * as inversify from 'inversify';
 import * as interfaces from './interfaces';
 import * as _ from 'lodash';
-import { TYPE, METADATA_KEY, DEFAULT_ROUTING_ROOT_PATH, APP_CONFIG, CORE_CONFIG } from './constants';
+import { TYPE, METADATA_KEY, APP_CONFIG, CORE_CONFIG } from './constants';
 import { loadModules, loadConfig } from './loader';
 import { container } from './container';
 import { registry } from './registry';
 import * as d from 'debug';
 
 const debug = d('Gabliam:core');
-const debugRoute = d('Gabliam:route');
 
 /**
  * Wrapper for the express server.
@@ -21,7 +20,6 @@ export class Gabliam {
     private _app: express.Application = express();
     private _configFn: interfaces.ConfigFunction[] = [];
     private _errorConfigFn: interfaces.ConfigFunction[] = [];
-    private _routingConfig: interfaces.RoutingConfig;
 
     public container: inversify.interfaces.Container = container;
 
@@ -48,9 +46,6 @@ export class Gabliam {
 
         this.container.bind<interfaces.GabliamConfig>(CORE_CONFIG).toConstantValue(this._options);
         this._router = this._options.customRouter || express.Router();
-        this._routingConfig = this._options.routingConfig || {
-            rootPath: DEFAULT_ROUTING_ROOT_PATH
-        };
     }
 
     /**
@@ -102,8 +97,6 @@ export class Gabliam {
             .filter(plugin => typeof plugin.build === 'function')
             .forEach(plugin => plugin.build());
 
-        this.registerControllers();
-
         // register error handlers after controllers
         this._errorConfigFn.forEach(fn => fn(this._app));
 
@@ -133,9 +126,6 @@ export class Gabliam {
             .forEach(({id, target}) => this.container.bind<any>(id).to(target).inSingletonScope());
 
         registry.get(TYPE.Service)
-            .forEach(({id, target}) => this.container.bind<any>(id).to(target).inSingletonScope());
-
-        registry.get(TYPE.Controller)
             .forEach(({id, target}) => this.container.bind<any>(id).to(target).inSingletonScope());
 
         this._plugins
@@ -173,73 +163,5 @@ export class Gabliam {
             }
         }
         debug('_loadConfig end');
-    }
-
-    private registerControllers() {
-        debug('registerControllers');
-        let controllerIds = registry.get(TYPE.Controller);
-
-        controllerIds.forEach(({id: controllerId}) => {
-            let controller = this.container.get<interfaces.Controller>(controllerId);
-
-            let controllerMetadata: interfaces.ControllerMetadata = Reflect.getOwnMetadata(
-                METADATA_KEY.controller,
-                controller.constructor
-            );
-
-            let methodMetadata: interfaces.ControllerMethodMetadata[] = Reflect.getOwnMetadata(
-                METADATA_KEY.controllerMethod,
-                controller.constructor
-            );
-
-            if (controllerMetadata && methodMetadata) {
-                let router = express.Router();
-                debugRoute(`New route : "${this._routingConfig.rootPath}${controllerMetadata.path}"`);
-                methodMetadata.forEach((metadata: interfaces.ControllerMethodMetadata) => {
-                    debugRoute(`${metadata.path}`);
-                    let handler: express.RequestHandler = this.handlerFactory(controllerId, metadata.key, controllerMetadata.json);
-                    router[metadata.method](
-                        `${metadata.path}`,
-                        ...controllerMetadata.middlewares,
-                        ...metadata.middlewares,
-                        handler
-                    );
-                });
-               let path = `${this._routingConfig.rootPath}${controllerMetadata.path}`.replace(/\/+/gi, '/');
-                this._app.use(path, router);
-            }
-        });
-
-        // this._app.use(this._routingConfig.rootPath, this._router);
-    }
-
-    private handlerFactory(controllerId: any, key: string, json: boolean): express.RequestHandler {
-        return (req: express.Request, res: express.Response, next: express.NextFunction) => {
-            let result: any = this.container.get(controllerId)[key](req, res, next);
-
-            // try to resolve promise
-            if (result && result instanceof Promise) {
-
-                result.then((value: any) => {
-                    if (value && !res.headersSent) {
-                        if (json) {
-                            res.json(value);
-                        } else {
-                            res.send(value);
-                        }
-                    }
-                })
-                    .catch((error: any) => {
-                        next(error);
-                    });
-
-            } else if (result && !res.headersSent) {
-                if (json) {
-                    res.json(result);
-                } else {
-                    res.send(result);
-                }
-            }
-        };
     }
 }
