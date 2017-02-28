@@ -1,5 +1,6 @@
 import * as express from 'express';
 import { interfaces } from 'inversify';
+import { Registry } from '../registry';
 
 
 export interface ConfigFunction {
@@ -7,16 +8,6 @@ export interface ConfigFunction {
 }
 
 export interface Config { }
-
-export interface DecoratorRegistry {
-    id: interfaces.ServiceIdentifier<any>;
-
-    target: any;
-}
-
-export interface ConfigRegistry extends DecoratorRegistry {
-    order: number;
-}
 
 export interface GabliamConfig {
     discoverPath: string;
@@ -26,17 +17,17 @@ export interface GabliamConfig {
 
 
 export interface GabliamPluginConstructor {
-    new (app: express.Application, container: interfaces.Container): GabliamPlugin;
+    new (): GabliamPlugin;
 }
 
 
 export interface GabliamPlugin {
 
-    build?();
+    build?(app: express.Application, container: interfaces.Container, registry: Registry): void;
 
-    bind?();
+    bind?(app: express.Application, container: interfaces.Container, registry: Registry): void;
 
-    addConfig?(): ConfigFunction;
+    addConfig?(app: express.Application, container: interfaces.Container, registry: Registry): ConfigFunction;
 
-    addErrorConfig?(): ConfigFunction;
+    addErrorConfig?(app: express.Application, container: interfaces.Container, registry: Registry): ConfigFunction;
 }

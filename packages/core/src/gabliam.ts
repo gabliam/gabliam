@@ -3,9 +3,9 @@ import * as inversify from 'inversify';
 import * as interfaces from './interfaces';
 import * as _ from 'lodash';
 import { TYPE, METADATA_KEY, APP_CONFIG, CORE_CONFIG } from './constants';
-import { loadModules, loadConfig } from './loader';
-import { container } from './container';
-import { registry } from './registry';
+import { Loader } from './loader';
+import { createContainer } from './container';
+import { Registry } from './registry';
 import * as d from 'debug';
 
 const debug = d('Gabliam:core');
@@ -14,6 +14,8 @@ const debug = d('Gabliam:core');
  * Wrapper for the express server.
  */
 export class Gabliam {
+    private _loader: Loader = new Loader();
+
     private _plugins: interfaces.GabliamPlugin[] = [];
     private _options: interfaces.GabliamConfig;
     private _router: express.Router;
@@ -21,7 +23,9 @@ export class Gabliam {
     private _configFn: interfaces.ConfigFunction[] = [];
     private _errorConfigFn: interfaces.ConfigFunction[] = [];
 
-    public container: inversify.interfaces.Container = container;
+    public container: inversify.interfaces.Container = createContainer();
+
+    public registry: Registry;
 
 
     /**
@@ -41,8 +45,6 @@ export class Gabliam {
         if (!this._options.configPath) {
             this._options.configPath = this._options.discoverPath;
         }
-
-        registry.addPath(this._options.discoverPath);
 
         this.container.bind<interfaces.GabliamConfig>(CORE_CONFIG).toConstantValue(this._options);
         this._router = this._options.customRouter || express.Router();
@@ -75,7 +77,7 @@ export class Gabliam {
     }
 
     public addPlugin(ctor: interfaces.GabliamPluginConstructor): Gabliam {
-        this._plugins.push(this._initializePlugin(ctor));
+        this._plugins.push(new ctor());
         return this;
     }
 
@@ -85,17 +87,25 @@ export class Gabliam {
     public async build(): Promise<express.Application> {
         this._initializeConfig();
 
-        loadModules(registry.getPaths());
+        this.registry = this._loader.loadModules(this._options.discoverPath, this._plugins);
 
         this._bind();
         await this._loadConfig();
+
+        this._plugins
+            .filter(plugin => typeof plugin.addConfig === 'function')
+            .forEach(plugin => this.addConfig(plugin.addConfig(this._app, this.container, this.registry)));
 
         // register server-level middleware before anything else
         this._configFn.forEach(fn => fn(this._app));
 
         this._plugins
             .filter(plugin => typeof plugin.build === 'function')
-            .forEach(plugin => plugin.build());
+            .forEach(plugin => plugin.build(this._app, this.container, this.registry));
+
+        this._plugins
+            .filter(plugin => typeof plugin.addErrorConfig === 'function')
+            .forEach(plugin => this.addConfig(plugin.addErrorConfig(this._app, this.container, this.registry)));
 
         // register error handlers after controllers
         this._errorConfigFn.forEach(fn => fn(this._app));
@@ -103,34 +113,22 @@ export class Gabliam {
         return this._app;
     }
 
-    private _initializePlugin(ctor: interfaces.GabliamPluginConstructor): interfaces.GabliamPlugin {
-        let instance = new ctor(this._app, this.container);
-        if (typeof instance.addConfig === 'function') {
-            this.addConfig(instance.addConfig());
-        }
-
-        if (typeof instance.addErrorConfig === 'function') {
-            this.addErrorConfig(instance.addErrorConfig());
-        }
-
-        return instance;
-    }
-
     private _initializeConfig() {
-        let config = loadConfig(this._options.configPath);
+        let config = this._loader.loadConfig(this._options.configPath);
         this.container.bind<any>(APP_CONFIG).toConstantValue(config);
     }
 
     private _bind() {
-        registry.get(TYPE.Config)
+         debug('_bind');
+        this.registry.get(TYPE.Config)
             .forEach(({id, target}) => this.container.bind<any>(id).to(target).inSingletonScope());
 
-        registry.get(TYPE.Service)
+        this.registry.get(TYPE.Service)
             .forEach(({id, target}) => this.container.bind<any>(id).to(target).inSingletonScope());
 
         this._plugins
             .filter(plugin => typeof plugin.bind === 'function')
-            .forEach(plugin => plugin.bind());
+            .forEach(plugin => plugin.bind(this._app, this.container, this.registry));
     }
 
     private async _loadConfig() {
@@ -139,7 +137,7 @@ export class Gabliam {
             return Promise.resolve(instance[key]());
         }
 
-        let configsRegistry = registry.get<interfaces.ConfigRegistry>(TYPE.Config);
+        let configsRegistry = this.registry.get<interfaces.ConfigRegistry>(TYPE.Config);
         debug('configsRegistry', configsRegistry);
         if (configsRegistry) {
             configsRegistry = _.sortBy(configsRegistry, 'order');

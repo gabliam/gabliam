@@ -7,6 +7,8 @@ export const TYPE = {
 export const METADATA_KEY = {
     bean: '_bean',
     value: '_value',
+    register: '_register',
+    scan: '_scan',
 };
 
 export const ORDER_CONFIG = {

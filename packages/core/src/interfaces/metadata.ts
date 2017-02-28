@@ -11,3 +11,19 @@ export interface ValueMetadata {
     key: string;
     target: any;
 }
+
+export interface ValueRegistry {
+    id: interfaces.ServiceIdentifier<any>;
+
+    target: any;
+}
+
+export interface ConfigRegistry extends ValueRegistry {
+    order: number;
+}
+
+export interface RegistryMetada {
+    type: string|symbol;
+
+    value: ValueRegistry;
+}

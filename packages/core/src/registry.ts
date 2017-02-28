@@ -1,10 +1,15 @@
-import { DecoratorRegistry } from './interfaces';
+import { ValueRegistry } from './interfaces';
 
 export class Registry {
-    private registry = new Map<symbol | string, any[]>();
-    private paths: string[] = [];
+    public registry = new Map<symbol | string, any[]>();
 
-   get<T extends DecoratorRegistry>(key: symbol| string):  T[] {
+    addRegistry(subRegistry: Registry) {
+        for (let [key, value] of subRegistry.registry) {
+            this.get(key).push(...value);
+        }
+    }
+
+   get<T extends ValueRegistry>(key: symbol| string):  T[] {
         if (!this.registry.has(key)) {
             this.registry.set(key, []);
         }
@@ -12,21 +17,11 @@ export class Registry {
         return this.registry.get(key);
     }
 
-    add<T  extends DecoratorRegistry>(key: symbol | string, target: T) {
+    add<T  extends ValueRegistry>(key: symbol | string, target: T) {
         this.get(key).push(target);
-    }
-
-    addPath(path: string) {
-        this.paths.push(path);
-    }
-
-    getPaths() {
-        return this.paths;
     }
 
     remove(key: symbol) {
         this.registry.delete(key);
     }
 }
-
-export const registry = new Registry();
