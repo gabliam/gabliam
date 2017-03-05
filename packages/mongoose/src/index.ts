@@ -9,6 +9,8 @@ const debug = d('Gabliam:Plugin:mongoose');
 
 export * from './decorators';
 export { interfaces };
+export * from './mongooseConnection';
+export * from './repository';
 
 @Scan(__dirname)
 export default class RestPlugin implements coreInterfaces.GabliamPlugin {
