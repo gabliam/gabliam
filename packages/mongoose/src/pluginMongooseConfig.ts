@@ -35,7 +35,7 @@ export class PluginMongooseConfig {
         this.listDocument = listDocument;
     }
 
-    @Bean(MongooseConnection)
+    @Bean('MongooseConnection')
     create() {
         let mongooseConnection = new MongooseConnection(this.uri, this.connectionOptions, this.listDocument);
         return mongooseConnection;
