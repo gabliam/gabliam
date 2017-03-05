@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/mongoose",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -10,8 +10,20 @@
     "prepublish": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabliam/mongoose.git"
+  },
   "author": "David Touzet <dtouzet@gmail.com>",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gabliam/mongoose/issues"
+  },
+  "homepage": "https://github.com/gabliam/mongoose#readme",
   "peerDependencies": {
     "@gabliam/core": "^1.4.0",
     "mongoose": "^4.8.5"
