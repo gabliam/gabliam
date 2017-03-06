@@ -4,7 +4,7 @@ import { METADATA_KEY } from './constants';
 import { DocumentMetadata } from './interfaces';
 const { Mongoose } = mongoose;
 
-
+(<any>mongoose).Promise = global.Promise;
 
 export class MongooseConnection {
     public conn: mongoose.Connection;
