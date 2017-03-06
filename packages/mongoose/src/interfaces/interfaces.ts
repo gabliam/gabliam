@@ -7,7 +7,7 @@ export interface DocumentOptions  {
 }
 
 export interface IRead<T extends mongoose.Document> {
-  retrieve(): Promise<T[]>;
+  findAll(): Promise<T[]>;
   findById(_id: string): Promise<T>;
   findOne(cond?: Object): mongoose.Query<T>;
   find(cond?: Object, fields?: Object, options?: Object): mongoose.Query<T[]>;

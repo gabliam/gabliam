@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 import { IRead, IWrite } from './interfaces';
 
-export class RepositoryBase<T> implements IRead<T & mongoose.Document>, IWrite<T, T & mongoose.Document> {
+export class Repository<T> implements IRead<T & mongoose.Document>, IWrite<T, T & mongoose.Document> {
 
   public model: mongoose.Model<mongoose.Document>;
 
@@ -13,11 +13,11 @@ export class RepositoryBase<T> implements IRead<T & mongoose.Document>, IWrite<T
     return this.model.create(item);
   }
 
-  retrieve(): Promise<(T & mongoose.Document)[]> {
+  findAll(): Promise<(T & mongoose.Document)[]> {
     return this.model.find({}).exec();
   }
 
-  update(_id: mongoose.Types.ObjectId, item: T): Promise<T & mongoose.Document> {
+  update(_id: mongoose.Types.ObjectId, item: T): Promise<any> {
     return this.model.update({ _id: _id }, item).exec();
   }
 

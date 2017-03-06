@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import { RepositoryBase } from './repository';
+import { Repository } from './repository';
 import { METADATA_KEY } from './constants';
 import { DocumentMetadata } from './interfaces';
 const { Mongoose } = mongoose;
@@ -9,7 +9,7 @@ const { Mongoose } = mongoose;
 export class MongooseConnection {
     public conn: mongoose.Connection;
 
-    private repositories = new Map<string, RepositoryBase<any>>();
+    private repositories = new Map<string, Repository<any>>();
 
     private schemas = new Map<string, mongoose.Model<any>>();
 
@@ -37,7 +37,7 @@ export class MongooseConnection {
         }
 
         let clazzSchema = this.conn.model<T & mongoose.Document>(name, schema, collectionName);
-        let repository = new RepositoryBase<T>(clazzSchema);
+        let repository = new Repository<T>(clazzSchema);
         this.repositories.set(documentName, repository);
         return repository;
     }
@@ -48,7 +48,7 @@ export class MongooseConnection {
             return this.repositories.get(name);
         } else {
             if (this.schemas.has(name)) {
-                let repository = new RepositoryBase<T>(this.schemas.get(name));
+                let repository = new Repository<T>(this.schemas.get(name));
                 this.repositories.set(name, repository);
                 return repository;
             }
