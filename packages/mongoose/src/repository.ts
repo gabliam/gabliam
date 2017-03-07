@@ -17,7 +17,7 @@ export class Repository<T> implements IRead<T & mongoose.Document>, IWrite<T, T 
     return this.model.find({}).exec();
   }
 
-  update(_id: mongoose.Types.ObjectId, item: T): Promise<any> {
+  update(_id: mongoose.Types.ObjectId, item: Object): Promise<any> {
     return this.model.update({ _id: _id }, item).exec();
   }
 
