@@ -1,4 +1,5 @@
 import { interfaces } from 'inversify';
+import * as Joi from 'joi';
 
 export interface BeanMetadata {
     id: interfaces.ServiceIdentifier<any>;
@@ -6,10 +7,22 @@ export interface BeanMetadata {
     target: any;
 }
 
+export interface ValueValidator {
+    schema: Joi.Schema;
+
+    throwError?: boolean;
+
+    customErrorMsg?: string;
+
+    options?: Joi.ValidationOptions;
+}
+
 export interface ValueMetadata {
     path: string;
     key: string;
     target: any;
+
+    validator: ValueValidator;
 }
 
 export interface ValueRegistry {

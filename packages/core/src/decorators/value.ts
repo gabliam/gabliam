@@ -1,15 +1,47 @@
 import { METADATA_KEY } from '../constants';
-import { ValueMetadata } from '../interfaces';
+import { ValueMetadata, ValueValidator } from '../interfaces';
+import * as Joi from 'joi';
 
 
-export function Value(path: string) {
-    return function(target: any, key: string) {
-        valueProperty(path, target, key);
+
+export interface ValueOptions {
+    path: string;
+    validator?: Joi.Schema | ValueValidator;
+}
+
+function isValueOptions(obj: any): obj is ValueOptions {
+    return typeof obj === 'object' && obj.path;
+}
+
+function isValueValidator(obj: any): obj is ValueValidator {
+    return typeof obj === 'object' && obj.schema;
+}
+
+export function Value(options: ValueOptions);
+export function Value(path: string);
+export function Value(value: any) {
+    return function (target: any, key: string) {
+        if (typeof value === 'string') {
+            valueProperty(value, null, target, key);
+        } else if (isValueOptions(value)) {
+            valueProperty(value.path, value.validator, target, key);
+        }
     };
 }
 
-function valueProperty(path: string, target: any, key: string) {
-    let metadata: ValueMetadata = { path, target, key };
+function valueProperty(path: string, schema: Joi.Schema | ValueValidator, target: any, key: string) {
+    let validator: ValueValidator = null;
+    if (schema !== null) {
+        if (isValueValidator(schema)) {
+            validator = {
+                throwError: false,
+                ...schema
+            };
+        } else {
+            validator = { throwError: false, schema };
+        }
+    }
+    let metadata: ValueMetadata = { path, target, key, validator };
     let metadataList: ValueMetadata[] = [];
 
     if (!Reflect.hasOwnMetadata(METADATA_KEY.value, target.constructor)) {

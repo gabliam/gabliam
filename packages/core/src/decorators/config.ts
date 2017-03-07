@@ -1,9 +1,7 @@
 import { TYPE } from '../constants';
-// import { registry } from '../registry';
 import { register } from './register';
 import { interfaces, injectable } from 'inversify';
 import { ORDER_CONFIG } from '../constants';
-// import { ConfigRegistry } from '../interfaces';
 
 export function Config(order = ORDER_CONFIG.Config) {
     return configDecorator(order);
@@ -22,7 +20,6 @@ function configDecorator(order: number) {
         let id: interfaces.ServiceIdentifier<any> = target;
         injectable()(target);
         register(TYPE.Config, { id, order, target })(target);
-        // registry.add<ConfigRegistry>(TYPE.Config, { id, order, target });
     };
 }
 

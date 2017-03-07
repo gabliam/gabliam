@@ -1,9 +1,23 @@
 import { interfaces, Container } from 'inversify';
 import { METADATA_KEY, APP_CONFIG } from '../constants';
-import { ValueMetadata } from '../interfaces';
+import { ValueMetadata, ValueValidator } from '../interfaces';
 import * as _ from 'lodash';
+import * as Joi from 'joi';
 
 export function makeValueMiddleware(container: Container) {
+    function validate(value: any, validator: ValueValidator) {
+        let validate = Joi.validate(value, validator.schema, validator.options);
+        if (validate.error) {
+            value = null;
+            if (validator.throwError) {
+                let msg = validator.customErrorMsg || `Error value`;
+                msg += JSON.stringify(validate.error);
+                throw new Error(msg);
+            }
+        }
+        return value;
+    }
+
     return function ValueMiddleware(next: interfaces.Next): interfaces.Next {
         return (args: interfaces.NextArgs) => {
             let results: any = null;
@@ -16,12 +30,16 @@ export function makeValueMiddleware(container: Container) {
                 );
 
                 if (valueMetadata) {
-                    valueMetadata.forEach(({key, path}) => {
+                    valueMetadata.forEach(({ key, path, validator }) => {
                         try {
                             let defaultValue = results[key];
                             let config = container.get<any>(APP_CONFIG);
-                            results[key] = _.get(config, path, defaultValue);
-                        } catch (err) {}
+                            let value = _.get(config, path, defaultValue);
+                            if (validator) {
+                                value = validate(value, validator);
+                            }
+                            results[key] = value;
+                        } catch (err) { }
                     });
                 }
             }

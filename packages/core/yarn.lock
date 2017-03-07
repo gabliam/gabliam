@@ -30,6 +30,10 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
+"@types/joi@^10.0.1":
+  version "10.0.1"
+  resolved "https://registry.yarnpkg.com/@types/joi/-/joi-10.0.1.tgz#d6fd34d357b79931f655bf80a87374f1c0f90728"
+
 "@types/js-yaml@^3.5.29":
   version "3.5.29"
   resolved "https://registry.yarnpkg.com/@types/js-yaml/-/js-yaml-3.5.29.tgz#29f4dd9314fbccb080d8bd84b9c23811ec5090c2"
@@ -391,6 +395,10 @@ has-ansi@^2.0.0:
   dependencies:
     ansi-regex "^2.0.0"
 
+hoek@4.x.x:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/hoek/-/hoek-4.1.0.tgz#4a4557460f69842ed463aa00628cc26d2683afa7"
+
 http-errors@~1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/http-errors/-/http-errors-1.5.1.tgz#788c0d2c1de2c81b9e6e8c01843b6b97eb920750"
@@ -478,6 +486,23 @@ is-stream@^1.0.0:
 isarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
+
+isemail@2.x.x:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/isemail/-/isemail-2.2.1.tgz#0353d3d9a62951080c262c2aa0a42b8ea8e9e2a6"
+
+items@2.x.x:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/items/-/items-2.1.1.tgz#8bd16d9c83b19529de5aea321acaada78364a198"
+
+joi@^10.2.2:
+  version "10.2.2"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-10.2.2.tgz#dc5a792b7b4c6fffa562242a95b55d9d3f077e24"
+  dependencies:
+    hoek "4.x.x"
+    isemail "2.x.x"
+    items "2.x.x"
+    topo "2.x.x"
 
 js-tokens@^3.0.0:
   version "3.0.1"
@@ -824,6 +849,12 @@ supports-color@^2.0.0:
 timed-out@^3.0.0:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/timed-out/-/timed-out-3.1.3.tgz#95860bfcc5c76c277f8f8326fd0f5b2e20eba217"
+
+topo@2.x.x:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/topo/-/topo-2.0.2.tgz#cd5615752539057c0dc0491a621c3bc6fbe1d182"
+  dependencies:
+    hoek "4.x.x"
 
 tslint@^4.4.2:
   version "4.4.2"
