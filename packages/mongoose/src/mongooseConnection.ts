@@ -24,8 +24,8 @@ export class MongooseConnection {
         }
     }
 
-    getRepository<T>(documentName: string)
-    getRepository<T>(clazz: any) {
+    getRepository<T>(documentName: string): Repository<T>;
+    getRepository<T>(clazz: any): Repository<T> {
         if (typeof clazz === 'string') {
             return this.getRepositoryByName<T>(clazz);
         }
