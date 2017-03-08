@@ -9,7 +9,7 @@ export function makeValueMiddleware(container: Container) {
         let options: Joi.ValidationOptions = {
             abortEarly: false,
             ...(validator.options || {})
-        }
+        };
         let validate = Joi.validate(value, validator.schema, options);
         if (validate.error) {
             value = null;

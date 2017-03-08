@@ -18,11 +18,11 @@ function isValueValidator(obj: any): obj is ValueValidator {
 }
 
 export function Value(options: ValueOptions);
-export function Value(path: string);
-export function Value(value: any) {
+export function Value(path: string, schema?: Joi.Schema);
+export function Value(value: any, schema: Joi.Schema = null) {
     return function (target: any, key: string) {
         if (typeof value === 'string') {
-            valueProperty(value, null, target, key);
+            valueProperty(value, schema, target, key);
         } else if (isValueOptions(value)) {
             valueProperty(value.path, value.validator, target, key);
         }
