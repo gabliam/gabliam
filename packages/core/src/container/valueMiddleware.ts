@@ -14,7 +14,7 @@ export function makeValueMiddleware(container: Container) {
         if (validate.error) {
             value = null;
             if (validator.throwError) {
-                let msg = validator.customErrorMsg || `Error value`;
+                let msg = validator.customErrorMsg || `Error for '${path}' value`;
                 msg += JSON.stringify(validate.error);
                 throw new Error(msg);
             }
