@@ -35,15 +35,13 @@ export function makeValueMiddleware(container: Container) {
 
                 if (valueMetadata) {
                     valueMetadata.forEach(({ key, path, validator }) => {
-                        try {
-                            let defaultValue = results[key];
-                            let config = container.get<any>(APP_CONFIG);
-                            let value = _.get(config, path, defaultValue);
-                            if (validator) {
-                                value = validate(path, value, validator);
-                            }
-                            results[key] = value;
-                        } catch (err) { }
+                        let defaultValue = results[key];
+                        let config = container.get<any>(APP_CONFIG);
+                        let value = _.get(config, path, defaultValue);
+                        if (validator) {
+                            value = validate(path, value, validator);
+                        }
+                        results[key] = value;
                     });
                 }
             }
