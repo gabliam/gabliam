@@ -5,8 +5,12 @@ import * as _ from 'lodash';
 import * as Joi from 'joi';
 
 export function makeValueMiddleware(container: Container) {
-    function validate(value: any, validator: ValueValidator) {
-        let validate = Joi.validate(value, validator.schema, validator.options);
+    function validate(path: string, value: any, validator: ValueValidator) {
+        let options: Joi.ValidationOptions = {
+            abortEarly: false,
+            ...(validator.options || {})
+        }
+        let validate = Joi.validate(value, validator.schema, options);
         if (validate.error) {
             value = null;
             if (validator.throwError) {
@@ -15,7 +19,7 @@ export function makeValueMiddleware(container: Container) {
                 throw new Error(msg);
             }
         }
-        return value;
+        return validate.value;
     }
 
     return function ValueMiddleware(next: interfaces.Next): interfaces.Next {
@@ -36,7 +40,7 @@ export function makeValueMiddleware(container: Container) {
                             let config = container.get<any>(APP_CONFIG);
                             let value = _.get(config, path, defaultValue);
                             if (validator) {
-                                value = validate(value, validator);
+                                value = validate(path, value, validator);
                             }
                             results[key] = value;
                         } catch (err) { }
