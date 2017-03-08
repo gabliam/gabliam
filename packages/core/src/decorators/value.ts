@@ -10,11 +10,11 @@ export interface ValueOptions {
 }
 
 function isValueOptions(obj: any): obj is ValueOptions {
-    return typeof obj === 'object' && obj.path;
+    return typeof obj === 'object' && obj.hasOwnProperty('path');
 }
 
 function isValueValidator(obj: any): obj is ValueValidator {
-    return typeof obj === 'object' && obj.schema;
+    return typeof obj === 'object' && obj.hasOwnProperty('schema') && !obj.hasOwnProperty('isJoi');
 }
 
 export function Value(options: ValueOptions);
