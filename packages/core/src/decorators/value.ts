@@ -34,11 +34,11 @@ function valueProperty(path: string, schema: Joi.Schema | ValueValidator, target
     if (schema !== null) {
         if (isValueValidator(schema)) {
             validator = {
-                throwError: false,
+                throwError: true,
                 ...schema
             };
         } else {
-            validator = { throwError: false, schema };
+            validator = { throwError: true, schema };
         }
     }
     let metadata: ValueMetadata = { path, target, key, validator };
