@@ -1,6 +1,7 @@
 import { interfaces, Container } from 'inversify';
 import { METADATA_KEY, APP_CONFIG } from '../constants';
 import { ValueMetadata, ValueValidator } from '../interfaces';
+import { ValueValidationError } from '../errors';
 import * as _ from 'lodash';
 import * as Joi from 'joi';
 
@@ -15,8 +16,7 @@ export function makeValueMiddleware(container: Container) {
             value = null;
             if (validator.throwError) {
                 let msg = validator.customErrorMsg || `Error for '${path}' value`;
-                msg += JSON.stringify(validate.error);
-                throw new Error(msg);
+                throw new ValueValidationError(msg, validate.error);
             }
         }
         return validate.value;
@@ -35,13 +35,19 @@ export function makeValueMiddleware(container: Container) {
 
                 if (valueMetadata) {
                     valueMetadata.forEach(({ key, path, validator }) => {
-                        let defaultValue = results[key];
-                        let config = container.get<any>(APP_CONFIG);
-                        let value = _.get(config, path, defaultValue);
-                        if (validator) {
-                            value = validate(path, value, validator);
-                        }
-                        results[key] = value;
+                        try {
+                            let defaultValue = results[key];
+                            let config = container.get<any>(APP_CONFIG);
+                            let value = _.get(config, path, defaultValue);
+                            if (validator) {
+                                value = validate(path, value, validator);
+                            }
+                            results[key] = value;
+                        } catch (err) {
+                            if (err instanceof ValueValidationError) {
+                                throw err;
+                            }
+                         }
                     });
                 }
             }
