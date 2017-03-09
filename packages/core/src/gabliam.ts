@@ -25,6 +25,8 @@ export class Gabliam {
 
     public container: inversify.interfaces.Container = createContainer();
 
+    public config: any;
+
     public registry: Registry;
 
 
@@ -114,7 +116,7 @@ export class Gabliam {
     }
 
     private _initializeConfig() {
-        let config = this._loader.loadConfig(this._options.configPath);
+        let config = this.config = this._loader.loadConfig(this._options.configPath);
         this.container.bind<any>(APP_CONFIG).toConstantValue(config);
     }
 
