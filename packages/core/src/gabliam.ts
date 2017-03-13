@@ -121,12 +121,12 @@ export class Gabliam {
     }
 
     private _bind() {
-         debug('_bind');
+        debug('_bind');
         this.registry.get(TYPE.Config)
-            .forEach(({id, target}) => this.container.bind<any>(id).to(target).inSingletonScope());
+            .forEach(({ id, target }) => this.container.bind<any>(id).to(target).inSingletonScope());
 
         this.registry.get(TYPE.Service)
-            .forEach(({id, target}) => this.container.bind<any>(id).to(target).inSingletonScope());
+            .forEach(({ id, target }) => this.container.bind<any>(id).to(target).inSingletonScope());
 
         this._plugins
             .filter(plugin => typeof plugin.bind === 'function')
@@ -144,7 +144,7 @@ export class Gabliam {
         if (configsRegistry) {
             configsRegistry = _.sortBy(configsRegistry, 'order');
 
-            for (let {id: configId} of configsRegistry) {
+            for (let { id: configId } of configsRegistry) {
                 let confInstance = this.container.get<interfaces.Config>(configId);
 
                 let beanMetadata: interfaces.BeanMetadata[] = Reflect.getOwnMetadata(
@@ -166,7 +166,8 @@ export class Gabliam {
     }
 
     async destroy() {
-        let pluginsDestroy = this._plugins.map(plugin => Promise.resolve(plugin.destroy()));
+        let pluginsDestroy = this._plugins
+            .map(plugin => Promise.resolve(plugin.destroy(this._app, this.container, this.registry)));
         await Promise.all(pluginsDestroy);
     }
 }
