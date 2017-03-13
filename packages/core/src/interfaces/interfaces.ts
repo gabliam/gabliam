@@ -31,5 +31,5 @@ export interface GabliamPlugin {
 
     addErrorConfig?(app: express.Application, container: interfaces.Container, registry: Registry): ConfigFunction;
 
-    destroy(): Promise<void>;
+    destroy(app: express.Application, container: interfaces.Container, registry: Registry): Promise<void>;
 }
