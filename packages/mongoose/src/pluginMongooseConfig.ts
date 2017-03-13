@@ -14,12 +14,12 @@ export class PluginMongooseConfig {
 
     @Value('application.mongoose.host')
     host: string;
-    
-     @Value('application.mongoose.database_name')
-     database_name: string;
 
-     @Value('application.mongoose.port')
-     port: string;
+    @Value('application.mongoose.database_name')
+    database_name: string;
+
+    @Value('application.mongoose.port')
+    port: string;
 
     @Value('application.mongoose.options')
     connectionOptions: mongoose.ConnectionOptions;

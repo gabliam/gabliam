@@ -33,5 +33,5 @@ export function Document(v: any) {
 
     Reflect.defineMetadata(METADATA_KEY.document, metadata, target);
     register(TYPE.Document, {id: null,  target })(target);
-  }
+  };
 }
