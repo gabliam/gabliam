@@ -164,4 +164,9 @@ export class Gabliam {
         }
         debug('_loadConfig end');
     }
+
+    async destroy() {
+        let pluginsDestroy = this._plugins.map(plugin => Promise.resolve(plugin.destroy()));
+        await Promise.all(pluginsDestroy);
+    }
 }

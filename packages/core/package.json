@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/core",
-  "version": "1.5.7",
+  "version": "1.6.0",
   "description": "express with decorator",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -20,9 +20,6 @@
     "joi": "^10.2.2"
   },
   "dependencies": {
-    "@types/glob": "^5.0.30",
-    "@types/js-yaml": "^3.5.29",
-    "@types/lodash": "^4.14.53",
     "debug": "^2.6.1",
     "glob": "^7.1.1",
     "include-all": "^3.0.1",
@@ -36,6 +33,9 @@
     "@types/express": "^4.0.35",
     "@types/joi": "^10.0.1",
     "@types/reflect-metadata": "^0.0.5",
+    "@types/glob": "^5.0.30",
+    "@types/js-yaml": "^3.5.29",
+    "@types/lodash": "^4.14.53",
     "express": "^4.14.1",
     "joi": "^10.2.2",
     "reflect-metadata": "^0.1.9",
