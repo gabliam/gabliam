@@ -1,6 +1,6 @@
 import { PluginConfig, Value, optional, Bean, inject } from '@gabliam/core';
 import { MongooseConnectionOptionsBeanId, LIST_DOCUMENT } from './constants';
-import { MongooseConnection } from './MongooseConnection';
+import { MongooseConnection } from './mongooseConnection';
 import * as mongoose from 'mongoose';
 import * as d from 'debug';
 
