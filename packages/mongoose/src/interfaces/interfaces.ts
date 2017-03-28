@@ -18,3 +18,15 @@ export interface IWrite<T, U extends mongoose.Document> {
   update(_id: mongoose.Types.ObjectId, item: T): Promise<U>;
   delete(_id: string): Promise<void>;
 }
+
+export interface MongooseConfiguration {
+  uri?: string;
+
+  host?: string;
+
+  database_name?: string;
+
+  port?: number;
+
+  options: mongoose.ConnectionOptions;
+}

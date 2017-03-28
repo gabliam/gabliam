@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 import { Repository } from './repository';
 import { METADATA_KEY } from './constants';
-import { DocumentMetadata } from './interfaces';
+import { DocumentMetadata, MongooseConfiguration } from './interfaces';
 const { Mongoose } = mongoose;
 
 (<any>mongoose).Promise = global.Promise;
@@ -13,9 +13,19 @@ export class MongooseConnection {
 
     private schemas = new Map<string, mongoose.Model<any>>();
 
-    constructor(uri: string, options: mongoose.ConnectionOptions, listDocument: any[]) {
+    constructor(mongooseConfiguration: MongooseConfiguration, listDocument: any[]) {
         let m = new Mongoose();
-        this.conn = m.createConnection(uri, options);
+        if (mongooseConfiguration.host) {
+            this.conn = m.createConnection(
+                mongooseConfiguration.host,
+                mongooseConfiguration.database_name,
+                mongooseConfiguration.port,
+                mongooseConfiguration.options
+            );
+        } else {
+            this.conn = m.createConnection(mongooseConfiguration.uri, mongooseConfiguration.options);
+        }
+
         for (let document of listDocument) {
             let { collectionName, name, schema } = <DocumentMetadata>Reflect.getOwnMetadata(METADATA_KEY.document, document);
             let documentName = name.toLowerCase();

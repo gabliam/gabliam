@@ -8,5 +8,3 @@ export const METADATA_KEY = {
 };
 
 export const LIST_DOCUMENT = Symbol('LIST_DOCUMENT');
-
-export const MongooseConnectionOptionsBeanId = Symbol('MongooseConnectionOptionsBeanId');

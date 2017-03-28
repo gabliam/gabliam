@@ -3,4 +3,4 @@ build/*
 .vscode/
 *.log
 lib/*
-l.ts
+t.js
