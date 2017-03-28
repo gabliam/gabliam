@@ -1,9 +1,9 @@
 import * as Joi from 'joi';
 
 export const mongooseConfigurationValidator = Joi.object().keys({
-    uri: Joi.when('host', { is: undefined, then: Joi.string().required() }),
-    host: Joi.when('uri', { is: undefined, then: Joi.string().required() }),
-    database_name: Joi.when('uri', { is: undefined, then: Joi.string().required() }),
-    port: Joi.when('uri', { is: undefined, then: Joi.number() }),
+    uri: Joi.string(),
+    host: Joi.string(),
+    database_name: Joi.string(),
+    port: Joi.number(),
     options: Joi.object(),
-});
+}).xor('uri', 'host').and('host', 'database_name');
