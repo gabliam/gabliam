@@ -20,7 +20,7 @@ export class PluginTypeormConfig {
     ) {
         debug('constructor PluginTypeormConfig', connectionOptions, config);
         this.connectionOptions = connectionOptions;
-        this.entitiesPath = `${config.discoverPath}/**/*{.js,.ts}`;
+        this.entitiesPath = `${config.scanPath}/**/*{.js,.ts}`;
     }
 
     @Bean(Connection)
