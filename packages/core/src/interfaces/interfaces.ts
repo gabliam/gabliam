@@ -15,7 +15,7 @@ export interface ConfigFunction {
 export interface Config { }
 
 /**
- * Config for gabliam 
+ * Config for gabliam
  */
 export interface GabliamConfig {
     /**

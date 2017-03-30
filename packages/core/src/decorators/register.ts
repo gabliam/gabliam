@@ -2,8 +2,7 @@ import { METADATA_KEY } from '../constants';
 
 /**
  * Register decorator
- * 
- * 
+ *
  * @param  {string} type type in registry
  * @param  {any} value
  */
