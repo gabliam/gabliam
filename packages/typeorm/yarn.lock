@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@gabliam/core@^1.6.0":
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/@gabliam/core/-/core-1.6.1.tgz#2d1b014e65ea16535feb6f3a47506b09b7e51b60"
+"@gabliam/core@^1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@gabliam/core/-/core-1.7.0.tgz#2fead9a081f6f53eb9bcdd2e4310e348e3bf1265"
   dependencies:
     debug "^2.6.1"
     glob "^7.1.1"
