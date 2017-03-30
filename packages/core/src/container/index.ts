@@ -2,6 +2,9 @@ import { Container } from 'inversify';
 import { makeLoggerMiddleware } from 'inversify-logger-middleware';
 import { makeValueMiddleware } from './valueMiddleware';
 
+/**
+ * Create the inversify container
+ */
 export function createContainer(): Container {
     let container = new Container();
 

@@ -11,7 +11,7 @@ import * as d from 'debug';
 const debug = d('Gabliam:core');
 
 /**
- * Wrapper for the express server.
+ * Gabliam
  */
 export class Gabliam {
     private _loader: Loader = new Loader();
@@ -29,23 +29,21 @@ export class Gabliam {
 
     public registry: Registry;
 
-
     /**
-     * Wrapper for the express server.
-     *
-     * @param container Container loaded with all controllers and their dependencies.
+     * Constructor
+     * @param  {interfaces.GabliamConfig|string} options
      */
     constructor(options: interfaces.GabliamConfig | string) {
         if (typeof options === 'string') {
             this._options = {
-                discoverPath: options
+                scanPath: options
             };
         } else {
             this._options = options;
         }
 
         if (!this._options.configPath) {
-            this._options.configPath = this._options.discoverPath;
+            this._options.configPath = this._options.scanPath;
         }
 
         this.container.bind<interfaces.GabliamConfig>(CORE_CONFIG).toConstantValue(this._options);
@@ -89,7 +87,7 @@ export class Gabliam {
     public async build(): Promise<express.Application> {
         this._initializeConfig();
 
-        this.registry = this._loader.loadModules(this._options.discoverPath, this._plugins);
+        this.registry = this._loader.loadModules(this._options.scanPath, this._plugins);
 
         this._bind();
         await this._loadConfig();

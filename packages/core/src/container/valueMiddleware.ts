@@ -5,6 +5,12 @@ import { ValueValidationError } from '../errors';
 import * as _ from 'lodash';
 import * as Joi from 'joi';
 
+
+/**
+ *  Make  the value middleware
+ *  Intercept all creation, if the class as a Value decorator then inject the value
+ * @param  {Container} container
+ */
 export function makeValueMiddleware(container: Container) {
     function validate(path: string, value: any, validator: ValueValidator) {
         let options: Joi.ValidationOptions = {
