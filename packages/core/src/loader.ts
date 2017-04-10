@@ -13,9 +13,20 @@ import { RegistryMetada, GabliamPlugin } from './interfaces';
 const debug = d('Gabliam:loader');
 const reg = /^.*(git|svn|node_modules|dist|build).*/;
 
+/**
+ * Loader
+ */
 export class Loader {
-    loadedFolder = [];
+    /**
+     * List of loaded folder
+     */
+    private loadedFolder = [];
 
+    /**
+     * Load all modules
+     * @param  {string} scan
+     * @param  {GabliamPlugin[]} plugins
+     */
     loadModules(scan: string, plugins: GabliamPlugin[]) {
         let folders = plugins.reduce((prev, current) => {
             if (hasMetadata(METADATA_KEY.scan, current.constructor)) {
@@ -28,7 +39,12 @@ export class Loader {
         return this.loadFolders(...folders);
     }
 
-    private loadFolder(folder) {
+
+    /**
+     * Load on folder
+     * @param  {string} folder
+     */
+    private loadFolder(folder: string) {
         debug(`load ${folder}`);
         let registry = new Registry();
         let files = glob.sync('**/*.@(js|ts)', { cwd: folder })
@@ -43,7 +59,7 @@ export class Loader {
                     let metadata = <RegistryMetada>Reflect.getOwnMetadata(METADATA_KEY.register, m);
                     registry.add(metadata.type, metadata.value);
                 }
-
+                // if ()
                 if (hasMetadata(METADATA_KEY.scan, m)) {
                     let paths = <string[]>Reflect.getOwnMetadata(METADATA_KEY.scan, m);
                     registry.addRegistry(this.loadFolders(...paths));
@@ -54,6 +70,10 @@ export class Loader {
         return registry;
     }
 
+    /**
+     * Load folders
+     * @param  {string[]} ...folders
+     */
     private loadFolders(...folders: string[]) {
         let registry = new Registry();
         if (!Array.isArray(folders) || folders.length === 0) {
@@ -68,7 +88,11 @@ export class Loader {
         return registry;
     }
 
-
+    /**
+     * Load configuration
+     * @param  {string} folder the configuration folder
+     * @returns any
+     */
     loadConfig(folder: string): any {
         debug('loadConfig', folder);
         let files = glob.sync('**/application?(-+([a-zA-Z])).yml', { cwd: folder });

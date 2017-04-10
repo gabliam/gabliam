@@ -1,5 +1,12 @@
 import { METADATA_KEY } from '../constants';
 
+/**
+ * Add path to scan.
+ *
+ * The path is scanned on loading phase
+ *
+ * @param  {string} path
+ */
 export function Scan(path: string) {
     return function (target: any) {
         let paths = [];

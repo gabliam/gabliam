@@ -3,6 +3,8 @@ import { METADATA_KEY } from '../constants';
 /**
  * Register decorator
  *
+ * All values are used on building phase
+ *
  * @param  {string} type type in registry
  * @param  {any} value
  */
