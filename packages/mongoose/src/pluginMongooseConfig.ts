@@ -22,7 +22,7 @@ export class PluginMongooseConfig {
         this.listDocument = listDocument;
     }
 
-    @Bean('MongooseConnection')
+    @Bean(MongooseConnection)
     create() {
         debug('Create MongooseConnection', this.mongooseConfiguration);
         let mongooseConnection = new MongooseConnection(this.mongooseConfiguration, this.listDocument);
