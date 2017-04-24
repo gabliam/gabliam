@@ -1,13 +1,5 @@
-import * as express from 'express';
 import { interfaces } from 'inversify';
 import { Registry } from '../registry';
-
-/**
- * Config function
- */
-export interface ConfigFunction {
-    (app: express.Application): void;
-}
 
 /**
  * Config interface
@@ -27,11 +19,6 @@ export interface GabliamConfig {
      * Path of config
      */
     configPath?: string;
-
-    /**
-     * customRouter
-     */
-    customRouter?: express.Router;
 }
 
 /**
@@ -46,13 +33,15 @@ export interface GabliamPluginConstructor {
  */
 export interface GabliamPlugin {
 
-    build?(app: express.Application, container: interfaces.Container, registry: Registry): void;
+    build?(container: interfaces.Container, registry: Registry): void;
 
-    bind?(app: express.Application, container: interfaces.Container, registry: Registry): void;
+    bind?(container: interfaces.Container, registry: Registry): void;
 
-    addConfig?(app: express.Application, container: interfaces.Container, registry: Registry): ConfigFunction;
+    config?(container: interfaces.Container, registry: Registry, confInstance: any): void;
 
-    addErrorConfig?(app: express.Application, container: interfaces.Container, registry: Registry): ConfigFunction;
+    start?(container: interfaces.Container, registry: Registry): Promise<void>;
 
-    destroy(app: express.Application, container: interfaces.Container, registry: Registry): Promise<void>;
+    stop?(container: interfaces.Container, registry: Registry): Promise<void>;
+
+    destroy?(container: interfaces.Container, registry: Registry): Promise<void>;
 }

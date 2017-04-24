@@ -18,7 +18,7 @@ import { METADATA_KEY } from '../constants';
  *      }
  *  }
  *
- * @Config
+ * @Config()
  * class SampleConfig {
  *      @Bean(Gretter)
  *      createGretter() {
@@ -26,7 +26,7 @@ import { METADATA_KEY } from '../constants';
  *      }
  * }
  *
- * @Service
+ * @Service()
  * class SampleService {
  *  constructor(gretter: Gretter) {
  *      console.log(gretter.greet()); // display Hello David !

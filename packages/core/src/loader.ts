@@ -1,4 +1,3 @@
-// import includeAll = require('include-all');
 import * as glob from 'glob';
 import * as yaml from 'js-yaml';
 import * as fs from 'fs';
@@ -115,7 +114,7 @@ export class Loader {
                 config = _.merge({}, config, this.loadYmlFile(`${folder}/${profileFile}`));
             }
         }
-
+        debug('loadConfig', config);
         return config;
     }
 

@@ -1,4 +1,3 @@
-import * as express from 'express';
 import * as inversify from 'inversify';
 import * as interfaces from './interfaces';
 import * as _ from 'lodash';
@@ -18,11 +17,6 @@ export class Gabliam {
 
     private _plugins: interfaces.GabliamPlugin[] = [];
     private _options: interfaces.GabliamConfig;
-    private _router: express.Router;
-    private _app: express.Application = express();
-    private _configFn: interfaces.ConfigFunction[] = [];
-    private _errorConfigFn: interfaces.ConfigFunction[] = [];
-
     public container: inversify.interfaces.Container = createContainer();
 
     public config: any;
@@ -47,33 +41,6 @@ export class Gabliam {
         }
 
         this.container.bind<interfaces.GabliamConfig>(CORE_CONFIG).toConstantValue(this._options);
-        this._router = this._options.customRouter || express.Router();
-    }
-
-    /**
-     * Add the configuration function to be applied to the application.
-     * Note that the config function is not actually executed until a call to Gabliam.build().
-     *
-     * This method is chainable.
-     *
-     * @param fn Function in which app-level middleware can be registered.
-     */
-    public addConfig(fn: interfaces.ConfigFunction): Gabliam {
-        this._configFn.push(fn);
-        return this;
-    }
-
-    /**
-     * Sets the error handler configuration function to be applied to the application.
-     * Note that the error config function is not actually executed until a call to Gabliam.build().
-     *
-     * This method is chainable.
-     *
-     * @param fn Function in which app-level error handlers can be registered.
-     */
-    public addErrorConfig(fn: interfaces.ConfigFunction): Gabliam {
-        this._errorConfigFn.push(fn);
-        return this;
     }
 
     public addPlugin(ctor: interfaces.GabliamPluginConstructor): Gabliam {
@@ -84,7 +51,7 @@ export class Gabliam {
     /**
      * Applies all routes and configuration to the server, returning the express application.
      */
-    public async build(): Promise<express.Application> {
+    public async build(): Promise<Gabliam> {
         this._initializeConfig();
 
         this.registry = this._loader.loadModules(this._options.scanPath, this._plugins);
@@ -92,25 +59,11 @@ export class Gabliam {
         this._bind();
         await this._loadConfig();
 
-        this._plugins
-            .filter(plugin => typeof plugin.addConfig === 'function')
-            .forEach(plugin => this.addConfig(plugin.addConfig(this._app, this.container, this.registry)));
-
-        // register server-level middleware before anything else
-        this._configFn.forEach(fn => fn(this._app));
-
-        this._plugins
+       this._plugins
             .filter(plugin => typeof plugin.build === 'function')
-            .forEach(plugin => plugin.build(this._app, this.container, this.registry));
+            .forEach(plugin => plugin.build(this.container, this.registry));
 
-        this._plugins
-            .filter(plugin => typeof plugin.addErrorConfig === 'function')
-            .forEach(plugin => this.addConfig(plugin.addErrorConfig(this._app, this.container, this.registry)));
-
-        // register error handlers after controllers
-        this._errorConfigFn.forEach(fn => fn(this._app));
-
-        return this._app;
+        return this;
     }
 
     private _initializeConfig() {
@@ -128,7 +81,7 @@ export class Gabliam {
 
         this._plugins
             .filter(plugin => typeof plugin.bind === 'function')
-            .forEach(plugin => plugin.bind(this._app, this.container, this.registry));
+            .forEach(plugin => plugin.bind(this.container, this.registry));
     }
 
     private async _loadConfig() {
@@ -136,7 +89,8 @@ export class Gabliam {
         async function callInstance(instance, key) {
             return Promise.resolve(instance[key]());
         }
-
+        let pluginConfig =  this._plugins
+            .filter(plugin => plugin.destroy && _.isFunction(plugin.config));
         let configsRegistry = this.registry.get<interfaces.ConfigRegistry>(TYPE.Config);
         debug('configsRegistry', configsRegistry);
         if (configsRegistry) {
@@ -158,14 +112,42 @@ export class Gabliam {
                             .toConstantValue(await callInstance(confInstance, metadata.key));
                     }
                 }
+
+                pluginConfig.forEach(plugin => plugin.config(this.container, this.registry, confInstance));
             }
         }
         debug('_loadConfig end');
     }
 
-    async destroy() {
+    async buildAndStart(): Promise<Gabliam> {
+        await this.build();
+        await this.start();
+        return this;
+    }
+
+    async start(): Promise<Gabliam> {
+        let pluginsStart = this._plugins
+            .filter(plugin => plugin.start && _.isFunction(plugin.start))
+            .map(plugin => plugin.start(this.container, this.registry));
+        await Promise.all(pluginsStart);
+        return this;
+    }
+
+
+    async stop(): Promise<Gabliam> {
+        let pluginsStop = this._plugins
+            .filter(plugin => plugin.stop && _.isFunction(plugin.stop))
+            .map(plugin => plugin.stop(this.container, this.registry));
+        await Promise.all(pluginsStop);
+        return this;
+    }
+
+
+    async destroy(): Promise<Gabliam> {
         let pluginsDestroy = this._plugins
-            .map(plugin => Promise.resolve(plugin.destroy(this._app, this.container, this.registry)));
+            .filter(plugin => plugin.destroy && _.isFunction(plugin.destroy))
+            .map(plugin => plugin.destroy(this.container, this.registry));
         await Promise.all(pluginsDestroy);
+        return this;
     }
 }

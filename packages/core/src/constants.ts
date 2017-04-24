@@ -13,8 +13,8 @@ export const METADATA_KEY = {
 
 export const ORDER_CONFIG = {
     Core: 50,
-    Config: 100,
-    Plugin: 150
+    Plugin: 100,
+    Config: 150,
 };
 
 export const APP_CONFIG = Symbol('APP_CONFIG');
