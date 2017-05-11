@@ -7,7 +7,7 @@ export * from './registry';
 export * from './errors';
 
 export {
-    injectable, tagged, named, inject, optional, unmanaged, multiInject, targetName, decorate, interfaces as inversifyInterfaces
+  injectable, tagged, named, inject, optional, unmanaged, multiInject, targetName, decorate, interfaces as inversifyInterfaces
 } from 'inversify';
 
 export { interfaces };

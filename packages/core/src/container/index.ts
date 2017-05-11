@@ -6,17 +6,17 @@ import { makeValueMiddleware } from './valueMiddleware';
  * Create the inversify container
  */
 export function createContainer(): Container {
-    let container = new Container();
+  const container = new Container();
 
-    let middlewares = [];
-    if (process.env.NODE_ENV === 'development') {
-        let logger = makeLoggerMiddleware();
-        middlewares.push(logger);
-    }
+  const middlewares = [];
+  if (process.env.NODE_ENV === 'development') {
+    const logger = makeLoggerMiddleware();
+    middlewares.push(logger);
+  }
 
-    middlewares.push(makeValueMiddleware(container));
-    container.applyMiddleware(...middlewares);
-    return container;
+  middlewares.push(makeValueMiddleware(container));
+  container.applyMiddleware(...middlewares);
+  return container;
 }
 
 export { Container };

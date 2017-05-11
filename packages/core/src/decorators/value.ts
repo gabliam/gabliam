@@ -7,19 +7,19 @@ import * as Joi from 'joi';
  * Options for value decorator
  */
 export interface ValueOptions {
-    /**
-     * Path of configuration
-     */
-    path: string;
+  /**
+   * Path of configuration
+   */
+  path: string;
 
-    /**
-     * validator of configuration
-     * If validator is an Joi schema, throw an error when validation fail
-     * If you want customize error, or disable throw error, use ValueValidator
-     * @see Joi.Schema
-     * @see ValueValidator
-     */
-    validator?: Joi.Schema | ValueValidator;
+  /**
+   * validator of configuration
+   * If validator is an Joi schema, throw an error when validation fail
+   * If you want customize error, or disable throw error, use ValueValidator
+   * @see Joi.Schema
+   * @see ValueValidator
+   */
+  validator?: Joi.Schema | ValueValidator;
 }
 
 /**
@@ -28,7 +28,7 @@ export interface ValueOptions {
  * @returns boolean
  */
 function isValueOptions(obj: any): obj is ValueOptions {
-    return typeof obj === 'object' && obj.hasOwnProperty('path');
+  return typeof obj === 'object' && obj.hasOwnProperty('path');
 }
 
 /**
@@ -37,18 +37,20 @@ function isValueOptions(obj: any): obj is ValueOptions {
  * @returns boolean
  */
 function isValueValidator(obj: any): obj is ValueValidator {
-    return typeof obj === 'object' && obj.hasOwnProperty('schema') && !obj.hasOwnProperty('isJoi');
+  return typeof obj === 'object' && obj.hasOwnProperty('schema') && !obj.hasOwnProperty('isJoi');
 }
+
+export type ValueReturn = (target: any, key: string) => void;
 
 /**
  * @param  {ValueOptions} options options of decorator
  */
-export function Value(options: ValueOptions);
+export function Value(options: ValueOptions): ValueReturn;
 /**
  * @param  {string} path path of configuration
  * @param  {Joi.Schema} schema? Joi schema
  */
-export function Value(path: string, schema?: Joi.Schema);
+export function Value(path: string, schema?: Joi.Schema): ValueReturn;
 
 /**
  * Value decorator
@@ -93,36 +95,36 @@ export function Value(path: string, schema?: Joi.Schema);
  * @param  {any} value
  * @param  {Joi.Schema=null} schema
  */
-export function Value(value: any, schema: Joi.Schema = null) {
-    return function (target: any, key: string) {
-        if (typeof value === 'string') {
-            valueProperty(value, schema, target, key);
-        } else if (isValueOptions(value)) {
-            valueProperty(value.path, value.validator, target, key);
-        }
-    };
+export function Value(value: any, schema?: Joi.Schema): ValueReturn {
+  return function (target: any, key: string) {
+    if (typeof value === 'string') {
+      valueProperty(value, schema, target, key);
+    } else if (isValueOptions(value)) {
+      valueProperty(value.path, value.validator, target, key);
+    }
+  };
 }
 
-function valueProperty(path: string, schema: Joi.Schema | ValueValidator, target: any, key: string) {
-    let validator: ValueValidator = null;
-    if (schema !== null) {
-        if (isValueValidator(schema)) {
-            validator = {
-                throwError: true,
-                ...schema
-            };
-        } else {
-            validator = { throwError: true, schema };
-        }
-    }
-    let metadata: ValueMetadata = { path, target, key, validator };
-    let metadataList: ValueMetadata[] = [];
-
-    if (!Reflect.hasOwnMetadata(METADATA_KEY.value, target.constructor)) {
-        Reflect.defineMetadata(METADATA_KEY.value, metadataList, target.constructor);
+function valueProperty(path: string, schema: Joi.Schema | ValueValidator | undefined, target: any, key: string) {
+  let validator: ValueValidator | null = null;
+  if (schema) {
+    if (isValueValidator(schema)) {
+      validator = {
+        throwError: true,
+        ...schema
+      };
     } else {
-        metadataList = Reflect.getOwnMetadata(METADATA_KEY.value, target.constructor);
+      validator = { throwError: true, schema };
     }
+  }
+  const metadata: ValueMetadata = { path, target, key, validator };
+  let metadataList: ValueMetadata[] = [];
 
-    metadataList.push(metadata);
+  if (!Reflect.hasOwnMetadata(METADATA_KEY.value, target.constructor)) {
+    Reflect.defineMetadata(METADATA_KEY.value, metadataList, target.constructor);
+  } else {
+    metadataList = Reflect.getOwnMetadata(METADATA_KEY.value, target.constructor);
+  }
+
+  metadataList.push(metadata);
 }

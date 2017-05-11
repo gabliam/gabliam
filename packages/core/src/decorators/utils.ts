@@ -6,9 +6,9 @@
  * @param  {any} target
  */
 export function hasMetadata(key: string, target: any) {
-    try {
-        return Reflect.hasOwnMetadata(key, target);
-    } catch (e) {
-        return false;
-    }
+  try {
+    return Reflect.hasOwnMetadata(key, target);
+  } catch (e) {
+    return false;
+  }
 }

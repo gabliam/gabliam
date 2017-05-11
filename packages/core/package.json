@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/core",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "express with decorator",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -8,7 +8,7 @@
   "scripts": {
     "build": "rimraf lib && tsc",
     "prepublish": "npm run lint && npm run build",
-    "lint": "tslint src/**/*.ts && tslint 'src/**/*.ts'",
+    "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "files": [
@@ -37,8 +37,10 @@
     "joi": "^10.2.2",
     "reflect-metadata": "^0.1.9",
     "rimraf": "^2.6.0",
-    "tslint": "^4.4.2",
-    "typescript": "^2.2.1"
+    "tslint": "^5.2.0",
+    "tslint-eslint-rules": "^4.0.0",
+    "typescript": "^2.3.2",
+    "vrsource-tslint-rules": "^5.1.0"
   },
   "repository": {
     "type": "git",

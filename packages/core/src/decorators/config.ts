@@ -1,7 +1,6 @@
-import { TYPE } from '../constants';
+import { TYPE, ORDER_CONFIG } from '../constants';
 import { register } from './register';
 import { interfaces, injectable } from 'inversify';
-import { ORDER_CONFIG } from '../constants';
 
 /**
  * Config decorator
@@ -32,7 +31,7 @@ import { ORDER_CONFIG } from '../constants';
  * @param  {number=ORDER_CONFIG.Config} order order of loading
  */
 export function Config(order: number = ORDER_CONFIG.Config) {
-    return configDecorator(order);
+  return configDecorator(order);
 }
 
 /**
@@ -64,7 +63,7 @@ export function Config(order: number = ORDER_CONFIG.Config) {
  * @param  {number=ORDER_CONFIG.Core} order order of loading
  */
 export function CoreConfig(order = ORDER_CONFIG.Core) {
-    return configDecorator(order);
+  return configDecorator(order);
 }
 
 /**
@@ -96,14 +95,14 @@ export function CoreConfig(order = ORDER_CONFIG.Core) {
  * @param  {number=ORDER_CONFIG.Core} order order of loading
  */
 export function PluginConfig(order = ORDER_CONFIG.Plugin) {
-    return configDecorator(order);
+  return configDecorator(order);
 }
 
 function configDecorator(order: number) {
-    return function (target: any) {
-        let id: interfaces.ServiceIdentifier<any> = target;
-        injectable()(target);
-        register(TYPE.Config, { id, order, target })(target);
-    };
+  return function (target: any) {
+    const id: interfaces.ServiceIdentifier<any> = target;
+    injectable()(target);
+    register(TYPE.Config, { id, order, target })(target);
+  };
 }
 
