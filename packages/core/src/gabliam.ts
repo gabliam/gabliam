@@ -111,7 +111,7 @@ export class Gabliam {
       configsRegistry = _.sortBy(configsRegistry, 'order');
 
       for (const { id: configId } of configsRegistry) {
-        const confInstance = this.container.get<{}>(configId);
+        const confInstance = this.container.get<object>(configId);
 
         const beanMetadata: interfaces.BeanMetadata[] = Reflect.getOwnMetadata(
           METADATA_KEY.bean,
