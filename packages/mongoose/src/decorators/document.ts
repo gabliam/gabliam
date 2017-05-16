@@ -3,9 +3,7 @@ import { TYPE, METADATA_KEY } from '../constants';
 import { DocumentOptions, DocumentMetadata } from '../interfaces';
 import * as mongoose from 'mongoose';
 
-export function Document(name: string);
-export function Document(opts: DocumentOptions);
-export function Document(v: any) {
+export function Document(v: string | DocumentOptions) {
   return function (target: any) {
     let opts: DocumentOptions;
     if (typeof v === 'string') {
@@ -26,7 +24,7 @@ export function Document(v: any) {
       schema = opts.schema;
     }
 
-    let metadata: DocumentMetadata = {
+    const metadata: DocumentMetadata = {
       ...opts,
       schema
     };

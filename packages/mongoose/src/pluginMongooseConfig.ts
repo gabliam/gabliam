@@ -16,7 +16,7 @@ export class PluginMongooseConfig {
     listDocument: any[];
 
     constructor(
-        @inject(LIST_DOCUMENT) listDocument
+        @inject(LIST_DOCUMENT) listDocument: any[]
     ) {
         debug('constructor PluginMongooseConfig');
         this.listDocument = listDocument;
@@ -25,7 +25,6 @@ export class PluginMongooseConfig {
     @Bean(MongooseConnection)
     create() {
         debug('Create MongooseConnection', this.mongooseConfiguration);
-        let mongooseConnection = new MongooseConnection(this.mongooseConfiguration, this.listDocument);
-        return mongooseConnection;
+        return new MongooseConnection(this.mongooseConfiguration, this.listDocument);
     }
 }

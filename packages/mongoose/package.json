@@ -8,7 +8,7 @@
   "scripts": {
     "build": "rimraf lib && tsc",
     "prepublish": "npm run build",
-    "lint": "tslint src/**/*.ts && tslint 'src/**/*.ts'",
+    "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "files": [
@@ -26,12 +26,12 @@
   },
   "homepage": "https://github.com/gabliam/mongoose#readme",
   "peerDependencies": {
-    "@gabliam/core": "~2.0.0",
+    "@gabliam/core": "^2.1.0",
     "joi": "^10.2.2",
     "mongoose": "^4.8.5"
   },
   "devDependencies": {
-    "@gabliam/core": "~2.0.0",
+    "@gabliam/core": "^2.1.0",
     "@types/debug": "^0.0.29",
     "@types/joi": "^10.0.1",
     "@types/mongoose": "^4.7.6",
@@ -40,8 +40,10 @@
     "mongoose": "^4.8.5",
     "reflect-metadata": "^0.1.10",
     "rimraf": "^2.6.1",
-    "tslint": "^4.5.0",
-    "typescript": "^2.2.1"
+    "tslint": "^5.2.0",
+    "tslint-eslint-rules": "^4.0.0",
+    "typescript": "^2.3.2",
+    "vrsource-tslint-rules": "^5.1.0"
   },
   "dependencies": {
     "debug": "^2.6.1"

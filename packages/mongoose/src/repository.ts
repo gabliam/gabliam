@@ -33,8 +33,9 @@ export class Repository<T> implements IRead<T & mongoose.Document>, IWrite<T, T 
     return this.model.findOne(cond);
   }
 
-  find(cond?: Object, fields?: Object, options?: Object): mongoose.Query<(T & mongoose.Document)[]> {
-    return this.model.find(cond, options);
+
+  find(conditions: Object, projection?: Object, options?: Object): mongoose.Query<(T & mongoose.Document)[]> {
+    return this.model.find(conditions, projection!, options!);
   }
 
   private toObjectId(_id: string): mongoose.Types.ObjectId {

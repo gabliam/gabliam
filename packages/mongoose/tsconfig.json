@@ -6,8 +6,8 @@
         "moduleResolution": "node",
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
+        "strict": true,
         "declaration": true,
-        "noImplicitAny": false,
         "noUnusedLocals": true,
         "sourceMap": false,
         "outDir": "lib"
