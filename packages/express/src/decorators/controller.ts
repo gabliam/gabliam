@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { ControllerMetadata, Controller, HandlerDecorator, ControllerMethodMetadata } from '../interfaces';
+import { ControllerMetadata, HandlerDecorator, ControllerMethodMetadata } from '../interfaces';
 import { METADATA_KEY, TYPE } from '../constants';
 import { inversifyInterfaces, injectable, register } from '@gabliam/core';
 import { addMiddlewareMetadata } from '../metadata';
@@ -11,8 +11,6 @@ export interface ControllerOptions {
     middlewares?: express.RequestHandler[];
 }
 
-export function Controller(options: ControllerOptions);
-export function Controller(path: string);
 export function Controller(options: ControllerOptions | string) {
     return function (target: any) {
         decorateController(options, target, false);
@@ -20,8 +18,6 @@ export function Controller(options: ControllerOptions | string) {
 }
 
 
-export function RestController(options: ControllerOptions);
-export function RestController(path: string);
 export function RestController(options: ControllerOptions | string) {
     return function (target: any) {
         decorateController(options, target, true);
@@ -36,7 +32,7 @@ function decorateController(options: ControllerOptions | string, target: any, js
         path = options;
     } else {
         path = options.path;
-        middlewares = options.middlewares;
+        middlewares = options.middlewares || [];
         if (options.name) {
             id = name;
         }
@@ -44,7 +40,7 @@ function decorateController(options: ControllerOptions | string, target: any, js
 
     addMiddlewareMetadata(middlewares, target);
 
-    let metadata: ControllerMetadata = { path, target, json };
+    const metadata: ControllerMetadata = { path, target, json };
     Reflect.defineMetadata(METADATA_KEY.controller, metadata, target);
     injectable()(target);
     register(TYPE.Controller, {id, target})(target);
@@ -80,7 +76,7 @@ export function Delete(path: string, ...middlewares: express.RequestHandler[]): 
 
 export function Method(method: string, path: string, ...middlewares: express.RequestHandler[]): HandlerDecorator {
     return function (target: any, key: string, descriptor: PropertyDescriptor) {
-        let metadata: ControllerMethodMetadata = { path, method, target, key };
+        const metadata: ControllerMethodMetadata = { path, method, target, key };
         let metadataList: ControllerMethodMetadata[] = [];
 
         addMiddlewareMetadata(middlewares, target.constructor, key);

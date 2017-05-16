@@ -14,7 +14,7 @@ export { interfaces, APP, SERVER };
 
 @Scan(__dirname)
 export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
-    errorMiddlewares = [];
+    errorMiddlewares: any = [];
 
     bind(container: inversifyInterfaces.Container, registry: Registry) {
         container.bind(APP).toConstantValue(express());
@@ -28,9 +28,9 @@ export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
     }
 
     config(container: inversifyInterfaces.Container, registry: Registry, confInstance: any) {
-        let app = container.get<express.Application>(APP);
+        const app = container.get<express.Application>(APP);
         if (Reflect.hasMetadata(METADATA_KEY.MiddlewareConfig, confInstance.constructor)) {
-            let metadataList: interfaces.ExpressConfigMetadata[] = Reflect.getOwnMetadata(
+            const metadataList: interfaces.ExpressConfigMetadata[] = Reflect.getOwnMetadata(
                 METADATA_KEY.MiddlewareConfig,
                 confInstance.constructor
             );
@@ -40,7 +40,7 @@ export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
         }
 
         if (Reflect.hasMetadata(METADATA_KEY.MiddlewareErrorConfig, confInstance.constructor)) {
-            let metadataList: interfaces.ExpressConfigMetadata[] = Reflect.getOwnMetadata(
+            const metadataList: interfaces.ExpressConfigMetadata[] = Reflect.getOwnMetadata(
                 METADATA_KEY.MiddlewareErrorConfig,
                 confInstance.constructor
             );
@@ -51,52 +51,52 @@ export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
     }
 
     private buildExpressErrorConfig(container: inversifyInterfaces.Container, registry: Registry) {
-        let app = container.get<express.Application>(APP);
-        this.errorMiddlewares.forEach(mid => mid(app));
+        const app = container.get<express.Application>(APP);
+        this.errorMiddlewares.forEach((mid: any) => mid(app));
     }
 
     private buildControllers(container: inversifyInterfaces.Container, registry: Registry) {
-        let restConfig = container.get<interfaces.ExpressPluginConfig>(EXPRESS_PLUGIN_CONFIG);
+        const restConfig = container.get<interfaces.ExpressPluginConfig>(EXPRESS_PLUGIN_CONFIG);
         debug('registerControllers', TYPE.Controller);
-        let controllerIds = registry.get(TYPE.Controller);
+        const controllerIds = registry.get(TYPE.Controller);
         controllerIds.forEach(({ id: controllerId }) => {
-            let controller = container.get<interfaces.Controller>(controllerId);
+            const controller = container.get<object>(controllerId);
 
-            let controllerMetadata: interfaces.ControllerMetadata = Reflect.getOwnMetadata(
+            const controllerMetadata: interfaces.ControllerMetadata = Reflect.getOwnMetadata(
                 METADATA_KEY.controller,
                 controller.constructor
             );
 
-            let controllerMiddlewares = getMiddlewares(container, controller.constructor);
+            const controllerMiddlewares = getMiddlewares(container, controller.constructor);
 
-            let methodMetadatas: interfaces.ControllerMethodMetadata[] = Reflect.getOwnMetadata(
+            const methodMetadatas: interfaces.ControllerMethodMetadata[] = Reflect.getOwnMetadata(
                 METADATA_KEY.controllerMethod,
                 controller.constructor
             );
 
             if (controllerMetadata && methodMetadatas) {
-                let router = express.Router();
-                let routerPath = cleanPath(`${restConfig.rootPath}${controllerMetadata.path}`);
+                const router = express.Router();
+                const routerPath = cleanPath(`${restConfig.rootPath}${controllerMetadata.path}`);
                 debug(`New route : "${routerPath}"`);
                 methodMetadatas.forEach((methodMetadata: interfaces.ControllerMethodMetadata) => {
-                    let methodMetadataPath = cleanPath(methodMetadata.path);
-                    let methodMiddlewares = getMiddlewares(container, controller.constructor, methodMetadata.key);
+                    const methodMetadataPath = cleanPath(methodMetadata.path);
+                    const methodMiddlewares = getMiddlewares(container, controller.constructor, methodMetadata.key);
                     debug(methodMetadataPath);
                     debug({ methodMiddlewares, controllerMiddlewares });
-                    let handler: express.RequestHandler = this.handlerFactory(
+                    const handler: express.RequestHandler = this.handlerFactory(
                         container,
                         controllerId,
                         methodMetadata.key,
                         controllerMetadata.json
                     );
-                    router[methodMetadata.method](
+                    (router as any)[methodMetadata.method](
                         methodMetadataPath,
                         ...controllerMiddlewares,
                         ...methodMiddlewares,
                         handler
                     );
                 });
-                let app = container.get<express.Application>(APP);
+                const app = container.get<express.Application>(APP);
                 app.use(routerPath, router);
             }
         });
@@ -109,7 +109,7 @@ export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
         json: boolean
     ): express.RequestHandler {
         return (req: express.Request, res: express.Response, next: express.NextFunction) => {
-            let result: any = container.get(controllerId)[key](req, res, next);
+            const result: any = container.get<any>(controllerId)[key](req, res, next);
 
             // try to resolve promise
             if (result && result instanceof Promise) {
@@ -144,7 +144,7 @@ export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
     async stop(container: inversifyInterfaces.Container, registry: Registry) {
         try {
             // server can be undefined (if start is not called)
-            let server = container.get<http.Server>(SERVER);
+            const server = container.get<http.Server>(SERVER);
             return new Promise<void>((resolve) => {
                 server.close(() => resolve());
             });
@@ -153,9 +153,9 @@ export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
     }
 
     async start(container: inversifyInterfaces.Container, registry: Registry) {
-        let restConfig = container.get<interfaces.ExpressPluginConfig>(EXPRESS_PLUGIN_CONFIG);
-        let app = container.get<express.Application>(APP);
-        let port = restConfig.port;
+        const restConfig = container.get<interfaces.ExpressPluginConfig>(EXPRESS_PLUGIN_CONFIG);
+        const app = container.get<express.Application>(APP);
+        const port = restConfig.port;
         app.set('port', port);
 
         const server = http.createServer(app);
@@ -167,7 +167,7 @@ export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
         function onError(error: NodeJS.ErrnoException): void {
             // tslint:disable-next-line:curly
             if (error.syscall !== 'listen') throw error;
-            let bind = (typeof port === 'string') ? 'Pipe ' + port : 'Port ' + port;
+            const bind = (typeof port === 'string') ? 'Pipe ' + port : 'Port ' + port;
             switch (error.code) {
                 case 'EACCES':
                     console.error(`${bind} requires elevated privileges`);
@@ -183,8 +183,8 @@ export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
         }
 
         function onListening(): void {
-            let addr = server.address();
-            let bind = (typeof addr === 'string') ? `pipe ${addr}` : `port ${addr.port}`;
+            const addr = server.address();
+            const bind = (typeof addr === 'string') ? `pipe ${addr}` : `port ${addr.port}`;
             console.log(`Listening on ${bind}`);
         }
     }
