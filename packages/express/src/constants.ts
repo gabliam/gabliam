@@ -1,14 +1,14 @@
 /** Type in registry */
 export const TYPE = {
-    Controller: 'ControllerType',
+  Controller: 'ControllerType',
 };
 
 export const METADATA_KEY = {
-    controller: '_controller',
-    controllerMethod: '_controller-method',
-    middleware: '_middleware',
-    MiddlewareConfig: '_middlewareConfig',
-    MiddlewareErrorConfig: '_middlewareErrorConfig'
+  controller: '_controller',
+  controllerMethod: '_controller-method',
+  middleware: '_middleware',
+  MiddlewareConfig: '_middlewareConfig',
+  MiddlewareErrorConfig: '_middlewareErrorConfig'
 };
 
 export const DEFAULT_ROUTING_ROOT_PATH = '/';
