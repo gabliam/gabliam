@@ -10,8 +10,8 @@ import * as d from 'debug';
 const debug = d('Gabliam:core');
 
 const DEFAULT_CONFIG: interfaces.GabliamOptions = {
-  scanPath: process.env(),
-  configPath: process.env.GABLIAM_CONFIG_PATH || process.env()
+  scanPath: process.env.PWD,
+  configPath: process.env.GABLIAM_CONFIG_PATH || process.env.PWD
 };
 
 /**
