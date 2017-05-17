@@ -29,8 +29,8 @@ export class PluginTypeormConfig {
         if (!this.connectionOptions) {
             throw new Error(`PluginTypeormConfig connectionOptions is mandatory`);
         }
-        let connectionOptions = this.connectionOptions;
-        let entities: any = connectionOptions.entities || [];
+        const connectionOptions = this.connectionOptions;
+        const entities: any = connectionOptions.entities || [];
         entities.push(this.entitiesPath);
 
         return createConnection({
