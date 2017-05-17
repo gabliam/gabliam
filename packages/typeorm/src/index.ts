@@ -7,8 +7,8 @@ export * from './constant';
 
 @Scan(__dirname)
 export default class PluginsTypeOrm implements interfaces.GabliamPlugin {
-    async destroy(container: inversifyInterfaces.Container, registry: Registry) {
-        const connection = container.get<Connection>(Connection);
-        await connection.close();
-    }
+  async destroy(container: inversifyInterfaces.Container, registry: Registry) {
+    const connection = container.get<Connection>(Connection);
+    await connection.close();
+  }
 }
