@@ -10,21 +10,21 @@ const debug = d('Gabliam:Plugin:mongoose');
 @PluginConfig()
 export class PluginMongooseConfig {
 
-    @Value('application.mongoose', mongooseConfigurationValidator)
-    mongooseConfiguration: MongooseConfiguration;
+  @Value('application.mongoose', mongooseConfigurationValidator)
+  mongooseConfiguration: MongooseConfiguration;
 
-    listDocument: any[];
+  listDocument: any[];
 
-    constructor(
-        @inject(LIST_DOCUMENT) listDocument: any[]
-    ) {
-        debug('constructor PluginMongooseConfig');
-        this.listDocument = listDocument;
-    }
+  constructor(
+    @inject(LIST_DOCUMENT) listDocument: any[]
+  ) {
+    debug('constructor PluginMongooseConfig');
+    this.listDocument = listDocument;
+  }
 
-    @Bean(MongooseConnection)
-    create() {
-        debug('Create MongooseConnection', this.mongooseConfiguration);
-        return new MongooseConnection(this.mongooseConfiguration, this.listDocument);
-    }
+  @Bean(MongooseConnection)
+  create() {
+    debug('Create MongooseConnection', this.mongooseConfiguration);
+    return new MongooseConnection(this.mongooseConfiguration, this.listDocument);
+  }
 }

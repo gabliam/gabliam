@@ -15,19 +15,19 @@ export * from './repository';
 @Scan(__dirname)
 export default class MongoosePlugin implements coreInterfaces.GabliamPlugin {
 
-    bind(container: inversifyInterfaces.Container, registry: Registry) {
-        let documents = registry.get(TYPE.Document)
-            .map(({ id, target }) => {
-                return target;
-            });
-        debug('list documents', documents);
-        container.bind<any>(LIST_DOCUMENT).toConstantValue(documents);
-    }
+  bind(container: inversifyInterfaces.Container, registry: Registry) {
+    const documents = registry.get(TYPE.Document)
+      .map(({ id, target }) => {
+        return target;
+      });
+    debug('list documents', documents);
+    container.bind<any>(LIST_DOCUMENT).toConstantValue(documents);
+  }
 
-    async destroy(container: inversifyInterfaces.Container, registry: Registry) {
-        let connection = container.get<MongooseConnection>(MongooseConnection);
-        if (connection) {
-            await connection.conn.close();
-        }
+  async destroy(container: inversifyInterfaces.Container, registry: Registry) {
+    const connection = container.get<MongooseConnection>(MongooseConnection);
+    if (connection) {
+      await connection.conn.close();
     }
+  }
 }

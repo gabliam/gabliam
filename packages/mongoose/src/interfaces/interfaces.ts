@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 
-export interface DocumentOptions  {
+export interface DocumentOptions {
   name: string;
   collectionName?: string;
   schema?: mongoose.Schema;
