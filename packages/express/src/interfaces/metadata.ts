@@ -24,6 +24,8 @@ export interface ExpressConfigMetadata {
   id: inversifyInterfaces.ServiceIdentifier<any>;
 
   key: string;
+
+  order: number;
 }
 
 export type MiddlewareMetadata = express.RequestHandler | MiddlewareDefinition;

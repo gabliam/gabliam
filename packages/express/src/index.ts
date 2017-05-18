@@ -14,7 +14,9 @@ export { interfaces, APP, SERVER };
 
 @Scan(__dirname)
 export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
-  errorMiddlewares: any = [];
+  middlewares: interfaces.ExpressConfig[] = [];
+
+  errorMiddlewares: interfaces.ExpressConfig[] = [];
 
   bind(container: inversifyInterfaces.Container, registry: Registry) {
     container.bind(APP).toConstantValue(express());
@@ -23,19 +25,20 @@ export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
   }
 
   build(container: inversifyInterfaces.Container, registry: Registry) {
+    this.buildExpressConfig(container, registry);
     this.buildControllers(container, registry);
     this.buildExpressErrorConfig(container, registry);
   }
 
   config(container: inversifyInterfaces.Container, registry: Registry, confInstance: any) {
-    const app = container.get<express.Application>(APP);
     if (Reflect.hasMetadata(METADATA_KEY.MiddlewareConfig, confInstance.constructor)) {
       const metadataList: interfaces.ExpressConfigMetadata[] = Reflect.getOwnMetadata(
         METADATA_KEY.MiddlewareConfig,
         confInstance.constructor
       );
-      metadataList.forEach(({ key }) => {
-        confInstance[key](app);
+
+      metadataList.forEach(({ key, order }) => {
+        this.middlewares.push({ order, instance: confInstance[key].bind(confInstance[key]) })
       });
     }
 
@@ -44,19 +47,30 @@ export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
         METADATA_KEY.MiddlewareErrorConfig,
         confInstance.constructor
       );
-      metadataList.forEach(({ key }) => {
-        this.errorMiddlewares.push(confInstance[key].bind(confInstance[key]));
+
+      metadataList.forEach(({ key, order }) => {
+        this.errorMiddlewares.push({ order, instance: confInstance[key].bind(confInstance[key]) });
       });
     }
   }
 
+  private buildExpressConfig(container: inversifyInterfaces.Container, registry: Registry) {
+    const app = container.get<express.Application>(APP);
+    this.middlewares
+      .sort((a, b) => a.order - b.order)
+      .forEach(({ instance }) => instance(app));
+  }
+
   private buildExpressErrorConfig(container: inversifyInterfaces.Container, registry: Registry) {
     const app = container.get<express.Application>(APP);
-    this.errorMiddlewares.forEach((mid: any) => mid(app));
+    this.errorMiddlewares
+      .sort((a, b) => a.order - b.order)
+      .forEach((mid: any) => mid(app));
   }
 
   private buildControllers(container: inversifyInterfaces.Container, registry: Registry) {
     const restConfig = container.get<interfaces.ExpressPluginConfig>(EXPRESS_PLUGIN_CONFIG);
+
     debug('registerControllers', TYPE.Controller);
     const controllerIds = registry.get(TYPE.Controller);
     controllerIds.forEach(({ id: controllerId }) => {
@@ -77,7 +91,9 @@ export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
       if (controllerMetadata && methodMetadatas) {
         const router = express.Router();
         const routerPath = cleanPath(`${restConfig.rootPath}${controllerMetadata.path}`);
+
         debug(`New route : "${routerPath}"`);
+
         methodMetadatas.forEach((methodMetadata: interfaces.ControllerMethodMetadata) => {
           const methodMetadataPath = cleanPath(methodMetadata.path);
           const methodMiddlewares = getMiddlewares(container, controller.constructor, methodMetadata.key);

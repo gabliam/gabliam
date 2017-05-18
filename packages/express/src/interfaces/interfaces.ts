@@ -28,3 +28,10 @@ export type ConfigFunction = (app: express.Application) => void;
 export interface ExpressConfigRegistry extends interfaces.ValueRegistry {
   key: string;
 }
+
+
+export interface ExpressConfig {
+  order: number;
+
+  instance: ConfigFunction;
+}
