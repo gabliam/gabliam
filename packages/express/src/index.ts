@@ -65,7 +65,7 @@ export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
     const app = container.get<express.Application>(APP);
     this.errorMiddlewares
       .sort((a, b) => a.order - b.order)
-      .forEach((mid: any) => mid(app));
+      .forEach(({ instance }) => instance(app));
   }
 
   private buildControllers(container: inversifyInterfaces.Container, registry: Registry) {
