@@ -34,8 +34,8 @@ export class MongooseConnection {
     }
   }
 
-  getRepository<T>(documentName: string): Repository<T> | undefined;
-  getRepository<T>(clazz: any): Repository<T> | undefined {
+  getRepository<T>(documentName: string): Repository<T>;
+  getRepository<T>(clazz: any): Repository<T> {
     if (typeof clazz === 'string') {
       return this.getRepositoryByName<T>(clazz);
     }
@@ -43,7 +43,7 @@ export class MongooseConnection {
     const { collectionName, name, schema } = <DocumentMetadata>Reflect.getOwnMetadata(METADATA_KEY.document, clazz);
     const documentName = name.toLowerCase();
     if (this.repositories.has(documentName)) {
-      return this.repositories.get(documentName);
+      return this.repositories.get(documentName)!;
     }
 
     const clazzSchema = this.conn.model<T & mongoose.Document>(name, schema, collectionName);
@@ -55,7 +55,7 @@ export class MongooseConnection {
   private getRepositoryByName<T>(documentName: string) {
     const name = documentName.toLowerCase();
     if (this.repositories.has(name)) {
-      return this.repositories.get(name);
+      return this.repositories.get(name)!;
     } else {
       if (this.schemas.has(name)) {
         const repository = new Repository<T>(this.schemas.get(name)!);
