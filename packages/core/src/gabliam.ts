@@ -26,11 +26,14 @@ export class Gabliam {
 
   public config: any;
 
+  /**
+   * Registry
+   */
   public registry: Registry;
 
   /**
    * Constructor
-   * @param  {interfaces.GabliamConfig|string} options
+   * @param  {interfaces.GabliamConfig|string} options?
    */
   constructor(options?: interfaces.GabliamConfig | string) {
     if (options === undefined) {
@@ -51,23 +54,44 @@ export class Gabliam {
 
     this.container.bind<interfaces.GabliamConfig>(CORE_CONFIG).toConstantValue(this._options);
   }
-
+  /**
+   * Add a plugin order
+   * @param  {interfaces.GabliamPluginConstructor} ctor
+   * @returns Gabliam
+   */
   public addPlugin(ctor: interfaces.GabliamPluginConstructor): Gabliam {
     this._plugins.push(new ctor());
     return this;
   }
 
   /**
-   * Applies all routes and configuration to the server, returning the express application.
+   * Build gabliam
+   * @returns Promise
    */
   public async build(): Promise<Gabliam> {
+    /**
+     * Load config file
+     */
     this._initializeConfig();
 
+    /**
+     * Loading phase
+     */
     this.registry = this._loader.loadModules(this._options.scanPath, this._plugins);
 
+    /**
+     * Binding phase
+     */
     this._bind();
+
+    /**
+     * Config phase
+     */
     await this._loadConfig();
 
+    /**
+     * building phase
+     */
     this._plugins
       .filter(plugin => _.isFunction(plugin.build))
       .forEach(plugin => plugin.build!(this.container, this.registry));
@@ -75,11 +99,20 @@ export class Gabliam {
     return this;
   }
 
+
+  /**
+   * Load config file and bind result in APP_CONFIG
+   */
   private _initializeConfig() {
     const config = this.config = this._loader.loadConfig(this._options.configPath);
     this.container.bind<any>(APP_CONFIG).toConstantValue(config);
   }
 
+  /**
+   * Binding phase
+   * Binding of config and service classes.
+   * call all plugin.bind
+   */
   private _bind() {
     debug('_bind');
     this.registry.get(TYPE.Config)
@@ -93,6 +126,9 @@ export class Gabliam {
       .forEach(plugin => plugin.bind!(this.container, this.registry));
   }
 
+  /**
+   * Config phase
+   */
   private async _loadConfig() {
     debug('_loadConfig');
     async function callInstance(instance: any, key: string) {
@@ -132,13 +168,22 @@ export class Gabliam {
     }
     debug('_loadConfig end');
   }
-
+  /**
+   * Build and start gabliam application
+   * @returns Promise
+   */
   async buildAndStart(): Promise<Gabliam> {
     await this.build();
     await this.start();
     return this;
   }
 
+  /**
+   * Start gabliam application
+   *
+   * call all plugin.start
+   * @returns Promise
+   */
   async start(): Promise<Gabliam> {
     const pluginsStart = this._plugins
       .filter(plugin => _.isFunction(plugin.start))
@@ -148,7 +193,12 @@ export class Gabliam {
     return this;
   }
 
-
+  /**
+   * Stop gabliam application
+   * call all plugin.stop
+   *
+   * @returns Promise
+   */
   async stop(): Promise<Gabliam> {
     const pluginsStop = this._plugins
       .filter(plugin => _.isFunction(plugin.stop))
@@ -158,7 +208,12 @@ export class Gabliam {
     return this;
   }
 
-
+  /**
+   * Destroy gabliam application
+   * call all plugin.destroy
+   *
+   * @returns Promise
+   */
   async destroy(): Promise<Gabliam> {
     const pluginsDestroy = this._plugins
       .filter(plugin => _.isFunction(plugin.destroy))
