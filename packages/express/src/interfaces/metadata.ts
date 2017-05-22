@@ -5,15 +5,11 @@ import { inversifyInterfaces } from '@gabliam/core';
 export interface ControllerMetadata {
   path: string;
 
-  target: any;
-
   json: boolean;
 }
 
 export interface ControllerMethodMetadata {
   path: string;
-
-  target: any;
 
   method: string;
 

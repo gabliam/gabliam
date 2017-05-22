@@ -6,6 +6,7 @@ import { addMiddlewareMetadata } from '../metadata';
 
 export interface ControllerOptions {
   name?: string;
+
   path: string;
 
   middlewares?: express.RequestHandler[];
@@ -40,7 +41,7 @@ function decorateController(options: ControllerOptions | string, target: any, js
 
   addMiddlewareMetadata(middlewares, target);
 
-  const metadata: ControllerMetadata = { path, target, json };
+  const metadata: ControllerMetadata = { path, json };
   Reflect.defineMetadata(METADATA_KEY.controller, metadata, target);
   injectable()(target);
   register(TYPE.Controller, { id, target })(target);
@@ -76,7 +77,7 @@ export function Delete(path: string, ...middlewares: express.RequestHandler[]): 
 
 export function Method(method: string, path: string, ...middlewares: express.RequestHandler[]): HandlerDecorator {
   return function (target: any, key: string, descriptor: PropertyDescriptor) {
-    const metadata: ControllerMethodMetadata = { path, method, target, key };
+    const metadata: ControllerMethodMetadata = { path, method, key };
     let metadataList: ControllerMethodMetadata[] = [];
 
     addMiddlewareMetadata(middlewares, target.constructor, key);

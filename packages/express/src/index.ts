@@ -18,6 +18,13 @@ export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
 
   errorMiddlewares: interfaces.ExpressConfig[] = [];
 
+  /**
+   * binding phase
+   *
+   * Bind all controller and bind express app
+   * @param  {inversifyInterfaces.Container} container
+   * @param  {Registry} registry
+   */
   bind(container: inversifyInterfaces.Container, registry: Registry) {
     container.bind(APP).toConstantValue(express());
     registry.get(TYPE.Controller)
@@ -30,7 +37,16 @@ export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
     this.buildExpressErrorConfig(container, registry);
   }
 
+
+  /**
+   * Management of @middleware decorator in config class
+   *
+   * @param  {inversifyInterfaces.Container} container
+   * @param  {Registry} registry
+   * @param  {any} confInstance
+   */
   config(container: inversifyInterfaces.Container, registry: Registry, confInstance: any) {
+    // if config class has a @middleware decorator, add in this.middlewares for add it in building phase
     if (Reflect.hasMetadata(METADATA_KEY.MiddlewareConfig, confInstance.constructor)) {
       const metadataList: interfaces.ExpressConfigMetadata[] = Reflect.getOwnMetadata(
         METADATA_KEY.MiddlewareConfig,
@@ -42,6 +58,7 @@ export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
       });
     }
 
+    // if config class has a @middleware decorator, add in this.errorMiddlewares for add it in building phase
     if (Reflect.hasMetadata(METADATA_KEY.MiddlewareErrorConfig, confInstance.constructor)) {
       const metadataList: interfaces.ExpressConfigMetadata[] = Reflect.getOwnMetadata(
         METADATA_KEY.MiddlewareErrorConfig,
@@ -54,6 +71,12 @@ export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
     }
   }
 
+  /**
+   * Build express middleware
+   *
+   * @param  {inversifyInterfaces.Container} container
+   * @param  {Registry} registry
+   */
   private buildExpressConfig(container: inversifyInterfaces.Container, registry: Registry) {
     const app = container.get<express.Application>(APP);
     this.middlewares
@@ -61,6 +84,12 @@ export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
       .forEach(({ instance }) => instance(app));
   }
 
+  /**
+   * Build express error middleware
+   *
+   * @param  {inversifyInterfaces.Container} container
+   * @param  {Registry} registry
+   */
   private buildExpressErrorConfig(container: inversifyInterfaces.Container, registry: Registry) {
     const app = container.get<express.Application>(APP);
     this.errorMiddlewares
