@@ -5,6 +5,7 @@ export { APP_CONFIG, CORE_CONFIG } from './constants';
 
 export * from './registry';
 export * from './errors';
+export * from './utils';
 
 export {
   injectable, tagged, named, inject, optional, unmanaged, multiInject, targetName, decorate, interfaces as inversifyInterfaces

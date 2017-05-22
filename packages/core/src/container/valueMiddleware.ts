@@ -1,9 +1,7 @@
 import { interfaces, Container } from 'inversify';
-import { METADATA_KEY, APP_CONFIG } from '../constants';
-import { ValueMetadata, ValueValidator } from '../interfaces';
-import { ValueValidationError } from '../errors';
-import * as _ from 'lodash';
-import * as Joi from 'joi';
+import { METADATA_KEY } from '../constants';
+import { ValueMetadata } from '../interfaces';
+import { valueExtractor } from '../utils';
 
 
 /**
@@ -12,21 +10,7 @@ import * as Joi from 'joi';
  * @param  {Container} container
  */
 export function makeValueMiddleware(container: Container) {
-  function validate(path: string, value: any, validator: ValueValidator) {
-    const options: Joi.ValidationOptions = {
-      abortEarly: false,
-      ...(validator.options || {})
-    };
-    const validate = Joi.validate(value, validator.schema, options);
-    if (validate.error) {
-      value = null;
-      if (validator.throwError) {
-        const msg = validator.customErrorMsg || `Error for '${path}' value`;
-        throw new ValueValidationError(msg, validate.error);
-      }
-    }
-    return validate.value;
-  }
+  const getValue = valueExtractor(container);
 
   return function ValueMiddleware(next: interfaces.Next): interfaces.Next {
     return (args: interfaces.NextArgs) => {
@@ -41,19 +25,8 @@ export function makeValueMiddleware(container: Container) {
 
         if (valueMetadata) {
           valueMetadata.forEach(({ key, path, validator }) => {
-            try {
-              const defaultValue = results[key];
-              const config = container.get<any>(APP_CONFIG);
-              let value = _.get(config, path, defaultValue);
-              if (validator) {
-                value = validate(path, value, validator);
-              }
-              results[key] = value;
-            } catch (err) {
-              if (err instanceof ValueValidationError) {
-                throw err;
-              }
-            }
+            const defaultValue = results[key];
+            results[key] = getValue(path, defaultValue, validator);
           });
         }
       }
