@@ -38,7 +38,7 @@ import { METADATA_KEY } from '../constants';
  */
 export function Bean(id: interfaces.ServiceIdentifier<any>) {
   return function (target: any, key: string, descriptor: PropertyDescriptor) {
-    const metadata: BeanMetadata = { id, target, key };
+    const metadata: BeanMetadata = { id, key };
     let metadataList: BeanMetadata[] = [];
 
     if (!Reflect.hasOwnMetadata(METADATA_KEY.bean, target.constructor)) {

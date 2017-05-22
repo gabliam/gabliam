@@ -14,11 +14,6 @@ export interface BeanMetadata {
    * Key of method
    */
   key: string;
-
-  /**
-   * Configuration class where the bean is
-   */
-  target: any;
 }
 
 /**
@@ -53,6 +48,7 @@ export interface ValueValidator {
 export interface ValueMetadata {
   path: string;
   key: string;
+
   target: any;
 
   validator: ValueValidator | null;
