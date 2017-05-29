@@ -6,17 +6,15 @@ import * as interfaces from './interfaces';
 import * as express from 'express';
 import * as d from 'debug';
 import * as http from 'http';
+import { MiddlewareConfig } from './middlewares';
 
 const debug = d('Gabliam:Plugin:ExpressPlugin');
 
 export * from './decorators';
-export { interfaces, APP, SERVER };
+export { interfaces, APP, SERVER, MiddlewareConfig };
 
 @Scan(__dirname)
 export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
-  middlewares: interfaces.ExpressConfig[] = [];
-
-  errorMiddlewares: interfaces.ExpressConfig[] = [];
 
   /**
    * binding phase
@@ -29,6 +27,8 @@ export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
     container.bind(APP).toConstantValue(express());
     registry.get(TYPE.Controller)
       .forEach(({ id, target }) => container.bind<any>(id).to(target).inSingletonScope());
+
+    container.bind(MiddlewareConfig).toConstantValue(new MiddlewareConfig());
   }
 
   build(container: inversifyInterfaces.Container, registry: Registry) {
@@ -46,6 +46,7 @@ export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
    * @param  {any} confInstance
    */
   config(container: inversifyInterfaces.Container, registry: Registry, confInstance: any) {
+    const middlewareConfig = container.get<MiddlewareConfig>(MiddlewareConfig);
     // if config class has a @middleware decorator, add in this.middlewares for add it in building phase
     if (Reflect.hasMetadata(METADATA_KEY.MiddlewareConfig, confInstance.constructor)) {
       const metadataList: interfaces.ExpressConfigMetadata[] = Reflect.getOwnMetadata(
@@ -54,7 +55,7 @@ export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
       );
 
       metadataList.forEach(({ key, order }) => {
-        this.middlewares.push({ order, instance: confInstance[key].bind(confInstance[key]) })
+        middlewareConfig.addMiddleware({ order, instance: confInstance[key].bind(confInstance[key]) })
       });
     }
 
@@ -66,7 +67,7 @@ export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
       );
 
       metadataList.forEach(({ key, order }) => {
-        this.errorMiddlewares.push({ order, instance: confInstance[key].bind(confInstance[key]) });
+        middlewareConfig.addErrorMiddleware({ order, instance: confInstance[key].bind(confInstance[key]) });
       });
     }
   }
@@ -78,8 +79,9 @@ export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
    * @param  {Registry} registry
    */
   private buildExpressConfig(container: inversifyInterfaces.Container, registry: Registry) {
+    const middlewareConfig = container.get<MiddlewareConfig>(MiddlewareConfig);
     const app = container.get<express.Application>(APP);
-    this.middlewares
+    middlewareConfig.middlewares
       .sort((a, b) => a.order - b.order)
       .forEach(({ instance }) => instance(app));
   }
@@ -91,8 +93,9 @@ export default class ExpressPlugin implements coreInterfaces.GabliamPlugin {
    * @param  {Registry} registry
    */
   private buildExpressErrorConfig(container: inversifyInterfaces.Container, registry: Registry) {
+    const middlewareConfig = container.get<MiddlewareConfig>(MiddlewareConfig);
     const app = container.get<express.Application>(APP);
-    this.errorMiddlewares
+    middlewareConfig.errorMiddlewares
       .sort((a, b) => a.order - b.order)
       .forEach(({ instance }) => instance(app));
   }
