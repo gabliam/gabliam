@@ -36,7 +36,7 @@ export interface GabliamPluginConstructor {
 }
 
 /**
- * Interace for a plugin
+ * Interface for a plugin
  */
 export interface GabliamPlugin {
 
