@@ -1,0 +1,61 @@
+{
+  "name": "@gabliam/graphql",
+  "version": "1.0.0",
+  "description": "Graphql plugin for gabliam",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "module": "lib/index.js",
+  "scripts": {
+    "build": "rimraf lib && tsc",
+    "prepublish": "npm run lint && npm run build",
+    "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabliam/graphql.git"
+  },
+  "author": "David Touzet <dtouzet@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gabliam/graphql/issues"
+  },
+  "homepage": "https://github.com/gabliam/graphql#readme",
+  "peerDependencies": {
+    "@gabliam/core": "^2.2.0",
+    "@gabliam/express": "^2.3.0",
+    "joi": "^10.2.2"
+  },
+  "devDependencies": {
+    "@gabliam/core": "^2.2.0",
+    "@gabliam/express": "^2.3.0",
+    "@types/body-parser": "^1.16.3",
+    "@types/debug": "^0.0.29",
+    "@types/express": "^4.0.35",
+    "@types/graphql": "^0.9.1",
+    "@types/joi": "^10.3.2",
+    "@types/lodash": "^4.14.64",
+    "@types/node": "^7.0.18",
+    "@types/reflect-metadata": "^0.0.5",
+    "express": "^4.15.3",
+    "joi": "^10.5.0",
+    "reflect-metadata": "^0.1.10",
+    "rimraf": "^2.6.1",
+    "tslint": "^5.2.0",
+    "tslint-eslint-rules": "^4.0.0",
+    "typescript": "^2.3.2",
+    "vrsource-tslint-rules": "^5.1.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "debug": "^2.6.7",
+    "graphql": "^0.9.6",
+    "graphql-server-express": "^0.7.2",
+    "graphql-tools": "^0.11.0",
+    "lodash": "^4.17.4"
+  }
+}
