@@ -2,6 +2,8 @@ import { resolverType } from './interfaces';
 
 export interface ControllerMetadata {
   schema: string[];
+
+  graphqlFiles: string[];
 }
 
 
@@ -12,5 +14,7 @@ export interface ResolverMetadata {
 
   key: string;
 
-  schema: string | null
+  schema: string | undefined;
+
+  graphqlFile: string | undefined;
 }

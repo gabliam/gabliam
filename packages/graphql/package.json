@@ -6,8 +6,9 @@
   "typings": "lib/index.d.ts",
   "module": "lib/index.js",
   "scripts": {
-    "build": "rimraf lib && tsc",
-    "prepublish": "npm run lint && npm run build",
+    "precommit": "npm run lint",
+    "build": "rimraf lib && npm run lint && tsc",
+    "prepublish": "npm run build",
     "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -42,6 +43,7 @@
     "@types/node": "^7.0.18",
     "@types/reflect-metadata": "^0.0.5",
     "express": "^4.15.3",
+    "husky": "^0.13.4",
     "joi": "^10.5.0",
     "reflect-metadata": "^0.1.10",
     "rimraf": "^2.6.1",

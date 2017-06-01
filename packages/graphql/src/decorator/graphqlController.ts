@@ -3,42 +3,59 @@ import { injectable, register, inversifyInterfaces as interfaces } from '@gablia
 import { ResolverMetadata, resolverType, ControllerMetadata } from '../interfaces';
 
 
+
 /**
  * GraphqlController decorator
  *
  * Add a GraphqlController
- * @param  {string} name? name of the GraphqlController
  */
-export function GraphqlController(schema: string[]) {
+export function GraphqlController({
+  schema = [],
+  graphqlFiles = []
+}: {
+    schema?: string[]
+    graphqlFiles?: string[]
+  } = {
+    schema: [],
+    graphqlFiles: []
+  }) {
   return (target: any) => {
     const id: interfaces.ServiceIdentifier<any> = target;
     injectable()(target);
     register(TYPE.Controller, { id, target })(target);
-    const metadata: ControllerMetadata = { schema };
+    const metadata: ControllerMetadata = { schema, graphqlFiles };
     Reflect.defineMetadata(METADATA_KEY.controller, metadata, target);
   }
 }
 
+export interface ResolverOptions {
+  schema?: string;
 
-export function QueryResolver(schema: string, path?: string) {
-  return resolver('Query', schema);
-}
-export function MutationResolver(schema: string, path?: string) {
-  return resolver('Mutation', schema);
-}
-export function SubscriptionResolver(schema: string, path?: string) {
-  return resolver('Subscription', schema);
+  path?: string;
+
+  graphqlFile?: string;
 }
 
-export function Resolver(path: string) {
-  return resolver(null, null, path);
+
+export function QueryResolver(options?: ResolverOptions) {
+  return resolver('Query', options);
+}
+export function MutationResolver(options?: ResolverOptions) {
+  return resolver('Mutation', options);
+}
+export function SubscriptionResolver(options?: ResolverOptions) {
+  return resolver('Subscription', options);
 }
 
-function resolver(type: resolverType | null, schema: string | null, path?: string) {
+export function Resolver(options?: ResolverOptions) {
+  return resolver(null, options);
+}
+
+function resolver(type: resolverType | null, resolverOptions: ResolverOptions = {}) {
   return function (target: any, key: string, descriptor: PropertyDescriptor) {
     let resolverPath = '';
-    if (path) {
-      resolverPath = path
+    if (resolverOptions.path) {
+      resolverPath = resolverOptions.path
     } else {
       resolverPath = key;
     }
@@ -47,7 +64,14 @@ function resolver(type: resolverType | null, schema: string | null, path?: strin
       resolverPath = `${type}.${resolverPath}`;
     }
 
-    const metadata: ResolverMetadata = { type, path: resolverPath, key, schema };
+    const metadata: ResolverMetadata = {
+      type,
+      path: resolverPath,
+      key,
+      schema: resolverOptions.schema,
+      graphqlFile: resolverOptions.graphqlFile
+    };
+
     let metadataList: ResolverMetadata[] = [];
 
     if (!Reflect.hasOwnMetadata(METADATA_KEY.resolver, target.constructor)) {

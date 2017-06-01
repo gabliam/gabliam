@@ -2,11 +2,12 @@ import { interfaces as coreInterfaces, inversifyInterfaces, Scan, Registry } fro
 import { MiddlewareConfig } from '@gabliam/express';
 import { makeExecutableSchema } from 'graphql-tools';
 import { TYPE, METADATA_KEY, GRAPHQL_PLUGIN_CONFIG } from './constants';
-import { ResolverMetadata, SchemaByType, ControllerMetadata, GraphqlConfig } from './interfaces';
+import { ResolverMetadata, ControllerMetadata, GraphqlConfig } from './interfaces';
 import { IResolvers } from 'graphql-tools/dist/Interfaces';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import * as bodyParser from 'body-parser';
 import * as _ from 'lodash';
+import * as fs from 'fs';
 
 @Scan(__dirname)
 export class GraphqlPlugin implements coreInterfaces.GabliamPlugin {
@@ -21,14 +22,13 @@ export class GraphqlPlugin implements coreInterfaces.GabliamPlugin {
   build(container: inversifyInterfaces.Container, registry: Registry) {
     const middlewareConfig = container.get<MiddlewareConfig>(MiddlewareConfig);
     const graphqlPluginConfig = container.get<GraphqlConfig>(GRAPHQL_PLUGIN_CONFIG);
+    const typeDefs: string[] = [];
+
+    if (graphqlPluginConfig.graphqlFiles) {
+      typeDefs.push(...this.loadGraphqlFiles(...graphqlPluginConfig.graphqlFiles));
+    }
 
     const controllerIds = registry.get(TYPE.Controller);
-    const controllerSchemas: string[] = [];
-    const schemaByType: SchemaByType = {
-      Query: [],
-      Mutation: [],
-      Subscription: []
-    };
     const resolverList: IResolvers[] = [];
 
     for (const { id: controllerId } of controllerIds) {
@@ -39,7 +39,8 @@ export class GraphqlPlugin implements coreInterfaces.GabliamPlugin {
         controller.constructor
       );
 
-      controllerSchemas.push(...controllerMetadata.schema);
+      typeDefs.push(...controllerMetadata.schema);
+      typeDefs.push(...this.loadGraphqlFiles(...controllerMetadata.graphqlFiles));
 
       const resolverMetadatas: ResolverMetadata[] = Reflect.getOwnMetadata(
         METADATA_KEY.resolver,
@@ -48,9 +49,13 @@ export class GraphqlPlugin implements coreInterfaces.GabliamPlugin {
 
       if (resolverMetadatas && controllerMetadata) {
         for (const resolverMetadata of resolverMetadatas) {
-          if (resolverMetadata.schema && resolverMetadata.type) {
-            schemaByType[resolverMetadata.type].push(resolverMetadata.schema);
+          if (resolverMetadata.schema) {
+            typeDefs.push(resolverMetadata.schema);
           }
+          if (resolverMetadata.graphqlFile) {
+            typeDefs.push(...this.loadGraphqlFiles(resolverMetadata.graphqlFile));
+          }
+
           resolverList.push(this.getResolver(
             container,
             controllerId,
@@ -60,7 +65,6 @@ export class GraphqlPlugin implements coreInterfaces.GabliamPlugin {
       }
     }
 
-    const typeDefs = this.constructSchema(controllerSchemas, schemaByType);
     const resolvers = _.merge<IResolvers>({}, ...resolverList);
 
 
@@ -93,44 +97,8 @@ export class GraphqlPlugin implements coreInterfaces.GabliamPlugin {
     });
   }
 
-  private constructSchema(controllerSchemas: string[], schemaByType: SchemaByType) {
-    const rootSchema = [];
-    let schema = `schema {`;
-
-    if (schemaByType.Query.length) {
-      rootSchema.push(`
-      type Query {
-        ${schemaByType.Query.join('\n')}
-      }
-      `);
-      schema += `
-      query: Query`;
-    }
-
-    if (schemaByType.Mutation.length) {
-      rootSchema.push(`
-      type Mutation {
-        ${schemaByType.Mutation.join('\n')}
-      }
-      `);
-      schema += `
-      mutation: Mutation`;
-    }
-
-    if (schemaByType.Subscription.length) {
-      rootSchema.push(`
-      type Subscription {
-        ${schemaByType.Subscription.join('\n')}
-      }
-      `);
-      schema += `
-      subscription: Subscription`;
-    }
-
-    schema += `
-    }`;
-
-    return [...rootSchema, schema, ...controllerSchemas];
+  private loadGraphqlFiles(...files: string[]) {
+    return files.map(file => fs.readFileSync(file, 'UTF-8'));
   }
 
   private getResolver(
