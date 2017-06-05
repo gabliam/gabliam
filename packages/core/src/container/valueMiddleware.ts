@@ -3,7 +3,6 @@ import { METADATA_KEY } from '../constants';
 import { ValueMetadata } from '../interfaces';
 import { valueExtractor } from '../utils';
 
-
 /**
  *  Make  the value middleware
  *  Intercept all creation, if the class as a Value decorator then inject the value

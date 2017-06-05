@@ -9,7 +9,7 @@ import { register } from './register';
  * @param  {string} name? name of the service
  */
 export function Service(name?: string) {
-  return function (target: any) {
+  return function(target: any) {
     const id: interfaces.ServiceIdentifier<any> = name ? name : target;
     injectable()(target);
     register(TYPE.Service, { id, target })(target);

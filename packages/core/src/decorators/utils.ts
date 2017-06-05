@@ -1,4 +1,3 @@
-
 /**
  * Reflect.hasOwnMetadata wrapper for exceptions
  * @see {Reflect.hasOwnMetadata}

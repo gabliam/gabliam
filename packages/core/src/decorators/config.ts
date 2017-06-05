@@ -99,10 +99,9 @@ export function PluginConfig(order = ORDER_CONFIG.Plugin) {
 }
 
 function configDecorator(order: number) {
-  return function (target: any) {
+  return function(target: any) {
     const id: interfaces.ServiceIdentifier<any> = target;
     injectable()(target);
     register(TYPE.Config, { id, order, target })(target);
   };
 }
-

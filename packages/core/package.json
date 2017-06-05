@@ -10,7 +10,8 @@
     "build": "rimraf lib && npm run lint && tsc",
     "prepublish": "npm run build",
     "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier": "prettier --single-quote --write --parser typescript src/**/*.ts"
   },
   "files": [
     "lib",
@@ -37,6 +38,7 @@
     "@types/reflect-metadata": "^0.0.5",
     "husky": "^0.13.4",
     "joi": "^10.2.2",
+    "prettier": "^1.4.2",
     "reflect-metadata": "^0.1.9",
     "rimraf": "^2.6.0",
     "tslint": "^5.2.0",

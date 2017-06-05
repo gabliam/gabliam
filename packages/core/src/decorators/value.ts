@@ -2,7 +2,6 @@ import { METADATA_KEY } from '../constants';
 import { ValueMetadata, ValueValidator } from '../interfaces';
 import * as Joi from 'joi';
 
-
 /**
  * Options for value decorator
  */
@@ -37,7 +36,11 @@ function isValueOptions(obj: any): obj is ValueOptions {
  * @returns boolean
  */
 function isValueValidator(obj: any): obj is ValueValidator {
-  return typeof obj === 'object' && obj.hasOwnProperty('schema') && !obj.hasOwnProperty('isJoi');
+  return (
+    typeof obj === 'object' &&
+    obj.hasOwnProperty('schema') &&
+    !obj.hasOwnProperty('isJoi')
+  );
 }
 
 export type ValueReturn = (target: any, key: string) => void;
@@ -45,12 +48,12 @@ export type ValueReturn = (target: any, key: string) => void;
 /**
  * @param  {ValueOptions} options options of decorator
  */
-export function Value(options: ValueOptions): ValueReturn;
+export function Value(options: ValueOptions): ValueReturn
 /**
  * @param  {string} path path of configuration
  * @param  {Joi.Schema} schema? Joi schema
  */
-export function Value(path: string, schema?: Joi.Schema): ValueReturn;
+export function Value(path: string, schema?: Joi.Schema): ValueReturn
 
 /**
  * Value decorator
@@ -96,7 +99,7 @@ export function Value(path: string, schema?: Joi.Schema): ValueReturn;
  * @param  {Joi.Schema=null} schema
  */
 export function Value(value: any, schema?: Joi.Schema): ValueReturn {
-  return function (target: any, key: string) {
+  return function(target: any, key: string) {
     if (typeof value === 'string') {
       valueProperty(value, schema, target, key);
     } else if (isValueOptions(value)) {
@@ -105,7 +108,12 @@ export function Value(value: any, schema?: Joi.Schema): ValueReturn {
   };
 }
 
-function valueProperty(path: string, schema: Joi.Schema | ValueValidator | undefined, target: any, key: string) {
+function valueProperty(
+  path: string,
+  schema: Joi.Schema | ValueValidator | undefined,
+  target: any,
+  key: string
+) {
   let validator: ValueValidator | null = null;
   if (schema) {
     if (isValueValidator(schema)) {
@@ -121,9 +129,16 @@ function valueProperty(path: string, schema: Joi.Schema | ValueValidator | undef
   let metadataList: ValueMetadata[] = [];
 
   if (!Reflect.hasOwnMetadata(METADATA_KEY.value, target.constructor)) {
-    Reflect.defineMetadata(METADATA_KEY.value, metadataList, target.constructor);
+    Reflect.defineMetadata(
+      METADATA_KEY.value,
+      metadataList,
+      target.constructor
+    );
   } else {
-    metadataList = Reflect.getOwnMetadata(METADATA_KEY.value, target.constructor);
+    metadataList = Reflect.getOwnMetadata(
+      METADATA_KEY.value,
+      target.constructor
+    );
   }
 
   metadataList.push(metadata);

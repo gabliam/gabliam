@@ -8,7 +8,7 @@ import { METADATA_KEY } from '../constants';
  * @param  {string} path
  */
 export function Scan(path: string) {
-  return function (target: any) {
+  return function(target: any) {
     let paths: string[] = [];
     if (!Reflect.hasOwnMetadata(METADATA_KEY.scan, target)) {
       Reflect.defineMetadata(METADATA_KEY.scan, paths, target);

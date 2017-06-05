@@ -9,7 +9,7 @@ import { METADATA_KEY } from '../constants';
  * @param  {any} value
  */
 export function register(type: string, value: any) {
-  return function (target: any) {
+  return function(target: any) {
     if (!Reflect.hasOwnMetadata(METADATA_KEY.register, target)) {
       Reflect.defineMetadata(METADATA_KEY.register, { type, value }, target);
     }
