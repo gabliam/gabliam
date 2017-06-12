@@ -8,7 +8,16 @@ export * from './errors';
 export * from './utils';
 
 export {
-  injectable, tagged, named, inject, optional, unmanaged, multiInject, targetName, decorate, interfaces as inversifyInterfaces
+  injectable,
+  tagged,
+  named,
+  inject,
+  optional,
+  unmanaged,
+  multiInject,
+  targetName,
+  decorate,
+  interfaces as inversifyInterfaces
 } from 'inversify';
 
 export { interfaces };

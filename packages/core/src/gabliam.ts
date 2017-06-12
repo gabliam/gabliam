@@ -52,7 +52,9 @@ export class Gabliam {
       }
     }
 
-    this.container.bind<interfaces.GabliamConfig>(CORE_CONFIG).toConstantValue(this._options);
+    this.container
+      .bind<interfaces.GabliamConfig>(CORE_CONFIG)
+      .toConstantValue(this._options);
   }
   /**
    * Add a plugin order
@@ -77,7 +79,10 @@ export class Gabliam {
     /**
      * Loading phase
      */
-    this.registry = this._loader.loadModules(this._options.scanPath, this._plugins);
+    this.registry = this._loader.loadModules(
+      this._options.scanPath,
+      this._plugins
+    );
 
     /**
      * Binding phase
@@ -99,12 +104,13 @@ export class Gabliam {
     return this;
   }
 
-
   /**
    * Load config file and bind result in APP_CONFIG
    */
   private _initializeConfig() {
-    const config = this.config = this._loader.loadConfig(this._options.configPath);
+    const config = (this.config = this._loader.loadConfig(
+      this._options.configPath
+    ));
     this.container.bind<any>(APP_CONFIG).toConstantValue(config);
   }
 
@@ -115,11 +121,17 @@ export class Gabliam {
    */
   private _bind() {
     debug('_bind');
-    this.registry.get(TYPE.Config)
-      .forEach(({ id, target }) => this.container.bind<any>(id).to(target).inSingletonScope());
+    this.registry
+      .get(TYPE.Config)
+      .forEach(({ id, target }) =>
+        this.container.bind<any>(id).to(target).inSingletonScope()
+      );
 
-    this.registry.get(TYPE.Service)
-      .forEach(({ id, target }) => this.container.bind<any>(id).to(target).inSingletonScope());
+    this.registry
+      .get(TYPE.Service)
+      .forEach(({ id, target }) =>
+        this.container.bind<any>(id).to(target).inSingletonScope()
+      );
 
     this._plugins
       .filter(plugin => _.isFunction(plugin.bind))
@@ -136,11 +148,13 @@ export class Gabliam {
     }
 
     // list of plugins with config phase
-    const pluginConfig = this._plugins
-      .filter(plugin => _.isFunction(plugin.config));
+    const pluginConfig = this._plugins.filter(plugin =>
+      _.isFunction(plugin.config)
+    );
 
-    let configsRegistry = this.registry.get<interfaces.ConfigRegistry>(TYPE.Config);
-
+    let configsRegistry = this.registry.get<interfaces.ConfigRegistry>(
+      TYPE.Config
+    );
 
     debug('configsRegistry', configsRegistry);
     if (configsRegistry) {
@@ -163,7 +177,9 @@ export class Gabliam {
           }
         }
 
-        pluginConfig.forEach(plugin => plugin.config!(this.container, this.registry, confInstance));
+        pluginConfig.forEach(plugin =>
+          plugin.config!(this.container, this.registry, confInstance)
+        );
       }
     }
     debug('_loadConfig end');

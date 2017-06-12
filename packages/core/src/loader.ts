@@ -27,17 +27,22 @@ export class Loader {
    * @param  {GabliamPlugin[]} plugins
    */
   loadModules(scan: string, plugins: GabliamPlugin[]) {
-    const folders = plugins.reduce((prev, current) => {
-      if (hasMetadata(METADATA_KEY.scan, current.constructor)) {
-        const paths = <string[]>Reflect.getOwnMetadata(METADATA_KEY.scan, current.constructor);
-        prev.push(...paths);
-      }
-      return prev;
-    }, [scan]);
+    const folders = plugins.reduce(
+      (prev, current) => {
+        if (hasMetadata(METADATA_KEY.scan, current.constructor)) {
+          const paths = <string[]>Reflect.getOwnMetadata(
+            METADATA_KEY.scan,
+            current.constructor
+          );
+          prev.push(...paths);
+        }
+        return prev;
+      },
+      [scan]
+    );
     debug('folders to load', folders);
     return this.loadFolders(...folders);
   }
-
 
   /**
    * Load on folder
@@ -48,7 +53,8 @@ export class Loader {
 
     const registry = new Registry();
 
-    const files = glob.sync('**/*.@(js|ts)', { cwd: folder })
+    const files = glob
+      .sync('**/*.@(js|ts)', { cwd: folder })
       .filter(file => !_.endsWith(file, '.d.ts') && !reg.test(file))
       .map(file => `${folder}/${file}`);
 
@@ -57,7 +63,10 @@ export class Loader {
       for (const k of Object.keys(modules)) {
         const m = modules[k];
         if (hasMetadata(METADATA_KEY.register, m)) {
-          const metadata = <RegistryMetada>Reflect.getOwnMetadata(METADATA_KEY.register, m);
+          const metadata = <RegistryMetada>Reflect.getOwnMetadata(
+            METADATA_KEY.register,
+            m
+          );
           registry.add(metadata.type, metadata.value);
         }
         // if ()
@@ -98,7 +107,9 @@ export class Loader {
    */
   loadConfig(folder: string): any {
     debug('loadConfig', folder);
-    const files = glob.sync('**/application?(-+([a-zA-Z])).yml', { cwd: folder });
+    const files = glob.sync('**/application?(-+([a-zA-Z])).yml', {
+      cwd: folder
+    });
     let config = {};
     if (!files) {
       return config;
@@ -112,10 +123,16 @@ export class Loader {
     }
 
     if (profile) {
-      const profileFile = files.find(file => file === `application-${profile}.yml`);
+      const profileFile = files.find(
+        file => file === `application-${profile}.yml`
+      );
 
       if (profileFile) {
-        config = _.merge({}, config, this.loadYmlFile(`${folder}/${profileFile}`));
+        config = _.merge(
+          {},
+          config,
+          this.loadYmlFile(`${folder}/${profileFile}`)
+        );
       }
     }
     debug('loadConfig', config);
@@ -131,4 +148,3 @@ export class Loader {
     }
   }
 }
-

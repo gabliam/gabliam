@@ -14,7 +14,7 @@ import { APP_CONFIG } from './constants';
 function validate(path: string, value: any, validator: ValueValidator) {
   const options: Joi.ValidationOptions = {
     abortEarly: false,
-    ...(validator.options || {})
+    ...validator.options || {}
   };
   const validate = Joi.validate(value, validator.schema, options);
   if (validate.error) {
@@ -33,7 +33,6 @@ function validate(path: string, value: any, validator: ValueValidator) {
  * @param  {Container} container
  */
 export function valueExtractor(container: Container) {
-
   /**
    * Get value in configuration
    * @param  {string} path
@@ -41,7 +40,11 @@ export function valueExtractor(container: Container) {
    * @param  {ValueValidator|null} validator?
    * @returns any
    */
-  return (path: string, defaultValue: any, validator?: ValueValidator | null): any => {
+  return (
+    path: string,
+    defaultValue: any,
+    validator?: ValueValidator | null
+  ): any => {
     try {
       const config = container.get<object>(APP_CONFIG);
       let value = _.get(config, path, defaultValue);
@@ -54,5 +57,5 @@ export function valueExtractor(container: Container) {
         throw err;
       }
     }
-  }
+  };
 }

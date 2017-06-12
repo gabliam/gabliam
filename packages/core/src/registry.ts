@@ -1,6 +1,5 @@
 import { ValueRegistry } from './interfaces';
 
-
 /**
  * Registry
  */
@@ -36,7 +35,6 @@ export class Registry {
   add<T extends ValueRegistry>(type: symbol | string, target: T) {
     this.get(type).push(target);
   }
-
 
   /**
    * Remove all values for a type

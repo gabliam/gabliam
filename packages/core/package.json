@@ -7,10 +7,10 @@
   "module": "lib/index.js",
   "scripts": {
     "precommit": "lint-staged",
-    "build": "rimraf lib && npm run lint && tsc",
+    "build": "rimraf lib && npm run lint && tsc -p tsconfig.build.json",
     "prepublish": "npm run build",
     "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --no-timeouts  --require ./mochaConfig.js --compilers ts:ts-node/register test/"
   },
   "lint-staged": {
     "*.ts": [
@@ -36,18 +36,23 @@
     "lodash": "^4.17.4"
   },
   "devDependencies": {
+    "@types/chai": "^4.0.0",
     "@types/debug": "^0.0.29",
     "@types/glob": "^5.0.30",
     "@types/joi": "^10.0.1",
     "@types/js-yaml": "^3.5.29",
     "@types/lodash": "^4.14.53",
+    "@types/mocha": "^2.2.41",
     "@types/reflect-metadata": "^0.0.5",
+    "chai": "^4.0.2",
     "husky": "^0.13.4",
     "joi": "^10.2.2",
     "lint-staged": "^3.6.0",
+    "mocha": "^3.4.2",
     "prettier": "^1.4.2",
     "reflect-metadata": "^0.1.9",
     "rimraf": "^2.6.0",
+    "ts-node": "^3.0.6",
     "tslint": "^5.2.0",
     "tslint-eslint-rules": "^4.0.0",
     "typescript": "^2.3.2",
