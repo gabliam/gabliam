@@ -1,4 +1,4 @@
-import { TYPE, ORDER_CONFIG } from '../constants';
+import { TYPE, ORDER_CONFIG, METADATA_KEY, ERRORS_MSGS } from '../constants';
 import { register } from './register';
 import { interfaces, injectable } from 'inversify';
 
@@ -100,6 +100,11 @@ export function PluginConfig(order = ORDER_CONFIG.Plugin) {
 
 function configDecorator(order: number) {
   return function(target: any) {
+    if (Reflect.hasOwnMetadata(METADATA_KEY.config, target) === true) {
+      throw new Error(ERRORS_MSGS.DUPLICATED_CONFIG_DECORATOR);
+    }
+    Reflect.defineMetadata(METADATA_KEY.config, true, target);
+
     const id: interfaces.ServiceIdentifier<any> = target;
     injectable()(target);
     register(TYPE.Config, { id, order, target })(target);
