@@ -7,6 +7,7 @@
   "module": "lib/index.js",
   "scripts": {
     "precommit": "lint-staged",
+    "build-test": "npm run build && npm run test",
     "build": "rimraf lib && npm run lint && tsc -p tsconfig.build.json",
     "prepublish": "publish-please guard",
     "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
