@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/core",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "express with decorator",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -10,14 +10,15 @@
     "build-test": "npm run build && npm run test",
     "build": "rimraf lib && npm run lint && tsc -p tsconfig.build.json",
     "prepublish": "publish-please guard",
+    "prettier": "prettier --single-quote --write --parser typescript src/**/*.ts",
     "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
     "test": "mocha --no-timeouts  --require ./mochaConfig.js --compilers ts:ts-node/register test/",
     "publish-please": "publish-please"
   },
   "lint-staged": {
     "*.ts": [
-      "prettier --single-quote --write --parser typescript src/**/*.ts",
-      "tslint --type-check --project tsconfig.json src/**/*.ts",
+      "npm run prettier",
+      "npm run lint",
       "git add"
     ]
   },
