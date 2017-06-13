@@ -1,4 +1,4 @@
-import { METADATA_KEY } from '../constants';
+import { METADATA_KEY, ERRORS_MSGS } from '../constants';
 import { ValueMetadata, ValueValidator } from '../interfaces';
 import * as Joi from 'joi';
 
@@ -48,12 +48,12 @@ export type ValueReturn = (target: any, key: string) => void;
 /**
  * @param  {ValueOptions} options options of decorator
  */
-export function Value(options: ValueOptions): ValueReturn
+export function Value(options: ValueOptions): ValueReturn;
 /**
  * @param  {string} path path of configuration
  * @param  {Joi.Schema} schema? Joi schema
  */
-export function Value(path: string, schema?: Joi.Schema): ValueReturn
+export function Value(path: string, schema?: Joi.Schema): ValueReturn;
 
 /**
  * Value decorator
@@ -104,6 +104,8 @@ export function Value(value: any, schema?: Joi.Schema): ValueReturn {
       valueProperty(value, schema, target, key);
     } else if (isValueOptions(value)) {
       valueProperty(value.path, value.validator, target, key);
+    } else {
+      throw new Error(ERRORS_MSGS.INVALID_VALUE_DECORATOR);
     }
   };
 }

@@ -142,7 +142,7 @@ export class Loader {
   private loadYmlFile(ymlPath: string) {
     const data = fs.readFileSync(ymlPath, 'utf8');
     try {
-      return yaml.load(data);
+      return yaml.load(data) || {};
     } catch (e) {
       return {};
     }
