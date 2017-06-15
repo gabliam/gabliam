@@ -1,15 +1,10 @@
 <a name="2.3.0"></a>
 # 2.3.0 (2017-06-15)
 
-* chore: Bump version ([9263c2f](https://github.com/gabliam/core/commit/9263c2f))
+* build: add git cz and changelog ([a549c11](https://github.com/gabliam/core/commit/a549c11))
+* chore: Bump version ([e3d534c](https://github.com/gabliam/core/commit/e3d534c))
 * feat(Gabliam): delete interfaces GabliamOptions and use Partial<GabliamConfig> ([b70009a](https://github.com/gabliam/core/commit/b70009a))
 * docs(changelog): add changelog ([ba3a192](https://github.com/gabliam/core/commit/ba3a192))
-
-
-
-<a name="2.3.0"></a>
-# [2.3.0](https://github.com/gabliam/core/compare/v2.2.2...v2.3.0) (2017-06-15)
-
 
 
 
