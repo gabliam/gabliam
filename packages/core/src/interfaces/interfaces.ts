@@ -8,18 +8,6 @@ export interface GabliamConfig {
   /**
    * Path to scan
    */
-  scanPath?: string;
-
-  /**
-   * Path of config
-   */
-  configPath?: string;
-}
-
-export interface GabliamOptions {
-  /**
-   * Path to scan
-   */
   scanPath: string;
 
   /**

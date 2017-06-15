@@ -9,7 +9,7 @@ import * as d from 'debug';
 
 const debug = d('Gabliam:core');
 
-const DEFAULT_CONFIG: interfaces.GabliamOptions = {
+const DEFAULT_CONFIG: interfaces.GabliamConfig = {
   scanPath: process.env.PWD,
   configPath: process.env.GABLIAM_CONFIG_PATH || process.env.PWD
 };
@@ -21,7 +21,7 @@ export class Gabliam {
   private _loader: Loader = new Loader();
 
   private _plugins: interfaces.GabliamPlugin[] = [];
-  private _options: interfaces.GabliamOptions;
+  private _options: interfaces.GabliamConfig;
   public container: inversify.interfaces.Container = createContainer();
 
   public config: any;
@@ -35,7 +35,7 @@ export class Gabliam {
    * Constructor
    * @param  {interfaces.GabliamConfig|string} options?
    */
-  constructor(options?: interfaces.GabliamConfig | string) {
+  constructor(options?: Partial<interfaces.GabliamConfig> | string) {
     if (options === undefined) {
       this._options = DEFAULT_CONFIG;
     } else {

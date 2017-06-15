@@ -222,29 +222,29 @@ describe('Unit Test: Decorators', () => {
 
   describe('@Value', () => {
     describe('@Value(options: ValueOptions)', () => {
-      // it('should add Value metadata to a class when decorated with @Value(options: ValueOptions)', () => {
-      //   class TestBean {
-      //     @Value({ path: 'application.name' })
-      //     name: string;
-      //     @Value({ path: 'application.surname', validator: Joi.string() })
-      //     surname: string;
-      //     @Value({
-      //       path: 'application.surname',
-      //       validator: { schema: Joi.string() }
-      //     })
-      //     firstname: string;
-      //     @Value({
-      //       path: 'application.postalcode',
-      //       validator: { schema: Joi.string().required(), customErrorMsg: 'Error'}
-      //     })
-      //     postalcode: string;
-      //     @Value({
-      //       path: 'application.address',
-      //       validator: Joi.string().required()
-      //     })
-      //     address: string;
-      //   }
-      // });
+      it('should add Value metadata to a class when decorated with @Value(options: ValueOptions)', () => {
+        // class TestBean {
+        //   @Value({ path: 'application.name' })
+        //   name: string;
+        //   @Value({ path: 'application.surname', validator: Joi.string() })
+        //   surname: string;
+        //   @Value({
+        //     path: 'application.surname',
+        //     validator: { schema: Joi.string() }
+        //   })
+        //   firstname: string;
+        //   @Value({
+        //     path: 'application.postalcode',
+        //     validator: { schema: Joi.string().required(), customErrorMsg: 'Error'}
+        //   })
+        //   postalcode: string;
+        //   @Value({
+        //     path: 'application.address',
+        //     validator: Joi.string().required()
+        //   })
+        //   address: string;
+        // }
+      });
     }); // end @Value(options: ValueOptions)
   }); // end describe @Value
 });
