@@ -1,6 +1,6 @@
 import { Container } from 'inversify';
 import { makeLoggerMiddleware } from 'inversify-logger-middleware';
-import { makeValueMiddleware } from './valueMiddleware';
+import { makeValueMiddleware } from './value-middleware';
 
 /**
  * Create the inversify container

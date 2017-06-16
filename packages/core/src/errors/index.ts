@@ -1,1 +1,1 @@
-export * from './valueValidationError';
+export * from './value-validation-error';
