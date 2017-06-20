@@ -29,3 +29,5 @@ export const ERRORS_MSGS = {
 export const APP_CONFIG = Symbol('APP_CONFIG');
 
 export const CORE_CONFIG = Symbol('CORE_CONFIG');
+
+export const VALUE_EXTRACTOR = Symbol('ValueExtractor');

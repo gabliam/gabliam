@@ -1,5 +1,6 @@
 import { interfaces } from 'inversify';
 import { Registry } from '../registry';
+import { ValueValidator } from './metadata';
 
 /**
  * Config for gabliam
@@ -43,3 +44,9 @@ export interface GabliamPlugin {
 
   destroy?(container: interfaces.Container, registry: Registry): Promise<void>;
 }
+
+export type ValueExtractor = (
+  path: string,
+  defaultValue: any,
+  validator?: ValueValidator | null
+) => any;

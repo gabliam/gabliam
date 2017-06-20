@@ -32,7 +32,7 @@ function validate(path: string, value: any, validator: ValueValidator) {
  * Create value extractor
  * @param  {Container} container
  */
-export function valueExtractor(container: interfaces.Container) {
+export function configureValueExtractor(container: interfaces.Container) {
   /**
    * Get value in configuration
    * @param  {string} path

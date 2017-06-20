@@ -1,11 +1,18 @@
 import * as inversify from 'inversify';
 import * as interfaces from './interfaces';
 import * as _ from 'lodash';
-import { TYPE, METADATA_KEY, APP_CONFIG, CORE_CONFIG } from './constants';
+import {
+  TYPE,
+  METADATA_KEY,
+  APP_CONFIG,
+  CORE_CONFIG,
+  VALUE_EXTRACTOR
+} from './constants';
 import { Loader } from './loader';
 import { createContainer } from './container';
 import { Registry } from './registry';
 import * as d from 'debug';
+import { configureValueExtractor } from './utils';
 
 const debug = d('Gabliam:core');
 
@@ -167,7 +174,10 @@ export class Gabliam {
     const config = (this.config = this._loader.loadConfig(
       this._options.configPath
     ));
-    this.container.bind<any>(APP_CONFIG).toConstantValue(config);
+    this.container.bind(APP_CONFIG).toConstantValue(config);
+    this.container
+      .bind(VALUE_EXTRACTOR)
+      .toConstantValue(configureValueExtractor(this.container));
   }
 
   /**
@@ -180,13 +190,13 @@ export class Gabliam {
     this.registry
       .get(TYPE.Config)
       .forEach(({ id, target }) =>
-        this.container.bind<any>(id).to(target).inSingletonScope()
+        this.container.bind(id).to(target).inSingletonScope()
       );
 
     this.registry
       .get(TYPE.Service)
       .forEach(({ id, target }) =>
-        this.container.bind<any>(id).to(target).inSingletonScope()
+        this.container.bind(id).to(target).inSingletonScope()
       );
 
     this._plugins
@@ -228,7 +238,7 @@ export class Gabliam {
           // No promise.all and await because order of beans are important
           for (const metadata of beanMetadata) {
             this.container
-              .bind<any>(metadata.id)
+              .bind(metadata.id)
               .toConstantValue(await callInstance(confInstance, metadata.key));
           }
         }

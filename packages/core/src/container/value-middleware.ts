@@ -1,7 +1,7 @@
 import { interfaces, Container } from 'inversify';
 import { METADATA_KEY } from '../constants';
 import { ValueMetadata } from '../interfaces';
-import { valueExtractor } from '../utils';
+import { configureValueExtractor } from '../utils';
 
 /**
  *  Make  the value middleware
@@ -9,7 +9,7 @@ import { valueExtractor } from '../utils';
  * @param  {Container} container
  */
 export function makeValueMiddleware(container: Container) {
-  const getValue = valueExtractor(container);
+  const valueExtractor = configureValueExtractor(container);
 
   return function ValueMiddleware(next: interfaces.Next): interfaces.Next {
     return (args: interfaces.NextArgs) => {
@@ -25,7 +25,7 @@ export function makeValueMiddleware(container: Container) {
         if (valueMetadata) {
           valueMetadata.forEach(({ key, path, validator }) => {
             const defaultValue = results[key];
-            results[key] = getValue(path, defaultValue, validator);
+            results[key] = valueExtractor(path, defaultValue, validator);
           });
         }
       }
