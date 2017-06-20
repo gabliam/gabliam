@@ -1,3 +1,13 @@
+<a name="2.3.1"></a>
+## 2.3.1 (2017-06-20)
+
+* bump version ([9998f9b](https://github.com/gabliam/core/commit/9998f9b))
+* feat(valueExtractor): valueExtractor take inversify interface container ([cfb8e70](https://github.com/gabliam/core/commit/cfb8e70))
+* build(tslint): correction tslint ([81f230a](https://github.com/gabliam/core/commit/81f230a))
+* refactor: Change CamelCase for KebabCase ([6bda474](https://github.com/gabliam/core/commit/6bda474))
+
+
+
 <a name="2.3.0"></a>
 # 2.3.0 (2017-06-15)
 
