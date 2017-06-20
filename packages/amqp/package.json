@@ -1,0 +1,79 @@
+{
+  "name": "@gabliam/amqp",
+  "version": "1.0.0",
+  "description": "amqp plugin for gabliam",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "module": "lib/index.js",
+  "scripts": {
+    "changelog": "conventional-changelog -i  CHANGELOG.md -s",
+    "precommit": "lint-staged",
+    "build": "rimraf lib && npm run lint && tsc -p tsconfig.build.json",
+    "prepublish": "publish-please guard",
+    "prettier": "prettier --single-quote --write --parser typescript src/**/*.ts",
+    "lint": "tslint --type-check --project tsconfig.json 'src/**/*.ts'",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publish-please": "publish-please"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "npm run prettier",
+      "npm run lint",
+      "git add"
+    ]
+  },
+  "files": [
+    "lib",
+    "src",
+    "custom-typings.d.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabliam/amqp.git"
+  },
+  "keywords": [
+    "amqp",
+    "gabliam"
+  ],
+  "author": "David Touzet <dtouzet@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabliam/amqp/issues"
+  },
+  "homepage": "https://github.com/gabliam/amqp#readme",
+  "peerDependencies": {
+    "@gabliam/core": "^2.4.0",
+    "joi": "^10.5.2"
+  },
+  "devDependencies": {
+    "@gabliam/core": "^2.4.0",
+    "@types/debug": "^0.0.29",
+    "@types/joi": "^10.4.0",
+    "@types/node": "^7.0.29",
+    "@types/reflect-metadata": "^0.0.5",
+    "@types/uuid": "^3.0.0",
+    "commitizen": "^2.9.6",
+    "conventional-changelog-cli": "^1.3.1",
+    "cz-conventional-changelog": "^2.0.0",
+    "husky": "^0.13.4",
+    "joi": "^10.5.2",
+    "lint-staged": "^4.0.0",
+    "prettier": "^1.4.4",
+    "publish-please": "^2.3.1",
+    "rimraf": "^2.6.1",
+    "tslint": "^5.4.3",
+    "tslint-eslint-rules": "^4.1.1",
+    "typescript": "^2.3.4",
+    "vrsource-tslint-rules": "^5.1.0"
+  },
+  "dependencies": {
+    "amqplib": "^0.5.1",
+    "debug": "^2.6.8",
+    "uuid": "^3.0.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
