@@ -1,3 +1,12 @@
+<a name="2.4.0"></a>
+# 2.4.0 (2017-06-20)
+
+* build(tslint): noImplicitAny ([eac7b59](https://github.com/gabliam/core/commit/eac7b59))
+* feat(gabliam): add VALUE_EXTRACTOR in di ([6e0de13](https://github.com/gabliam/core/commit/6e0de13))
+* style(gabliam, loader): correction order member ([2bb3799](https://github.com/gabliam/core/commit/2bb3799))
+
+
+
 <a name="2.3.1"></a>
 ## 2.3.1 (2017-06-20)
 
