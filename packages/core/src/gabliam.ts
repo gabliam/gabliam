@@ -18,10 +18,6 @@ const DEFAULT_CONFIG: interfaces.GabliamConfig = {
  * Gabliam
  */
 export class Gabliam {
-  private _loader: Loader = new Loader();
-
-  private _plugins: interfaces.GabliamPlugin[] = [];
-  private _options: interfaces.GabliamConfig;
   public container: inversify.interfaces.Container = createContainer();
 
   public config: any;
@@ -30,6 +26,11 @@ export class Gabliam {
    * Registry
    */
   public registry: Registry;
+
+  private _loader: Loader = new Loader();
+
+  private _plugins: interfaces.GabliamPlugin[] = [];
+  private _options: interfaces.GabliamConfig;
 
   /**
    * Constructor
@@ -101,6 +102,61 @@ export class Gabliam {
       .filter(plugin => _.isFunction(plugin.build))
       .forEach(plugin => plugin.build!(this.container, this.registry));
 
+    return this;
+  }
+
+  /**
+   * Build and start gabliam application
+   * @returns Promise
+   */
+  async buildAndStart(): Promise<Gabliam> {
+    await this.build();
+    await this.start();
+    return this;
+  }
+
+  /**
+   * Start gabliam application
+   *
+   * call all plugin.start
+   * @returns Promise
+   */
+  async start(): Promise<Gabliam> {
+    const pluginsStart = this._plugins
+      .filter(plugin => _.isFunction(plugin.start))
+      .map(plugin => plugin.start!(this.container, this.registry));
+
+    await Promise.all(pluginsStart);
+    return this;
+  }
+
+  /**
+   * Stop gabliam application
+   * call all plugin.stop
+   *
+   * @returns Promise
+   */
+  async stop(): Promise<Gabliam> {
+    const pluginsStop = this._plugins
+      .filter(plugin => _.isFunction(plugin.stop))
+      .map(plugin => plugin.stop!(this.container, this.registry));
+
+    await Promise.all(pluginsStop);
+    return this;
+  }
+
+  /**
+   * Destroy gabliam application
+   * call all plugin.destroy
+   *
+   * @returns Promise
+   */
+  async destroy(): Promise<Gabliam> {
+    const pluginsDestroy = this._plugins
+      .filter(plugin => _.isFunction(plugin.destroy))
+      .map(plugin => plugin.destroy!(this.container, this.registry));
+
+    await Promise.all(pluginsDestroy);
     return this;
   }
 
@@ -183,59 +239,5 @@ export class Gabliam {
       }
     }
     debug('_loadConfig end');
-  }
-  /**
-   * Build and start gabliam application
-   * @returns Promise
-   */
-  async buildAndStart(): Promise<Gabliam> {
-    await this.build();
-    await this.start();
-    return this;
-  }
-
-  /**
-   * Start gabliam application
-   *
-   * call all plugin.start
-   * @returns Promise
-   */
-  async start(): Promise<Gabliam> {
-    const pluginsStart = this._plugins
-      .filter(plugin => _.isFunction(plugin.start))
-      .map(plugin => plugin.start!(this.container, this.registry));
-
-    await Promise.all(pluginsStart);
-    return this;
-  }
-
-  /**
-   * Stop gabliam application
-   * call all plugin.stop
-   *
-   * @returns Promise
-   */
-  async stop(): Promise<Gabliam> {
-    const pluginsStop = this._plugins
-      .filter(plugin => _.isFunction(plugin.stop))
-      .map(plugin => plugin.stop!(this.container, this.registry));
-
-    await Promise.all(pluginsStop);
-    return this;
-  }
-
-  /**
-   * Destroy gabliam application
-   * call all plugin.destroy
-   *
-   * @returns Promise
-   */
-  async destroy(): Promise<Gabliam> {
-    const pluginsDestroy = this._plugins
-      .filter(plugin => _.isFunction(plugin.destroy))
-      .map(plugin => plugin.destroy!(this.container, this.registry));
-
-    await Promise.all(pluginsDestroy);
-    return this;
   }
 }

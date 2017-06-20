@@ -12,7 +12,7 @@
     "build": "rimraf lib && npm run lint && tsc -p tsconfig.build.json",
     "prepublish": "publish-please guard",
     "prettier": "prettier --single-quote --write --parser typescript src/**/*.ts",
-    "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
+    "lint": "tslint --type-check --project tsconfig.json 'src/**/*.ts'",
     "test": "mocha --no-timeouts  --require ./mochaConfig.js --compilers ts:ts-node/register test/",
     "publish-please": "publish-please"
   },

@@ -45,6 +45,45 @@ export class Loader {
   }
 
   /**
+   * Load configuration
+   * @param  {string} folder the configuration folder
+   * @returns any
+   */
+  loadConfig(folder: string): any {
+    debug('loadConfig', folder);
+    const files = glob.sync('**/application?(-+([a-zA-Z])).yml', {
+      cwd: folder
+    });
+    let config = {};
+    if (!files) {
+      return config;
+    }
+
+    const profile = process.env.PROFILE || null;
+    const defaultProfileFile = files.find(file => file === 'application.yml');
+
+    if (defaultProfileFile) {
+      config = this.loadYmlFile(`${folder}/${defaultProfileFile}`);
+    }
+
+    if (profile) {
+      const profileFile = files.find(
+        file => file === `application-${profile}.yml`
+      );
+
+      if (profileFile) {
+        config = _.merge(
+          {},
+          config,
+          this.loadYmlFile(`${folder}/${profileFile}`)
+        );
+      }
+    }
+    debug('loadConfig', config);
+    return config;
+  }
+
+  /**
    * Load on folder
    * @param  {string} folder
    */
@@ -98,45 +137,6 @@ export class Loader {
       }
     }
     return registry;
-  }
-
-  /**
-   * Load configuration
-   * @param  {string} folder the configuration folder
-   * @returns any
-   */
-  loadConfig(folder: string): any {
-    debug('loadConfig', folder);
-    const files = glob.sync('**/application?(-+([a-zA-Z])).yml', {
-      cwd: folder
-    });
-    let config = {};
-    if (!files) {
-      return config;
-    }
-
-    const profile = process.env.PROFILE || null;
-    const defaultProfileFile = files.find(file => file === 'application.yml');
-
-    if (defaultProfileFile) {
-      config = this.loadYmlFile(`${folder}/${defaultProfileFile}`);
-    }
-
-    if (profile) {
-      const profileFile = files.find(
-        file => file === `application-${profile}.yml`
-      );
-
-      if (profileFile) {
-        config = _.merge(
-          {},
-          config,
-          this.loadYmlFile(`${folder}/${profileFile}`)
-        );
-      }
-    }
-    debug('loadConfig', config);
-    return config;
   }
 
   private loadYmlFile(ymlPath: string) {
