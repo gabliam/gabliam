@@ -5,6 +5,9 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "module": "lib/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "changelog": "conventional-changelog -i  CHANGELOG.md -s",
     "precommit": "lint-staged",
