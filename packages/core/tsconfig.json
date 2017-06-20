@@ -8,6 +8,7 @@
     "emitDecoratorMetadata": true,
     "strict": true,
     "declaration": true,
+    "noImplicitAny": true,
     "noUnusedLocals": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": false,
