@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { Container } from 'inversify';
+import { interfaces } from 'inversify';
 import * as Joi from 'joi';
 import { ValueValidator } from './interfaces';
 import { ValueValidationError } from './errors';
@@ -32,7 +32,7 @@ function validate(path: string, value: any, validator: ValueValidator) {
  * Create value extractor
  * @param  {Container} container
  */
-export function valueExtractor(container: Container) {
+export function valueExtractor(container: interfaces.Container) {
   /**
    * Get value in configuration
    * @param  {string} path

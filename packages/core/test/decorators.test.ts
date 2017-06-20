@@ -175,7 +175,7 @@ describe('Unit Test: Decorators', () => {
         TestBean
       );
 
-      expect(serviceMetadata).to.be.an('boolean').that.be.true;
+      expect(serviceMetadata).to.be.a('boolean').that.be.true;
       expect(registryMetadata).to.have.property('type', TYPE.Service);
       expect(registryMetadata).to.have.property('value');
       expect(registryMetadata).to.have.nested.property('value.id', TestBean);
@@ -252,8 +252,45 @@ describe('Unit Test: Decorators', () => {
           METADATA_KEY.value,
           TestBean
         );
-
         console.log(valueMetadata);
+        // expect(valueMetadata).to.be.an('array');
+        // expect(valueMetadata).to.have.lengthOf(5);
+        // expect(valueMetadata).to.deep.equal([
+        //   {
+        //     path: 'application.name',
+        //     target: new TestBean(),
+        //     key: 'name',
+        //     validator: null
+        //   },
+        //   {
+        //     path: 'application.surname',
+        //     target: new TestBean(),
+        //     key: 'surname',
+        //     validator: { throwError: true, schema: Joi.string() }
+        //   },
+        //   {
+        //     path: 'application.surname',
+        //     target: new TestBean(),
+        //     key: 'firstname',
+        //     validator: { throwError: true, schema: Joi.string() }
+        //   },
+        //   {
+        //     path: 'application.postalcode',
+        //     target: new TestBean(),
+        //     key: 'postalcode',
+        //     validator: {
+        //       throwError: true,
+        //       schema: Joi.string(),
+        //       customErrorMsg: 'Error'
+        //     }
+        //   },
+        //   {
+        //     path: 'application.address',
+        //     target: new TestBean(),
+        //     key: 'address',
+        //     validator: { throwError: true, schema: Joi.string() }
+        //   }
+        // ]);
       });
     }); // end @Value(options: ValueOptions)
   }); // end describe @Value
