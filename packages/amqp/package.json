@@ -8,7 +8,7 @@
   "scripts": {
     "changelog": "conventional-changelog -i  CHANGELOG.md -s",
     "precommit": "lint-staged",
-    "build-test": "npm run build && npm run test",
+    "build-test": "npm run build",
     "build": "rimraf lib && npm run lint && tsc -p tsconfig.build.json",
     "prepublish": "publish-please guard",
     "prettier": "prettier --single-quote --write --parser typescript src/**/*.ts",
