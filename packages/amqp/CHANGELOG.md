@@ -1,3 +1,10 @@
+<a name="1.2.0"></a>
+# 1.2.0 (2017-06-21)
+
+* chore(license): Change license ISC to MIT ([5772c1a](https://github.com/gabliam/amqp/commit/5772c1a))
+
+
+
 <a name="1.1.0"></a>
 # 1.1.0 (2017-06-21)
 
