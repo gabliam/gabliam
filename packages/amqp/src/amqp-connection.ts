@@ -97,7 +97,7 @@ export class AmqpConnection {
 
       // create new Queue for get the response
       chan
-        .assertQueue(replyTo, { exclusive: true })
+        .assertQueue(replyTo, { exclusive: true, autoDelete: true })
         .then(() => {
           return chan.consume(replyTo, (msg: Message) => {
             if (msg.properties.correlationId === correlationId) {
