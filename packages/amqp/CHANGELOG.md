@@ -1,3 +1,11 @@
+<a name="1.3.0"></a>
+# 1.3.0 (2017-06-21)
+
+* chore(all): bump version ([6dbcfbc](https://github.com/gabliam/amqp/commit/6dbcfbc))
+* feat(consume queue): JSON.parse for content in consume queue ([1421a43](https://github.com/gabliam/amqp/commit/1421a43))
+
+
+
 <a name="1.2.0"></a>
 # 1.2.0 (2017-06-21)
 
