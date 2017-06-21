@@ -1,9 +1,9 @@
 import * as Joi from 'joi';
 
 export const schemaQueueOptions = Joi.object().keys({
-  exclusive: Joi.boolean().default(false),
-  durable: Joi.boolean().default(true),
-  autoDelete: Joi.boolean().default(false)
+  exclusive: Joi.boolean(),
+  durable: Joi.boolean(),
+  autoDelete: Joi.boolean()
 });
 
 export const schemaQueueConfiguration = Joi.object().keys({
