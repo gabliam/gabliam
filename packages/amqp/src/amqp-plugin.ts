@@ -110,7 +110,7 @@ export class AmqpPlugin implements coreInterfaces.GabliamPlugin {
 
       const connection = container.get(AmqpConnection);
       const controller = container.get<Controller>(controllerId);
-      const content = msg.content.toString();
+      const content = JSON.parse(msg.content.toString());
 
       let response: any;
       let sendOptions: SendOptions;

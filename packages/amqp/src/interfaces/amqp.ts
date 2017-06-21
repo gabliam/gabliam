@@ -33,7 +33,7 @@ export interface QueueConfiguration {
 
 export type ConsumerHandler = (msg: Message) => void | Promise<void>;
 
-export type Handler = (content: string) => any | Promise<any>;
+export type Handler = (content: any) => any | Promise<any>;
 
 export interface Controller {
   [k: string]: Handler;
