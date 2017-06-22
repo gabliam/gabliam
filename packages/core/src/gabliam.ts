@@ -60,9 +60,7 @@ export class Gabliam {
       }
     }
 
-    this.container
-      .bind<interfaces.GabliamConfig>(CORE_CONFIG)
-      .toConstantValue(this._options);
+    this.container.bind(CORE_CONFIG).toConstantValue(this._options);
   }
   /**
    * Add a plugin order
