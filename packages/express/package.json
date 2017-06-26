@@ -6,11 +6,19 @@
   "typings": "lib/index.d.ts",
   "module": "lib/index.js",
   "scripts": {
-    "precommit": "npm run lint",
+    "precommit": "lint-staged",
     "build": "rimraf lib && npm run lint && tsc",
     "prepublish": "npm run build",
+    "prettier": "prettier --single-quote --write --parser typescript src/**/*.ts",
     "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "npm run prettier",
+      "npm run lint",
+      "git add"
+    ]
   },
   "files": [
     "lib",
@@ -39,6 +47,7 @@
     "express": "^4.14.1",
     "husky": "^0.13.4",
     "joi": "^10.2.2",
+    "lint-staged": "^3.6.1",
     "reflect-metadata": "^0.1.10",
     "rimraf": "^2.6.1",
     "tslint": "^5.2.0",
