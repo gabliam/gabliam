@@ -1,5 +1,9 @@
 import * as express from 'express';
-import { ControllerMetadata, HandlerDecorator, ControllerMethodMetadata } from '../interfaces';
+import {
+  ControllerMetadata,
+  HandlerDecorator,
+  ControllerMethodMetadata
+} from '../interfaces';
 import { METADATA_KEY, TYPE } from '../constants';
 import { inversifyInterfaces, injectable, register } from '@gabliam/core';
 import { addMiddlewareMetadata } from '../metadata';
@@ -13,19 +17,22 @@ export interface ControllerOptions {
 }
 
 export function Controller(options: ControllerOptions | string) {
-  return function (target: any) {
+  return function(target: any) {
     decorateController(options, target, false);
   };
 }
 
-
 export function RestController(options: ControllerOptions | string) {
-  return function (target: any) {
+  return function(target: any) {
     decorateController(options, target, true);
   };
 }
 
-function decorateController(options: ControllerOptions | string, target: any, json: boolean) {
+function decorateController(
+  options: ControllerOptions | string,
+  target: any,
+  json: boolean
+) {
   let path: string;
   let id: inversifyInterfaces.ServiceIdentifier<any> = target;
   let middlewares: express.RequestHandler[] = [];
@@ -47,44 +54,78 @@ function decorateController(options: ControllerOptions | string, target: any, js
   register(TYPE.Controller, { id, target })(target);
 }
 
-export function All(path: string, ...middlewares: express.RequestHandler[]): HandlerDecorator {
+export function All(
+  path: string,
+  ...middlewares: express.RequestHandler[]
+): HandlerDecorator {
   return Method('all', path, ...middlewares);
 }
 
-export function Get(path: string, ...middlewares: express.RequestHandler[]): HandlerDecorator {
+export function Get(
+  path: string,
+  ...middlewares: express.RequestHandler[]
+): HandlerDecorator {
   return Method('get', path, ...middlewares);
 }
 
-export function Post(path: string, ...middlewares: express.RequestHandler[]): HandlerDecorator {
+export function Post(
+  path: string,
+  ...middlewares: express.RequestHandler[]
+): HandlerDecorator {
   return Method('post', path, ...middlewares);
 }
 
-export function Put(path: string, ...middlewares: express.RequestHandler[]): HandlerDecorator {
+export function Put(
+  path: string,
+  ...middlewares: express.RequestHandler[]
+): HandlerDecorator {
   return Method('put', path, ...middlewares);
 }
 
-export function Patch(path: string, ...middlewares: express.RequestHandler[]): HandlerDecorator {
+export function Patch(
+  path: string,
+  ...middlewares: express.RequestHandler[]
+): HandlerDecorator {
   return Method('patch', path, ...middlewares);
 }
 
-export function Head(path: string, ...middlewares: express.RequestHandler[]): HandlerDecorator {
+export function Head(
+  path: string,
+  ...middlewares: express.RequestHandler[]
+): HandlerDecorator {
   return Method('head', path, ...middlewares);
 }
 
-export function Delete(path: string, ...middlewares: express.RequestHandler[]): HandlerDecorator {
+export function Delete(
+  path: string,
+  ...middlewares: express.RequestHandler[]
+): HandlerDecorator {
   return Method('delete', path, ...middlewares);
 }
 
-export function Method(method: string, path: string, ...middlewares: express.RequestHandler[]): HandlerDecorator {
-  return function (target: any, key: string, descriptor: PropertyDescriptor) {
+export function Method(
+  method: string,
+  path: string,
+  ...middlewares: express.RequestHandler[]
+): HandlerDecorator {
+  return function(target: any, key: string, descriptor: PropertyDescriptor) {
     const metadata: ControllerMethodMetadata = { path, method, key };
     let metadataList: ControllerMethodMetadata[] = [];
 
     addMiddlewareMetadata(middlewares, target.constructor, key);
-    if (!Reflect.hasOwnMetadata(METADATA_KEY.controllerMethod, target.constructor)) {
-      Reflect.defineMetadata(METADATA_KEY.controllerMethod, metadataList, target.constructor);
+    if (
+      !Reflect.hasOwnMetadata(METADATA_KEY.controllerMethod, target.constructor)
+    ) {
+      Reflect.defineMetadata(
+        METADATA_KEY.controllerMethod,
+        metadataList,
+        target.constructor
+      );
     } else {
-      metadataList = Reflect.getOwnMetadata(METADATA_KEY.controllerMethod, target.constructor);
+      metadataList = Reflect.getOwnMetadata(
+        METADATA_KEY.controllerMethod,
+        target.constructor
+      );
     }
 
     metadataList.push(metadata);

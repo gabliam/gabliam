@@ -1,7 +1,6 @@
 import * as express from 'express';
 import { interfaces } from '@gabliam/core';
 
-
 export type HandlerDecorator = (target: any, key: string, value: any) => void;
 
 export interface ExpressPluginConfig {
@@ -12,7 +11,9 @@ export interface ExpressPluginConfig {
   hostname: string;
 }
 
-export type MiddlewareConfigurator = (...values: any[]) => express.RequestHandler |  express.RequestHandler[];
+export type MiddlewareConfigurator = (
+  ...values: any[]
+) => express.RequestHandler | express.RequestHandler[];
 
 export interface MiddlewareDefinition {
   name: string;
@@ -28,7 +29,6 @@ export type ConfigFunction = (app: express.Application) => void;
 export interface ExpressConfigRegistry extends interfaces.ValueRegistry {
   key: string;
 }
-
 
 export interface ExpressConfig {
   order: number;

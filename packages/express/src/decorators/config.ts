@@ -3,14 +3,14 @@ import { ExpressConfigMetadata } from '../interfaces';
 
 export function ExpressConfig(order: number = 1) {
   return ExpressConfigDecorator(METADATA_KEY.MiddlewareConfig, order);
-};
+}
 
 export function ExpressErrorConfig(order: number = 1) {
   return ExpressConfigDecorator(METADATA_KEY.MiddlewareErrorConfig, order);
-};
+}
 
 function ExpressConfigDecorator(type: string, order: number) {
-  return function (target: any, key: string, descriptor: PropertyDescriptor) {
+  return function(target: any, key: string, descriptor: PropertyDescriptor) {
     const id = target.constructor.name;
     const metadata: ExpressConfigMetadata = { id, key, order };
     let metadataList: ExpressConfigMetadata[] = [];
@@ -23,4 +23,4 @@ function ExpressConfigDecorator(type: string, order: number) {
 
     metadataList.push(metadata);
   };
-};
+}

@@ -1,7 +1,6 @@
 import { Bean } from '@gabliam/core';
 import { addMiddlewareMetadata } from '../metadata';
 
-
 /**
  * MiddlewareInject decorator
  *
@@ -14,7 +13,7 @@ import { addMiddlewareMetadata } from '../metadata';
  * @param  {any[]} ...values values for configuration of Middleware
  */
 export function MiddlewareInject(name: string, ...values: any[]) {
-  return function (target: any, key?: string) {
+  return function(target: any, key?: string) {
     let realTarget = target;
     // if key != undefined then it's a property decorator
     if (key !== undefined) {
@@ -22,7 +21,7 @@ export function MiddlewareInject(name: string, ...values: any[]) {
     }
     addMiddlewareMetadata([{ name, values }], realTarget, key);
   };
-};
+}
 
 /**
  * Middleware Decorator
@@ -57,4 +56,4 @@ export function MiddlewareInject(name: string, ...values: any[]) {
  */
 export function Middleware(name: string) {
   return Bean(`${name}Middleware`);
-};
+}
