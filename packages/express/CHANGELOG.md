@@ -1,12 +1,14 @@
 <a name="2.3.1"></a>
 ## 2.3.1 (2017-06-26)
 
-* chore: bump version ([b6b254d](https://github.com/gabliam/express/commit/b6b254d))
-* chore(package): add changelog, precommit, publish-please ([5fc69d6](https://github.com/gabliam/express/commit/5fc69d6))
-* chore(package): correction lint-staged ([59d920f](https://github.com/gabliam/express/commit/59d920f))
-* fix(hadlerFactory): Correction when controller return void ([dec79a7](https://github.com/gabliam/express/commit/dec79a7))
+* build(build): add tsconfig.build.json ([c67840e](https://github.com/gabliam/express/commit/c67840e))
 * build(commit): Add husky ([fab6ad3](https://github.com/gabliam/express/commit/fab6ad3))
 * build(package): add lint-staged ([4f68b44](https://github.com/gabliam/express/commit/4f68b44))
+* fix(handlerFactory): Correction when controller return void ([dec79a7](https://github.com/gabliam/express/commit/dec79a7))
+* fix(yarn): fix repository ([45747be](https://github.com/gabliam/express/commit/45747be))
+* chore: bump version ([a530eb3](https://github.com/gabliam/express/commit/a530eb3))
+* chore(package): add changelog, precommit, publish-please ([5fc69d6](https://github.com/gabliam/express/commit/5fc69d6))
+* chore(package): correction lint-staged ([59d920f](https://github.com/gabliam/express/commit/59d920f))
 
 
 
