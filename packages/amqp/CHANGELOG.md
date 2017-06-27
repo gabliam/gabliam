@@ -1,3 +1,12 @@
+<a name="1.4.0"></a>
+# 1.4.0 (2017-06-27)
+
+* chore(package): bump version ([ce94d78](https://github.com/gabliam/amqp/commit/ce94d78))
+* chore(package): correction lint-staged ([ca6a3b3](https://github.com/gabliam/amqp/commit/ca6a3b3))
+* fix(decorators): fix typo RabbitComsumer => RabbitConsumer ([b4c1e8c](https://github.com/gabliam/amqp/commit/b4c1e8c))
+
+
+
 <a name="1.3.0"></a>
 # 1.3.0 (2017-06-21)
 
