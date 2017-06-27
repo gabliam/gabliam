@@ -1,3 +1,11 @@
+<a name="2.3.2"></a>
+## 2.3.2 (2017-06-27)
+
+* chore(package): bump version ([9be95ac](https://github.com/gabliam/express/commit/9be95ac))
+* fix(handlerFactory): revert Correction when controller return void ([caec929](https://github.com/gabliam/express/commit/caec929))
+
+
+
 <a name="2.3.1"></a>
 ## 2.3.1 (2017-06-26)
 
