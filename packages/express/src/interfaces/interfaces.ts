@@ -1,5 +1,6 @@
 import * as express from 'express';
 import { interfaces } from '@gabliam/core';
+import { PARAMETER_TYPE } from '../constants';
 
 export type HandlerDecorator = (target: any, key: string, value: any) => void;
 
@@ -34,4 +35,14 @@ export interface ExpressConfig {
   order: number;
 
   instance: ConfigFunction;
+}
+
+export interface ControllerParameterMetadata {
+  [methodName: string]: ParameterMetadata[];
+}
+
+export interface ParameterMetadata {
+  parameterName: string;
+  index: number;
+  type: PARAMETER_TYPE;
 }

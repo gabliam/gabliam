@@ -9,7 +9,8 @@ import {
   METADATA_KEY,
   EXPRESS_PLUGIN_CONFIG,
   APP,
-  SERVER
+  SERVER,
+  PARAMETER_TYPE
 } from './constants';
 import { getMiddlewares } from './metadata';
 import { cleanPath } from './utils';
@@ -17,7 +18,9 @@ import {
   ExpressConfigMetadata,
   ExpressPluginConfig,
   ControllerMetadata,
-  ControllerMethodMetadata
+  ControllerMethodMetadata,
+  ParameterMetadata,
+  ControllerParameterMetadata
 } from './interfaces';
 import * as express from 'express';
 import * as d from 'debug';
@@ -168,6 +171,11 @@ export class ExpressPlugin implements coreInterfaces.GabliamPlugin {
         controller.constructor
       );
 
+      const parameterMetadata: ControllerParameterMetadata = Reflect.getOwnMetadata(
+        METADATA_KEY.controllerParameter,
+        controller.constructor
+      );
+
       if (controllerMetadata && methodMetadatas) {
         const router = express.Router();
         const routerPath = cleanPath(
@@ -177,6 +185,10 @@ export class ExpressPlugin implements coreInterfaces.GabliamPlugin {
         debug(`New route : "${routerPath}"`);
 
         methodMetadatas.forEach((methodMetadata: ControllerMethodMetadata) => {
+          let paramList: ParameterMetadata[] = [];
+          if (parameterMetadata) {
+            paramList = parameterMetadata[methodMetadata.key] || [];
+          }
           const methodMetadataPath = cleanPath(methodMetadata.path);
           const methodMiddlewares = getMiddlewares(
             container,
@@ -189,7 +201,8 @@ export class ExpressPlugin implements coreInterfaces.GabliamPlugin {
             container,
             controllerId,
             methodMetadata.key,
-            controllerMetadata.json
+            controllerMetadata.json,
+            paramList
           );
           (router as any)[methodMetadata.method](
             methodMetadataPath,
@@ -208,14 +221,16 @@ export class ExpressPlugin implements coreInterfaces.GabliamPlugin {
     container: inversifyInterfaces.Container,
     controllerId: any,
     key: string,
-    json: boolean
+    json: boolean,
+    parameterMetadata: ParameterMetadata[]
   ): express.RequestHandler {
     return (
       req: express.Request,
       res: express.Response,
       next: express.NextFunction
     ) => {
-      const result: any = container.get<any>(controllerId)[key](req, res, next);
+      const args = this.extractParameters(req, res, next, parameterMetadata);
+      const result: any = container.get<any>(controllerId)[key](...args);
 
       // try to resolve promise
       if (result && result instanceof Promise) {
@@ -294,6 +309,64 @@ export class ExpressPlugin implements coreInterfaces.GabliamPlugin {
         ? `pipe ${addr}`
         : `port ${addr.port}`;
       console.log(`Listening on ${bind}`);
+    }
+  }
+
+  private extractParameters(
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction,
+    params: ParameterMetadata[]
+  ): any[] {
+    const args = [];
+    if (!params || !params.length) {
+      return [req, res, next];
+    }
+    for (const item of params) {
+      switch (item.type) {
+        default:
+          args[item.index] = res;
+          break; // response
+        case PARAMETER_TYPE.REQUEST:
+          args[item.index] = this.getParam(req, null, item.parameterName);
+          break;
+        case PARAMETER_TYPE.NEXT:
+          args[item.index] = next;
+          break;
+        case PARAMETER_TYPE.PARAMS:
+          args[item.index] = this.getParam(req, 'params', item.parameterName);
+          break;
+        case PARAMETER_TYPE.QUERY:
+          args[item.index] = this.getParam(req, 'query', item.parameterName);
+          break;
+        case PARAMETER_TYPE.BODY:
+          args[item.index] = this.getParam(req, 'body', item.parameterName);
+          break;
+        case PARAMETER_TYPE.HEADERS:
+          args[item.index] = this.getParam(req, 'headers', item.parameterName);
+          break;
+        case PARAMETER_TYPE.COOKIES:
+          args[item.index] = this.getParam(req, 'cookies', item.parameterName);
+          break;
+      }
+    }
+    args.push(req, res, next);
+    return args;
+  }
+
+  private getParam(source: any, paramType: string | null, name: string) {
+    let param = source;
+    if (paramType !== null && source[paramType]) {
+      param = source[paramType];
+    }
+    return param[name] || this.checkQueryParam(paramType, param);
+  }
+
+  private checkQueryParam(paramType: string | null, param: any) {
+    if (paramType === 'query') {
+      return undefined;
+    } else {
+      return param;
     }
   }
 }
