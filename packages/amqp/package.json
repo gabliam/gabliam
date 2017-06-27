@@ -21,8 +21,8 @@
   },
   "lint-staged": {
     "*.ts": [
-      "npm run prettier",
-      "npm run lint",
+      "prettier --single-quote --write --parser typescript",
+      "tslint --type-check --project tsconfig.json",
       "git add"
     ]
   },
