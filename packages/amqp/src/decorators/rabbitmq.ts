@@ -21,7 +21,7 @@ export function RabbitController() {
 
 export const RabbitListener = createRabbitHandlerDecorator('Listener');
 
-export const RabbitComsumer = createRabbitHandlerDecorator('Consumer');
+export const RabbitConsumer = createRabbitHandlerDecorator('Consumer');
 
 function createRabbitHandlerDecorator(type: HandlerType) {
   return function(queue: string, options: RabbitHandlerOptions = {}) {
