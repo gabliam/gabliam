@@ -238,12 +238,6 @@ export class ExpressPlugin implements coreInterfaces.GabliamPlugin {
         } else {
           res.send(result);
         }
-      } else if (!res.headersSent) {
-        if (json) {
-          res.json(null);
-        } else {
-          res.send(null);
-        }
       }
     };
   }
