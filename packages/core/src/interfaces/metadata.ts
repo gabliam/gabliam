@@ -64,6 +64,9 @@ export interface ConfigRegistry extends ValueRegistry {
   order: number;
 }
 
+/**
+ * @TODO change by RegistryMetada<T>
+ */
 export interface RegistryMetada {
   type: string | symbol;
 

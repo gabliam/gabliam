@@ -59,7 +59,9 @@ export class Gabliam {
         };
       }
     }
-
+    /**
+     * @TODO move in building phase
+     */
     this.container.bind(CORE_CONFIG).toConstantValue(this._options);
   }
   /**
