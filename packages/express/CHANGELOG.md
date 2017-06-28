@@ -1,3 +1,11 @@
+<a name="2.4.0"></a>
+# 2.4.0 (2017-06-28)
+
+* chore(package): bump version ([7f222f4](https://github.com/gabliam/express/commit/7f222f4))
+* feat(decorators): add many decorators ([d8586da](https://github.com/gabliam/express/commit/d8586da))
+
+
+
 <a name="2.3.2"></a>
 ## 2.3.2 (2017-06-27)
 
