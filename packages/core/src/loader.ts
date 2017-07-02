@@ -49,7 +49,7 @@ export class Loader {
    * @param  {string} folder the configuration folder
    * @returns any
    */
-  loadConfig(folder: string): any {
+  loadConfig(folder: string, profile = process.env.PROFILE || null): any {
     debug('loadConfig', folder);
     const files = glob.sync('**/application?(-+([a-zA-Z])).yml', {
       cwd: folder
@@ -59,7 +59,6 @@ export class Loader {
       return config;
     }
 
-    const profile = process.env.PROFILE || null;
     const defaultProfileFile = files.find(file => file === 'application.yml');
 
     if (defaultProfileFile) {
