@@ -229,8 +229,16 @@ export class ExpressPlugin implements coreInterfaces.GabliamPlugin {
       res: express.Response,
       next: express.NextFunction
     ) => {
-      const args = this.extractParameters(req, res, next, parameterMetadata);
-      const result: any = container.get<any>(controllerId)[key](...args);
+      const controller = container.get<any>(controllerId);
+      const args = this.extractParameters(
+        controller,
+        key,
+        req,
+        res,
+        next,
+        parameterMetadata
+      );
+      const result: any = controller[key](...args);
 
       // try to resolve promise
       if (result && result instanceof Promise) {
@@ -313,6 +321,8 @@ export class ExpressPlugin implements coreInterfaces.GabliamPlugin {
   }
 
   private extractParameters(
+    target: any,
+    key: string,
     req: express.Request,
     res: express.Response,
     next: express.NextFunction,
@@ -322,31 +332,33 @@ export class ExpressPlugin implements coreInterfaces.GabliamPlugin {
     if (!params || !params.length) {
       return [req, res, next];
     }
+    const getParam = this.getFuncParam(target, key);
+
     for (const item of params) {
       switch (item.type) {
         default:
           args[item.index] = res;
           break; // response
         case PARAMETER_TYPE.REQUEST:
-          args[item.index] = this.getParam(req, null, item.parameterName);
+          args[item.index] = getParam(req, null, item);
           break;
         case PARAMETER_TYPE.NEXT:
           args[item.index] = next;
           break;
         case PARAMETER_TYPE.PARAMS:
-          args[item.index] = this.getParam(req, 'params', item.parameterName);
+          args[item.index] = getParam(req, 'params', item);
           break;
         case PARAMETER_TYPE.QUERY:
-          args[item.index] = this.getParam(req, 'query', item.parameterName);
+          args[item.index] = getParam(req, 'query', item);
           break;
         case PARAMETER_TYPE.BODY:
-          args[item.index] = this.getParam(req, 'body', item.parameterName);
+          args[item.index] = getParam(req, 'body', item);
           break;
         case PARAMETER_TYPE.HEADERS:
-          args[item.index] = this.getParam(req, 'headers', item.parameterName);
+          args[item.index] = getParam(req, 'headers', item);
           break;
         case PARAMETER_TYPE.COOKIES:
-          args[item.index] = this.getParam(req, 'cookies', item.parameterName);
+          args[item.index] = getParam(req, 'cookies', item);
           break;
       }
     }
@@ -354,19 +366,44 @@ export class ExpressPlugin implements coreInterfaces.GabliamPlugin {
     return args;
   }
 
-  private getParam(source: any, paramType: string | null, name: string) {
-    let param = source;
-    if (paramType !== null && source[paramType]) {
-      param = source[paramType];
-    }
-    return param[name] || this.checkQueryParam(paramType, param);
-  }
+  private getFuncParam(target: any, key: string) {
+    return (
+      source: any,
+      paramType: string | null,
+      itemParam: ParameterMetadata
+    ) => {
+      const name = itemParam.parameterName;
 
-  private checkQueryParam(paramType: string | null, param: any) {
-    if (paramType === 'query') {
-      return undefined;
-    } else {
-      return param;
-    }
+      let param = source;
+      if (paramType !== null && source[paramType]) {
+        param = source[paramType];
+      }
+
+      let res = param[name];
+      if (res) {
+        /**
+         * For query, all value sare considered to string value.
+         * If the query waits for a Number, we try to convert the value
+         */
+        if (paramType === 'query') {
+          const type: Function[] = Reflect.getMetadata(
+            'design:paramtypes',
+            target,
+            key
+          );
+          if (Array.isArray(type) && type[itemParam.index]) {
+            try {
+              if (type[itemParam.index].name === 'Number') {
+                // parseFloat for compatibility with integer and float
+                res = Number.parseFloat(res);
+              }
+            } catch (e) {}
+          }
+        }
+        return res;
+      } else {
+        return paramType === 'query' ? undefined : param;
+      }
+    };
   }
 }
