@@ -1,3 +1,12 @@
+<a name="2.5.0"></a>
+# 2.5.0 (2017-07-04)
+
+* chore(package): bump version ([2e442b6](https://github.com/gabliam/express/commit/2e442b6))
+* feat(@QueryParam): If the query waits for a Number, we try to convert the value ([67ea227](https://github.com/gabliam/express/commit/67ea227))
+* build(tsconfig): add noImplicitAny ([731a80d](https://github.com/gabliam/express/commit/731a80d))
+
+
+
 <a name="2.4.0"></a>
 # 2.4.0 (2017-06-28)
 
