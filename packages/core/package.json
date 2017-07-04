@@ -11,8 +11,8 @@
     "build-test": "npm run build && npm run test",
     "build": "rimraf lib && npm run lint && tsc -p tsconfig.build.json",
     "prepublish": "publish-please guard",
-    "prettier": "prettier --single-quote --write --parser typescript src/**/*.ts",
-    "lint": "tslint --type-check --project tsconfig.json 'src/**/*.ts'",
+    "prettier": "prettier --single-quote --write --parser typescript {src,test}/**/*.ts",
+    "lint": "tslint --type-check --project tsconfig.json '{src,test}/**/*.ts'",
     "test": "mocha --no-timeouts  --require ./mochaConfig.js --compilers ts:ts-node/register test/",
     "publish-please": "publish-please"
   },
@@ -23,14 +23,12 @@
       "git add"
     ]
   },
-  "files": [
-    "lib",
-    "src"
-  ],
+  "files": ["lib", "src"],
   "peerDependencies": {
     "joi": "^10.2.2"
   },
   "dependencies": {
+    "@types/mock-fs": "^3.6.30",
     "debug": "^2.6.1",
     "glob": "^7.1.1",
     "inversify": "^3.1.0",
@@ -55,6 +53,7 @@
     "joi": "^10.2.2",
     "lint-staged": "^3.6.0",
     "mocha": "^3.4.2",
+    "mock-fs": "^4.4.1",
     "prettier": "^1.4.2",
     "publish-please": "^2.3.1",
     "reflect-metadata": "^0.1.9",
