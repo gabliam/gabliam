@@ -385,7 +385,7 @@ export class ExpressPlugin implements coreInterfaces.GabliamPlugin {
          * For query, all value sare considered to string value.
          * If the query waits for a Number, we try to convert the value
          */
-        if (paramType === 'query') {
+        if (paramType === 'query' || paramType === 'params') {
           const type: Function[] = Reflect.getMetadata(
             'design:paramtypes',
             target,
