@@ -1,3 +1,11 @@
+<a name="2.6.0"></a>
+# 2.6.0 (2017-07-06)
+
+* chore(package): bump version ([215f7e3](https://github.com/gabliam/express/commit/215f7e3))
+* feat(@RequestParam): If the param waits for a Number, we try to convert the value ([d1db82a](https://github.com/gabliam/express/commit/d1db82a))
+
+
+
 <a name="2.5.0"></a>
 # 2.5.0 (2017-07-04)
 
