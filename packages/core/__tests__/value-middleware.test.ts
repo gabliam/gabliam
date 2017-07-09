@@ -1,6 +1,5 @@
 // tslint:disable:one-line
 // tslint:disable:no-unused-expression
-import { expect } from 'chai';
 import { createContainer } from '../src/container';
 import { APP_CONFIG } from '../src/constants';
 import { Config, Value } from '../src/decorators';
@@ -32,9 +31,7 @@ describe('Unit Test: Value midlleware', () => {
 
       container.bind(Conf).to(Conf).inSingletonScope();
       const conf = container.get<Conf>(Conf);
-      expect(conf).to.be.an.instanceOf(Conf);
-      expect(conf).to.haveOwnProperty('rootPath').and.that.equal('/');
-      expect(conf).to.haveOwnProperty('hostname').and.that.equal('localhost');
+      expect(conf).toMatchSnapshot();
     }); // end all value in config
 
     it('default value in property', () => {
@@ -49,10 +46,7 @@ describe('Unit Test: Value midlleware', () => {
 
       container.bind(Conf).to(Conf).inSingletonScope();
       const conf = container.get<Conf>(Conf);
-      expect(conf).to.be.an.instanceOf(Conf);
-      expect(conf).to.haveOwnProperty('rootPath').and.that.equal('/');
-      expect(conf).to.haveOwnProperty('port').and.that.equal(3000);
-      expect(conf).to.haveOwnProperty('hostname').and.that.equal('localhost');
+      expect(conf).toMatchSnapshot();
     }); // end default value in property
 
     it('with value undefined', () => {
@@ -69,11 +63,7 @@ describe('Unit Test: Value midlleware', () => {
 
       container.bind(Conf).to(Conf).inSingletonScope();
       const conf = container.get<Conf>(Conf);
-      expect(conf).to.be.an.instanceOf(Conf);
-      expect(conf).to.haveOwnProperty('rootPath').and.that.equal('/');
-      expect(conf).to.haveOwnProperty('port').and.that.equal(3000);
-      expect(conf).to.haveOwnProperty('lol').and.that.equal(undefined);
-      expect(conf).to.haveOwnProperty('hostname').and.that.equal('localhost');
+      expect(conf).toMatchSnapshot();
     }); // end whith value undefined
 
     it('default value in constructor', () => {
@@ -92,10 +82,7 @@ describe('Unit Test: Value midlleware', () => {
 
       container.bind(Conf).to(Conf).inSingletonScope();
       const conf = container.get<Conf>(Conf);
-      expect(conf).to.be.an.instanceOf(Conf);
-      expect(conf).to.haveOwnProperty('rootPath').and.that.equal('/');
-      expect(conf).to.haveOwnProperty('port').and.that.equal(8080);
-      expect(conf).to.haveOwnProperty('hostname').and.that.equal('localhost');
+      expect(conf).toMatchSnapshot();
     }); // end default value in constructor
 
     it('default value in constructor and property', () => {
@@ -114,10 +101,7 @@ describe('Unit Test: Value midlleware', () => {
 
       container.bind(Conf).to(Conf).inSingletonScope();
       const conf = container.get<Conf>(Conf);
-      expect(conf).to.be.an.instanceOf(Conf);
-      expect(conf).to.haveOwnProperty('rootPath').and.that.equal('/');
-      expect(conf).to.haveOwnProperty('port').and.that.equal(8080);
-      expect(conf).to.haveOwnProperty('hostname').and.that.equal('localhost');
+      expect(conf).toMatchSnapshot();
     }); // end default value in constructor
 
     it('default value in other bean', () => {
@@ -137,10 +121,7 @@ describe('Unit Test: Value midlleware', () => {
 
       container.bind(Conf).to(Conf).inSingletonScope();
       const conf = container.get<Conf>(Conf);
-      expect(conf).to.be.an.instanceOf(Conf);
-      expect(conf).to.haveOwnProperty('rootPath').and.that.equal('/');
-      expect(conf).to.haveOwnProperty('port').and.that.equal(8081);
-      expect(conf).to.haveOwnProperty('hostname').and.that.equal('localhost');
+      expect(conf).toMatchSnapshot();
     }); // end default value in constructor
 
     it('default value and optional bean', () => {
@@ -161,9 +142,7 @@ describe('Unit Test: Value midlleware', () => {
 
       container.bind(Conf).to(Conf).inSingletonScope();
       const conf = container.get<Conf>(Conf);
-      expect(conf).to.be.an.instanceOf(Conf);
-      expect(conf).to.haveOwnProperty('rootPath').and.that.equal('/');
-      expect(conf).to.haveOwnProperty('hostname').and.that.equal('localhost');
+      expect(conf).toMatchSnapshot();
     }); // end default value and optional bean
   }); // end @Value(path: string)
 
@@ -191,9 +170,7 @@ describe('Unit Test: Value midlleware', () => {
 
       container.bind(Conf).to(Conf).inSingletonScope();
       const conf = container.get<Conf>(Conf);
-      expect(conf).to.be.an.instanceOf(Conf);
-      expect(conf).to.haveOwnProperty('rootPath').and.that.equal('/');
-      expect(conf).to.haveOwnProperty('hostname').and.that.equal('localhost');
+      expect(conf).toMatchSnapshot();
     }); // end all value in config
 
     it('default value in property', () => {
@@ -211,10 +188,7 @@ describe('Unit Test: Value midlleware', () => {
 
       container.bind(Conf).to(Conf).inSingletonScope();
       const conf = container.get<Conf>(Conf);
-      expect(conf).to.be.an.instanceOf(Conf);
-      expect(conf).to.haveOwnProperty('rootPath').and.that.equal('/');
-      expect(conf).to.haveOwnProperty('port').and.that.equal(3000);
-      expect(conf).to.haveOwnProperty('hostname').and.that.equal('localhost');
+      expect(conf).toMatchSnapshot();
     }); // end default value in property
 
     it('bad format', () => {
@@ -227,7 +201,7 @@ describe('Unit Test: Value midlleware', () => {
       container.bind(Conf).to(Conf).inSingletonScope();
       expect(() => {
         container.get<Conf>(Conf);
-      }).throw();
+      }).toThrow();
     }); // end bad format
 
     it('error required', () => {
@@ -243,7 +217,7 @@ describe('Unit Test: Value midlleware', () => {
       container.bind(Conf).to(Conf).inSingletonScope();
       expect(() => {
         container.get<Conf>(Conf);
-      }).throw();
+      }).toThrow();
     }); // end error required
 
     it('default value in constructor', () => {
@@ -265,10 +239,7 @@ describe('Unit Test: Value midlleware', () => {
 
       container.bind(Conf).to(Conf).inSingletonScope();
       const conf = container.get<Conf>(Conf);
-      expect(conf).to.be.an.instanceOf(Conf);
-      expect(conf).to.haveOwnProperty('rootPath').and.that.equal('/');
-      expect(conf).to.haveOwnProperty('port').and.that.equal(8080);
-      expect(conf).to.haveOwnProperty('hostname').and.that.equal('localhost');
+      expect(conf).toMatchSnapshot();
     }); // end default value in constructor
 
     it('default in joi', () => {
@@ -286,10 +257,7 @@ describe('Unit Test: Value midlleware', () => {
 
       container.bind(Conf).to(Conf).inSingletonScope();
       const conf = container.get<Conf>(Conf);
-      expect(conf).to.be.an.instanceOf(Conf);
-      expect(conf).to.haveOwnProperty('rootPath').and.that.equal('/');
-      expect(conf).to.haveOwnProperty('port').and.that.equal(8088);
-      expect(conf).to.haveOwnProperty('hostname').and.that.equal('localhost');
+      expect(conf).toMatchSnapshot();
     }); // end default value in constructor
   }); // end @Value(path: string, schema: Joi.Schema)
 
@@ -323,9 +291,7 @@ describe('Unit Test: Value midlleware', () => {
 
       container.bind(Conf).to(Conf).inSingletonScope();
       const conf = container.get<Conf>(Conf);
-      expect(conf).to.be.an.instanceOf(Conf);
-      expect(conf).to.haveOwnProperty('rootPath').and.that.equal('/');
-      expect(conf).to.haveOwnProperty('hostname').and.that.equal('localhost');
+      expect(conf).toMatchSnapshot();
     }); // end all value in config
 
     it('default value in property', () => {
@@ -352,10 +318,7 @@ describe('Unit Test: Value midlleware', () => {
 
       container.bind(Conf).to(Conf).inSingletonScope();
       const conf = container.get<Conf>(Conf);
-      expect(conf).to.be.an.instanceOf(Conf);
-      expect(conf).to.haveOwnProperty('rootPath').and.that.equal('/');
-      expect(conf).to.haveOwnProperty('port').and.that.equal(3000);
-      expect(conf).to.haveOwnProperty('hostname').and.that.equal('localhost');
+      expect(conf).toMatchSnapshot();
     }); // end default value in property
 
     it('bad format', () => {
@@ -371,7 +334,7 @@ describe('Unit Test: Value midlleware', () => {
       container.bind(Conf).to(Conf).inSingletonScope();
       expect(() => {
         container.get<Conf>(Conf);
-      }).throw();
+      }).toThrow();
     }); // end bad format
 
     it('bad format custom error', () => {
@@ -390,7 +353,7 @@ describe('Unit Test: Value midlleware', () => {
       container.bind(Conf).to(Conf).inSingletonScope();
       expect(() => {
         container.get<Conf>(Conf);
-      }).throw('custom');
+      }).toThrow('custom');
     }); // end bad format
 
     it('bad format without throw error', () => {
@@ -408,8 +371,7 @@ describe('Unit Test: Value midlleware', () => {
 
       container.bind(Conf).to(Conf).inSingletonScope();
       const conf = container.get<Conf>(Conf);
-      expect(conf).to.be.an.instanceOf(Conf);
-      expect(conf).to.haveOwnProperty('rootPath').and.that.equal(null);
+      expect(conf).toMatchSnapshot();
     }); // end bad format
 
     it('error required', () => {
@@ -431,7 +393,7 @@ describe('Unit Test: Value midlleware', () => {
       container.bind(Conf).to(Conf).inSingletonScope();
       expect(() => {
         container.get<Conf>(Conf);
-      }).throw();
+      }).toThrow();
     }); // end error required
 
     it('default value in constructor', () => {
@@ -462,10 +424,7 @@ describe('Unit Test: Value midlleware', () => {
 
       container.bind(Conf).to(Conf).inSingletonScope();
       const conf = container.get<Conf>(Conf);
-      expect(conf).to.be.an.instanceOf(Conf);
-      expect(conf).to.haveOwnProperty('rootPath').and.that.equal('/');
-      expect(conf).to.haveOwnProperty('port').and.that.equal(8080);
-      expect(conf).to.haveOwnProperty('hostname').and.that.equal('localhost');
+      expect(conf).toMatchSnapshot();
     }); // end default value in constructor
 
     it('default in joi', () => {
@@ -492,10 +451,7 @@ describe('Unit Test: Value midlleware', () => {
 
       container.bind(Conf).to(Conf).inSingletonScope();
       const conf = container.get<Conf>(Conf);
-      expect(conf).to.be.an.instanceOf(Conf);
-      expect(conf).to.haveOwnProperty('rootPath').and.that.equal('/');
-      expect(conf).to.haveOwnProperty('port').and.that.equal(8088);
-      expect(conf).to.haveOwnProperty('hostname').and.that.equal('localhost');
+      expect(conf).toMatchSnapshot();
     }); // end default value in constructor
   }); // end @Value(path: string, schema: Joi.Schema)
 });

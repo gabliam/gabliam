@@ -1,0 +1,230 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Unit Test: Decorators @Bean should add Bean metadata to a class when decorated multiple times with @Bean 1`] = `
+Array [
+  Object {
+    "id": "test",
+    "key": "testMethod",
+  },
+  Object {
+    "id": "test3",
+    "key": "test2Method",
+  },
+  Object {
+    "id": "test2",
+    "key": "test2Method",
+  },
+]
+`;
+
+exports[`Unit Test: Decorators @Bean should add Bean metadata to a class when decorated with @Bean 1`] = `
+Array [
+  Object {
+    "id": "test",
+    "key": "testMethod",
+  },
+  Object {
+    "id": "test2",
+    "key": "test2Method",
+  },
+]
+`;
+
+exports[`Unit Test: Decorators @Config should add Registry and config metadata to a class when decorated with @Config 1`] = `true`;
+
+exports[`Unit Test: Decorators @Config should add Registry and config metadata to a class when decorated with @Config 2`] = `
+Object {
+  "type": "ConfigType",
+  "value": Object {
+    "id": [Function],
+    "order": 150,
+    "target": [Function],
+  },
+}
+`;
+
+exports[`Unit Test: Decorators @Register should add Registry metadata to a class when decorated with @Register 1`] = `
+Object {
+  "type": "ConfigType",
+  "value": Object {},
+}
+`;
+
+exports[`Unit Test: Decorators @Scan should add Scan metadata to a class when decorated multiple times with @Scan 1`] = `
+Array [
+  "/Users/eyolas/Documents/devperso/js/gabliam/core/__tests__/otherFolder",
+  "/Users/eyolas/Documents/devperso/js/gabliam/core/__tests__",
+]
+`;
+
+exports[`Unit Test: Decorators @Scan should add Scan metadata to a class when decorated with @Scan 1`] = `
+Array [
+  "/Users/eyolas/Documents/devperso/js/gabliam/core/__tests__",
+]
+`;
+
+exports[`Unit Test: Decorators @Service should add Service metadata to a class when decorated with @Service 1`] = `true`;
+
+exports[`Unit Test: Decorators @Service should add Service metadata to a class when decorated with @Service 2`] = `
+Object {
+  "type": "ServiceType",
+  "value": Object {
+    "id": [Function],
+    "target": [Function],
+  },
+}
+`;
+
+exports[`Unit Test: Decorators @Service should add Service metadata to a class when decorated with @Service('Test) 1`] = `true`;
+
+exports[`Unit Test: Decorators @Service should add Service metadata to a class when decorated with @Service('Test) 2`] = `
+Object {
+  "type": "ServiceType",
+  "value": Object {
+    "id": "Test",
+    "target": [Function],
+  },
+}
+`;
+
+exports[`Unit Test: Decorators @Value @Value(options: ValueOptions) should add Value metadata to a class when decorated with @Value(options: ValueOptions) 1`] = `
+Array [
+  Object {
+    "key": "name",
+    "path": "application.name",
+    "target": TestBean {},
+    "validator": null,
+  },
+  Object {
+    "key": "surname",
+    "path": "application.surname",
+    "target": TestBean {},
+    "validator": Object {
+      "schema":  {
+        "_description": null,
+        "_examples": Array [],
+        "_flags": Object {},
+        "_inner": Object {},
+        "_invalids": Set {
+          "_set": Array [
+            "",
+          ],
+        },
+        "_meta": Array [],
+        "_notes": Array [],
+        "_refs": Array [],
+        "_settings": null,
+        "_tags": Array [],
+        "_tests": Array [],
+        "_type": "string",
+        "_unit": null,
+        "_valids": Set {
+          "_set": Array [],
+        },
+        "isJoi": true,
+      },
+      "throwError": true,
+    },
+  },
+  Object {
+    "key": "firstname",
+    "path": "application.surname",
+    "target": TestBean {},
+    "validator": Object {
+      "schema":  {
+        "_description": null,
+        "_examples": Array [],
+        "_flags": Object {},
+        "_inner": Object {},
+        "_invalids": Set {
+          "_set": Array [
+            "",
+          ],
+        },
+        "_meta": Array [],
+        "_notes": Array [],
+        "_refs": Array [],
+        "_settings": null,
+        "_tags": Array [],
+        "_tests": Array [],
+        "_type": "string",
+        "_unit": null,
+        "_valids": Set {
+          "_set": Array [],
+        },
+        "isJoi": true,
+      },
+      "throwError": true,
+    },
+  },
+  Object {
+    "key": "postalcode",
+    "path": "application.postalcode",
+    "target": TestBean {},
+    "validator": Object {
+      "customErrorMsg": "Error",
+      "schema":  {
+        "_baseType": undefined,
+        "_description": null,
+        "_examples": Array [],
+        "_flags": Object {
+          "presence": "required",
+        },
+        "_inner": Object {},
+        "_invalids": Set {
+          "_set": Array [
+            "",
+          ],
+        },
+        "_meta": Array [],
+        "_notes": Array [],
+        "_refs": Array [],
+        "_settings": null,
+        "_tags": Array [],
+        "_tests": Array [],
+        "_type": "string",
+        "_unit": null,
+        "_valids": Set {
+          "_set": Array [],
+        },
+        "isJoi": true,
+      },
+      "throwError": true,
+    },
+  },
+  Object {
+    "key": "address",
+    "path": "application.address",
+    "target": TestBean {},
+    "validator": Object {
+      "schema":  {
+        "_baseType": undefined,
+        "_description": null,
+        "_examples": Array [],
+        "_flags": Object {
+          "presence": "required",
+        },
+        "_inner": Object {},
+        "_invalids": Set {
+          "_set": Array [
+            "",
+          ],
+        },
+        "_meta": Array [],
+        "_notes": Array [],
+        "_refs": Array [],
+        "_settings": null,
+        "_tags": Array [],
+        "_tests": Array [],
+        "_type": "string",
+        "_unit": null,
+        "_valids": Set {
+          "_set": Array [],
+        },
+        "isJoi": true,
+      },
+      "throwError": true,
+    },
+  },
+]
+`;

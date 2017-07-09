@@ -1,6 +1,5 @@
 // tslint:disable:one-line
 // tslint:disable:no-unused-expression
-import { expect } from 'chai';
 import { Loader } from '../src/loader';
 import * as mock from 'mock-fs';
 
@@ -12,7 +11,7 @@ describe('Unit Test: config loader', () => {
 
   it(`with config folder doesn't exist`, () => {
     const config = loader.loadConfig('doesntexist/config');
-    expect(config).to.deep.equal({});
+    expect(config).toMatchSnapshot();
   });
 
   it(`with application.yml empty`, () => {
@@ -22,7 +21,7 @@ describe('Unit Test: config loader', () => {
       }
     });
     const config = loader.loadConfig('test/config');
-    expect(config).to.deep.equal({});
+    expect(config).toMatchSnapshot();
     mock.restore();
   });
 
@@ -36,12 +35,12 @@ describe('Unit Test: config loader', () => {
       }
     });
     const config = loader.loadConfig('test/config');
-    expect(config).to.deep.equal({});
+    expect(config).toEqual({});
     mock.restore();
   });
 
   describe('with application.yml', () => {
-    before(() => {
+    beforeAll(() => {
       mock({
         'test/config': {
           'application.yml': `
@@ -59,34 +58,19 @@ describe('Unit Test: config loader', () => {
 
     it('load application.yml', () => {
       const config = loader.loadConfig('test/config');
-      expect(config).to.deep.equal({
-        application: {
-          host: '127.0.0.1',
-          db: 'test'
-        }
-      });
+      expect(config).toMatchSnapshot();
     });
 
     it('load with bad profile', () => {
       const config = loader.loadConfig('test/config', 'int');
-      expect(config).to.deep.equal({
-        application: {
-          host: '127.0.0.1',
-          db: 'test'
-        }
-      });
+      expect(config).toMatchSnapshot();
     });
 
     it('load with prod profile', () => {
       const config = loader.loadConfig('test/config', 'prod');
-      expect(config).to.deep.equal({
-        application: {
-          host: 'prod.app.com',
-          db: 'test'
-        }
-      });
+      expect(config).toMatchSnapshot();
     });
 
-    after(() => mock.restore());
+    afterAll(() => mock.restore());
   });
 });

@@ -1,6 +1,5 @@
 // tslint:disable:one-line
 // tslint:disable:no-unused-expression
-import { expect } from 'chai';
 import {
   Bean,
   Config,
@@ -9,7 +8,7 @@ import {
   Service,
   Value
 } from '../src/decorators';
-import { METADATA_KEY, TYPE, ORDER_CONFIG } from '../src/constants';
+import { METADATA_KEY, TYPE } from '../src/constants';
 import { BeanMetadata, RegistryMetada, ValueMetadata } from '../src/interfaces';
 import * as Joi from 'joi';
 
@@ -28,12 +27,8 @@ describe('Unit Test: Decorators', () => {
         METADATA_KEY.bean,
         TestBean
       );
-      expect(beanMetadata).to.be.an('array');
-      expect(beanMetadata).to.have.lengthOf(2);
-      expect(beanMetadata).to.deep.equal([
-        { id: 'test', key: 'testMethod' },
-        { id: 'test2', key: 'test2Method' }
-      ]);
+
+      expect(beanMetadata).toMatchSnapshot();
     });
 
     it('should add Bean metadata to a class when decorated multiple times with @Bean', () => {
@@ -50,13 +45,7 @@ describe('Unit Test: Decorators', () => {
         METADATA_KEY.bean,
         TestBean
       );
-      expect(beanMetadata).to.be.an('array');
-      expect(beanMetadata).to.have.lengthOf(3);
-      expect(beanMetadata).to.deep.equal([
-        { id: 'test', key: 'testMethod' },
-        { id: 'test3', key: 'test2Method' },
-        { id: 'test2', key: 'test2Method' }
-      ]);
+      expect(beanMetadata).toMatchSnapshot();
     });
   }); // end describe @Bean
 
@@ -75,19 +64,8 @@ describe('Unit Test: Decorators', () => {
         TestBean
       );
 
-      expect(configMetadata).to.be.an('boolean').that.be.true;
-
-      expect(registryMetadata).to.have.property('type', TYPE.Config);
-      expect(registryMetadata).to.have.property('value');
-      expect(registryMetadata).to.have.nested.property('value.id', TestBean);
-      expect(registryMetadata).to.have.nested.property(
-        'value.order',
-        ORDER_CONFIG.Config
-      );
-      expect(registryMetadata).to.have.nested.property(
-        'value.target',
-        TestBean
-      );
+      expect(configMetadata).toMatchSnapshot();
+      expect(registryMetadata).toMatchSnapshot();
     });
 
     it('should fail when decorated multiple times with @Config', () => {
@@ -97,7 +75,7 @@ describe('Unit Test: Decorators', () => {
         class TestBean {}
 
         new TestBean();
-      }).to.throw();
+      }).toThrowError();
     });
   }); // end describe @Config
 
@@ -111,8 +89,7 @@ describe('Unit Test: Decorators', () => {
         TestBean
       );
 
-      expect(registryMetadata).to.have.property('type', TYPE.Config);
-      expect(registryMetadata).to.have.property('value').that.be.empty;
+      expect(registryMetadata).toMatchSnapshot();
     });
 
     it('should fail when decorated multiple times with @Register', () => {
@@ -122,7 +99,7 @@ describe('Unit Test: Decorators', () => {
         class TestBean {}
 
         new TestBean();
-      }).to.throw();
+      }).toThrowError();
     });
   }); // end describe @Register
 
@@ -136,9 +113,7 @@ describe('Unit Test: Decorators', () => {
         TestBean
       );
 
-      expect(scanMetadata).to.be.an('array');
-      expect(scanMetadata).to.have.lengthOf(1);
-      expect(scanMetadata).to.deep.equal([__dirname]);
+      expect(scanMetadata).toMatchSnapshot();
     });
 
     it('should add Scan metadata to a class when decorated multiple times with @Scan', () => {
@@ -150,13 +125,7 @@ describe('Unit Test: Decorators', () => {
         METADATA_KEY.scan,
         TestBean
       );
-
-      expect(scanMetadata).to.be.an('array');
-      expect(scanMetadata).to.have.lengthOf(2);
-      expect(scanMetadata).to.deep.equal([
-        `${__dirname}/otherFolder`,
-        __dirname
-      ]);
+      expect(scanMetadata).toMatchSnapshot();
     });
   }); // end describe @Scan
 
@@ -174,15 +143,8 @@ describe('Unit Test: Decorators', () => {
         METADATA_KEY.service,
         TestBean
       );
-
-      expect(serviceMetadata).to.be.a('boolean').that.be.true;
-      expect(registryMetadata).to.have.property('type', TYPE.Service);
-      expect(registryMetadata).to.have.property('value');
-      expect(registryMetadata).to.have.nested.property('value.id', TestBean);
-      expect(registryMetadata).to.have.nested.property(
-        'value.target',
-        TestBean
-      );
+      expect(serviceMetadata).toMatchSnapshot();
+      expect(registryMetadata).toMatchSnapshot();
     });
 
     it(`should add Service metadata to a class when decorated with @Service('Test)`, () => {
@@ -199,14 +161,8 @@ describe('Unit Test: Decorators', () => {
         TestBean
       );
 
-      expect(serviceMetadata).to.be.an('boolean').that.be.true;
-      expect(registryMetadata).to.have.property('type', TYPE.Service);
-      expect(registryMetadata).to.have.property('value');
-      expect(registryMetadata).to.have.nested.property('value.id', 'Test');
-      expect(registryMetadata).to.have.nested.property(
-        'value.target',
-        TestBean
-      );
+      expect(serviceMetadata).toMatchSnapshot();
+      expect(registryMetadata).toMatchSnapshot();
     });
 
     it('should fail when decorated multiple times with @Service', () => {
@@ -216,7 +172,7 @@ describe('Unit Test: Decorators', () => {
         class TestBean {}
 
         new TestBean();
-      }).to.throw();
+      }).toThrowError();
     });
   }); // end describe @Service
 
@@ -252,45 +208,7 @@ describe('Unit Test: Decorators', () => {
           METADATA_KEY.value,
           TestBean
         );
-
-        expect(valueMetadata).to.be.an('array');
-        expect(valueMetadata).to.have.lengthOf(5);
-        expect(valueMetadata).to.deep.equal([
-          {
-            path: 'application.name',
-            target: new TestBean(),
-            key: 'name',
-            validator: null
-          },
-          {
-            path: 'application.surname',
-            target: new TestBean(),
-            key: 'surname',
-            validator: { throwError: true, schema: Joi.string() }
-          },
-          {
-            path: 'application.surname',
-            target: new TestBean(),
-            key: 'firstname',
-            validator: { throwError: true, schema: Joi.string() }
-          },
-          {
-            path: 'application.postalcode',
-            target: new TestBean(),
-            key: 'postalcode',
-            validator: {
-              throwError: true,
-              schema: Joi.string().required(),
-              customErrorMsg: 'Error'
-            }
-          },
-          {
-            path: 'application.address',
-            target: new TestBean(),
-            key: 'address',
-            validator: { throwError: true, schema: Joi.string().required() }
-          }
-        ]);
+        expect(valueMetadata).toMatchSnapshot();
       });
     }); // end @Value(options: ValueOptions)
   }); // end describe @Value
