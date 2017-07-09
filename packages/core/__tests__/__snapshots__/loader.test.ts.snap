@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Unit Test: loader whitout other scan 1`] = `
+Registry {
+  "registry": Map {
+    "ServiceType" => Array [
+      Object {
+        "id": [Function],
+        "target": [Function],
+      },
+      Object {
+        "id": [Function],
+        "target": [Function],
+      },
+    ],
+    "ConfigType" => Array [
+      Object {
+        "id": [Function],
+        "order": 150,
+        "target": [Function],
+      },
+    ],
+  },
+}
+`;
+
+exports[`Unit Test: loader whitout other scan 2`] = `
+Loader {
+  "loadedFolder": Array [
+    "<PROJECT_ROOT>/__tests__/fixtures/loader/withoutscan",
+  ],
+}
+`;
+
+exports[`Unit Test: loader with scan 1`] = `
+Registry {
+  "registry": Map {
+    "ServiceType" => Array [
+      Object {
+        "id": [Function],
+        "target": [Function],
+      },
+      Object {
+        "id": [Function],
+        "target": [Function],
+      },
+      Object {
+        "id": [Function],
+        "target": [Function],
+      },
+    ],
+    "ConfigType" => Array [
+      Object {
+        "id": [Function],
+        "order": 200,
+        "target": [Function],
+      },
+    ],
+  },
+}
+`;
+
+exports[`Unit Test: loader with scan 2`] = `
+Loader {
+  "loadedFolder": Array [
+    "<PROJECT_ROOT>/__tests__/fixtures/loader/withscan",
+    "<PROJECT_ROOT>/__tests__/fixtures/loader/subfoldertoscan",
+  ],
+}
+`;
