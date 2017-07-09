@@ -52,14 +52,14 @@ Object {
 
 exports[`Unit Test: Decorators @Scan should add Scan metadata to a class when decorated multiple times with @Scan 1`] = `
 Array [
-  "__tests/otherFolder",
-  "__tests/",
+  "<PROJECT_ROOT>/__tests__/otherFolder",
+  "<PROJECT_ROOT>/__tests__",
 ]
 `;
 
 exports[`Unit Test: Decorators @Scan should add Scan metadata to a class when decorated with @Scan 1`] = `
 Array [
-  "__tests/",
+  "<PROJECT_ROOT>/__tests__",
 ]
 `;
 

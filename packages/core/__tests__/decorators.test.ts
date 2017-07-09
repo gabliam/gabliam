@@ -105,7 +105,7 @@ describe('Unit Test: Decorators', () => {
 
   describe('@Scan', () => {
     it('should add Scan metadata to a class when decorated with @Scan', () => {
-      @Scan('__tests/')
+      @Scan(__dirname)
       class TestBean {}
 
       const scanMetadata: RegistryMetada = Reflect.getMetadata(
@@ -117,8 +117,8 @@ describe('Unit Test: Decorators', () => {
     });
 
     it('should add Scan metadata to a class when decorated multiple times with @Scan', () => {
-      @Scan('__tests/')
-      @Scan(`__tests/otherFolder`)
+      @Scan(__dirname)
+      @Scan(`${__dirname}/otherFolder`)
       class TestBean {}
 
       const scanMetadata: string[] = Reflect.getMetadata(
