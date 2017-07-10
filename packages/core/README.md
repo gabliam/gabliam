@@ -1,6 +1,7 @@
 [![Build Status][build-image]][build-url]
 [![NPM version][npm-image]][npm-url]
 [![Dependency Status][gemnasium-image]][gemnasium-url]
+[![codecov][codecov-image]][codecov-url]
 
 
 # Gabliam core
@@ -70,3 +71,8 @@ todo list
 [npm-url]: https://github.com/gabliam/core
 [gemnasium-image]: http://img.shields.io/gemnasium/gabliam/core.svg?style=flat-square
 [gemnasium-url]: https://gemnasium.com/gabliam/core
+[codecov-image]: https://img.shields.io/codecov/c/github/gabliam/core/master.svg?style=flat-square
+[codecov-url]: https://codecov.io/gh/gabliam/core
+
+
+[![codecov](https://codecov.io/gh/gabliam/core/branch/master/graph/badge.svg)](https://codecov.io/gh/gabliam/core)
