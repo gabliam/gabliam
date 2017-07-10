@@ -49,23 +49,19 @@ Go to [Samples]
 
 
 todo list
-- [ ] add readme
 - [ ] add doc
-- [ ] add tests
+- [x] add tests
 - [ ] add @Contraint for load class
 - [ ] add before and after for config
-
-[Samples]: <https://github.com/gabliam/sample>
-
-
 - [x] delete express in core
 
+[Samples]: <https://github.com/gabliam/sample>
 
 # License
 
   MIT
 
-[build-image]: https://travis-ci.org/gabliam/core.svg?branch=master
+[build-image]: https://img.shields.io/travis/gabliam/core/master.svg?style=flat-square
 [build-url]: https://travis-ci.org/gabliam/core
 [npm-image]: https://img.shields.io/npm/v/@gabliam/core.svg?style=flat-square
 [npm-url]: https://github.com/gabliam/core
@@ -73,6 +69,3 @@ todo list
 [gemnasium-url]: https://gemnasium.com/gabliam/core
 [codecov-image]: https://img.shields.io/codecov/c/github/gabliam/core/master.svg?style=flat-square
 [codecov-url]: https://codecov.io/gh/gabliam/core
-
-
-[![codecov](https://codecov.io/gh/gabliam/core/branch/master/graph/badge.svg)](https://codecov.io/gh/gabliam/core)
