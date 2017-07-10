@@ -9,6 +9,8 @@ export function createContainer(): Container {
   const container = new Container();
 
   const middlewares = [];
+
+  /* istanbul ignore if */
   if (process.env.NODE_ENV === 'development') {
     const logger = makeLoggerMiddleware();
     middlewares.push(logger);
