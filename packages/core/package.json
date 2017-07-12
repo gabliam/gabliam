@@ -23,7 +23,10 @@
       "git add"
     ]
   },
-  "files": ["lib", "src"],
+  "files": [
+    "lib",
+    "src"
+  ],
   "peerDependencies": {
     "joi": "^10.2.2"
   },
@@ -83,8 +86,15 @@
     "setupTestFrameworkScriptFile": "<rootDir>/__tests__/setup.js",
     "testEnvironment": "node",
     "testRegex": "(/__tests__/.*)\\.test\\.(ts|tsx|js)$",
-    "snapshotSerializers": ["jest-serializer-path"],
-    "moduleFileExtensions": ["ts", "tsx", "js", "json"]
+    "snapshotSerializers": [
+      "jest-serializer-path"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ]
   },
   "repository": {
     "type": "git",
