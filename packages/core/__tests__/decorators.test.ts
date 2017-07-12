@@ -3,11 +3,13 @@
 import {
   Bean,
   Config,
+  PluginConfig,
   register,
   Scan,
   Service,
   Value
 } from '../src/decorators';
+import { CoreConfig } from '../src/decorators/config';
 import { METADATA_KEY, TYPE } from '../src/constants';
 import { BeanMetadata, RegistryMetada, ValueMetadata } from '../src/interfaces';
 import * as Joi from 'joi';
@@ -68,10 +70,124 @@ describe('Unit Test: Decorators', () => {
       expect(registryMetadata).toMatchSnapshot();
     });
 
+    it('should add Registry and config metadata to a class when decorated with @Config(100)', () => {
+      @Config(100)
+      class TestBean {}
+
+      const registryMetadata: RegistryMetada = Reflect.getMetadata(
+        METADATA_KEY.register,
+        TestBean
+      );
+
+      const configMetadata: boolean | undefined = Reflect.getMetadata(
+        METADATA_KEY.config,
+        TestBean
+      );
+
+      expect(configMetadata).toMatchSnapshot();
+      expect(registryMetadata).toMatchSnapshot();
+    });
+
     it('should fail when decorated multiple times with @Config', () => {
       expect(function() {
         @Config()
         @Config()
+        class TestBean {}
+
+        new TestBean();
+      }).toThrowError();
+    });
+  }); // end describe @Config
+
+  describe('@PluginConfig', () => {
+    it('should add Registry and config metadata to a class when decorated with @PluginConfig', () => {
+      @PluginConfig()
+      class TestBean {}
+
+      const registryMetadata: RegistryMetada = Reflect.getMetadata(
+        METADATA_KEY.register,
+        TestBean
+      );
+
+      const configMetadata: boolean | undefined = Reflect.getMetadata(
+        METADATA_KEY.config,
+        TestBean
+      );
+
+      expect(configMetadata).toMatchSnapshot();
+      expect(registryMetadata).toMatchSnapshot();
+    });
+
+    it('should add Registry and config metadata to a class when decorated with @PluginConfig(100)', () => {
+      @PluginConfig(100)
+      class TestBean {}
+
+      const registryMetadata: RegistryMetada = Reflect.getMetadata(
+        METADATA_KEY.register,
+        TestBean
+      );
+
+      const configMetadata: boolean | undefined = Reflect.getMetadata(
+        METADATA_KEY.config,
+        TestBean
+      );
+
+      expect(configMetadata).toMatchSnapshot();
+      expect(registryMetadata).toMatchSnapshot();
+    });
+
+    it('should fail when decorated multiple times with @Config', () => {
+      expect(function() {
+        @PluginConfig()
+        @PluginConfig()
+        class TestBean {}
+
+        new TestBean();
+      }).toThrowError();
+    });
+  }); // end describe @Config
+
+  describe('@CoreConfig', () => {
+    it('should add Registry and config metadata to a class when decorated with @CoreConfig', () => {
+      @CoreConfig()
+      class TestBean {}
+
+      const registryMetadata: RegistryMetada = Reflect.getMetadata(
+        METADATA_KEY.register,
+        TestBean
+      );
+
+      const configMetadata: boolean | undefined = Reflect.getMetadata(
+        METADATA_KEY.config,
+        TestBean
+      );
+
+      expect(configMetadata).toMatchSnapshot();
+      expect(registryMetadata).toMatchSnapshot();
+    });
+
+    it('should add Registry and config metadata to a class when decorated with @CoreConfig(100)', () => {
+      @CoreConfig(100)
+      class TestBean {}
+
+      const registryMetadata: RegistryMetada = Reflect.getMetadata(
+        METADATA_KEY.register,
+        TestBean
+      );
+
+      const configMetadata: boolean | undefined = Reflect.getMetadata(
+        METADATA_KEY.config,
+        TestBean
+      );
+
+      expect(configMetadata).toMatchSnapshot();
+      expect(registryMetadata).toMatchSnapshot();
+    });
+
+    it('should fail when decorated multiple times with @CoreConfig', () => {
+      expect(function() {
+        @CoreConfig()
+        @CoreConfig()
         class TestBean {}
 
         new TestBean();
