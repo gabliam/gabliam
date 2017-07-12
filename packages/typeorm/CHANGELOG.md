@@ -1,7 +1,8 @@
 <a name="2.2.0"></a>
 # 2.2.0 (2017-07-12)
 
-* chore: bump version ([c1bb4fe](https://github.com/gabliam/typeorm/commit/c1bb4fe))
+* chore: bump version ([bc93101](https://github.com/gabliam/typeorm/commit/bc93101))
+* chore(publish): add .publishrc ([51bea32](https://github.com/gabliam/typeorm/commit/51bea32))
 * refactor(all): use prettier ([de4893d](https://github.com/gabliam/typeorm/commit/de4893d))
 * refactor(config): rename config file ([6b490c2](https://github.com/gabliam/typeorm/commit/6b490c2))
 * refactor(TypeOrmPlugin): move TypeOrmPlugin class in file ([02de524](https://github.com/gabliam/typeorm/commit/02de524))
