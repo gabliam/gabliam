@@ -30,8 +30,9 @@
     "@gabliam/core": "^2.1.0"
   },
   "dependencies": {
+    "caller": "^1.0.1",
     "debug": "^2.6.1",
-    "typeorm": "^0.0.8"
+    "typeorm": "0.0.8"
   },
   "devDependencies": {
     "@gabliam/core": "^2.1.0",
@@ -43,7 +44,7 @@
     "rimraf": "^2.6.0",
     "tslint": "^5.2.0",
     "tslint-eslint-rules": "^4.0.0",
-    "typescript": "^2.3.2",
+    "typescript": "^2.4.1",
     "vrsource-tslint-rules": "^5.1.0"
   }
 }

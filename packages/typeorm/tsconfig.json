@@ -6,6 +6,8 @@
         "moduleResolution": "node",
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
+        "skipDefaultLibCheck": true,
+        "skipLibCheck": true,
         "declaration": true,
         "strict": true,
         "noUnusedLocals": true,

@@ -1,6 +1,6 @@
-import { PluginConfig, Value, optional, Bean, CORE_CONFIG, inject, interfaces } from '@gabliam/core';
+import { PluginConfig, Value, optional, Bean, inject } from '@gabliam/core';
 import { ConnectionOptions, Connection, createConnection } from './typeorm';
-import { ConnectionOptionsBeanId } from './constant';
+import { ConnectionOptionsBeanId, ENTITIES_PATH } from './constant';
 import * as d from 'debug';
 
 const debug = d('Gabliam:Plugin:Typeorm');
@@ -11,16 +11,15 @@ export class PluginTypeormConfig {
   @Value('application.typeorm.connectionOptions')
   connectionOptions: ConnectionOptions;
 
-  @Value('application.typeorm.entitiesPath')
-  entitiesPath: string;
+  entitiesPath: string[];
 
   constructor(
     @inject(ConnectionOptionsBeanId) @optional() connectionOptions: ConnectionOptions,
-    @inject(CORE_CONFIG) config: interfaces.GabliamConfig
+    @inject(ENTITIES_PATH) entitiesPath: string[]
   ) {
-    debug('constructor PluginTypeormConfig', connectionOptions, config);
+    debug('constructor PluginTypeormConfig', connectionOptions);
     this.connectionOptions = connectionOptions;
-    this.entitiesPath = `${config.scanPath}/**/*{.js,.ts}`;
+    this.entitiesPath = entitiesPath;
   }
 
   @Bean(Connection)
@@ -31,7 +30,7 @@ export class PluginTypeormConfig {
     }
     const connectionOptions = this.connectionOptions;
     const entities: any = connectionOptions.entities || [];
-    entities.push(this.entitiesPath);
+    entities.push(...this.entitiesPath);
 
     return createConnection({
       ...connectionOptions,
