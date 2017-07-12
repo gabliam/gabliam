@@ -7,14 +7,15 @@ const debug = d('Gabliam:Plugin:Typeorm');
 
 @PluginConfig()
 export class PluginTypeormConfig {
-
   @Value('application.typeorm.connectionOptions')
   connectionOptions: ConnectionOptions;
 
   entitiesPath: string[];
 
   constructor(
-    @inject(ConnectionOptionsBeanId) @optional() connectionOptions: ConnectionOptions,
+    @inject(ConnectionOptionsBeanId)
+    @optional()
+    connectionOptions: ConnectionOptions,
     @inject(ENTITIES_PATH) entitiesPath: string[]
   ) {
     debug('constructor PluginTypeormConfig', connectionOptions);

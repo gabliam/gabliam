@@ -6,11 +6,22 @@
   "typings": "lib/index.d.ts",
   "module": "lib/index.js",
   "scripts": {
-    "precommit": "npm run lint",
+    "changelog": "conventional-changelog -i  CHANGELOG.md -s",
+    "precommit": "lint-staged",
+    "build-test": "npm run build",
     "build": "rimraf lib && npm run lint && tsc",
-    "prepublish": "npm run build",
-    "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepublish": "publish-please guard",
+    "prettier": "prettier --single-quote --write --parser typescript {src,test}/**/*.ts",
+    "lint": "tslint --type-check --project tsconfig.json '{src,test}/**/*.ts'",
+    "test": "jest",
+    "publish-please": "publish-please"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "prettier --single-quote --write --parser typescript",
+      "tslint --type-check --project tsconfig.json",
+      "git add"
+    ]
   },
   "files": [
     "lib",
