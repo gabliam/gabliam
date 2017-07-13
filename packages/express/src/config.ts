@@ -9,11 +9,10 @@ export class RestPluginConfig {
   rootPath = DEFAULT_ROUTING_ROOT_PATH;
 
   @Value('application.express.port', Joi.number().positive())
-  port: number = process.env.PORT || 3000;
+  port: number = process.env.PORT ? parseInt(process.env.PORT!, 10) : 3000;
 
   @Value('application.express.hostname', Joi.string())
   hostname: string;
-
 
   @Bean(EXPRESS_PLUGIN_CONFIG)
   restConfig(): ExpressPluginConfig {
