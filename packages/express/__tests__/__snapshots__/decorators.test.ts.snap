@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExpressConfig decorator should add ExpressConfig metadata to a class when decorated with @ExpressConfig 1`] = `
+Array [
+  Object {
+    "id": "TestConfig",
+    "key": "testMethod",
+    "order": 1,
+  },
+  Object {
+    "id": "TestConfig",
+    "key": "test2Method",
+    "order": 1,
+  },
+]
+`;
+
+exports[`ExpressConfig decorator should add ExpressConfig metadata to a class when decorated with @ExpressConfig(order) 1`] = `
+Array [
+  Object {
+    "id": "TestConfig",
+    "key": "testMethod",
+    "order": 50,
+  },
+  Object {
+    "id": "TestConfig",
+    "key": "test2Method",
+    "order": 100,
+  },
+]
+`;
+
+exports[`ExpressErrorConfig decorator should add ExpressErrorConfig metadata to a class when decorated with @ExpressErrorConfig 1`] = `
+Array [
+  Object {
+    "id": "TestConfig",
+    "key": "testMethod",
+    "order": 1,
+  },
+  Object {
+    "id": "TestConfig",
+    "key": "test2Method",
+    "order": 1,
+  },
+]
+`;
+
+exports[`ExpressErrorConfig decorator should add ExpressErrorConfig metadata to a class when decorated with @ExpressErrorConfig(order) 1`] = `
+Array [
+  Object {
+    "id": "TestConfig",
+    "key": "testMethod",
+    "order": 50,
+  },
+  Object {
+    "id": "TestConfig",
+    "key": "test2Method",
+    "order": 100,
+  },
+]
+`;

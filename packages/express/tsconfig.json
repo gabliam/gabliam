@@ -6,10 +6,11 @@
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "noImplicitAny": true,
     "strict": true,
     "declaration": true,
+    "noImplicitAny": true,
     "noUnusedLocals": true,
+    "noFallthroughCasesInSwitch": true,
     "sourceMap": false,
     "outDir": "lib"
   }
