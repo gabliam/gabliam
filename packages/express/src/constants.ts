@@ -31,5 +31,6 @@ export const APP = Symbol('GABLIAM/EXPRESS_APP');
 export const SERVER = Symbol('GABLIAM/EXPRESS_SERVER');
 
 export const ERRORS_MSGS = {
-  DUPLICATED_CONFIG_DECORATOR: `Cannot apply @ExpressConfig or @ExpressErrorConfig decorator multiple times on same method.`
+  DUPLICATED_CONFIG_DECORATOR: `Cannot apply @ExpressConfig or @ExpressErrorConfig decorator multiple times on same method.`,
+  DUPLICATED_CONTROLLER_DECORATOR: `Cannot apply @Controller and @RestController decorator multiple times.`
 };

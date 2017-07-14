@@ -1,6 +1,6 @@
 import * as express from 'express';
 import { ControllerMetadata } from '../interfaces';
-import { METADATA_KEY, TYPE } from '../constants';
+import { METADATA_KEY, TYPE, ERRORS_MSGS } from '../constants';
 import { inversifyInterfaces, injectable, register } from '@gabliam/core';
 import { addMiddlewareMetadata } from '../metadata';
 
@@ -29,6 +29,10 @@ function decorateController(
   target: any,
   json: boolean
 ) {
+  if (Reflect.hasOwnMetadata(METADATA_KEY.controller, target) === true) {
+    throw new Error(ERRORS_MSGS.DUPLICATED_CONFIG_DECORATOR);
+  }
+
   let path: string;
   let id: inversifyInterfaces.ServiceIdentifier<any> = target;
   let middlewares: express.RequestHandler[] = [];
@@ -38,7 +42,7 @@ function decorateController(
     path = options.path;
     middlewares = options.middlewares || [];
     if (options.name) {
-      id = name;
+      id = options.name;
     }
   }
 
