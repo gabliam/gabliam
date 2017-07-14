@@ -11,7 +11,8 @@
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noFallthroughCasesInSwitch": true,
-    "sourceMap": false,
+    "sourceMap": true,
+    "inlineSourceMap": true,
     "outDir": "lib"
   }
 }
