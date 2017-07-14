@@ -1,6 +1,6 @@
-import { ExpressConfig, ExpressErrorConfig } from '../src/decorators';
-import { ExpressConfigMetadata } from '../src/interfaces';
-import { METADATA_KEY } from '../src/constants';
+import { ExpressConfig, ExpressErrorConfig } from '../../src/decorators';
+import { ExpressConfigMetadata } from '../../src/interfaces';
+import { METADATA_KEY } from '../../src/constants';
 
 describe('ExpressConfig decorator', () => {
   test('should add ExpressConfig metadata to a class when decorated with @ExpressConfig', () => {

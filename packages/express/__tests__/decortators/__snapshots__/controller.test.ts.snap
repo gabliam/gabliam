@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Controller decorator should add Controller metadata to a class when decorated with @Controller(ControllerOptions) 1`] = `
+Object {
+  "json": false,
+  "path": "/test",
+}
+`;
+
+exports[`Controller decorator should add Controller metadata to a class when decorated with @Controller(ControllerOptions) 2`] = `
+Object {
+  "type": "ControllerType",
+  "value": Object {
+    "id": "TestControllerName",
+    "target": [Function],
+  },
+}
+`;
+
+exports[`Controller decorator should add Controller metadata to a class when decorated with @Controller(string) 1`] = `
+Object {
+  "json": false,
+  "path": "/test",
+}
+`;
+
+exports[`Controller decorator should add Controller metadata to a class when decorated with @Controller(string) 2`] = `
+Object {
+  "type": "ControllerType",
+  "value": Object {
+    "id": [Function],
+    "target": [Function],
+  },
+}
+`;
+
+exports[`RestController decorator should add Controller metadata to a class when decorated with @RestController(ControllerOptions) 1`] = `
+Object {
+  "json": true,
+  "path": "/test",
+}
+`;
+
+exports[`RestController decorator should add Controller metadata to a class when decorated with @RestController(ControllerOptions) 2`] = `
+Object {
+  "type": "ControllerType",
+  "value": Object {
+    "id": "TestControllerName",
+    "target": [Function],
+  },
+}
+`;
+
+exports[`RestController decorator should add Controller metadata to a class when decorated with @RestController(string) 1`] = `
+Object {
+  "json": true,
+  "path": "/test",
+}
+`;
+
+exports[`RestController decorator should add Controller metadata to a class when decorated with @RestController(string) 2`] = `
+Object {
+  "type": "ControllerType",
+  "value": Object {
+    "id": [Function],
+    "target": [Function],
+  },
+}
+`;
