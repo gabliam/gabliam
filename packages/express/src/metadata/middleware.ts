@@ -4,6 +4,15 @@ import { MiddlewareMetadata, MiddlewareConfigurator } from '../interfaces';
 import { METADATA_KEY } from '../constants';
 import { isMiddlewareDefinition } from '../utils';
 
+/**
+ * Add middlewares metadata.
+ *  If key is undefined, add the list of middlewares for a class (target)
+ *  else add the list of middlewares for a method (key) of a class (target)
+ *
+ * @param  {MiddlewareMetadata[]} middlewares
+ * @param  {Object} target
+ * @param  {string} key?
+ */
 export function addMiddlewareMetadata(
   middlewares: MiddlewareMetadata[],
   target: Object,
@@ -12,6 +21,7 @@ export function addMiddlewareMetadata(
   let metadataList: MiddlewareMetadata[] = [];
 
   // add key! for disable false error
+  // if key is undefined => middleware metadata for class else for method
   if (!Reflect.hasOwnMetadata(METADATA_KEY.middleware, target, key!)) {
     Reflect.defineMetadata(METADATA_KEY.middleware, metadataList, target, key!);
   } else {
@@ -25,6 +35,15 @@ export function addMiddlewareMetadata(
   metadataList.push(...middlewares);
 }
 
+/**
+ * Get middlewares metadata.
+ * If key is undefined, return the list of middlewares for a class (target)
+ *  else return the list of middlewares for a method (key) of a class (target)
+ * @param  {inversifyInterfaces.Container} container
+ * @param  {Object} target
+ * @param  {string} key?
+ * @returns express.RequestHandler[]
+ */
 export function getMiddlewares(
   container: inversifyInterfaces.Container,
   target: Object,

@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`middleware decorators should add Bean metadata to a class when decorated with @Middleware 1`] = `
+Array [
+  Object {
+    "id": "testMiddleware",
+    "key": "testMethod",
+  },
+  Object {
+    "id": "test2Middleware",
+    "key": "test2Method",
+  },
+]
+`;
+
+exports[`middleware decorators should add Middleware metadata to a class when decorated with @MiddlewareInject 1`] = `
+Array [
+  Object {
+    "name": "log",
+    "values": Array [],
+  },
+]
+`;
+
+exports[`middleware decorators should add Middleware metadata to a class when decorated with @MiddlewareInject 2`] = `
+Array [
+  Object {
+    "name": "auth",
+    "values": Array [
+      "isAdmin",
+    ],
+  },
+]
+`;
+
+exports[`middleware decorators should add Middleware metadata to a class when decorated with @MiddlewareInject 3`] = `
+Array [
+  Object {
+    "name": "auth",
+    "values": Array [
+      "foo",
+      "bar",
+      12,
+    ],
+  },
+]
+`;
