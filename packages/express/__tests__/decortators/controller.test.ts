@@ -1,5 +1,5 @@
 import { Controller, RestController } from '../../src/decorators';
-import { ControllerMetadata } from '../../src/interfaces';
+import { ControllerMetadata, MiddlewareMetadata } from '../../src/interfaces';
 import { METADATA_KEY } from '../../src/constants';
 import { RegistryMetada } from '@gabliam/core/lib/interfaces';
 import { METADATA_KEY as CORE_METADATA_KEY } from '@gabliam/core/lib/constants';
@@ -49,6 +49,13 @@ describe('Controller decorator', () => {
     );
 
     expect(registryMetadata).toMatchSnapshot();
+
+    const middlewareMetadata: MiddlewareMetadata[] = Reflect.getOwnMetadata(
+      METADATA_KEY.middleware,
+      TestController
+    );
+
+    expect(middlewareMetadata).toMatchSnapshot();
   });
 
   test('should fail when decorated multiple times the same class with @Controller', () => {
@@ -116,6 +123,13 @@ describe('RestController decorator', () => {
     );
 
     expect(registryMetadata).toMatchSnapshot();
+
+    const middlewareMetadata: MiddlewareMetadata[] = Reflect.getOwnMetadata(
+      METADATA_KEY.middleware,
+      TestController
+    );
+
+    expect(middlewareMetadata).toMatchSnapshot();
   });
 
   test('should fail when decorated multiple times the same class with @RestController', () => {

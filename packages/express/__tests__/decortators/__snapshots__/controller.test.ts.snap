@@ -17,6 +17,12 @@ Object {
 }
 `;
 
+exports[`Controller decorator should add Controller metadata to a class when decorated with @Controller(ControllerOptions) 3`] = `
+Array [
+  [Function],
+]
+`;
+
 exports[`Controller decorator should add Controller metadata to a class when decorated with @Controller(string) 1`] = `
 Object {
   "json": false,
@@ -49,6 +55,12 @@ Object {
     "target": [Function],
   },
 }
+`;
+
+exports[`RestController decorator should add Controller metadata to a class when decorated with @RestController(ControllerOptions) 3`] = `
+Array [
+  [Function],
+]
 `;
 
 exports[`RestController decorator should add Controller metadata to a class when decorated with @RestController(string) 1`] = `
