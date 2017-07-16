@@ -17,8 +17,8 @@ import { configureValueExtractor } from './utils';
 const debug = d('Gabliam:core');
 
 const DEFAULT_CONFIG: interfaces.GabliamConfig = {
-  scanPath: process.env.PWD,
-  configPath: process.env.GABLIAM_CONFIG_PATH || process.env.PWD
+  scanPath: process.env.PWD!,
+  configPath: process.env.GABLIAM_CONFIG_PATH || process.env.PWD!
 };
 
 /**
