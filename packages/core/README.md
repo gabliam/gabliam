@@ -7,6 +7,8 @@
 # Gabliam core
 
 Gabliam is on top of inversify.
+Gabliam help you for register all class in inversify.
+Gabilliam is modular with plugins.
 
 
 # Gabliam phase

@@ -1,3 +1,33 @@
+<a name="2.5.0"></a>
+# 2.5.0 (2017-07-16)
+
+* chore(mochaConfig): delete mochaConfig.js ([86a12ae](https://github.com/gabliam/core/commit/86a12ae))
+* chore(package): bump version ([7edb472](https://github.com/gabliam/core/commit/7edb472))
+* chore(package): correction lint-staged ([00a4f3a](https://github.com/gabliam/core/commit/00a4f3a))
+* chore(package): update deps ([a98509c](https://github.com/gabliam/core/commit/a98509c))
+* chore(readme): add codecov badge ([6549dab](https://github.com/gabliam/core/commit/6549dab))
+* chore(readme): update readme ([e00307c](https://github.com/gabliam/core/commit/e00307c))
+* feat(Gabliam): change registry ([2f0f493](https://github.com/gabliam/core/commit/2f0f493))
+* fix(process.env.PWD can't be undefined): ([15c5979](https://github.com/gabliam/core/commit/15c5979))
+* test(loader, gabliam): add tests for loader and gabliam ([662bdbe](https://github.com/gabliam/core/commit/662bdbe))
+* test: add sourceMap and inlineSourceMap for correct coverage ([ce99e3b](https://github.com/gabliam/core/commit/ce99e3b))
+* test: delete sourceMap ([77cd779](https://github.com/gabliam/core/commit/77cd779))
+* test(all): add coverage ([e3cfca8](https://github.com/gabliam/core/commit/e3cfca8))
+* test(all): replace mocha/chai by jest ([b0a1801](https://github.com/gabliam/core/commit/b0a1801))
+* test(config): add test for @CoreConfig and @PluginConfig ([b86bd08](https://github.com/gabliam/core/commit/b86bd08))
+* test(container): ignore if for coverage ([acd286a](https://github.com/gabliam/core/commit/acd286a))
+* test(decorators): test for @value ([82d0d7b](https://github.com/gabliam/core/commit/82d0d7b))
+* test(loaderconfig): add test for loader config ([e084c7b](https://github.com/gabliam/core/commit/e084c7b))
+* test(path): correction path ([a3a7aed](https://github.com/gabliam/core/commit/a3a7aed))
+* test(tests): coverage only for travis ([2a9d58c](https://github.com/gabliam/core/commit/2a9d58c))
+* test(value-middleware): add test for value-middleware ([56f57c1](https://github.com/gabliam/core/commit/56f57c1))
+* build(path): add jest-serializer-path ([3579664](https://github.com/gabliam/core/commit/3579664))
+* build(prettier): update prettier ([4bc5762](https://github.com/gabliam/core/commit/4bc5762))
+* refactor(gabliam): delete type on bind<> ([d2efe6b](https://github.com/gabliam/core/commit/d2efe6b))
+* refactor(loader): Move profile to method paramater (more easy for testing) ([f996317](https://github.com/gabliam/core/commit/f996317))
+
+
+
 <a name="2.4.0"></a>
 # 2.4.0 (2017-06-20)
 
