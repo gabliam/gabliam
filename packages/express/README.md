@@ -6,7 +6,10 @@
 
 # Gabliam express
 
-Gabliam plugin for add express
+Gabliam plugin for add express.
+Adaptation of [inversify-express-utils](https://github.com/inversify/inversify-express-utils) for Gabliam.
+
+Thanks to [Cody Simms](https://github.com/codyjs)
 
 # License
 

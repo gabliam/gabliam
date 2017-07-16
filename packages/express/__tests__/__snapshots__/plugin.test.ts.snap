@@ -1,0 +1,298 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should use returned values as response 1`] = `
+Object {
+  "__parsed__": true,
+  "header": Object {
+    "connection": "close",
+    "content-length": "17",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\\"11-IkjuL6CqqtmReFMfkkvwC0sKj04\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "{\\"hello\\":\\"world\\"}",
+}
+`;
+
+exports[`should work for async controller methods 1`] = `
+Object {
+  "__parsed__": true,
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-8DC7vTKWbN5BA3uYqIScRrduS8E\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "GET",
+}
+`;
+
+exports[`should work for async controller methods that fails 1`] = `
+Object {
+  "__parsed__": true,
+  "header": Object {
+    "connection": "close",
+    "content-length": "130",
+    "content-security-policy": "default-src 'self'",
+    "content-type": "text/html; charset=utf-8",
+    "x-content-type-options": "nosniff",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 500,
+  "text": "<!DOCTYPE html>
+<html lang=\\"en\\">
+<head>
+<meta charset=\\"utf-8\\">
+<title>Error</title>
+</head>
+<body>
+<pre>GET</pre>
+</body>
+</html>
+",
+}
+`;
+
+exports[`should work for async methods called by nextFunc() 1`] = `
+Object {
+  "__parsed__": true,
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-8DC7vTKWbN5BA3uYqIScRrduS8E\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "GET",
+}
+`;
+
+exports[`should work for async methods which call nextFunc() 1`] = `
+Object {
+  "__parsed__": true,
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-8DC7vTKWbN5BA3uYqIScRrduS8E\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "GET",
+}
+`;
+
+exports[`should work for each shortcut decorator 1`] = `
+Object {
+  "__parsed__": true,
+  "header": Object {
+    "connection": "close",
+    "content-length": "6",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"6-1vVjYJjNRYzp0ik5+OPo3qsOm9A\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "DELETE",
+  },
+  "status": 200,
+  "text": "DELETE",
+}
+`;
+
+exports[`should work for each shortcut decorator 2`] = `
+Object {
+  "__parsed__": true,
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-8DC7vTKWbN5BA3uYqIScRrduS8E\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "HEAD",
+  },
+  "status": 200,
+  "text": undefined,
+}
+`;
+
+exports[`should work for each shortcut decorator 3`] = `
+Object {
+  "__parsed__": true,
+  "header": Object {
+    "connection": "close",
+    "content-length": "5",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"5-n74p1Ndux1ZCGu4G4PNPF/pIj/M\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "PATCH",
+  },
+  "status": 200,
+  "text": "PATCH",
+}
+`;
+
+exports[`should work for each shortcut decorator 4`] = `
+Object {
+  "__parsed__": true,
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-CRsM5C6wvZYWnqALFt2Tj21jrJU\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "PUT",
+  },
+  "status": 200,
+  "text": "PUT",
+}
+`;
+
+exports[`should work for each shortcut decorator 5`] = `
+Object {
+  "__parsed__": true,
+  "header": Object {
+    "connection": "close",
+    "content-length": "4",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"4-Yf+Bwwqjx254r+pisuO9HfpJ6FQ\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "POST",
+  },
+  "status": 200,
+  "text": "POST",
+}
+`;
+
+exports[`should work for each shortcut decorator 6`] = `
+Object {
+  "__parsed__": true,
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-8DC7vTKWbN5BA3uYqIScRrduS8E\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "GET",
+}
+`;
+
+exports[`should work for methods which call nextFunc() 1`] = `
+Object {
+  "__parsed__": true,
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-8DC7vTKWbN5BA3uYqIScRrduS8E\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "GET",
+}
+`;
+
+exports[`should work for more obscure HTTP methods using the httpMethod decorator 1`] = `
+Object {
+  "__parsed__": true,
+  "header": Object {
+    "connection": "close",
+    "content-length": "8",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"8-q7JH/ElbTfQ5LDMKp+kb5Bpx9So\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "PROPFIND",
+  },
+  "status": 200,
+  "text": "PROPFIND",
+}
+`;
