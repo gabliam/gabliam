@@ -1,8 +1,10 @@
 <a name="2.5.0"></a>
 # 2.5.0 (2017-07-16)
 
+* docs(changelog): update changelog ([f7159a0](https://github.com/gabliam/core/commit/f7159a0))
+* fix(utils): fix tslint error Shadowed name: 'validate' ([c4d07b6](https://github.com/gabliam/core/commit/c4d07b6))
 * chore(mochaConfig): delete mochaConfig.js ([86a12ae](https://github.com/gabliam/core/commit/86a12ae))
-* chore(package): bump version ([7edb472](https://github.com/gabliam/core/commit/7edb472))
+* chore(package): bump version ([e76cd0b](https://github.com/gabliam/core/commit/e76cd0b))
 * chore(package): correction lint-staged ([00a4f3a](https://github.com/gabliam/core/commit/00a4f3a))
 * chore(package): update deps ([a98509c](https://github.com/gabliam/core/commit/a98509c))
 * chore(readme): add codecov badge ([6549dab](https://github.com/gabliam/core/commit/6549dab))
@@ -31,16 +33,17 @@
 <a name="2.4.0"></a>
 # 2.4.0 (2017-06-20)
 
+* bump version ([edb6d0d](https://github.com/gabliam/core/commit/edb6d0d))
+* style(gabliam, loader): correction order member ([2bb3799](https://github.com/gabliam/core/commit/2bb3799))
 * build(tslint): noImplicitAny ([eac7b59](https://github.com/gabliam/core/commit/eac7b59))
 * feat(gabliam): add VALUE_EXTRACTOR in di ([6e0de13](https://github.com/gabliam/core/commit/6e0de13))
-* style(gabliam, loader): correction order member ([2bb3799](https://github.com/gabliam/core/commit/2bb3799))
 
 
 
 <a name="2.3.1"></a>
 ## 2.3.1 (2017-06-20)
 
-* bump version ([9998f9b](https://github.com/gabliam/core/commit/9998f9b))
+* bump version ([5a84ef0](https://github.com/gabliam/core/commit/5a84ef0))
 * feat(valueExtractor): valueExtractor take inversify interface container ([cfb8e70](https://github.com/gabliam/core/commit/cfb8e70))
 * build(tslint): correction tslint ([81f230a](https://github.com/gabliam/core/commit/81f230a))
 * refactor: Change CamelCase for KebabCase ([6bda474](https://github.com/gabliam/core/commit/6bda474))
@@ -50,7 +53,7 @@
 <a name="2.3.0"></a>
 # 2.3.0 (2017-06-15)
 
-* build: add git cz and changelog ([a549c11](https://github.com/gabliam/core/commit/a549c11))
+* build: add git cz and changelog ([1a05325](https://github.com/gabliam/core/commit/1a05325))
 * chore: Bump version ([e3d534c](https://github.com/gabliam/core/commit/e3d534c))
 * feat(Gabliam): delete interfaces GabliamOptions and use Partial<GabliamConfig> ([b70009a](https://github.com/gabliam/core/commit/b70009a))
 * docs(changelog): add changelog ([ba3a192](https://github.com/gabliam/core/commit/ba3a192))
