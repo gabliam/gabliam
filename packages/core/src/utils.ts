@@ -11,7 +11,7 @@ import { APP_CONFIG } from './constants';
  * @param  {any} value
  * @param  {ValueValidator} validator
  */
-function validate(path: string, value: any, validator: ValueValidator) {
+function valueValidator(path: string, value: any, validator: ValueValidator) {
   const options: Joi.ValidationOptions = {
     abortEarly: false,
     ...validator.options || {}
@@ -49,7 +49,7 @@ export function configureValueExtractor(container: interfaces.Container) {
       const config = container.get<object>(APP_CONFIG);
       let value = _.get(config, path, defaultValue);
       if (validator) {
-        value = validate(path, value, validator);
+        value = valueValidator(path, value, validator);
       }
       return value;
     } catch (err) {
