@@ -32,7 +32,7 @@ export class Gabliam {
   /**
    * Registry
    */
-  public registry: Registry;
+  public registry: Registry = new Registry();
 
   private _loader: Loader = new Loader();
 
@@ -87,9 +87,8 @@ export class Gabliam {
     /**
      * Loading phase
      */
-    this.registry = this._loader.loadModules(
-      this._options.scanPath,
-      this._plugins
+    this.registry.addRegistry(
+      this._loader.loadModules(this._options.scanPath, this._plugins)
     );
 
     /**
