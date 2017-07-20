@@ -10,6 +10,8 @@ import {
   ConsumeConfig
 } from './interfaces';
 import * as uuid from 'uuid';
+import * as PromiseB from 'bluebird';
+import { AmqpTimeout } from './errors';
 
 enum ConnectionState {
   stopped,
@@ -79,9 +81,11 @@ export class AmqpConnection {
   async sendAndReceive<T = any>(
     queue: string,
     content: any,
-    options: SendOptions = {}
+    options: SendOptions = {},
+    timeout?: number
   ): Promise<T> {
-    return new Promise<T>((resolve, reject) => {
+    let onTimeout = false;
+    let promise = new PromiseB<T>((resolve, reject) => {
       const queueName = this.getQueueName(queue);
       if (!options.correlationId) {
         options.correlationId = uuid();
@@ -100,7 +104,7 @@ export class AmqpConnection {
         .assertQueue(replyTo, { exclusive: true, autoDelete: true })
         .then(() => {
           return chan.consume(replyTo, (msg: Message) => {
-            if (msg.properties.correlationId === correlationId) {
+            if (!onTimeout && msg.properties.correlationId === correlationId) {
               resolve(JSON.parse(msg.content.toString()));
               chan.ack(msg);
             }
@@ -115,6 +119,15 @@ export class AmqpConnection {
         })
         .catch(err => reject(err));
     });
+
+    if (timeout) {
+      promise = promise.timeout(timeout).catch(PromiseB.TimeoutError, e => {
+        onTimeout = true;
+        throw new AmqpTimeout(e.message);
+      });
+    }
+
+    return promise;
   }
 
   async stop() {
