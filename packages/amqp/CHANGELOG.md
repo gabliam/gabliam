@@ -1,3 +1,12 @@
+<a name="1.5.0"></a>
+# 1.5.0 (2017-07-20)
+
+* chore(package): bump version ([943e3b1](https://github.com/gabliam/amqp/commit/943e3b1))
+* chore(package): update deps ([18d4249](https://github.com/gabliam/amqp/commit/18d4249))
+* feat(AmqpConnection): sendAndReceive can take a timeout ([a83b019](https://github.com/gabliam/amqp/commit/a83b019))
+
+
+
 <a name="1.4.0"></a>
 # 1.4.0 (2017-06-27)
 
