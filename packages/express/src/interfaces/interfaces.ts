@@ -46,3 +46,5 @@ export interface ParameterMetadata {
   index: number;
   type: PARAMETER_TYPE;
 }
+
+export type RouterCreator = () => express.Router;

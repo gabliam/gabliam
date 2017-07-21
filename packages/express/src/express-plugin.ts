@@ -10,7 +10,8 @@ import {
   EXPRESS_PLUGIN_CONFIG,
   APP,
   SERVER,
-  PARAMETER_TYPE
+  PARAMETER_TYPE,
+  CUSTOM_ROUTER_CREATOR
 } from './constants';
 import { getMiddlewares } from './metadata';
 import { cleanPath } from './utils';
@@ -20,7 +21,8 @@ import {
   ControllerMetadata,
   ControllerMethodMetadata,
   ParameterMetadata,
-  ControllerParameterMetadata
+  ControllerParameterMetadata,
+  RouterCreator
 } from './interfaces';
 import * as express from 'express';
 import * as d from 'debug';
@@ -109,6 +111,60 @@ export class ExpressPlugin implements coreInterfaces.GabliamPlugin {
     }
   }
 
+  async destroy(container: inversifyInterfaces.Container, registry: Registry) {
+    await this.stop(container, registry);
+  }
+
+  async stop(container: inversifyInterfaces.Container, registry: Registry) {
+    try {
+      // server can be undefined (if start is not called)
+      const server = container.get<http.Server>(SERVER);
+      return new Promise<void>(resolve => {
+        server.close(() => resolve());
+      });
+    } catch (e) {}
+  }
+
+  async start(container: inversifyInterfaces.Container, registry: Registry) {
+    const restConfig = container.get<ExpressPluginConfig>(
+      EXPRESS_PLUGIN_CONFIG
+    );
+    const app = container.get<express.Application>(APP);
+    const port = restConfig.port;
+    app.set('port', port);
+
+    const server = http.createServer(app);
+    server.listen(port, restConfig.hostname);
+    server.on('error', onError);
+    server.on('listening', onListening);
+    container.bind(SERVER).toConstantValue(server);
+
+    function onError(error: NodeJS.ErrnoException): void {
+      // tslint:disable-next-line:curly
+      if (error.syscall !== 'listen') throw error;
+      const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
+      switch (error.code) {
+        case 'EACCES':
+          console.error(`${bind} requires elevated privileges`);
+          process.exit(1);
+          break;
+        case 'EADDRINUSE':
+          console.error(`${bind} is already in use`);
+          process.exit(1);
+          break;
+        default:
+          throw error;
+      }
+    }
+
+    function onListening(): void {
+      const addr = server.address();
+      const bind =
+        typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
+      console.log(`Listening on ${bind}`);
+    }
+  }
+
   /**
    * Build express middleware
    *
@@ -151,6 +207,11 @@ export class ExpressPlugin implements coreInterfaces.GabliamPlugin {
       EXPRESS_PLUGIN_CONFIG
     );
 
+    let routerCreator: RouterCreator = () => express.Router();
+    try {
+      routerCreator = container.get<RouterCreator>(CUSTOM_ROUTER_CREATOR);
+    } catch (e) {}
+
     debug('registerControllers', TYPE.Controller);
     const controllerIds = registry.get(TYPE.Controller);
     controllerIds.forEach(({ id: controllerId }) => {
@@ -177,7 +238,7 @@ export class ExpressPlugin implements coreInterfaces.GabliamPlugin {
       );
 
       if (controllerMetadata && methodMetadatas) {
-        const router = express.Router();
+        const router = routerCreator();
         const routerPath = cleanPath(
           `${restConfig.rootPath}${controllerMetadata.path}`
         );
@@ -263,60 +324,6 @@ export class ExpressPlugin implements coreInterfaces.GabliamPlugin {
         }
       }
     };
-  }
-
-  async destroy(container: inversifyInterfaces.Container, registry: Registry) {
-    await this.stop(container, registry);
-  }
-
-  async stop(container: inversifyInterfaces.Container, registry: Registry) {
-    try {
-      // server can be undefined (if start is not called)
-      const server = container.get<http.Server>(SERVER);
-      return new Promise<void>(resolve => {
-        server.close(() => resolve());
-      });
-    } catch (e) {}
-  }
-
-  async start(container: inversifyInterfaces.Container, registry: Registry) {
-    const restConfig = container.get<ExpressPluginConfig>(
-      EXPRESS_PLUGIN_CONFIG
-    );
-    const app = container.get<express.Application>(APP);
-    const port = restConfig.port;
-    app.set('port', port);
-
-    const server = http.createServer(app);
-    server.listen(port, restConfig.hostname);
-    server.on('error', onError);
-    server.on('listening', onListening);
-    container.bind(SERVER).toConstantValue(server);
-
-    function onError(error: NodeJS.ErrnoException): void {
-      // tslint:disable-next-line:curly
-      if (error.syscall !== 'listen') throw error;
-      const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
-      switch (error.code) {
-        case 'EACCES':
-          console.error(`${bind} requires elevated privileges`);
-          process.exit(1);
-          break;
-        case 'EADDRINUSE':
-          console.error(`${bind} is already in use`);
-          process.exit(1);
-          break;
-        default:
-          throw error;
-      }
-    }
-
-    function onListening(): void {
-      const addr = server.address();
-      const bind =
-        typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
-      console.log(`Listening on ${bind}`);
-    }
   }
 
   private extractParameters(
