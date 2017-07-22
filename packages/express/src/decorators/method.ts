@@ -61,6 +61,9 @@ export function Method(
   ...middlewares: MiddlewareMetadata[]
 ): HandlerDecorator {
   return function(target: any, key: string, descriptor: PropertyDescriptor) {
+    if (path[0] !== '/') {
+      path = '/' + path;
+    }
     const metadata: ControllerMethodMetadata = { path, method, key };
     let metadataList: ControllerMethodMetadata[] = [];
 
