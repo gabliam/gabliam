@@ -1,5 +1,4 @@
-import * as express from 'express';
-import { ControllerMetadata } from '../interfaces';
+import { ControllerMetadata, MiddlewareMetadata } from '../interfaces';
 import { METADATA_KEY, TYPE, ERRORS_MSGS } from '../constants';
 import { inversifyInterfaces, injectable, register } from '@gabliam/core';
 import { addMiddlewareMetadata } from '../metadata';
@@ -9,7 +8,7 @@ export interface ControllerOptions {
 
   path: string;
 
-  middlewares?: express.RequestHandler[];
+  middlewares?: MiddlewareMetadata[];
 }
 
 export function Controller(options: ControllerOptions | string) {
@@ -35,7 +34,7 @@ function decorateController(
 
   let path: string;
   let id: inversifyInterfaces.ServiceIdentifier<any> = target;
-  let middlewares: express.RequestHandler[] = [];
+  let middlewares: MiddlewareMetadata[] = [];
   if (typeof options === 'string') {
     path = options;
   } else {

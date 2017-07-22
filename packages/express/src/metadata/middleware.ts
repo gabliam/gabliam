@@ -58,6 +58,18 @@ export function getMiddlewares(
     );
   }
 
+  function resolveMiddleware(
+    middleware: MiddlewareMetadata
+  ): express.RequestHandler {
+    try {
+      return container.get<express.RequestHandler>(
+        <inversifyInterfaces.ServiceIdentifier<any>>middleware
+      );
+    } catch (e) {
+      return <express.RequestHandler>middleware;
+    }
+  }
+
   return metadataList.reduce<express.RequestHandler[]>((prev, metadata) => {
     if (isMiddlewareDefinition(metadata)) {
       const middleware = container.get<MiddlewareConfigurator>(
@@ -69,7 +81,7 @@ export function getMiddlewares(
         prev.push(middleware);
       }
     } else {
-      prev.push(metadata);
+      prev.push(resolveMiddleware(metadata));
     }
 
     return prev;
