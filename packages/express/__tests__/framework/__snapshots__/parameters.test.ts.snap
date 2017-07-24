@@ -1,0 +1,176 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Parameters: should bind a method parameter to a cookie 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "2",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8\\"",
+    "set-cookie": Array [
+      "cookie=hey; Path=/",
+    ],
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "{}",
+}
+`;
+
+exports[`Parameters: should bind a method parameter to a query parameter 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "7",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"7-5Uyg9FH6Z639wlnjohqGsan13Gc\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "lolilol",
+}
+`;
+
+exports[`Parameters: should bind a method parameter to the next function 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-C+7Hteo/D9vJXQ3UfzxbwnXaijM\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "foo",
+}
+`;
+
+exports[`Parameters: should bind a method parameter to the request body 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "13",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\\"d-pedE0BZFQNM7HX6mFsKPL6l+dUo\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": Object {
+      "foo": "bar",
+    },
+    "headers": Object {
+      "content-type": "application/json",
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "POST",
+  },
+  "status": 200,
+  "text": "{\\"foo\\":\\"bar\\"}",
+}
+`;
+
+exports[`Parameters: should bind a method parameter to the request headers 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "11",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"b-zaZ1r0YCMBDq+OjlsZnp2JpqfDA\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "testhead": "fooTestHead",
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "fooTestHead",
+}
+`;
+
+exports[`Parameters: should bind a method parameter to the request object 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-8DC7vTKWbN5BA3uYqIScRrduS8E\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "GET",
+}
+`;
+
+exports[`Parameters: should bind a method parameter to the response object 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-C+7Hteo/D9vJXQ3UfzxbwnXaijM\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "foo",
+}
+`;
+
+exports[`Parameters: should bind a method parameter to the url parameter of the web request 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-C+7Hteo/D9vJXQ3UfzxbwnXaijM\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "foo",
+}
+`;

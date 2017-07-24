@@ -288,17 +288,17 @@ Array [
   Object {
     "key": "test",
     "method": "get",
-    "path": "foo",
+    "path": "/foo",
   },
   Object {
     "key": "test2",
     "method": "foo",
-    "path": "bar",
+    "path": "/bar",
   },
   Object {
     "key": "test3",
     "method": "bar",
-    "path": "foo",
+    "path": "/foo",
   },
 ]
 `;

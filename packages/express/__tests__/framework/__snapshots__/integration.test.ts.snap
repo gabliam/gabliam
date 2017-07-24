@@ -1,8 +1,113 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should use returned values as response 1`] = `
+exports[`Integration Tests: should use custom router passed from configuration 1`] = `
 Object {
-  "__parsed__": true,
+  "header": Object {
+    "connection": "close",
+    "content-length": "9",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"9-pQ/Pu6+qfOrXcJtZvB+frrlxk/c\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "Such Text",
+}
+`;
+
+exports[`Integration Tests: should use custom router passed from configuration 2`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "161",
+    "content-security-policy": "default-src 'self'",
+    "content-type": "text/html; charset=utf-8",
+    "x-content-type-options": "nosniff",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 404,
+  "text": "<!DOCTYPE html>
+<html lang=\\"en\\">
+<head>
+<meta charset=\\"utf-8\\">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /casesensitive/endpoint</pre>
+</body>
+</html>
+",
+}
+`;
+
+exports[`Integration Tests: should use custom router passed from configuration 3`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "161",
+    "content-security-policy": "default-src 'self'",
+    "content-type": "text/html; charset=utf-8",
+    "x-content-type-options": "nosniff",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 404,
+  "text": "<!DOCTYPE html>
+<html lang=\\"en\\">
+<head>
+<meta charset=\\"utf-8\\">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /CaseSensitive/endpoint</pre>
+</body>
+</html>
+",
+}
+`;
+
+exports[`Integration Tests: should use custom routing configuration 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "4",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"4-DlFKBmK8tp3IY5U9HOJuPUDoGoc\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "pong",
+}
+`;
+
+exports[`Integration Tests: should use returned values as response 1`] = `
+Object {
   "header": Object {
     "connection": "close",
     "content-length": "17",
@@ -22,9 +127,8 @@ Object {
 }
 `;
 
-exports[`should work for async controller methods 1`] = `
+exports[`Integration Tests: should work for async controller methods 1`] = `
 Object {
-  "__parsed__": true,
   "header": Object {
     "connection": "close",
     "content-length": "3",
@@ -44,9 +148,8 @@ Object {
 }
 `;
 
-exports[`should work for async controller methods that fails 1`] = `
+exports[`Integration Tests: should work for async controller methods that fails 1`] = `
 Object {
-  "__parsed__": true,
   "header": Object {
     "connection": "close",
     "content-length": "130",
@@ -77,9 +180,8 @@ Object {
 }
 `;
 
-exports[`should work for async methods called by nextFunc() 1`] = `
+exports[`Integration Tests: should work for async methods called by nextFunc() 1`] = `
 Object {
-  "__parsed__": true,
   "header": Object {
     "connection": "close",
     "content-length": "3",
@@ -99,9 +201,8 @@ Object {
 }
 `;
 
-exports[`should work for async methods which call nextFunc() 1`] = `
+exports[`Integration Tests: should work for async methods which call nextFunc() 1`] = `
 Object {
-  "__parsed__": true,
   "header": Object {
     "connection": "close",
     "content-length": "3",
@@ -121,9 +222,8 @@ Object {
 }
 `;
 
-exports[`should work for each shortcut decorator 1`] = `
+exports[`Integration Tests: should work for each shortcut decorator 1`] = `
 Object {
-  "__parsed__": true,
   "header": Object {
     "connection": "close",
     "content-length": "6",
@@ -143,9 +243,8 @@ Object {
 }
 `;
 
-exports[`should work for each shortcut decorator 2`] = `
+exports[`Integration Tests: should work for each shortcut decorator 2`] = `
 Object {
-  "__parsed__": true,
   "header": Object {
     "connection": "close",
     "content-length": "3",
@@ -165,9 +264,8 @@ Object {
 }
 `;
 
-exports[`should work for each shortcut decorator 3`] = `
+exports[`Integration Tests: should work for each shortcut decorator 3`] = `
 Object {
-  "__parsed__": true,
   "header": Object {
     "connection": "close",
     "content-length": "5",
@@ -187,9 +285,8 @@ Object {
 }
 `;
 
-exports[`should work for each shortcut decorator 4`] = `
+exports[`Integration Tests: should work for each shortcut decorator 4`] = `
 Object {
-  "__parsed__": true,
   "header": Object {
     "connection": "close",
     "content-length": "3",
@@ -209,9 +306,8 @@ Object {
 }
 `;
 
-exports[`should work for each shortcut decorator 5`] = `
+exports[`Integration Tests: should work for each shortcut decorator 5`] = `
 Object {
-  "__parsed__": true,
   "header": Object {
     "connection": "close",
     "content-length": "4",
@@ -231,9 +327,8 @@ Object {
 }
 `;
 
-exports[`should work for each shortcut decorator 6`] = `
+exports[`Integration Tests: should work for each shortcut decorator 6`] = `
 Object {
-  "__parsed__": true,
   "header": Object {
     "connection": "close",
     "content-length": "3",
@@ -253,9 +348,8 @@ Object {
 }
 `;
 
-exports[`should work for methods which call nextFunc() 1`] = `
+exports[`Integration Tests: should work for methods which call nextFunc() 1`] = `
 Object {
-  "__parsed__": true,
   "header": Object {
     "connection": "close",
     "content-length": "3",
@@ -275,9 +369,8 @@ Object {
 }
 `;
 
-exports[`should work for more obscure HTTP methods using the httpMethod decorator 1`] = `
+exports[`Integration Tests: should work for more obscure HTTP methods using the httpMethod decorator 1`] = `
 Object {
-  "__parsed__": true,
   "header": Object {
     "connection": "close",
     "content-length": "8",
