@@ -1,3 +1,11 @@
+<a name="1.6.0"></a>
+# 1.6.0 (2017-07-25)
+
+* chore(package): bump version ([f09bce7](https://github.com/gabliam/amqp/commit/f09bce7))
+* feat(AmqpConnection): add default timeout for sendAndReceive ([715503a](https://github.com/gabliam/amqp/commit/715503a))
+
+
+
 <a name="1.5.0"></a>
 # 1.5.0 (2017-07-20)
 
