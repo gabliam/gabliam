@@ -82,7 +82,7 @@ export class AmqpConnection {
     queue: string,
     content: any,
     options: SendOptions = {},
-    timeout?: number
+    timeout: number = 5000
   ): Promise<T> {
     let onTimeout = false;
     let promise = new PromiseB<T>((resolve, reject) => {
@@ -94,6 +94,10 @@ export class AmqpConnection {
 
       if (!options.replyTo) {
         options.replyTo = `amqpSendAndReceive${uuid()}`;
+      }
+
+      if (!options.expiration) {
+        options.expiration = '' + timeout;
       }
 
       const replyTo = options.replyTo;
