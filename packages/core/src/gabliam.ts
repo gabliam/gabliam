@@ -34,7 +34,7 @@ export class Gabliam {
    */
   public registry: Registry = new Registry();
 
-  private _loader: Loader = new Loader();
+  public loader: Loader = new Loader();
 
   private _plugins: interfaces.GabliamPlugin[] = [];
   private _options: interfaces.GabliamConfig;
@@ -88,7 +88,7 @@ export class Gabliam {
      * Loading phase
      */
     this.registry.addRegistry(
-      this._loader.loadModules(this._options.scanPath, this._plugins)
+      this.loader.loadModules(this._options.scanPath, this._plugins)
     );
 
     /**
@@ -170,7 +170,7 @@ export class Gabliam {
    * Load config file and bind result in APP_CONFIG
    */
   private _initializeConfig() {
-    const config = (this.config = this._loader.loadConfig(
+    const config = (this.config = this.loader.loadConfig(
       this._options.configPath
     ));
     this.container.bind(APP_CONFIG).toConstantValue(config);
