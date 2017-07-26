@@ -36,8 +36,9 @@ export class Gabliam {
 
   public loader: Loader = new Loader();
 
-  private _plugins: interfaces.GabliamPlugin[] = [];
-  private _options: interfaces.GabliamConfig;
+  public plugins: interfaces.GabliamPlugin[] = [];
+
+  public options: interfaces.GabliamConfig;
 
   /**
    * Constructor
@@ -45,15 +46,15 @@ export class Gabliam {
    */
   constructor(options?: Partial<interfaces.GabliamConfig> | string) {
     if (options === undefined) {
-      this._options = DEFAULT_CONFIG;
+      this.options = DEFAULT_CONFIG;
     } else {
       if (_.isString(options)) {
-        this._options = {
+        this.options = {
           scanPath: options,
           configPath: options
         };
       } else {
-        this._options = {
+        this.options = {
           ...DEFAULT_CONFIG,
           ...options
         };
@@ -62,7 +63,7 @@ export class Gabliam {
     /**
      * @TODO move in building phase
      */
-    this.container.bind(CORE_CONFIG).toConstantValue(this._options);
+    this.container.bind(CORE_CONFIG).toConstantValue(this.options);
   }
   /**
    * Add a plugin order
@@ -70,7 +71,7 @@ export class Gabliam {
    * @returns Gabliam
    */
   public addPlugin(ctor: interfaces.GabliamPluginConstructor): Gabliam {
-    this._plugins.push(new ctor());
+    this.plugins.push(new ctor());
     return this;
   }
 
@@ -88,7 +89,7 @@ export class Gabliam {
      * Loading phase
      */
     this.registry.addRegistry(
-      this.loader.loadModules(this._options.scanPath, this._plugins)
+      this.loader.loadModules(this.options.scanPath, this.plugins)
     );
 
     /**
@@ -104,7 +105,7 @@ export class Gabliam {
     /**
      * building phase
      */
-    this._plugins
+    this.plugins
       .filter(plugin => _.isFunction(plugin.build))
       .forEach(plugin => plugin.build!(this.container, this.registry));
 
@@ -128,7 +129,7 @@ export class Gabliam {
    * @returns Promise
    */
   async start(): Promise<Gabliam> {
-    const pluginsStart = this._plugins
+    const pluginsStart = this.plugins
       .filter(plugin => _.isFunction(plugin.start))
       .map(plugin => plugin.start!(this.container, this.registry));
 
@@ -143,7 +144,7 @@ export class Gabliam {
    * @returns Promise
    */
   async stop(): Promise<Gabliam> {
-    const pluginsStop = this._plugins
+    const pluginsStop = this.plugins
       .filter(plugin => _.isFunction(plugin.stop))
       .map(plugin => plugin.stop!(this.container, this.registry));
 
@@ -158,7 +159,7 @@ export class Gabliam {
    * @returns Promise
    */
   async destroy(): Promise<Gabliam> {
-    const pluginsDestroy = this._plugins
+    const pluginsDestroy = this.plugins
       .filter(plugin => _.isFunction(plugin.destroy))
       .map(plugin => plugin.destroy!(this.container, this.registry));
 
@@ -171,7 +172,7 @@ export class Gabliam {
    */
   private _initializeConfig() {
     const config = (this.config = this.loader.loadConfig(
-      this._options.configPath
+      this.options.configPath
     ));
     this.container.bind(APP_CONFIG).toConstantValue(config);
     this.container
@@ -198,7 +199,7 @@ export class Gabliam {
         this.container.bind(id).to(target).inSingletonScope()
       );
 
-    this._plugins
+    this.plugins
       .filter(plugin => _.isFunction(plugin.bind))
       .forEach(plugin => plugin.bind!(this.container, this.registry));
   }
@@ -213,7 +214,7 @@ export class Gabliam {
     }
 
     // list of plugins with config phase
-    const pluginConfig = this._plugins.filter(plugin =>
+    const pluginConfig = this.plugins.filter(plugin =>
       _.isFunction(plugin.config)
     );
 
