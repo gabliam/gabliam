@@ -1,3 +1,13 @@
+<a name="2.7.0"></a>
+# 2.7.0 (2017-07-26)
+
+* chore(package): bump version ([0e5b710](https://github.com/gabliam/core/commit/0e5b710))
+* feat(gabliam test): add startPlugins ([d0b12af](https://github.com/gabliam/core/commit/d0b12af))
+* feat(gabliam): plugins and options are public (for test) ([3e2e9fd](https://github.com/gabliam/core/commit/3e2e9fd))
+* feat(GabliamTest): rename start to build ([9f28550](https://github.com/gabliam/core/commit/9f28550))
+
+
+
 <a name="2.6.0"></a>
 # 2.6.0 (2017-07-26)
 
