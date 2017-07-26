@@ -15,8 +15,8 @@ export class ExpressPluginTest extends GabliamTest {
     super(gab);
   }
 
-  async start() {
-    await super.start();
+  async build() {
+    await super.build();
     this.app = this.gab.container.get<e.Application>(APP);
   }
 }

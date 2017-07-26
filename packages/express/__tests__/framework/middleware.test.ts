@@ -61,7 +61,7 @@ describe('Middleware:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.start();
+    await appTest.build();
 
     const response = await supertest(appTest.app).get('/').expect(200);
 
@@ -82,7 +82,7 @@ describe('Middleware:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.start();
+    await appTest.build();
 
     const response = await supertest(appTest.app).post('/').expect(200);
     expect(spyA.calledOnce).toBe(true);
@@ -101,7 +101,7 @@ describe('Middleware:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.start();
+    await appTest.build();
 
     const response = await supertest(appTest.app).put('/').expect(200);
     expect(spyA.calledOnce).toBe(true);
@@ -121,7 +121,7 @@ describe('Middleware:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.start();
+    await appTest.build();
 
     const response = await supertest(appTest.app).patch('/').expect(200);
     expect(spyA.calledOnce).toBe(true);
@@ -140,7 +140,7 @@ describe('Middleware:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.start();
+    await appTest.build();
 
     const response = await supertest(appTest.app).head('/').expect(200);
     expect(spyA.calledOnce).toBe(true);
@@ -159,7 +159,7 @@ describe('Middleware:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.start();
+    await appTest.build();
 
     const response = await supertest(appTest.app).delete('/').expect(200);
     expect(spyA.calledOnce).toBe(true);
@@ -178,7 +178,7 @@ describe('Middleware:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.start();
+    await appTest.build();
 
     const response = await supertest(appTest.app).get('/').expect(200);
     expect(spyA.calledOnce).toBe(true);
@@ -201,7 +201,7 @@ describe('Middleware:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.start();
+    await appTest.build();
 
     const response = await supertest(appTest.app).get('/').expect(200);
     expect(spyA.calledOnce).toBe(true);
@@ -232,7 +232,7 @@ describe('Middleware:', () => {
 
     appTest.addClass(TestController);
     appTest.addClass(ServerConfig);
-    await appTest.start();
+    await appTest.build();
 
     const response = await supertest(appTest.app).get('/').expect(200);
     expect(spyA.calledOnce).toBe(true);
@@ -264,7 +264,7 @@ describe('Middleware:', () => {
 
     appTest.addClass(TestController);
     appTest.addClass(ServerConfig);
-    await appTest.start();
+    await appTest.build();
 
     const response = await supertest(appTest.app).get('/').expect(200);
     expect(spyA.calledOnce).toBe(true);
@@ -294,7 +294,7 @@ describe('Middleware:', () => {
       .bind<e.RequestHandler>(symbolId)
       .toConstantValue(spyA);
     appTest.gab.container.bind<e.RequestHandler>(strId).toConstantValue(spyB);
-    await appTest.start();
+    await appTest.build();
 
     const response = await supertest(appTest.app).get('/').expect(200);
     expect(spyA.calledOnce).toBe(true);
@@ -320,7 +320,7 @@ describe('Middleware:', () => {
       .bind<e.RequestHandler>(symbolId)
       .toConstantValue(spyA);
     appTest.gab.container.bind<e.RequestHandler>(strId).toConstantValue(spyB);
-    await appTest.start();
+    await appTest.build();
 
     const response = await supertest(appTest.app).get('/').expect(200);
     expect(spyA.calledOnce).toBe(true);
@@ -349,7 +349,7 @@ describe('Middleware:', () => {
       .bind<e.RequestHandler>(symbolId)
       .toConstantValue(spyA);
     appTest.gab.container.bind<e.RequestHandler>(strId).toConstantValue(spyB);
-    await appTest.start();
+    await appTest.build();
 
     const response = await supertest(appTest.app).get('/').expect(200);
     expect(spyA.calledOnce).toBe(true);

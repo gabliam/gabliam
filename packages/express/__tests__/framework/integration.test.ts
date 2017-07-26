@@ -36,7 +36,7 @@ describe('Integration Tests:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.start();
+    await appTest.build();
     const response = await supertest(appTest.app).get('/').expect(200);
     expect(response).toMatchSnapshot();
   });
@@ -52,7 +52,7 @@ describe('Integration Tests:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.start();
+    await appTest.build();
     const response = await supertest(appTest.app).get('/').expect(500);
     expect(response).toMatchSnapshot();
   });
@@ -76,7 +76,7 @@ describe('Integration Tests:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.start();
+    await appTest.build();
     const response = await supertest(appTest.app).get('/').expect(200);
     expect(response).toMatchSnapshot();
   });
@@ -108,7 +108,7 @@ describe('Integration Tests:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.start();
+    await appTest.build();
     const response = await supertest(appTest.app).get('/').expect(200);
     expect(response).toMatchSnapshot();
   });
@@ -133,7 +133,7 @@ describe('Integration Tests:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.start();
+    await appTest.build();
     const response = await supertest(appTest.app).get('/').expect(200);
     expect(response).toMatchSnapshot();
   });
@@ -167,7 +167,7 @@ describe('Integration Tests:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.start();
+    await appTest.build();
     const agent = supertest(appTest.app);
 
     const rd = await agent.delete('/').expect(200);
@@ -199,7 +199,7 @@ describe('Integration Tests:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.start();
+    await appTest.build();
 
     const response = await supertest(appTest.app).propfind('/').expect(200);
     expect(response).toMatchSnapshot();
@@ -215,7 +215,7 @@ describe('Integration Tests:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.start();
+    await appTest.build();
 
     const response = await supertest(appTest.app).get('/').expect(200);
     expect(response).toMatchSnapshot();
@@ -242,7 +242,7 @@ describe('Integration Tests:', () => {
     }
     appTest.addClass(Conf);
     appTest.addClass(TestController);
-    await appTest.start();
+    await appTest.build();
 
     const agent = supertest(appTest.app);
 
@@ -276,7 +276,7 @@ describe('Integration Tests:', () => {
 
     appTest.addClass(TestController);
     appTest.addConf('application.express.rootPath', '/api/v1');
-    await appTest.start();
+    await appTest.build();
 
     const response = await supertest(appTest.app)
       .get('/api/v1/ping/endpoint')

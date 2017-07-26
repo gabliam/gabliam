@@ -44,7 +44,7 @@ describe('Parameters:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.start();
+    await appTest.build();
     const response = await supertest(appTest.app).get('/foo').expect(200);
     expect(response).toMatchSnapshot();
   });
@@ -58,7 +58,7 @@ describe('Parameters:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.start();
+    await appTest.build();
     const response = await supertest(appTest.app).get('/GET').expect(200);
     expect(response).toMatchSnapshot();
   });
@@ -73,7 +73,7 @@ describe('Parameters:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.start();
+    await appTest.build();
     const response = await supertest(appTest.app).get('/').expect(200);
     expect(response).toMatchSnapshot();
   });
@@ -88,7 +88,7 @@ describe('Parameters:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.start();
+    await appTest.build();
     const response = await supertest(appTest.app)
       .get('/')
       .query('id=lolilol')
@@ -115,7 +115,7 @@ describe('Parameters:', () => {
 
     appTest.addClass(TestController);
     appTest.addClass(ServerConfig);
-    await appTest.start();
+    await appTest.build();
     const response = await supertest(appTest.app)
       .post('/')
       .send({ foo: 'bar' })
@@ -133,7 +133,7 @@ describe('Parameters:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.start();
+    await appTest.build();
     const response = await supertest(appTest.app)
       .get('/')
       .set('TestHead', 'fooTestHead')
@@ -172,7 +172,7 @@ describe('Parameters:', () => {
 
     appTest.addClass(TestController);
     appTest.addClass(ServerConfig);
-    await appTest.start();
+    await appTest.build();
     const response = await supertest(appTest.app).get('/').expect(200);
     expect(response).toMatchSnapshot();
   });
@@ -195,7 +195,7 @@ describe('Parameters:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.start();
+    await appTest.build();
     const response = await supertest(appTest.app).get('/').expect(200);
     expect(spy.calledOnce).toBe(true);
     expect(response).toMatchSnapshot();
