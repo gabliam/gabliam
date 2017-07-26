@@ -1,3 +1,12 @@
+<a name="2.6.0"></a>
+# 2.6.0 (2017-07-26)
+
+* chore(package): bump version ([0400737](https://github.com/gabliam/core/commit/0400737))
+* add class utils for testing ([d51c2a9](https://github.com/gabliam/core/commit/d51c2a9))
+* feat(gabliam): loader is public (for test) ([4bf99fd](https://github.com/gabliam/core/commit/4bf99fd))
+
+
+
 <a name="2.5.0"></a>
 # 2.5.0 (2017-07-16)
 
