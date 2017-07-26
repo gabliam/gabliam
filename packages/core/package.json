@@ -80,6 +80,7 @@
     "collectCoverageFrom": [
       "src/**/*.{ts}",
       "!src/interfaces/**",
+      "!src/testing/**",
       "!**/node_modules/**",
       "!**/vendor/**"
     ],
