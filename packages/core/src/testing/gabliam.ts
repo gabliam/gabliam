@@ -23,7 +23,7 @@ export class GabliamTest {
     this.loader = this.gab.loader = new LoaderTest();
   }
 
-  async start() {
+  async build() {
     await this.gab.build();
   }
 
