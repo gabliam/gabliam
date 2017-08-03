@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Unit Test: loader whitout other scan 1`] = `
+exports[`whitout other scan 1`] = `
 Registry {
   "registry": Map {
     "ServiceType" => Array [
@@ -24,7 +24,7 @@ Registry {
 }
 `;
 
-exports[`Unit Test: loader whitout other scan 2`] = `
+exports[`whitout other scan 2`] = `
 Loader {
   "loadedFolder": Array [
     "<PROJECT_ROOT>/__tests__/fixtures/loader/withoutscan",
@@ -32,7 +32,7 @@ Loader {
 }
 `;
 
-exports[`Unit Test: loader with scan 1`] = `
+exports[`with scan 1`] = `
 Registry {
   "registry": Map {
     "ServiceType" => Array [
@@ -60,7 +60,7 @@ Registry {
 }
 `;
 
-exports[`Unit Test: loader with scan 2`] = `
+exports[`with scan 2`] = `
 Loader {
   "loadedFolder": Array [
     "<PROJECT_ROOT>/__tests__/fixtures/loader/withscan",

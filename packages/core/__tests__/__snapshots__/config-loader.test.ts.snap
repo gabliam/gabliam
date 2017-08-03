@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Unit Test: config loader with application.yml empty 1`] = `Object {}`;
+exports[`with application.yml empty 1`] = `Object {}`;
 
-exports[`Unit Test: config loader with application.yml load application.yml 1`] = `
+exports[`with application.yml load application.yml 1`] = `
 Object {
   "application": Object {
     "db": "test",
@@ -11,7 +11,7 @@ Object {
 }
 `;
 
-exports[`Unit Test: config loader with application.yml load with bad profile 1`] = `
+exports[`with application.yml load with bad profile 1`] = `
 Object {
   "application": Object {
     "db": "test",
@@ -20,7 +20,7 @@ Object {
 }
 `;
 
-exports[`Unit Test: config loader with application.yml load with prod profile 1`] = `
+exports[`with application.yml load with prod profile 1`] = `
 Object {
   "application": Object {
     "db": "test",
@@ -29,4 +29,4 @@ Object {
 }
 `;
 
-exports[`Unit Test: config loader with config folder doesn't exist 1`] = `Object {}`;
+exports[`with config folder doesn't exist 1`] = `Object {}`;

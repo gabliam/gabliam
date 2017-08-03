@@ -1,19 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Unit Test: Value midlleware @Value(options: ValueOptions) Value with Schema all value in config and respect Validator 1`] = `
+exports[`@Value(options: ValueOptions) Value with Schema all value in config and respect Validator 1`] = `
 Conf {
   "hostname": "localhost",
   "rootPath": "/",
 }
 `;
 
-exports[`Unit Test: Value midlleware @Value(options: ValueOptions) Value with Schema bad format without throw error 1`] = `
+exports[`@Value(options: ValueOptions) Value with Schema bad format without throw error 1`] = `
 Conf {
   "rootPath": null,
 }
 `;
 
-exports[`Unit Test: Value midlleware @Value(options: ValueOptions) Value with Schema default in joi 1`] = `
+exports[`@Value(options: ValueOptions) Value with Schema default in joi 1`] = `
 Conf {
   "hostname": "localhost",
   "port": 8088,
@@ -21,7 +21,7 @@ Conf {
 }
 `;
 
-exports[`Unit Test: Value midlleware @Value(options: ValueOptions) Value with Schema default value in constructor 1`] = `
+exports[`@Value(options: ValueOptions) Value with Schema default value in constructor 1`] = `
 Conf {
   "hostname": "localhost",
   "port": 8080,
@@ -29,7 +29,7 @@ Conf {
 }
 `;
 
-exports[`Unit Test: Value midlleware @Value(options: ValueOptions) Value with Schema default value in property 1`] = `
+exports[`@Value(options: ValueOptions) Value with Schema default value in property 1`] = `
 Conf {
   "hostname": "localhost",
   "port": 3000,
@@ -37,29 +37,21 @@ Conf {
 }
 `;
 
-exports[`Unit Test: Value midlleware @Value(path: string) Value without others options all value in config 1`] = `
+exports[`@Value(path: string) Value without others options all value in config 1`] = `
 Conf {
   "hostname": "localhost",
   "rootPath": "/",
 }
 `;
 
-exports[`Unit Test: Value midlleware @Value(path: string) Value without others options default value and optional bean 1`] = `
+exports[`@Value(path: string) Value without others options default value and optional bean 1`] = `
 Conf {
   "hostname": "localhost",
   "rootPath": "/",
 }
 `;
 
-exports[`Unit Test: Value midlleware @Value(path: string) Value without others options default value in constructor 1`] = `
-Conf {
-  "hostname": "localhost",
-  "port": 8080,
-  "rootPath": "/",
-}
-`;
-
-exports[`Unit Test: Value midlleware @Value(path: string) Value without others options default value in constructor and property 1`] = `
+exports[`@Value(path: string) Value without others options default value in constructor 1`] = `
 Conf {
   "hostname": "localhost",
   "port": 8080,
@@ -67,7 +59,15 @@ Conf {
 }
 `;
 
-exports[`Unit Test: Value midlleware @Value(path: string) Value without others options default value in other bean 1`] = `
+exports[`@Value(path: string) Value without others options default value in constructor and property 1`] = `
+Conf {
+  "hostname": "localhost",
+  "port": 8080,
+  "rootPath": "/",
+}
+`;
+
+exports[`@Value(path: string) Value without others options default value in other bean 1`] = `
 Conf {
   "hostname": "localhost",
   "port": 8081,
@@ -75,7 +75,7 @@ Conf {
 }
 `;
 
-exports[`Unit Test: Value midlleware @Value(path: string) Value without others options default value in property 1`] = `
+exports[`@Value(path: string) Value without others options default value in property 1`] = `
 Conf {
   "hostname": "localhost",
   "port": 3000,
@@ -83,7 +83,7 @@ Conf {
 }
 `;
 
-exports[`Unit Test: Value midlleware @Value(path: string) Value without others options with value undefined 1`] = `
+exports[`@Value(path: string) Value without others options with value undefined 1`] = `
 Conf {
   "hostname": "localhost",
   "lol": undefined,
@@ -92,14 +92,14 @@ Conf {
 }
 `;
 
-exports[`Unit Test: Value midlleware @Value(path: string, schema: Joi.Schema) Value with Schema all value in config and respect Validator 1`] = `
+exports[`@Value(path: string, schema: Joi.Schema) Value with Schema all value in config and respect Validator 1`] = `
 Conf {
   "hostname": "localhost",
   "rootPath": "/",
 }
 `;
 
-exports[`Unit Test: Value midlleware @Value(path: string, schema: Joi.Schema) Value with Schema default in joi 1`] = `
+exports[`@Value(path: string, schema: Joi.Schema) Value with Schema default in joi 1`] = `
 Conf {
   "hostname": "localhost",
   "port": 8088,
@@ -107,7 +107,7 @@ Conf {
 }
 `;
 
-exports[`Unit Test: Value midlleware @Value(path: string, schema: Joi.Schema) Value with Schema default value in constructor 1`] = `
+exports[`@Value(path: string, schema: Joi.Schema) Value with Schema default value in constructor 1`] = `
 Conf {
   "hostname": "localhost",
   "port": 8080,
@@ -115,7 +115,7 @@ Conf {
 }
 `;
 
-exports[`Unit Test: Value midlleware @Value(path: string, schema: Joi.Schema) Value with Schema default value in property 1`] = `
+exports[`@Value(path: string, schema: Joi.Schema) Value with Schema default value in property 1`] = `
 Conf {
   "hostname": "localhost",
   "port": 3000,

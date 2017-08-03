@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Unit Test: Decorators @Bean should add Bean metadata to a class when decorated multiple times with @Bean 1`] = `
+exports[`@Bean should add Bean metadata to a class when decorated multiple times with @Bean 1`] = `
 Array [
   Object {
     "id": "test",
@@ -17,7 +17,7 @@ Array [
 ]
 `;
 
-exports[`Unit Test: Decorators @Bean should add Bean metadata to a class when decorated with @Bean 1`] = `
+exports[`@Bean should add Bean metadata to a class when decorated with @Bean 1`] = `
 Array [
   Object {
     "id": "test",
@@ -30,9 +30,9 @@ Array [
 ]
 `;
 
-exports[`Unit Test: Decorators @Config should add Registry and config metadata to a class when decorated with @Config 1`] = `true`;
+exports[`@Config should add Registry and config metadata to a class when decorated with @Config 1`] = `true`;
 
-exports[`Unit Test: Decorators @Config should add Registry and config metadata to a class when decorated with @Config 2`] = `
+exports[`@Config should add Registry and config metadata to a class when decorated with @Config 2`] = `
 Object {
   "type": "ConfigType",
   "value": Object {
@@ -43,9 +43,9 @@ Object {
 }
 `;
 
-exports[`Unit Test: Decorators @Config should add Registry and config metadata to a class when decorated with @Config(100) 1`] = `true`;
+exports[`@Config should add Registry and config metadata to a class when decorated with @Config(100) 1`] = `true`;
 
-exports[`Unit Test: Decorators @Config should add Registry and config metadata to a class when decorated with @Config(100) 2`] = `
+exports[`@Config should add Registry and config metadata to a class when decorated with @Config(100) 2`] = `
 Object {
   "type": "ConfigType",
   "value": Object {
@@ -56,9 +56,9 @@ Object {
 }
 `;
 
-exports[`Unit Test: Decorators @CoreConfig should add Registry and config metadata to a class when decorated with @CoreConfig 1`] = `true`;
+exports[`@CoreConfig should add Registry and config metadata to a class when decorated with @CoreConfig 1`] = `true`;
 
-exports[`Unit Test: Decorators @CoreConfig should add Registry and config metadata to a class when decorated with @CoreConfig 2`] = `
+exports[`@CoreConfig should add Registry and config metadata to a class when decorated with @CoreConfig 2`] = `
 Object {
   "type": "ConfigType",
   "value": Object {
@@ -69,9 +69,9 @@ Object {
 }
 `;
 
-exports[`Unit Test: Decorators @CoreConfig should add Registry and config metadata to a class when decorated with @CoreConfig(100) 1`] = `true`;
+exports[`@CoreConfig should add Registry and config metadata to a class when decorated with @CoreConfig(100) 1`] = `true`;
 
-exports[`Unit Test: Decorators @CoreConfig should add Registry and config metadata to a class when decorated with @CoreConfig(100) 2`] = `
+exports[`@CoreConfig should add Registry and config metadata to a class when decorated with @CoreConfig(100) 2`] = `
 Object {
   "type": "ConfigType",
   "value": Object {
@@ -82,9 +82,9 @@ Object {
 }
 `;
 
-exports[`Unit Test: Decorators @PluginConfig should add Registry and config metadata to a class when decorated with @PluginConfig 1`] = `true`;
+exports[`@PluginConfig should add Registry and config metadata to a class when decorated with @PluginConfig 1`] = `true`;
 
-exports[`Unit Test: Decorators @PluginConfig should add Registry and config metadata to a class when decorated with @PluginConfig 2`] = `
+exports[`@PluginConfig should add Registry and config metadata to a class when decorated with @PluginConfig 2`] = `
 Object {
   "type": "ConfigType",
   "value": Object {
@@ -95,9 +95,9 @@ Object {
 }
 `;
 
-exports[`Unit Test: Decorators @PluginConfig should add Registry and config metadata to a class when decorated with @PluginConfig(100) 1`] = `true`;
+exports[`@PluginConfig should add Registry and config metadata to a class when decorated with @PluginConfig(100) 1`] = `true`;
 
-exports[`Unit Test: Decorators @PluginConfig should add Registry and config metadata to a class when decorated with @PluginConfig(100) 2`] = `
+exports[`@PluginConfig should add Registry and config metadata to a class when decorated with @PluginConfig(100) 2`] = `
 Object {
   "type": "ConfigType",
   "value": Object {
@@ -108,29 +108,29 @@ Object {
 }
 `;
 
-exports[`Unit Test: Decorators @Register should add Registry metadata to a class when decorated with @Register 1`] = `
+exports[`@Register should add Registry metadata to a class when decorated with @Register 1`] = `
 Object {
   "type": "ConfigType",
   "value": Object {},
 }
 `;
 
-exports[`Unit Test: Decorators @Scan should add Scan metadata to a class when decorated multiple times with @Scan 1`] = `
+exports[`@Scan should add Scan metadata to a class when decorated multiple times with @Scan 1`] = `
 Array [
   "<PROJECT_ROOT>/__tests__/otherFolder",
   "<PROJECT_ROOT>/__tests__",
 ]
 `;
 
-exports[`Unit Test: Decorators @Scan should add Scan metadata to a class when decorated with @Scan 1`] = `
+exports[`@Scan should add Scan metadata to a class when decorated with @Scan 1`] = `
 Array [
   "<PROJECT_ROOT>/__tests__",
 ]
 `;
 
-exports[`Unit Test: Decorators @Service should add Service metadata to a class when decorated with @Service 1`] = `true`;
+exports[`@Service should add Service metadata to a class when decorated with @Service 1`] = `true`;
 
-exports[`Unit Test: Decorators @Service should add Service metadata to a class when decorated with @Service 2`] = `
+exports[`@Service should add Service metadata to a class when decorated with @Service 2`] = `
 Object {
   "type": "ServiceType",
   "value": Object {
@@ -140,9 +140,9 @@ Object {
 }
 `;
 
-exports[`Unit Test: Decorators @Service should add Service metadata to a class when decorated with @Service('Test) 1`] = `true`;
+exports[`@Service should add Service metadata to a class when decorated with @Service('Test) 1`] = `true`;
 
-exports[`Unit Test: Decorators @Service should add Service metadata to a class when decorated with @Service('Test) 2`] = `
+exports[`@Service should add Service metadata to a class when decorated with @Service('Test) 2`] = `
 Object {
   "type": "ServiceType",
   "value": Object {
@@ -152,7 +152,7 @@ Object {
 }
 `;
 
-exports[`Unit Test: Decorators @Value @Value(options: ValueOptions) should add Value metadata to a class when decorated with @Value(options: ValueOptions) 1`] = `
+exports[`@Value @Value(options: ValueOptions) should add Value metadata to a class when decorated with @Value(options: ValueOptions) 1`] = `
 Array [
   Object {
     "key": "name",

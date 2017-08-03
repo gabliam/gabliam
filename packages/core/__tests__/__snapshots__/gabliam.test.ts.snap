@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Gabliam gabliam instance 1`] = `
+exports[`gabliam instance 1`] = `
 Object {
   "application": Object {
     "db": "test",
@@ -9,14 +9,14 @@ Object {
 }
 `;
 
-exports[`Gabliam gabliam instance 2`] = `
+exports[`gabliam instance 2`] = `
 Object {
   "configPath": "<PROJECT_ROOT>/__tests__/fixtures/gabliam/config",
   "scanPath": "<PROJECT_ROOT>/__tests__/fixtures/gabliam",
 }
 `;
 
-exports[`Gabliam gabliam instance 3`] = `
+exports[`gabliam instance 3`] = `
 TestService {
   "dbConfig": DbConfig {
     "db": "test",
@@ -25,9 +25,11 @@ TestService {
 }
 `;
 
-exports[`Gabliam gabliam instance 4`] = `
+exports[`gabliam instance 4`] = `
 DbConfig {
   "db": "test",
   "host": "127.0.0.1",
 }
 `;
+
+exports[`test plugin with config gabliam build 1`] = `1`;
