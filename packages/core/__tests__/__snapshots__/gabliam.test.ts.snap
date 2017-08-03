@@ -32,13 +32,6 @@ DbConfig {
 }
 `;
 
-exports[`gabliam instance with default config 1`] = `
-Object {
-  "configPath": "/Users/eyolas/Documents/devperso/js/gabliam/core",
-  "scanPath": "/Users/eyolas/Documents/devperso/js/gabliam/core",
-}
-`;
-
 exports[`gabliam instance with path 1`] = `Object {}`;
 
 exports[`gabliam instance with path 2`] = `

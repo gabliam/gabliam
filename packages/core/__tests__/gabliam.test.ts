@@ -33,7 +33,10 @@ test('gabliam instance', async () => {
 
 test('gabliam instance with default config', async () => {
   const gab = new Gabliam();
-  expect(gab.options).toMatchSnapshot();
+  expect(gab.options).toEqual({
+    scanPath: process.env.PWD,
+    configPath: process.env.PWD
+  });
   await gab.destroy();
 });
 
