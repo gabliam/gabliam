@@ -8,4 +8,5 @@ install:
 script:
   - npm test -- --runInBand --coverage
   - node remap_coverage.js
+  - rm -fr coverage_jest_raw
   - codecov
