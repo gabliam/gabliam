@@ -54,7 +54,8 @@ export class Loader {
       cwd: folder
     });
     let config = {};
-    if (!files) {
+
+    if (!files || files.length === 0) {
       return config;
     }
 
