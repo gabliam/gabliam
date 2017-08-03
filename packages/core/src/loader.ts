@@ -125,6 +125,7 @@ export class Loader {
   private loadFolders(...folders: string[]) {
     const registry = new Registry();
 
+    /* istanbul ignore if  */
     if (!Array.isArray(folders) || folders.length === 0) {
       return registry;
     }

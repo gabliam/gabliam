@@ -31,6 +31,24 @@ test('gabliam instance', async () => {
   await gab.destroy();
 });
 
+test('gabliam instance with default config', async () => {
+  const gab = new Gabliam();
+  expect(gab.options).toMatchSnapshot();
+  await gab.destroy();
+});
+
+test('gabliam instance with path', async () => {
+  const gab = new Gabliam(path.resolve(__dirname, './fixtures/gabliam'));
+  await gab.buildAndStart();
+  // @todo write a guid serializer
+  // expect(gab).toMatchSnapshot();
+  expect(gab.container.get(APP_CONFIG)).toMatchSnapshot();
+  expect(gab.container.get(CORE_CONFIG)).toMatchSnapshot();
+  expect(gab.container.get(TestService)).toMatchSnapshot();
+  expect(gab.container.get(DbConfig)).toMatchSnapshot();
+  await gab.destroy();
+});
+
 describe('test plugin', async () => {
   class PluginTest implements interfaces.GabliamPlugin {
     build(container: inversifyInterfaces.Container, registry: Registry): void {}

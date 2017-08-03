@@ -326,4 +326,15 @@ describe('@Value', () => {
       expect(valueMetadata).toMatchSnapshot();
     });
   }); // end @Value(options: ValueOptions)
+
+  test('should fail whit bad value', () => {
+    expect(function() {
+      class TestBean {
+        @Value(<any>{ lol: 'application.name' })
+        name: string;
+      }
+
+      new TestBean();
+    }).toThrowError();
+  });
 }); // end describe @Value

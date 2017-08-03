@@ -2,6 +2,7 @@
 // tslint:disable:no-unused-expression
 import { Loader } from '../src/loader';
 import * as mock from 'mock-fs';
+import * as path from 'path';
 
 let loader: Loader;
 beforeEach(() => {
@@ -10,6 +11,13 @@ beforeEach(() => {
 
 test(`with config folder doesn't exist`, () => {
   const config = loader.loadConfig('doesntexist/config');
+  expect(config).toMatchSnapshot();
+});
+
+test(`with bad application.yml`, () => {
+  const config = loader.loadConfig(
+    path.resolve(__dirname, './fixtures/badyml')
+  );
   expect(config).toMatchSnapshot();
 });
 

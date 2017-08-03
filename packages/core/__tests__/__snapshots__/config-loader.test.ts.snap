@@ -29,4 +29,6 @@ Object {
 }
 `;
 
+exports[`with bad application.yml 1`] = `Object {}`;
+
 exports[`with config folder doesn't exist 1`] = `Object {}`;

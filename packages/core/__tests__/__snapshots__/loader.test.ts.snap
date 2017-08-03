@@ -32,6 +32,89 @@ Loader {
 }
 `;
 
+exports[`with plugin 1`] = `
+Registry {
+  "registry": Map {
+    "ServiceType" => Array [
+      Object {
+        "id": [Function],
+        "target": [Function],
+      },
+      Object {
+        "id": [Function],
+        "target": [Function],
+      },
+      Object {
+        "id": [Function],
+        "target": [Function],
+      },
+      Object {
+        "id": [Function],
+        "target": [Function],
+      },
+      Object {
+        "id": [Function],
+        "target": [Function],
+      },
+    ],
+    "ConfigType" => Array [
+      Object {
+        "id": [Function],
+        "order": 150,
+        "target": [Function],
+      },
+      Object {
+        "id": [Function],
+        "order": 200,
+        "target": [Function],
+      },
+    ],
+  },
+}
+`;
+
+exports[`with plugin 2`] = `
+Loader {
+  "loadedFolder": Array [
+    "<PROJECT_ROOT>/__tests__/fixtures/loader/withoutscan",
+    "<PROJECT_ROOT>/__tests__/fixtures/loader/withscan",
+    "<PROJECT_ROOT>/__tests__/fixtures/loader/subfoldertoscan",
+  ],
+}
+`;
+
+exports[`with plugin and false scan path 1`] = `
+Registry {
+  "registry": Map {
+    "ServiceType" => Array [
+      Object {
+        "id": [Function],
+        "target": [Function],
+      },
+      Object {
+        "id": [Function],
+        "target": [Function],
+      },
+    ],
+    "ConfigType" => Array [
+      Object {
+        "id": [Function],
+        "order": 150,
+        "target": [Function],
+      },
+    ],
+  },
+}
+`;
+
+exports[`with plugin and false scan path 2`] = `
+Loader {
+  "loadedFolder": Array [
+    "<PROJECT_ROOT>/__tests__/fixtures/loader/withoutscan",
+  ],
+}
+`;
+
 exports[`with scan 1`] = `
 Registry {
   "registry": Map {

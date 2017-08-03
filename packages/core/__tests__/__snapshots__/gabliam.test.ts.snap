@@ -32,4 +32,36 @@ DbConfig {
 }
 `;
 
+exports[`gabliam instance with default config 1`] = `
+Object {
+  "configPath": "/Users/eyolas/Documents/devperso/js/gabliam/core",
+  "scanPath": "/Users/eyolas/Documents/devperso/js/gabliam/core",
+}
+`;
+
+exports[`gabliam instance with path 1`] = `Object {}`;
+
+exports[`gabliam instance with path 2`] = `
+Object {
+  "configPath": "<PROJECT_ROOT>/__tests__/fixtures/gabliam",
+  "scanPath": "<PROJECT_ROOT>/__tests__/fixtures/gabliam",
+}
+`;
+
+exports[`gabliam instance with path 3`] = `
+TestService {
+  "dbConfig": DbConfig {
+    "db": undefined,
+    "host": undefined,
+  },
+}
+`;
+
+exports[`gabliam instance with path 4`] = `
+DbConfig {
+  "db": undefined,
+  "host": undefined,
+}
+`;
+
 exports[`test plugin with config gabliam build 1`] = `1`;

@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`gabliam instance 1`] = `
+Object {
+  "application": Object {
+    "db": "test",
+    "host": "127.0.0.1",
+  },
+}
+`;
+
+exports[`gabliam instance 2`] = `
+Object {
+  "configPath": "<PROJECT_ROOT>/__tests__/fixtures/gabliam/config",
+  "scanPath": "<PROJECT_ROOT>/__tests__/fixtures/gabliam",
+}
+`;
+
+exports[`gabliam instance 3`] = `
+TestService {
+  "dbConfig": DbConfig {
+    "db": "test",
+    "host": "127.0.0.1",
+  },
+}
+`;
+
+exports[`gabliam instance 4`] = `
+DbConfig {
+  "db": "test",
+  "host": "127.0.0.1",
+}
+`;
+
+exports[`gabliam instance 5`] = `
+Registry {
+  "registry": Map {
+    "ConfigType" => Array [
+      Object {
+        "id": [Function],
+        "order": 150,
+        "target": [Function],
+      },
+    ],
+    "ServiceType" => Array [
+      Object {
+        "id": [Function],
+        "target": [Function],
+      },
+    ],
+  },
+}
+`;
+
+exports[`gabliam instance 6`] = `
+Registry {
+  "registry": Map {
+    "ConfigType" => Array [
+      Object {
+        "id": [Function],
+        "order": 150,
+        "target": [Function],
+      },
+    ],
+  },
+}
+`;
+
+exports[`gabliam instance 7`] = `
+Registry {
+  "registry": Map {},
+}
+`;
