@@ -5,7 +5,6 @@ import * as _ from 'lodash';
 import * as d from 'debug';
 
 import { Registry } from './registry';
-import { hasMetadata } from './decorators';
 import { METADATA_KEY } from './constants';
 import { RegistryMetada, GabliamPlugin } from './interfaces';
 
@@ -29,7 +28,7 @@ export class Loader {
   loadModules(scan: string, plugins: GabliamPlugin[]) {
     const folders = plugins.reduce(
       (prev, current) => {
-        if (hasMetadata(METADATA_KEY.scan, current.constructor)) {
+        if (Reflect.hasOwnMetadata(METADATA_KEY.scan, current.constructor)) {
           const paths = <string[]>Reflect.getOwnMetadata(
             METADATA_KEY.scan,
             current.constructor
@@ -100,15 +99,15 @@ export class Loader {
       const modules = require(file);
       for (const k of Object.keys(modules)) {
         const m = modules[k];
-        if (hasMetadata(METADATA_KEY.register, m)) {
+        if (Reflect.hasOwnMetadata(METADATA_KEY.register, m)) {
           const metadata = <RegistryMetada>Reflect.getOwnMetadata(
             METADATA_KEY.register,
             m
           );
           registry.add(metadata.type, metadata.value);
         }
-        // if ()
-        if (hasMetadata(METADATA_KEY.scan, m)) {
+
+        if (Reflect.hasOwnMetadata(METADATA_KEY.scan, m)) {
           const paths = <string[]>Reflect.getOwnMetadata(METADATA_KEY.scan, m);
           registry.addRegistry(this.loadFolders(...paths));
         }
