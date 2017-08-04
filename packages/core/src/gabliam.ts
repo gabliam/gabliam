@@ -95,7 +95,7 @@ export class Gabliam {
     /**
      * Binding phase
      */
-    this._bind();
+    await this._bind();
 
     /**
      * Config phase
@@ -105,9 +105,13 @@ export class Gabliam {
     /**
      * building phase
      */
-    this.plugins
-      .filter(plugin => _.isFunction(plugin.build))
-      .forEach(plugin => plugin.build!(this.container, this.registry));
+    const pluginsWithBuild = this.plugins.filter(plugin =>
+      _.isFunction(plugin.build)
+    );
+
+    for (const plugin of pluginsWithBuild) {
+      await Promise.resolve(plugin.build!(this.container, this.registry));
+    }
 
     return this;
   }
@@ -129,11 +133,14 @@ export class Gabliam {
    * @returns Promise
    */
   async start(): Promise<Gabliam> {
-    const pluginsStart = this.plugins
-      .filter(plugin => _.isFunction(plugin.start))
-      .map(plugin => plugin.start!(this.container, this.registry));
+    const pluginsWithStart = this.plugins.filter(plugin =>
+      _.isFunction(plugin.start)
+    );
 
-    await Promise.all(pluginsStart);
+    for (const plugin of pluginsWithStart) {
+      await plugin.start!(this.container, this.registry);
+    }
+
     return this;
   }
 
@@ -144,11 +151,14 @@ export class Gabliam {
    * @returns Promise
    */
   async stop(): Promise<Gabliam> {
-    const pluginsStop = this.plugins
-      .filter(plugin => _.isFunction(plugin.stop))
-      .map(plugin => plugin.stop!(this.container, this.registry));
+    const pluginsWithStop = this.plugins.filter(plugin =>
+      _.isFunction(plugin.stop)
+    );
 
-    await Promise.all(pluginsStop);
+    for (const plugin of pluginsWithStop) {
+      await plugin.stop!(this.container, this.registry);
+    }
+
     return this;
   }
 
@@ -159,11 +169,14 @@ export class Gabliam {
    * @returns Promise
    */
   async destroy(): Promise<Gabliam> {
-    const pluginsDestroy = this.plugins
-      .filter(plugin => _.isFunction(plugin.destroy))
-      .map(plugin => plugin.destroy!(this.container, this.registry));
+    const pluginsWithDestroy = this.plugins.filter(plugin =>
+      _.isFunction(plugin.destroy)
+    );
 
-    await Promise.all(pluginsDestroy);
+    for (const plugin of pluginsWithDestroy) {
+      await plugin.destroy!(this.container, this.registry);
+    }
+
     return this;
   }
 
@@ -185,7 +198,7 @@ export class Gabliam {
    * Binding of config and service classes.
    * call all plugin.bind
    */
-  private _bind() {
+  private async _bind() {
     debug('_bind');
     this.registry
       .get(TYPE.Config)
@@ -199,9 +212,13 @@ export class Gabliam {
         this.container.bind(id).to(target).inSingletonScope()
       );
 
-    this.plugins
-      .filter(plugin => _.isFunction(plugin.bind))
-      .forEach(plugin => plugin.bind!(this.container, this.registry));
+    const pluginsWithBind = this.plugins.filter(plugin =>
+      _.isFunction(plugin.bind)
+    );
+
+    for (const plugin of pluginsWithBind) {
+      await Promise.resolve(plugin.bind!(this.container, this.registry));
+    }
   }
 
   /**
@@ -243,9 +260,11 @@ export class Gabliam {
           }
         }
 
-        pluginConfig.forEach(plugin =>
-          plugin.config!(this.container, this.registry, confInstance)
-        );
+        for (const plugin of pluginConfig) {
+          await Promise.resolve(
+            plugin.config!(this.container, this.registry, confInstance)
+          );
+        }
       }
     }
     debug('_loadConfig end');

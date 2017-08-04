@@ -28,15 +28,21 @@ export interface GabliamPluginConstructor {
  * Interface for a plugin
  */
 export interface GabliamPlugin {
-  build?(container: interfaces.Container, registry: Registry): void;
+  build?(
+    container: interfaces.Container,
+    registry: Registry
+  ): void | Promise<void>;
 
-  bind?(container: interfaces.Container, registry: Registry): void;
+  bind?(
+    container: interfaces.Container,
+    registry: Registry
+  ): void | Promise<void>;
 
   config?(
     container: interfaces.Container,
     registry: Registry,
     confInstance: any
-  ): void;
+  ): void | Promise<void>;
 
   start?(container: interfaces.Container, registry: Registry): Promise<void>;
 
