@@ -1,3 +1,21 @@
+<a name="2.8.0"></a>
+# 2.8.0 (2017-08-04)
+
+* chore: bump deps ([d938607](https://github.com/gabliam/core/commit/d938607))
+* chore(package): bump version ([f99ca06](https://github.com/gabliam/core/commit/f99ca06))
+* chore(package): move remap-istanbul deps to devDeps ([530b2c9](https://github.com/gabliam/core/commit/530b2c9))
+* feat(decorators): delete utils ([27417c8](https://github.com/gabliam/core/commit/27417c8))
+* feat(gabliam): change plugin ([721abf9](https://github.com/gabliam/core/commit/721abf9))
+* fix(loader): fix loader module and add test ([2b14218](https://github.com/gabliam/core/commit/2b14218))
+* test: add tests ([86473ec](https://github.com/gabliam/core/commit/86473ec))
+* test: add tests ([892fdeb](https://github.com/gabliam/core/commit/892fdeb))
+* test: change travis ([c4230ba](https://github.com/gabliam/core/commit/c4230ba))
+* test: correction test ([e325148](https://github.com/gabliam/core/commit/e325148))
+* test(coverage): add remap coverage ([3f060a8](https://github.com/gabliam/core/commit/3f060a8))
+* refactor: glob return all time array => change test ([af2cb13](https://github.com/gabliam/core/commit/af2cb13))
+
+
+
 <a name="2.7.0"></a>
 # 2.7.0 (2017-07-26)
 
