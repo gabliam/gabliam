@@ -59,3 +59,10 @@ export function configureValueExtractor(container: interfaces.Container) {
     }
   };
 }
+
+export function isObject(val: any): val is Object {
+  if (val === null || val === undefined) {
+    return false;
+  }
+  return typeof val === 'function' || typeof val === 'object';
+}

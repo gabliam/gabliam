@@ -7,6 +7,7 @@ import * as d from 'debug';
 import { Registry } from './registry';
 import { METADATA_KEY } from './constants';
 import { RegistryMetada, GabliamPlugin } from './interfaces';
+import { isObject } from './utils';
 
 const debug = d('Gabliam:loader');
 const reg = /^.*(git|svn|node_modules|dist|build).*/;
@@ -28,7 +29,11 @@ export class Loader {
   loadModules(scan: string, plugins: GabliamPlugin[]) {
     const folders = plugins.reduce(
       (prev, current) => {
-        if (Reflect.hasOwnMetadata(METADATA_KEY.scan, current.constructor)) {
+        if (
+          isObject(current) &&
+          current.constructor &&
+          Reflect.hasOwnMetadata(METADATA_KEY.scan, current.constructor)
+        ) {
           const paths = <string[]>Reflect.getOwnMetadata(
             METADATA_KEY.scan,
             current.constructor
@@ -100,7 +105,7 @@ export class Loader {
       const modules = require(file);
       for (const k of Object.keys(modules)) {
         const m = modules[k];
-        if (Reflect.hasOwnMetadata(METADATA_KEY.register, m)) {
+        if (isObject(m) && Reflect.hasOwnMetadata(METADATA_KEY.register, m)) {
           const metadata = <RegistryMetada>Reflect.getOwnMetadata(
             METADATA_KEY.register,
             m
@@ -108,7 +113,7 @@ export class Loader {
           registry.add(metadata.type, metadata.value);
         }
 
-        if (Reflect.hasOwnMetadata(METADATA_KEY.scan, m)) {
+        if (isObject(m) && Reflect.hasOwnMetadata(METADATA_KEY.scan, m)) {
           const paths = <string[]>Reflect.getOwnMetadata(METADATA_KEY.scan, m);
           registry.addRegistry(this.loadFolders(...paths));
         }
