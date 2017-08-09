@@ -196,7 +196,7 @@ describe('@CoreConfig', () => {
 
 describe('@Register', () => {
   test('should add Registry metadata to a class when decorated with @Register', () => {
-    @register(TYPE.Config, {})
+    @register(TYPE.Config, { id: TestBean, target: TestBean })
     class TestBean {}
 
     const registryMetadata: RegistryMetada = Reflect.getMetadata(
@@ -209,8 +209,8 @@ describe('@Register', () => {
 
   test('should fail when decorated multiple times with @Register', () => {
     expect(function() {
-      @register(TYPE.Config, {})
-      @register(TYPE.Service, {})
+      @register(TYPE.Config, { id: TestBean, target: TestBean })
+      @register(TYPE.Service, { id: TestBean, target: TestBean })
       class TestBean {}
 
       new TestBean();

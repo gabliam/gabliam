@@ -54,21 +54,23 @@ export interface ValueMetadata {
   validator: ValueValidator | null;
 }
 
-export interface ValueRegistry {
+export interface ValueRegistry<T = any> {
   id: interfaces.ServiceIdentifier<any>;
 
   target: any;
+
+  options?: T;
 }
 
-export interface ConfigRegistry extends ValueRegistry {
+export interface ConfigRegistry {
   order: number;
 }
 
 /**
  * @TODO change by RegistryMetada<T>
  */
-export interface RegistryMetada {
+export interface RegistryMetada<T = any> {
   type: string | symbol;
 
-  value: ValueRegistry;
+  value: ValueRegistry<T>;
 }

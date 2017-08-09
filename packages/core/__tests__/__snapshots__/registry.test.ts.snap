@@ -38,7 +38,9 @@ Registry {
     "ConfigType" => Array [
       Object {
         "id": [Function],
-        "order": 150,
+        "options": Object {
+          "order": 150,
+        },
         "target": [Function],
       },
     ],
@@ -58,7 +60,9 @@ Registry {
     "ConfigType" => Array [
       Object {
         "id": [Function],
-        "order": 150,
+        "options": Object {
+          "order": 150,
+        },
         "target": [Function],
       },
     ],

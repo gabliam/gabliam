@@ -16,7 +16,9 @@ Registry {
     "ConfigType" => Array [
       Object {
         "id": [Function],
-        "order": 150,
+        "options": Object {
+          "order": 150,
+        },
         "target": [Function],
       },
     ],
@@ -60,12 +62,16 @@ Registry {
     "ConfigType" => Array [
       Object {
         "id": [Function],
-        "order": 150,
+        "options": Object {
+          "order": 150,
+        },
         "target": [Function],
       },
       Object {
         "id": [Function],
-        "order": 200,
+        "options": Object {
+          "order": 50,
+        },
         "target": [Function],
       },
     ],
@@ -99,7 +105,9 @@ Registry {
     "ConfigType" => Array [
       Object {
         "id": [Function],
-        "order": 150,
+        "options": Object {
+          "order": 150,
+        },
         "target": [Function],
       },
     ],
@@ -135,7 +143,9 @@ Registry {
     "ConfigType" => Array [
       Object {
         "id": [Function],
-        "order": 200,
+        "options": Object {
+          "order": 50,
+        },
         "target": [Function],
       },
     ],

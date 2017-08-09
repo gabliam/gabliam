@@ -4,7 +4,7 @@ import { ValueRegistry } from './interfaces';
  * Registry
  */
 export class Registry {
-  public registry = new Map<symbol | string, any[]>();
+  public registry = new Map<symbol | string, Array<ValueRegistry<any>>>();
 
   /**
    * Add a sub registry
@@ -20,7 +20,7 @@ export class Registry {
    * @param  {symbol|string} type
    * @returns T[] return the list of velue
    */
-  get<T extends ValueRegistry>(type: symbol | string): T[] {
+  get<T>(type: symbol | string): Array<ValueRegistry<T>> {
     if (!this.registry.has(type)) {
       this.registry.set(type, []);
     }
@@ -32,7 +32,10 @@ export class Registry {
    * @param  {symbol|string} type
    * @param  {T} target
    */
-  add<T extends ValueRegistry>(type: symbol | string, target: T) {
+  add<T extends ValueRegistry<T>>(
+    type: symbol | string,
+    target: ValueRegistry<T>
+  ) {
     this.get(type).push(target);
   }
 

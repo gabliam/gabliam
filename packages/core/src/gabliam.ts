@@ -241,7 +241,7 @@ export class Gabliam {
 
     debug('configsRegistry', configsRegistry);
     if (configsRegistry) {
-      configsRegistry = _.sortBy(configsRegistry, 'order');
+      configsRegistry = _.sortBy(configsRegistry, 'options.order');
 
       for (const { id: configId } of configsRegistry) {
         const confInstance = this.container.get<object>(configId);

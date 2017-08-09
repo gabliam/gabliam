@@ -95,6 +95,7 @@ describe('test plugin', async () => {
   let gab: Gabliam;
 
   describe('with config', () => {
+    let res = '';
     beforeAll(() => {
       const g = new GabliamTest(
         new Gabliam({
@@ -104,9 +105,21 @@ describe('test plugin', async () => {
       );
       gab = g.gab;
 
-      @Config()
-      class Conf {}
+      @Config(300)
+      class Conf {
+        constructor() {
+          res += 'Conf';
+        }
+      }
+      @Config(200)
+      class Conf2 {
+        constructor() {
+          res += 'Conf2';
+        }
+      }
+
       g.addClass(Conf);
+      g.addClass(Conf2);
     });
 
     afterAll(() => {
@@ -123,6 +136,7 @@ describe('test plugin', async () => {
       expect(build.calledOnce).toBe(true);
       expect(bind.calledOnce).toBe(true);
       expect(config.callCount).toMatchSnapshot();
+      expect(res).toMatchSnapshot();
     });
 
     test('gabliam start', async () => {

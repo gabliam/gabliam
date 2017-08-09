@@ -107,6 +107,6 @@ function configDecorator(order: number) {
 
     const id: interfaces.ServiceIdentifier<any> = target;
     injectable()(target);
-    register(TYPE.Config, { id, order, target })(target);
+    register(TYPE.Config, { id, target, options: { order } })(target);
   };
 }

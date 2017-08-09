@@ -1,6 +1,6 @@
 import { Config, Bean, Value } from '../../../../src';
 
-@Config(200)
+@Config(50)
 export class TestConfig {
   @Value('application.name') name: string;
 

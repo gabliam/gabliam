@@ -37,7 +37,9 @@ Object {
   "type": "ConfigType",
   "value": Object {
     "id": [Function],
-    "order": 150,
+    "options": Object {
+      "order": 150,
+    },
     "target": [Function],
   },
 }
@@ -50,7 +52,9 @@ Object {
   "type": "ConfigType",
   "value": Object {
     "id": [Function],
-    "order": 100,
+    "options": Object {
+      "order": 100,
+    },
     "target": [Function],
   },
 }
@@ -63,7 +67,9 @@ Object {
   "type": "ConfigType",
   "value": Object {
     "id": [Function],
-    "order": 50,
+    "options": Object {
+      "order": 50,
+    },
     "target": [Function],
   },
 }
@@ -76,7 +82,9 @@ Object {
   "type": "ConfigType",
   "value": Object {
     "id": [Function],
-    "order": 100,
+    "options": Object {
+      "order": 100,
+    },
     "target": [Function],
   },
 }
@@ -89,7 +97,9 @@ Object {
   "type": "ConfigType",
   "value": Object {
     "id": [Function],
-    "order": 100,
+    "options": Object {
+      "order": 100,
+    },
     "target": [Function],
   },
 }
@@ -102,7 +112,9 @@ Object {
   "type": "ConfigType",
   "value": Object {
     "id": [Function],
-    "order": 100,
+    "options": Object {
+      "order": 100,
+    },
     "target": [Function],
   },
 }
@@ -111,7 +123,10 @@ Object {
 exports[`@Register should add Registry metadata to a class when decorated with @Register 1`] = `
 Object {
   "type": "ConfigType",
-  "value": Object {},
+  "value": Object {
+    "id": [Function],
+    "target": [Function],
+  },
 }
 `;
 
