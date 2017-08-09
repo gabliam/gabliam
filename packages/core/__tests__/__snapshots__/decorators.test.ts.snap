@@ -137,9 +137,27 @@ Array [
 ]
 `;
 
-exports[`@Scan should add Scan metadata to a class when decorated with @Scan 1`] = `
+exports[`@Scan should add Scan metadata to a class when decorated with @Scan() 1`] = `
 Array [
   "<PROJECT_ROOT>/__tests__",
+]
+`;
+
+exports[`@Scan should add Scan metadata to a class when decorated with @Scan(__dirname) 1`] = `
+Array [
+  "<PROJECT_ROOT>/__tests__",
+]
+`;
+
+exports[`@Scan should add Scan metadata to a class when decorated with @Scan(relativePath) 1`] = `
+Array [
+  "<PROJECT_ROOT>/__tests__/fixtures/loader",
+]
+`;
+
+exports[`@Scan should add Scan metadata to a class when decorated with @Scan(relativePath) 2 1`] = `
+Array [
+  "<PROJECT_ROOT>/src",
 ]
 `;
 

@@ -31,6 +31,7 @@
     "joi": "^10.2.2"
   },
   "dependencies": {
+    "caller": "^1.0.1",
     "debug": "^2.6.1",
     "glob": "^7.1.1",
     "inversify": "^4.3.0",

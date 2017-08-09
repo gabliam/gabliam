@@ -219,7 +219,43 @@ describe('@Register', () => {
 }); // end describe @Register
 
 describe('@Scan', () => {
-  test('should add Scan metadata to a class when decorated with @Scan', () => {
+  test('should add Scan metadata to a class when decorated with @Scan()', () => {
+    @Scan()
+    class TestBean {}
+
+    const scanMetadata: RegistryMetada = Reflect.getMetadata(
+      METADATA_KEY.scan,
+      TestBean
+    );
+
+    expect(scanMetadata).toMatchSnapshot();
+  });
+
+  test('should add Scan metadata to a class when decorated with @Scan(relativePath)', () => {
+    @Scan('./fixtures/loader')
+    class TestBean {}
+
+    const scanMetadata: RegistryMetada = Reflect.getMetadata(
+      METADATA_KEY.scan,
+      TestBean
+    );
+
+    expect(scanMetadata).toMatchSnapshot();
+  });
+
+  test('should add Scan metadata to a class when decorated with @Scan(relativePath) 2', () => {
+    @Scan('../src')
+    class TestBean {}
+
+    const scanMetadata: RegistryMetada = Reflect.getMetadata(
+      METADATA_KEY.scan,
+      TestBean
+    );
+
+    expect(scanMetadata).toMatchSnapshot();
+  });
+
+  test('should add Scan metadata to a class when decorated with @Scan(__dirname)', () => {
     @Scan(__dirname)
     class TestBean {}
 
