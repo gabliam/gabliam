@@ -7,7 +7,9 @@ import {
   Head,
   Delete,
   All,
-  ExpressConfig
+  ExpressConfig,
+  Middleware,
+  MiddlewareInject
 } from '../../src/index';
 import * as e from 'express';
 import { ExpressPluginTest } from '../express-plugin-test';
@@ -356,5 +358,292 @@ describe('Middleware:', () => {
     expect(spyB.calledOnce).toBe(true);
     expect(response).toMatchSnapshot();
     expect(result).toMatchSnapshot();
+  });
+});
+
+describe('Middleware inject:', () => {
+  let result: string;
+  let args: string;
+  @Config()
+  class TestConfig {
+    @Middleware('a')
+    a() {
+      return () => (
+        req: e.Request,
+        res: e.Response,
+        nextFunc: e.NextFunction
+      ) => {
+        result += 'a';
+        nextFunc();
+      };
+    }
+
+    @Middleware('b')
+    b() {
+      return () => (
+        req: e.Request,
+        res: e.Response,
+        nextFunc: e.NextFunction
+      ) => {
+        result += 'b';
+        nextFunc();
+      };
+    }
+
+    @Middleware('c')
+    c(arg?: string) {
+      return () => (
+        req: e.Request,
+        res: e.Response,
+        nextFunc: e.NextFunction
+      ) => {
+        result += 'c';
+        if (arg) {
+          args += arg;
+        }
+        nextFunc();
+      };
+    }
+
+    @Middleware('de')
+    de() {
+      return (arg?: string, arg2?: string) => [
+        (req: e.Request, res: e.Response, nextFunc: e.NextFunction) => {
+          result += 'd';
+          if (arg) {
+            args += 'd' + arg;
+          }
+          if (arg2) {
+            args += 'd' + arg2;
+          }
+          nextFunc();
+        },
+        (req: e.Request, res: e.Response, nextFunc: e.NextFunction) => {
+          result += 'e';
+          if (arg) {
+            args += 'e' + arg;
+          }
+          if (arg2) {
+            args += 'e' + arg2;
+          }
+          nextFunc();
+        }
+      ];
+    }
+  }
+
+  beforeEach(() => {
+    result = '';
+    args = '';
+  });
+
+  test('should call method-level middleware correctly (GET)', async () => {
+    @Controller('/')
+    class TestController {
+      @MiddlewareInject('de', 'dearg', 'dearg2')
+      @MiddlewareInject('c', 'carg')
+      @MiddlewareInject('b')
+      @MiddlewareInject('a')
+      @Get('/')
+      public getTest(req: e.Request, res: e.Response) {
+        res.send('GET');
+      }
+    }
+
+    appTest.addClass(TestConfig);
+    appTest.addClass(TestController);
+    await appTest.build();
+
+    const response = await supertest(appTest.app).get('/').expect(200);
+    expect(response).toMatchSnapshot();
+    expect(result).toMatchSnapshot();
+    expect(args).toMatchSnapshot();
+  });
+
+  test('should call method-level middleware correctly (POST)', async () => {
+    @Controller('/')
+    class TestController {
+      @MiddlewareInject('de', 'dearg', 'dearg2')
+      @MiddlewareInject('c', 'carg')
+      @MiddlewareInject('b')
+      @MiddlewareInject('a')
+      @Post('/')
+      public postTest(req: e.Request, res: e.Response) {
+        res.send('POST');
+      }
+    }
+
+    appTest.addClass(TestConfig);
+    appTest.addClass(TestController);
+    await appTest.build();
+
+    const response = await supertest(appTest.app).post('/').expect(200);
+    expect(response).toMatchSnapshot();
+    expect(result).toMatchSnapshot();
+    expect(args).toMatchSnapshot();
+  });
+
+  test('should call method-level middleware correctly (PUT)', async () => {
+    @Controller('/')
+    class TestController {
+      @MiddlewareInject('de', 'dearg', 'dearg2')
+      @MiddlewareInject('c', 'carg')
+      @MiddlewareInject('b')
+      @MiddlewareInject('a')
+      @Put('/')
+      public postTest(req: e.Request, res: e.Response) {
+        res.send('PUT');
+      }
+    }
+
+    appTest.addClass(TestConfig);
+    appTest.addClass(TestController);
+    await appTest.build();
+
+    const response = await supertest(appTest.app).put('/').expect(200);
+    expect(response).toMatchSnapshot();
+    expect(result).toMatchSnapshot();
+    expect(args).toMatchSnapshot();
+  });
+
+  test('should call method-level middleware correctly (PATCH)', async () => {
+    @Controller('/')
+    class TestController {
+      @MiddlewareInject('de', 'dearg', 'dearg2')
+      @MiddlewareInject('c', 'carg')
+      @MiddlewareInject('b')
+      @MiddlewareInject('a')
+      @Patch('/')
+      public postTest(req: e.Request, res: e.Response) {
+        res.send('PATCH');
+      }
+    }
+
+    appTest.addClass(TestConfig);
+    appTest.addClass(TestController);
+    await appTest.build();
+
+    const response = await supertest(appTest.app).patch('/').expect(200);
+    expect(response).toMatchSnapshot();
+    expect(result).toMatchSnapshot();
+    expect(args).toMatchSnapshot();
+  });
+
+  test('should call method-level middleware correctly (HEAD)', async () => {
+    @Controller('/')
+    class TestController {
+      @MiddlewareInject('de', 'dearg', 'dearg2')
+      @MiddlewareInject('c', 'carg')
+      @MiddlewareInject('b')
+      @MiddlewareInject('a')
+      @Head('/')
+      public postTest(req: e.Request, res: e.Response) {
+        res.send('HEAD');
+      }
+    }
+    appTest.addClass(TestConfig);
+    appTest.addClass(TestController);
+    await appTest.build();
+
+    const response = await supertest(appTest.app).head('/').expect(200);
+    expect(response).toMatchSnapshot();
+    expect(result).toMatchSnapshot();
+    expect(args).toMatchSnapshot();
+  });
+
+  test('should call method-level middleware correctly (DELETE)', async () => {
+    @Controller('/')
+    class TestController {
+      @MiddlewareInject('de', 'dearg', 'dearg2')
+      @MiddlewareInject('c', 'carg')
+      @MiddlewareInject('b')
+      @MiddlewareInject('a')
+      @Delete('/')
+      public postTest(req: e.Request, res: e.Response) {
+        res.send('DELETE');
+      }
+    }
+
+    appTest.addClass(TestConfig);
+    appTest.addClass(TestController);
+    await appTest.build();
+
+    const response = await supertest(appTest.app).delete('/').expect(200);
+    expect(response).toMatchSnapshot();
+    expect(result).toMatchSnapshot();
+    expect(args).toMatchSnapshot();
+  });
+
+  test('should call method-level middleware correctly (ALL)', async () => {
+    @Controller('/')
+    class TestController {
+      @MiddlewareInject('de', 'dearg', 'dearg2')
+      @MiddlewareInject('c', 'carg')
+      @MiddlewareInject('b')
+      @MiddlewareInject('a')
+      @All('/')
+      public postTest(req: e.Request, res: e.Response) {
+        res.send('ALL');
+      }
+    }
+
+    appTest.addClass(TestConfig);
+    appTest.addClass(TestController);
+    await appTest.build();
+
+    const response = await supertest(appTest.app).get('/').expect(200);
+    expect(response).toMatchSnapshot();
+    expect(result).toMatchSnapshot();
+    expect(args).toMatchSnapshot();
+  });
+
+  test('should call controller-level middleware correctly', async () => {
+    @MiddlewareInject('de', 'dearg', 'dearg2')
+    @MiddlewareInject('c', 'carg')
+    @MiddlewareInject('b')
+    @MiddlewareInject('a')
+    @Controller({
+      path: '/'
+    })
+    class TestController {
+      @Get('/')
+      public getTest(req: e.Request, res: e.Response) {
+        res.send('GET');
+      }
+    }
+
+    appTest.addClass(TestConfig);
+    appTest.addClass(TestController);
+    await appTest.build();
+
+    const response = await supertest(appTest.app).get('/').expect(200);
+    expect(response).toMatchSnapshot();
+    expect(result).toMatchSnapshot();
+    expect(args).toMatchSnapshot();
+  });
+
+  test('should call all middleware in correct order', async () => {
+    @MiddlewareInject('b')
+    @MiddlewareInject('a')
+    @Controller({
+      path: '/'
+    })
+    class TestController {
+      @MiddlewareInject('de', 'dearg', 'dearg2')
+      @MiddlewareInject('c', 'carg')
+      @Get('/')
+      public getTest(req: e.Request, res: e.Response) {
+        res.send('GET');
+      }
+    }
+
+    appTest.addClass(TestController);
+    appTest.addClass(TestConfig);
+    await appTest.build();
+
+    const response = await supertest(appTest.app).get('/').expect(200);
+    expect(response).toMatchSnapshot();
+    expect(result).toMatchSnapshot();
+    expect(args).toMatchSnapshot();
   });
 });

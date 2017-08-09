@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@ExpressConfig 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-8DC7vTKWbN5BA3uYqIScRrduS8E\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "GET",
+}
+`;
+
+exports[`@ExpressConfig 2`] = `"abc"`;
+
+exports[`@ExpressConfig Order 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-8DC7vTKWbN5BA3uYqIScRrduS8E\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "GET",
+}
+`;
+
+exports[`@ExpressConfig Order 2`] = `"abc"`;
+
+exports[`ErrorConfig 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "5",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"5-EflXjQXm97tYo83QAQfp9OOIJnE\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 500,
+  "text": "error",
+}
+`;
+
+exports[`ErrorConfig 2`] = `"e"`;
+
+exports[`ErrorConfig order 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "5",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"5-EflXjQXm97tYo83QAQfp9OOIJnE\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 500,
+  "text": "error",
+}
+`;
+
+exports[`ErrorConfig order 2`] = `"de"`;

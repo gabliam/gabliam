@@ -45,6 +45,27 @@ Object {
 }
 `;
 
+exports[`Parameters: should bind a method parameter to a query parameter and cast to number 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "13",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\\"d-+eIvcEC3YUszYERL17BmmrIVMVw\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "[\\"number\\",12]",
+}
+`;
+
 exports[`Parameters: should bind a method parameter to the next function 1`] = `
 Object {
   "header": Object {
@@ -172,5 +193,26 @@ Object {
   },
   "status": 200,
   "text": "foo",
+}
+`;
+
+exports[`Parameters: should bind a method parameter to the url parameter of the web request and cast to number 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "13",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\\"d-f7JRWtNSw/8B+r0iQq6BpCFihJo\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "[\\"number\\",42]",
 }
 `;

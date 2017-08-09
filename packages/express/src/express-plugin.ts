@@ -139,6 +139,7 @@ export class ExpressPlugin implements coreInterfaces.GabliamPlugin {
     server.on('listening', onListening);
     container.bind(SERVER).toConstantValue(server);
 
+    /* istanbul ignore next */
     function onError(error: NodeJS.ErrnoException): void {
       // tslint:disable-next-line:curly
       if (error.syscall !== 'listen') throw error;
@@ -157,6 +158,7 @@ export class ExpressPlugin implements coreInterfaces.GabliamPlugin {
       }
     }
 
+    /* istanbul ignore next */
     function onListening(): void {
       const addr = server.address();
       const bind =

@@ -49,6 +49,24 @@ describe('Parameters:', () => {
     expect(response).toMatchSnapshot();
   });
 
+  test('should bind a method parameter to the url parameter of the web request and cast to number', async () => {
+    @Controller('/')
+    class TestController {
+      @Get(':id')
+      public getTest(
+        @RequestParam('id') id: number,
+        req: e.Request,
+        res: e.Response
+      ) {
+        return [typeof id, id];
+      }
+    }
+    appTest.addClass(TestController);
+    await appTest.build();
+    const response = await supertest(appTest.app).get('/42').expect(200);
+    expect(response).toMatchSnapshot();
+  });
+
   test('should bind a method parameter to the request object', async () => {
     @Controller('/')
     class TestController {
@@ -92,6 +110,24 @@ describe('Parameters:', () => {
     const response = await supertest(appTest.app)
       .get('/')
       .query('id=lolilol')
+      .expect(200);
+    expect(response).toMatchSnapshot();
+  });
+
+  test('should bind a method parameter to a query parameter and cast to number', async () => {
+    @Controller('/')
+    class TestController {
+      @Get('/')
+      public getTest(@QueryParam('id') id: number) {
+        return [typeof id, id];
+      }
+    }
+
+    appTest.addClass(TestController);
+    await appTest.build();
+    const response = await supertest(appTest.app)
+      .get('/')
+      .query('id=12')
       .expect(200);
     expect(response).toMatchSnapshot();
   });

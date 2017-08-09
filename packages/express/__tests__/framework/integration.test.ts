@@ -1,5 +1,6 @@
 import {
   Controller,
+  RestController,
   Get,
   Post,
   Put,
@@ -25,263 +26,267 @@ afterEach(async () => {
 });
 
 describe('Integration Tests:', () => {
-  test('should work for async controller methods', async () => {
-    @Controller('/')
-    class TestController {
-      @Get('/')
-      async getTest(req: e.Request, res: e.Response) {
-        return new Promise(resolve => {
-          setTimeout(resolve, 100, 'GET');
-        });
-      }
-    }
-    appTest.addClass(TestController);
-    await appTest.build();
-    const response = await supertest(appTest.app).get('/').expect(200);
-    expect(response).toMatchSnapshot();
-  });
+  [Controller, RestController].forEach(decorator => {
+    describe(`decorator ${decorator.name}`, () => {
+      test('should work for async controller methods', async () => {
+        @decorator('/')
+        class TestController {
+          @Get('/')
+          async getTest(req: e.Request, res: e.Response) {
+            return new Promise(resolve => {
+              setTimeout(resolve, 100, 'GET');
+            });
+          }
+        }
+        appTest.addClass(TestController);
+        await appTest.build();
+        const response = await supertest(appTest.app).get('/').expect(200);
+        expect(response).toMatchSnapshot();
+      });
 
-  test('should work for async controller methods that fails', async () => {
-    @Controller('/')
-    class TestController {
-      @Get('/')
-      public getTest(req: e.Request, res: e.Response) {
-        return new Promise((resolve, reject) => {
-          setTimeout(reject, 100, 'GET');
-        });
-      }
-    }
-    appTest.addClass(TestController);
-    await appTest.build();
-    const response = await supertest(appTest.app).get('/').expect(500);
-    expect(response).toMatchSnapshot();
-  });
+      test('should work for async controller methods that fails', async () => {
+        @decorator('/')
+        class TestController {
+          @Get('/')
+          public getTest(req: e.Request, res: e.Response) {
+            return new Promise((resolve, reject) => {
+              setTimeout(reject, 100, 'GET');
+            });
+          }
+        }
+        appTest.addClass(TestController);
+        await appTest.build();
+        const response = await supertest(appTest.app).get('/').expect(500);
+        expect(response).toMatchSnapshot();
+      });
 
-  test('should work for methods which call nextFunc()', async () => {
-    @Controller('/')
-    class TestController {
-      @Get('/')
-      public getTest(
-        req: e.Request,
-        res: e.Response,
-        nextFunc: e.NextFunction
-      ) {
-        nextFunc();
-      }
+      test('should work for methods which call nextFunc()', async () => {
+        @decorator('/')
+        class TestController {
+          @Get('/')
+          public getTest(
+            req: e.Request,
+            res: e.Response,
+            nextFunc: e.NextFunction
+          ) {
+            nextFunc();
+          }
 
-      @Get('/')
-      public getTest2(req: e.Request, res: e.Response) {
-        return 'GET';
-      }
-    }
+          @Get('/')
+          public getTest2(req: e.Request, res: e.Response) {
+            return 'GET';
+          }
+        }
 
-    appTest.addClass(TestController);
-    await appTest.build();
-    const response = await supertest(appTest.app).get('/').expect(200);
-    expect(response).toMatchSnapshot();
-  });
+        appTest.addClass(TestController);
+        await appTest.build();
+        const response = await supertest(appTest.app).get('/').expect(200);
+        expect(response).toMatchSnapshot();
+      });
 
-  test('should work for async methods which call nextFunc()', async () => {
-    @Controller('/')
-    class TestController {
-      @Get('/')
-      public getTest(
-        req: e.Request,
-        res: e.Response,
-        nextFunc: e.NextFunction
-      ) {
-        return new Promise(resolve => {
-          setTimeout(
-            () => {
-              nextFunc();
-              resolve();
-            },
-            100,
-            'GET'
-          );
-        });
-      }
+      test('should work for async methods which call nextFunc()', async () => {
+        @decorator('/')
+        class TestController {
+          @Get('/')
+          public getTest(
+            req: e.Request,
+            res: e.Response,
+            nextFunc: e.NextFunction
+          ) {
+            return new Promise(resolve => {
+              setTimeout(
+                () => {
+                  nextFunc();
+                  resolve();
+                },
+                100,
+                'GET'
+              );
+            });
+          }
 
-      @Get('/')
-      public getTest2(req: e.Request, res: e.Response) {
-        return 'GET';
-      }
-    }
-    appTest.addClass(TestController);
-    await appTest.build();
-    const response = await supertest(appTest.app).get('/').expect(200);
-    expect(response).toMatchSnapshot();
-  });
+          @Get('/')
+          public getTest2(req: e.Request, res: e.Response) {
+            return 'GET';
+          }
+        }
+        appTest.addClass(TestController);
+        await appTest.build();
+        const response = await supertest(appTest.app).get('/').expect(200);
+        expect(response).toMatchSnapshot();
+      });
 
-  test('should work for async methods called by nextFunc()', async () => {
-    @Controller('/')
-    class TestController {
-      @Get('/')
-      public getTest(
-        req: e.Request,
-        res: e.Response,
-        nextFunc: e.NextFunction
-      ) {
-        nextFunc();
-      }
+      test('should work for async methods called by nextFunc()', async () => {
+        @decorator('/')
+        class TestController {
+          @Get('/')
+          public getTest(
+            req: e.Request,
+            res: e.Response,
+            nextFunc: e.NextFunction
+          ) {
+            nextFunc();
+          }
 
-      @Get('/')
-      public getTest2(req: e.Request, res: e.Response) {
-        return new Promise(resolve => {
-          setTimeout(resolve, 100, 'GET');
-        });
-      }
-    }
-    appTest.addClass(TestController);
-    await appTest.build();
-    const response = await supertest(appTest.app).get('/').expect(200);
-    expect(response).toMatchSnapshot();
-  });
+          @Get('/')
+          public getTest2(req: e.Request, res: e.Response) {
+            return new Promise(resolve => {
+              setTimeout(resolve, 100, 'GET');
+            });
+          }
+        }
+        appTest.addClass(TestController);
+        await appTest.build();
+        const response = await supertest(appTest.app).get('/').expect(200);
+        expect(response).toMatchSnapshot();
+      });
 
-  test('should work for each shortcut decorator', async () => {
-    @Controller('/')
-    class TestController {
-      @Get('/')
-      public getTest(req: e.Request, res: e.Response) {
-        res.send('GET');
-      }
-      @Post('/')
-      public postTest(req: e.Request, res: e.Response) {
-        res.send('POST');
-      }
-      @Put('/')
-      public putTest(req: e.Request, res: e.Response) {
-        res.send('PUT');
-      }
-      @Patch('/')
-      public patchTest(req: e.Request, res: e.Response) {
-        res.send('PATCH');
-      }
-      @Head('/')
-      public headTest(req: e.Request, res: e.Response) {
-        res.send('HEAD');
-      }
-      @Delete('/')
-      public deleteTest(req: e.Request, res: e.Response) {
-        res.send('DELETE');
-      }
-    }
-    appTest.addClass(TestController);
-    await appTest.build();
-    const agent = supertest(appTest.app);
+      test('should work for each shortcut decorator', async () => {
+        @decorator('/')
+        class TestController {
+          @Get('/')
+          public getTest(req: e.Request, res: e.Response) {
+            res.send('GET');
+          }
+          @Post('/')
+          public postTest(req: e.Request, res: e.Response) {
+            res.send('POST');
+          }
+          @Put('/')
+          public putTest(req: e.Request, res: e.Response) {
+            res.send('PUT');
+          }
+          @Patch('/')
+          public patchTest(req: e.Request, res: e.Response) {
+            res.send('PATCH');
+          }
+          @Head('/')
+          public headTest(req: e.Request, res: e.Response) {
+            res.send('HEAD');
+          }
+          @Delete('/')
+          public deleteTest(req: e.Request, res: e.Response) {
+            res.send('DELETE');
+          }
+        }
+        appTest.addClass(TestController);
+        await appTest.build();
+        const agent = supertest(appTest.app);
 
-    const rd = await agent.delete('/').expect(200);
-    expect(rd).toMatchSnapshot();
+        const rd = await agent.delete('/').expect(200);
+        expect(rd).toMatchSnapshot();
 
-    const rh = await agent.head('/').expect(200);
-    expect(rh).toMatchSnapshot();
+        const rh = await agent.head('/').expect(200);
+        expect(rh).toMatchSnapshot();
 
-    const rpatch = await agent.patch('/').expect(200);
-    expect(rpatch).toMatchSnapshot();
+        const rpatch = await agent.patch('/').expect(200);
+        expect(rpatch).toMatchSnapshot();
 
-    const rput = await agent.put('/').expect(200);
-    expect(rput).toMatchSnapshot();
+        const rput = await agent.put('/').expect(200);
+        expect(rput).toMatchSnapshot();
 
-    const rpost = await agent.post('/').expect(200);
-    expect(rpost).toMatchSnapshot();
+        const rpost = await agent.post('/').expect(200);
+        expect(rpost).toMatchSnapshot();
 
-    const rget = await agent.get('/').expect(200);
-    expect(rget).toMatchSnapshot();
-  });
+        const rget = await agent.get('/').expect(200);
+        expect(rget).toMatchSnapshot();
+      });
 
-  test('should work for more obscure HTTP methods using the httpMethod decorator', async () => {
-    @Controller('/')
-    class TestController {
-      @Method('propfind', '/')
-      public getTest(req: e.Request, res: e.Response) {
-        res.send('PROPFIND');
-      }
-    }
+      test('should work for more obscure HTTP methods using the httpMethod decorator', async () => {
+        @decorator('/')
+        class TestController {
+          @Method('propfind', '/')
+          public getTest(req: e.Request, res: e.Response) {
+            res.send('PROPFIND');
+          }
+        }
 
-    appTest.addClass(TestController);
-    await appTest.build();
+        appTest.addClass(TestController);
+        await appTest.build();
 
-    const response = await supertest(appTest.app).propfind('/').expect(200);
-    expect(response).toMatchSnapshot();
-  });
+        const response = await supertest(appTest.app).propfind('/').expect(200);
+        expect(response).toMatchSnapshot();
+      });
 
-  test('should use returned values as response', async () => {
-    @Controller('/')
-    class TestController {
-      @Get('/')
-      public getTest(req: e.Request, res: e.Response) {
-        return { hello: 'world' };
-      }
-    }
+      test('should use returned values as response', async () => {
+        @decorator('/')
+        class TestController {
+          @Get('/')
+          public getTest(req: e.Request, res: e.Response) {
+            return { hello: 'world' };
+          }
+        }
 
-    appTest.addClass(TestController);
-    await appTest.build();
+        appTest.addClass(TestController);
+        await appTest.build();
 
-    const response = await supertest(appTest.app).get('/').expect(200);
-    expect(response).toMatchSnapshot();
-  });
+        const response = await supertest(appTest.app).get('/').expect(200);
+        expect(response).toMatchSnapshot();
+      });
 
-  test('should use custom router passed from configuration', async () => {
-    @Controller('/CaseSensitive')
-    class TestController {
-      @Get('/Endpoint')
-      public get() {
-        return 'Such Text';
-      }
-    }
+      test('should use custom router passed from configuration', async () => {
+        @decorator('/CaseSensitive')
+        class TestController {
+          @Get('/Endpoint')
+          public get() {
+            return 'Such Text';
+          }
+        }
 
-    @Config()
-    class Conf {
-      @Bean(CUSTOM_ROUTER_CREATOR)
-      custom() {
-        return () =>
-          e.Router({
-            caseSensitive: true
-          });
-      }
-    }
-    appTest.addClass(Conf);
-    appTest.addClass(TestController);
-    await appTest.build();
+        @Config()
+        class Conf {
+          @Bean(CUSTOM_ROUTER_CREATOR)
+          custom() {
+            return () =>
+              e.Router({
+                caseSensitive: true
+              });
+          }
+        }
+        appTest.addClass(Conf);
+        appTest.addClass(TestController);
+        await appTest.build();
 
-    const agent = supertest(appTest.app);
+        const agent = supertest(appTest.app);
 
-    const expectedSuccess = await agent
-      .get('/CaseSensitive/Endpoint')
-      .expect(200, 'Such Text');
+        const expectedSuccess = await agent
+          .get('/CaseSensitive/Endpoint')
+          .expect(200);
 
-    expect(expectedSuccess).toMatchSnapshot();
+        expect(expectedSuccess).toMatchSnapshot();
 
-    const expectedNotFound1 = await agent
-      .get('/casesensitive/endpoint')
-      .expect(404);
+        const expectedNotFound1 = await agent
+          .get('/casesensitive/endpoint')
+          .expect(404);
 
-    expect(expectedNotFound1).toMatchSnapshot();
+        expect(expectedNotFound1).toMatchSnapshot();
 
-    const expectedNotFound2 = await agent
-      .get('/CaseSensitive/endpoint')
-      .expect(404);
+        const expectedNotFound2 = await agent
+          .get('/CaseSensitive/endpoint')
+          .expect(404);
 
-    expect(expectedNotFound2).toMatchSnapshot();
-  });
+        expect(expectedNotFound2).toMatchSnapshot();
+      });
 
-  test('should use custom routing configuration', async () => {
-    @Controller('/ping')
-    class TestController {
-      @Get('/endpoint')
-      public get() {
-        return 'pong';
-      }
-    }
+      test('should use custom routing configuration', async () => {
+        @decorator('/ping')
+        class TestController {
+          @Get('/endpoint')
+          public get() {
+            return 'pong';
+          }
+        }
 
-    appTest.addClass(TestController);
-    appTest.addConf('application.express.rootPath', '/api/v1');
-    await appTest.build();
+        appTest.addClass(TestController);
+        appTest.addConf('application.express.rootPath', '/api/v1');
+        await appTest.build();
 
-    const response = await supertest(appTest.app)
-      .get('/api/v1/ping/endpoint')
-      .expect(200);
+        const response = await supertest(appTest.app)
+          .get('/api/v1/ping/endpoint')
+          .expect(200);
 
-    expect(response).toMatchSnapshot();
+        expect(response).toMatchSnapshot();
+      });
+    });
   });
 });

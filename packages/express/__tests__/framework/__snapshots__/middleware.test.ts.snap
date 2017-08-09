@@ -1,5 +1,230 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Middleware inject: should call all middleware in correct order 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-8DC7vTKWbN5BA3uYqIScRrduS8E\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "GET",
+}
+`;
+
+exports[`Middleware inject: should call all middleware in correct order 2`] = `"abcde"`;
+
+exports[`Middleware inject: should call all middleware in correct order 3`] = `"ddeargddearg2edeargedearg2"`;
+
+exports[`Middleware inject: should call controller-level middleware correctly 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-8DC7vTKWbN5BA3uYqIScRrduS8E\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "GET",
+}
+`;
+
+exports[`Middleware inject: should call controller-level middleware correctly 2`] = `"abcde"`;
+
+exports[`Middleware inject: should call controller-level middleware correctly 3`] = `"ddeargddearg2edeargedearg2"`;
+
+exports[`Middleware inject: should call method-level middleware correctly (ALL) 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-a0KHTjzSB3HZMJbsXONjB6HyuhQ\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "ALL",
+}
+`;
+
+exports[`Middleware inject: should call method-level middleware correctly (ALL) 2`] = `"abcde"`;
+
+exports[`Middleware inject: should call method-level middleware correctly (ALL) 3`] = `"ddeargddearg2edeargedearg2"`;
+
+exports[`Middleware inject: should call method-level middleware correctly (DELETE) 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "6",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"6-1vVjYJjNRYzp0ik5+OPo3qsOm9A\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "DELETE",
+  },
+  "status": 200,
+  "text": "DELETE",
+}
+`;
+
+exports[`Middleware inject: should call method-level middleware correctly (DELETE) 2`] = `"abcde"`;
+
+exports[`Middleware inject: should call method-level middleware correctly (DELETE) 3`] = `"ddeargddearg2edeargedearg2"`;
+
+exports[`Middleware inject: should call method-level middleware correctly (GET) 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-8DC7vTKWbN5BA3uYqIScRrduS8E\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "GET",
+}
+`;
+
+exports[`Middleware inject: should call method-level middleware correctly (GET) 2`] = `"abcde"`;
+
+exports[`Middleware inject: should call method-level middleware correctly (GET) 3`] = `"ddeargddearg2edeargedearg2"`;
+
+exports[`Middleware inject: should call method-level middleware correctly (HEAD) 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "4",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"4-cTilFmGUexm1CI2lor/t4odvSbk\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "HEAD",
+  },
+  "status": 200,
+  "text": undefined,
+}
+`;
+
+exports[`Middleware inject: should call method-level middleware correctly (HEAD) 2`] = `"abcde"`;
+
+exports[`Middleware inject: should call method-level middleware correctly (HEAD) 3`] = `"ddeargddearg2edeargedearg2"`;
+
+exports[`Middleware inject: should call method-level middleware correctly (PATCH) 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "5",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"5-n74p1Ndux1ZCGu4G4PNPF/pIj/M\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "PATCH",
+  },
+  "status": 200,
+  "text": "PATCH",
+}
+`;
+
+exports[`Middleware inject: should call method-level middleware correctly (PATCH) 2`] = `"abcde"`;
+
+exports[`Middleware inject: should call method-level middleware correctly (PATCH) 3`] = `"ddeargddearg2edeargedearg2"`;
+
+exports[`Middleware inject: should call method-level middleware correctly (POST) 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "4",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"4-Yf+Bwwqjx254r+pisuO9HfpJ6FQ\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "POST",
+  },
+  "status": 200,
+  "text": "POST",
+}
+`;
+
+exports[`Middleware inject: should call method-level middleware correctly (POST) 2`] = `"abcde"`;
+
+exports[`Middleware inject: should call method-level middleware correctly (POST) 3`] = `"ddeargddearg2edeargedearg2"`;
+
+exports[`Middleware inject: should call method-level middleware correctly (PUT) 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-CRsM5C6wvZYWnqALFt2Tj21jrJU\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "user-agent": "node-superagent/3.5.2",
+    },
+    "method": "PUT",
+  },
+  "status": 200,
+  "text": "PUT",
+}
+`;
+
+exports[`Middleware inject: should call method-level middleware correctly (PUT) 2`] = `"abcde"`;
+
+exports[`Middleware inject: should call method-level middleware correctly (PUT) 3`] = `"ddeargddearg2edeargedearg2"`;
+
 exports[`Middleware: should call all middleware in correct order 1`] = `
 Object {
   "header": Object {
