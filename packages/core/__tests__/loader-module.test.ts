@@ -1,17 +1,17 @@
 // tslint:disable:one-line
 // tslint:disable:no-unused-expression
-import { Loader } from '../src/loader';
+import { LoaderModule } from '../src/loaders';
 import * as path from 'path';
 import { Scan } from '../src/index';
 import { METADATA_KEY } from '../src/constants';
 
-let loader: Loader;
+let loader: LoaderModule;
 beforeEach(() => {
-  loader = new Loader();
+  loader = new LoaderModule();
 });
 
 test('whitout other scan', () => {
-  const registry = loader.loadModules(
+  const registry = loader.load(
     path.resolve(__dirname, './fixtures/loader/withoutscan'),
     []
   );
@@ -20,7 +20,7 @@ test('whitout other scan', () => {
 });
 
 test('with scan', () => {
-  const registry = loader.loadModules(
+  const registry = loader.load(
     path.resolve(__dirname, './fixtures/loader/withscan'),
     []
   );
@@ -32,7 +32,7 @@ test('with plugin', () => {
   @Scan(path.resolve(__dirname, './fixtures/loader/withscan'))
   class Plugin {}
 
-  const registry = loader.loadModules(
+  const registry = loader.load(
     path.resolve(__dirname, './fixtures/loader/withoutscan'),
     [new Plugin()]
   );
@@ -45,7 +45,7 @@ test('with plugin and false scan path', () => {
 
   Reflect.defineMetadata(METADATA_KEY.scan, [], Plugin);
 
-  const registry = loader.loadModules(
+  const registry = loader.load(
     path.resolve(__dirname, './fixtures/loader/withoutscan'),
     [new Plugin()]
   );

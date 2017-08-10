@@ -1,15 +1,15 @@
-import { Loader } from '../loader';
+import { LoaderConfig } from '../loaders';
 import * as _ from 'lodash';
 
-export class LoaderTest extends Loader {
+export class LoaderConfigTest extends LoaderConfig {
   conf = {};
 
   addConfig(p: string, conf: any) {
     this.conf = _.set(this.conf, p, conf);
   }
 
-  loadConfig(folder: string, profile?: string | null): any {
-    const config = super.loadConfig(folder, profile);
+  load(folder: string, profile?: string | null): any {
+    const config = super.load(folder, profile);
     return _.merge({}, config, this.conf);
   }
 }

@@ -1,6 +1,6 @@
 import * as path from 'path';
 import { Gabliam } from '../gabliam';
-import { LoaderTest } from './loader';
+import { LoaderConfigTest } from './loader';
 import { METADATA_KEY } from '../constants';
 import { RegistryMetada } from '../interfaces';
 import * as _ from 'lodash';
@@ -8,7 +8,7 @@ import * as _ from 'lodash';
 export class GabliamTest {
   public gab: Gabliam;
 
-  public loader: LoaderTest;
+  public loaderConfig: LoaderConfigTest;
 
   constructor(gab?: Gabliam) {
     if (gab) {
@@ -20,7 +20,7 @@ export class GabliamTest {
       });
     }
 
-    this.loader = this.gab.loader = new LoaderTest();
+    this.loaderConfig = this.gab.loaderConfig = new LoaderConfigTest();
   }
 
   async build() {
@@ -43,7 +43,7 @@ export class GabliamTest {
   }
 
   addConf(p: string, conf: any) {
-    this.loader.addConfig(p, conf);
+    this.loaderConfig.addConfig(p, conf);
   }
 
   addClass(ctrl: any) {

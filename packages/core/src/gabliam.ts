@@ -8,7 +8,7 @@ import {
   CORE_CONFIG,
   VALUE_EXTRACTOR
 } from './constants';
-import { Loader } from './loader';
+import { LoaderModule, LoaderConfig } from './loaders';
 import { createContainer } from './container';
 import { Registry } from './registry';
 import * as d from 'debug';
@@ -34,7 +34,9 @@ export class Gabliam {
    */
   public registry: Registry = new Registry();
 
-  public loader: Loader = new Loader();
+  public loaderModule: LoaderModule = new LoaderModule();
+
+  public loaderConfig: LoaderConfig = new LoaderConfig();
 
   public plugins: interfaces.GabliamPlugin[] = [];
 
@@ -89,7 +91,7 @@ export class Gabliam {
      * Loading phase
      */
     this.registry.addRegistry(
-      this.loader.loadModules(this.options.scanPath, this.plugins)
+      this.loaderModule.load(this.options.scanPath, this.plugins)
     );
 
     /**
@@ -184,7 +186,7 @@ export class Gabliam {
    * Load config file and bind result in APP_CONFIG
    */
   private _initializeConfig() {
-    const config = (this.config = this.loader.loadConfig(
+    const config = (this.config = this.loaderConfig.load(
       this.options.configPath
     ));
     this.container.bind(APP_CONFIG).toConstantValue(config);
