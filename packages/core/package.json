@@ -37,7 +37,9 @@
     "inversify": "^4.3.0",
     "inversify-logger-middleware": "^3.0.0",
     "js-yaml": "^3.8.1",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "shortstop": "^1.0.3",
+    "shortstop-handlers": "^1.0.1"
   },
   "devDependencies": {
     "@types/debug": "^0.0.29",

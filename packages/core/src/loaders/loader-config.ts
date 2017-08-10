@@ -3,6 +3,8 @@ import * as yaml from 'js-yaml';
 import * as fs from 'fs';
 import * as _ from 'lodash';
 import * as d from 'debug';
+import * as shortstop from 'shortstop';
+import * as handlers from 'shortstop-handlers';
 
 const debug = d('Gabliam:loader-config');
 
@@ -12,7 +14,20 @@ export class LoaderConfig {
    * @param  {string} folder the configuration folder
    * @returns any
    */
-  load(folder: string, profile = process.env.PROFILE || null): any {
+  async load(
+    scanPath: string,
+    folder: string,
+    profile = process.env.PROFILE || null
+  ): Promise<any> {
+    const resolver = shortstop.create();
+    resolver.use('file', handlers.file(scanPath));
+    resolver.use('path', handlers.path(scanPath));
+    resolver.use('base64', handlers.base64());
+    resolver.use('env', handlers.env());
+    resolver.use('require', handlers.require(scanPath));
+    resolver.use('exec', handlers.exec(scanPath));
+    resolver.use('glob', handlers.glob(scanPath));
+
     debug('loadConfig', folder);
     const files = glob.sync('**/application?(-+([a-zA-Z])).yml', {
       cwd: folder
@@ -42,8 +57,17 @@ export class LoaderConfig {
         );
       }
     }
+
     debug('loadConfig', config);
-    return config;
+    return new Promise((resolve, reject) => {
+      resolver.resolve(config, (err, data) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(data);
+        }
+      });
+    });
   }
 
   private loadYmlFile(ymlPath: string) {

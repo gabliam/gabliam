@@ -8,8 +8,12 @@ export class LoaderConfigTest extends LoaderConfig {
     this.conf = _.set(this.conf, p, conf);
   }
 
-  load(folder: string, profile?: string | null): any {
-    const config = super.load(folder, profile);
+  async load(
+    scanPath: string,
+    folder: string,
+    profile = process.env.PROFILE || null
+  ): Promise<any> {
+    const config = await super.load(scanPath, folder, profile);
     return _.merge({}, config, this.conf);
   }
 }

@@ -85,7 +85,7 @@ export class Gabliam {
     /**
      * Load config file
      */
-    this._initializeConfig();
+    await this._initializeConfig();
 
     /**
      * Loading phase
@@ -185,10 +185,12 @@ export class Gabliam {
   /**
    * Load config file and bind result in APP_CONFIG
    */
-  private _initializeConfig() {
-    const config = (this.config = this.loaderConfig.load(
+  private async _initializeConfig() {
+    this.config = await this.loaderConfig.load(
+      this.options.scanPath,
       this.options.configPath
-    ));
+    );
+    const config = this.config;
     this.container.bind(APP_CONFIG).toConstantValue(config);
     this.container
       .bind(VALUE_EXTRACTOR)

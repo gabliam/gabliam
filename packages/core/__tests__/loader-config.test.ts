@@ -5,32 +5,35 @@ import * as mock from 'mock-fs';
 import * as path from 'path';
 
 let loader: LoaderConfig;
-beforeEach(() => {
+beforeEach(async () => {
   loader = new LoaderConfig();
 });
 
-test(`with config folder doesn't exist`, () => {
-  const config = loader.load('doesntexist/config');
+test(`with config folder doesn't exist`, async () => {
+  const config = await loader.load(__dirname, 'doesntexist/config');
   expect(config).toMatchSnapshot();
 });
 
-test(`with bad application.yml`, () => {
-  const config = loader.load(path.resolve(__dirname, './fixtures/badyml'));
+test(`with bad application.yml`, async () => {
+  const config = await loader.load(
+    __dirname,
+    path.resolve(__dirname, './fixtures/badyml')
+  );
   expect(config).toMatchSnapshot();
 });
 
-test(`with application.yml empty`, () => {
+test(`with application.yml empty`, async () => {
   mock({
     'test/config': {
       'application.yml': ``
     }
   });
-  const config = loader.load('test/config');
+  const config = await loader.load(__dirname, 'test/config');
   expect(config).toMatchSnapshot();
   mock.restore();
 });
 
-test(`with application.yml with nothing`, () => {
+test(`with application.yml with nothing`, async () => {
   mock({
     'test/config': {
       // tslint:disable-next-line:no-trailing-whitespace
@@ -39,19 +42,20 @@ test(`with application.yml with nothing`, () => {
               `
     }
   });
-  const config = loader.load('test/config');
+  const config = await loader.load(__dirname, 'test/config');
   expect(config).toEqual({});
   mock.restore();
 });
 
-describe('with application.yml', () => {
-  beforeAll(() => {
+describe('with application.yml', async () => {
+  beforeAll(async () => {
     mock({
       'test/config': {
         'application.yml': `
               application:
                 host: 127.0.0.1
                 db: test
+              testPath: path:./test.json
             `,
         'application-prod.yml': `
               application:
@@ -61,19 +65,48 @@ describe('with application.yml', () => {
     });
   });
 
-  test('load application.yml', () => {
-    const config = loader.load('test/config');
+  test('load application.yml', async () => {
+    const config = await loader.load(__dirname, 'test/config');
     expect(config).toMatchSnapshot();
   });
 
-  test('load with bad profile', () => {
-    const config = loader.load('test/config', 'int');
+  test('load with bad profile', async () => {
+    const config = await loader.load(__dirname, 'test/config', 'int');
     expect(config).toMatchSnapshot();
   });
 
-  test('load with prod profile', () => {
-    const config = loader.load('test/config', 'prod');
+  test('load with prod profile', async () => {
+    const config = await loader.load(__dirname, 'test/config', 'prod');
     expect(config).toMatchSnapshot();
+  });
+
+  afterAll(() => mock.restore());
+});
+
+describe('with application.yml with bad handler', async () => {
+  beforeAll(async () => {
+    mock({
+      'test/config': {
+        'application.yml': `
+              application:
+                host: 127.0.0.1
+                db: test
+              testPath: file:./test.json
+            `,
+        'application-prod.yml': `
+              application:
+                host: prod.app.com
+            `
+      }
+    });
+  });
+
+  test('must throw error', async () => {
+    try {
+      await loader.load(__dirname, 'test/config', 'int');
+    } catch (e) {
+      expect(e).toMatchSnapshot();
+    }
   });
 
   afterAll(() => mock.restore());
