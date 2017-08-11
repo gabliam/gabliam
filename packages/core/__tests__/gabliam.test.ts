@@ -8,7 +8,8 @@ import {
   interfaces,
   inversifyInterfaces,
   Registry,
-  Config
+  Config,
+  Plugin
 } from '../src';
 import * as path from 'path';
 import { TestService } from './fixtures/gabliam/service';
@@ -53,6 +54,7 @@ test('gabliam instance with path', async () => {
 });
 
 describe('test plugin', async () => {
+  @Plugin()
   class PluginTest implements interfaces.GabliamPlugin {
     build(container: inversifyInterfaces.Container, registry: Registry): void {}
 
@@ -195,4 +197,29 @@ describe('test plugin', async () => {
       expect(destroy.calledOnce).toBe(true);
     });
   });
+});
+
+test('should fail with bad Plugin', () => {
+  class BadPlugin {}
+  const g = new GabliamTest();
+  expect(() => {
+    g.gab.addPlugin(BadPlugin);
+  }).toThrowError();
+});
+
+test('should fail with Plugin with bad deps', () => {
+  @Plugin({ dependencies: ['BadPlugin'] })
+  class BadPlugin {}
+  const g = new GabliamTest();
+  expect(() => {
+    g.gab.addPlugin(BadPlugin);
+  }).toThrowError();
+});
+
+test('plugin findByName', () => {
+  @Plugin()
+  class BadPlugin {}
+  const g = new GabliamTest();
+  g.gab.addPlugin(BadPlugin);
+  expect(g.gab.pluginList.findByName('BadPlugin')).toMatchSnapshot();
 });

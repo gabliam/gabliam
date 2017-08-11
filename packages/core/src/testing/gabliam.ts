@@ -29,7 +29,7 @@ export class GabliamTest {
 
   async startPlugins(...pluginNames: string[]) {
     for (const pluginName of pluginNames) {
-      const plugin = this.gab.plugins.find(
+      const plugin = this.gab.pluginList.plugins.find(
         p => p.constructor.name === pluginName && _.isFunction(p.start)
       );
       if (plugin) {

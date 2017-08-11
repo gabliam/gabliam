@@ -90,6 +90,45 @@ Object {
 }
 `;
 
+exports[`@Plugin should add Plugin metadata to a class when decorated with @Plugin('TestPlugin') 1`] = `
+Object {
+  "dependencies": Array [],
+  "name": "TestPlugin",
+}
+`;
+
+exports[`@Plugin should add Plugin metadata to a class when decorated with @Plugin() 1`] = `
+Object {
+  "dependencies": Array [],
+  "name": "TestBean",
+}
+`;
+
+exports[`@Plugin should add Plugin metadata to a class when decorated with @Plugin({ dependencies: ['TestPlugin'] }) 1`] = `
+Object {
+  "dependencies": Array [
+    "TestPlugin",
+  ],
+  "name": "TestBean",
+}
+`;
+
+exports[`@Plugin should add Plugin metadata to a class when decorated with @Plugin({ name: 'TestPlugin' }) 1`] = `
+Object {
+  "dependencies": Array [],
+  "name": "TestPlugin",
+}
+`;
+
+exports[`@Plugin should add Plugin metadata to a class when decorated with @Plugin({ name: 'TestPlugin', dependencies: ['TestPlugin2'] }) 1`] = `
+Object {
+  "dependencies": Array [
+    "TestPlugin2",
+  ],
+  "name": "TestPlugin",
+}
+`;
+
 exports[`@PluginConfig should add Registry and config metadata to a class when decorated with @PluginConfig 1`] = `true`;
 
 exports[`@PluginConfig should add Registry and config metadata to a class when decorated with @PluginConfig 2`] = `

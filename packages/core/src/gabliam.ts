@@ -13,6 +13,7 @@ import { createContainer } from './container';
 import { Registry } from './registry';
 import * as d from 'debug';
 import { configureValueExtractor } from './utils';
+import { PluginList } from './plugin-list';
 
 const debug = d('Gabliam:core');
 
@@ -38,7 +39,7 @@ export class Gabliam {
 
   public loaderConfig: LoaderConfig = new LoaderConfig();
 
-  public plugins: interfaces.GabliamPlugin[] = [];
+  public pluginList: PluginList = new PluginList();
 
   public options: interfaces.GabliamConfig;
 
@@ -73,7 +74,7 @@ export class Gabliam {
    * @returns Gabliam
    */
   public addPlugin(ctor: interfaces.GabliamPluginConstructor): Gabliam {
-    this.plugins.push(new ctor());
+    this.pluginList.add(ctor);
     return this;
   }
 
@@ -91,7 +92,7 @@ export class Gabliam {
      * Loading phase
      */
     this.registry.addRegistry(
-      this.loaderModule.load(this.options.scanPath, this.plugins)
+      this.loaderModule.load(this.options.scanPath, this.pluginList.plugins)
     );
 
     /**
@@ -104,14 +105,7 @@ export class Gabliam {
      */
     await this._loadConfig();
 
-    /**
-     * building phase
-     */
-    const pluginsWithBuild = this.plugins.filter(plugin =>
-      _.isFunction(plugin.build)
-    );
-
-    for (const plugin of pluginsWithBuild) {
+    for (const plugin of this.pluginList.pluginsWithBuild) {
       await Promise.resolve(plugin.build!(this.container, this.registry));
     }
 
@@ -135,11 +129,7 @@ export class Gabliam {
    * @returns Promise
    */
   async start(): Promise<Gabliam> {
-    const pluginsWithStart = this.plugins.filter(plugin =>
-      _.isFunction(plugin.start)
-    );
-
-    for (const plugin of pluginsWithStart) {
+    for (const plugin of this.pluginList.pluginsWithStart) {
       await plugin.start!(this.container, this.registry);
     }
 
@@ -153,11 +143,7 @@ export class Gabliam {
    * @returns Promise
    */
   async stop(): Promise<Gabliam> {
-    const pluginsWithStop = this.plugins.filter(plugin =>
-      _.isFunction(plugin.stop)
-    );
-
-    for (const plugin of pluginsWithStop) {
+    for (const plugin of this.pluginList.pluginsWithStop) {
       await plugin.stop!(this.container, this.registry);
     }
 
@@ -171,11 +157,7 @@ export class Gabliam {
    * @returns Promise
    */
   async destroy(): Promise<Gabliam> {
-    const pluginsWithDestroy = this.plugins.filter(plugin =>
-      _.isFunction(plugin.destroy)
-    );
-
-    for (const plugin of pluginsWithDestroy) {
+    for (const plugin of this.pluginList.pluginsWithDestroy) {
       await plugin.destroy!(this.container, this.registry);
     }
 
@@ -216,11 +198,7 @@ export class Gabliam {
         this.container.bind(id).to(target).inSingletonScope()
       );
 
-    const pluginsWithBind = this.plugins.filter(plugin =>
-      _.isFunction(plugin.bind)
-    );
-
-    for (const plugin of pluginsWithBind) {
+    for (const plugin of this.pluginList.pluginsWithBind) {
       await Promise.resolve(plugin.bind!(this.container, this.registry));
     }
   }
@@ -233,11 +211,6 @@ export class Gabliam {
     async function callInstance(instance: any, key: string) {
       return Promise.resolve(instance[key]());
     }
-
-    // list of plugins with config phase
-    const pluginConfig = this.plugins.filter(plugin =>
-      _.isFunction(plugin.config)
-    );
 
     let configsRegistry = this.registry.get<interfaces.ConfigRegistry>(
       TYPE.Config
@@ -264,7 +237,7 @@ export class Gabliam {
           }
         }
 
-        for (const plugin of pluginConfig) {
+        for (const plugin of this.pluginList.pluginWithConfig) {
           await Promise.resolve(
             plugin.config!(this.container, this.registry, confInstance)
           );

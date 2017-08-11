@@ -7,11 +7,17 @@ import {
   register,
   Scan,
   Service,
-  Value
+  Value,
+  Plugin
 } from '../src/decorators';
 import { CoreConfig } from '../src/decorators/config';
 import { METADATA_KEY, TYPE } from '../src/constants';
-import { BeanMetadata, RegistryMetada, ValueMetadata } from '../src/interfaces';
+import {
+  BeanMetadata,
+  RegistryMetada,
+  ValueMetadata,
+  PluginMetadata
+} from '../src/interfaces';
 import * as Joi from 'joi';
 
 describe('@Bean', () => {
@@ -374,3 +380,74 @@ describe('@Value', () => {
     }).toThrowError();
   });
 }); // end describe @Value
+
+describe('@Plugin', () => {
+  test('should add Plugin metadata to a class when decorated with @Plugin()', () => {
+    @Plugin()
+    class TestBean {}
+    const pluginMetadata: PluginMetadata = Reflect.getMetadata(
+      METADATA_KEY.plugin,
+      TestBean
+    );
+    expect(pluginMetadata).toMatchSnapshot();
+  });
+
+  test(`should add Plugin metadata to a class when decorated with @Plugin('TestPlugin')`, () => {
+    @Plugin('TestPlugin')
+    class TestBean {}
+    const pluginMetadata: PluginMetadata = Reflect.getMetadata(
+      METADATA_KEY.plugin,
+      TestBean
+    );
+    expect(pluginMetadata).toMatchSnapshot();
+  });
+
+  test(`should add Plugin metadata to a class when decorated with @Plugin({ dependencies: ['TestPlugin'] })`, () => {
+    @Plugin({ dependencies: ['TestPlugin'] })
+    class TestBean {}
+    const pluginMetadata: PluginMetadata = Reflect.getMetadata(
+      METADATA_KEY.plugin,
+      TestBean
+    );
+    expect(pluginMetadata).toMatchSnapshot();
+  });
+
+  test(`should add Plugin metadata to a class when decorated with @Plugin({ name: 'TestPlugin' })`, () => {
+    @Plugin({ name: 'TestPlugin' })
+    class TestBean {}
+    const pluginMetadata: PluginMetadata = Reflect.getMetadata(
+      METADATA_KEY.plugin,
+      TestBean
+    );
+    expect(pluginMetadata).toMatchSnapshot();
+  });
+
+  test(`should add Plugin metadata to a class when decorated with @Plugin({ name: 'TestPlugin', dependencies: ['TestPlugin2'] })`, () => {
+    @Plugin({ name: 'TestPlugin', dependencies: ['TestPlugin2'] })
+    class TestBean {}
+    const pluginMetadata: PluginMetadata = Reflect.getMetadata(
+      METADATA_KEY.plugin,
+      TestBean
+    );
+    expect(pluginMetadata).toMatchSnapshot();
+  });
+
+  test('should fail when decorated multiple times with @Plugin', () => {
+    expect(function() {
+      @Plugin()
+      @Plugin()
+      class TestBean {}
+
+      new TestBean();
+    }).toThrowError();
+  });
+
+  test('should fail whit bad value', () => {
+    expect(function() {
+      @Plugin(<any>{ lol: 'application.name' })
+      class TestBean {}
+
+      new TestBean();
+    }).toThrowError();
+  });
+});

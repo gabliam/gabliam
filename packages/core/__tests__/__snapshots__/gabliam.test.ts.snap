@@ -57,6 +57,13 @@ DbConfig {
 }
 `;
 
+exports[`plugin findByName 1`] = `
+Object {
+  "name": "BadPlugin",
+  "plugin": BadPlugin {},
+}
+`;
+
 exports[`test plugin with config gabliam build 1`] = `2`;
 
 exports[`test plugin with config gabliam build 2`] = `"Conf2Conf"`;

@@ -24,6 +24,12 @@ export interface GabliamPluginConstructor {
   new (): GabliamPlugin;
 }
 
+export interface GabliamPluginDefinition {
+  name: string;
+
+  plugin: GabliamPlugin;
+}
+
 /**
  * Interface for a plugin
  */
