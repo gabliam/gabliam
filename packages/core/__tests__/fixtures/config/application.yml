@@ -1,0 +1,3 @@
+application:
+  host: prod.app.com
+  mongoose: require:./fixtures/test.json

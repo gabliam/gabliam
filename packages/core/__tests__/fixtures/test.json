@@ -1,0 +1,5 @@
+{
+  "mongoose": {
+    "url": "mongo://localhost"
+  }
+}

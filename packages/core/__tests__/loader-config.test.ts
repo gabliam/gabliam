@@ -43,8 +43,16 @@ test(`with application.yml with nothing`, async () => {
     }
   });
   const config = await loader.load(__dirname, 'test/config');
-  expect(config).toEqual({});
+  expect(config).toMatchSnapshot();
   mock.restore();
+});
+
+test(`with application.yml`, async () => {
+  const config = await loader.load(
+    __dirname,
+    path.resolve(__dirname, './fixtures/config')
+  );
+  expect(config).toMatchSnapshot();
 });
 
 describe('with application.yml', async () => {

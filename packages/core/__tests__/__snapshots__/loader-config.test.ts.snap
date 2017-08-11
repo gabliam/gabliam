@@ -1,5 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`with application.yml 1`] = `
+Object {
+  "application": Object {
+    "host": "prod.app.com",
+    "mongoose": Object {
+      "mongoose": Object {
+        "url": "mongo://localhost",
+      },
+    },
+  },
+}
+`;
+
 exports[`with application.yml empty 1`] = `Object {}`;
 
 exports[`with application.yml load application.yml 1`] = `
@@ -33,6 +46,8 @@ Object {
 `;
 
 exports[`with application.yml with bad handler must throw error 1`] = `[Error: ENOENT, no such file or directory '<PROJECT_ROOT>/__tests__/test.json']`;
+
+exports[`with application.yml with nothing 1`] = `Object {}`;
 
 exports[`with bad application.yml 1`] = `Object {}`;
 
