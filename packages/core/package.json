@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "caller": "^1.0.1",
-    "debug": "^2.6.1",
+    "debug": "^3.0.0",
     "glob": "^7.1.1",
     "inversify": "^4.3.0",
     "inversify-logger-middleware": "^3.0.0",
@@ -42,7 +42,7 @@
     "shortstop-handlers": "^1.0.1"
   },
   "devDependencies": {
-    "@types/debug": "^0.0.29",
+    "@types/debug": "^0.0.30",
     "@types/glob": "^5.0.30",
     "@types/jest": "^20.0.2",
     "@types/joi": "^10.0.1",
@@ -65,7 +65,7 @@
     "reflect-metadata": "^0.1.9",
     "remap-istanbul": "^0.9.5",
     "rimraf": "^2.6.0",
-    "sinon": "^2.4.1",
+    "sinon": "^3.2.0",
     "ts-jest": "^20.0.6",
     "ts-node": "^3.0.6",
     "tslint": "^5.2.0",
