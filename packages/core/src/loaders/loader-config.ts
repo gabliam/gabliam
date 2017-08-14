@@ -60,7 +60,7 @@ export class LoaderConfig {
 
     debug('loadConfig', config);
     return new Promise((resolve, reject) => {
-      resolver.resolve(config, (err, data) => {
+      resolver.resolve(config, (err: any, data: any) => {
         if (err) {
           reject(err);
         } else {

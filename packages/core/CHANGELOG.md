@@ -1,3 +1,20 @@
+<a name="3.0.0"></a>
+# 3.0.0 (2017-08-14)
+
+* chore(deps): bump deps ([7b3cdfe](https://github.com/gabliam/core/commit/7b3cdfe))
+* chore(package): bump version ([27aacd5](https://github.com/gabliam/core/commit/27aacd5))
+* feat(config): now config use shortstop ([3010221](https://github.com/gabliam/core/commit/3010221))
+* feat(loader): split module and config loader ([2144757](https://github.com/gabliam/core/commit/2144757))
+* feat(plugin): add @Plugin decorator ([1ac180f](https://github.com/gabliam/core/commit/1ac180f))
+* feat(registry): rewrite registry ([df514fa](https://github.com/gabliam/core/commit/df514fa))
+* test: add tests ([595cdc7](https://github.com/gabliam/core/commit/595cdc7))
+* feat(@scan): @scan ([1c2b201](https://github.com/gabliam/core/commit/1c2b201))
+
+
+### BREAKING CHANGE
+
+* Plugins must be decorated by @Plugin
+
 <a name="2.8.0"></a>
 # 2.8.0 (2017-08-04)
 
