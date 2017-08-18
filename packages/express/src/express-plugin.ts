@@ -28,6 +28,7 @@ import * as express from 'express';
 import * as d from 'debug';
 import * as http from 'http';
 import { MiddlewareConfig } from './middlewares';
+import { ResponseEntity } from './response-entity';
 
 const debug = d('Gabliam:Plugin:ExpressPlugin');
 
@@ -303,12 +304,23 @@ export class ExpressPlugin implements coreInterfaces.GabliamPlugin {
       );
       const result: any = controller[key](...args);
 
+      function responseEntityHandler(value: ResponseEntity) {
+        if (value.hasHeader()) {
+          Object.keys(value.headers).forEach(k =>
+            res.setHeader(k, value.headers[k])
+          );
+        }
+        res.status(value.status).json(value.body);
+      }
+
       // try to resolve promise
       if (result && result instanceof Promise) {
         result
           .then((value: any) => {
             if (value !== undefined && !res.headersSent) {
-              if (json) {
+              if (value instanceof ResponseEntity) {
+                responseEntityHandler(value);
+              } else if (json) {
                 res.json(value);
               } else {
                 res.send(value);
@@ -318,6 +330,8 @@ export class ExpressPlugin implements coreInterfaces.GabliamPlugin {
           .catch((error: any) => {
             next(error);
           });
+      } else if (result && result instanceof ResponseEntity) {
+        responseEntityHandler(result);
       } else if (result !== undefined && !res.headersSent) {
         if (json) {
           res.json(result);

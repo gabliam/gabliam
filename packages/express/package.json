@@ -103,5 +103,8 @@
     "tslint-eslint-rules": "^4.0.0",
     "typescript": "^2.3.2",
     "vrsource-tslint-rules": "^5.1.0"
+  },
+  "dependencies": {
+    "http-status-codes": "^1.2.0"
   }
 }
