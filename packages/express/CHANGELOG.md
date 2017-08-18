@@ -1,3 +1,34 @@
+<a name="3.0.0"></a>
+# 3.0.0 (2017-08-18)
+
+* chore: update deps ([5e52779](https://github.com/gabliam/express/commit/5e52779))
+* chore(package): update deps ([42197d5](https://github.com/gabliam/express/commit/42197d5))
+* chore(package): update deps ([b6bf195](https://github.com/gabliam/express/commit/b6bf195))
+* chore(package): upgrade deps ([ee347fa](https://github.com/gabliam/express/commit/ee347fa))
+* chore(package): v3.0.0 ([e47c85c](https://github.com/gabliam/express/commit/e47c85c))
+* feat: Add ResponseEntity ([eafc2eb](https://github.com/gabliam/express/commit/eafc2eb))
+* feat: upgrade gabliam/core to 3.X.X ([380a108](https://github.com/gabliam/express/commit/380a108))
+* feat(plugin): add router creator + correction tslint ([945f777](https://github.com/gabliam/express/commit/945f777))
+* test: add sourceMap and inlineSourceMap for correct coverage ([b7d5969](https://github.com/gabliam/express/commit/b7d5969))
+* test: add tests ([de5293d](https://github.com/gabliam/express/commit/de5293d))
+* test(coverage): 100% ([0c67d39](https://github.com/gabliam/express/commit/0c67d39))
+* test(framework): add many tests ([e9b48b9](https://github.com/gabliam/express/commit/e9b48b9))
+* test(methods): add tests for methods decorators ([e15f83a](https://github.com/gabliam/express/commit/e15f83a))
+* test(params decorators): add tests for params decorators ([4fcd752](https://github.com/gabliam/express/commit/4fcd752))
+* refactor: Change CamelCase for KebabCase ([5ec1ccc](https://github.com/gabliam/express/commit/5ec1ccc))
+* refactor: update @gabliam/core ([d488427](https://github.com/gabliam/express/commit/d488427))
+* fix(all methods): Add / on path ([67cfd44](https://github.com/gabliam/express/commit/67cfd44))
+* fix(RestPluginConfig): parseInt process.env.port if exist ([3275ffc](https://github.com/gabliam/express/commit/3275ffc))
+* feat(controller, methods): Now you can inject middleware in @Controller, @RestController, and all me ([e40a127](https://github.com/gabliam/express/commit/e40a127))
+* fix(@ExpressConfig,@ExpressErrorConfig): throw error when decorated multiple times the same method w ([05f3e49](https://github.com/gabliam/express/commit/05f3e49))
+* fix(@Restcontroller,@Controller): fix @Restcontroller and @Controller ([4332144](https://github.com/gabliam/express/commit/4332144))
+* test(@Controller, @RestController): add tests ([8fdfd29](https://github.com/gabliam/express/commit/8fdfd29))
+* test(@ExpressErrorConfig,@ExpressConfig): add test for @ExpressErrorConfig and @ExpressConfig ([c09c143](https://github.com/gabliam/express/commit/c09c143))
+* test(@Middleware, @MiddlewareInject): add tests ([8209286](https://github.com/gabliam/express/commit/8209286))
+* test(rename decortators to decorators): ([53cf074](https://github.com/gabliam/express/commit/53cf074))
+
+
+
 <a name="2.6.0"></a>
 # 2.6.0 (2017-07-06)
 
