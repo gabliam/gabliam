@@ -1,10 +1,9 @@
-import { OutgoingHttpHeaders } from 'http';
 import * as HttpStatus from 'http-status-codes';
 
 export class ResponseEntity<T = any> {
   private _status = HttpStatus.OK;
 
-  private _headers: OutgoingHttpHeaders = {};
+  private _headers: { [header: string]: number | string | string[] } = {};
 
   private _body: T | null = null;
 

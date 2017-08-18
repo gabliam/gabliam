@@ -2,7 +2,8 @@ import {
   interfaces as coreInterfaces,
   inversifyInterfaces,
   Scan,
-  Registry
+  Registry,
+  Plugin
 } from '@gabliam/core';
 import {
   TYPE,
@@ -32,7 +33,8 @@ import { ResponseEntity } from './response-entity';
 
 const debug = d('Gabliam:Plugin:ExpressPlugin');
 
-@Scan(__dirname)
+@Plugin('ExpressPlugin')
+@Scan()
 export class ExpressPlugin implements coreInterfaces.GabliamPlugin {
   /**
    * binding phase
