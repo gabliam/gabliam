@@ -1,11 +1,4 @@
 {
-  "appenders": [
-    {
-      "type": "logLevelFilter",
-      "level": "ERROR",
-      "appender": {
-        "type": "console"
-      }
-    }
-  ]
+  "appenders": { "out": { "type": "console" } },
+  "categories": { "default": { "appenders": ["out"], "level": "error" } }
 }

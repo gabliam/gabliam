@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "description": "log4js plugin for gabliam",
   "keywords": [
-    "gabliam",
-    "gabliam-plugin",
-    "plugin",
-    "log"
+    "log",
+    "gabliam"
   ],
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -62,10 +60,6 @@
     "type": "git",
     "url": "git+https://github.com/gabliam/log4js.git"
   },
-  "keywords": [
-    "log",
-    "gabliam"
-  ],
   "author": "David Touzet <dtouzet@gmail.com>",
   "license": "MIT",
   "bugs": {
@@ -103,6 +97,6 @@
   },
   "dependencies": {
     "@types/log4js": "^0.0.32",
-    "log4js": "^1.1.1"
+    "log4js": "^2.3.3"
   }
 }
