@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`with config folder custom config 1`] = `6`;
+
+exports[`with config folder default config 1`] = `4`;
+
+exports[`without config folder without config 1`] = `5`;

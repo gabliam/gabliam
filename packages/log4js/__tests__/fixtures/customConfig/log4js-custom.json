@@ -1,0 +1,11 @@
+{
+  "appenders": [
+    {
+      "type": "logLevelFilter",
+      "level": "WARN",
+      "appender": {
+        "type": "console"
+      }
+    }
+  ]
+}
