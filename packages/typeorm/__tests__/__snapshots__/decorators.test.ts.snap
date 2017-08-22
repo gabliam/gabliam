@@ -4,7 +4,7 @@ exports[`AbstractEntity decorators 1`] = `
 Object {
   "type": "EntityTypeOrm",
   "value": Object {
-    "filePath": "/Users/eyolas/Documents/devperso/js/gabliam/typeorm/__tests__/decorators.test.ts",
+    "filePath": "<PROJECT_ROOT>/__tests__/decorators.test.ts",
     "id": null,
     "target": [Function],
   },
@@ -15,7 +15,7 @@ exports[`ClassEntityChild decorators 1`] = `
 Object {
   "type": "EntityTypeOrm",
   "value": Object {
-    "filePath": "/Users/eyolas/Documents/devperso/js/gabliam/typeorm/__tests__/decorators.test.ts",
+    "filePath": "<PROJECT_ROOT>/__tests__/decorators.test.ts",
     "id": null,
     "target": [Function],
   },
@@ -26,7 +26,7 @@ exports[`ClosureEntity decorators 1`] = `
 Object {
   "type": "EntityTypeOrm",
   "value": Object {
-    "filePath": "/Users/eyolas/Documents/devperso/js/gabliam/typeorm/__tests__/decorators.test.ts",
+    "filePath": "<PROJECT_ROOT>/__tests__/decorators.test.ts",
     "id": null,
     "target": [Function],
   },
@@ -37,7 +37,7 @@ exports[`EmbeddableEntity decorators 1`] = `
 Object {
   "type": "EntityTypeOrm",
   "value": Object {
-    "filePath": "/Users/eyolas/Documents/devperso/js/gabliam/typeorm/__tests__/decorators.test.ts",
+    "filePath": "<PROJECT_ROOT>/__tests__/decorators.test.ts",
     "id": null,
     "target": [Function],
   },
@@ -48,7 +48,7 @@ exports[`Entity decorators 1`] = `
 Object {
   "type": "EntityTypeOrm",
   "value": Object {
-    "filePath": "/Users/eyolas/Documents/devperso/js/gabliam/typeorm/__tests__/decorators.test.ts",
+    "filePath": "<PROJECT_ROOT>/__tests__/decorators.test.ts",
     "id": null,
     "target": [Function],
   },
@@ -59,7 +59,7 @@ exports[`SingleEntityChild decorators 1`] = `
 Object {
   "type": "EntityTypeOrm",
   "value": Object {
-    "filePath": "/Users/eyolas/Documents/devperso/js/gabliam/typeorm/__tests__/decorators.test.ts",
+    "filePath": "<PROJECT_ROOT>/__tests__/decorators.test.ts",
     "id": null,
     "target": [Function],
   },

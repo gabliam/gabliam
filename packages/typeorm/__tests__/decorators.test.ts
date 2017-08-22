@@ -21,7 +21,7 @@ import { METADATA_KEY as CORE_METADATA_KEY } from '@gabliam/core/lib/constants';
     @deco()
     class TestEntity {}
 
-    const entityMetadata: RegistryMetada[] = Reflect.getMetadata(
+    const entityMetadata: RegistryMetada = Reflect.getMetadata(
       CORE_METADATA_KEY.register,
       TestEntity
     );
