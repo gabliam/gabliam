@@ -70,7 +70,7 @@
   },
   "homepage": "https://github.com/gabliam/express#readme",
   "peerDependencies": {
-    "@gabliam/core": "^2.5.0",
+    "@gabliam/core": "^3.0.0",
     "express": "^4.14.1"
   },
   "devDependencies": {
