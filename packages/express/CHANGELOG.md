@@ -1,3 +1,12 @@
+<a name="3.0.1"></a>
+## 3.0.1 (2017-08-23)
+
+* chore(package): v3.0.1 ([73fbe04](https://github.com/gabliam/express/commit/73fbe04))
+* test(package): remove jest-serializer-path ([f3b29dd](https://github.com/gabliam/express/commit/f3b29dd))
+* fix(package): correction peerDependencies ([ff5a355](https://github.com/gabliam/express/commit/ff5a355))
+
+
+
 <a name="3.0.0"></a>
 # 3.0.0 (2017-08-18)
 

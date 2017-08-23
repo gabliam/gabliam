@@ -3,7 +3,7 @@ node_js:
   - "7"
   - "node"
 install:
-  - npm install
+  - yarn
   - npm install -g codecov
 script:
   - npm test -- --runInBand --coverage
