@@ -8,8 +8,8 @@ export interface DocumentOptions {
 
 export interface IRead<T extends mongoose.Document> {
   findAll(): Promise<T[]>;
-  findById(_id: string): Promise<T>;
-  findOne(cond?: Object): mongoose.Query<T>;
+  findById(_id: string): Promise<T | null>;
+  findOne(cond?: Object): mongoose.Query<T | null>;
   find(cond?: Object, fields?: Object, options?: Object): mongoose.Query<T[]>;
 }
 

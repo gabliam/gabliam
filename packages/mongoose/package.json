@@ -32,22 +32,22 @@
     "mongoose": "^4.8.5"
   },
   "devDependencies": {
-    "@gabliam/core": "^2.1.0",
+    "@gabliam/core": "^2.5.0",
     "@types/debug": "^0.0.29",
-    "@types/joi": "^10.0.1",
-    "@types/mongoose": "^4.7.6",
+    "@types/joi": "^10.4.0",
+    "@types/mongoose": "^4.7.19",
     "@types/reflect-metadata": "^0.0.5",
-    "husky": "^0.13.4",
-    "joi": "^10.2.2",
-    "mongoose": "^4.8.5",
+    "husky": "^0.14.3",
+    "joi": "^10.6.0",
+    "mongoose": "^4.11.3",
     "reflect-metadata": "^0.1.10",
     "rimraf": "^2.6.1",
-    "tslint": "^5.2.0",
-    "tslint-eslint-rules": "^4.0.0",
-    "typescript": "^2.3.2",
+    "tslint": "^5.5.0",
+    "tslint-eslint-rules": "^4.1.1",
+    "typescript": "^2.4.2",
     "vrsource-tslint-rules": "^5.1.0"
   },
   "dependencies": {
-    "debug": "^2.6.1"
+    "debug": "^2.6.8"
   }
 }
