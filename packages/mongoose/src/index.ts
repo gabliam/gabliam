@@ -3,13 +3,13 @@ import { TYPE, LIST_DOCUMENT } from './constants';
 import * as interfaces from './interfaces';
 import * as d from 'debug';
 const debug = d('Gabliam:Plugin:mongoose');
-import { MongooseConnection } from './mongooseConnection';
+import { MongooseConnection } from './mongoose-connection';
 
 
 
 export * from './decorators';
 export { interfaces };
-export * from './mongooseConnection';
+export * from './mongoose-connection';
 export * from './repository';
 
 @Scan(__dirname)

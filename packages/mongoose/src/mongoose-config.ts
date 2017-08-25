@@ -1,8 +1,8 @@
 import { PluginConfig, Value, Bean, inject } from '@gabliam/core';
 import { LIST_DOCUMENT } from './constants';
-import { mongooseConfigurationValidator } from './mongooseConfigurationValidator';
+import { configurationValidator } from './configuration-validator';
 import { MongooseConfiguration } from './interfaces';
-import { MongooseConnection } from './mongooseConnection';
+import { MongooseConnection } from './mongoose-connection';
 import * as d from 'debug';
 
 const debug = d('Gabliam:Plugin:mongoose');
@@ -10,7 +10,7 @@ const debug = d('Gabliam:Plugin:mongoose');
 @PluginConfig()
 export class PluginMongooseConfig {
 
-  @Value('application.mongoose', mongooseConfigurationValidator)
+  @Value('application.mongoose', configurationValidator)
   mongooseConfiguration: MongooseConfiguration;
 
   listDocument: any[];

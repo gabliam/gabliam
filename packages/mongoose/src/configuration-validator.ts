@@ -1,6 +1,6 @@
 import * as Joi from 'joi';
 
-export const mongooseConfigurationValidator = Joi.object().keys({
+export const configurationValidator = Joi.object().keys({
   uri: Joi.string(),
   host: Joi.string(),
   database_name: Joi.string(),
