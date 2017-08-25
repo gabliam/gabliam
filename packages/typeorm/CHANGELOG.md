@@ -1,3 +1,14 @@
+<a name="3.0.0"></a>
+# 3.0.0 (2017-08-25)
+
+* chore: update @types/node ([a12f79f](https://github.com/gabliam/typeorm/commit/a12f79f))
+* chore(package): v 3.0.0 ([f5f3a34](https://github.com/gabliam/typeorm/commit/f5f3a34))
+* feat: upgrade @gabliam/core to v3 ([4a97de6](https://github.com/gabliam/typeorm/commit/4a97de6))
+* test: add jest-serializer-path ([98339b6](https://github.com/gabliam/typeorm/commit/98339b6))
+* test: add many tests ([9f3ee5d](https://github.com/gabliam/typeorm/commit/9f3ee5d))
+
+
+
 <a name="2.2.0"></a>
 # 2.2.0 (2017-07-12)
 
