@@ -65,7 +65,7 @@
     "mongoose": "^4.8.5"
   },
   "devDependencies": {
-    "@gabliam/core": "2.8.0",
+    "@gabliam/core": "^3.0.0",
     "@types/debug": "^0.0.30",
     "@types/jest": "^20.0.8",
     "@types/joi": "^10.4.0",
