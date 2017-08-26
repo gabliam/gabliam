@@ -123,29 +123,12 @@ Object {
         "auto": true,
         "type": [Function],
       },
-      "id": VirtualType {
-        "getters": Array [
-          [Function],
-        ],
-        "options": Object {},
-        "path": "id",
-        "setters": Array [],
-      },
       "name": Object {
         "required": true,
         "type": [Function],
       },
     },
-    "virtuals": Object {
-      "id": VirtualType {
-        "getters": Array [
-          [Function],
-        ],
-        "options": Object {},
-        "path": "id",
-        "setters": Array [],
-      },
-    },
+    "virtuals": Object {},
   },
 }
 `;
@@ -273,29 +256,12 @@ Object {
         "auto": true,
         "type": [Function],
       },
-      "id": VirtualType {
-        "getters": Array [
-          [Function],
-        ],
-        "options": Object {},
-        "path": "id",
-        "setters": Array [],
-      },
       "name": Object {
         "required": true,
         "type": [Function],
       },
     },
-    "virtuals": Object {
-      "id": VirtualType {
-        "getters": Array [
-          [Function],
-        ],
-        "options": Object {},
-        "path": "id",
-        "setters": Array [],
-      },
-    },
+    "virtuals": Object {},
   },
 }
 `;
@@ -424,29 +390,12 @@ Object {
         "auto": true,
         "type": [Function],
       },
-      "id": VirtualType {
-        "getters": Array [
-          [Function],
-        ],
-        "options": Object {},
-        "path": "id",
-        "setters": Array [],
-      },
       "name": Object {
         "required": true,
         "type": [Function],
       },
     },
-    "virtuals": Object {
-      "id": VirtualType {
-        "getters": Array [
-          [Function],
-        ],
-        "options": Object {},
-        "path": "id",
-        "setters": Array [],
-      },
-    },
+    "virtuals": Object {},
   },
 }
 `;
