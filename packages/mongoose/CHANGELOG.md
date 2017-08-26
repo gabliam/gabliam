@@ -1,3 +1,22 @@
+<a name="3.0.0"></a>
+# 3.0.0 (2017-08-26)
+
+* chore: add prettier ([8c829d0](https://github.com/gabliam/mongoose/commit/8c829d0))
+* chore: upgrade deps ([6c8c025](https://github.com/gabliam/mongoose/commit/6c8c025))
+* chore(package): v3.0.0 ([8293fbe](https://github.com/gabliam/mongoose/commit/8293fbe))
+* test: add all tests ([cd0cda3](https://github.com/gabliam/mongoose/commit/cd0cda3))
+* test: add mongodb to travis >< ([f1da6d6](https://github.com/gabliam/mongoose/commit/f1da6d6))
+* test: correction snapshot for travis ([3d1d33c](https://github.com/gabliam/mongoose/commit/3d1d33c))
+* test: correction test ([2b6f89f](https://github.com/gabliam/mongoose/commit/2b6f89f))
+* feat: Change CamelCase for KebabCase ([9845358](https://github.com/gabliam/mongoose/commit/9845358))
+* feat: upgrade deps ([7b9aee5](https://github.com/gabliam/mongoose/commit/7b9aee5))
+* feat: upgrade to gabliam v3 ([6781626](https://github.com/gabliam/mongoose/commit/6781626))
+* docs: add changelog ([8103a0f](https://github.com/gabliam/mongoose/commit/8103a0f))
+* refactor: move plugin ([64d9df1](https://github.com/gabliam/mongoose/commit/64d9df1))
+* build(commit): add husky ([3b7a2b3](https://github.com/gabliam/mongoose/commit/3b7a2b3))
+
+
+
 <a name="2.2.0"></a>
 # 2.2.0 (2017-05-19)
 
