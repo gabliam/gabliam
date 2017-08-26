@@ -2,6 +2,8 @@ language: node_js
 node_js:
   - "7"
   - "node"
+services:
+  - mongodb
 install:
   - yarn
   - npm install -g codecov
