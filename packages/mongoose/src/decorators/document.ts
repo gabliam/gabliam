@@ -4,7 +4,7 @@ import { DocumentOptions, DocumentMetadata } from '../interfaces';
 import * as mongoose from 'mongoose';
 
 export function Document(v: string | DocumentOptions) {
-  return function (target: any) {
+  return function(target: any) {
     let opts: DocumentOptions;
     if (typeof v === 'string') {
       opts = {
@@ -17,7 +17,9 @@ export function Document(v: string | DocumentOptions) {
     let schema: mongoose.Schema;
     if (!opts.schema) {
       if (typeof target.getSchema !== 'function') {
-        throw new Error(`Schema is mandory. Add it with decorator or with static method`);
+        throw new Error(
+          `Schema is mandory. Add it with decorator or with static method`
+        );
       }
       schema = target.getSchema();
     } else {
