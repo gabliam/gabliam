@@ -1,3 +1,11 @@
+<a name="3.0.2"></a>
+## 3.0.2 (2017-08-26)
+
+* chore: v3.0.2 ([68da650](https://github.com/gabliam/mongoose/commit/68da650))
+* fix: add publishrc ([97238ef](https://github.com/gabliam/mongoose/commit/97238ef))
+
+
+
 <a name="3.0.1"></a>
 ## 3.0.1 (2017-08-26)
 
