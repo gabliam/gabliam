@@ -4,7 +4,7 @@ exports[`@Document('Hero') decorator 1`] = `
 Object {
   "type": "Document",
   "value": Object {
-    "id": null,
+    "id": [Function],
     "target": [Function],
   },
 }
@@ -137,7 +137,7 @@ exports[`@Document(DocumentOptions without collectionName)  decorator 1`] = `
 Object {
   "type": "Document",
   "value": Object {
-    "id": null,
+    "id": [Function],
     "target": [Function],
   },
 }
@@ -270,7 +270,7 @@ exports[`@Document(DocumentOptions)  decorator 1`] = `
 Object {
   "type": "Document",
   "value": Object {
-    "id": null,
+    "id": [Function],
     "target": [Function],
   },
 }
