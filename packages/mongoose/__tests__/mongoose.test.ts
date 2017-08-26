@@ -76,7 +76,6 @@ test('with config uri', async () => {
 
   await expect(appTest.gab.buildAndStart()).resolves.toBeInstanceOf(Gabliam);
   const connection = appTest.gab.container.get(MongooseConnection);
-  expect(connection).toMatchSnapshot();
   const repo = connection.getRepository<HeroModel>('Hero');
   let res = await repo.findAll();
   expect(res).toMatchSnapshot();
@@ -110,7 +109,6 @@ test('with config host & database', async () => {
 
   await expect(appTest.gab.buildAndStart()).resolves.toBeInstanceOf(Gabliam);
   const connection = appTest.gab.container.get(MongooseConnection);
-  expect(connection).toMatchSnapshot();
   const repo = connection.getRepository<HeroModel>('Hero');
   let res = await repo.findAll();
   expect(res).toMatchSnapshot();
