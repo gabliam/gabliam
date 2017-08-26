@@ -8,8 +8,10 @@
     "emitDecoratorMetadata": true,
     "strict": true,
     "declaration": true,
+    "noImplicitAny": true,
     "noUnusedLocals": true,
-    "sourceMap": false,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
     "outDir": "lib"
   }
 }

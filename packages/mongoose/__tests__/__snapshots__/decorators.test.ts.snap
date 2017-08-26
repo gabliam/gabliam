@@ -1,0 +1,452 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@Document('Hero') decorator 1`] = `
+Object {
+  "type": "Document",
+  "value": Object {
+    "id": null,
+    "target": [Function],
+  },
+}
+`;
+
+exports[`@Document('Hero') decorator 2`] = `
+Object {
+  "name": "Hero",
+  "schema": Schema {
+    "_indexes": Array [],
+    "aliases": Object {},
+    "callQueue": Array [
+      Array [
+        "pre",
+        Arguments [
+          "remove",
+          true,
+          [Function],
+        ],
+      ],
+    ],
+    "childSchemas": Array [],
+    "inherits": Object {},
+    "methods": Object {},
+    "nested": Object {},
+    "obj": Object {
+      "name": Object {
+        "required": true,
+        "type": [Function],
+      },
+    },
+    "options": Object {
+      "_id": true,
+      "autoIndex": null,
+      "bufferCommands": true,
+      "capped": false,
+      "discriminatorKey": "__t",
+      "id": true,
+      "minimize": true,
+      "noId": false,
+      "noVirtualId": false,
+      "read": null,
+      "retainKeyOrder": false,
+      "shardKey": null,
+      "strict": true,
+      "typeKey": "type",
+      "validateBeforeSave": true,
+      "versionKey": "__v",
+    },
+    "paths": Object {
+      "_id": ObjectId {
+        "_index": null,
+        "defaultValue": [Function],
+        "getters": Array [],
+        "instance": "ObjectID",
+        "options": Object {
+          "auto": true,
+          "runSettersOnQuery": undefined,
+          "type": [Function],
+        },
+        "path": "_id",
+        "setters": Array [
+          [Function],
+        ],
+        "validators": Array [],
+      },
+      "name": SchemaString {
+        "_index": null,
+        "enumValues": Array [],
+        "getters": Array [],
+        "instance": "String",
+        "isRequired": true,
+        "options": Object {
+          "required": true,
+          "runSettersOnQuery": undefined,
+          "type": [Function],
+        },
+        "originalRequiredValue": true,
+        "path": "name",
+        "regExp": null,
+        "requiredValidator": [Function],
+        "setters": Array [],
+        "validators": Array [
+          Object {
+            "message": "Path \`{PATH}\` is required.",
+            "type": "required",
+            "validator": [Function],
+          },
+        ],
+      },
+    },
+    "plugins": Array [],
+    "query": Object {},
+    "s": Object {
+      "hooks": Kareem {
+        "_posts": Object {},
+        "_pres": Object {},
+      },
+      "kareemHooks": Object {
+        "count": true,
+        "find": true,
+        "findOne": true,
+        "findOneAndRemove": true,
+        "findOneAndUpdate": true,
+        "insertMany": true,
+        "update": true,
+        "updateMany": true,
+        "updateOne": true,
+      },
+    },
+    "singleNestedPaths": Object {},
+    "statics": Object {},
+    "subpaths": Object {},
+    "tree": Object {
+      "_id": Object {
+        "auto": true,
+        "type": [Function],
+      },
+      "id": VirtualType {
+        "getters": Array [
+          [Function],
+        ],
+        "options": Object {},
+        "path": "id",
+        "setters": Array [],
+      },
+      "name": Object {
+        "required": true,
+        "type": [Function],
+      },
+    },
+    "virtuals": Object {
+      "id": VirtualType {
+        "getters": Array [
+          [Function],
+        ],
+        "options": Object {},
+        "path": "id",
+        "setters": Array [],
+      },
+    },
+  },
+}
+`;
+
+exports[`@Document(DocumentOptions without collectionName)  decorator 1`] = `
+Object {
+  "type": "Document",
+  "value": Object {
+    "id": null,
+    "target": [Function],
+  },
+}
+`;
+
+exports[`@Document(DocumentOptions without collectionName)  decorator 2`] = `
+Object {
+  "name": "Hero",
+  "schema": Schema {
+    "_indexes": Array [],
+    "aliases": Object {},
+    "callQueue": Array [
+      Array [
+        "pre",
+        Arguments [
+          "remove",
+          true,
+          [Function],
+        ],
+      ],
+    ],
+    "childSchemas": Array [],
+    "inherits": Object {},
+    "methods": Object {},
+    "nested": Object {},
+    "obj": Object {
+      "name": Object {
+        "required": true,
+        "type": [Function],
+      },
+    },
+    "options": Object {
+      "_id": true,
+      "autoIndex": null,
+      "bufferCommands": true,
+      "capped": false,
+      "discriminatorKey": "__t",
+      "id": true,
+      "minimize": true,
+      "noId": false,
+      "noVirtualId": false,
+      "read": null,
+      "retainKeyOrder": false,
+      "shardKey": null,
+      "strict": true,
+      "typeKey": "type",
+      "validateBeforeSave": true,
+      "versionKey": "__v",
+    },
+    "paths": Object {
+      "_id": ObjectId {
+        "_index": null,
+        "defaultValue": [Function],
+        "getters": Array [],
+        "instance": "ObjectID",
+        "options": Object {
+          "auto": true,
+          "runSettersOnQuery": undefined,
+          "type": [Function],
+        },
+        "path": "_id",
+        "setters": Array [
+          [Function],
+        ],
+        "validators": Array [],
+      },
+      "name": SchemaString {
+        "_index": null,
+        "enumValues": Array [],
+        "getters": Array [],
+        "instance": "String",
+        "isRequired": true,
+        "options": Object {
+          "required": true,
+          "runSettersOnQuery": undefined,
+          "type": [Function],
+        },
+        "originalRequiredValue": true,
+        "path": "name",
+        "regExp": null,
+        "requiredValidator": [Function],
+        "setters": Array [],
+        "validators": Array [
+          Object {
+            "message": "Path \`{PATH}\` is required.",
+            "type": "required",
+            "validator": [Function],
+          },
+        ],
+      },
+    },
+    "plugins": Array [],
+    "query": Object {},
+    "s": Object {
+      "hooks": Kareem {
+        "_posts": Object {},
+        "_pres": Object {},
+      },
+      "kareemHooks": Object {
+        "count": true,
+        "find": true,
+        "findOne": true,
+        "findOneAndRemove": true,
+        "findOneAndUpdate": true,
+        "insertMany": true,
+        "update": true,
+        "updateMany": true,
+        "updateOne": true,
+      },
+    },
+    "singleNestedPaths": Object {},
+    "statics": Object {},
+    "subpaths": Object {},
+    "tree": Object {
+      "_id": Object {
+        "auto": true,
+        "type": [Function],
+      },
+      "id": VirtualType {
+        "getters": Array [
+          [Function],
+        ],
+        "options": Object {},
+        "path": "id",
+        "setters": Array [],
+      },
+      "name": Object {
+        "required": true,
+        "type": [Function],
+      },
+    },
+    "virtuals": Object {
+      "id": VirtualType {
+        "getters": Array [
+          [Function],
+        ],
+        "options": Object {},
+        "path": "id",
+        "setters": Array [],
+      },
+    },
+  },
+}
+`;
+
+exports[`@Document(DocumentOptions)  decorator 1`] = `
+Object {
+  "type": "Document",
+  "value": Object {
+    "id": null,
+    "target": [Function],
+  },
+}
+`;
+
+exports[`@Document(DocumentOptions)  decorator 2`] = `
+Object {
+  "collectionName": "HeroCollection",
+  "name": "Hero",
+  "schema": Schema {
+    "_indexes": Array [],
+    "aliases": Object {},
+    "callQueue": Array [
+      Array [
+        "pre",
+        Arguments [
+          "remove",
+          true,
+          [Function],
+        ],
+      ],
+    ],
+    "childSchemas": Array [],
+    "inherits": Object {},
+    "methods": Object {},
+    "nested": Object {},
+    "obj": Object {
+      "name": Object {
+        "required": true,
+        "type": [Function],
+      },
+    },
+    "options": Object {
+      "_id": true,
+      "autoIndex": null,
+      "bufferCommands": true,
+      "capped": false,
+      "discriminatorKey": "__t",
+      "id": true,
+      "minimize": true,
+      "noId": false,
+      "noVirtualId": false,
+      "read": null,
+      "retainKeyOrder": false,
+      "shardKey": null,
+      "strict": true,
+      "typeKey": "type",
+      "validateBeforeSave": true,
+      "versionKey": "__v",
+    },
+    "paths": Object {
+      "_id": ObjectId {
+        "_index": null,
+        "defaultValue": [Function],
+        "getters": Array [],
+        "instance": "ObjectID",
+        "options": Object {
+          "auto": true,
+          "runSettersOnQuery": undefined,
+          "type": [Function],
+        },
+        "path": "_id",
+        "setters": Array [
+          [Function],
+        ],
+        "validators": Array [],
+      },
+      "name": SchemaString {
+        "_index": null,
+        "enumValues": Array [],
+        "getters": Array [],
+        "instance": "String",
+        "isRequired": true,
+        "options": Object {
+          "required": true,
+          "runSettersOnQuery": undefined,
+          "type": [Function],
+        },
+        "originalRequiredValue": true,
+        "path": "name",
+        "regExp": null,
+        "requiredValidator": [Function],
+        "setters": Array [],
+        "validators": Array [
+          Object {
+            "message": "Path \`{PATH}\` is required.",
+            "type": "required",
+            "validator": [Function],
+          },
+        ],
+      },
+    },
+    "plugins": Array [],
+    "query": Object {},
+    "s": Object {
+      "hooks": Kareem {
+        "_posts": Object {},
+        "_pres": Object {},
+      },
+      "kareemHooks": Object {
+        "count": true,
+        "find": true,
+        "findOne": true,
+        "findOneAndRemove": true,
+        "findOneAndUpdate": true,
+        "insertMany": true,
+        "update": true,
+        "updateMany": true,
+        "updateOne": true,
+      },
+    },
+    "singleNestedPaths": Object {},
+    "statics": Object {},
+    "subpaths": Object {},
+    "tree": Object {
+      "_id": Object {
+        "auto": true,
+        "type": [Function],
+      },
+      "id": VirtualType {
+        "getters": Array [
+          [Function],
+        ],
+        "options": Object {},
+        "path": "id",
+        "setters": Array [],
+      },
+      "name": Object {
+        "required": true,
+        "type": [Function],
+      },
+    },
+    "virtuals": Object {
+      "id": VirtualType {
+        "getters": Array [
+          [Function],
+        ],
+        "options": Object {},
+        "path": "id",
+        "setters": Array [],
+      },
+    },
+  },
+}
+`;

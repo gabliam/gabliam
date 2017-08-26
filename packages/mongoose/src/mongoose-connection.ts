@@ -13,7 +13,10 @@ export class MongooseConnection {
 
   private schemas = new Map<string, mongoose.Model<any>>();
 
-  constructor(mongooseConfiguration: MongooseConfiguration, listDocument: any[]) {
+  constructor(
+    mongooseConfiguration: MongooseConfiguration,
+    listDocument: any[]
+  ) {
     const m = new Mongoose();
     if (mongooseConfiguration.host) {
       this.conn = m.createConnection(
@@ -23,30 +26,52 @@ export class MongooseConnection {
         mongooseConfiguration.options
       );
     } else {
-      this.conn = m.createConnection(mongooseConfiguration.uri!, mongooseConfiguration.options);
+      this.conn = m.createConnection(
+        mongooseConfiguration.uri!,
+        mongooseConfiguration.options
+      );
     }
 
     for (const document of listDocument) {
-      const { collectionName, name, schema } = <DocumentMetadata>Reflect.getOwnMetadata(METADATA_KEY.document, document);
+      const {
+        collectionName,
+        name,
+        schema
+      } = <DocumentMetadata>Reflect.getOwnMetadata(
+        METADATA_KEY.document,
+        document
+      );
       const documentName = name.toLowerCase();
-      const clazzSchema = this.conn.model<mongoose.Document>(name, schema, collectionName);
+      const clazzSchema = this.conn.model<mongoose.Document>(
+        name,
+        schema,
+        collectionName
+      );
       this.schemas.set(documentName, clazzSchema);
     }
   }
 
-  getRepository<T>(documentName: string): Repository<T>;
-  getRepository<T>(clazz: any): Repository<T> {
+  // getRepository<T>(documentName: string): Repository<T>;
+  getRepository<T>(clazz: string | any): Repository<T> {
     if (typeof clazz === 'string') {
       return this.getRepositoryByName<T>(clazz);
     }
 
-    const { collectionName, name, schema } = <DocumentMetadata>Reflect.getOwnMetadata(METADATA_KEY.document, clazz);
+    const {
+      collectionName,
+      name,
+      schema
+    } = <DocumentMetadata>Reflect.getOwnMetadata(METADATA_KEY.document, clazz);
     const documentName = name.toLowerCase();
     if (this.repositories.has(documentName)) {
       return this.repositories.get(documentName)!;
     }
 
-    const clazzSchema = this.conn.model<T & mongoose.Document>(name, schema, collectionName);
+    const clazzSchema = this.conn.model<T & mongoose.Document>(
+      name,
+      schema,
+      collectionName
+    );
     const repository = new Repository<T>(clazzSchema);
     this.repositories.set(documentName, repository);
     return repository;

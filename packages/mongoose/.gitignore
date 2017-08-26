@@ -3,4 +3,5 @@ build/*
 .vscode/
 *.log
 lib/*
-t.js
+coverage/*
+coverage_jest_raw/*

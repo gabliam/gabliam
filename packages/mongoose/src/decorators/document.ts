@@ -26,6 +26,10 @@ export function Document(v: string | DocumentOptions) {
       schema = opts.schema;
     }
 
+    if (!(schema instanceof mongoose.Schema)) {
+      throw new Error(`Schema must be an instance of mongoose.Schema`);
+    }
+
     const metadata: DocumentMetadata = {
       ...opts,
       schema

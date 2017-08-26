@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`connection get Repo getRespository(clazz) 1`] = `
+Repository {
+  "model": [Function],
+}
+`;
+
+exports[`connection get Repo getRespository(clazz) 2`] = `
+Repository {
+  "model": [Function],
+}
+`;
+
+exports[`connection get Repo getRespository(string) 1`] = `
+Repository {
+  "model": [Function],
+}
+`;
+
+exports[`connection get Repo getRespository(string) 2`] = `
+Repository {
+  "model": [Function],
+}
+`;
+
+exports[`repository methods create / findAll 1`] = `Array []`;
+
+exports[`repository methods create / findAll 2`] = `"test"`;
+
+exports[`repository methods delete with ObjectId 1`] = `Array []`;
+
+exports[`repository methods delete with ObjectId 2`] = `"test"`;
+
+exports[`repository methods delete with ObjectId 3`] = `Array []`;
+
+exports[`repository methods delete with id 1`] = `Array []`;
+
+exports[`repository methods delete with id 2`] = `"test"`;
+
+exports[`repository methods delete with id 3`] = `Array []`;
+
+exports[`repository methods deleteAll 1`] = `Array []`;
+
+exports[`repository methods deleteAll 2`] = `"test"`;
+
+exports[`repository methods deleteAll 3`] = `"test2"`;
+
+exports[`repository methods deleteAll 4`] = `Array []`;
+
+exports[`repository methods find 1`] = `Array []`;
+
+exports[`repository methods find 2`] = `"test"`;
+
+exports[`repository methods find 3`] = `"test"`;
+
+exports[`repository methods findById with ObjectId 1`] = `Array []`;
+
+exports[`repository methods findById with ObjectId 2`] = `"test"`;
+
+exports[`repository methods findById with id 1`] = `Array []`;
+
+exports[`repository methods findById with id 2`] = `"test"`;
+
+exports[`repository methods findOne 1`] = `Array []`;
+
+exports[`repository methods findOne 2`] = `"test"`;
+
+exports[`repository methods update with ObjectId 1`] = `Array []`;
+
+exports[`repository methods update with ObjectId 2`] = `"test"`;
+
+exports[`repository methods update with ObjectId 3`] = `"testupdate"`;
+
+exports[`repository methods update with id 1`] = `Array []`;
+
+exports[`repository methods update with id 2`] = `"test"`;
+
+exports[`repository methods update with id 3`] = `"testupdate"`;

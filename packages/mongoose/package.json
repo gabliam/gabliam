@@ -13,7 +13,7 @@
     "prepublish": "publish-please guard",
     "prettier": "prettier --single-quote --write --parser typescript {src,test}/**/*.ts",
     "lint": "tslint --type-check --project tsconfig.json '{src,test}/**/*.ts'",
-    "test": "jest",
+    "test": "jest --runInBand",
     "publish-please": "publish-please"
   },
   "jest": {
@@ -23,7 +23,7 @@
     "collectCoverage": false,
     "collectCoverageFrom": [
       "src/**/*.{ts}",
-      "!src/interface.ts",
+      "!src/interfaces/**",
       "!**/node_modules/**",
       "!**/vendor/**"
     ],
@@ -31,9 +31,6 @@
     "setupTestFrameworkScriptFile": "<rootDir>/__tests__/setup.js",
     "testEnvironment": "node",
     "testRegex": "(/__tests__/.*)\\.test\\.(ts|tsx|js)$",
-    "snapshotSerializers": [
-      "jest-serializer-path"
-    ],
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -68,8 +65,9 @@
     "mongoose": "^4.8.5"
   },
   "devDependencies": {
-    "@gabliam/core": "^2.5.0",
+    "@gabliam/core": "2.8.0",
     "@types/debug": "^0.0.29",
+    "@types/jest": "^20.0.8",
     "@types/joi": "^10.4.0",
     "@types/mongoose": "^4.7.19",
     "@types/reflect-metadata": "^0.0.5",
@@ -77,6 +75,7 @@
     "conventional-changelog-cli": "^1.3.2",
     "cz-conventional-changelog": "^2.0.0",
     "husky": "^0.14.3",
+    "jest": "^20.0.4",
     "joi": "^10.6.0",
     "lint-staged": "^4.0.4",
     "mongoose": "^4.11.3",
@@ -85,6 +84,7 @@
     "reflect-metadata": "^0.1.10",
     "remap-istanbul": "^0.9.5",
     "rimraf": "^2.6.1",
+    "ts-jest": "^20.0.10",
     "tslint": "^5.5.0",
     "tslint-eslint-rules": "^4.1.1",
     "typescript": "^2.4.2",
