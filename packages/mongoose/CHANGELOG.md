@@ -1,3 +1,11 @@
+<a name="3.0.1"></a>
+## 3.0.1 (2017-08-26)
+
+* chore: v3.0.1 ([063628e](https://github.com/gabliam/mongoose/commit/063628e))
+* fix: correction peerDependencies ([89a4716](https://github.com/gabliam/mongoose/commit/89a4716))
+
+
+
 <a name="3.0.0"></a>
 # 3.0.0 (2017-08-26)
 
