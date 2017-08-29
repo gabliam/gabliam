@@ -74,7 +74,7 @@
   "devDependencies": {
     "@gabliam/core": "2.8.0",
     "@types/bluebird": "^3.5.8",
-    "@types/debug": "^0.0.29",
+    "@types/debug": "^0.0.30",
     "@types/jest": "^20.0.8",
     "@types/joi": "^10.4.0",
     "@types/node": "^8.0.14",
@@ -103,7 +103,7 @@
   "dependencies": {
     "amqplib": "^0.5.1",
     "bluebird": "^3.5.0",
-    "debug": "^2.6.8",
+    "debug": "^3.0.1",
     "uuid": "^3.0.1"
   },
   "config": {
