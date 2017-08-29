@@ -1,3 +1,21 @@
+<a name="2.0.0"></a>
+# 2.0.0 (2017-08-29)
+
+* chore: upgrade deps ([5d80ca9](https://github.com/gabliam/amqp/commit/5d80ca9))
+* chore(package): v2.0.0 ([73964ad](https://github.com/gabliam/amqp/commit/73964ad))
+* fix: correction peerDependencies ([042824d](https://github.com/gabliam/amqp/commit/042824d))
+* feat: sendToQueue, sendAndReceive create buffer ([b073acd](https://github.com/gabliam/amqp/commit/b073acd))
+* feat: upgrade to gabliam v3 ([e88bf70](https://github.com/gabliam/amqp/commit/e88bf70))
+* test: add all tests ([7187c8c](https://github.com/gabliam/amqp/commit/7187c8c))
+* test: change travis conf ([f13fade](https://github.com/gabliam/amqp/commit/f13fade))
+* test: correction travis ([af18edf](https://github.com/gabliam/amqp/commit/af18edf))
+
+
+### BREAKING CHANGE
+
+* incompatible with gabliam v2
+
+
 <a name="1.6.0"></a>
 # 1.6.0 (2017-07-25)
 
