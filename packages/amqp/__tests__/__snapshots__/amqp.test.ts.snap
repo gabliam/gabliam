@@ -1,0 +1,157 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Consumer test with buffer object 1`] = `
+Object {
+  "test": "buffertest",
+}
+`;
+
+exports[`Consumer test with buffer object 2`] = `1`;
+
+exports[`Consumer test with buffer object 3`] = `
+Array [
+  Array [
+    Object {
+      "test": "buffertest",
+    },
+  ],
+]
+`;
+
+exports[`Consumer test with buffer string 1`] = `"buffertest"`;
+
+exports[`Consumer test with buffer string 2`] = `1`;
+
+exports[`Consumer test with buffer string 3`] = `
+Array [
+  Array [
+    "buffertest",
+  ],
+]
+`;
+
+exports[`Consumer test with object 1`] = `
+Object {
+  "test": "cool",
+}
+`;
+
+exports[`Consumer test with object 2`] = `1`;
+
+exports[`Consumer test with object 3`] = `
+Array [
+  Array [
+    Object {
+      "test": "cool",
+    },
+  ],
+]
+`;
+
+exports[`Consumer test with string 1`] = `"test"`;
+
+exports[`Consumer test with string 2`] = `1`;
+
+exports[`Consumer test with string 3`] = `
+Array [
+  Array [
+    "test",
+  ],
+]
+`;
+
+exports[`Errors with bad config 1`] = `[Error: Error for 'application.amqp.url' value{"isJoi":true,"name":"ValidationError","details":[{"message":"\\"value\\" is required","path":"value","type":"any.required","context":{"key":"value"}}]}]`;
+
+exports[`Errors with bad url 1`] = `[Error: getaddrinfo ENOTFOUND bad bad:5672]`;
+
+exports[`Errors without config folder 1`] = `[Error: Error for 'application.amqp.url' value{"isJoi":true,"name":"ValidationError","details":[{"message":"\\"value\\" is required","path":"value","type":"any.required","context":{"key":"value"}}]}]`;
+
+exports[`Errors without queueName 1`] = `[Error: Error for 'application.amqp.queues' value{"isJoi":true,"name":"ValidationError","details":[{"message":"\\"queueName\\" is required","path":"queueTest.queueName","type":"any.required","context":{"key":"queueName"}},{"message":"\\"name\\" is not allowed","path":"queueTest.name","type":"object.allowUnknown","context":{"child":"name","key":"name"}}],"_object":{"queueTest":{"name":"lol"}}}]`;
+
+exports[`Listener test with buffer object 1`] = `
+Object {
+  "test": "buffertest",
+}
+`;
+
+exports[`Listener test with buffer object 2`] = `1`;
+
+exports[`Listener test with buffer object 3`] = `
+Array [
+  Array [
+    Object {
+      "test": "buffertest",
+    },
+  ],
+]
+`;
+
+exports[`Listener test with buffer string 1`] = `"buffertest"`;
+
+exports[`Listener test with buffer string 2`] = `1`;
+
+exports[`Listener test with buffer string 3`] = `
+Array [
+  Array [
+    "buffertest",
+  ],
+]
+`;
+
+exports[`Listener test with object 1`] = `
+Object {
+  "test": "cool",
+}
+`;
+
+exports[`Listener test with object 2`] = `1`;
+
+exports[`Listener test with object 3`] = `
+Array [
+  Array [
+    Object {
+      "test": "cool",
+    },
+  ],
+]
+`;
+
+exports[`Listener test with string 1`] = `"test"`;
+
+exports[`Listener test with string 2`] = `1`;
+
+exports[`Listener test with string 3`] = `
+Array [
+  Array [
+    "test",
+  ],
+]
+`;
+
+exports[`bad queue 1`] = `[AssertionError [ERR_ASSERTION]: queue consumerTestBad doesn't exist]`;
+
+exports[`consumer throw error 1`] = `Object {}`;
+
+exports[`consumer throw error 2`] = `1`;
+
+exports[`consumer throw error 3`] = `
+Array [
+  Array [
+    "test",
+  ],
+]
+`;
+
+exports[`sendAndReceive timeout 1`] = `[Error: operation timed out]`;
+
+exports[`start 2 times 1`] = `"testCase.content"`;
+
+exports[`start 2 times 2`] = `1`;
+
+exports[`start 2 times 3`] = `
+Array [
+  Array [
+    "testCase.content",
+  ],
+]
+`;
