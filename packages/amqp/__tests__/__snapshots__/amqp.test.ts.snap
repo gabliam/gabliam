@@ -128,7 +128,7 @@ Array [
 ]
 `;
 
-exports[`bad queue 1`] = `[AssertionError [ERR_ASSERTION]: queue consumerTestBad doesn't exist]`;
+exports[`bad queue 1`] = `[Error: queue "consumerTestBad" doesn't exist]`;
 
 exports[`consumer throw error 1`] = `Object {}`;
 

@@ -1,6 +1,5 @@
 import amqp = require('amqplib');
 import { Queue } from './queue';
-import * as assert from 'assert';
 import { interfaces } from '@gabliam/core';
 import {
   ConsumerHandler,
@@ -63,7 +62,9 @@ export class AmqpConnection {
     options?: ConsumeOptions
   ) {
     const queueName = this.getQueueName(queue);
-    assert(this.queueExist(queueName), `queue ${queueName} doesn't exist`);
+    if (!this.queueExist(queueName)) {
+      throw new Error(`queue "${queueName}" doesn't exist`);
+    }
     this.consumerList.push({ queueName, handler, options });
   }
 

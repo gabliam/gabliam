@@ -3,7 +3,8 @@ import {
   interfaces as coreInterfaces,
   Scan,
   inversifyInterfaces,
-  Registry
+  Registry,
+  Plugin
 } from '@gabliam/core';
 import { TYPE, METADATA_KEY } from './constants';
 import {
@@ -18,7 +19,8 @@ import * as d from 'debug';
 
 const debug = d('Gabliam:Plugin:AmqpPlugin');
 
-@Scan(__dirname)
+@Plugin()
+@Scan()
 export class AmqpPlugin implements coreInterfaces.GabliamPlugin {
   /**
    * binding phase
@@ -29,11 +31,12 @@ export class AmqpPlugin implements coreInterfaces.GabliamPlugin {
    */
   bind(container: inversifyInterfaces.Container, registry: Registry) {
     debug('bind AmqpPlugin');
-    registry
-      .get(TYPE.RabbitController)
-      .forEach(({ id, target }) =>
-        container.bind(id).to(target).inSingletonScope()
-      );
+    registry.get(TYPE.RabbitController).forEach(({ id, target }) =>
+      container
+        .bind(id)
+        .to(target)
+        .inSingletonScope()
+    );
   }
 
   build(container: inversifyInterfaces.Container, registry: Registry) {
