@@ -6,7 +6,7 @@ services:
   - rabbitmq
 install:
   - yarn
-  - yarn codecov
+  - yarn add codecov
 script:
   - npm test -- --coverage
   - node remap_coverage.js
