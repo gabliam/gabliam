@@ -68,7 +68,7 @@
   },
   "homepage": "https://github.com/gabliam/amqp#readme",
   "peerDependencies": {
-    "@gabliam/core": "^2.4.0",
+    "@gabliam/core": "^3.0.0",
     "joi": "^10.5.2"
   },
   "devDependencies": {
