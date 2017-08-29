@@ -1,3 +1,5 @@
+import amqp = require('amqplib');
+
 export interface QueueOptions {
   /**
    * if true, scopes the queue to the connection (defaults to false)
@@ -31,7 +33,9 @@ export interface QueueConfiguration {
   options: QueueOptions;
 }
 
-export type ConsumerHandler = (msg: Message) => void | Promise<void>;
+export type ConsumerHandler = (
+  chan: amqp.Channel
+) => (msg: Message) => void | Promise<void>;
 
 export type Handler = (content: any) => any | Promise<any>;
 

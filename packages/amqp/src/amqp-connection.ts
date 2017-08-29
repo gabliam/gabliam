@@ -51,7 +51,7 @@ export class AmqpConnection {
     }
 
     for (const { queueName, handler, options } of this.consumerList) {
-      await ch.consume(queueName, handler, options);
+      await ch.consume(queueName, handler(this.channel), options);
     }
 
     this.state = ConnectionState.running;
@@ -67,14 +67,27 @@ export class AmqpConnection {
     this.consumerList.push({ queueName, handler, options });
   }
 
-  async sendToQueue(
+  async sendToQueue(queue: string, content: any, options?: SendOptions) {
+    const queueName = this.getQueueName(queue);
+    await this.channel.sendToQueue(
+      queueName,
+      this.contentToBuffer(content),
+      options
+    );
+  }
+
+  async sendToQueueAck(
     queue: string,
-    content: Buffer,
+    content: any,
     msg: Message,
     options?: SendOptions
   ) {
     const queueName = this.getQueueName(queue);
-    await this.channel.sendToQueue(queueName, content, options);
+    await this.channel.sendToQueue(
+      queueName,
+      this.contentToBuffer(content),
+      options
+    );
     await this.channel.ack(msg);
   }
 
@@ -109,19 +122,22 @@ export class AmqpConnection {
         .then(() => {
           return chan.consume(replyTo, (msg: Message) => {
             if (!onTimeout && msg.properties.correlationId === correlationId) {
-              resolve(JSON.parse(msg.content.toString()));
+              resolve(this.parseContent(msg));
               chan.ack(msg);
             }
           });
         })
         .then(() => {
-          chan.sendToQueue(
-            queueName,
-            new Buffer(JSON.stringify(content)),
-            options
-          );
+          chan.sendToQueue(queueName, this.contentToBuffer(content), options);
         })
-        .catch(err => reject(err));
+        // catch when error amqp (untestable)
+        .catch(
+          // prettier-ignore
+          /* istanbul ignore next */
+          (err) => {
+            reject(err)
+          }
+        );
     });
 
     if (timeout) {
@@ -160,5 +176,25 @@ export class AmqpConnection {
       `application.amqp.queues.${queueName}.queueName`,
       this.valueExtractor(queueName, queueName)
     );
+  }
+
+  contentToBuffer(content: any) {
+    if (content instanceof Buffer) {
+      return content;
+    }
+
+    if (typeof content === 'string') {
+      return new Buffer(content);
+    }
+
+    return new Buffer(JSON.stringify(content));
+  }
+
+  parseContent(msg: Message) {
+    try {
+      return JSON.parse(msg.content.toString());
+    } catch (e) {
+      return msg.content.toString();
+    }
   }
 }

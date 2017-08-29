@@ -1,3 +1,4 @@
+import amqp = require('amqplib');
 import {
   interfaces as coreInterfaces,
   Scan,
@@ -91,10 +92,12 @@ export class AmqpPlugin implements coreInterfaces.GabliamPlugin {
     container: inversifyInterfaces.Container,
     controllerId: any
   ): ConsumerHandler {
-    return (msg: Message) => {
+    return (chan: amqp.Channel) => async (msg: Message) => {
+      const connection = container.get(AmqpConnection);
       const controller = container.get<Controller>(controllerId);
-      const content = msg.content.toString();
-      controller[handlerMetadata.key](content);
+      const content = connection.parseContent(msg);
+      await Promise.resolve(controller[handlerMetadata.key](content));
+      await chan.ack(msg);
     };
   }
 
@@ -103,14 +106,16 @@ export class AmqpPlugin implements coreInterfaces.GabliamPlugin {
     container: inversifyInterfaces.Container,
     controllerId: any
   ): ConsumerHandler {
-    return async (msg: Message) => {
+    return (chan: amqp.Channel) => async (msg: Message) => {
+      // catch when error amqp (untestable)
+      /* istanbul ignore next */
       if (msg.properties.replyTo === undefined) {
         throw new Error(`replyTo is missing`);
       }
 
       const connection = container.get(AmqpConnection);
       const controller = container.get<Controller>(controllerId);
-      const content = JSON.parse(msg.content.toString());
+      const content = connection.parseContent(msg);
 
       let response: any;
       let sendOptions: SendOptions;
@@ -124,16 +129,11 @@ export class AmqpPlugin implements coreInterfaces.GabliamPlugin {
         sendOptions = handlerMetadata.sendOptionsError || {};
       }
 
-      connection.sendToQueue(
-        msg.properties.replyTo,
-        new Buffer(JSON.stringify(response)),
-        msg,
-        {
-          correlationId: msg.properties.correlationId,
-          contentType: 'application/json',
-          ...sendOptions
-        }
-      );
+      connection.sendToQueueAck(msg.properties.replyTo, response, msg, {
+        correlationId: msg.properties.correlationId,
+        contentType: 'application/json',
+        ...sendOptions
+      });
     };
   }
 }
