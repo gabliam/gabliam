@@ -1,4 +1,3 @@
-import amqp = require('amqplib');
 import {
   interfaces as coreInterfaces,
   Scan,
@@ -7,13 +6,7 @@ import {
   Plugin
 } from '@gabliam/core';
 import { TYPE, METADATA_KEY } from './constants';
-import {
-  RabbitHandlerMetadata,
-  ConsumerHandler,
-  Message,
-  SendOptions,
-  Controller
-} from './interfaces';
+import { RabbitHandlerMetadata } from './interfaces';
 import { AmqpConnection } from './amqp-connection';
 import * as d from 'debug';
 
@@ -55,26 +48,7 @@ export class AmqpPlugin implements coreInterfaces.GabliamPlugin {
 
       if (handlerMetadatas) {
         handlerMetadatas.forEach(handlerMetadata => {
-          let consumeHandler: ConsumerHandler;
-          if (handlerMetadata.type === 'Listener') {
-            consumeHandler = this.constructListener(
-              handlerMetadata,
-              container,
-              controllerId
-            );
-          } else {
-            consumeHandler = this.constructConsumer(
-              handlerMetadata,
-              container,
-              controllerId
-            );
-          }
-
-          connection.addConsume(
-            handlerMetadata.queue,
-            consumeHandler,
-            handlerMetadata.consumeOptions
-          );
+          connection.constructAndAddConsume(handlerMetadata, controller);
         });
       }
     });
@@ -88,55 +62,5 @@ export class AmqpPlugin implements coreInterfaces.GabliamPlugin {
   async stop(container: inversifyInterfaces.Container, registry: Registry) {
     const connection = container.get(AmqpConnection);
     await connection.stop();
-  }
-
-  private constructListener(
-    handlerMetadata: RabbitHandlerMetadata,
-    container: inversifyInterfaces.Container,
-    controllerId: any
-  ): ConsumerHandler {
-    return (chan: amqp.Channel) => async (msg: Message) => {
-      const connection = container.get(AmqpConnection);
-      const controller = container.get<Controller>(controllerId);
-      const content = connection.parseContent(msg);
-      await Promise.resolve(controller[handlerMetadata.key](content));
-      await chan.ack(msg);
-    };
-  }
-
-  private constructConsumer(
-    handlerMetadata: RabbitHandlerMetadata,
-    container: inversifyInterfaces.Container,
-    controllerId: any
-  ): ConsumerHandler {
-    return (chan: amqp.Channel) => async (msg: Message) => {
-      // catch when error amqp (untestable)
-      /* istanbul ignore next */
-      if (msg.properties.replyTo === undefined) {
-        throw new Error(`replyTo is missing`);
-      }
-
-      const connection = container.get(AmqpConnection);
-      const controller = container.get<Controller>(controllerId);
-      const content = connection.parseContent(msg);
-
-      let response: any;
-      let sendOptions: SendOptions;
-      try {
-        response = await Promise.resolve(
-          controller[handlerMetadata.key](content)
-        );
-        sendOptions = handlerMetadata.sendOptions || {};
-      } catch (err) {
-        response = err;
-        sendOptions = handlerMetadata.sendOptionsError || {};
-      }
-
-      connection.sendToQueueAck(msg.properties.replyTo, response, msg, {
-        correlationId: msg.properties.correlationId,
-        contentType: 'application/json',
-        ...sendOptions
-      });
-    };
   }
 }

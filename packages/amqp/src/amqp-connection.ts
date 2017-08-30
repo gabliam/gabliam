@@ -6,7 +6,9 @@ import {
   ConsumeOptions,
   SendOptions,
   Message,
-  ConsumeConfig
+  ConsumeConfig,
+  RabbitHandlerMetadata,
+  Controller
 } from './interfaces';
 import * as uuid from 'uuid';
 import * as PromiseB from 'bluebird';
@@ -50,7 +52,7 @@ export class AmqpConnection {
     }
 
     for (const { queueName, handler, options } of this.consumerList) {
-      await ch.consume(queueName, handler(this.channel), options);
+      await ch.consume(queueName, handler, options);
     }
 
     this.state = ConnectionState.running;
@@ -66,6 +68,24 @@ export class AmqpConnection {
       throw new Error(`queue "${queueName}" doesn't exist`);
     }
     this.consumerList.push({ queueName, handler, options });
+  }
+
+  constructAndAddConsume(
+    handlerMetadata: RabbitHandlerMetadata,
+    controller: Controller
+  ) {
+    let consumeHandler: ConsumerHandler;
+    if (handlerMetadata.type === 'Listener') {
+      consumeHandler = this.constructListener(handlerMetadata, controller);
+    } else {
+      consumeHandler = this.constructConsumer(handlerMetadata, controller);
+    }
+
+    this.addConsume(
+      handlerMetadata.queue,
+      consumeHandler,
+      handlerMetadata.consumeOptions
+    );
   }
 
   async sendToQueue(queue: string, content: any, options?: SendOptions) {
@@ -197,5 +217,49 @@ export class AmqpConnection {
     } catch (e) {
       return msg.content.toString();
     }
+  }
+
+  private constructListener(
+    handlerMetadata: RabbitHandlerMetadata,
+    controller: Controller
+  ): ConsumerHandler {
+    return async (msg: Message) => {
+      const content = this.parseContent(msg);
+      await Promise.resolve(controller[handlerMetadata.key](content));
+      await this.channel.ack(msg);
+    };
+  }
+
+  private constructConsumer(
+    handlerMetadata: RabbitHandlerMetadata,
+    controller: Controller
+  ): ConsumerHandler {
+    return async (msg: Message) => {
+      // catch when error amqp (untestable)
+      /* istanbul ignore next */
+      if (msg.properties.replyTo === undefined) {
+        throw new Error(`replyTo is missing`);
+      }
+
+      const content = this.parseContent(msg);
+
+      let response: any;
+      let sendOptions: SendOptions;
+      try {
+        response = await Promise.resolve(
+          controller[handlerMetadata.key](content)
+        );
+        sendOptions = handlerMetadata.sendOptions || {};
+      } catch (err) {
+        response = err;
+        sendOptions = handlerMetadata.sendOptionsError || {};
+      }
+
+      this.sendToQueueAck(msg.properties.replyTo, response, msg, {
+        correlationId: msg.properties.correlationId,
+        contentType: 'application/json',
+        ...sendOptions
+      });
+    };
   }
 }
