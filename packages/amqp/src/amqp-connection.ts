@@ -124,8 +124,8 @@ export class AmqpConnection {
           return chan.consume(replyTo, (msg: Message) => {
             if (!onTimeout && msg.properties.correlationId === correlationId) {
               resolve(this.parseContent(msg));
-              chan.ack(msg);
             }
+            chan.ack(msg);
           });
         })
         .then(() => {
