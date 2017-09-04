@@ -1,3 +1,11 @@
+<a name="2.1.0"></a>
+# 2.1.0 (2017-09-04)
+
+* chore(package): v2.1.0 ([80a2dfa](https://github.com/gabliam/log4js/commit/80a2dfa))
+* fix(log4js config): add fs.exist for loggerConfigPath ([8dc52da](https://github.com/gabliam/log4js/commit/8dc52da))
+
+
+
 <a name="2.0.1"></a>
 ## 2.0.1 (2017-09-04)
 
