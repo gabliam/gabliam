@@ -1,3 +1,12 @@
+<a name="2.0.1"></a>
+## 2.0.1 (2017-09-04)
+
+* chore: upgrade deps ([8145a31](https://github.com/gabliam/log4js/commit/8145a31))
+* chore(package): v2.0.1 ([8792891](https://github.com/gabliam/log4js/commit/8792891))
+* fix: fix peerDependencies ([917b552](https://github.com/gabliam/log4js/commit/917b552))
+
+
+
 <a name="2.0.0"></a>
 # 2.0.0 (2017-08-21)
 
