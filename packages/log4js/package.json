@@ -67,7 +67,7 @@
   },
   "homepage": "https://github.com/gabliam/log4js#readme",
   "peerDependencies": {
-    "@gabliam/core": "^2.4.0",
+    "@gabliam/core": "^3.0.0",
     "joi": "^10.6.0"
   },
   "devDependencies": {
