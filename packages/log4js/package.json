@@ -96,7 +96,7 @@
     "vrsource-tslint-rules": "^5.1.0"
   },
   "dependencies": {
-    "@types/log4js": "^0.0.32",
+    "@types/log4js": "^0.0.33",
     "log4js": "^2.3.3"
   }
 }
