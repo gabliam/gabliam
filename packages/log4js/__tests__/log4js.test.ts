@@ -88,7 +88,7 @@ describe('with config folder', () => {
 
     appTest.addConf(
       'application.loggerConfigPath',
-      '../customConfig/log4js-custom.json'
+      path.resolve(__dirname, './fixtures/customConfig/log4js-custom.json')
     );
     appTest.addClass(TestLog);
     await appTest.build();

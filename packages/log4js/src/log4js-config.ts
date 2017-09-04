@@ -24,8 +24,8 @@ export class LoggerConfig {
 
   @Bean('logger')
   createLogger() {
-    if (this.loggerConfigPath) {
-      log4js.configure(path.resolve(this.configPath, this.loggerConfigPath));
+    if (this.loggerConfigPath && fs.existsSync(this.loggerConfigPath)) {
+      log4js.configure(this.loggerConfigPath);
     } else {
       const defaultFilePath = path.resolve(this.configPath, 'log4js.json');
       if (fs.existsSync(defaultFilePath)) {
