@@ -1,6 +1,6 @@
 import * as interfaces from './interfaces';
 
-import { GraphqlPlugin } from './graphqlPlugin';
+import { GraphqlPlugin } from './graphql-plugin';
 
 export * from './decorator';
 export * from 'graphql-server-express';
