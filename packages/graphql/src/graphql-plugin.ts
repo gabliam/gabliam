@@ -6,7 +6,12 @@ import {
 } from '@gabliam/core';
 import { MiddlewareConfig } from '@gabliam/express';
 import { makeExecutableSchema } from 'graphql-tools';
-import { TYPE, METADATA_KEY, GRAPHQL_PLUGIN_CONFIG } from './constants';
+import {
+  TYPE,
+  METADATA_KEY,
+  GRAPHQL_PLUGIN_CONFIG,
+  DEBUG_PATH
+} from './constants';
 import {
   ResolverMetadata,
   ControllerMetadata,
@@ -17,6 +22,9 @@ import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import * as bodyParser from 'body-parser';
 import * as _ from 'lodash';
 import * as fs from 'fs';
+import * as d from 'debug';
+
+const debug = d(DEBUG_PATH);
 
 @Scan(__dirname)
 export class GraphqlPlugin implements coreInterfaces.GabliamPlugin {
@@ -91,14 +99,15 @@ export class GraphqlPlugin implements coreInterfaces.GabliamPlugin {
     for (const definitions of listdefinitions) {
       const types = definitions
         .split('}')
-        .map(s => s.replace(/^\s+|\s+$/g, ''))
-        .filter(s => s !== '}' && s !== '')
-        .filter(s => s[0] !== '#')
+        .map(s => s.replace(/^\s+|\s+$/g, '')) // remove space
+        .filter(s => s !== '}' && s !== '') // remove usless
+        .filter(s => s[0] !== '#') // remove commentaries lines
         .map(s => s + '\n}');
 
       for (let type of types) {
         if (hasQuery.test(type)) {
           if (type.slice(0, 6) !== 'extend') {
+            // add extend
             type = `extend ${type}`;
           }
           queries.push(type);
@@ -114,6 +123,8 @@ export class GraphqlPlugin implements coreInterfaces.GabliamPlugin {
     }
 
     const typeDefs: string[] = [];
+
+    // for first Type Query remove extend
     if (queries.length) {
       queries[0] = queries[0].slice(7);
       typeDefs.push(...queries);
@@ -132,6 +143,7 @@ export class GraphqlPlugin implements coreInterfaces.GabliamPlugin {
       return;
     }
 
+    debug('typeDefs', typeDefs);
     const executableSchema = makeExecutableSchema({
       typeDefs,
       resolvers
@@ -139,6 +151,7 @@ export class GraphqlPlugin implements coreInterfaces.GabliamPlugin {
     middlewareConfig.addMiddleware({
       order: 50,
       instance: app => {
+        debug('add graphql middleware to ExpressPlugin');
         app.use(bodyParser.urlencoded({ extended: true }));
         app.use(bodyParser.json());
 

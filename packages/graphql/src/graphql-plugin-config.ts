@@ -1,8 +1,15 @@
-
 import { Value, Bean, PluginConfig } from '@gabliam/core';
-import { DEFAULT_END_POINT_URL, DEFAULT_END_POINT_URL_GRAPHIQL, GRAPHQL_PLUGIN_CONFIG } from './constants';
+import {
+  DEFAULT_END_POINT_URL,
+  DEFAULT_END_POINT_URL_GRAPHIQL,
+  GRAPHQL_PLUGIN_CONFIG,
+  DEBUG_PATH
+} from './constants';
 import * as Joi from 'joi';
 import { GraphiqlOptions, GraphqlConfig } from './interfaces';
+import * as d from 'debug';
+
+const debug = d(`${DEBUG_PATH}:GraphqlPluginConfig`);
 
 export const GraphiqlOptionsValidator = Joi.object().keys({
   subscriptionsEndpoint: Joi.string(),
@@ -27,22 +34,20 @@ export class GraphqlPluginConfig {
   @Value('application.graphiql.options', GraphiqlOptionsValidator)
   private graphiqlOptions: GraphiqlOptions = {};
 
-
   @Bean(GRAPHQL_PLUGIN_CONFIG)
   creatreConfig(): GraphqlConfig {
-    return {
+    const graphqlConfig: GraphqlConfig = {
       endpointUrl: this.endpointUrl,
       endpointUrlGraphiql: this.endpointUrlGraphiql,
       graphqlFiles: this.graphqlFiles,
       graphiqlOptions: {
         endpointURL: this.endpointUrl,
-        ...(this.graphiqlOptions)
+        ...this.graphiqlOptions
       }
     };
+
+    debug('GraphqlConfig', graphqlConfig);
+
+    return graphqlConfig;
   }
 }
-
-
-
-
-
