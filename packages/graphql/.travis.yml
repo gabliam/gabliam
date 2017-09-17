@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "7"
+  - "node"
+install:
+  - yarn
+  - npm install -g codecov
+script:
+  - npm test -- --runInBand --coverage
+  - node remap_coverage.js
+  - rm -fr coverage_jest_raw
+  - codecov
