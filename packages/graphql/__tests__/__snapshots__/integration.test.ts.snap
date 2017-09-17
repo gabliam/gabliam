@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mutation test 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-type": "application/json",
+    "transfer-encoding": "chunked",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": Object {
+      "operationName": "submitHero",
+      "query": "mutation submitHero($heroInput: HeroInput!) {
+        submitHero(heroInput: $heroInput) {
+          id,
+          name
+        }
+      }",
+      "variables": Object {
+        "heroInput": Object {
+          "amountPeopleSaved": 1000,
+          "name": "Rogue",
+          "power": "Absorption of abilities",
+        },
+      },
+    },
+    "headers": Object {
+      "accept": "application/json",
+      "content-type": "application/json",
+      "user-agent": "node-superagent/3.6.0",
+    },
+    "method": "POST",
+  },
+  "status": 200,
+  "text": "{\\"data\\":{\\"submitHero\\":{\\"id\\":4,\\"name\\":\\"Rogue\\"}}}",
+}
+`;
+
+exports[`Mutation test 2`] = `
+Array [
+  Object {
+    "amountPeopleSaved": 10,
+    "id": 1,
+    "name": "spiderman",
+    "power": "spider",
+  },
+  Object {
+    "amountPeopleSaved": 100,
+    "id": 2,
+    "name": "Wolverine",
+    "power": "Superhuman senses",
+  },
+  Object {
+    "amountPeopleSaved": 1000,
+    "id": 4,
+    "name": "Rogue",
+    "power": "Absorption of abilities",
+  },
+]
+`;
+
+exports[`Query test 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-type": "application/json",
+    "transfer-encoding": "chunked",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": Object {
+      "query": "query {heroes {
+        id,
+        name
+      }}",
+      "variables": null,
+    },
+    "headers": Object {
+      "accept": "application/json",
+      "content-type": "application/json",
+      "user-agent": "node-superagent/3.6.0",
+    },
+    "method": "POST",
+  },
+  "status": 200,
+  "text": "{\\"data\\":{\\"heroes\\":[{\\"id\\":1,\\"name\\":\\"spiderman\\"},{\\"id\\":2,\\"name\\":\\"Wolverine\\"}]}}",
+}
+`;

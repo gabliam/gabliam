@@ -1,0 +1,27 @@
+type Photo {
+  id: Int!
+
+  name: String!
+
+  description: String!
+
+  fileName: String!
+
+  views: Int!
+
+  isPublished: Boolean!
+}
+
+type PhotoPage {
+  items: [Photo]
+  totalCount: Int
+}
+
+type Query {
+  photos: [Photo]
+  getPageOfPhotos(page: Int, perPage: Int, sortField: String, sortOrder: String, filter: String): PhotoPage
+}
+
+type Mutation {
+  submitPhoto(photoInput: PhotoInput!): Photo
+}

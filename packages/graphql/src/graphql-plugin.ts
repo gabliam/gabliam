@@ -136,7 +136,6 @@ export class GraphqlPlugin implements coreInterfaces.GabliamPlugin {
       typeDefs,
       resolvers
     });
-
     middlewareConfig.addMiddleware({
       order: 50,
       instance: app => {
@@ -148,6 +147,7 @@ export class GraphqlPlugin implements coreInterfaces.GabliamPlugin {
           graphqlExpress(req => {
             let options = {};
 
+            /* istanbul ignore if  */
             if ((<any>req).graphqlOptions) {
               options = (<any>req).graphqlOptions;
             }

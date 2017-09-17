@@ -1,0 +1,31 @@
+type Hero {
+  id: Int!
+
+  name: String!
+
+  power: String!
+
+  amountPeopleSaved: Int!
+}
+
+input HeroInput {
+  name: String!
+
+  power: String!
+
+  amountPeopleSaved: Int!
+}
+
+type HeroPage {
+  items: [Hero]
+  totalCount: Int
+}
+
+type Query {
+  heroes: [Hero]
+  getPageOfHeroes(page: Int, perPage: Int, sortField: String, sortOrder: String, filter: String): HeroPage
+}
+
+type Mutation {
+  submitHero(heroInput: HeroInput!): Hero
+}

@@ -1,0 +1,11 @@
+input PhotoInput {
+  name: String!
+
+  description: String!
+
+  fileName: String!
+
+  views: Int!
+
+  isPublished: Boolean!
+}
