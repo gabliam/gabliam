@@ -75,8 +75,14 @@ export interface RegistryMetada<T = any> {
   value: ValueRegistry<T>;
 }
 
+export interface PluginDependency {
+  name: string;
+
+  order: 'before' | 'after';
+}
+
 export interface PluginMetadata {
   name: string;
 
-  dependencies: string[];
+  dependencies: PluginDependency[];
 }

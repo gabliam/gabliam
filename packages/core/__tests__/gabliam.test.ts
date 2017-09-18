@@ -207,13 +207,28 @@ test('should fail with bad Plugin', () => {
   }).toThrowError();
 });
 
-test('should fail with Plugin with bad deps', () => {
-  @Plugin({ dependencies: ['BadPlugin'] })
+test('ok with Plugin', async () => {
+  @Plugin()
+  class Plugin1 {}
+
+  @Plugin({ dependencies: ['Plugin1'] })
+  class Plugin2 {}
+
+  @Plugin({ dependencies: [{ name: 'Plugin2', order: 'before' }] })
+  class Plugin3 {}
+  const g = new GabliamTest();
+  g.gab.addPlugin(Plugin1);
+  g.gab.addPlugin(Plugin2);
+  g.gab.addPlugin(Plugin3);
+  await expect(g.build()).resolves;
+});
+
+test('should fail with Plugin with bad deps', async () => {
+  @Plugin({ dependencies: ['BadDeps'] })
   class BadPlugin {}
   const g = new GabliamTest();
-  expect(() => {
-    g.gab.addPlugin(BadPlugin);
-  }).toThrowError();
+  g.gab.addPlugin(BadPlugin);
+  await expect(g.build()).rejects.toMatchSnapshot();
 });
 
 test('plugin findByName', () => {

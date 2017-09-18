@@ -6,6 +6,7 @@ import {
 } from './interfaces';
 import { METADATA_KEY, ERRORS_MSGS } from './constants';
 import * as _ from 'lodash';
+import * as Topo from 'topo';
 
 export class PluginList {
   private _plugins: GabliamPluginDefinition[] = [];
@@ -20,17 +21,40 @@ export class PluginList {
       throw new Error(ERRORS_MSGS.INVALID_PLUGIN);
     }
 
-    if (pluginMetadata.dependencies.length) {
-      for (const dep of pluginMetadata.dependencies) {
-        if (!this.has(dep)) {
-          throw new Error(
-            `The plugin ${pluginMetadata.name} need the plugin ${dep}}`
-          );
+    this._plugins.push({ ...pluginMetadata, plugin: new ctor() });
+  }
+
+  sort() {
+    const treePlugin = new Topo();
+
+    for (const plugin of this._plugins) {
+      const after = [];
+      const before = [];
+      if (plugin.dependencies) {
+        for (const dep of plugin.dependencies) {
+          if (!this.has(dep.name)) {
+            throw new Error(
+              `The plugin ${plugin.name} need the plugin ${dep.name}}`
+            );
+          }
+          switch (dep.order) {
+            case 'before':
+              before.unshift(dep.name);
+              break;
+            case 'after':
+              after.push(dep.name);
+              break;
+          }
         }
       }
+      treePlugin.add(plugin.name, { after, before });
     }
 
-    this._plugins.push({ name: pluginMetadata.name, plugin: new ctor() });
+    const sortedPlugins = <string[]>treePlugin.nodes;
+    const listPlugin = sortedPlugins.map<GabliamPluginDefinition>(
+      p => this.findByName(p)!
+    );
+    this._plugins = listPlugin;
   }
 
   has(name: string) {

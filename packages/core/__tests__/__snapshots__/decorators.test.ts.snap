@@ -107,7 +107,10 @@ Object {
 exports[`@Plugin should add Plugin metadata to a class when decorated with @Plugin({ dependencies: ['TestPlugin'] }) 1`] = `
 Object {
   "dependencies": Array [
-    "TestPlugin",
+    Object {
+      "name": "TestPlugin",
+      "order": "after",
+    },
   ],
   "name": "TestBean",
 }
@@ -123,7 +126,10 @@ Object {
 exports[`@Plugin should add Plugin metadata to a class when decorated with @Plugin({ name: 'TestPlugin', dependencies: ['TestPlugin2'] }) 1`] = `
 Object {
   "dependencies": Array [
-    "TestPlugin2",
+    Object {
+      "name": "TestPlugin2",
+      "order": "after",
+    },
   ],
   "name": "TestPlugin",
 }

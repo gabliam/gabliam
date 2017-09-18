@@ -83,6 +83,8 @@ export class Gabliam {
    * @returns Promise
    */
   public async build(): Promise<Gabliam> {
+    this.pluginList.sort();
+
     /**
      * Load config file
      */

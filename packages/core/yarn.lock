@@ -3979,11 +3979,15 @@ topo@1.x.x:
   dependencies:
     hoek "2.x.x"
 
-topo@2.x.x:
+topo@2.x.x, topo@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/topo/-/topo-2.0.2.tgz#cd5615752539057c0dc0491a621c3bc6fbe1d182"
   dependencies:
     hoek "4.x.x"
+
+toposort@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/toposort/-/toposort-1.0.3.tgz#f02cd8a74bd8be2fc0e98611c3bacb95a171869c"
 
 tough-cookie@^2.3.2, tough-cookie@~2.3.0:
   version "2.3.2"

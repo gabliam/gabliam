@@ -59,10 +59,13 @@ DbConfig {
 
 exports[`plugin findByName 1`] = `
 Object {
+  "dependencies": Array [],
   "name": "BadPlugin",
   "plugin": BadPlugin {},
 }
 `;
+
+exports[`should fail with Plugin with bad deps 1`] = `[Error: The plugin BadPlugin need the plugin BadDeps}]`;
 
 exports[`test plugin with config gabliam build 1`] = `2`;
 

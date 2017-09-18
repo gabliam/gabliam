@@ -1,6 +1,6 @@
 import { interfaces } from 'inversify';
 import { Registry } from '../registry';
-import { ValueValidator } from './metadata';
+import { ValueValidator, PluginMetadata } from './metadata';
 
 /**
  * Config for gabliam
@@ -24,9 +24,7 @@ export interface GabliamPluginConstructor {
   new (): GabliamPlugin;
 }
 
-export interface GabliamPluginDefinition {
-  name: string;
-
+export interface GabliamPluginDefinition extends PluginMetadata {
   plugin: GabliamPlugin;
 }
 

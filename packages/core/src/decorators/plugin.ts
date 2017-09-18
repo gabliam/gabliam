@@ -1,10 +1,17 @@
 import { METADATA_KEY, ERRORS_MSGS } from '../constants';
-import { PluginMetadata } from '../interfaces';
+import { PluginMetadata, PluginDependency } from '../interfaces';
 
 export interface PluginOptions {
   name?: string;
 
-  dependencies?: string[];
+  dependencies?: (PluginDependency | string)[];
+}
+
+function isPluginDependency(obj: any): obj is PluginDependency {
+  return (
+    typeof obj === 'object' &&
+    (obj.hasOwnProperty('name') || obj.hasOwnProperty('order'))
+  );
 }
 
 function isPluginOptions(obj: any): obj is PluginOptions {
@@ -30,14 +37,22 @@ export function Plugin(value?: string | PluginOptions): PluginReturn {
     }
 
     let name = target.name;
-    let dependencies: string[] = [];
+    const dependencies: PluginDependency[] = [];
 
     if (value) {
       if (typeof value === 'string') {
         name = value;
       } else if (isPluginOptions(value)) {
         name = value.name ? value.name : name;
-        dependencies = value.dependencies ? value.dependencies : dependencies;
+        if (value.dependencies) {
+          value.dependencies.forEach(dep => {
+            if (isPluginDependency(dep)) {
+              dependencies.push(dep);
+            } else {
+              dependencies.push({ name: dep, order: 'after' });
+            }
+          });
+        }
       } else {
         throw new Error(ERRORS_MSGS.INVALID_PLUGIN_DECORATOR);
       }
