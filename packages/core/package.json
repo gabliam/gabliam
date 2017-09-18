@@ -40,8 +40,7 @@
     "lodash": "^4.17.4",
     "shortstop": "^1.0.3",
     "shortstop-handlers": "^1.0.1",
-    "topo": "^2.0.2",
-    "toposort": "^1.0.3"
+    "topo": "^2.0.2"
   },
   "devDependencies": {
     "@types/debug": "^0.0.30",
