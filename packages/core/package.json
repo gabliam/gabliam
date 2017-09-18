@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/core",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Gabliam is on top of inversify",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",

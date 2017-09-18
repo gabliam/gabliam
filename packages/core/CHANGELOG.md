@@ -1,3 +1,12 @@
+<a name="3.1.1"></a>
+## 3.1.1 (2017-09-18)
+
+* chore: v3.1.1 ([011e702](https://github.com/gabliam/core/commit/011e702))
+* chore(package): remove toposort ([793563f](https://github.com/gabliam/core/commit/793563f))
+* chore(package): upgrade deps ([4dafc19](https://github.com/gabliam/core/commit/4dafc19))
+
+
+
 <a name="3.1.0"></a>
 # 3.1.0 (2017-09-18)
 
