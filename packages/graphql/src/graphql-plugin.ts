@@ -53,8 +53,6 @@ export class GraphqlPlugin implements coreInterfaces.GabliamPlugin {
 
     const controllerIds = registry.get(TYPE.Controller);
     const resolverList: IResolvers[] = [];
-    const hasQuery = /\s*type\s*Query\s*{\s*/g;
-    const hasMutation = /\s*type\s*Mutation\s*{\s*/g;
 
     for (const { id: controllerId } of controllerIds) {
       const controller = container.get<object>(controllerId);
@@ -105,13 +103,13 @@ export class GraphqlPlugin implements coreInterfaces.GabliamPlugin {
         .map(s => s + '\n}');
 
       for (let type of types) {
-        if (hasQuery.test(type)) {
+        if (/\s*type\s*Query\s*{\s*/g.test(type)) {
           if (type.slice(0, 6) !== 'extend') {
             // add extend
             type = `extend ${type}`;
           }
           queries.push(type);
-        } else if (hasMutation.test(type)) {
+        } else if (/\s*type\s*Mutation\s*{\s*/g.test(type)) {
           if (type.slice(0, 6) !== 'extend') {
             type = `extend ${type}`;
           }
@@ -123,7 +121,6 @@ export class GraphqlPlugin implements coreInterfaces.GabliamPlugin {
     }
 
     const typeDefs: string[] = [];
-
     // for first Type Query remove extend
     if (queries.length) {
       queries[0] = queries[0].slice(7);

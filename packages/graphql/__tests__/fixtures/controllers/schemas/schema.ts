@@ -64,11 +64,6 @@ type HeroPage {
   totalCount: Int
 }
 
-type Query {
-  heroes: [Hero]
-  getPageOfHeroes(page: Int, perPage: Int, sortField: String, sortOrder: String, filter: String): HeroPage
-}
-
 type Mutation {
   submitHero(heroInput: HeroInput!): Hero
 }
