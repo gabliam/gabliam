@@ -1,3 +1,11 @@
+<a name="3.1.0"></a>
+# 3.1.0 (2017-09-18)
+
+* chore: v3.1.0 ([b5e80b7](https://github.com/gabliam/core/commit/b5e80b7))
+* fix(order plugin load): Correction for plugin order ([fa2928c](https://github.com/gabliam/core/commit/fa2928c))
+
+
+
 <a name="3.0.0"></a>
 # 3.0.0 (2017-08-14)
 
