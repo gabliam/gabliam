@@ -54,8 +54,8 @@
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-20.0.8.tgz#7f8c97f73d20d3bf5448fbe33661a342002b5954"
 
 "@types/joi@^10.3.2":
-  version "10.4.2"
-  resolved "https://registry.yarnpkg.com/@types/joi/-/joi-10.4.2.tgz#66bcb36d5c0baf5621702aed7113fbe626291814"
+  version "10.4.3"
+  resolved "https://registry.yarnpkg.com/@types/joi/-/joi-10.4.3.tgz#1d82cd9a79194f3dd0685d5d2c220a77a9c0776b"
 
 "@types/lodash@^4.14.64":
   version "4.14.74"
@@ -2843,8 +2843,8 @@ jest@^21.0.1:
     jest-cli "^21.1.0"
 
 joi@^11.0.1:
-  version "11.0.1"
-  resolved "https://registry.yarnpkg.com/joi/-/joi-11.0.1.tgz#a97bafd15b4cea708462f862a4e8e8b4072c5985"
+  version "11.0.2"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-11.0.2.tgz#5345ccf26f070e00b91add74ecbf3356df38e364"
   dependencies:
     hoek "4.x.x"
     isemail "3.x.x"
