@@ -33,14 +33,15 @@
   "dependencies": {
     "caller": "^1.0.1",
     "debug": "^3.0.0",
+    "gert": "^2.0.0",
+    "gert-topo-sort": "^1.0.0",
     "glob": "^7.1.1",
     "inversify": "^4.3.0",
     "inversify-logger-middleware": "^3.0.0",
     "js-yaml": "^3.8.1",
     "lodash": "^4.17.4",
     "shortstop": "^1.0.3",
-    "shortstop-handlers": "^1.0.1",
-    "topo": "^2.0.2"
+    "shortstop-handlers": "^1.0.1"
   },
   "devDependencies": {
     "@types/debug": "^0.0.30",
