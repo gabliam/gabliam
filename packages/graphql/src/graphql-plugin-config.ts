@@ -28,6 +28,9 @@ export class GraphqlPluginConfig {
   @Value('application.graphql.graphqlFiles', Joi.array().items(Joi.string()))
   private graphqlFiles: string[] | undefined;
 
+  @Value('application.graphiql.enabled', Joi.boolean())
+  private graphiqlEnabled = true;
+
   @Value('application.graphiql.endpointUrl', Joi.string())
   private endpointUrlGraphiql: string = DEFAULT_END_POINT_URL_GRAPHIQL;
 
@@ -40,6 +43,7 @@ export class GraphqlPluginConfig {
       endpointUrl: this.endpointUrl,
       endpointUrlGraphiql: this.endpointUrlGraphiql,
       graphqlFiles: this.graphqlFiles,
+      graphiqlEnabled: this.graphiqlEnabled,
       graphiqlOptions: {
         endpointURL: this.endpointUrl,
         ...this.graphiqlOptions

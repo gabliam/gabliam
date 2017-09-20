@@ -1,7 +1,6 @@
 import { inversifyInterfaces } from '@gabliam/core';
 import * as GraphiQL from 'graphql-server-module-graphiql';
 
-
 export type listControllers = inversifyInterfaces.ServiceIdentifier<any>[];
 
 export type resolverType = 'Query' | 'Mutation' | 'Subscription';
@@ -23,4 +22,6 @@ export interface GraphqlConfig {
   graphiqlOptions: GraphiQL.GraphiQLData;
 
   graphqlFiles: string[] | undefined;
+
+  graphiqlEnabled: boolean;
 }

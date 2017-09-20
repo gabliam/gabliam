@@ -175,10 +175,12 @@ export class GraphqlPlugin implements coreInterfaces.GabliamPlugin {
           }) as ExpressGraphQLOptionsFunction)
         );
 
-        app.use(
-          graphqlPluginConfig.endpointUrlGraphiql,
-          graphiqlExpress(graphqlPluginConfig.graphiqlOptions)
-        );
+        if (graphqlPluginConfig.graphiqlEnabled) {
+          app.use(
+            graphqlPluginConfig.endpointUrlGraphiql,
+            graphiqlExpress(graphqlPluginConfig.graphiqlOptions)
+          );
+        }
       }
     });
   }
