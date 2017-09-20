@@ -60,13 +60,13 @@ Array [
 ]
 `;
 
-exports[`Errors with bad config 1`] = `[Error: Error for 'application.amqp.url' value{"isJoi":true,"name":"ValidationError","details":[{"message":"\\"value\\" is required","path":"value","type":"any.required","context":{"key":"value"}}]}]`;
+exports[`Errors with bad config 1`] = `[Error: Error for 'application.amqp.url' value{"isJoi":true,"name":"ValidationError","details":[{"message":"\\"value\\" is required","path":[],"type":"any.required","context":{"label":"value"}}]}]`;
 
 exports[`Errors with bad url 1`] = `[Error: getaddrinfo ENOTFOUND bad bad:5672]`;
 
-exports[`Errors without config folder 1`] = `[Error: Error for 'application.amqp.url' value{"isJoi":true,"name":"ValidationError","details":[{"message":"\\"value\\" is required","path":"value","type":"any.required","context":{"key":"value"}}]}]`;
+exports[`Errors without config folder 1`] = `[Error: Error for 'application.amqp.url' value{"isJoi":true,"name":"ValidationError","details":[{"message":"\\"value\\" is required","path":[],"type":"any.required","context":{"label":"value"}}]}]`;
 
-exports[`Errors without queueName 1`] = `[Error: Error for 'application.amqp.queues' value{"isJoi":true,"name":"ValidationError","details":[{"message":"\\"queueName\\" is required","path":"queueTest.queueName","type":"any.required","context":{"key":"queueName"}},{"message":"\\"name\\" is not allowed","path":"queueTest.name","type":"object.allowUnknown","context":{"child":"name","key":"name"}}],"_object":{"queueTest":{"name":"lol"}}}]`;
+exports[`Errors without queueName 1`] = `[Error: Error for 'application.amqp.queues' value{"isJoi":true,"name":"ValidationError","details":[{"message":"\\"queueName\\" is required","path":["queueTest","queueName"],"type":"any.required","context":{"key":"queueName","label":"queueName"}},{"message":"\\"name\\" is not allowed","path":["queueTest","name"],"type":"object.allowUnknown","context":{"child":"name","key":"name","label":"name"}}],"_object":{"queueTest":{"name":"lol"}}}]`;
 
 exports[`Listener test with buffer object 1`] = `
 Object {
