@@ -1,3 +1,14 @@
+<a name="2.1.0"></a>
+# 2.1.0 (2017-09-20)
+
+* chore: upgrade deps ([2719900](https://github.com/gabliam/amqp/commit/2719900))
+* chore: v2.1.0 ([11592f0](https://github.com/gabliam/amqp/commit/11592f0))
+* chore(package): add test for publish-please ([85a750a](https://github.com/gabliam/amqp/commit/85a750a))
+* refactor: move create consume in connection ([80650b7](https://github.com/gabliam/amqp/commit/80650b7))
+* fix: SendAndReceive: Ack all the time even if there is a timeout error ([ab06997](https://github.com/gabliam/amqp/commit/ab06997))
+
+
+
 <a name="2.0.0"></a>
 # 2.0.0 (2017-08-29)
 
