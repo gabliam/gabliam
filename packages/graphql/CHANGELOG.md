@@ -1,3 +1,11 @@
+<a name="2.1.0"></a>
+# 2.1.0 (2017-09-20)
+
+* chore: v2.1.0 ([376e760](https://github.com/gabliam/graphql/commit/376e760))
+* feat: now we can disabled graphiql ([04ca94a](https://github.com/gabliam/graphql/commit/04ca94a))
+
+
+
 <a name="2.0.0"></a>
 # 2.0.0 (2017-09-20)
 
