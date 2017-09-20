@@ -1,3 +1,12 @@
+<a name="3.2.0"></a>
+# 3.2.0 (2017-09-20)
+
+* chore: upgrade deps ([f0f50b0](https://github.com/gabliam/core/commit/f0f50b0))
+* chore(package): v3.2.0 ([f269c54](https://github.com/gabliam/core/commit/f269c54))
+* feat: rewrite sort plugin ([cd1bfcb](https://github.com/gabliam/core/commit/cd1bfcb))
+
+
+
 <a name="3.1.1"></a>
 ## 3.1.1 (2017-09-18)
 
