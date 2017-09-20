@@ -13,8 +13,8 @@ export class GraphqlPluginTest extends GabliamTest {
       scanPath: p,
       configPath: p
     })
-      .addPlugin(GraphqlPlugin)
-      .addPlugin(ExpressPlugin);
+      .addPlugin(ExpressPlugin)
+      .addPlugin(GraphqlPlugin);
     super(gab);
   }
 

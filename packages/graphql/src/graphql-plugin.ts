@@ -2,6 +2,7 @@ import {
   interfaces as coreInterfaces,
   inversifyInterfaces,
   Scan,
+  Plugin,
   Registry
 } from '@gabliam/core';
 import { MiddlewareConfig } from '@gabliam/express';
@@ -18,7 +19,11 @@ import {
   GraphqlConfig
 } from './interfaces';
 import { IResolvers } from 'graphql-tools/dist/Interfaces';
-import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
+import {
+  graphqlExpress,
+  graphiqlExpress,
+  ExpressGraphQLOptionsFunction
+} from 'graphql-server-express';
 import * as bodyParser from 'body-parser';
 import * as _ from 'lodash';
 import * as fs from 'fs';
@@ -26,7 +31,8 @@ import * as d from 'debug';
 
 const debug = d(DEBUG_PATH);
 
-@Scan(__dirname)
+@Plugin({ dependencies: [{ name: 'ExpressPlugin', order: 'before' }] })
+@Scan()
 export class GraphqlPlugin implements coreInterfaces.GabliamPlugin {
   bind(container: inversifyInterfaces.Container, registry: Registry) {
     registry.get(TYPE.Controller).map(({ id, target }) => {
@@ -154,7 +160,7 @@ export class GraphqlPlugin implements coreInterfaces.GabliamPlugin {
 
         app.use(
           graphqlPluginConfig.endpointUrl,
-          graphqlExpress(req => {
+          graphqlExpress(((req: any) => {
             let options = {};
 
             /* istanbul ignore if  */
@@ -166,7 +172,7 @@ export class GraphqlPlugin implements coreInterfaces.GabliamPlugin {
               schema: executableSchema,
               ...options
             };
-          })
+          }) as ExpressGraphQLOptionsFunction)
         );
 
         app.use(
