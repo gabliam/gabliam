@@ -29,7 +29,7 @@ Registry {
 exports[`whitout other scan 2`] = `
 LoaderModule {
   "loadedFolder": Array [
-    "<PROJECT_ROOT>/__tests__/fixtures/loader/withoutscan",
+    "<PROJECT_ROOT>/packages/core/__tests__/fixtures/loader/withoutscan",
   ],
 }
 `;
@@ -82,9 +82,9 @@ Registry {
 exports[`with plugin 2`] = `
 LoaderModule {
   "loadedFolder": Array [
-    "<PROJECT_ROOT>/__tests__/fixtures/loader/withoutscan",
-    "<PROJECT_ROOT>/__tests__/fixtures/loader/withscan",
-    "<PROJECT_ROOT>/__tests__/fixtures/loader/subfoldertoscan",
+    "<PROJECT_ROOT>/packages/core/__tests__/fixtures/loader/withoutscan",
+    "<PROJECT_ROOT>/packages/core/__tests__/fixtures/loader/withscan",
+    "<PROJECT_ROOT>/packages/core/__tests__/fixtures/loader/subfoldertoscan",
   ],
 }
 `;
@@ -118,7 +118,7 @@ Registry {
 exports[`with plugin and false scan path 2`] = `
 LoaderModule {
   "loadedFolder": Array [
-    "<PROJECT_ROOT>/__tests__/fixtures/loader/withoutscan",
+    "<PROJECT_ROOT>/packages/core/__tests__/fixtures/loader/withoutscan",
   ],
 }
 `;
@@ -156,8 +156,8 @@ Registry {
 exports[`with scan 2`] = `
 LoaderModule {
   "loadedFolder": Array [
-    "<PROJECT_ROOT>/__tests__/fixtures/loader/withscan",
-    "<PROJECT_ROOT>/__tests__/fixtures/loader/subfoldertoscan",
+    "<PROJECT_ROOT>/packages/core/__tests__/fixtures/loader/withscan",
+    "<PROJECT_ROOT>/packages/core/__tests__/fixtures/loader/subfoldertoscan",
   ],
 }
 `;

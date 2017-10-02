@@ -6,9 +6,7 @@
   "typings": "lib/index.d.ts",
   "module": "lib/index.js",
   "scripts": {
-    "build-test": "npm run build && npm run test",
-    "build": "rimraf lib && tsc -p tsconfig.build.json",
-    "test": "jest"
+    "build": "rimraf lib && tsc -p tsconfig.build.json"
   },
   "files": [
     "lib",
@@ -38,33 +36,6 @@
     "@types/lodash": "^4.14.53",
     "joi": "^11.0.1",
     "rimraf": "^2.6.0"
-  },
-  "jest": {
-    "transform": {
-      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "collectCoverage": false,
-    "collectCoverageFrom": [
-      "src/**/*.{ts}",
-      "!src/interfaces/**",
-      "!src/testing/**",
-      "!src/typings/**",
-      "!**/node_modules/**",
-      "!**/vendor/**"
-    ],
-    "coverageDirectory": "coverage_jest_raw",
-    "setupTestFrameworkScriptFile": "<rootDir>/__tests__/setup.js",
-    "testEnvironment": "node",
-    "testRegex": "(/__tests__/.*)\\.test\\.(ts|tsx|js)$",
-    "snapshotSerializers": [
-      "jest-serializer-path"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "json"
-    ]
   },
   "repository": {
     "type": "git",

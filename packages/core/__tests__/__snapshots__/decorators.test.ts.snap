@@ -177,32 +177,32 @@ Object {
 
 exports[`@Scan should add Scan metadata to a class when decorated multiple times with @Scan 1`] = `
 Array [
-  "<PROJECT_ROOT>/__tests__/otherFolder",
-  "<PROJECT_ROOT>/__tests__",
+  "<PROJECT_ROOT>/packages/core/__tests__/otherFolder",
+  "<PROJECT_ROOT>/packages/core/__tests__",
 ]
 `;
 
 exports[`@Scan should add Scan metadata to a class when decorated with @Scan() 1`] = `
 Array [
-  "<PROJECT_ROOT>/__tests__",
+  "<PROJECT_ROOT>/packages/core/__tests__",
 ]
 `;
 
 exports[`@Scan should add Scan metadata to a class when decorated with @Scan(__dirname) 1`] = `
 Array [
-  "<PROJECT_ROOT>/__tests__",
+  "<PROJECT_ROOT>/packages/core/__tests__",
 ]
 `;
 
 exports[`@Scan should add Scan metadata to a class when decorated with @Scan(relativePath) 1`] = `
 Array [
-  "<PROJECT_ROOT>/__tests__/fixtures/loader",
+  "<PROJECT_ROOT>/packages/core/__tests__/fixtures/loader",
 ]
 `;
 
 exports[`@Scan should add Scan metadata to a class when decorated with @Scan(relativePath) 2 1`] = `
 Array [
-  "<PROJECT_ROOT>/src",
+  "<PROJECT_ROOT>/packages/core/src",
 ]
 `;
 
