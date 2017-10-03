@@ -5,3 +5,4 @@ coverage
 lib/
 *.log
 coverage_jest_raw
+*.sqlite
