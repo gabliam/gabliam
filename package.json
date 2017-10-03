@@ -33,7 +33,10 @@
     "sinon": "^4.0.0",
     "supertest": "^3.0.0",
     "ts-node": "^3.3.0",
-    "typescript": "^2.5.3"
+    "tslint": "^5.7.0",
+    "tslint-eslint-rules": "^4.1.1",
+    "typescript": "^2.5.3",
+    "vrsource-tslint-rules": "^5.1.1"
   },
   "lint-staged": {
     "*.ts": [
