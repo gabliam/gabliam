@@ -12,7 +12,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.5.2",
+      "user-agent": "node-superagent/3.6.2",
     },
     "method": "GET",
   },
@@ -35,7 +35,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.5.2",
+      "user-agent": "node-superagent/3.6.2",
     },
     "method": "GET",
   },
@@ -58,7 +58,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.5.2",
+      "user-agent": "node-superagent/3.6.2",
     },
     "method": "GET",
   },
@@ -81,7 +81,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.5.2",
+      "user-agent": "node-superagent/3.6.2",
     },
     "method": "GET",
   },
