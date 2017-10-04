@@ -21,14 +21,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gabliam/express.git"
+    "url": "git+https://github.com/gabliam/gabliam.git"
   },
   "author": "David Touzet <dtouzet@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gabliam/express/issues"
+    "url": "https://github.com/gabliam/gabliam/issues"
   },
-  "homepage": "https://github.com/gabliam/express#readme",
+  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/express#readme",
   "peerDependencies": {
     "@gabliam/core": "^4.0.0-0",
     "express": "^4.14.1"
