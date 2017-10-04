@@ -12,14 +12,6 @@ exports[`with config host & database 1`] = `Array []`;
 
 exports[`with config host & database 2`] = `"test"`;
 
-exports[`with config uri 1`] = `
-Array [
-  Object {
-    "__v": 0,
-    "_id": "59d48c2457496222861d6dee",
-    "name": "test",
-  },
-]
-`;
+exports[`with config uri 1`] = `Array []`;
 
 exports[`with config uri 2`] = `"test"`;
