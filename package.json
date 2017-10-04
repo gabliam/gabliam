@@ -10,6 +10,7 @@
     "lint": "tslint --type-check --project tsconfig.json \"./packages/**/src/**/*.ts\" --exclude \"./packages/**/node_modules/**/*.ts\" --exclude \"./packages/**/src/**/*.d.ts\" ",
     "build": "lerna run build",
     "test": "jest --runInBand",
+    "test:ci": "jest --runInBand --coverage && node remap_coverage.js && rimraf coverage_jest_raw && codecov",
     "release": "npm run build && npm run lint && npm run test && lerna publish"
   },
   "devDependencies": {
@@ -18,6 +19,7 @@
     "@types/reflect-metadata": "^0.0.5",
     "@types/sinon": "^2.3.5",
     "@types/supertest": "^2.0.3",
+    "codecov": "^2.3.0",
     "commitizen": "^2.9.6",
     "conventional-changelog-cli": "^1.3.4",
     "cz-conventional-changelog": "^2.0.0",
