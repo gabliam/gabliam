@@ -44,7 +44,7 @@ exports[`repository methods deleteAll 1`] = `Array []`;
 
 exports[`repository methods deleteAll 2`] = `"test"`;
 
-exports[`repository methods deleteAll 3`] = `"test2"`;
+exports[`repository methods deleteAll 3`] = `"test"`;
 
 exports[`repository methods deleteAll 4`] = `Array []`;
 

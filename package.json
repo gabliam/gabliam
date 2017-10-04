@@ -12,7 +12,7 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@types/jest": "^21.1.1",
+    "@types/jest": "^21.1.2",
     "@types/mock-fs": "^3.6.30",
     "@types/reflect-metadata": "^0.0.5",
     "@types/sinon": "^2.3.5",
@@ -27,13 +27,14 @@
     "lerna": "^2.2.0",
     "lint-staged": "^4.2.3",
     "mock-fs": "^4.4.1",
-    "prettier": "^1.7.3",
+    "prettier": "^1.7.4",
     "publish-please": "^2.3.1",
     "reflect-metadata": "^0.1.10",
     "remap-istanbul": "^0.9.5",
     "rimraf": "^2.6.2",
     "sinon": "^4.0.0",
     "supertest": "^3.0.0",
+    "ts-jest": "^21.0.1",
     "ts-node": "^3.3.0",
     "tslint": "^5.7.0",
     "tslint-eslint-rules": "^4.1.1",
@@ -75,7 +76,5 @@
       "json"
     ]
   },
-  "dependencies": {
-    "ts-jest": "^21.0.1"
-  }
+  "dependencies": {}
 }
