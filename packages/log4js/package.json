@@ -19,14 +19,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gabliam/log4js.git"
+    "url": "git+https://github.com/gabliam/gabliam.git"
   },
   "author": "David Touzet <dtouzet@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gabliam/log4js/issues"
+    "url": "https://github.com/gabliam/gabliam/issues"
   },
-  "homepage": "https://github.com/gabliam/log4js#readme",
+  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/log4js#readme",
   "peerDependencies": {
     "@gabliam/core": "^3.0.0",
     "joi": "^10.6.0"
