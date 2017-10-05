@@ -14,14 +14,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gabliam/typeorm.git"
+    "url": "git+https://github.com/gabliam/gabliam.git"
   },
   "author": "David Touzet <dtouzet@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gabliam/typeorm/issues"
+    "url": "https://github.com/gabliam/gabliam/issues"
   },
-  "homepage": "https://github.com/gabliam/typeorm#readme",
+  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/typeorm#readme",
   "peerDependencies": {
     "@gabliam/core": "^3.0.0"
   },
