@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/mongoose",
-  "version": "3.0.2",
+  "version": "4.0.0-1",
   "description": "mongoose plugin for gabliam",
   "keywords": [
     "gabliam",

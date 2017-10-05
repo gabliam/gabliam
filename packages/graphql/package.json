@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/graphql",
-  "version": "2.1.0",
+  "version": "4.0.0-1",
   "description": "Graphql plugin for gabliam",
   "keywords": [
     "gabliam",
