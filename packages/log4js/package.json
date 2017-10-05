@@ -28,11 +28,11 @@
   },
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/log4js#readme",
   "peerDependencies": {
-    "@gabliam/core": "^3.0.0",
+    "@gabliam/core": "^4.0.0-1",
     "joi": "^10.6.0"
   },
   "devDependencies": {
-    "@gabliam/core": "^3.0.0",
+    "@gabliam/core": "^4.0.0-1",
     "@types/joi": "^10.4.0",
     "joi": "^10.6.0",
     "lodash": "^4.17.4"

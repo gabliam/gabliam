@@ -30,13 +30,13 @@
   },
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/graphql#readme",
   "peerDependencies": {
-    "@gabliam/core": "^2.2.0",
-    "@gabliam/express": "^2.3.0",
+    "@gabliam/core": "^4.0.0-1",
+    "@gabliam/express": "^4.0.0-1",
     "joi": "^10.2.2"
   },
   "devDependencies": {
-    "@gabliam/core": "^3.1.1",
-    "@gabliam/express": "^3.0.1",
+    "@gabliam/core": "^4.0.0-1",
+    "@gabliam/express": "^4.0.0-1",
     "@types/body-parser": "^1.16.3",
     "@types/debug": "^0.0.30",
     "@types/express": "^4.0.35",
