@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@gabliam/core@^3.1.1":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@gabliam/core/-/core-3.2.0.tgz#a9733c5432403dcc19297bc02cbe4f5cf2dd8c4b"
+"@gabliam/core@^4.0.0-1":
+  version "4.0.0-1"
+  resolved "https://registry.yarnpkg.com/@gabliam/core/-/core-4.0.0-1.tgz#f856a483e200645949ba83ceb44e6b5962117e93"
   dependencies:
     caller "^1.0.1"
     debug "^3.0.0"
@@ -18,9 +18,9 @@
     shortstop "^1.0.3"
     shortstop-handlers "^1.0.1"
 
-"@gabliam/express@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@gabliam/express/-/express-3.0.1.tgz#d9e19a6d0029f6dcc1d8a17af65710d24be502ab"
+"@gabliam/express@^4.0.0-1":
+  version "4.0.0-1"
+  resolved "https://registry.yarnpkg.com/@gabliam/express/-/express-4.0.0-1.tgz#c131769e14f646f74e449c8b48e4981ab3b86ad1"
   dependencies:
     http-status-codes "^1.2.0"
 
