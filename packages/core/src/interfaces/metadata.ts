@@ -1,5 +1,5 @@
 import { interfaces } from 'inversify';
-import * as Joi from 'joi';
+import { Joi } from '../joi';
 
 /**
  * Bean metadata

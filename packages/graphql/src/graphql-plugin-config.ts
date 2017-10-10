@@ -1,11 +1,10 @@
-import { Value, Bean, PluginConfig } from '@gabliam/core';
+import { Value, Bean, PluginConfig, Joi } from '@gabliam/core';
 import {
   DEFAULT_END_POINT_URL,
   DEFAULT_END_POINT_URL_GRAPHIQL,
   GRAPHQL_PLUGIN_CONFIG,
   DEBUG_PATH
 } from './constants';
-import * as Joi from 'joi';
 import { GraphiqlOptions, GraphqlConfig } from './interfaces';
 import * as d from 'debug';
 

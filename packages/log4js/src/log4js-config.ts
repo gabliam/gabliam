@@ -4,10 +4,10 @@ import {
   Bean,
   CORE_CONFIG,
   inject,
-  interfaces
+  interfaces,
+  Joi
 } from '@gabliam/core';
 import { log4js } from './log4js';
-import * as Joi from 'joi';
 import * as path from 'path';
 import * as fs from 'fs';
 

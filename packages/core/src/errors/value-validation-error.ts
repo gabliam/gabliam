@@ -1,4 +1,4 @@
-import * as Joi from 'joi';
+import { Joi } from '../joi';
 
 /**
  * Exception when validation of value fail

@@ -28,17 +28,14 @@
   },
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/amqp#readme",
   "peerDependencies": {
-    "@gabliam/core": "^4.0.0-1",
-    "joi": "^11.0.1"
+    "@gabliam/core": "^4.0.0-1"
   },
   "devDependencies": {
     "@gabliam/core": "^4.0.0-1",
     "@types/bluebird": "^3.5.8",
     "@types/debug": "^0.0.30",
-    "@types/joi": "^10.4.0",
     "@types/node": "^8.0.14",
-    "@types/uuid": "^3.4.0",
-    "joi": "^11.0.2"
+    "@types/uuid": "^3.4.0"
   },
   "dependencies": {
     "amqplib": "^0.5.1",

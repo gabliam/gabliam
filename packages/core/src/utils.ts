@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import { interfaces } from 'inversify';
-import * as Joi from 'joi';
+import { Joi } from './joi';
 import { ValueValidator } from './interfaces';
 import { ValueValidationError } from './errors';
 import { APP_CONFIG } from './constants';
@@ -14,7 +14,7 @@ import { APP_CONFIG } from './constants';
 function valueValidator(path: string, value: any, validator: ValueValidator) {
   const options: Joi.ValidationOptions = {
     abortEarly: false,
-    ...validator.options || {}
+    ...(validator.options || {})
   };
   const validate = Joi.validate(value, validator.schema, options);
   if (validate.error) {

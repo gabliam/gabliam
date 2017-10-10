@@ -1,4 +1,4 @@
-import * as Joi from 'joi';
+import { Joi } from '@gabliam/core';
 
 export const schemaQueueOptions = Joi.object().keys({
   exclusive: Joi.boolean(),
@@ -7,7 +7,9 @@ export const schemaQueueOptions = Joi.object().keys({
 });
 
 export const schemaQueueConfiguration = Joi.object().keys({
-  queueName: Joi.string().trim().required(),
+  queueName: Joi.string()
+    .trim()
+    .required(),
   options: schemaQueueOptions.default()
 });
 

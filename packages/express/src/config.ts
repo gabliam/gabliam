@@ -1,7 +1,6 @@
-import { PluginConfig, Bean, Value } from '@gabliam/core';
+import { PluginConfig, Bean, Value, Joi } from '@gabliam/core';
 import { DEFAULT_ROUTING_ROOT_PATH, EXPRESS_PLUGIN_CONFIG } from './constants';
 import { ExpressPluginConfig } from './interfaces';
-import * as Joi from 'joi';
 
 @PluginConfig()
 export class RestPluginConfig {

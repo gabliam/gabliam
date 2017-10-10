@@ -13,7 +13,7 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
-"@types/joi@^10.0.1":
+"@types/joi@^10.4.3":
   version "10.4.3"
   resolved "https://registry.yarnpkg.com/@types/joi/-/joi-10.4.3.tgz#1d82cd9a79194f3dd0685d5d2c220a77a9c0776b"
 
@@ -169,9 +169,9 @@ isemail@3.x.x:
   dependencies:
     punycode "2.x.x"
 
-joi@^11.0.1:
-  version "11.1.1"
-  resolved "https://registry.yarnpkg.com/joi/-/joi-11.1.1.tgz#08194537d3b9c796bac8666deb3a825c1a5d83c1"
+joi@^11.3.3:
+  version "11.3.3"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-11.3.3.tgz#dcc95755df2b1a7576c21375728c05e4b8a5c924"
   dependencies:
     hoek "4.x.x"
     isemail "3.x.x"

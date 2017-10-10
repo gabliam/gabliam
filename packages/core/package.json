@@ -12,10 +12,8 @@
     "lib",
     "src"
   ],
-  "peerDependencies": {
-    "joi": "^11.0.1"
-  },
   "dependencies": {
+    "@types/joi": "^10.4.3",
     "caller": "^1.0.1",
     "debug": "^3.0.0",
     "gert": "^2.0.0",
@@ -23,6 +21,7 @@
     "glob": "^7.1.1",
     "inversify": "^4.3.0",
     "inversify-logger-middleware": "^3.0.0",
+    "joi": "^11.3.3",
     "js-yaml": "^3.8.1",
     "lodash": "^4.17.4",
     "shortstop": "^1.0.3",
@@ -31,10 +30,8 @@
   "devDependencies": {
     "@types/debug": "^0.0.30",
     "@types/glob": "^5.0.30",
-    "@types/joi": "^10.0.1",
     "@types/js-yaml": "^3.5.29",
-    "@types/lodash": "^4.14.53",
-    "joi": "^11.0.1"
+    "@types/lodash": "^4.14.53"
   },
   "repository": {
     "type": "git",

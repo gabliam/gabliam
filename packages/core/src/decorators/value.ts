@@ -1,6 +1,6 @@
 import { METADATA_KEY, ERRORS_MSGS } from '../constants';
 import { ValueMetadata, ValueValidator } from '../interfaces';
-import * as Joi from 'joi';
+import { Joi } from '../joi';
 
 /**
  * Options for value decorator

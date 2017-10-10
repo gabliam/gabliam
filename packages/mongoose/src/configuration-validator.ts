@@ -1,4 +1,4 @@
-import * as Joi from 'joi';
+import { Joi } from '@gabliam/core';
 
 export const configurationValidator = Joi.object()
   .keys({

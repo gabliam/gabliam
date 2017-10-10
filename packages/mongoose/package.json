@@ -30,15 +30,12 @@
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/mongoose#readme",
   "peerDependencies": {
     "@gabliam/core": "^4.0.0-1",
-    "joi": "^10.2.2",
     "mongoose": "^4.8.5"
   },
   "devDependencies": {
     "@gabliam/core": "^4.0.0-1",
     "@types/debug": "^0.0.30",
-    "@types/joi": "^10.4.0",
     "@types/mongoose": "^4.7.19",
-    "joi": "^10.6.0",
     "mongoose": "^4.11.3"
   },
   "dependencies": {

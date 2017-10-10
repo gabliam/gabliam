@@ -4,13 +4,13 @@ import {
   Value,
   inject,
   VALUE_EXTRACTOR,
-  interfaces
+  interfaces,
+  Joi
 } from '@gabliam/core';
 import { QueueConfiguration } from './interfaces';
 import { schemaPlugin } from './schema';
 import { Queue } from './queue';
 import { AmqpConnection } from './amqp-connection';
-import * as Joi from 'joi';
 
 @PluginConfig()
 export class AmqpConfig {
