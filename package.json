@@ -80,5 +80,7 @@
       "json"
     ]
   },
-  "dependencies": {}
+  "workspaces": [
+    "packages/*"
+  ]
 }
