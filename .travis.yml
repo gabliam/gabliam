@@ -5,7 +5,7 @@ node_js:
 services:
   - mongodb
   - rabbitmq
-before_script:
+before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
 script:
   - npm run test:ci
