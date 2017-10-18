@@ -7,12 +7,13 @@
     "precommit": "lint-staged",
     "postinstall": "yarn run build",
     "changelog": "conventional-changelog -i  CHANGELOG.md -s",
-    "lint": "tslint --type-check --project tsconfig.json \"./packages/**/src/**/*.ts\" --exclude \"./packages/**/node_modules/**/*.ts\" --exclude \"./packages/**/src/**/*.d.ts\" ",
+    "lint": "tslint --type-check --project tsconfig.json \"./{packages,examples}/**/src/**/*.ts\" --exclude \"./{packages,examples}/**/node_modules/**/*.ts\" --exclude \"./{packages,examples}/**/src/**/*.d.ts\"",
     "build": "lerna run build",
     "test": "jest --runInBand",
     "test:ci": "jest --runInBand --coverage && yarn run coverage",
     "coverage": "node remap_coverage.js && rimraf coverage_jest_raw && codecov",
-    "release": "yarn run build && yarn run lint && yarn run test && lerna publish"
+    "release": "yarn run build && yarn run lint && yarn run test && lerna publish",
+    "example:graphql": "lerna run --scope graphql-sample start"
   },
   "devDependencies": {
     "@types/jest": "^21.1.2",
@@ -82,6 +83,7 @@
     ]
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "examples/*"
   ]
 }

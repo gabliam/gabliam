@@ -1,0 +1,13 @@
+extend type Query {
+  photos: [Photo]
+  getPageOfPhotos(page: Int, perPage: Int, sortField: String, sortOrder: String, filter: String): PhotoPage
+}
+
+type Mutation {
+  submitPhoto(photoInput: PhotoInput!): Photo
+}
+
+# schema {
+#   query: Query
+#   mutation: Mutation
+# }

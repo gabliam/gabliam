@@ -1,0 +1,30 @@
+type Photo {
+  id: Int!
+
+  name: String!
+
+  description: String!
+
+  fileName: String!
+
+  views: Int!
+
+  isPublished: Boolean!
+}
+
+input PhotoInput {
+  name: String!
+
+  description: String!
+
+  fileName: String!
+
+  views: Int!
+
+  isPublished: Boolean!
+}
+
+type PhotoPage {
+  items: [Photo]
+  totalCount: Int
+}

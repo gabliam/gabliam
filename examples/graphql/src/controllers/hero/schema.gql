@@ -1,0 +1,13 @@
+type Query {
+  heroes: [Hero]
+  getPageOfHeroes(page: Int, perPage: Int, sortField: String, sortOrder: String, filter: String): HeroPage
+}
+
+type Mutation {
+  submitHero(heroInput: HeroInput!): Hero
+}
+
+# schema {
+#   query: Query
+#   mutation: Mutation
+# }
