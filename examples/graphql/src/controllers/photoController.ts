@@ -2,6 +2,7 @@ import {
   GraphqlController,
   QueryResolver,
   GraphQLFieldResolver,
+  interfaces,
   MutationResolver,
   Resolver
 } from '@gabliam/graphql';
@@ -25,7 +26,7 @@ export class PhotoController {
   @Resolver({
     path: 'Photo'
   })
-  photoResolver() {
+  photoResolver(): interfaces.GraphQLMapFieldResolver {
     return {
       id(value: any, args: any, context: any) {
         console.log('id here', value);
