@@ -62,9 +62,9 @@ export function getMiddlewares(
     middleware: MiddlewareMetadata
   ): express.RequestHandler {
     try {
-      return container.get<express.RequestHandler>(
-        <inversifyInterfaces.ServiceIdentifier<any>>middleware
-      );
+      return container.get<
+        express.RequestHandler
+      >(<inversifyInterfaces.ServiceIdentifier<any>>middleware);
     } catch (e) {
       return <express.RequestHandler>middleware;
     }

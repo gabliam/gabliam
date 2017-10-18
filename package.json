@@ -13,6 +13,7 @@
     "test:ci": "jest --runInBand --coverage && yarn run coverage",
     "coverage": "node remap_coverage.js && rimraf coverage_jest_raw && codecov",
     "release": "yarn run build && yarn run lint && yarn run test && lerna publish",
+    "prettier": "prettier --single-quote --write --parser typescript \"./{packages,examples}/**/src/**/*.ts\"",
     "example:graphql": "lerna run --scope graphql-sample start"
   },
   "devDependencies": {

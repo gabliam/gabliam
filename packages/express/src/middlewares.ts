@@ -5,7 +5,6 @@ export class MiddlewareConfig {
 
   private _errorMiddlewares: ExpressConfig[] = [];
 
-
   addMiddleware(middleware: ExpressConfig) {
     this._middlewares.push(middleware);
   }

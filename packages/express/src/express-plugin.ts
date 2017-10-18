@@ -45,11 +45,12 @@ export class ExpressPlugin implements coreInterfaces.GabliamPlugin {
    */
   bind(container: inversifyInterfaces.Container, registry: Registry) {
     container.bind(APP).toConstantValue(express());
-    registry
-      .get(TYPE.Controller)
-      .forEach(({ id, target }) =>
-        container.bind<any>(id).to(target).inSingletonScope()
-      );
+    registry.get(TYPE.Controller).forEach(({ id, target }) =>
+      container
+        .bind<any>(id)
+        .to(target)
+        .inSingletonScope()
+    );
 
     container.bind(MiddlewareConfig).toConstantValue(new MiddlewareConfig());
   }

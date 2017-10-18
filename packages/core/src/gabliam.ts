@@ -188,17 +188,19 @@ export class Gabliam {
    */
   private async _bind() {
     debug('_bind');
-    this.registry
-      .get(TYPE.Config)
-      .forEach(({ id, target }) =>
-        this.container.bind(id).to(target).inSingletonScope()
-      );
+    this.registry.get(TYPE.Config).forEach(({ id, target }) =>
+      this.container
+        .bind(id)
+        .to(target)
+        .inSingletonScope()
+    );
 
-    this.registry
-      .get(TYPE.Service)
-      .forEach(({ id, target }) =>
-        this.container.bind(id).to(target).inSingletonScope()
-      );
+    this.registry.get(TYPE.Service).forEach(({ id, target }) =>
+      this.container
+        .bind(id)
+        .to(target)
+        .inSingletonScope()
+    );
 
     for (const plugin of this.pluginList.pluginsWithBind) {
       await Promise.resolve(plugin.bind!(this.container, this.registry));

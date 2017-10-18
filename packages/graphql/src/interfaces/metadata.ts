@@ -6,7 +6,6 @@ export interface ControllerMetadata {
   graphqlFiles: string[];
 }
 
-
 export interface ResolverMetadata {
   type: resolverType | null;
 

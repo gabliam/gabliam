@@ -9,15 +9,12 @@ const debug = d('Gabliam:Plugin:mongoose');
 
 @PluginConfig()
 export class PluginMongooseConfig {
-
   @Value('application.mongoose', configurationValidator)
   mongooseConfiguration: MongooseConfiguration;
 
   listDocument: any[];
 
-  constructor(
-    @inject(LIST_DOCUMENT) listDocument: any[]
-  ) {
+  constructor(@inject(LIST_DOCUMENT) listDocument: any[]) {
     debug('constructor PluginMongooseConfig');
     this.listDocument = listDocument;
   }
@@ -25,6 +22,9 @@ export class PluginMongooseConfig {
   @Bean(MongooseConnection)
   create() {
     debug('Create MongooseConnection', this.mongooseConfiguration);
-    return new MongooseConnection(this.mongooseConfiguration, this.listDocument);
+    return new MongooseConnection(
+      this.mongooseConfiguration,
+      this.listDocument
+    );
   }
 }

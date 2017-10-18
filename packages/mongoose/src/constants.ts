@@ -1,6 +1,6 @@
 /** Type in registry */
 export const TYPE = {
-  Document: 'Document',
+  Document: 'Document'
 };
 
 export const METADATA_KEY = {
