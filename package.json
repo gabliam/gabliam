@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "precommit": "lint-staged",
-    "postinstall": "yarn run build",
+    "bootstrap": "yarn run build",
     "changelog": "conventional-changelog -i  CHANGELOG.md -s",
     "lint": "tslint --type-check --project tsconfig.json \"./{packages,examples}/**/src/**/*.ts\" --exclude \"./{packages,examples}/**/node_modules/**/*.ts\" --exclude \"./{packages,examples}/**/src/**/*.d.ts\"",
     "build": "lerna run build",
