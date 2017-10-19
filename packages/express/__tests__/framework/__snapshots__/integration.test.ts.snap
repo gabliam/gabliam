@@ -12,7 +12,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "GET",
   },
@@ -34,7 +34,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "GET",
   },
@@ -66,7 +66,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "GET",
   },
@@ -97,7 +97,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "GET",
   },
@@ -118,7 +118,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "GET",
   },
@@ -139,7 +139,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "GET",
   },
@@ -161,7 +161,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "GET",
   },
@@ -192,7 +192,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "GET",
   },
@@ -213,7 +213,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "GET",
   },
@@ -234,7 +234,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "DELETE",
   },
@@ -255,7 +255,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "HEAD",
   },
@@ -276,7 +276,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "PATCH",
   },
@@ -297,7 +297,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "PUT",
   },
@@ -318,7 +318,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "POST",
   },
@@ -339,7 +339,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "GET",
   },
@@ -360,7 +360,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "GET",
   },
@@ -381,7 +381,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "PROPFIND",
   },
@@ -402,7 +402,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "GET",
   },
@@ -424,7 +424,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "GET",
   },
@@ -456,7 +456,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "GET",
   },
@@ -487,7 +487,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "GET",
   },
@@ -508,7 +508,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "GET",
   },
@@ -529,7 +529,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "GET",
   },
@@ -551,7 +551,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "GET",
   },
@@ -582,7 +582,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "GET",
   },
@@ -603,7 +603,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "GET",
   },
@@ -624,7 +624,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "DELETE",
   },
@@ -645,7 +645,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "HEAD",
   },
@@ -666,7 +666,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "PATCH",
   },
@@ -687,7 +687,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "PUT",
   },
@@ -708,7 +708,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "POST",
   },
@@ -729,7 +729,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "GET",
   },
@@ -750,7 +750,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "GET",
   },
@@ -771,7 +771,7 @@ Object {
   "req": Object {
     "data": undefined,
     "headers": Object {
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "PROPFIND",
   },

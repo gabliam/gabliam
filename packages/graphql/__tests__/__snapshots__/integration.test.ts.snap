@@ -28,7 +28,7 @@ Object {
     "headers": Object {
       "accept": "application/json",
       "content-type": "application/json",
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "POST",
   },
@@ -79,7 +79,7 @@ Object {
     "headers": Object {
       "accept": "application/json",
       "content-type": "application/json",
-      "user-agent": "node-superagent/3.6.3",
+      "user-agent": "node-superagent/3.7.0",
     },
     "method": "POST",
   },
