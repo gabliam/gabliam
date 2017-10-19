@@ -1,9 +1,9 @@
 import {
-  interfaces as coreInterfaces,
-  inversifyInterfaces,
   Scan,
   Registry,
-  Plugin
+  Plugin,
+  GabliamPlugin,
+  Container
 } from '@gabliam/core';
 import { TYPE, LIST_DOCUMENT } from './constants';
 import * as d from 'debug';
@@ -12,8 +12,8 @@ import { MongooseConnection } from './mongoose-connection';
 
 @Plugin()
 @Scan()
-export class MongoosePlugin implements coreInterfaces.GabliamPlugin {
-  bind(container: inversifyInterfaces.Container, registry: Registry) {
+export class MongoosePlugin implements GabliamPlugin {
+  bind(container: Container, registry: Registry) {
     const documents = registry.get(TYPE.Document).map(({ id, target }) => {
       return target;
     });
@@ -21,7 +21,7 @@ export class MongoosePlugin implements coreInterfaces.GabliamPlugin {
     container.bind<any>(LIST_DOCUMENT).toConstantValue(documents);
   }
 
-  async destroy(container: inversifyInterfaces.Container, registry: Registry) {
+  async destroy(container: Container, registry: Registry) {
     const connection = container.get<MongooseConnection>(MongooseConnection);
     if (connection) {
       await connection.conn.close();

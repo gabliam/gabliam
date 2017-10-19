@@ -1,7 +1,8 @@
-import { interfaces, Container } from 'inversify';
+import { interfaces } from 'inversify';
 import { METADATA_KEY } from '../constants';
 import { ValueMetadata } from '../interfaces';
 import { configureValueExtractor } from '../utils';
+import { Container } from './container';
 
 /**
  *  Make  the value middleware

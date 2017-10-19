@@ -4,8 +4,8 @@ import {
   Value,
   inject,
   VALUE_EXTRACTOR,
-  interfaces,
-  Joi
+  Joi,
+  ValueExtractor
 } from '@gabliam/core';
 import { QueueConfiguration } from './interfaces';
 import { schemaPlugin } from './schema';
@@ -20,9 +20,7 @@ export class AmqpConfig {
   @Value('application.amqp.url', Joi.string().required())
   private url: string;
 
-  constructor(
-    @inject(VALUE_EXTRACTOR) public valueExtractor: interfaces.ValueExtractor
-  ) {}
+  constructor(@inject(VALUE_EXTRACTOR) public valueExtractor: ValueExtractor) {}
 
   createQueue() {
     return Object.keys(this.queueConfig).map<Queue>((k: string) => {

@@ -1,4 +1,4 @@
-import { inversifyInterfaces } from '@gabliam/core';
+import { inversifyInterfaces, Container } from '@gabliam/core';
 import * as express from 'express';
 import { MiddlewareMetadata, MiddlewareConfigurator } from '../interfaces';
 import { METADATA_KEY } from '../constants';
@@ -39,13 +39,13 @@ export function addMiddlewareMetadata(
  * Get middlewares metadata.
  * If key is undefined, return the list of middlewares for a class (target)
  *  else return the list of middlewares for a method (key) of a class (target)
- * @param  {inversifyInterfaces.Container} container
+ * @param  {Container} container
  * @param  {Object} target
  * @param  {string} key?
  * @returns express.RequestHandler[]
  */
 export function getMiddlewares(
-  container: inversifyInterfaces.Container,
+  container: Container,
   target: Object,
   key?: string
 ): express.RequestHandler[] {

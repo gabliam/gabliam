@@ -1,5 +1,3 @@
-import * as inversify from 'inversify';
-import * as interfaces from './interfaces';
 import * as _ from 'lodash';
 import {
   TYPE,
@@ -9,15 +7,21 @@ import {
   VALUE_EXTRACTOR
 } from './constants';
 import { LoaderModule, LoaderConfig } from './loaders';
-import { createContainer } from './container';
+import { createContainer, Container } from './container';
 import { Registry } from './registry';
 import * as d from 'debug';
 import { configureValueExtractor } from './utils';
 import { PluginList } from './plugin-list';
+import {
+  GabliamConfig,
+  GabliamPluginConstructor,
+  ConfigRegistry,
+  BeanMetadata
+} from './interfaces';
 
 const debug = d('Gabliam:core');
 
-const DEFAULT_CONFIG: interfaces.GabliamConfig = {
+const DEFAULT_CONFIG: GabliamConfig = {
   scanPath: process.env.PWD!,
   configPath: process.env.GABLIAM_CONFIG_PATH || process.env.PWD!
 };
@@ -26,7 +30,7 @@ const DEFAULT_CONFIG: interfaces.GabliamConfig = {
  * Gabliam
  */
 export class Gabliam {
-  public container: inversify.interfaces.Container = createContainer();
+  public container: Container = createContainer();
 
   public config: any;
 
@@ -41,13 +45,13 @@ export class Gabliam {
 
   public pluginList: PluginList = new PluginList();
 
-  public options: interfaces.GabliamConfig;
+  public options: GabliamConfig;
 
   /**
    * Constructor
-   * @param  {interfaces.GabliamConfig|string} options?
+   * @param  {GabliamConfig|string} options?
    */
-  constructor(options?: Partial<interfaces.GabliamConfig> | string) {
+  constructor(options?: Partial<GabliamConfig> | string) {
     if (options === undefined) {
       this.options = DEFAULT_CONFIG;
     } else {
@@ -70,10 +74,10 @@ export class Gabliam {
   }
   /**
    * Add a plugin order
-   * @param  {interfaces.GabliamPluginConstructor} ctor
+   * @param  {GabliamPluginConstructor} ctor
    * @returns Gabliam
    */
-  public addPlugin(ctor: interfaces.GabliamPluginConstructor): Gabliam {
+  public addPlugin(ctor: GabliamPluginConstructor): Gabliam {
     this.pluginList.add(ctor);
     return this;
   }
@@ -216,9 +220,7 @@ export class Gabliam {
       return Promise.resolve(instance[key]());
     }
 
-    let configsRegistry = this.registry.get<interfaces.ConfigRegistry>(
-      TYPE.Config
-    );
+    let configsRegistry = this.registry.get<ConfigRegistry>(TYPE.Config);
 
     debug('configsRegistry', configsRegistry);
     if (configsRegistry) {
@@ -227,7 +229,7 @@ export class Gabliam {
       for (const { id: configId } of configsRegistry) {
         const confInstance = this.container.get<object>(configId);
 
-        const beanMetadata: interfaces.BeanMetadata[] = Reflect.getOwnMetadata(
+        const beanMetadata: BeanMetadata[] = Reflect.getOwnMetadata(
           METADATA_KEY.bean,
           confInstance.constructor
         );

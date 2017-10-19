@@ -1,15 +1,15 @@
-import { ExpressConfig } from './interfaces';
+import { ExpressConfiguration } from './interfaces';
 
 export class MiddlewareConfig {
-  private _middlewares: ExpressConfig[] = [];
+  private _middlewares: ExpressConfiguration[] = [];
 
-  private _errorMiddlewares: ExpressConfig[] = [];
+  private _errorMiddlewares: ExpressConfiguration[] = [];
 
-  addMiddleware(middleware: ExpressConfig) {
+  addMiddleware(middleware: ExpressConfiguration) {
     this._middlewares.push(middleware);
   }
 
-  addErrorMiddleware(middleware: ExpressConfig) {
+  addErrorMiddleware(middleware: ExpressConfiguration) {
     this._errorMiddlewares.push(middleware);
   }
 

@@ -1,6 +1,6 @@
 import amqp = require('amqplib');
 import { Queue } from './queue';
-import { interfaces } from '@gabliam/core';
+import { ValueExtractor } from '@gabliam/core';
 import {
   ConsumerHandler,
   ConsumeOptions,
@@ -36,7 +36,7 @@ export class AmqpConnection {
   constructor(
     private url: string,
     private queues: Queue[],
-    private valueExtractor: interfaces.ValueExtractor
+    private valueExtractor: ValueExtractor
   ) {}
 
   async start() {

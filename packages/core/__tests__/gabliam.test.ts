@@ -5,11 +5,11 @@ import {
   Gabliam,
   APP_CONFIG,
   CORE_CONFIG,
-  interfaces,
-  inversifyInterfaces,
+  Container,
   Registry,
   Config,
-  Plugin
+  Plugin,
+  GabliamPlugin
 } from '../src';
 import * as path from 'path';
 import { TestService } from './fixtures/gabliam/service';
@@ -55,35 +55,22 @@ test('gabliam instance with path', async () => {
 
 describe('test plugin', async () => {
   @Plugin()
-  class PluginTest implements interfaces.GabliamPlugin {
-    build(container: inversifyInterfaces.Container, registry: Registry): void {}
+  class PluginTest implements GabliamPlugin {
+    build(container: Container, registry: Registry): void {}
 
-    bind(container: inversifyInterfaces.Container, registry: Registry): void {}
+    bind(container: Container, registry: Registry): void {}
 
-    config(
-      container: inversifyInterfaces.Container,
-      registry: Registry,
-      confInstance: any
-    ): void {}
+    config(container: Container, registry: Registry, confInstance: any): void {}
 
-    start(
-      container: inversifyInterfaces.Container,
-      registry: Registry
-    ): Promise<void> {
+    start(container: Container, registry: Registry): Promise<void> {
       return Promise.resolve();
     }
 
-    stop(
-      container: inversifyInterfaces.Container,
-      registry: Registry
-    ): Promise<void> {
+    stop(container: Container, registry: Registry): Promise<void> {
       return Promise.resolve();
     }
 
-    destroy(
-      container: inversifyInterfaces.Container,
-      registry: Registry
-    ): Promise<void> {
+    destroy(container: Container, registry: Registry): Promise<void> {
       return Promise.resolve();
     }
   }

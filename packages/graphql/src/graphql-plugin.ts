@@ -1,9 +1,9 @@
 import {
-  interfaces as coreInterfaces,
-  inversifyInterfaces,
   Scan,
   Plugin,
-  Registry
+  Registry,
+  GabliamPlugin,
+  Container
 } from '@gabliam/core';
 import { MiddlewareConfig } from '@gabliam/express';
 import { makeExecutableSchema } from 'graphql-tools';
@@ -33,8 +33,8 @@ const debug = d(DEBUG_PATH);
 
 @Plugin({ dependencies: [{ name: 'ExpressPlugin', order: 'before' }] })
 @Scan()
-export class GraphqlPlugin implements coreInterfaces.GabliamPlugin {
-  bind(container: inversifyInterfaces.Container, registry: Registry) {
+export class GraphqlPlugin implements GabliamPlugin {
+  bind(container: Container, registry: Registry) {
     registry.get(TYPE.Controller).map(({ id, target }) => {
       container
         .bind<any>(id)
@@ -44,7 +44,7 @@ export class GraphqlPlugin implements coreInterfaces.GabliamPlugin {
     });
   }
 
-  build(container: inversifyInterfaces.Container, registry: Registry) {
+  build(container: Container, registry: Registry) {
     const middlewareConfig = container.get<MiddlewareConfig>(MiddlewareConfig);
     const graphqlPluginConfig = container.get<GraphqlConfig>(
       GRAPHQL_PLUGIN_CONFIG
@@ -190,7 +190,7 @@ export class GraphqlPlugin implements coreInterfaces.GabliamPlugin {
   }
 
   private getResolver(
-    container: inversifyInterfaces.Container,
+    container: Container,
     controllerId: any,
     resolverMetadata: ResolverMetadata
   ): IResolvers {

@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { interfaces } from '@gabliam/core';
+import { ValueRegistry } from '@gabliam/core';
 import { PARAMETER_TYPE } from '../constants';
 
 export type HandlerDecorator = (target: any, key: string, value: any) => void;
@@ -27,11 +27,11 @@ export interface MiddlewareDefinition {
  */
 export type ConfigFunction = (app: express.Application) => void;
 
-export interface ExpressConfigRegistry extends interfaces.ValueRegistry {
+export interface ExpressConfigRegistry extends ValueRegistry {
   key: string;
 }
 
-export interface ExpressConfig {
+export interface ExpressConfiguration {
   order: number;
 
   instance: ConfigFunction;

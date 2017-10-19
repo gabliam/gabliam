@@ -4,8 +4,8 @@ import {
   Bean,
   CORE_CONFIG,
   inject,
-  interfaces,
-  Joi
+  Joi,
+  GabliamConfig
 } from '@gabliam/core';
 import { log4js } from './log4js';
 import * as path from 'path';
@@ -18,7 +18,7 @@ export class LoggerConfig {
 
   private configPath: string;
 
-  constructor(@inject(CORE_CONFIG) coreConfig: interfaces.GabliamConfig) {
+  constructor(@inject(CORE_CONFIG) coreConfig: GabliamConfig) {
     this.configPath = coreConfig.configPath;
   }
 

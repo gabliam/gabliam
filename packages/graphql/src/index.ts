@@ -1,4 +1,4 @@
-import * as interfaces from './interfaces';
+export * from './interfaces';
 
 import { GraphqlPlugin } from './graphql-plugin';
 
@@ -7,4 +7,4 @@ export * from 'graphql-server-express';
 export * from 'graphql-tools';
 export * from 'graphql';
 
-export { interfaces, GraphqlPlugin as default };
+export { GraphqlPlugin as default };

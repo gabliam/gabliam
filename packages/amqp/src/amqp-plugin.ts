@@ -1,9 +1,9 @@
 import {
-  interfaces as coreInterfaces,
   Scan,
-  inversifyInterfaces,
+  Container,
   Registry,
-  Plugin
+  Plugin,
+  GabliamPlugin
 } from '@gabliam/core';
 import { TYPE, METADATA_KEY } from './constants';
 import { RabbitHandlerMetadata } from './interfaces';
@@ -14,15 +14,15 @@ const debug = d('Gabliam:Plugin:AmqpPlugin');
 
 @Plugin()
 @Scan()
-export class AmqpPlugin implements coreInterfaces.GabliamPlugin {
+export class AmqpPlugin implements GabliamPlugin {
   /**
    * binding phase
    *
    * Bind all controller and bind express app
-   * @param  {inversifyInterfaces.Container} container
+   * @param  {Container} container
    * @param  {Registry} registry
    */
-  bind(container: inversifyInterfaces.Container, registry: Registry) {
+  bind(container: Container, registry: Registry) {
     debug('bind AmqpPlugin');
     registry.get(TYPE.RabbitController).forEach(({ id, target }) =>
       container
@@ -32,7 +32,7 @@ export class AmqpPlugin implements coreInterfaces.GabliamPlugin {
     );
   }
 
-  build(container: inversifyInterfaces.Container, registry: Registry) {
+  build(container: Container, registry: Registry) {
     debug('build AmqpPlugin');
     const controllerIds = registry.get(TYPE.RabbitController);
     const connection = container.get(AmqpConnection);
@@ -54,12 +54,12 @@ export class AmqpPlugin implements coreInterfaces.GabliamPlugin {
     });
   }
 
-  async start(container: inversifyInterfaces.Container, registry: Registry) {
+  async start(container: Container, registry: Registry) {
     const connection = container.get(AmqpConnection);
     await connection.start();
   }
 
-  async stop(container: inversifyInterfaces.Container, registry: Registry) {
+  async stop(container: Container, registry: Registry) {
     const connection = container.get(AmqpConnection);
     await connection.stop();
   }
