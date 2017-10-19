@@ -1,7 +1,7 @@
-import * as mongoose from 'mongoose';
 import { Repository } from './repository';
 import { METADATA_KEY } from './constants';
 import { DocumentMetadata, MongooseConfiguration } from './interfaces';
+import { mongoose } from './mongoose';
 const { Mongoose } = mongoose;
 
 (<any>mongoose).Promise = global.Promise;

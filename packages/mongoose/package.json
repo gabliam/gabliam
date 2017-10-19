@@ -29,16 +29,15 @@
   },
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/mongoose#readme",
   "peerDependencies": {
-    "@gabliam/core": "^4.0.0-1",
-    "mongoose": "^4.8.5"
+    "@gabliam/core": "^4.0.0-1"
   },
   "devDependencies": {
     "@gabliam/core": "^4.0.0-1",
-    "@types/debug": "^0.0.30",
-    "@types/mongoose": "^4.7.19",
-    "mongoose": "^4.11.3"
+    "@types/debug": "^0.0.30"
   },
   "dependencies": {
-    "debug": "^3.0.1"
+    "@types/mongoose": "^4.7.23",
+    "debug": "^3.0.1",
+    "mongoose": "^4.12.3"
   }
 }

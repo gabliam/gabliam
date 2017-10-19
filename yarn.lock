@@ -100,7 +100,7 @@
     "@types/bson" "*"
     "@types/node" "*"
 
-"@types/mongoose@^4.7.19":
+"@types/mongoose@^4.7.23":
   version "4.7.23"
   resolved "https://registry.yarnpkg.com/@types/mongoose/-/mongoose-4.7.23.tgz#ce665da40a0e20384c2d892622dbfbdd5fc2bdde"
   dependencies:
@@ -4183,7 +4183,7 @@ mongodb@2.2.33:
     mongodb-core "2.1.17"
     readable-stream "2.2.7"
 
-mongoose@^4.11.3, mongoose@^4.8.5:
+mongoose@^4.12.3, mongoose@^4.8.5:
   version "4.12.3"
   resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-4.12.3.tgz#7099bf8ce4945150001f4c2462e56c9e958ddcb9"
   dependencies:

@@ -1,5 +1,5 @@
-import { Document } from '@gabliam/mongoose';
-import * as mongoose from 'mongoose';
+import { Document, mongoose } from '@gabliam/mongoose';
+
 export interface HeroModel {
   name: string;
   power: string;

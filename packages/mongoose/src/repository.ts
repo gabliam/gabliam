@@ -1,5 +1,5 @@
-import * as mongoose from 'mongoose';
 import { IRead, IWrite } from './interfaces';
+import { mongoose } from './mongoose';
 
 export class Repository<T>
   implements IRead<T & mongoose.Document>, IWrite<T, T & mongoose.Document> {

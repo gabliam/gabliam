@@ -1,7 +1,7 @@
 import { register } from '@gabliam/core';
 import { TYPE, METADATA_KEY } from '../constants';
 import { DocumentOptions, DocumentMetadata } from '../interfaces';
-import * as mongoose from 'mongoose';
+import { mongoose } from '../mongoose';
 
 export function Document(v: string | DocumentOptions) {
   return function(target: any) {
