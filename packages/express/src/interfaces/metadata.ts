@@ -1,6 +1,6 @@
-import * as express from 'express';
 import { MiddlewareDefinition } from './interfaces';
 import { inversifyInterfaces } from '@gabliam/core';
+import { express } from '../express';
 
 export interface ControllerMetadata {
   path: string;

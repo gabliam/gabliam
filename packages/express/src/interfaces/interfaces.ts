@@ -1,6 +1,6 @@
-import * as express from 'express';
 import { ValueRegistry } from '@gabliam/core';
 import { PARAMETER_TYPE } from '../constants';
+import { express } from '../express';
 
 export type HandlerDecorator = (target: any, key: string, value: any) => void;
 

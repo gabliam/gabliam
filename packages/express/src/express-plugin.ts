@@ -19,12 +19,12 @@ import {
   ControllerParameterMetadata,
   RouterCreator
 } from './interfaces';
-import * as express from 'express';
 import * as d from 'debug';
 import * as http from 'http';
 import { MiddlewareConfig } from './middlewares';
 import { ResponseEntity } from './response-entity';
 import { GabliamPlugin } from '../../core/lib/interfaces/interfaces';
+import { express } from './express';
 
 const debug = d('Gabliam:Plugin:ExpressPlugin');
 

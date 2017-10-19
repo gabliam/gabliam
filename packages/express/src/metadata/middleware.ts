@@ -1,8 +1,8 @@
 import { inversifyInterfaces, Container } from '@gabliam/core';
-import * as express from 'express';
 import { MiddlewareMetadata, MiddlewareConfigurator } from '../interfaces';
 import { METADATA_KEY } from '../constants';
 import { isMiddlewareDefinition } from '../utils';
+import { express } from '../express';
 
 /**
  * Add middlewares metadata.

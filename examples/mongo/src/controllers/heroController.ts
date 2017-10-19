@@ -1,6 +1,5 @@
-import { RestController, Get, Post, Delete } from '@gabliam/express';
+import { RestController, Get, Post, Delete, express } from '@gabliam/express';
 import { Hero } from '../entities/hero';
-import * as express from 'express';
 import * as mongoose from 'mongoose';
 import { Repository, MongooseConnection } from '@gabliam/mongoose';
 

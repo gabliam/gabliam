@@ -1,6 +1,5 @@
 import { Config } from '@gabliam/core';
-import { ExpressConfig } from '@gabliam/express';
-import * as express from 'express';
+import { ExpressConfig, express } from '@gabliam/express';
 import * as bodyParser from 'body-parser';
 import * as helmet from 'helmet';
 
