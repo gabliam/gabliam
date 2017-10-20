@@ -8,7 +8,7 @@ import { Hero } from '../entities/hero';
 import { Connection, Repository } from '@gabliam/typeorm';
 
 @GraphqlController({
-  graphqlFiles: [`${__dirname}/hero/schema.gql`, `${__dirname}/hero/hero.gql`]
+  graphqlFiles: [`./hero/schema.gql`, `./hero/hero.gql`]
 })
 export class HeroController {
   private heroRepository: Repository<Hero>;

@@ -11,10 +11,7 @@ import { Connection, Repository } from '@gabliam/typeorm';
 import * as _ from 'lodash';
 
 @GraphqlController({
-  graphqlFiles: [
-    `${__dirname}/photo/schema.gql`,
-    `${__dirname}/photo/photo.gql`
-  ]
+  graphqlFiles: [`./photo/schema.gql`, `./photo/photo.gql`]
 })
 export class PhotoController {
   private photoRepository: Repository<Photo>;
