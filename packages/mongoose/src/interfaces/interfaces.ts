@@ -1,6 +1,5 @@
 import { mongoose } from '../mongoose';
 
-
 export interface DocumentOptions {
   name: string;
   collectionName?: string;

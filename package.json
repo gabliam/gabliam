@@ -16,7 +16,8 @@
     "prettier": "prettier --single-quote --write --parser typescript \"./{packages,examples}/**/src/**/*.ts\"",
     "example:graphql": "lerna run --scope graphql-sample start",
     "example:mongo": "lerna run --scope mongo-sample start",
-    "example:typeorm": "lerna run --scope typeorm-sample start"
+    "example:typeorm": "lerna run --scope typeorm-sample start",
+    "example:express:passport": "lerna run --scope express-passport-sample start"
   },
   "devDependencies": {
     "@types/jest": "^21.1.2",

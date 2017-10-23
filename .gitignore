@@ -7,3 +7,4 @@ lib/
 coverage_jest_raw
 *.sqlite
 .vscode/
+test.json

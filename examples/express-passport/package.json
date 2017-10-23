@@ -1,0 +1,38 @@
+{
+  "name": "express-passport-sample",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "watch": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts",
+    "start": "ts-node src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabliam/sample.git"
+  },
+  "author": "David Touzet <dtouzet@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gabliam/sample/issues"
+  },
+  "homepage": "https://github.com/gabliam/sample#readme",
+  "dependencies": {
+    "@gabliam/core": "^4.0.0-1",
+    "@gabliam/express": "^4.0.0-1",
+    "body-parser": "^1.16.1",
+    "celebrate": "^5.0.1",
+    "cerialize": "^0.1.18",
+    "express-session": "^1.15.6",
+    "helmet": "^3.4.0",
+    "lokijs": "^1.5.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "reflect-metadata": "^0.1.9"
+  },
+  "devDependencies": {
+    "@types/lokijs": "^1.2.30",
+    "@types/passport": "^0.3.4",
+    "@types/passport-local": "^1.0.31",
+    "nodemon": "^1.11.0"
+  }
+}
