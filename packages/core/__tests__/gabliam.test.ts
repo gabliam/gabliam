@@ -210,6 +210,31 @@ test('ok with Plugin', async () => {
   await expect(g.build()).resolves;
 });
 
+test('ok with Plugin 2', async () => {
+  @Plugin()
+  class Plugin1 {}
+
+  @Plugin({ dependencies: ['Plugin1'] })
+  class Plugin2 {}
+
+  @Plugin({ dependencies: [{ name: 'Plugin2', order: 'after' }] })
+  class Plugin3 {}
+
+  @Plugin({
+    dependencies: [
+      { name: 'Plugin2', order: 'after' },
+      { name: 'Plugin3', order: 'after' }
+    ]
+  })
+  class Plugin4 {}
+  const g = new GabliamTest();
+  g.gab.addPlugin(Plugin4);
+  g.gab.addPlugin(Plugin3);
+  g.gab.addPlugin(Plugin1);
+  g.gab.addPlugin(Plugin2);
+  await expect(g.build()).resolves;
+});
+
 test('should fail with Plugin with bad deps', async () => {
   @Plugin({ dependencies: ['BadDeps'] })
   class BadPlugin {}
