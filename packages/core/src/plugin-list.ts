@@ -46,8 +46,10 @@ export class PluginList {
           }
         }
       }
+
       while (orderedPlugin.length && orderedPlugin[0] !== plugin.name) {
         const name = orderedPlugin.shift()!;
+        /* istanbul ignore next */
         const index =
           orderedPlugin.indexOf(plugin.name) === orderedPlugin.length
             ? orderedPlugin.length

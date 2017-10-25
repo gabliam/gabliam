@@ -221,10 +221,7 @@ test('ok with Plugin 2', async () => {
   class Plugin3 {}
 
   @Plugin({
-    dependencies: [
-      { name: 'Plugin2', order: 'after' },
-      { name: 'Plugin3', order: 'after' }
-    ]
+    dependencies: [{ name: 'Plugin3', order: 'after' }]
   })
   class Plugin4 {}
   const g = new GabliamTest();
