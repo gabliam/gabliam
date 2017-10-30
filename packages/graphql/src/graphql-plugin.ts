@@ -140,7 +140,7 @@ export class GraphqlPlugin implements GabliamPlugin {
 
     typeDefs.push(...others);
 
-    const resolvers = _.merge<IResolvers>({}, ...resolverList);
+    const resolvers = <IResolvers>_.merge({}, ...resolverList);
 
     if (Object.keys(resolvers).length === 0) {
       return;
