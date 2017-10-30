@@ -18,7 +18,7 @@ export class UserController {
   }
 
   @Get('/')
-  async getById(req: express.Request, res: express.Response) {
+  async getAll(req: express.Request, res: express.Response) {
     return Serialize(this.userCollection.find(), UserSerialize);
   }
 }

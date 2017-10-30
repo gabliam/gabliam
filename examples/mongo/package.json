@@ -27,6 +27,7 @@
     "reflect-metadata": "^0.1.9"
   },
   "devDependencies": {
+    "@types/helmet": "^0.0.37",
     "nodemon": "^1.11.0"
   }
 }
