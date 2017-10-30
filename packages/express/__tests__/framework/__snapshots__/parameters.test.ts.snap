@@ -14,9 +14,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -35,9 +33,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -56,9 +52,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -77,9 +71,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -102,7 +94,6 @@ Object {
     },
     "headers": Object {
       "content-type": "application/json",
-      "user-agent": "node-superagent/3.7.0",
     },
     "method": "POST",
   },
@@ -124,7 +115,6 @@ Object {
     "data": undefined,
     "headers": Object {
       "testhead": "fooTestHead",
-      "user-agent": "node-superagent/3.7.0",
     },
     "method": "GET",
   },
@@ -144,9 +134,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -165,9 +153,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -186,9 +172,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -207,9 +191,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,

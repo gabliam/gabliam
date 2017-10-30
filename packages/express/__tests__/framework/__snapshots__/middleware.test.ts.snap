@@ -11,9 +11,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -36,9 +34,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -61,9 +57,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -86,9 +80,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "DELETE",
   },
   "status": 200,
@@ -111,9 +103,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -136,9 +126,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "HEAD",
   },
   "status": 200,
@@ -161,9 +149,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "PATCH",
   },
   "status": 200,
@@ -186,9 +172,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "POST",
   },
   "status": 200,
@@ -211,9 +195,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "PUT",
   },
   "status": 200,
@@ -236,9 +218,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -259,9 +239,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -282,9 +260,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -305,9 +281,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "DELETE",
   },
   "status": 200,
@@ -328,9 +302,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -351,9 +323,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "HEAD",
   },
   "status": 200,
@@ -374,9 +344,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "PATCH",
   },
   "status": 200,
@@ -397,9 +365,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "POST",
   },
   "status": 200,
@@ -420,9 +386,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "PUT",
   },
   "status": 200,
@@ -443,9 +407,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -466,9 +428,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -489,9 +449,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -512,9 +470,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,

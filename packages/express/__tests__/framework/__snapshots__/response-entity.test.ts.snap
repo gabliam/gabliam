@@ -11,9 +11,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 202,
@@ -32,9 +30,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 400,
@@ -51,9 +47,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 204,
@@ -72,9 +66,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 404,
@@ -92,9 +84,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -113,9 +103,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -134,9 +122,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -156,9 +142,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -177,9 +161,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -198,9 +180,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 202,
@@ -219,9 +199,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 400,
@@ -238,9 +216,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 204,
@@ -259,9 +235,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 404,
@@ -279,9 +253,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -300,9 +272,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -321,9 +291,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -343,9 +311,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -364,9 +330,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,

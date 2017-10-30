@@ -11,9 +11,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -34,9 +32,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 200,
@@ -57,9 +53,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 500,
@@ -80,9 +74,7 @@ Object {
   },
   "req": Object {
     "data": undefined,
-    "headers": Object {
-      "user-agent": "node-superagent/3.7.0",
-    },
+    "headers": Object {},
     "method": "GET",
   },
   "status": 500,
