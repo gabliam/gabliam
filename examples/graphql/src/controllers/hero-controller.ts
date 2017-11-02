@@ -21,7 +21,7 @@ export class HeroController {
   submitHero(): GraphQLFieldResolver<any, any> {
     return async (obj, { heroInput }, context, info) => {
       console.log('submitHero', heroInput);
-      return await this.heroRepository.persist(heroInput);
+      return await this.heroRepository.save(heroInput);
     };
   }
 
@@ -52,8 +52,8 @@ export class HeroController {
       }
       const qb = this.heroRepository
         .createQueryBuilder('p')
-        .setOffset(page * perPage)
-        .setLimit(perPage);
+        .offset(page * perPage)
+        .limit(perPage);
 
       if (sortField && sortOrder) {
         qb.addOrderBy(sortField, sortOrder);

@@ -13,7 +13,7 @@ export class PhotoController {
   @Post('/')
   async create(req: express.Request, res: express.Response) {
     try {
-      return await this.photoRepository.persist(req.body);
+      return await this.photoRepository.save(req.body);
     } catch (err) {
       res.status(500);
       res.json(err);

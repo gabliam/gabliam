@@ -1,7 +1,6 @@
 application:
     typeorm:
         connectionOptions:
-            driver:
-                type: sqlite
-                storage: photo.sqlite
-            autoSchemaSync: true
+            type: sqlite
+            database: photo.sqlite
+            synchronize: true

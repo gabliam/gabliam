@@ -40,7 +40,7 @@ export class PhotoController {
   @MutationResolver()
   submitPhoto(): GraphQLFieldResolver<any, any> {
     return async (obj, { photoInput }, context, info) => {
-      return await this.photoRepository.persist(photoInput);
+      return await this.photoRepository.save(photoInput);
     };
   }
 
@@ -71,8 +71,8 @@ export class PhotoController {
       }
       const qb = this.photoRepository
         .createQueryBuilder('p')
-        .setOffset(page * perPage)
-        .setLimit(perPage);
+        .offset(page * perPage)
+        .limit(perPage);
 
       if (sortField && sortOrder) {
         qb.addOrderBy(sortField, sortOrder);
