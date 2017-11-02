@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`with bad config 1`] = `[TypeError: Cannot read property 'type' of undefined]`;
+exports[`with bad config 1`] = `[MissingDriverError: Wrong driver undefined given. Supported drivers are: "cordova", "mysql", "postgres", "mssql", "oracle", "mariadb", "sqlite".]`;
 
 exports[`with config 1`] = `true`;
 

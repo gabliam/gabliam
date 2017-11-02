@@ -24,25 +24,21 @@ test('with bad config', async () => {
 
 test('with no driver', async () => {
   appTest.addConf('application.typeorm.connectionOptions', {
-    driver: {
-      type: 'postgres',
-      host: 'localhost',
-      username: 'test',
-      password: 'test',
-      database: 'test'
-    },
-    autoSchemaSync: true
+    type: 'postgres',
+    host: 'localhost',
+    username: 'test',
+    password: 'test',
+    database: 'test',
+    synchronize: true
   });
   await expect(appTest.gab.buildAndStart()).rejects.toMatchSnapshot();
 });
 
 test('with config', async () => {
   appTest.addConf('application.typeorm.connectionOptions', {
-    driver: {
-      type: 'sqlite',
-      storage: 'test.sqlite'
-    },
-    autoSchemaSync: true
+    type: 'sqlite',
+    database: 'test.sqlite',
+    synchronize: true
   });
 
   @Entity()
@@ -70,7 +66,7 @@ test('with config', async () => {
   const repo = connection.getRepository<Photo>('Photo');
   let res = await repo.find();
   expect(res).toMatchSnapshot();
-  await repo.persist({
+  await repo.save({
     name: 'test',
     description: 'test desc',
     fileName: 'testfile',

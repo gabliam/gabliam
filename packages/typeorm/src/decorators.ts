@@ -1,10 +1,8 @@
 import {
   Entity as typeormEntity,
-  AbstractEntity as typeormAbstractEntity,
   ClassEntityChild as typeormClassEntityChild,
   SingleEntityChild as typeormSingleEntityChild,
   ClosureEntity as typeormClosureEntity,
-  EmbeddableEntity as typeormEmbeddableEntity,
   EntityOptions
 } from 'typeorm';
 import { register } from '@gabliam/core';
@@ -18,17 +16,6 @@ export function Entity(name?: string, options?: EntityOptions) {
   return (target: Function) => {
     register(TYPE.Entity, { id: target, target })(target);
     typeormEntity(name, options)(target);
-  };
-}
-
-/**
- * Abstract entity is a class that contains columns and relations for all entities that will inherit this entity.
- * Database table for the abstract entity is not created.
- */
-export function AbstractEntity() {
-  return (target: Function) => {
-    register(TYPE.Entity, { id: target, target })(target);
-    typeormAbstractEntity()(target);
   };
 }
 
@@ -59,15 +46,5 @@ export function ClosureEntity(name?: string, options?: EntityOptions) {
   return (target: Function) => {
     register(TYPE.Entity, { id: target, target })(target);
     typeormClosureEntity(name, options)(target);
-  };
-}
-
-/**
- * This decorator is used on the entities that must be embedded into another entities.
- */
-export function EmbeddableEntity() {
-  return (target: Function) => {
-    register(TYPE.Entity, { id: target, target })(target);
-    typeormEmbeddableEntity()(target);
   };
 }

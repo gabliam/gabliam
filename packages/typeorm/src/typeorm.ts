@@ -2,18 +2,9 @@ export * from 'typeorm';
 
 import {
   Entity,
-  AbstractEntity,
   ClassEntityChild,
   SingleEntityChild,
-  ClosureEntity,
-  EmbeddableEntity
+  ClosureEntity
 } from './decorators';
 
-export {
-  Entity,
-  AbstractEntity,
-  ClassEntityChild,
-  SingleEntityChild,
-  ClosureEntity,
-  EmbeddableEntity
-};
+export { Entity, ClassEntityChild, SingleEntityChild, ClosureEntity };

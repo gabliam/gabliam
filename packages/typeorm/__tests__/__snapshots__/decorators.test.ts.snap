@@ -1,15 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AbstractEntity decorators 1`] = `
-Object {
-  "type": "EntityTypeOrm",
-  "value": Object {
-    "id": [Function],
-    "target": [Function],
-  },
-}
-`;
-
 exports[`ClassEntityChild decorators 1`] = `
 Object {
   "type": "EntityTypeOrm",
@@ -21,16 +11,6 @@ Object {
 `;
 
 exports[`ClosureEntity decorators 1`] = `
-Object {
-  "type": "EntityTypeOrm",
-  "value": Object {
-    "id": [Function],
-    "target": [Function],
-  },
-}
-`;
-
-exports[`EmbeddableEntity decorators 1`] = `
 Object {
   "type": "EntityTypeOrm",
   "value": Object {
