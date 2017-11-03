@@ -75,7 +75,7 @@ export function Value(path: string, schema?: Joi.Schema): ValueReturn;
  *      @Value('application.name')
  *      private name:string;
  *
- *      constructor(){};
+ *      constructor(){}
  *      greet() {
  *          return `Hello ${this.name} !`; //display Hello David
  *      }
@@ -88,7 +88,20 @@ export function Value(path: string, schema?: Joi.Schema): ValueReturn;
  *      @Value('application.name2')
  *      private name:string = 'Jean';
  *
- *      constructor(){};
+ *      constructor(){}
+ *      greet() {
+ *          return `Hello ${this.name} !`; //display Hello Jean
+ *      }
+ *  }
+ *
+ * Here is an example of a class that define a value in constructor without configuration
+ * class Gretter2 {
+ *      @Value('application.name2')
+ *      private name:string;
+ *
+ *      constructor(){
+ *        this.name = 'Jean';
+ *      }
  *      greet() {
  *          return `Hello ${this.name} !`; //display Hello Jean
  *      }

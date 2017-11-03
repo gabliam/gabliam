@@ -54,6 +54,9 @@ export interface ValueMetadata {
   validator: ValueValidator | null;
 }
 
+/**
+ * Represents a value in the registry
+ */
 export interface ValueRegistry<T = any> {
   id: interfaces.ServiceIdentifier<any>;
 
@@ -62,12 +65,15 @@ export interface ValueRegistry<T = any> {
   options?: T;
 }
 
+/**
+ * Config registry
+ */
 export interface ConfigRegistry {
   order: number;
 }
 
 /**
- * @TODO change by RegistryMetada<T>
+ * Registry metadata
  */
 export interface RegistryMetada<T = any> {
   type: string | symbol;
@@ -75,12 +81,18 @@ export interface RegistryMetada<T = any> {
   value: ValueRegistry<T>;
 }
 
+/**
+ * Plugin dependency
+ */
 export interface PluginDependency {
   name: string;
 
   order: 'before' | 'after';
 }
 
+/**
+ * Plugin metadata
+ */
 export interface PluginMetadata {
   name: string;
 

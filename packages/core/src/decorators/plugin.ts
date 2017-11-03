@@ -1,9 +1,19 @@
 import { METADATA_KEY, ERRORS_MSGS } from '../constants';
 import { PluginMetadata, PluginDependency } from '../interfaces';
 
+/**
+ * Plugin options for decorator
+ */
 export interface PluginOptions {
+  /**
+   * Define the name of the plugin
+   * default: class.name
+   */
   name?: string;
 
+  /**
+   * Define the dependencies
+   */
   dependencies?: (PluginDependency | string)[];
 }
 
@@ -26,9 +36,10 @@ export type PluginReturn = (target: any) => void;
 /**
  * Plugin decorator
  *
+ * Define a Plugin for gabliam
  *
- * @param  {string} type type in registry
- * @param  {any} value
+ *
+ * @param  {string | PluginOptions} value
  */
 export function Plugin(value?: string | PluginOptions): PluginReturn {
   return function(target: any) {

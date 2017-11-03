@@ -6,5 +6,4 @@ lib/
 *.log
 coverage_jest_raw
 *.sqlite
-.vscode/
 test.json

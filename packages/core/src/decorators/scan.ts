@@ -6,8 +6,9 @@ import * as path from 'path';
  * Add path to scan.
  *
  * The path is scanned on loading phase
+
  *
- * @param  {string} path
+ * @param  {string} path can be absolute or relative path
  */
 export function Scan(p?: string) {
   let pathToAdd: string;

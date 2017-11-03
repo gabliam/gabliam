@@ -1,6 +1,5 @@
 // tslint:disable:one-line
 // tslint:disable:no-unused-expression
-
 import {
   Gabliam,
   APP_CONFIG,
@@ -9,7 +8,8 @@ import {
   Registry,
   Config,
   Plugin,
-  GabliamPlugin
+  GabliamPlugin,
+  Init
 } from '../src';
 import * as path from 'path';
 import { TestService } from './fixtures/gabliam/service';
@@ -246,4 +246,35 @@ test('plugin findByName', () => {
   const g = new GabliamTest();
   g.gab.addPlugin(BadPlugin);
   expect(g.gab.pluginList.findByName('BadPlugin')).toMatchSnapshot();
+});
+
+test('test init', async () => {
+  let res = '';
+  @Config(300)
+  class Conf {
+    constructor() {
+      res += '|Conf';
+    }
+
+    @Init()
+    init() {
+      res += '|initConf';
+    }
+  }
+  @Config(200)
+  class Conf2 {
+    constructor() {
+      res += '|Conf2';
+    }
+
+    @Init()
+    init() {
+      res += '|initConf2';
+    }
+  }
+  const g = new GabliamTest();
+  g.addClass(Conf);
+  g.addClass(Conf2);
+  await g.build();
+  expect(res).toMatchSnapshot();
 });

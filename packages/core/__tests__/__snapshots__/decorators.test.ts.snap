@@ -5323,3 +5323,10 @@ Array [
   },
 ]
 `;
+
+exports[`@init should add init metadata to a class when decorating a method with @init 1`] = `
+Array [
+  "testMethod",
+  "test2Method",
+]
+`;

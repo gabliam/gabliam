@@ -39,10 +39,19 @@ export class Gabliam {
    */
   public registry: Registry = new Registry();
 
+  /**
+   * Module loader
+   */
   public loaderModule: LoaderModule = new LoaderModule();
 
+  /**
+   * Config loader
+   */
   public loaderConfig: LoaderConfig = new LoaderConfig();
 
+  /**
+   * Plugin list
+   */
   public pluginList: PluginList = new PluginList();
 
   public options: GabliamConfig;
@@ -192,6 +201,7 @@ export class Gabliam {
    */
   private async _bind() {
     debug('_bind');
+    // register all config files
     this.registry.get(TYPE.Config).forEach(({ id, target }) =>
       this.container
         .bind(id)
@@ -199,6 +209,7 @@ export class Gabliam {
         .inSingletonScope()
     );
 
+    // register all service files
     this.registry.get(TYPE.Service).forEach(({ id, target }) =>
       this.container
         .bind(id)
@@ -229,17 +240,32 @@ export class Gabliam {
       for (const { id: configId } of configsRegistry) {
         const confInstance = this.container.get<object>(configId);
 
-        const beanMetadata: BeanMetadata[] = Reflect.getOwnMetadata(
+        const beanMetadatas: BeanMetadata[] = Reflect.getOwnMetadata(
           METADATA_KEY.bean,
           confInstance.constructor
         );
 
-        if (beanMetadata) {
+        const initMetadas: string[] = Reflect.getOwnMetadata(
+          METADATA_KEY.init,
+          confInstance.constructor
+        );
+
+        // If config has bean metadata
+        if (Array.isArray(beanMetadatas)) {
           // No promise.all and await because order of beans are important
-          for (const metadata of beanMetadata) {
+          for (const beanMetadata of beanMetadatas) {
             this.container
-              .bind(metadata.id)
-              .toConstantValue(await callInstance(confInstance, metadata.key));
+              .bind(beanMetadata.id)
+              .toConstantValue(
+                await callInstance(confInstance, beanMetadata.key)
+              );
+          }
+        }
+
+        if (Array.isArray(initMetadas)) {
+          // No promise.all and await because order of beans are important
+          for (const metada of initMetadas) {
+            await callInstance(confInstance, metada);
           }
         }
 

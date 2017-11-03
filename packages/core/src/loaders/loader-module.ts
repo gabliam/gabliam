@@ -62,8 +62,12 @@ export class LoaderModule {
 
     for (const file of files) {
       const modules = require(file);
+
+      // for all exported
       for (const k of Object.keys(modules)) {
         const m = modules[k];
+
+        // if the module is an objet and has a register metadata => add in registry
         if (isObject(m) && Reflect.hasOwnMetadata(METADATA_KEY.register, m)) {
           const metadata = <RegistryMetada>Reflect.getOwnMetadata(
             METADATA_KEY.register,
@@ -72,6 +76,7 @@ export class LoaderModule {
           registry.add(metadata.type, metadata.value);
         }
 
+        // if the module is an objet and has a scan metadata => add in registry and load paths
         if (isObject(m) && Reflect.hasOwnMetadata(METADATA_KEY.scan, m)) {
           const paths = <string[]>Reflect.getOwnMetadata(METADATA_KEY.scan, m);
           registry.addRegistry(this.loadFolders(...paths));

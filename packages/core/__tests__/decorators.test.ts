@@ -8,7 +8,8 @@ import {
   Scan,
   Service,
   Value,
-  Plugin
+  Plugin,
+  Init
 } from '../src/decorators';
 import { CoreConfig } from '../src/decorators/config';
 import { METADATA_KEY, TYPE } from '../src/constants';
@@ -19,6 +20,26 @@ import {
   PluginMetadata
 } from '../src/interfaces';
 import * as Joi from 'joi';
+
+describe('@init', () => {
+  test('should add init metadata to a class when decorating a method with @init', () => {
+    @Config()
+    class TestBean {
+      @Init()
+      testMethod() {}
+
+      @Init()
+      test2Method() {}
+    }
+
+    const initMetadata: string[] = Reflect.getMetadata(
+      METADATA_KEY.init,
+      TestBean
+    );
+
+    expect(initMetadata).toMatchSnapshot();
+  });
+});
 
 describe('@Bean', () => {
   test('should add Bean metadata to a class when decorated with @Bean', () => {

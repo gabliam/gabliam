@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import { Joi } from './joi';
-import { ValueValidator } from './interfaces';
+import { ValueValidator, ValueExtractor } from './interfaces';
 import { ValueValidationError } from './errors';
 import { APP_CONFIG } from './constants';
 import { Container } from './container';
@@ -32,7 +32,7 @@ function valueValidator(path: string, value: any, validator: ValueValidator) {
  * Create value extractor
  * @param  {Container} container
  */
-export function configureValueExtractor(container: Container) {
+export function configureValueExtractor(container: Container): ValueExtractor {
   /**
    * Get value in configuration
    * @param  {string} path
@@ -60,6 +60,10 @@ export function configureValueExtractor(container: Container) {
   };
 }
 
+/**
+ * Test if val is an object
+ * @param val
+ */
 export function isObject(val: any): val is Object {
   if (val === null || val === undefined) {
     return false;

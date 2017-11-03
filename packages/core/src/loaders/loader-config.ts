@@ -19,6 +19,7 @@ export class LoaderConfig {
     folder: string,
     profile = process.env.PROFILE || null
   ): Promise<any> {
+    // create resolver
     const resolver = shortstop.create();
     resolver.use('file', handlers.file(scanPath));
     resolver.use('path', handlers.path(scanPath));

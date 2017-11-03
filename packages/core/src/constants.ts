@@ -6,6 +6,7 @@ export const TYPE = {
 
 export const METADATA_KEY = {
   bean: '_bean',
+  init: '_init',
   value: '_value',
   register: '_register',
   scan: '_scan',

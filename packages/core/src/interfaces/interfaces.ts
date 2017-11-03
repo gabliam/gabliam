@@ -49,6 +49,9 @@ export interface GabliamPlugin {
   destroy?(container: Container, registry: Registry): Promise<void>;
 }
 
+/**
+ * Value extractor
+ */
 export type ValueExtractor = (
   path: string,
   defaultValue: any,
