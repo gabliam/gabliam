@@ -28,6 +28,7 @@ import * as bodyParser from 'body-parser';
 import * as _ from 'lodash';
 import * as fs from 'fs';
 import * as d from 'debug';
+import { GraphQLOptions } from 'apollo-server-core';
 
 const debug = d(DEBUG_PATH);
 
@@ -160,19 +161,20 @@ export class GraphqlPlugin implements GabliamPlugin {
 
         app.use(
           graphqlPluginConfig.endpointUrl,
-          graphqlExpress(((req: any) => {
+          graphqlExpress(<ExpressGraphQLOptionsFunction>((req: any) => {
             let options = {};
 
             /* istanbul ignore if  */
             if ((<any>req).graphqlOptions) {
               options = (<any>req).graphqlOptions;
             }
-
-            return {
+            // makeExecutableSchema and ExpressGraphQLOptionsFunction use different version of GraphQLSchema typings
+            // (GraphQLOptions use apollo-server-core and makeExecutableSchema use @types/graphql)
+            return <GraphQLOptions>(<any>{
               schema: executableSchema,
               ...options
-            };
-          }) as ExpressGraphQLOptionsFunction)
+            });
+          }))
         );
 
         if (graphqlPluginConfig.graphiqlEnabled) {

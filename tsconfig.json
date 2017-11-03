@@ -12,6 +12,7 @@
     "noUnusedLocals": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
     "sourceMap": true
   }
 }

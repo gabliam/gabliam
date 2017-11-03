@@ -128,7 +128,7 @@ export class ExpressPlugin implements GabliamPlugin {
     const port = restConfig.port;
     app.set('port', port);
 
-    const server = http.createServer(app);
+    const server = http.createServer(<any>app);
     server.listen(port, restConfig.hostname);
     server.on('error', onError);
     server.on('listening', onListening);

@@ -164,7 +164,7 @@ export class AmqpConnection {
     if (timeout) {
       promise = promise.timeout(timeout).catch(PromiseB.TimeoutError, e => {
         onTimeout = true;
-        throw new AmqpTimeout(e.message);
+        throw new AmqpTimeout((<any>e).message);
       });
     }
 

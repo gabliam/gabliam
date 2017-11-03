@@ -18,12 +18,19 @@ function paramDecoratorFactory(
   };
 }
 
-export function Params(type: PARAMETER_TYPE, parameterName: string) {
-  return function(target: Object, methodName: string, index: number) {
+export function Params(
+  type: PARAMETER_TYPE,
+  parameterName: string
+): ParameterDecorator {
+  return function(
+    target: Object,
+    propertyKey: string | symbol,
+    parameterIndex: number
+  ) {
     let metadataList: ControllerParameterMetadata = {};
     let parameterMetadataList: ParameterMetadata[] = [];
     const parameterMetadata: ParameterMetadata = {
-      index: index,
+      index: parameterIndex,
       parameterName: parameterName,
       type: type
     };
@@ -39,12 +46,12 @@ export function Params(type: PARAMETER_TYPE, parameterName: string) {
         METADATA_KEY.controllerParameter,
         target.constructor
       );
-      if (metadataList.hasOwnProperty(methodName)) {
-        parameterMetadataList = metadataList[methodName];
+      if (metadataList.hasOwnProperty(propertyKey)) {
+        parameterMetadataList = metadataList[propertyKey];
       }
       parameterMetadataList.unshift(parameterMetadata);
     }
-    metadataList[methodName] = parameterMetadataList;
+    metadataList[propertyKey] = parameterMetadataList;
     Reflect.defineMetadata(
       METADATA_KEY.controllerParameter,
       metadataList,

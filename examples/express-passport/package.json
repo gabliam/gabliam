@@ -20,7 +20,7 @@
     "@gabliam/core": "^4.0.0",
     "@gabliam/express": "^4.0.0",
     "body-parser": "^1.16.1",
-    "celebrate": "^5.0.1",
+    "celebrate": "^6.0.0",
     "cerialize": "^0.1.18",
     "express-session": "^1.15.6",
     "helmet": "^3.4.0",
