@@ -1,5 +1,10 @@
 import { ExpressConfiguration } from './interfaces';
 
+/**
+ * Middleware Config
+ *
+ * This class is a storage of all middlewares
+ */
 export class MiddlewareConfig {
   private _middlewares: ExpressConfiguration[] = [];
 

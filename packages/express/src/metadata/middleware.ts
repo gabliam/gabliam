@@ -58,10 +58,15 @@ export function getMiddlewares(
     );
   }
 
+  /**
+   * resolve a middleware
+   * @param middleware
+   */
   function resolveMiddleware(
     middleware: MiddlewareMetadata
   ): express.RequestHandler {
     try {
+      // test if the middleware is a ServiceIdentifier
       return container.get<
         express.RequestHandler
       >(<inversifyInterfaces.ServiceIdentifier<any>>middleware);
@@ -72,9 +77,12 @@ export function getMiddlewares(
 
   return metadataList.reduce<express.RequestHandler[]>((prev, metadata) => {
     if (isMiddlewareDefinition(metadata)) {
+      // if is a middleware definition, so get MiddlewareConfigurator and call with values
       const middleware = container.get<MiddlewareConfigurator>(
         `${metadata.name}Middleware`
       )(...metadata.values);
+
+      // MiddlewareConfigurator can return an array or one middleware
       if (Array.isArray(middleware)) {
         prev.push(...middleware);
       } else {

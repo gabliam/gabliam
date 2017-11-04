@@ -190,11 +190,18 @@ export class ExpressPlugin implements GabliamPlugin {
       .forEach(({ instance }) => instance(app));
   }
 
+  /**
+   * Build all controllers
+   *
+   * @param  {Container} container
+   * @param  {Registry} registry
+   */
   private buildControllers(container: Container, registry: Registry) {
     const restConfig = container.get<ExpressPluginConfig>(
       EXPRESS_PLUGIN_CONFIG
     );
 
+    // get the router creator
     let routerCreator: RouterCreator = () => express.Router();
     try {
       routerCreator = container.get<RouterCreator>(CUSTOM_ROUTER_CREATOR);
@@ -224,7 +231,7 @@ export class ExpressPlugin implements GabliamPlugin {
         METADATA_KEY.controllerParameter,
         controller.constructor
       );
-
+      // if the controller has controllerMetadata and methodMetadatas
       if (controllerMetadata && methodMetadatas) {
         const router = routerCreator();
         const routerPath = cleanPath(
@@ -246,6 +253,7 @@ export class ExpressPlugin implements GabliamPlugin {
           );
           debug(methodMetadataPath);
           debug({ methodMiddlewares, controllerMiddlewares });
+          // create handler
           const handler: express.RequestHandler = this.handlerFactory(
             container,
             controllerId,
@@ -253,6 +261,8 @@ export class ExpressPlugin implements GabliamPlugin {
             controllerMetadata.json,
             paramList
           );
+
+          // register handler in router
           (router as any)[methodMetadata.method](
             methodMetadataPath,
             ...controllerMiddlewares,
@@ -279,6 +289,7 @@ export class ExpressPlugin implements GabliamPlugin {
       next: express.NextFunction
     ) => {
       const controller = container.get<any>(controllerId);
+      // extract all args
       const args = this.extractParameters(
         controller,
         key,
@@ -289,6 +300,7 @@ export class ExpressPlugin implements GabliamPlugin {
       );
       const result: any = controller[key](...args);
 
+      // response handler if the result is a ResponseEntity
       function responseEntityHandler(value: ResponseEntity) {
         if (value.hasHeader()) {
           Object.keys(value.headers).forEach(k =>
@@ -339,6 +351,8 @@ export class ExpressPlugin implements GabliamPlugin {
     if (!params || !params.length) {
       return [req, res, next];
     }
+
+    // create de param getter
     const getParam = this.getFuncParam(target, key);
 
     for (const item of params) {
@@ -381,6 +395,7 @@ export class ExpressPlugin implements GabliamPlugin {
     ) => {
       const name = itemParam.parameterName;
 
+      // get the param source
       let param = source;
       if (paramType !== null && source[paramType]) {
         param = source[paramType];

@@ -4,10 +4,19 @@ import { addMiddlewareMetadata } from '../metadata';
 /**
  * MiddlewareInject decorator
  *
- * Injection fs Middleware that are created with @Middleware
+ * Injection of Middleware that are created with @Middleware
  * Middleware can be inject at the top of controller (The middleware is valid for all method) or on method
  *
- *## Simple Example
+ * ## Simple Example
+ *
+ * @RestController()
+ * class Sample {
+ *  @MiddlewareInject('log')
+ *  @Get('/hello')
+ *  hello() {
+ *  return 'hello world';
+ *  }
+ * }
  *
  * @param  {string} name name of Middleware to inject
  * @param  {any[]} ...values values for configuration of Middleware
@@ -27,6 +36,7 @@ export function MiddlewareInject(name: string, ...values: any[]) {
  * Middleware Decorator
  *
  * Middleware must return MiddlewareConfigurator
+ *
  * @see MiddlewareConfigurator
  *
  * Create new Middleware

@@ -3,20 +3,66 @@ import { METADATA_KEY, TYPE, ERRORS_MSGS } from '../constants';
 import { inversifyInterfaces, injectable, register } from '@gabliam/core';
 import { addMiddlewareMetadata } from '../metadata';
 
+/**
+ * Controller options
+ */
 export interface ControllerOptions {
+  /**
+   * Name of controller
+   */
   name?: string;
 
+  /**
+   * Path of controller
+   */
   path: string;
 
+  /**
+   * List of middlewares
+   */
   middlewares?: MiddlewareMetadata[];
 }
 
+/**
+ * Controller decorator
+ *
+ * Define a controller class
+ * if a method return a result, pass to res.send
+ *
+ * ## Simple example
+ * @Controller('/')
+ * class SampleController {
+ *    @get('/')
+ *    hello() {
+ *      return 'Hello';
+ *    }
+ * }
+ *
+ * @param {ControllerOptions | string} options if options is a string, it's define the path
+ */
 export function Controller(options: ControllerOptions | string) {
   return function(target: any) {
     decorateController(options, target, false);
   };
 }
 
+/**
+ * Rest controller
+ *
+ * Define a rest controller
+ *
+ * if a method return a result, pass to res.json
+ *
+ * ## Simple example
+ * @Controller('/')
+ * class SampleController {
+ *    @get('/')
+ *    hello() {
+ *      return { hi: 'Hello' };
+ *    }
+ * }
+ * @param options
+ */
 export function RestController(options: ControllerOptions | string) {
   return function(target: any) {
     decorateController(options, target, true);

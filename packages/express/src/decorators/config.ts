@@ -1,10 +1,49 @@
 import { METADATA_KEY, ERRORS_MSGS } from '../constants';
 import { ExpressConfigMetadata } from '../interfaces';
 
+/**
+ * ExpressConfig decorator
+ *
+ * Add config for express
+ * The method take on parameter an express Application
+ *
+ * ## Simple Example
+ * @Config(200)
+ * export class ServerConfig {
+ *  @ExpressConfig()
+ *  addExpressConfig(app: express.Application) {
+ *    app.use(
+ *      bodyParser.urlencoded({
+ *        extended: true
+ *      })
+ *    );
+ *    app.use(bodyParser.json());
+ *    app.use(helmet());
+ *  }
+ * }
+ * @param {number=1} order order of express config
+ */
 export function ExpressConfig(order: number = 1) {
   return ExpressConfigDecorator(METADATA_KEY.MiddlewareConfig, order);
 }
 
+/**
+ * ExpressErrorConfig decorator
+ *
+ * Add error config for express
+ * The method take on parameter an express Application
+ *
+ * ## Simple Example
+ * @Config()
+ * export class ServerConfig {
+ *  @ExpressErrorConfig()
+ *  addErrorConfig(app: express.Application) {
+ *    // user errors celebrate
+ *    app.use(Celebrate.errors());
+ *  }
+ * }
+ * @param {number=1} order order of express config
+ */
 export function ExpressErrorConfig(order: number = 1) {
   return ExpressConfigDecorator(METADATA_KEY.MiddlewareErrorConfig, order);
 }
