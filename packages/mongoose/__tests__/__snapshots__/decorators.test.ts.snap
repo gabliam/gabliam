@@ -15,6 +15,7 @@ Object {
   "name": "Hero",
   "schema": Schema {
     "_indexes": Array [],
+    "_userProvidedOptions": undefined,
     "aliases": Object {},
     "callQueue": Array [
       Array [
@@ -104,6 +105,7 @@ Object {
         "_pres": Object {},
       },
       "kareemHooks": Object {
+        "aggregate": true,
         "count": true,
         "find": true,
         "findOne": true,
@@ -149,6 +151,7 @@ Object {
   "name": "Hero",
   "schema": Schema {
     "_indexes": Array [],
+    "_userProvidedOptions": undefined,
     "aliases": Object {},
     "callQueue": Array [
       Array [
@@ -238,6 +241,7 @@ Object {
         "_pres": Object {},
       },
       "kareemHooks": Object {
+        "aggregate": true,
         "count": true,
         "find": true,
         "findOne": true,
@@ -284,6 +288,7 @@ Object {
   "name": "Hero",
   "schema": Schema {
     "_indexes": Array [],
+    "_userProvidedOptions": undefined,
     "aliases": Object {},
     "callQueue": Array [
       Array [
@@ -373,6 +378,7 @@ Object {
         "_pres": Object {},
       },
       "kareemHooks": Object {
+        "aggregate": true,
         "count": true,
         "find": true,
         "findOne": true,
