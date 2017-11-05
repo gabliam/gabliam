@@ -100,7 +100,7 @@ export function PluginConfig(order = ORDER_CONFIG.Plugin) {
 
 function configDecorator(order: number) {
   return function(target: any) {
-    if (Reflect.hasOwnMetadata(METADATA_KEY.config, target) === true) {
+    if (Reflect.hasMetadata(METADATA_KEY.config, target) === true) {
       throw new Error(ERRORS_MSGS.DUPLICATED_CONFIG_DECORATOR);
     }
     Reflect.defineMetadata(METADATA_KEY.config, true, target);

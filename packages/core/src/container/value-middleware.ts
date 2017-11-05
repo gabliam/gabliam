@@ -18,7 +18,7 @@ export function makeValueMiddleware(container: Container) {
       results = next(args);
 
       if (results && results.constructor) {
-        const valueMetadata: ValueMetadata[] = Reflect.getOwnMetadata(
+        const valueMetadata: ValueMetadata[] = Reflect.getMetadata(
           METADATA_KEY.value,
           results.constructor
         );

@@ -68,6 +68,7 @@
       "!packages/**/src/interfaces/**",
       "!packages/**/src/testing/**",
       "!packages/**/src/typings/**",
+      "!packages/graphql-core/src/graphql-core-plugin.ts",
       "!**/node_modules/**",
       "!**/vendor/**"
     ],

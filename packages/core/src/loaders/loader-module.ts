@@ -30,9 +30,9 @@ export class LoaderModule {
         if (
           isObject(current) &&
           current.constructor &&
-          Reflect.hasOwnMetadata(METADATA_KEY.scan, current.constructor)
+          Reflect.hasMetadata(METADATA_KEY.scan, current.constructor)
         ) {
-          const paths = <string[]>Reflect.getOwnMetadata(
+          const paths = <string[]>Reflect.getMetadata(
             METADATA_KEY.scan,
             current.constructor
           );
@@ -68,8 +68,8 @@ export class LoaderModule {
         const m = modules[k];
 
         // if the module is an objet and has a register metadata => add in registry
-        if (isObject(m) && Reflect.hasOwnMetadata(METADATA_KEY.register, m)) {
-          const metadata = <RegistryMetada>Reflect.getOwnMetadata(
+        if (isObject(m) && Reflect.hasMetadata(METADATA_KEY.register, m)) {
+          const metadata = <RegistryMetada>Reflect.getMetadata(
             METADATA_KEY.register,
             m
           );
@@ -77,8 +77,8 @@ export class LoaderModule {
         }
 
         // if the module is an objet and has a scan metadata => add in registry and load paths
-        if (isObject(m) && Reflect.hasOwnMetadata(METADATA_KEY.scan, m)) {
-          const paths = <string[]>Reflect.getOwnMetadata(METADATA_KEY.scan, m);
+        if (isObject(m) && Reflect.hasMetadata(METADATA_KEY.scan, m)) {
+          const paths = <string[]>Reflect.getMetadata(METADATA_KEY.scan, m);
           registry.addRegistry(this.loadFolders(...paths));
         }
       }

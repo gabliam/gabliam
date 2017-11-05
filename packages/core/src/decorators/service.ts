@@ -10,7 +10,7 @@ import { register } from './register';
  */
 export function Service(name?: string) {
   return function(target: any) {
-    if (Reflect.hasOwnMetadata(METADATA_KEY.service, target) === true) {
+    if (Reflect.hasMetadata(METADATA_KEY.service, target) === true) {
       throw new Error(ERRORS_MSGS.DUPLICATED_SERVICE_DECORATOR);
     }
     Reflect.defineMetadata(METADATA_KEY.service, true, target);

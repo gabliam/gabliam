@@ -3,7 +3,7 @@
 exports[`MutationResolver TU should add  MutationResolver metadata to a class when decorated with @MutationResolver({graphqlFiles, schema}) 1`] = `
 Array [
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test1",
     "path": "Mutation.test1",
     "schema": "
@@ -50,7 +50,7 @@ type Mutation {
     "type": "Mutation",
   },
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test2",
     "path": "Mutation.test2",
     "schema": "
@@ -220,7 +220,7 @@ Array [
 exports[`MutationResolver TU should add MutationResolver metadata to a class when decorated with @MutationResolver({graphqlFiles, schema, path}) 1`] = `
 Array [
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test1",
     "path": "Mutation.lol",
     "schema": "
@@ -267,7 +267,7 @@ type Mutation {
     "type": "Mutation",
   },
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test2",
     "path": "Mutation.lol2",
     "schema": "
@@ -319,14 +319,14 @@ type Mutation {
 exports[`MutationResolver TU should add MutationResolver metadata to a class when decorated with @MutationResolver({graphqlFiles: absolute}) 1`] = `
 Array [
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test1",
     "path": "Mutation.test1",
     "schema": undefined,
     "type": "Mutation",
   },
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test2",
     "path": "Mutation.test2",
     "schema": undefined,
@@ -338,14 +338,14 @@ Array [
 exports[`MutationResolver TU should add MutationResolver metadata to a class when decorated with @MutationResolver({graphqlFiles: relative, pwd}) 1`] = `
 Array [
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/photo/photo.gql",
     "key": "test1",
     "path": "Mutation.test1",
     "schema": undefined,
     "type": "Mutation",
   },
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/photo/photo.gql",
     "key": "test2",
     "path": "Mutation.test2",
     "schema": undefined,
@@ -357,14 +357,14 @@ Array [
 exports[`MutationResolver TU should add MutationResolver metadata to a class when decorated with @MutationResolver({graphqlFiles: relative}) 1`] = `
 Array [
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test1",
     "path": "Mutation.test1",
     "schema": undefined,
     "type": "Mutation",
   },
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test2",
     "path": "Mutation.test2",
     "schema": undefined,
@@ -376,7 +376,7 @@ Array [
 exports[`QueryResolver TU should add  QueryResolver metadata to a class when decorated with @QueryResolver({graphqlFiles, schema}) 1`] = `
 Array [
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test1",
     "path": "Query.test1",
     "schema": "
@@ -423,7 +423,7 @@ type Mutation {
     "type": "Query",
   },
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test2",
     "path": "Query.test2",
     "schema": "
@@ -593,7 +593,7 @@ Array [
 exports[`QueryResolver TU should add QueryResolver metadata to a class when decorated with @QueryResolver({graphqlFiles, schema, path}) 1`] = `
 Array [
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test1",
     "path": "Query.lol",
     "schema": "
@@ -640,7 +640,7 @@ type Mutation {
     "type": "Query",
   },
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test2",
     "path": "Query.lol2",
     "schema": "
@@ -692,14 +692,14 @@ type Mutation {
 exports[`QueryResolver TU should add QueryResolver metadata to a class when decorated with @QueryResolver({graphqlFiles: absolute}) 1`] = `
 Array [
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test1",
     "path": "Query.test1",
     "schema": undefined,
     "type": "Query",
   },
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test2",
     "path": "Query.test2",
     "schema": undefined,
@@ -711,14 +711,14 @@ Array [
 exports[`QueryResolver TU should add QueryResolver metadata to a class when decorated with @QueryResolver({graphqlFiles: relative, pwd}) 1`] = `
 Array [
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/photo/photo.gql",
     "key": "test1",
     "path": "Query.test1",
     "schema": undefined,
     "type": "Query",
   },
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/photo/photo.gql",
     "key": "test2",
     "path": "Query.test2",
     "schema": undefined,
@@ -730,14 +730,14 @@ Array [
 exports[`QueryResolver TU should add QueryResolver metadata to a class when decorated with @QueryResolver({graphqlFiles: relative}) 1`] = `
 Array [
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test1",
     "path": "Query.test1",
     "schema": undefined,
     "type": "Query",
   },
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test2",
     "path": "Query.test2",
     "schema": undefined,
@@ -749,7 +749,7 @@ Array [
 exports[`Resolver TU should add  Resolver metadata to a class when decorated with @Resolver({graphqlFiles, schema}) 1`] = `
 Array [
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test1",
     "path": "test1",
     "schema": "
@@ -796,7 +796,7 @@ type Mutation {
     "type": null,
   },
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test2",
     "path": "test2",
     "schema": "
@@ -966,7 +966,7 @@ Array [
 exports[`Resolver TU should add Resolver metadata to a class when decorated with @Resolver({graphqlFiles, schema, path}) 1`] = `
 Array [
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test1",
     "path": "lol",
     "schema": "
@@ -1013,7 +1013,7 @@ type Mutation {
     "type": null,
   },
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test2",
     "path": "lol2",
     "schema": "
@@ -1065,14 +1065,14 @@ type Mutation {
 exports[`Resolver TU should add Resolver metadata to a class when decorated with @Resolver({graphqlFiles: absolute}) 1`] = `
 Array [
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test1",
     "path": "test1",
     "schema": undefined,
     "type": null,
   },
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test2",
     "path": "test2",
     "schema": undefined,
@@ -1084,14 +1084,14 @@ Array [
 exports[`Resolver TU should add Resolver metadata to a class when decorated with @Resolver({graphqlFiles: relative, pwd}) 1`] = `
 Array [
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/photo/photo.gql",
     "key": "test1",
     "path": "test1",
     "schema": undefined,
     "type": null,
   },
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/photo/photo.gql",
     "key": "test2",
     "path": "test2",
     "schema": undefined,
@@ -1103,14 +1103,14 @@ Array [
 exports[`Resolver TU should add Resolver metadata to a class when decorated with @Resolver({graphqlFiles: relative}) 1`] = `
 Array [
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test1",
     "path": "test1",
     "schema": undefined,
     "type": null,
   },
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test2",
     "path": "test2",
     "schema": undefined,
@@ -1122,7 +1122,7 @@ Array [
 exports[`SubscriptionResolver TU should add  SubscriptionResolver metadata to a class when decorated with @SubscriptionResolver({graphqlFiles, schema}) 1`] = `
 Array [
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test1",
     "path": "Subscription.test1",
     "schema": "
@@ -1169,7 +1169,7 @@ type Mutation {
     "type": "Subscription",
   },
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test2",
     "path": "Subscription.test2",
     "schema": "
@@ -1339,7 +1339,7 @@ Array [
 exports[`SubscriptionResolver TU should add SubscriptionResolver metadata to a class when decorated with @SubscriptionResolver({graphqlFiles, schema, path}) 1`] = `
 Array [
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test1",
     "path": "Subscription.lol",
     "schema": "
@@ -1386,7 +1386,7 @@ type Mutation {
     "type": "Subscription",
   },
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test2",
     "path": "Subscription.lol2",
     "schema": "
@@ -1438,14 +1438,14 @@ type Mutation {
 exports[`SubscriptionResolver TU should add SubscriptionResolver metadata to a class when decorated with @SubscriptionResolver({graphqlFiles: absolute}) 1`] = `
 Array [
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test1",
     "path": "Subscription.test1",
     "schema": undefined,
     "type": "Subscription",
   },
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test2",
     "path": "Subscription.test2",
     "schema": undefined,
@@ -1457,14 +1457,14 @@ Array [
 exports[`SubscriptionResolver TU should add SubscriptionResolver metadata to a class when decorated with @SubscriptionResolver({graphqlFiles: relative, pwd}) 1`] = `
 Array [
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/photo/photo.gql",
     "key": "test1",
     "path": "Subscription.test1",
     "schema": undefined,
     "type": "Subscription",
   },
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/photo/photo.gql",
     "key": "test2",
     "path": "Subscription.test2",
     "schema": undefined,
@@ -1476,14 +1476,14 @@ Array [
 exports[`SubscriptionResolver TU should add SubscriptionResolver metadata to a class when decorated with @SubscriptionResolver({graphqlFiles: relative}) 1`] = `
 Array [
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test1",
     "path": "Subscription.test1",
     "schema": undefined,
     "type": "Subscription",
   },
   Object {
-    "graphqlFile": "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "graphqlFile": "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
     "key": "test2",
     "path": "Subscription.test2",
     "schema": undefined,

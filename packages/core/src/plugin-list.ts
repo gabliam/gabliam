@@ -13,7 +13,7 @@ export class PluginList {
   private _plugins: GabliamPluginDefinition[] = [];
 
   add(ctor: GabliamPluginConstructor) {
-    const pluginMetadata = <PluginMetadata | undefined>Reflect.getOwnMetadata(
+    const pluginMetadata = <PluginMetadata | undefined>Reflect.getMetadata(
       METADATA_KEY.plugin,
       ctor
     );

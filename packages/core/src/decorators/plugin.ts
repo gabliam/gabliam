@@ -43,7 +43,7 @@ export type PluginReturn = (target: any) => void;
  */
 export function Plugin(value?: string | PluginOptions): PluginReturn {
   return function(target: any) {
-    if (Reflect.hasOwnMetadata(METADATA_KEY.plugin, target) === true) {
+    if (Reflect.hasMetadata(METADATA_KEY.plugin, target) === true) {
       throw new Error(ERRORS_MSGS.DUPLICATED_PLUGIN_DECORATOR);
     }
 

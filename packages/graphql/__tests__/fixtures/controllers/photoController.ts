@@ -2,12 +2,12 @@ import {
   GraphqlController,
   QueryResolver,
   MutationResolver,
+  GraphQLFieldResolver,
   Resolver
-} from '../../../src/decorator';
+} from '@gabliam/graphql-core';
 import { Photo } from './interfaces';
 import * as _ from 'lodash';
 import { Paginate } from './array-util';
-import { GraphQLFieldResolver } from '../../../src/index';
 
 @GraphqlController({
   graphqlFiles: ['./schemas/photo.gql']

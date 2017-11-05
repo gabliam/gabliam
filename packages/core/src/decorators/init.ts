@@ -12,14 +12,14 @@ export function Init() {
     const metadata = key;
     let metadataList: string[] = [];
 
-    if (!Reflect.hasOwnMetadata(METADATA_KEY.init, target.constructor)) {
+    if (!Reflect.hasMetadata(METADATA_KEY.init, target.constructor)) {
       Reflect.defineMetadata(
         METADATA_KEY.init,
         metadataList,
         target.constructor
       );
     } else {
-      metadataList = Reflect.getOwnMetadata(
+      metadataList = Reflect.getMetadata(
         METADATA_KEY.init,
         target.constructor
       );

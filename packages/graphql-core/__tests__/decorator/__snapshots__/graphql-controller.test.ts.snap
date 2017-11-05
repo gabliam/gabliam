@@ -10,7 +10,7 @@ Object {
 exports[`should add GraphqlController metadata to a class when decorated with @GraphqlController({graphqlFiles, schema}) 1`] = `
 Object {
   "graphqlFiles": Array [
-    "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
   ],
   "schema": Array [
     "
@@ -53,8 +53,8 @@ type Mutation {
 exports[`should add GraphqlController metadata to a class when decorated with @GraphqlController({graphqlFiles: absolute}) 1`] = `
 Object {
   "graphqlFiles": Array [
-    "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/hero.gql",
-    "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/hero.gql",
+    "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
   ],
   "schema": Array [],
 }
@@ -63,8 +63,8 @@ Object {
 exports[`should add GraphqlController metadata to a class when decorated with @GraphqlController({graphqlFiles: relative, pwd}) 1`] = `
 Object {
   "graphqlFiles": Array [
-    "<PROJECT_ROOT>/packages/graphql/__tests__/photo/hero.gql",
-    "<PROJECT_ROOT>/packages/graphql/__tests__/photo/photo.gql",
+    "<PROJECT_ROOT>/packages/graphql-core/__tests__/photo/hero.gql",
+    "<PROJECT_ROOT>/packages/graphql-core/__tests__/photo/photo.gql",
   ],
   "schema": Array [],
 }
@@ -73,8 +73,8 @@ Object {
 exports[`should add GraphqlController metadata to a class when decorated with @GraphqlController({graphqlFiles: relative}) 1`] = `
 Object {
   "graphqlFiles": Array [
-    "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/hero.gql",
-    "<PROJECT_ROOT>/packages/graphql/__tests__/decorator/photo/photo.gql",
+    "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/hero.gql",
+    "<PROJECT_ROOT>/packages/graphql-core/__tests__/decorator/photo/photo.gql",
   ],
   "schema": Array [],
 }

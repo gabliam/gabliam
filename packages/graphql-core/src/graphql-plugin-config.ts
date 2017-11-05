@@ -2,7 +2,7 @@ import { Value, Bean, PluginConfig, Joi } from '@gabliam/core';
 import {
   DEFAULT_END_POINT_URL,
   DEFAULT_END_POINT_URL_GRAPHIQL,
-  GRAPHQL_PLUGIN_CONFIG,
+  GRAPHQL_CONFIG,
   DEBUG_PATH
 } from './constants';
 import { GraphiqlOptions, GraphqlConfig } from './interfaces';
@@ -37,7 +37,7 @@ export class GraphqlPluginConfig {
   @Value('application.graphiql.options', GraphiqlOptionsValidator)
   private graphiqlOptions: GraphiqlOptions = {};
 
-  @Bean(GRAPHQL_PLUGIN_CONFIG)
+  @Bean(GRAPHQL_CONFIG)
   creatreConfig(): GraphqlConfig {
     const graphqlConfig: GraphqlConfig = {
       endpointUrl: this.endpointUrl,

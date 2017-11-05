@@ -1,12 +1,12 @@
 import {
   GraphqlController,
   QueryResolver,
-  MutationResolver
-} from '../../../src/decorator';
+  MutationResolver,
+  GraphQLFieldResolver
+} from '@gabliam/graphql-core';
 import { Hero } from './interfaces';
 import { Paginate } from './array-util';
 import { HeroSchema } from './schemas/schema';
-import { GraphQLFieldResolver } from '../../../src/index';
 
 @GraphqlController({
   schema: [HeroSchema]

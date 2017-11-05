@@ -6,7 +6,7 @@ import {
   SubscriptionResolver,
   Resolver,
   GraphqlController
-} from '../../src/decorator';
+} from '../../src';
 import { METADATA_KEY } from '../../src/constants';
 import { ResolverMetadata } from '../../src/interfaces';
 import { PhotoSchema } from '../fixtures/schemas/schema';

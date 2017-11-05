@@ -47,8 +47,8 @@ export class GabliamTest {
   }
 
   addClass(ctrl: any) {
-    if (Reflect.hasOwnMetadata(METADATA_KEY.register, ctrl)) {
-      const metadata = <RegistryMetada>Reflect.getOwnMetadata(
+    if (Reflect.hasMetadata(METADATA_KEY.register, ctrl)) {
+      const metadata = <RegistryMetada>Reflect.getMetadata(
         METADATA_KEY.register,
         ctrl
       );

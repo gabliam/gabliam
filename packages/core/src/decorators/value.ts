@@ -143,14 +143,14 @@ function valueProperty(
   const metadata: ValueMetadata = { path, target, key, validator };
   let metadataList: ValueMetadata[] = [];
 
-  if (!Reflect.hasOwnMetadata(METADATA_KEY.value, target.constructor)) {
+  if (!Reflect.hasMetadata(METADATA_KEY.value, target.constructor)) {
     Reflect.defineMetadata(
       METADATA_KEY.value,
       metadataList,
       target.constructor
     );
   } else {
-    metadataList = Reflect.getOwnMetadata(
+    metadataList = Reflect.getMetadata(
       METADATA_KEY.value,
       target.constructor
     );

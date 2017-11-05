@@ -41,14 +41,14 @@ export function Bean(id: interfaces.ServiceIdentifier<any>) {
     const metadata: BeanMetadata = { id, key };
     let metadataList: BeanMetadata[] = [];
 
-    if (!Reflect.hasOwnMetadata(METADATA_KEY.bean, target.constructor)) {
+    if (!Reflect.hasMetadata(METADATA_KEY.bean, target.constructor)) {
       Reflect.defineMetadata(
         METADATA_KEY.bean,
         metadataList,
         target.constructor
       );
     } else {
-      metadataList = Reflect.getOwnMetadata(
+      metadataList = Reflect.getMetadata(
         METADATA_KEY.bean,
         target.constructor
       );

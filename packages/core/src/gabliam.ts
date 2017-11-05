@@ -240,12 +240,12 @@ export class Gabliam {
       for (const { id: configId } of configsRegistry) {
         const confInstance = this.container.get<object>(configId);
 
-        const beanMetadatas: BeanMetadata[] = Reflect.getOwnMetadata(
+        const beanMetadatas: BeanMetadata[] = Reflect.getMetadata(
           METADATA_KEY.bean,
           confInstance.constructor
         );
 
-        const initMetadas: string[] = Reflect.getOwnMetadata(
+        const initMetadas: string[] = Reflect.getMetadata(
           METADATA_KEY.init,
           confInstance.constructor
         );
