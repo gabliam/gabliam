@@ -1,7 +1,5 @@
 [![Build Status][build-image]][build-url]
 [![NPM version][npm-image]][npm-url]
-[![Dependency Status][gemnasium-image]][gemnasium-url]
-
 # Plugin typeorm for gabliam
 
 Add typeorm on your gabliam application.
@@ -20,5 +18,3 @@ Auto create the connection.
 [build-url]: https://travis-ci.org/gabliam/gabliam
 [npm-image]: https://img.shields.io/npm/v/@gabliam/typeorm.svg?style=flat-square
 [npm-url]: https://github.com/gabliam/typeorm
-[gemnasium-image]: http://img.shields.io/gemnasium/gabliam/typeorm.svg?style=flat-square
-[gemnasium-url]: https://gemnasium.com/gabliam/typeorm
