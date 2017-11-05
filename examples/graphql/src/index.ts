@@ -3,7 +3,7 @@ import * as path from 'path';
 import { Gabliam } from '@gabliam/core';
 import expressPlugin from '@gabliam/express';
 import dbPlugin from '@gabliam/typeorm';
-import graphqlPlugin from '@gabliam/graphql';
+import graphqlPlugin from '@gabliam/graphql-express';
 
 new Gabliam({
   scanPath: __dirname,

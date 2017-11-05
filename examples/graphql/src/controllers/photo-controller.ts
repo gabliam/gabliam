@@ -5,7 +5,7 @@ import {
   MutationResolver,
   Resolver,
   GraphQLMapFieldResolver
-} from '@gabliam/graphql';
+} from '@gabliam/graphql-core';
 import { Photo } from '../entities/photo';
 import { Connection, Repository } from '@gabliam/typeorm';
 import * as _ from 'lodash';

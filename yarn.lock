@@ -2,6 +2,19 @@
 # yarn lockfile v1
 
 
+"@gabliam/graphql@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@gabliam/graphql/-/graphql-5.1.0.tgz#37b873d165a845d0ac8d0a87121771c8cf3c36ec"
+  dependencies:
+    body-parser "^1.17.2"
+    caller "^1.0.1"
+    debug "^3.0.1"
+    graphql "^0.10.0"
+    graphql-server-express "^1.1.2"
+    graphql-server-module-graphiql "^1.1.2"
+    graphql-tools "^1.2.2"
+    lodash "^4.17.4"
+
 "@types/accepts@*":
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/@types/accepts/-/accepts-1.3.3.tgz#6da8c6e3144566feec7ce2176828f1c47523f1ab"

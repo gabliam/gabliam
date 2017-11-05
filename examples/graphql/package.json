@@ -20,7 +20,8 @@
   "dependencies": {
     "@gabliam/core": "^5.0.0",
     "@gabliam/express": "^5.1.0",
-    "@gabliam/graphql": "^5.1.0",
+    "@gabliam/graphql-core": "^5.1.0",
+    "@gabliam/graphql-express": "^5.1.0",
     "@gabliam/typeorm": "^5.0.0",
     "body-parser": "^1.16.1",
     "helmet": "^3.4.0",

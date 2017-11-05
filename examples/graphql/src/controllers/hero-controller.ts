@@ -3,7 +3,7 @@ import {
   QueryResolver,
   GraphQLFieldResolver,
   MutationResolver
-} from '@gabliam/graphql';
+} from '@gabliam/graphql-core';
 import { Hero } from '../entities/hero';
 import { Connection, Repository } from '@gabliam/typeorm';
 

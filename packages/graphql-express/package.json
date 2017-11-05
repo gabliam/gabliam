@@ -1,5 +1,5 @@
 {
-  "name": "@gabliam/graphql",
+  "name": "@gabliam/graphql-express",
   "version": "5.1.0",
   "description": "Graphql plugin for gabliam",
   "keywords": [
@@ -28,7 +28,7 @@
   "bugs": {
     "url": "https://github.com/gabliam/gabliam/issues"
   },
-  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/graphql#readme",
+  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/graphql-express#readme",
   "peerDependencies": {
     "@gabliam/core": "^5.0.0",
     "@gabliam/express": "^5.1.0",
