@@ -1,3 +1,20 @@
+<a name="5.0.0"></a>
+# [5.0.0](https://github.com/gabliam/gabliam/compare/v4.0.0...v5.0.0) (2017-11-03)
+
+
+### Bug Fixes
+
+* correction when [@types](https://github.com/types)/lodash was upgraded ([9ab16c6](https://github.com/gabliam/gabliam/commit/9ab16c6))
+
+
+### Features
+
+* upgrade deps. Correction for ts update ([274e238](https://github.com/gabliam/gabliam/commit/274e238))
+* **@gabliam/typeorm:** update typeorm : 0.0.8 to 0.1.1 ([552d9f1](https://github.com/gabliam/gabliam/commit/552d9f1))
+* **@gabliam/typeorm:** upgrade typeorm deps ([4b0d498](https://github.com/gabliam/gabliam/commit/4b0d498))
+
+
+
 <a name="4.0.0"></a>
 # [4.0.0](https://github.com/gabliam/gabliam/compare/v4.0.0-2...v4.0.0) (2017-10-25)
 
@@ -85,7 +102,7 @@
 ### Bug Fixes
 
 * **@ExpressConfig,@ExpressErrorConfig:** throw error when decorated multiple times the same method w ([e203e37](https://github.com/gabliam/gabliam/commit/e203e37))
-* **@Restcontroller,@Controller:** fix [@Restcontroller](https://github.com/Restcontroller) and [@Controller](https://github.com/Controller) ([e0238fa](https://github.com/gabliam/gabliam/commit/e0238fa))
+* **@Restcontroller,@Controller:** fix @Restcontroller and @Controller ([e0238fa](https://github.com/gabliam/gabliam/commit/e0238fa))
 * **all methods:** Add / on path ([5d3880d](https://github.com/gabliam/gabliam/commit/5d3880d))
 * **config:** Correction when application.yml is empty ([8d64808](https://github.com/gabliam/gabliam/commit/8d64808))
 * **ExpressConfig:** Correction ([3596456](https://github.com/gabliam/gabliam/commit/3596456))
@@ -107,7 +124,7 @@
 * **@RequestParam:** If the param waits for a Number, we try to convert the value ([7e0f65b](https://github.com/gabliam/gabliam/commit/7e0f65b))
 * **@scan:** [@scan](https://github.com/scan) ([69c514d](https://github.com/gabliam/gabliam/commit/69c514d))
 * **config:** now config use shortstop ([e41968c](https://github.com/gabliam/gabliam/commit/e41968c))
-* **controller, methods:** Now you can inject middleware in [@Controller](https://github.com/Controller), [@RestController](https://github.com/RestController), and all me ([e07638b](https://github.com/gabliam/gabliam/commit/e07638b))
+* **controller, methods:** Now you can inject middleware in @Controller, @RestController, and all me ([e07638b](https://github.com/gabliam/gabliam/commit/e07638b))
 * **decorators:** add many decorators ([3ee2abd](https://github.com/gabliam/gabliam/commit/3ee2abd))
 * **decorators:** delete utils ([8d16921](https://github.com/gabliam/gabliam/commit/8d16921))
 * **ExpressConfig,ExpressErrorConfig:** Add order ([4d28d3d](https://github.com/gabliam/gabliam/commit/4d28d3d))
@@ -120,7 +137,7 @@
 * **gabliam test:** add startPlugins ([73fc7d5](https://github.com/gabliam/gabliam/commit/73fc7d5))
 * **GabliamTest:** rename start to build ([4fd571b](https://github.com/gabliam/gabliam/commit/4fd571b))
 * **loader:** split module and config loader ([6c1ed1d](https://github.com/gabliam/gabliam/commit/6c1ed1d))
-* **plugin:** add [@Plugin](https://github.com/Plugin) decorator ([b91c306](https://github.com/gabliam/gabliam/commit/b91c306))
+* **plugin:** add @Plugin decorator ([b91c306](https://github.com/gabliam/gabliam/commit/b91c306))
 * **plugin:** add MiddlewareConfig ([9ec01d8](https://github.com/gabliam/gabliam/commit/9ec01d8))
 * **plugin:** add router creator + correction tslint ([b3130cb](https://github.com/gabliam/gabliam/commit/b3130cb))
 * **registry:** rewrite registry ([6c65aa7](https://github.com/gabliam/gabliam/commit/6c65aa7))
