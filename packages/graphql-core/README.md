@@ -2,9 +2,9 @@
 [![NPM version][npm-image]][npm-url]
 [![Dependency Status][gemnasium-image]][gemnasium-url]
 
-# graphql
+# graphql-core
 
-The express plugin is required. You must add graphql plugin before express plugin.
+Package core for gabliam and graphql
 
 
 # License
@@ -13,7 +13,7 @@ The express plugin is required. You must add graphql plugin before express plugi
 
 [build-image]: https://img.shields.io/travis/gabliam/gabliam/master.svg?style=flat-square
 [build-url]: https://travis-ci.org/gabliam/gabliam
-[npm-image]: https://img.shields.io/npm/v/@gabliam/graphql.svg?style=flat-square
-[npm-url]: https://github.com/gabliam/graphql
-[gemnasium-image]: http://img.shields.io/gemnasium/gabliam/graphql.svg?style=flat-square
-[gemnasium-url]: https://gemnasium.com/gabliam/graphql
+[npm-image]: https://img.shields.io/npm/v/@gabliam/graphql-core.svg?style=flat-square
+[npm-url]: https://github.com/gabliam/graphql-core
+[gemnasium-image]: http://img.shields.io/gemnasium/gabliam/graphql-core.svg?style=flat-square
+[gemnasium-url]: https://gemnasium.com/gabliam/graphql-core
