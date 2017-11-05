@@ -76,7 +76,7 @@
   version "3.9.1"
   resolved "https://registry.yarnpkg.com/@types/js-yaml/-/js-yaml-3.9.1.tgz#2f3c142771bb345829ce690c5838760b6b9ba553"
 
-"@types/lodash@^4.14.53", "@types/lodash@^4.14.64", "@types/lodash@^4.14.70":
+"@types/lodash@^4.14.53", "@types/lodash@^4.14.64":
   version "4.14.81"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.81.tgz#c944b38118615fa54be6cac1ef7ba5326ff70d6e"
 
