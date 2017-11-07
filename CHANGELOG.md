@@ -1,3 +1,19 @@
+<a name="5.1.0"></a>
+# [5.1.0](https://github.com/gabliam/gabliam/compare/v5.0.0...v5.1.0) (2017-11-07)
+
+
+### Bug Fixes
+
+* **@gabliam/koa:** correction for headers in response-entity ([4d1828f](https://github.com/gabliam/gabliam/commit/4d1828f))
+* **@gabliam/koa:** delete prefix if path is / in router root ([39c910f](https://github.com/gabliam/gabliam/commit/39c910f))
+
+
+### Features
+
+* **@gabliam/koa:** begin koa plugin ([eaf244e](https://github.com/gabliam/gabliam/commit/eaf244e))
+
+
+
 <a name="5.0.0"></a>
 # [5.0.0](https://github.com/gabliam/gabliam/compare/v4.0.0...v5.0.0) (2017-11-03)
 
