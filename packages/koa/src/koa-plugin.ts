@@ -104,7 +104,7 @@ export class KoaPlugin implements GabliamPlugin {
     const app = container.get<koa>(APP);
     const port = restConfig.port;
 
-    const server = http.createServer(<any>app);
+    const server = http.createServer(<any>app.callback());
     server.listen(port, restConfig.hostname);
     server.on('error', onError);
     server.on('listening', onListening);
@@ -162,7 +162,7 @@ export class KoaPlugin implements GabliamPlugin {
     const restConfig = container.get<KoaPluginConfig>(KOA_PLUGIN_CONFIG);
 
     // get the router creator
-    let routerCreator: RouterCreator = (prefix: string) =>
+    let routerCreator: RouterCreator = (prefix?: string) =>
       new koaRouter({
         prefix
       });
@@ -196,9 +196,13 @@ export class KoaPlugin implements GabliamPlugin {
       );
       // if the controller has controllerMetadata and methodMetadatas
       if (controllerMetadata && methodMetadatas) {
-        const routerPath = cleanPath(
+        let routerPath: string | undefined = cleanPath(
           `${restConfig.rootPath}${controllerMetadata.path}`
         );
+
+        if (routerPath === '/') {
+          routerPath = undefined;
+        }
 
         debug(`New route : "${routerPath}"`);
         const router = routerCreator(routerPath);
@@ -246,11 +250,9 @@ export class KoaPlugin implements GabliamPlugin {
     json: boolean,
     parameterMetadata: ParameterMetadata[]
   ): koaRouter.IMiddleware {
-    return (
-      ctx: koaRouter.IRouterContext,
-      next: () => Promise<any>
-    ) => {
+    return async (ctx: koaRouter.IRouterContext, next: () => Promise<any>) => {
       const controller = container.get<any>(controllerId);
+
       // extract all args
       const args = this.extractParameters(
         controller,
@@ -259,7 +261,7 @@ export class KoaPlugin implements GabliamPlugin {
         next,
         parameterMetadata
       );
-      const result: any = controller[key](...args);
+      const result: any = await Promise.resolve(controller[key](...args));
 
       const sendJsonValue = (value: any) => {
         let val: any;
@@ -275,39 +277,22 @@ export class KoaPlugin implements GabliamPlugin {
       // response handler if the result is a ResponseEntity
       function responseEntityHandler(value: ResponseEntity) {
         if (value.hasHeader()) {
-          ctx.headers = {
-            ...ctx.headers,
-            ...value.headers
-          }
+          Object.keys(value.headers).forEach(k =>
+            ctx.set(k, '' + value.headers[k])
+          );
         }
         ctx.status = value.status;
-        ctx.body = sendJsonValue(value.body);
+        sendJsonValue(value.body);
       }
 
       // try to resolve promise
-      if (result && result instanceof Promise) {
-        result
-          .then((value: any) => {
-            if (value !== undefined && !ctx.headerSent) {
-              if (value instanceof ResponseEntity) {
-                responseEntityHandler(value);
-              } else if (json) {
-                sendJsonValue(value);
-              } else {
-                ctx.body = value;
-              }
-            }
-          })
-          .catch((error: any) => {
-            (<any>next)(error);
-          });
-      } else if (result && result instanceof ResponseEntity) {
+      if (result && result instanceof ResponseEntity) {
         responseEntityHandler(result);
       } else if (result !== undefined && !ctx.headerSent) {
         if (json) {
           sendJsonValue(result);
         } else {
-          ctx.body(result);
+          ctx.body = result;
         }
       }
     };
@@ -352,7 +337,7 @@ export class KoaPlugin implements GabliamPlugin {
           args[item.index] = getParam(ctx.request, 'headers', item);
           break;
         case PARAMETER_TYPE.COOKIES:
-          args[item.index] = getParam(ctx.request, 'cookies', item, true);
+          args[item.index] = getParam(ctx, 'cookies', item, true);
           break;
       }
     }

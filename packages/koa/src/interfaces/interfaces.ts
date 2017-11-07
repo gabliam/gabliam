@@ -1,8 +1,6 @@
 import { PARAMETER_TYPE } from '../constants';
 import { koa, koaRouter } from '../koa';
 
-
-
 /**
  * Handler decorator
  */
@@ -104,4 +102,4 @@ export interface ParameterMetadata {
 /**
  * Represent a method that create an koa router
  */
-export type RouterCreator = (path: string) => koaRouter;
+export type RouterCreator = (path?: string) => koaRouter;
