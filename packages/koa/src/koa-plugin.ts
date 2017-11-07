@@ -268,6 +268,7 @@ export class KoaPlugin implements GabliamPlugin {
         try {
           val = JSON.stringify(value);
         } catch {
+          /* istanbul ignore next */
           val = value;
         }
         ctx.type = 'application/json';
