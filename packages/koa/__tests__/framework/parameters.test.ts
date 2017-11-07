@@ -15,7 +15,6 @@ import {
   Next
 } from '../../src/index';
 import { KoaPluginTest } from '../koa-plugin-test';
-import * as supertest from 'supertest';
 import { Config } from '@gabliam/core';
 import * as sinon from 'sinon';
 const koaBody = require('koa-body');
@@ -35,15 +34,16 @@ describe('Parameters:', () => {
     @Controller('/')
     class TestController {
       @Get(':id')
-      public getTest(
-        @RequestParam('id') id: string
-      ) {
+      public getTest(@RequestParam('id') id: string) {
         return id;
       }
     }
     appTest.addClass(TestController);
     await appTest.build();
-    const response = await supertest(appTest.app).get('/foo').expect(200);
+    const response = await appTest
+      .supertest()
+      .get('/foo')
+      .expect(200);
     expect(response).toMatchSnapshot();
   });
 
@@ -51,15 +51,16 @@ describe('Parameters:', () => {
     @Controller('/')
     class TestController {
       @Get(':id')
-      public getTest(
-        @RequestParam('id') id: number
-      ) {
+      public getTest(@RequestParam('id') id: number) {
         return [typeof id, id];
       }
     }
     appTest.addClass(TestController);
     await appTest.build();
-    const response = await supertest(appTest.app).get('/42').expect(200);
+    const response = await appTest
+      .supertest()
+      .get('/42')
+      .expect(200);
     expect(response).toMatchSnapshot();
   });
 
@@ -73,7 +74,10 @@ describe('Parameters:', () => {
     }
     appTest.addClass(TestController);
     await appTest.build();
-    const response = await supertest(appTest.app).get('/GET').expect(200);
+    const response = await appTest
+      .supertest()
+      .get('/GET')
+      .expect(200);
     expect(response).toMatchSnapshot();
   });
 
@@ -87,7 +91,10 @@ describe('Parameters:', () => {
     }
     appTest.addClass(TestController);
     await appTest.build();
-    const response = await supertest(appTest.app).get('/GET').expect(200);
+    const response = await appTest
+      .supertest()
+      .get('/GET')
+      .expect(200);
     expect(response).toMatchSnapshot();
   });
 
@@ -102,7 +109,10 @@ describe('Parameters:', () => {
 
     appTest.addClass(TestController);
     await appTest.build();
-    const response = await supertest(appTest.app).get('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .get('/')
+      .expect(200);
     expect(response).toMatchSnapshot();
   });
 
@@ -117,7 +127,8 @@ describe('Parameters:', () => {
 
     appTest.addClass(TestController);
     await appTest.build();
-    const response = await supertest(appTest.app)
+    const response = await appTest
+      .supertest()
       .get('/')
       .query('id=lolilol')
       .expect(200);
@@ -135,7 +146,8 @@ describe('Parameters:', () => {
 
     appTest.addClass(TestController);
     await appTest.build();
-    const response = await supertest(appTest.app)
+    const response = await appTest
+      .supertest()
       .get('/')
       .query('id=12')
       .expect(200);
@@ -155,16 +167,19 @@ describe('Parameters:', () => {
     class ServerConfig {
       @KoaConfig()
       serverConfig(app: koa) {
-        app.use(koaBody({
-          jsonLimit: '1kb'
-        }));
+        app.use(
+          koaBody({
+            jsonLimit: '1kb'
+          })
+        );
       }
     }
 
     appTest.addClass(TestController);
     appTest.addClass(ServerConfig);
     await appTest.build();
-    const response = await supertest(appTest.app)
+    const response = await appTest
+      .supertest()
       .post('/')
       .send({ foo: 'bar' })
       .expect(200);
@@ -182,7 +197,8 @@ describe('Parameters:', () => {
 
     appTest.addClass(TestController);
     await appTest.build();
-    const response = await supertest(appTest.app)
+    const response = await appTest
+      .supertest()
       .get('/')
       .set('TestHead', 'fooTestHead')
       .expect(200);
@@ -197,29 +213,22 @@ describe('Parameters:', () => {
         @Cookies('cookie') cookie: any,
         ctx: koaRouter.IRouterContext
       ) {
+        // console.log('cookie', cookie)
         if (cookie) {
           ctx.body = cookie;
         } else {
-          ctx.body =  ':(';
+          ctx.body = ':(';
         }
       }
     }
 
-    @Config()
-    class ServerConfig {
-      @KoaConfig()
-      serverConfig(app: koa) {
-        app.use(async (ctx, nextFunc) => {
-          ctx.cookies.set('cookie', 'hey');
-          await nextFunc();
-        });
-      }
-    }
-
     appTest.addClass(TestController);
-    appTest.addClass(ServerConfig);
     await appTest.build();
-    const response = await supertest(appTest.app).get('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .get('/')
+      .set('Cookie', 'cookie=hey')
+      .expect(200);
     expect(response).toMatchSnapshot();
   });
 
@@ -242,7 +251,10 @@ describe('Parameters:', () => {
 
     appTest.addClass(TestController);
     await appTest.build();
-    const response = await supertest(appTest.app).get('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .get('/')
+      .expect(200);
     expect(spy.calledOnce).toBe(true);
     expect(response).toMatchSnapshot();
   });

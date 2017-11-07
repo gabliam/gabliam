@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`KoaConfig decorator should add KoaConfig metadata to a class when decorated with @KoaConfig 1`] = `
+Array [
+  Object {
+    "id": "TestConfig",
+    "key": "testMethod",
+    "order": 1,
+  },
+  Object {
+    "id": "TestConfig",
+    "key": "test2Method",
+    "order": 1,
+  },
+]
+`;
+
+exports[`KoaConfig decorator should add KoaConfig metadata to a class when decorated with @KoaConfig(order) 1`] = `
+Array [
+  Object {
+    "id": "TestConfig",
+    "key": "testMethod",
+    "order": 50,
+  },
+  Object {
+    "id": "TestConfig",
+    "key": "test2Method",
+    "order": 100,
+  },
+]
+`;

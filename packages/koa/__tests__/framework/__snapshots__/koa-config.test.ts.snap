@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@KoaConfig 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "GET",
+}
+`;
+
+exports[`@KoaConfig 2`] = `"abc"`;
+
+exports[`@KoaConfig Order 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "GET",
+}
+`;
+
+exports[`@KoaConfig Order 2`] = `"abc"`;
+
+exports[`ErrorConfig 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "21",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 500,
+  "text": "Internal Server Error",
+}
+`;
+
+exports[`ErrorConfig 2`] = `"e"`;
+
+exports[`ErrorConfig order 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "21",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 500,
+  "text": "Internal Server Error",
+}
+`;
+
+exports[`ErrorConfig order 2`] = `"de"`;

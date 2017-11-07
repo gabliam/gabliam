@@ -11,10 +11,8 @@ import {
   koaRouter
 } from '../../src/index';
 import { KoaPluginTest } from '../koa-plugin-test';
-import * as supertest from 'supertest';
 import { Config, Bean } from '@gabliam/core';
 import { CUSTOM_ROUTER_CREATOR } from '../../src/constants';
-
 
 let appTest: KoaPluginTest;
 
@@ -41,7 +39,10 @@ describe('Integration Tests:', () => {
         }
         appTest.addClass(TestController);
         await appTest.build();
-        const response = await supertest(appTest.app).get('/').expect(200);
+        const response = await appTest
+          .supertest()
+          .get('/')
+          .expect(200);
         expect(response).toMatchSnapshot();
       });
 
@@ -57,7 +58,10 @@ describe('Integration Tests:', () => {
         }
         appTest.addClass(TestController);
         await appTest.build();
-        const response = await supertest(appTest.app).get('/').expect(500);
+        const response = await appTest
+          .supertest()
+          .get('/')
+          .expect(500);
         expect(response).toMatchSnapshot();
       });
 
@@ -65,11 +69,11 @@ describe('Integration Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          public getTest(
+          public async getTest(
             ctx: koaRouter.IRouterContext,
             nextFunc: () => Promise<any>
           ) {
-            nextFunc();
+            await nextFunc();
           }
 
           @Get('/')
@@ -80,7 +84,10 @@ describe('Integration Tests:', () => {
 
         appTest.addClass(TestController);
         await appTest.build();
-        const response = await supertest(appTest.app).get('/').expect(200);
+        const response = await appTest
+          .supertest()
+          .get('/')
+          .expect(200);
         expect(response).toMatchSnapshot();
       });
 
@@ -95,8 +102,7 @@ describe('Integration Tests:', () => {
             return new Promise(resolve => {
               setTimeout(
                 () => {
-                  nextFunc();
-                  resolve();
+                  resolve(nextFunc());
                 },
                 100,
                 'GET'
@@ -111,7 +117,10 @@ describe('Integration Tests:', () => {
         }
         appTest.addClass(TestController);
         await appTest.build();
-        const response = await supertest(appTest.app).get('/').expect(200);
+        const response = await appTest
+          .supertest()
+          .get('/')
+          .expect(200);
         expect(response).toMatchSnapshot();
       });
 
@@ -119,11 +128,11 @@ describe('Integration Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          public getTest(
+          public async getTest(
             ctx: koaRouter.IRouterContext,
             nextFunc: () => Promise<any>
           ) {
-            nextFunc();
+            await nextFunc();
           }
 
           @Get('/')
@@ -135,7 +144,10 @@ describe('Integration Tests:', () => {
         }
         appTest.addClass(TestController);
         await appTest.build();
-        const response = await supertest(appTest.app).get('/').expect(200);
+        const response = await appTest
+          .supertest()
+          .get('/')
+          .expect(200);
         expect(response).toMatchSnapshot();
       });
 
@@ -169,7 +181,7 @@ describe('Integration Tests:', () => {
         }
         appTest.addClass(TestController);
         await appTest.build();
-        const agent = supertest(appTest.app);
+        const agent = appTest.supertest();
 
         const rd = await agent.delete('/').expect(200);
         expect(rd).toMatchSnapshot();
@@ -202,7 +214,10 @@ describe('Integration Tests:', () => {
         appTest.addClass(TestController);
         await appTest.build();
 
-        const response = await supertest(appTest.app).propfind('/').expect(200);
+        const response = await appTest
+          .supertest()
+          .propfind('/')
+          .expect(200);
         expect(response).toMatchSnapshot();
       });
 
@@ -218,7 +233,10 @@ describe('Integration Tests:', () => {
         appTest.addClass(TestController);
         await appTest.build();
 
-        const response = await supertest(appTest.app).get('/').expect(200);
+        const response = await appTest
+          .supertest()
+          .get('/')
+          .expect(200);
         expect(response).toMatchSnapshot();
       });
 
@@ -246,7 +264,7 @@ describe('Integration Tests:', () => {
         appTest.addClass(TestController);
         await appTest.build();
 
-        const agent = supertest(appTest.app);
+        const agent = appTest.supertest();
 
         const expectedSuccess = await agent
           .get('/CaseSensitive/Endpoint')
@@ -277,10 +295,11 @@ describe('Integration Tests:', () => {
         }
 
         appTest.addClass(TestController);
-        appTest.addConf('application.express.rootPath', '/api/v1');
+        appTest.addConf('application.koa.rootPath', '/api/v1');
         await appTest.build();
 
-        const response = await supertest(appTest.app)
+        const response = await appTest
+          .supertest()
           .get('/api/v1/ping/endpoint')
           .expect(200);
 

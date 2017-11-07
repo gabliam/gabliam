@@ -1,6 +1,5 @@
 import { Controller, RestController, Get } from '../../src/index';
 import { KoaPluginTest } from '../koa-plugin-test';
-import * as supertest from 'supertest';
 import {
   ResponseEntity,
   ok,
@@ -34,7 +33,8 @@ describe('Response entity Tests:', () => {
         }
         appTest.addClass(TestController);
         await appTest.build();
-        const response = await supertest(appTest.app)
+        const response = await appTest
+          .supertest()
           .get('/')
           .expect(HttpStatus.OK);
         expect(response).toMatchSnapshot();
@@ -52,7 +52,8 @@ describe('Response entity Tests:', () => {
         }
         appTest.addClass(TestController);
         await appTest.build();
-        const response = await supertest(appTest.app)
+        const response = await appTest
+          .supertest()
           .get('/')
           .expect(HttpStatus.OK);
         expect(response).toMatchSnapshot();
@@ -63,6 +64,7 @@ describe('Response entity Tests:', () => {
         class TestController {
           @Get('/')
           async getTest() {
+            // console.log('ici');
             return new Promise(resolve => {
               setTimeout(resolve, 100, new ResponseEntity({ get: 'GET' }));
             });
@@ -70,7 +72,8 @@ describe('Response entity Tests:', () => {
         }
         appTest.addClass(TestController);
         await appTest.build();
-        const response = await supertest(appTest.app)
+        const response = await appTest
+          .supertest()
           .get('/')
           .expect(HttpStatus.OK);
         expect(response).toMatchSnapshot();
@@ -86,7 +89,8 @@ describe('Response entity Tests:', () => {
         }
         appTest.addClass(TestController);
         await appTest.build();
-        const response = await supertest(appTest.app)
+        const response = await appTest
+          .supertest()
           .get('/')
           .expect(HttpStatus.OK);
         expect(response).toMatchSnapshot();
@@ -102,7 +106,8 @@ describe('Response entity Tests:', () => {
         }
         appTest.addClass(TestController);
         await appTest.build();
-        const response = await supertest(appTest.app)
+        const response = await appTest
+          .supertest()
           .get('/')
           .expect(HttpStatus.OK);
         expect(response).toMatchSnapshot();
@@ -118,7 +123,8 @@ describe('Response entity Tests:', () => {
         }
         appTest.addClass(TestController);
         await appTest.build();
-        const response = await supertest(appTest.app)
+        const response = await appTest
+          .supertest()
           .get('/')
           .expect(HttpStatus.ACCEPTED);
         expect(response).toMatchSnapshot();
@@ -134,7 +140,8 @@ describe('Response entity Tests:', () => {
         }
         appTest.addClass(TestController);
         await appTest.build();
-        const response = await supertest(appTest.app)
+        const response = await appTest
+          .supertest()
           .get('/')
           .expect(HttpStatus.BAD_REQUEST);
         expect(response).toMatchSnapshot();
@@ -150,7 +157,8 @@ describe('Response entity Tests:', () => {
         }
         appTest.addClass(TestController);
         await appTest.build();
-        const response = await supertest(appTest.app)
+        const response = await appTest
+          .supertest()
           .get('/')
           .expect(HttpStatus.NO_CONTENT);
         expect(response).toMatchSnapshot();
@@ -166,7 +174,8 @@ describe('Response entity Tests:', () => {
         }
         appTest.addClass(TestController);
         await appTest.build();
-        const response = await supertest(appTest.app)
+        const response = await appTest
+          .supertest()
           .get('/')
           .expect(HttpStatus.NOT_FOUND);
         expect(response).toMatchSnapshot();

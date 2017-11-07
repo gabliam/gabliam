@@ -1,0 +1,579 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Integration Tests: decorator Controller should use custom router passed from configuration 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "9",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "Such Text",
+}
+`;
+
+exports[`Integration Tests: decorator Controller should use custom router passed from configuration 2`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "9",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 404,
+  "text": "Not Found",
+}
+`;
+
+exports[`Integration Tests: decorator Controller should use custom router passed from configuration 3`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "9",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 404,
+  "text": "Not Found",
+}
+`;
+
+exports[`Integration Tests: decorator Controller should use custom routing configuration 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "4",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "pong",
+}
+`;
+
+exports[`Integration Tests: decorator Controller should use returned values as response 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "17",
+    "content-type": "application/json; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "{\\"hello\\":\\"world\\"}",
+}
+`;
+
+exports[`Integration Tests: decorator Controller should work for async controller methods 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "GET",
+}
+`;
+
+exports[`Integration Tests: decorator Controller should work for async controller methods that fails 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "21",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 500,
+  "text": "Internal Server Error",
+}
+`;
+
+exports[`Integration Tests: decorator Controller should work for async methods called by nextFunc() 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "GET",
+}
+`;
+
+exports[`Integration Tests: decorator Controller should work for async methods which call nextFunc() 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "GET",
+}
+`;
+
+exports[`Integration Tests: decorator Controller should work for each shortcut decorator 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "6",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "DELETE",
+  },
+  "status": 200,
+  "text": "DELETE",
+}
+`;
+
+exports[`Integration Tests: decorator Controller should work for each shortcut decorator 2`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "HEAD",
+  },
+  "status": 200,
+  "text": undefined,
+}
+`;
+
+exports[`Integration Tests: decorator Controller should work for each shortcut decorator 3`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "5",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "PATCH",
+  },
+  "status": 200,
+  "text": "PATCH",
+}
+`;
+
+exports[`Integration Tests: decorator Controller should work for each shortcut decorator 4`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "PUT",
+  },
+  "status": 200,
+  "text": "PUT",
+}
+`;
+
+exports[`Integration Tests: decorator Controller should work for each shortcut decorator 5`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "4",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "POST",
+  },
+  "status": 200,
+  "text": "POST",
+}
+`;
+
+exports[`Integration Tests: decorator Controller should work for each shortcut decorator 6`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "GET",
+}
+`;
+
+exports[`Integration Tests: decorator Controller should work for methods which call nextFunc() 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "GET",
+}
+`;
+
+exports[`Integration Tests: decorator Controller should work for more obscure HTTP methods using the httpMethod decorator 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "8",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "PROPFIND",
+  },
+  "status": 200,
+  "text": "PROPFIND",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should use custom router passed from configuration 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "11",
+    "content-type": "application/json; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "\\"Such Text\\"",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should use custom router passed from configuration 2`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "9",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 404,
+  "text": "Not Found",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should use custom router passed from configuration 3`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "9",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 404,
+  "text": "Not Found",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should use custom routing configuration 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "6",
+    "content-type": "application/json; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "\\"pong\\"",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should use returned values as response 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "17",
+    "content-type": "application/json; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "{\\"hello\\":\\"world\\"}",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should work for async controller methods 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "5",
+    "content-type": "application/json; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "\\"GET\\"",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should work for async controller methods that fails 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "21",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 500,
+  "text": "Internal Server Error",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should work for async methods called by nextFunc() 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "5",
+    "content-type": "application/json; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "\\"GET\\"",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should work for async methods which call nextFunc() 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "5",
+    "content-type": "application/json; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "\\"GET\\"",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should work for each shortcut decorator 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "6",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "DELETE",
+  },
+  "status": 200,
+  "text": "DELETE",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should work for each shortcut decorator 2`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "HEAD",
+  },
+  "status": 200,
+  "text": undefined,
+}
+`;
+
+exports[`Integration Tests: decorator RestController should work for each shortcut decorator 3`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "5",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "PATCH",
+  },
+  "status": 200,
+  "text": "PATCH",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should work for each shortcut decorator 4`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "PUT",
+  },
+  "status": 200,
+  "text": "PUT",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should work for each shortcut decorator 5`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "4",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "POST",
+  },
+  "status": 200,
+  "text": "POST",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should work for each shortcut decorator 6`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "GET",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should work for methods which call nextFunc() 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "5",
+    "content-type": "application/json; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "\\"GET\\"",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should work for more obscure HTTP methods using the httpMethod decorator 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "8",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "PROPFIND",
+  },
+  "status": 200,
+  "text": "PROPFIND",
+}
+`;

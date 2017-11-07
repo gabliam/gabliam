@@ -1,31 +1,36 @@
-import {
-  Controller,
-  Get,
-  KoaConfig,
-  koa,
-  koaRouter
-} from '../../src/index';
+import { Controller, Get, KoaConfig, koa, koaRouter } from '../../src/index';
 import { KoaPluginTest } from '../koa-plugin-test';
-import * as supertest from 'supertest';
 import { Config } from '@gabliam/core';
 import * as sinon from 'sinon';
 
 let appTest: KoaPluginTest;
 let result: string;
 const middleware: any = {
-  a: async function(ctx: koaRouter.IRouterContext, nextFunc: () => Promise<any>) {
+  a: async function(
+    ctx: koaRouter.IRouterContext,
+    nextFunc: () => Promise<any>
+  ) {
     result += 'a';
     await nextFunc();
   },
-  b: async function(ctx: koaRouter.IRouterContext, nextFunc: () => Promise<any>) {
+  b: async function(
+    ctx: koaRouter.IRouterContext,
+    nextFunc: () => Promise<any>
+  ) {
     result += 'b';
     await nextFunc();
   },
-  c: async function(ctx: koaRouter.IRouterContext, nextFunc: () => Promise<any>) {
+  c: async function(
+    ctx: koaRouter.IRouterContext,
+    nextFunc: () => Promise<any>
+  ) {
     result += 'c';
     await nextFunc();
   },
-  e: async function(ctx: koaRouter.IRouterContext, nextFunc: () => Promise<any>) {
+  e: async function(
+    ctx: koaRouter.IRouterContext,
+    nextFunc: () => Promise<any>
+  ) {
     result += 'e';
     ctx.throw(500);
   },
@@ -57,7 +62,7 @@ afterEach(async () => {
   await appTest.destroy();
 });
 
-test('@ExpressConfig', async () => {
+test('@KoaConfig', async () => {
   @Controller('/')
   class TestController {
     @Get('/')
@@ -80,7 +85,10 @@ test('@ExpressConfig', async () => {
   appTest.addClass(ServerConfig);
   await appTest.build();
 
-  const response = await supertest(appTest.app).get('/').expect(200);
+  const response = await appTest
+    .supertest()
+    .get('/')
+    .expect(200);
   expect(spyA.calledOnce).toBe(true);
   expect(spyB.calledOnce).toBe(true);
   expect(spyC.calledOnce).toBe(true);
@@ -88,7 +96,7 @@ test('@ExpressConfig', async () => {
   expect(result).toMatchSnapshot();
 });
 
-test('@ExpressConfig Order', async () => {
+test('@KoaConfig Order', async () => {
   @Controller('/')
   class TestController {
     @Get('/')
@@ -119,7 +127,10 @@ test('@ExpressConfig Order', async () => {
   appTest.addClass(ServerConfig);
   await appTest.build();
 
-  const response = await supertest(appTest.app).get('/').expect(200);
+  const response = await appTest
+    .supertest()
+    .get('/')
+    .expect(200);
   expect(spyA.calledOnce).toBe(true);
   expect(spyB.calledOnce).toBe(true);
   expect(spyC.calledOnce).toBe(true);
@@ -148,7 +159,10 @@ test('ErrorConfig', async () => {
   appTest.addClass(ServerConfig);
   await appTest.build();
 
-  const response = await supertest(appTest.app).get('/').expect(500);
+  const response = await appTest
+    .supertest()
+    .get('/')
+    .expect(500);
   expect(spyE.calledOnce).toBe(true);
   expect(response).toMatchSnapshot();
   expect(result).toMatchSnapshot();
@@ -180,7 +194,10 @@ test('ErrorConfig order', async () => {
   appTest.addClass(ServerConfig);
   await appTest.build();
 
-  const response = await supertest(appTest.app).get('/').expect(500);
+  const response = await appTest
+    .supertest()
+    .get('/')
+    .expect(500);
   expect(spyE.calledOnce).toBe(true);
   expect(spyD.calledOnce).toBe(true);
   expect(response).toMatchSnapshot();

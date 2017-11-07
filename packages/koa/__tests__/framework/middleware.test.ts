@@ -13,7 +13,6 @@ import {
   MiddlewareInject
 } from '../../src/index';
 import { KoaPluginTest } from '../koa-plugin-test';
-import * as supertest from 'supertest';
 import { Config } from '@gabliam/core';
 import * as sinon from 'sinon';
 
@@ -65,7 +64,10 @@ describe('Middleware:', () => {
     appTest.addClass(TestController);
     await appTest.build();
 
-    const response = await supertest(appTest.app).get('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .get('/')
+      .expect(200);
 
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
@@ -86,7 +88,10 @@ describe('Middleware:', () => {
     appTest.addClass(TestController);
     await appTest.build();
 
-    const response = await supertest(appTest.app).post('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .post('/')
+      .expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);
@@ -105,7 +110,10 @@ describe('Middleware:', () => {
     appTest.addClass(TestController);
     await appTest.build();
 
-    const response = await supertest(appTest.app).put('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .put('/')
+      .expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);
@@ -125,7 +133,10 @@ describe('Middleware:', () => {
     appTest.addClass(TestController);
     await appTest.build();
 
-    const response = await supertest(appTest.app).patch('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .patch('/')
+      .expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);
@@ -144,7 +155,10 @@ describe('Middleware:', () => {
     appTest.addClass(TestController);
     await appTest.build();
 
-    const response = await supertest(appTest.app).head('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .head('/')
+      .expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);
@@ -163,7 +177,10 @@ describe('Middleware:', () => {
     appTest.addClass(TestController);
     await appTest.build();
 
-    const response = await supertest(appTest.app).delete('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .delete('/')
+      .expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);
@@ -182,7 +199,10 @@ describe('Middleware:', () => {
     appTest.addClass(TestController);
     await appTest.build();
 
-    const response = await supertest(appTest.app).get('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .get('/')
+      .expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);
@@ -205,7 +225,10 @@ describe('Middleware:', () => {
     appTest.addClass(TestController);
     await appTest.build();
 
-    const response = await supertest(appTest.app).get('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .get('/')
+      .expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);
@@ -236,7 +259,10 @@ describe('Middleware:', () => {
     appTest.addClass(ServerConfig);
     await appTest.build();
 
-    const response = await supertest(appTest.app).get('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .get('/')
+      .expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);
@@ -252,7 +278,7 @@ describe('Middleware:', () => {
     class TestController {
       @Get('/', spyC)
       public getTest(ctx: koa.Context) {
-        ctx.body =  'GET';
+        ctx.body = 'GET';
       }
     }
 
@@ -268,7 +294,10 @@ describe('Middleware:', () => {
     appTest.addClass(ServerConfig);
     await appTest.build();
 
-    const response = await supertest(appTest.app).get('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .get('/')
+      .expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);
@@ -292,13 +321,14 @@ describe('Middleware:', () => {
     }
 
     appTest.addClass(TestController);
-    appTest.gab.container
-      .bind<koa.Middleware>(symbolId)
-      .toConstantValue(spyA);
+    appTest.gab.container.bind<koa.Middleware>(symbolId).toConstantValue(spyA);
     appTest.gab.container.bind<koa.Middleware>(strId).toConstantValue(spyB);
     await appTest.build();
 
-    const response = await supertest(appTest.app).get('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .get('/')
+      .expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(response).toMatchSnapshot();
@@ -318,13 +348,14 @@ describe('Middleware:', () => {
     }
 
     appTest.addClass(TestController);
-    appTest.gab.container
-      .bind<koa.Middleware>(symbolId)
-      .toConstantValue(spyA);
+    appTest.gab.container.bind<koa.Middleware>(symbolId).toConstantValue(spyA);
     appTest.gab.container.bind<koa.Middleware>(strId).toConstantValue(spyB);
     await appTest.build();
 
-    const response = await supertest(appTest.app).get('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .get('/')
+      .expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(response).toMatchSnapshot();
@@ -347,13 +378,14 @@ describe('Middleware:', () => {
     }
 
     appTest.addClass(TestController);
-    appTest.gab.container
-      .bind<koa.Middleware>(symbolId)
-      .toConstantValue(spyA);
+    appTest.gab.container.bind<koa.Middleware>(symbolId).toConstantValue(spyA);
     appTest.gab.container.bind<koa.Middleware>(strId).toConstantValue(spyB);
     await appTest.build();
 
-    const response = await supertest(appTest.app).get('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .get('/')
+      .expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(response).toMatchSnapshot();
@@ -368,10 +400,7 @@ describe('Middleware inject:', () => {
   class TestConfig {
     @Middleware('a')
     a() {
-      return () => async (
-        ctx: koa.Context,
-        nextFunc: () => Promise<any>
-      ) => {
+      return () => async (ctx: koa.Context, nextFunc: () => Promise<any>) => {
         result += 'a';
         await nextFunc();
       };
@@ -379,10 +408,7 @@ describe('Middleware inject:', () => {
 
     @Middleware('b')
     b() {
-      return () => async (
-        ctx: koa.Context,
-        nextFunc: () => Promise<any>
-      ) => {
+      return () => async (ctx: koa.Context, nextFunc: () => Promise<any>) => {
         result += 'b';
         await nextFunc();
       };
@@ -390,10 +416,7 @@ describe('Middleware inject:', () => {
 
     @Middleware('c')
     c(arg?: string) {
-      return () => async (
-        ctx: koa.Context,
-        nextFunc: () => Promise<any>
-      ) => {
+      return () => async (ctx: koa.Context, nextFunc: () => Promise<any>) => {
         result += 'c';
         if (arg) {
           args += arg;
@@ -451,7 +474,10 @@ describe('Middleware inject:', () => {
     appTest.addClass(TestController);
     await appTest.build();
 
-    const response = await supertest(appTest.app).get('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .get('/')
+      .expect(200);
     expect(response).toMatchSnapshot();
     expect(result).toMatchSnapshot();
     expect(args).toMatchSnapshot();
@@ -474,7 +500,10 @@ describe('Middleware inject:', () => {
     appTest.addClass(TestController);
     await appTest.build();
 
-    const response = await supertest(appTest.app).post('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .post('/')
+      .expect(200);
     expect(response).toMatchSnapshot();
     expect(result).toMatchSnapshot();
     expect(args).toMatchSnapshot();
@@ -497,7 +526,10 @@ describe('Middleware inject:', () => {
     appTest.addClass(TestController);
     await appTest.build();
 
-    const response = await supertest(appTest.app).put('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .put('/')
+      .expect(200);
     expect(response).toMatchSnapshot();
     expect(result).toMatchSnapshot();
     expect(args).toMatchSnapshot();
@@ -520,7 +552,10 @@ describe('Middleware inject:', () => {
     appTest.addClass(TestController);
     await appTest.build();
 
-    const response = await supertest(appTest.app).patch('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .patch('/')
+      .expect(200);
     expect(response).toMatchSnapshot();
     expect(result).toMatchSnapshot();
     expect(args).toMatchSnapshot();
@@ -542,7 +577,10 @@ describe('Middleware inject:', () => {
     appTest.addClass(TestController);
     await appTest.build();
 
-    const response = await supertest(appTest.app).head('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .head('/')
+      .expect(200);
     expect(response).toMatchSnapshot();
     expect(result).toMatchSnapshot();
     expect(args).toMatchSnapshot();
@@ -565,7 +603,10 @@ describe('Middleware inject:', () => {
     appTest.addClass(TestController);
     await appTest.build();
 
-    const response = await supertest(appTest.app).delete('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .delete('/')
+      .expect(200);
     expect(response).toMatchSnapshot();
     expect(result).toMatchSnapshot();
     expect(args).toMatchSnapshot();
@@ -588,7 +629,10 @@ describe('Middleware inject:', () => {
     appTest.addClass(TestController);
     await appTest.build();
 
-    const response = await supertest(appTest.app).get('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .get('/')
+      .expect(200);
     expect(response).toMatchSnapshot();
     expect(result).toMatchSnapshot();
     expect(args).toMatchSnapshot();
@@ -613,7 +657,10 @@ describe('Middleware inject:', () => {
     appTest.addClass(TestController);
     await appTest.build();
 
-    const response = await supertest(appTest.app).get('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .get('/')
+      .expect(200);
     expect(response).toMatchSnapshot();
     expect(result).toMatchSnapshot();
     expect(args).toMatchSnapshot();
@@ -638,7 +685,10 @@ describe('Middleware inject:', () => {
     appTest.addClass(TestConfig);
     await appTest.build();
 
-    const response = await supertest(appTest.app).get('/').expect(200);
+    const response = await appTest
+      .supertest()
+      .get('/')
+      .expect(200);
     expect(response).toMatchSnapshot();
     expect(result).toMatchSnapshot();
     expect(args).toMatchSnapshot();
