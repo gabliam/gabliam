@@ -38,7 +38,7 @@ export class ResponseEntity<T = any> {
  * @param body
  */
 export function ok<T = any>(body?: T) {
-  return new ResponseEntity(body, HttpStatus.OK);
+  return new ResponseEntity(body ? body : '', HttpStatus.OK);
 }
 
 /**
