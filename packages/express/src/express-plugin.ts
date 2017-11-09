@@ -1,4 +1,10 @@
-import { Scan, Registry, Plugin, Container } from '@gabliam/core';
+import {
+  Scan,
+  Registry,
+  Plugin,
+  Container,
+  GabliamPlugin
+} from '@gabliam/core';
 import {
   TYPE,
   METADATA_KEY,
@@ -23,7 +29,6 @@ import * as d from 'debug';
 import * as http from 'http';
 import { MiddlewareConfig } from './middlewares';
 import { ResponseEntity } from './response-entity';
-import { GabliamPlugin } from '../../core/lib/interfaces/interfaces';
 import { express } from './express';
 
 const debug = d('Gabliam:Plugin:ExpressPlugin');
