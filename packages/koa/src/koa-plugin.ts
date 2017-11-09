@@ -1,4 +1,10 @@
-import { Scan, Registry, Plugin, Container } from '@gabliam/core';
+import {
+  Scan,
+  Registry,
+  Plugin,
+  Container,
+  GabliamPlugin
+} from '@gabliam/core';
 import {
   TYPE,
   METADATA_KEY,
@@ -23,7 +29,6 @@ import * as d from 'debug';
 import * as http from 'http';
 import { MiddlewareConfig } from './middlewares';
 import { ResponseEntity } from './response-entity';
-import { GabliamPlugin } from '../../core/lib/interfaces/interfaces';
 import { koa, koaRouter } from './koa';
 
 const debug = d('Gabliam:Plugin:KoaPlugin');
@@ -104,7 +109,7 @@ export class KoaPlugin implements GabliamPlugin {
     const app = container.get<koa>(APP);
     const port = restConfig.port;
 
-    const server = http.createServer(<any>app.callback());
+    const server = http.createServer(app.callback());
     server.listen(port, restConfig.hostname);
     server.on('error', onError);
     server.on('listening', onListening);

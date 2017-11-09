@@ -67,9 +67,9 @@ export function getMiddlewares(
   ): koaRouter.IMiddleware {
     try {
       // test if the middleware is a ServiceIdentifier
-      return container.get<
-        koaRouter.IMiddleware
-      >(<inversifyInterfaces.ServiceIdentifier<any>>middleware);
+      return container.get<koaRouter.IMiddleware>(
+        <inversifyInterfaces.ServiceIdentifier<any>>middleware
+      );
     } catch (e) {
       return <koaRouter.IMiddleware>middleware;
     }
