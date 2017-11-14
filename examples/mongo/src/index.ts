@@ -6,7 +6,7 @@ import dbPlugin from '@gabliam/mongoose';
 
 new Gabliam({
   scanPath: __dirname,
-  configPath: path.resolve(__dirname, '../config')
+  config: path.resolve(__dirname, '../config')
 })
   .addPlugin(expressPlugin)
   .addPlugin(dbPlugin)

@@ -7,7 +7,7 @@ import graphqlPlugin from '@gabliam/graphql';
 
 new Gabliam({
   scanPath: __dirname,
-  configPath: path.resolve(__dirname, '../config')
+  config: path.resolve(__dirname, '../config')
 })
   .addPlugin(graphqlPlugin)
   .addPlugin(expressPlugin)

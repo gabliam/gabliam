@@ -6,7 +6,7 @@ import dbPlugin from '@gabliam/typeorm';
 
 new Gabliam({
   scanPath: __dirname,
-  configPath: path.resolve(__dirname, '../config')
+  config: path.resolve(__dirname, '../config')
 })
   .addPlugin(expressPlugin)
   .addPlugin(dbPlugin)
