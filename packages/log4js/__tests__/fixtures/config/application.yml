@@ -1,0 +1,2 @@
+application:
+  loggerConfig: require:./log4js-custom.json

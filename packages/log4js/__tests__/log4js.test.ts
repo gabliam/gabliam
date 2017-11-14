@@ -42,7 +42,7 @@ describe('without config folder', () => {
 describe('with config folder', () => {
   beforeEach(async () => {
     appTest = new Log4jsPluginTest(
-      path.resolve(__dirname, './fixtures/defaultFilePathConfig')
+      path.resolve(__dirname, './fixtures/config')
     );
   });
 
@@ -51,7 +51,7 @@ describe('with config folder', () => {
     p.reset();
   });
 
-  test('default config', async () => {
+  test('logger', async () => {
     @Service()
     class TestLog {
       public logger = log4js.getLogger(TestLog.name);
@@ -65,31 +65,6 @@ describe('with config folder', () => {
       }
     }
 
-    appTest.addClass(TestLog);
-    await appTest.build();
-    const testLog = appTest.gab.container.get(TestLog);
-    testLog.test();
-    expect(p.callCount).toMatchSnapshot();
-  });
-
-  test('custom config', async () => {
-    @Service()
-    class TestLog {
-      public logger = log4js.getLogger(TestLog.name);
-
-      test() {
-        this.logger.info('Info');
-        this.logger.debug('debug');
-        this.logger.error('error');
-        this.logger.fatal('fatal');
-        this.logger.warn('warn');
-      }
-    }
-
-    appTest.addConf(
-      'application.loggerConfigPath',
-      path.resolve(__dirname, './fixtures/customConfig/log4js-custom.json')
-    );
     appTest.addClass(TestLog);
     await appTest.build();
     const testLog = appTest.gab.container.get(TestLog);

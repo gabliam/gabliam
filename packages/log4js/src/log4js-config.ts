@@ -1,37 +1,17 @@
-import {
-  PluginConfig,
-  Value,
-  Bean,
-  CORE_CONFIG,
-  inject,
-  Joi,
-  GabliamConfig
-} from '@gabliam/core';
+import { PluginConfig, Value, Bean } from '@gabliam/core';
 import { log4js } from './log4js';
-import * as path from 'path';
-import * as fs from 'fs';
+import { Configuration } from 'log4js';
 
 @PluginConfig()
 export class LoggerConfig {
-  @Value('application.loggerConfigPath', Joi.string())
-  loggerConfigPath: string | null;
-
-  private configPath: string;
-
-  constructor(@inject(CORE_CONFIG) coreConfig: GabliamConfig) {
-    this.configPath = coreConfig.configPath;
-  }
+  @Value('application.loggerConfig') loggerConfig: Configuration | null;
 
   @Bean('logger')
   createLogger() {
-    if (this.loggerConfigPath && fs.existsSync(this.loggerConfigPath)) {
-      log4js.configure(this.loggerConfigPath);
-    } else {
-      const defaultFilePath = path.resolve(this.configPath, 'log4js.json');
-      if (fs.existsSync(defaultFilePath)) {
-        log4js.configure(defaultFilePath);
-      }
+    if (this.loggerConfig) {
+      log4js.configure(this.loggerConfig);
     }
+
     return log4js;
   }
 }
