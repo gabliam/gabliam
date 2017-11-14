@@ -8,6 +8,7 @@ export * from './errors';
 export * from './utils';
 export * from './joi';
 export * from './container';
+export { FileLoader } from './loaders';
 
 export {
   injectable,

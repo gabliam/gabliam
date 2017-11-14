@@ -7,7 +7,7 @@ import { TYPE } from '../src/constants';
 test('gabliam instance', async () => {
   const gab = new Gabliam({
     scanPath: path.resolve(__dirname, './fixtures/gabliam'),
-    configPath: path.resolve(__dirname, './fixtures/gabliam/config')
+    config: path.resolve(__dirname, './fixtures/gabliam/config')
   });
   await gab.buildAndStart();
   // @todo write a guid serializer

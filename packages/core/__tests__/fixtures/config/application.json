@@ -1,0 +1,7 @@
+{
+  "application": {
+    "host": "prod.app.json",
+    "mongoose": "require:./fixtures/test.json",
+    "json": true
+  }
+}

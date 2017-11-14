@@ -23,7 +23,7 @@ const debug = d('Gabliam:core');
 
 const DEFAULT_CONFIG: GabliamConfig = {
   scanPath: process.env.PWD!,
-  configPath: process.env.GABLIAM_CONFIG_PATH || process.env.PWD!
+  config: process.env.GABLIAM_CONFIG_PATH || process.env.PWD!
 };
 
 /**
@@ -67,7 +67,7 @@ export class Gabliam {
       if (_.isString(options)) {
         this.options = {
           scanPath: options,
-          configPath: options
+          config: options
         };
       } else {
         this.options = {
@@ -185,7 +185,7 @@ export class Gabliam {
   private async _initializeConfig() {
     this.config = await this.loaderConfig.load(
       this.options.scanPath,
-      this.options.configPath
+      this.options.config
     );
     const config = this.config;
     this.container.bind(APP_CONFIG).toConstantValue(config);

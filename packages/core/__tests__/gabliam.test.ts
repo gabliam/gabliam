@@ -20,7 +20,7 @@ import { GabliamTest } from '../src/testing/gabliam';
 test('gabliam instance', async () => {
   const gab = new Gabliam({
     scanPath: path.resolve(__dirname, './fixtures/gabliam'),
-    configPath: path.resolve(__dirname, './fixtures/gabliam/config')
+    config: path.resolve(__dirname, './fixtures/gabliam/config')
   });
   await gab.buildAndStart();
   // @todo write a guid serializer
@@ -36,7 +36,7 @@ test('gabliam instance with default config', async () => {
   const gab = new Gabliam();
   expect(gab.options).toEqual({
     scanPath: process.env.PWD,
-    configPath: process.env.PWD
+    config: process.env.PWD
   });
   await gab.destroy();
 });
@@ -89,7 +89,7 @@ describe('test plugin', async () => {
       const g = new GabliamTest(
         new Gabliam({
           scanPath: path.resolve(__dirname, 'gabliam'),
-          configPath: path.resolve(__dirname, 'gabliam')
+          config: path.resolve(__dirname, 'gabliam')
         }).addPlugin(PluginTest)
       );
       gab = g.gab;
@@ -148,7 +148,7 @@ describe('test plugin', async () => {
     beforeAll(() => {
       gab = new Gabliam({
         scanPath: path.resolve(__dirname, './fixtures/gabliam'),
-        configPath: path.resolve(__dirname, './fixtures/gabliam/config')
+        config: path.resolve(__dirname, './fixtures/gabliam/config')
       });
       gab.addPlugin(PluginTest);
     });

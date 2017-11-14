@@ -1,6 +1,7 @@
 import { Registry } from '../registry';
 import { ValueValidator, PluginMetadata } from './metadata';
 import { Container } from '../container';
+import { LoaderConfigOptions } from '../loaders';
 
 /**
  * Config for gabliam
@@ -14,7 +15,7 @@ export interface GabliamConfig {
   /**
    * Path of config
    */
-  configPath: string;
+  config: string | LoaderConfigOptions[];
 }
 
 /**

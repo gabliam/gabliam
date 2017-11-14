@@ -1,6 +1,6 @@
 // tslint:disable:one-line
 // tslint:disable:no-unused-expression
-import { LoaderConfig } from '../src/loaders';
+import { LoaderConfig, FileLoader } from '../src/loaders';
 import * as mock from 'mock-fs';
 import * as path from 'path';
 
@@ -110,12 +110,124 @@ describe('with application.yml with bad handler', async () => {
   });
 
   test('must throw error', async () => {
-    try {
-      await loader.load(__dirname, 'test/config', 'int');
-    } catch (e) {
-      expect(e).toMatchSnapshot();
-    }
+    const config = loader.load(__dirname, 'test/config', 'int');
+    await expect(config).rejects.toMatchSnapshot();
   });
 
   afterAll(() => mock.restore());
+});
+
+test(`with application.json`, async () => {
+  const config = await loader.load(__dirname, [
+    {
+      loader: FileLoader,
+      options: {
+        folder: path.resolve(__dirname, './fixtures/config'),
+        types: ['json']
+      }
+    }
+  ]);
+  expect(config).toMatchSnapshot();
+});
+
+test(`with json and yml`, async () => {
+  const config = await loader.load(__dirname, [
+    {
+      loader: FileLoader,
+      options: {
+        folder: path.resolve(__dirname, './fixtures/config'),
+        types: ['json', 'yml']
+      }
+    }
+  ]);
+  expect(config).toMatchSnapshot();
+});
+
+test(`with yml and json`, async () => {
+  const config = await loader.load(__dirname, [
+    {
+      loader: FileLoader,
+      options: {
+        folder: path.resolve(__dirname, './fixtures/config'),
+        types: ['yml', 'json']
+      }
+    }
+  ]);
+  expect(config).toMatchSnapshot();
+});
+
+test(`with bad application.json`, async () => {
+  const config = await loader.load(__dirname, [
+    {
+      loader: FileLoader,
+      options: {
+        folder: path.resolve(__dirname, './fixtures/badjson'),
+        types: ['json']
+      }
+    }
+  ]);
+  expect(config).toMatchSnapshot();
+});
+
+test(`with application.json empty`, async () => {
+  mock({
+    'test/config': {
+      'application.json': ``
+    }
+  });
+  const config = await loader.load(__dirname, [
+    {
+      loader: FileLoader,
+      options: {
+        folder: 'test/config',
+        types: ['json']
+      }
+    }
+  ]);
+  expect(config).toMatchSnapshot();
+  mock.restore();
+});
+
+test(`with application.json with nothing`, async () => {
+  mock({
+    'test/config': {
+      // tslint:disable-next-line:no-trailing-whitespace
+      'application.json': `
+
+              `
+    }
+  });
+  const config = await loader.load(__dirname, [
+    {
+      loader: FileLoader,
+      options: {
+        folder: 'test/config',
+        types: ['json']
+      }
+    }
+  ]);
+  expect(config).toMatchSnapshot();
+  mock.restore();
+});
+
+test(`with bad parser`, async () => {
+  const config = loader.load(__dirname, [
+    {
+      loader: FileLoader,
+      options: {
+        folder: path.resolve(__dirname, './fixtures/badparser'),
+        types: ['badparser']
+      }
+    }
+  ]);
+  await expect(config).rejects.toMatchSnapshot();
+});
+
+test(`with bad loader`, async () => {
+  const config = loader.load(__dirname, [
+    {
+      loader: 'BadLoader'
+    }
+  ]);
+  await expect(config).rejects.toMatchSnapshot();
 });

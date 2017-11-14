@@ -11,7 +11,7 @@ Object {
 
 exports[`gabliam instance 2`] = `
 Object {
-  "configPath": "<PROJECT_ROOT>/packages/core/__tests__/fixtures/gabliam/config",
+  "config": "<PROJECT_ROOT>/packages/core/__tests__/fixtures/gabliam/config",
   "scanPath": "<PROJECT_ROOT>/packages/core/__tests__/fixtures/gabliam",
 }
 `;
@@ -36,7 +36,7 @@ exports[`gabliam instance with path 1`] = `Object {}`;
 
 exports[`gabliam instance with path 2`] = `
 Object {
-  "configPath": "<PROJECT_ROOT>/packages/core/__tests__/fixtures/gabliam",
+  "config": "<PROJECT_ROOT>/packages/core/__tests__/fixtures/gabliam",
   "scanPath": "<PROJECT_ROOT>/packages/core/__tests__/fixtures/gabliam",
 }
 `;

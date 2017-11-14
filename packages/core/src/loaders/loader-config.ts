@@ -1,12 +1,26 @@
-import * as glob from 'glob';
-import * as yaml from 'js-yaml';
-import * as fs from 'fs';
 import * as _ from 'lodash';
 import * as d from 'debug';
 import * as shortstop from 'shortstop';
 import * as handlers from 'shortstop-handlers';
+import FileLoader from './file-loader';
+import { LoaderConfigPgkNotInstalledError } from '../errors';
 
 const debug = d('Gabliam:loader-config');
+
+export type Loader = (options: any, profile?: string) => Promise<Object>;
+
+export interface LoaderConfigOptions {
+  /**
+   * The loader
+   * if string, require the loader
+   */
+  loader: string | Loader;
+
+  /**
+   * options passed on loader
+   */
+  options?: Object;
+}
 
 export class LoaderConfig {
   /**
@@ -16,10 +30,26 @@ export class LoaderConfig {
    */
   async load(
     scanPath: string,
-    folder: string,
-    profile = process.env.PROFILE || null
+    configOptions: string | LoaderConfigOptions[],
+    profile = process.env.PROFILE || undefined
   ): Promise<any> {
+    // console.log('load', scanPath)
     // create resolver
+
+    let loaderConfigOptions: LoaderConfigOptions[];
+    if (typeof configOptions === 'string') {
+      loaderConfigOptions = [
+        {
+          loader: FileLoader,
+          options: {
+            folder: configOptions
+          }
+        }
+      ];
+    } else {
+      loaderConfigOptions = configOptions;
+    }
+
     const resolver = shortstop.create();
     resolver.use('file', handlers.file(scanPath));
     resolver.use('path', handlers.path(scanPath));
@@ -29,34 +59,23 @@ export class LoaderConfig {
     resolver.use('exec', handlers.exec(scanPath));
     resolver.use('glob', handlers.glob(scanPath));
 
-    debug('loadConfig', folder);
-    const files = glob.sync('**/application?(-+([a-zA-Z])).yml', {
-      cwd: folder
-    });
     let config = {};
 
-    if (!files || files.length === 0) {
-      return config;
-    }
+    for (const { loader, options } of loaderConfigOptions) {
+      let loaderFunc: Loader;
 
-    const defaultProfileFile = files.find(file => file === 'application.yml');
-
-    if (defaultProfileFile) {
-      config = this.loadYmlFile(`${folder}/${defaultProfileFile}`);
-    }
-
-    if (profile) {
-      const profileFile = files.find(
-        file => file === `application-${profile}.yml`
-      );
-
-      if (profileFile) {
-        config = _.merge(
-          {},
-          config,
-          this.loadYmlFile(`${folder}/${profileFile}`)
-        );
+      if (typeof loader === 'string') {
+        try {
+          loaderFunc = require(loader);
+        } catch {
+          throw new LoaderConfigPgkNotInstalledError(loader);
+        }
+      } else {
+        loaderFunc = loader;
       }
+      const loadedConfig = await loaderFunc(options, profile);
+
+      config = _.merge({}, config, loadedConfig);
     }
 
     debug('loadConfig', config);
@@ -69,14 +88,5 @@ export class LoaderConfig {
         }
       });
     });
-  }
-
-  private loadYmlFile(ymlPath: string) {
-    const data = fs.readFileSync(ymlPath, 'utf8');
-    try {
-      return yaml.load(data) || {};
-    } catch (e) {
-      return {};
-    }
   }
 }

@@ -1,14 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`with application.yml 1`] = `
+exports[`with application.json 1`] = `
 Object {
   "application": Object {
-    "host": "prod.app.com",
+    "host": "prod.app.json",
+    "json": true,
     "mongoose": Object {
       "mongoose": Object {
         "url": "mongo://localhost",
       },
     },
+  },
+}
+`;
+
+exports[`with application.json empty 1`] = `Object {}`;
+
+exports[`with application.json with nothing 1`] = `Object {}`;
+
+exports[`with application.yml 1`] = `
+Object {
+  "application": Object {
+    "host": "prod.app.yml",
+    "mongoose": Object {
+      "mongoose": Object {
+        "url": "mongo://localhost",
+      },
+    },
+    "yml": true,
   },
 }
 `;
@@ -49,6 +68,42 @@ exports[`with application.yml with bad handler must throw error 1`] = `[Error: E
 
 exports[`with application.yml with nothing 1`] = `Object {}`;
 
+exports[`with bad application.json 1`] = `Object {}`;
+
 exports[`with bad application.yml 1`] = `Object {}`;
 
+exports[`with bad loader 1`] = `[LoaderConfigPgkNotInstalledError: BadLoader package has not been found installed. Try to install it: npm install BadLoader --save or yarn add BadLoader]`;
+
+exports[`with bad parser 1`] = `[ParserNotSupportedError: The parser "badparser" is not supported by Gabliam]`;
+
 exports[`with config folder doesn't exist 1`] = `Object {}`;
+
+exports[`with json and yml 1`] = `
+Object {
+  "application": Object {
+    "host": "prod.app.yml",
+    "json": true,
+    "mongoose": Object {
+      "mongoose": Object {
+        "url": "mongo://localhost",
+      },
+    },
+    "yml": true,
+  },
+}
+`;
+
+exports[`with yml and json 1`] = `
+Object {
+  "application": Object {
+    "host": "prod.app.json",
+    "json": true,
+    "mongoose": Object {
+      "mongoose": Object {
+        "url": "mongo://localhost",
+      },
+    },
+    "yml": true,
+  },
+}
+`;
