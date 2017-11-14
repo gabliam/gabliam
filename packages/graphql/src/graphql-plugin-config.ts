@@ -11,6 +11,7 @@ import * as d from 'debug';
 const debug = d(`${DEBUG_PATH}:GraphqlPluginConfig`);
 
 export const GraphiqlOptionsValidator = Joi.object().keys({
+  endpointURL: Joi.string(),
   subscriptionsEndpoint: Joi.string(),
   query: Joi.string(),
   variables: Joi.object(),

@@ -7,6 +7,8 @@ export type listControllers = inversifyInterfaces.ServiceIdentifier<any>[];
 export type resolverType = 'Query' | 'Mutation' | 'Subscription';
 
 export interface GraphiqlOptions {
+  endpointURL?: string;
+
   subscriptionsEndpoint?: string;
   query?: string;
   variables?: Object;
