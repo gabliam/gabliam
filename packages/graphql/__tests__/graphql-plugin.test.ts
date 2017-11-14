@@ -14,7 +14,7 @@ describe('with config', () => {
     const g = new GabliamTest(
       new Gabliam({
         scanPath: path.resolve(__dirname, 'gabliam'),
-        configPath: path.resolve(__dirname, 'gabliam')
+        config: path.resolve(__dirname, 'gabliam')
       })
         .addPlugin(ExpressPlugin)
         .addPlugin(GraphqlPlugin)
@@ -42,7 +42,7 @@ describe('without config', () => {
   beforeAll(() => {
     gab = new Gabliam({
       scanPath: path.resolve(__dirname, './fixtures/gabliam'),
-      configPath: path.resolve(__dirname, './fixtures/gabliam/config')
+      config: path.resolve(__dirname, './fixtures/gabliam/config')
     });
     gab.addPlugin(ExpressPlugin).addPlugin(GraphqlPlugin);
   });

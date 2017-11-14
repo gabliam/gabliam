@@ -10,7 +10,7 @@ export class ExpressPluginTest extends GabliamTest {
   constructor() {
     const gab = new Gabliam({
       scanPath: path.resolve(__dirname, 'gabliam'),
-      configPath: path.resolve(__dirname, 'gabliam')
+      config: path.resolve(__dirname, 'gabliam')
     }).addPlugin(ExpressPlugin);
     super(gab);
   }

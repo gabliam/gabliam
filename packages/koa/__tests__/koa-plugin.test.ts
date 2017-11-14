@@ -18,7 +18,7 @@ describe('test plugin', async () => {
       const g = new GabliamTest(
         new Gabliam({
           scanPath: path.resolve(__dirname, 'gabliam'),
-          configPath: path.resolve(__dirname, 'gabliam')
+          config: path.resolve(__dirname, 'gabliam')
         }).addPlugin(KoaPlugin)
       );
       gab = g.gab;
@@ -64,7 +64,7 @@ describe('test plugin', async () => {
     beforeAll(() => {
       gab = new Gabliam({
         scanPath: path.resolve(__dirname, './fixtures/gabliam'),
-        configPath: path.resolve(__dirname, './fixtures/gabliam/config')
+        config: path.resolve(__dirname, './fixtures/gabliam/config')
       });
       gab.addPlugin(KoaPlugin);
     });

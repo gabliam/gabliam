@@ -11,7 +11,7 @@ export class GraphqlPluginTest extends GabliamTest {
   constructor(p = path.resolve(__dirname, 'gabliam')) {
     const gab = new Gabliam({
       scanPath: p,
-      configPath: p
+      config: p
     })
       .addPlugin(ExpressPlugin)
       .addPlugin(GraphqlPlugin);

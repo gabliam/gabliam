@@ -7,7 +7,7 @@ export class TypeormPluginTest extends GabliamTest {
   constructor(p = path.resolve(__dirname, 'gabliam')) {
     const gab = new Gabliam({
       scanPath: p,
-      configPath: p
+      config: p
     }).addPlugin(TypeormPlugin);
     super(gab);
   }

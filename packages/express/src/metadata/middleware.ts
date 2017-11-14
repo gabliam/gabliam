@@ -67,9 +67,9 @@ export function getMiddlewares(
   ): express.RequestHandler {
     try {
       // test if the middleware is a ServiceIdentifier
-      return container.get<
-        express.RequestHandler
-      >(<inversifyInterfaces.ServiceIdentifier<any>>middleware);
+      return container.get<express.RequestHandler>(
+        <inversifyInterfaces.ServiceIdentifier<any>>middleware
+      );
     } catch (e) {
       return <express.RequestHandler>middleware;
     }
