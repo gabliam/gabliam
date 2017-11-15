@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/graphql-express",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "Graphql plugin for gabliam",
   "keywords": [
     "gabliam",
@@ -32,12 +32,12 @@
   "peerDependencies": {
     "@gabliam/core": "^6.0.0",
     "@gabliam/express": "^6.0.0",
-    "@gabliam/graphql-core": "^6.0.0"
+    "@gabliam/graphql-core": "^6.0.1"
   },
   "devDependencies": {
     "@gabliam/core": "^6.0.0",
     "@gabliam/express": "^6.0.0",
-    "@gabliam/graphql-core": "^6.0.0",
+    "@gabliam/graphql-core": "^6.0.1",
     "@types/body-parser": "^1.16.3",
     "@types/debug": "^0.0.30",
     "@types/lodash": "^4.14.64",
