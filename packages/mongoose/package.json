@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/mongoose",
-  "version": "5.1.0",
+  "version": "6.0.0",
   "description": "mongoose plugin for gabliam",
   "keywords": [
     "gabliam",
@@ -29,10 +29,10 @@
   },
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/mongoose#readme",
   "peerDependencies": {
-    "@gabliam/core": "^5.0.0"
+    "@gabliam/core": "^6.0.0"
   },
   "devDependencies": {
-    "@gabliam/core": "^5.0.0",
+    "@gabliam/core": "^6.0.0",
     "@types/debug": "^0.0.30"
   },
   "dependencies": {

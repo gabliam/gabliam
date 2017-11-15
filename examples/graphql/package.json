@@ -1,6 +1,6 @@
 {
   "name": "graphql-sample",
-  "version": "5.1.0",
+  "version": "6.0.0",
   "private": true,
   "description": "sample with decorator",
   "scripts": {
@@ -18,11 +18,11 @@
   },
   "homepage": "https://github.com/gabliam/sample#readme",
   "dependencies": {
-    "@gabliam/core": "^5.0.0",
-    "@gabliam/express": "^5.1.0",
-    "@gabliam/graphql-core": "^5.1.0",
-    "@gabliam/graphql-express": "^5.1.0",
-    "@gabliam/typeorm": "^5.0.0",
+    "@gabliam/core": "^6.0.0",
+    "@gabliam/express": "^6.0.0",
+    "@gabliam/graphql-core": "^6.0.0",
+    "@gabliam/graphql-express": "^6.0.0",
+    "@gabliam/typeorm": "^6.0.0",
     "body-parser": "^1.16.1",
     "helmet": "^3.4.0",
     "lodash": "^4.17.4",
