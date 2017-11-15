@@ -23,7 +23,7 @@
     "@types/jest": "^21.1.2",
     "@types/mock-fs": "^3.6.30",
     "@types/reflect-metadata": "^0.0.5",
-    "@types/sinon": "^2.3.5",
+    "@types/sinon": "^4.0.0",
     "@types/supertest": "^2.0.3",
     "codecov": "^3.0.0",
     "commitizen": "^2.9.6",
