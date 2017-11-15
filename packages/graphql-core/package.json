@@ -39,6 +39,7 @@
     "@types/node": "^8.0.26"
   },
   "dependencies": {
+    "@types/graphql": "^0.11.6",
     "caller": "^1.0.1",
     "debug": "^3.0.1",
     "graphql": "^0.11.7",
