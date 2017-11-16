@@ -9,7 +9,8 @@ import {
   Service,
   Value,
   Plugin,
-  Init
+  Init,
+  InjectContainer
 } from '../src/decorators';
 import { CoreConfig } from '../src/decorators/config';
 import { METADATA_KEY, TYPE } from '../src/constants';
@@ -38,6 +39,21 @@ describe('@init', () => {
     );
 
     expect(initMetadata).toMatchSnapshot();
+  });
+});
+
+describe('@InjectContainer', () => {
+  test('should add InjectContainer metadata to a class when decorating a method with @InjectContainer', () => {
+    @InjectContainer()
+    @Config()
+    class TestBean {}
+
+    const injectMetadata = Reflect.hasMetadata(
+      METADATA_KEY.injectContainer,
+      TestBean
+    );
+
+    expect(injectMetadata).toMatchSnapshot();
   });
 });
 

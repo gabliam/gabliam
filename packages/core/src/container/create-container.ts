@@ -1,6 +1,7 @@
 import { makeLoggerMiddleware } from 'inversify-logger-middleware';
 import { makeValueMiddleware } from './value-middleware';
 import { Container } from './container';
+import { makeInjectMiddleware } from './inject-container-middleware';
 
 /**
  * Create the inversify container
@@ -17,6 +18,7 @@ export function createContainer(): Container {
   }
 
   middlewares.push(makeValueMiddleware(container));
+  middlewares.push(makeInjectMiddleware(container));
   container.applyMiddleware(...middlewares);
   return container;
 }

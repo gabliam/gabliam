@@ -6,3 +6,4 @@ export * from './scan';
 export * from './register';
 export * from './plugin';
 export * from './init';
+export * from './inject-container';

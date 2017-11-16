@@ -90,6 +90,8 @@ Object {
 }
 `;
 
+exports[`@InjectContainer should add InjectContainer metadata to a class when decorating a method with @InjectContainer 1`] = `true`;
+
 exports[`@Plugin should add Plugin metadata to a class when decorated with @Plugin('TestPlugin') 1`] = `
 Object {
   "dependencies": Array [],

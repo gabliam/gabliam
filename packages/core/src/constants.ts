@@ -12,8 +12,14 @@ export const METADATA_KEY = {
   scan: '_scan',
   config: '_config',
   service: '_service',
-  plugin: '_plugin'
+  plugin: '_plugin',
+  injectContainer: '_inject_container'
 };
+
+/**
+ * Inject container key in descriptor
+ */
+export const INJECT_CONTAINER_KEY = '$$container';
 
 export const ORDER_CONFIG = {
   Core: 50,

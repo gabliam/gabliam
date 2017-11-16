@@ -1,7 +1,12 @@
 export * from './interfaces';
 export * from './decorators';
 export * from './gabliam';
-export { APP_CONFIG, CORE_CONFIG, VALUE_EXTRACTOR } from './constants';
+export {
+  APP_CONFIG,
+  CORE_CONFIG,
+  VALUE_EXTRACTOR,
+  INJECT_CONTAINER_KEY
+} from './constants';
 
 export * from './registry';
 export * from './errors';
