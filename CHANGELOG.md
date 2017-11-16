@@ -1,3 +1,34 @@
+<a name="6.0.1"></a>
+## [6.0.1](https://github.com/gabliam/gabliam/compare/v6.0.0...v6.0.1) (2017-11-15)
+
+
+### Features
+
+* **graphql*:** add [@types](https://github.com/types)/graphql ([a0b97f7](https://github.com/gabliam/gabliam/commit/a0b97f7))
+
+
+
+<a name="6.0.0"></a>
+# [6.0.0](https://github.com/gabliam/gabliam/compare/v5.1.0...v6.0.0) (2017-11-15)
+
+
+### Bug Fixes
+
+* **@gabliam/express:** correction import path ([584f9db](https://github.com/gabliam/gabliam/commit/584f9db))
+* **@gabliam/koa:** correction import path ([2c65a2e](https://github.com/gabliam/gabliam/commit/2c65a2e))
+
+
+### Features
+
+* update deps ([f8bc5c3](https://github.com/gabliam/gabliam/commit/f8bc5c3))
+* **@gabliam/core:** add config for config-loader ([a38fe7f](https://github.com/gabliam/gabliam/commit/a38fe7f))
+* **@gabliam/graphql:** graphiql options endpointURL can be overrided ([3ba027c](https://github.com/gabliam/gabliam/commit/3ba027c))
+* **@gabliam/graphql:** rename [@gabliam](https://github.com/gabliam)/graphql to [@gabliam](https://github.com/gabliam)/graphql-express ([2cd981f](https://github.com/gabliam/gabliam/commit/2cd981f))
+* **@gabliam/graphql:** split graphql ([d9b51a7](https://github.com/gabliam/gabliam/commit/d9b51a7))
+* **@gabliam/log4js:** config change ([1cee9e9](https://github.com/gabliam/gabliam/commit/1cee9e9))
+
+
+
 <a name="5.1.0"></a>
 # [5.1.0](https://github.com/gabliam/gabliam/compare/v5.0.0...v5.1.0) (2017-11-07)
 
