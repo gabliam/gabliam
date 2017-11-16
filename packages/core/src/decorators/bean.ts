@@ -48,10 +48,7 @@ export function Bean(id: interfaces.ServiceIdentifier<any>) {
         target.constructor
       );
     } else {
-      metadataList = Reflect.getMetadata(
-        METADATA_KEY.bean,
-        target.constructor
-      );
+      metadataList = Reflect.getMetadata(METADATA_KEY.bean, target.constructor);
     }
 
     metadataList.push(metadata);

@@ -19,10 +19,7 @@ export function Init() {
         target.constructor
       );
     } else {
-      metadataList = Reflect.getMetadata(
-        METADATA_KEY.init,
-        target.constructor
-      );
+      metadataList = Reflect.getMetadata(METADATA_KEY.init, target.constructor);
     }
 
     metadataList.push(metadata);

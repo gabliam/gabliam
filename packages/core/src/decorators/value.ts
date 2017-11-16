@@ -150,10 +150,7 @@ function valueProperty(
       target.constructor
     );
   } else {
-    metadataList = Reflect.getMetadata(
-      METADATA_KEY.value,
-      target.constructor
-    );
+    metadataList = Reflect.getMetadata(METADATA_KEY.value, target.constructor);
   }
 
   metadataList.push(metadata);
