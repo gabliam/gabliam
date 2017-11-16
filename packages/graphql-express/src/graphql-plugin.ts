@@ -7,10 +7,6 @@ import {
 } from '@gabliam/core';
 import { MiddlewareConfig } from '@gabliam/express';
 import {
-  TYPE,
-  DEBUG_PATH
-} from './constants';
-import {
   graphqlExpress,
   graphiqlExpress,
   ExpressGraphQLOptionsFunction
@@ -18,10 +14,10 @@ import {
 import * as bodyParser from 'body-parser';
 import * as d from 'debug';
 import { GraphQLOptions } from 'apollo-server-core';
-import { GraphqlCorePlugin, GraphqlConfig } from '@gabliam/graphql-core';
+import { GraphqlCorePlugin, GraphqlConfig, TYPE } from '@gabliam/graphql-core';
 import { GraphQLSchema } from 'graphql';
 
-const debug = d(DEBUG_PATH);
+const debug = d('Gabliam:Plugin:GraphqlPluginExpress');
 
 @Plugin({ dependencies: [{ name: 'ExpressPlugin', order: 'before' }] })
 @Scan()
