@@ -1,9 +1,9 @@
 [![Build Status][build-image]][build-url]
 [![NPM version][npm-image]][npm-url]
 
-# graphql
+# graphql-express
 
-The express plugin is required. You must add graphql plugin before express plugin.
+The express plugin is required.
 
 
 # License
