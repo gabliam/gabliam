@@ -1,0 +1,50 @@
+{
+  "name": "@gabliam/graphql-koa",
+  "version": "6.0.1",
+  "description": "Graphql plugin for gabliam",
+  "keywords": [
+    "gabliam",
+    "gabliam-plugin",
+    "plugin",
+    "koa",
+    "graphql"
+  ],
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "module": "lib/index.js",
+  "scripts": {
+    "build": "rimraf lib && tsc -p tsconfig.build.json"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabliam/gabliam.git"
+  },
+  "author": "David Touzet <dtouzet@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gabliam/gabliam/issues"
+  },
+  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/graphql-koa#readme",
+  "peerDependencies": {
+    "@gabliam/core": "^6.0.0",
+    "@gabliam/graphql-core": "^6.0.1",
+    "@gabliam/koa": "^6.0.0"
+  },
+  "devDependencies": {
+    "@gabliam/core": "^6.0.0",
+    "@gabliam/graphql-core": "^6.0.1",
+    "@gabliam/koa": "^6.0.0",
+    "@types/debug": "^0.0.30",
+    "@types/koa-bodyparser": "^3.0.26",
+    "@types/node": "^8.0.26"
+  },
+  "dependencies": {
+    "debug": "^3.0.1",
+    "graphql-server-koa": "^1.2.0",
+    "koa-bodyparser": "^4.2.0"
+  }
+}
