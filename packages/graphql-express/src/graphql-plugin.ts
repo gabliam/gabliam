@@ -14,7 +14,7 @@ import {
 import * as bodyParser from 'body-parser';
 import * as d from 'debug';
 import { GraphQLOptions } from 'apollo-server-core';
-import { GraphqlCorePlugin, GraphqlConfig, TYPE } from '@gabliam/graphql-core';
+import { GraphqlCorePlugin, GraphqlConfig } from '@gabliam/graphql-core';
 import { GraphQLSchema } from 'graphql';
 
 const debug = d('Gabliam:Plugin:GraphqlPluginExpress');
@@ -22,16 +22,6 @@ const debug = d('Gabliam:Plugin:GraphqlPluginExpress');
 @Plugin({ dependencies: [{ name: 'ExpressPlugin', order: 'before' }] })
 @Scan()
 export class GraphqlPlugin extends GraphqlCorePlugin implements GabliamPlugin {
-  bind(container: Container, registry: Registry) {
-    registry.get(TYPE.Controller).map(({ id, target }) => {
-      container
-        .bind<any>(id)
-        .to(target)
-        .inSingletonScope();
-      return id;
-    });
-  }
-
   registerMiddleware(
     container: Container,
     registry: Registry,
