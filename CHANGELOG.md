@@ -1,3 +1,21 @@
+<a name="6.1.0"></a>
+# [6.1.0](https://github.com/gabliam/gabliam/compare/v6.0.1...v6.1.0) (2017-11-17)
+
+
+### Bug Fixes
+
+* **@gabliam/graphql-express:** remove lodash dependencies ([657e69e](https://github.com/gabliam/gabliam/commit/657e69e))
+
+
+### Features
+
+* **@gabliam/core:** Add InjectContainer ([2bce53e](https://github.com/gabliam/gabliam/commit/2bce53e))
+* **@gabliam/graphql-core:** now export TYPE from constants ([993e3d2](https://github.com/gabliam/gabliam/commit/993e3d2))
+* **@gabliam/graphql-express:** remove constant file ([d25138f](https://github.com/gabliam/gabliam/commit/d25138f))
+* **@gabliam/graphql-koa:** add graphql with koa ([112e325](https://github.com/gabliam/gabliam/commit/112e325))
+
+
+
 <a name="6.0.1"></a>
 ## [6.0.1](https://github.com/gabliam/gabliam/compare/v6.0.0...v6.0.1) (2017-11-15)
 
