@@ -21,6 +21,7 @@ import {
   PluginMetadata
 } from '../src/interfaces';
 import * as Joi from 'joi';
+import { OnMissingBean } from '../src/index';
 
 describe('@init', () => {
   test('should add init metadata to a class when decorating a method with @init', () => {
@@ -80,6 +81,47 @@ describe('@Bean', () => {
       @Bean('test')
       testMethod() {}
 
+      @Bean('test2')
+      @Bean('test3')
+      test2Method() {}
+    }
+
+    const beanMetadata: BeanMetadata[] = Reflect.getMetadata(
+      METADATA_KEY.bean,
+      TestBean
+    );
+    expect(beanMetadata).toMatchSnapshot();
+  });
+}); // end describe @Bean
+
+describe('@OnMissingBean', () => {
+  test('should add OnMissingBean metadata to a class when decorated with @OnMissingBean', () => {
+    class TestBean {
+      @OnMissingBean('OnMissingBean')
+      @Bean('test')
+      testMethod() {}
+
+      @OnMissingBean('OnMissingBean2')
+      @Bean('test2')
+      test2Method() {}
+    }
+
+    const beanMetadata: BeanMetadata[] = Reflect.getMetadata(
+      METADATA_KEY.bean,
+      TestBean
+    );
+
+    expect(beanMetadata).toMatchSnapshot();
+  });
+
+  test('should add OnMissingBean metadata to a class when decorated multiple times with @OnMissingBean', () => {
+    class TestBean {
+      @OnMissingBean('OnMissingBean')
+      @Bean('test')
+      testMethod() {}
+
+      @OnMissingBean('OnMissingBean1')
+      @OnMissingBean('OnMissingBean2')
       @Bean('test2')
       @Bean('test3')
       test2Method() {}

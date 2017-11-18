@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`@onMissingBean 1`] = `"|constructConf2|Conf2|constructConf|conf1"`;
+
+exports[`@onMissingBean 2 1`] = `"|constructConf|conf1|constructConf2"`;
+
+exports[`@onMissingBean with multiple missing but just one is missing 1`] = `"|constructConf|conf1|constructConf2"`;
+
 exports[`gabliam instance 1`] = `
 Object {
   "application": Object {

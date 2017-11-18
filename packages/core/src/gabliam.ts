@@ -245,6 +245,12 @@ export class Gabliam {
           confInstance.constructor
         );
 
+        const onMissingBeanMetadatas: BeanMetadata[] =
+          Reflect.getMetadata(
+            METADATA_KEY.onMissingBean,
+            confInstance.constructor
+          ) || [];
+
         const initMetadas: string[] = Reflect.getMetadata(
           METADATA_KEY.init,
           confInstance.constructor
@@ -253,12 +259,23 @@ export class Gabliam {
         // If config has bean metadata
         if (Array.isArray(beanMetadatas)) {
           // No promise.all and await because order of beans are important
-          for (const beanMetadata of beanMetadatas) {
-            this.container
-              .bind(beanMetadata.id)
-              .toConstantValue(
-                await callInstance(confInstance, beanMetadata.key)
-              );
+          for (const { id, key } of beanMetadatas) {
+            const onMissingBeans = onMissingBeanMetadatas.filter(
+              m => m.key === key
+            );
+
+            let allMissing = true;
+            for (const onMissingBean of onMissingBeans) {
+              try {
+                this.container.getAll(onMissingBean.id);
+                allMissing = false;
+              } catch {}
+            }
+            if (allMissing) {
+              this.container
+                .bind(id)
+                .toConstantValue(await callInstance(confInstance, key));
+            }
           }
         }
 

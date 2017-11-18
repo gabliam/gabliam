@@ -54,3 +54,30 @@ export function Bean(id: interfaces.ServiceIdentifier<any>) {
     metadataList.push(metadata);
   };
 }
+
+/**
+ * OnMissingBean decorator
+ *
+ * Set a conditionnal create bean
+ */
+export function OnMissingBean(id: interfaces.ServiceIdentifier<any>) {
+  return function(target: any, key: string, descriptor: PropertyDescriptor) {
+    const metadata: BeanMetadata = { id, key };
+    let metadataList: BeanMetadata[] = [];
+
+    if (!Reflect.hasMetadata(METADATA_KEY.onMissingBean, target.constructor)) {
+      Reflect.defineMetadata(
+        METADATA_KEY.onMissingBean,
+        metadataList,
+        target.constructor
+      );
+    } else {
+      metadataList = Reflect.getMetadata(
+        METADATA_KEY.onMissingBean,
+        target.constructor
+      );
+    }
+
+    metadataList.push(metadata);
+  };
+}

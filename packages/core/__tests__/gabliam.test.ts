@@ -9,7 +9,9 @@ import {
   Config,
   Plugin,
   GabliamPlugin,
-  Init
+  Init,
+  Bean,
+  OnMissingBean
 } from '../src';
 import * as path from 'path';
 import { TestService } from './fixtures/gabliam/service';
@@ -270,6 +272,106 @@ test('test init', async () => {
     @Init()
     init() {
       res += '|initConf2';
+    }
+  }
+  const g = new GabliamTest();
+  g.addClass(Conf);
+  g.addClass(Conf2);
+  await g.build();
+  expect(res).toMatchSnapshot();
+});
+
+test('@onMissingBean', async () => {
+  let res = '';
+  @Config(300)
+  class Conf {
+    constructor() {
+      res += '|constructConf';
+    }
+
+    @OnMissingBean('conf1')
+    @Bean('conf1')
+    conf1() {
+      res += '|conf1';
+    }
+  }
+  @Config(200)
+  class Conf2 {
+    constructor() {
+      res += '|constructConf2';
+    }
+
+    @OnMissingBean('conf1')
+    @Bean('conf2')
+    conf2() {
+      res += '|Conf2';
+    }
+  }
+  const g = new GabliamTest();
+  g.addClass(Conf);
+  g.addClass(Conf2);
+  await g.build();
+  expect(res).toMatchSnapshot();
+});
+
+test('@onMissingBean 2', async () => {
+  let res = '';
+  @Config(200)
+  class Conf {
+    constructor() {
+      res += '|constructConf';
+    }
+
+    @OnMissingBean('conf1')
+    @Bean('conf1')
+    conf1() {
+      res += '|conf1';
+    }
+  }
+  @Config(300)
+  class Conf2 {
+    constructor() {
+      res += '|constructConf2';
+    }
+
+    @OnMissingBean('conf1')
+    @Bean('conf2')
+    conf2() {
+      res += '|Conf2';
+    }
+  }
+  const g = new GabliamTest();
+  g.addClass(Conf);
+  g.addClass(Conf2);
+  await g.build();
+  expect(res).toMatchSnapshot();
+});
+
+test('@onMissingBean with multiple missing but just one is missing', async () => {
+  let res = '';
+  @Config(200)
+  class Conf {
+    constructor() {
+      res += '|constructConf';
+    }
+
+    @OnMissingBean('conf1')
+    @Bean('conf1')
+    conf1() {
+      res += '|conf1';
+    }
+  }
+  @Config(300)
+  class Conf2 {
+    constructor() {
+      res += '|constructConf2';
+    }
+
+    @OnMissingBean('conf3')
+    @OnMissingBean('conf1')
+    @Bean('conf2')
+    conf2() {
+      res += '|Conf2';
     }
   }
   const g = new GabliamTest();
