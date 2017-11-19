@@ -13,6 +13,7 @@
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "importHelpers": true
   }
 }

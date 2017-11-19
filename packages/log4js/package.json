@@ -34,6 +34,7 @@
     "@gabliam/core": "^6.1.0"
   },
   "dependencies": {
-    "log4js": "^2.3.3"
+    "log4js": "^2.3.3",
+    "tslib": "^1.8.0"
   }
 }

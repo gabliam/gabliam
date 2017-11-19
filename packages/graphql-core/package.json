@@ -45,6 +45,7 @@
     "graphql": "^0.11.7",
     "graphql-server-module-graphiql": "^1.1.2",
     "graphql-tools": "^2.7.2",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "tslib": "^1.8.0"
   }
 }
