@@ -10,8 +10,7 @@
   },
   "files": [
     "lib",
-    "src",
-    "custom-typings.d.ts"
+    "src"
   ],
   "repository": {
     "type": "git",
