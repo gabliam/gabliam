@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SimpleCacheManager with dynamic and defaultCache must create and return cache 1`] = `
+NoOpCache2 {
+  "name": "test2",
+  "options": Object {
+    "options": "any",
+  },
+}
+`;
+
+exports[`SimpleCacheManager with dynamic and defaultCache must create and return cache 2`] = `
+Array [
+  "test",
+  "test2",
+]
+`;
+
+exports[`SimpleCacheManager with dynamic and defaultCache must return cache 1`] = `
+NoOpCache {
+  "name": "test",
+}
+`;
+
+exports[`SimpleCacheManager with dynamic and defaultCache must return cache 2`] = `
+Array [
+  "test",
+]
+`;
+
+exports[`SimpleCacheManager with dynamic and whitout defaultCache must create and return cache 1`] = `
+NoOpCache {
+  "name": "test2",
+}
+`;
+
+exports[`SimpleCacheManager with dynamic and whitout defaultCache must create and return cache 2`] = `
+Array [
+  "test",
+  "test2",
+]
+`;
+
+exports[`SimpleCacheManager with dynamic and whitout defaultCache must return cache 1`] = `
+NoOpCache {
+  "name": "test",
+}
+`;
+
+exports[`SimpleCacheManager with dynamic and whitout defaultCache must return cache 2`] = `
+Array [
+  "test",
+]
+`;
+
+exports[`SimpleCacheManager without dynamic must return cache 1`] = `
+NoOpCache {
+  "name": "test",
+}
+`;
+
+exports[`SimpleCacheManager without dynamic must return cache 2`] = `
+Array [
+  "test",
+]
+`;
+
+exports[`SimpleCacheManager without dynamic must return undefined 1`] = `undefined`;
+
+exports[`SimpleCacheManager without dynamic must return undefined 2`] = `
+Array [
+  "test",
+]
+`;

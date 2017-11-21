@@ -1,0 +1,43 @@
+{
+  "name": "@gabliam/cache",
+  "version": "6.1.0",
+  "description": "cache plugin for gabliam",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "module": "lib/index.js",
+  "scripts": {
+    "build": "rimraf lib && tsc -p tsconfig.build.json"
+  },
+  "files": [
+    "lib",
+    "src",
+    "custom-typings.d.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabliam/gabliam.git"
+  },
+  "keywords": [
+    "cache",
+    "gabliam"
+  ],
+  "author": "David Touzet <dtouzet@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gabliam/gabliam/issues"
+  },
+  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/cache#readme",
+  "peerDependencies": {
+    "@gabliam/core": "^6.1.0"
+  },
+  "devDependencies": {
+    "@gabliam/core": "^6.1.0",
+    "@types/debug": "^0.0.30",
+    "@types/node": "^8.0.14"
+  },
+  "dependencies": {
+    "debug": "^3.0.1",
+    "lru-cache": "^4.1.1",
+    "tslib": "^1.8.0"
+  }
+}

@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cache 1`] = `"test"`;
+
+exports[`cache 2`] = `
+NoOpCache {
+  "name": "test",
+}
+`;
+
+exports[`cache get & put 1`] = `undefined`;
+
+exports[`cache get & put 2`] = `
+NoOpCache {
+  "name": "test",
+}
+`;
+
+exports[`cache get & put 3`] = `undefined`;
+
+exports[`cache putIfAbsent 1`] = `
+NoOpCache {
+  "name": "test",
+}
+`;
+
+exports[`cache putIfAbsent 2`] = `undefined`;
+
+exports[`cache putIfAbsent 3`] = `undefined`;
+
+exports[`clear 1`] = `
+NoOpCache {
+  "name": "test",
+}
+`;
+
+exports[`clear 2`] = `
+NoOpCache {
+  "name": "test",
+}
+`;
+
+exports[`evict 1`] = `
+NoOpCache {
+  "name": "test",
+}
+`;
