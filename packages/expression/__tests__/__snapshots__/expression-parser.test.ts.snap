@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`expression evaluator compile should compile an expression an return an evaluator 1`] = `1234`;
+
+exports[`expression evaluator locals should refer to the root context 1`] = `
+Object {
+  "myString": "global context",
+}
+`;
+
+exports[`expression evaluator lookups should look up a doubly nested primitive in the context using dot notation 1`] = `true`;
+
+exports[`expression evaluator lookups should look up a doubly nested primitive in the context using dot notation 2`] = `"boolean"`;
+
+exports[`expression evaluator lookups should look up a nested primitive in the context using bracket notation 1`] = `undefined`;
+
+exports[`expression evaluator lookups should look up a nested primitive in the context using bracket notation 2`] = `"undefined"`;
+
+exports[`expression evaluator lookups should look up a nested primitive in the context using bracket notation literal 1`] = `"hi"`;
+
+exports[`expression evaluator lookups should look up a nested primitive in the context using bracket notation literal 2`] = `"string"`;
+
+exports[`expression evaluator lookups should look up a nested primitive in the context using dot notation 1`] = `"hi"`;
+
+exports[`expression evaluator lookups should look up a nested primitive in the context using dot notation 2`] = `"string"`;
+
+exports[`expression evaluator lookups should look up a primitive in the context 1`] = `1`;
+
+exports[`expression evaluator lookups should look up a primitive in the context 2`] = `"number"`;
+
+exports[`expression evaluator lookups should look up a really nested primitive in the context using bracket notation 1`] = `"bye"`;
+
+exports[`expression evaluator lookups should look up a really nested primitive in the context using bracket notation 2`] = `"string"`;
+
+exports[`expression evaluator lookups should return undefined 1`] = `undefined`;
+
+exports[`expression evaluator lookups should return undefined 2`] = `"undefined"`;
+
+exports[`expression evaluator parse primitives should evaluate a boolean 1`] = `true`;
+
+exports[`expression evaluator parse primitives should evaluate a boolean 2`] = `"boolean"`;
+
+exports[`expression evaluator parse primitives should evaluate a boolean 3`] = `false`;
+
+exports[`expression evaluator parse primitives should evaluate a boolean 4`] = `"boolean"`;
+
+exports[`expression evaluator parse primitives should evaluate a number 1`] = `123`;
+
+exports[`expression evaluator parse primitives should evaluate a number 2`] = `"number"`;
+
+exports[`expression evaluator parse primitives should evaluate a number 3`] = `123.4`;
+
+exports[`expression evaluator parse primitives should evaluate a number 4`] = `"number"`;
+
+exports[`expression evaluator parse primitives should evaluate a string 1`] = `"hello world!"`;
+
+exports[`expression evaluator parse primitives should evaluate a string 2`] = `"string"`;
+
+exports[`expression evaluator parse primitives should evaluate a string 3`] = `"hello world!"`;
+
+exports[`expression evaluator parse primitives should evaluate a string 4`] = `"string"`;
+
+exports[`expression evaluator parse primitives should evaluate a string with embedded escaped double quotes 1`] = `"hello world!"`;
+
+exports[`expression evaluator parse primitives should evaluate a string with embedded escaped double quotes 2`] = `"string"`;
+
+exports[`expression evaluator parse primitives should evaluate a string with embedded escaped double quotes 3`] = `"hello world!"`;
+
+exports[`expression evaluator parse primitives should evaluate a string with embedded escaped double quotes 4`] = `"string"`;
+
+exports[`expression evaluator parse primitives should evaluate a string with embedded escaped single quotes 1`] = `"hello world !"`;
+
+exports[`expression evaluator parse primitives should evaluate a string with embedded escaped single quotes 2`] = `"string"`;
+
+exports[`expression evaluator parse primitives should evaluate a string with embedded escaped single quotes 3`] = `"hello world !"`;
+
+exports[`expression evaluator parse primitives should evaluate a string with embedded escaped single quotes 4`] = `"string"`;

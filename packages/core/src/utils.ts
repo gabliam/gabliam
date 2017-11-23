@@ -4,6 +4,7 @@ import { ValueValidator, ValueExtractor } from './interfaces';
 import { ValueValidationError } from './errors';
 import { APP_CONFIG } from './constants';
 import { Container } from './container';
+import { ExpressionParser } from '@gabliam/expression';
 
 /**
  * Validate a value
@@ -45,9 +46,18 @@ export function configureValueExtractor(container: Container): ValueExtractor {
     defaultValue: any,
     validator?: ValueValidator | null
   ): any => {
+    let value = undefined;
+    const config = container.get<object>(APP_CONFIG);
     try {
-      const config = container.get<object>(APP_CONFIG);
-      let value = _.get(config, path, defaultValue);
+      const expression = new ExpressionParser(config).parseExpression(path);
+      value = expression.getValue();
+    } catch {}
+
+    if (value === undefined) {
+      value = _.get(config, path, defaultValue);
+    }
+
+    try {
       if (validator) {
         value = valueValidator(path, value, validator);
       }
