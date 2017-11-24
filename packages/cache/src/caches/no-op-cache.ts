@@ -12,16 +12,17 @@ export class NoOpCache implements Cache {
   getNativeCache(): object {
     return this;
   }
-  get<T>(key: string): T | undefined | null {
-    return undefined;
+  async get<T>(key: string): Promise<T | undefined | null> {
+    return Promise.resolve(undefined);
   }
-  put(key: string, value: any): void {}
-  putIfAbsent<T>(
+  async put(key: string, value: any): Promise<void> {}
+
+  async putIfAbsent<T>(
     key: string,
     value: T | null | undefined
-  ): T | undefined | null {
+  ): Promise<T | undefined | null> {
     return undefined;
   }
-  evict(key: string): void {}
-  clear(): void {}
+  async evict(key: string): Promise<void> {}
+  async clear(): Promise<void> {}
 }

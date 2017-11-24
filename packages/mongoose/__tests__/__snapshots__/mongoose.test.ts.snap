@@ -6,6 +6,8 @@ exports[`Errors with host and database_name and unknown value 1`] = `[Error: Err
 
 exports[`Errors with host without database_name 1`] = `[Error: Error for 'application.mongoose' value{"isJoi":true,"name":"ValidationError","details":[{"message":"\\"value\\" contains [host] without its required peers [database_name]","path":[],"type":"object.and","context":{"present":["host"],"presentWithLabels":["host"],"missing":["database_name"],"missingWithLabels":["database_name"],"label":"value"}}],"_object":{"host":"localhost"}}]`;
 
+exports[`Errors with host without database_name 2`] = `[Error: Error for 'application.mongoose' value{"isJoi":true,"name":"ValidationError","details":[{"message":"\\"value\\" contains [host] without its required peers [database_name]","path":[],"type":"object.and","context":{"present":["host"],"presentWithLabels":["host"],"missing":["database_name"],"missingWithLabels":["database_name"],"label":"value"}}],"_object":{"host":"localhost"}}]`;
+
 exports[`Errors without config folder 1`] = `[TypeError: Cannot read property 'host' of undefined]`;
 
 exports[`with config host & database 1`] = `Array []`;

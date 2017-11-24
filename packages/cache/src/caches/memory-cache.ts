@@ -71,25 +71,25 @@ export class MemoryCache implements Cache {
   getNativeCache(): object {
     return this;
   }
-  get<T>(key: string): T | null | undefined {
+  async get<T>(key: string): Promise<T | null | undefined> {
     return this.cache.get(key);
   }
-  put(key: string, value: any): void {
+  async put(key: string, value: any): Promise<void> {
     this.cache.set(key, value);
   }
-  putIfAbsent<T>(
+  async putIfAbsent<T>(
     key: string,
     value: T | null | undefined
-  ): T | null | undefined {
+  ): Promise<T | null | undefined> {
     if (!this.cache.has(key)) {
       this.cache.set(key, value);
     }
     return this.cache.get(key);
   }
-  evict(key: string): void {
+  async evict(key: string): Promise<void> {
     this.cache.del(key);
   }
-  clear(): void {
+  async clear(): Promise<void> {
     this.cache.reset();
   }
 }

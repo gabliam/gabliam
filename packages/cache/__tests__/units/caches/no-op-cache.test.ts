@@ -11,36 +11,36 @@ test('cache', () => {
   expect(cache.getNativeCache()).toMatchSnapshot();
 });
 
-test('cache get & put', () => {
-  expect(cache.get('test')).toMatchSnapshot();
-  cache.put('test', 'test');
+test('cache get & put', async () => {
+  expect(await cache.get('test')).toMatchSnapshot();
+  await cache.put('test', 'test');
   expect(cache).toMatchSnapshot();
-  expect(cache.get('test')).toMatchSnapshot();
+  expect(await cache.get('test')).toMatchSnapshot();
 });
 
-test('cache putIfAbsent', () => {
-  cache.put('test', 'test');
-  cache.putIfAbsent('test', 'testnew');
-  cache.putIfAbsent('test2', 'test2');
-  cache.putIfAbsent('test3', 'test3');
+test('cache putIfAbsent', async () => {
+  await cache.put('test', 'test');
+  await cache.putIfAbsent('test', 'testnew');
+  await cache.putIfAbsent('test2', 'test2');
+  await cache.putIfAbsent('test3', 'test3');
   expect(cache).toMatchSnapshot();
-  expect(cache.get('test')).toMatchSnapshot();
-  expect(cache.get('test2')).toMatchSnapshot();
+  expect(await cache.get('test')).toMatchSnapshot();
+  expect(await cache.get('test2')).toMatchSnapshot();
 });
 
-test('evict', () => {
-  cache.putIfAbsent('test', 'testnew');
-  cache.putIfAbsent('test2', 'test2');
-  cache.putIfAbsent('test3', 'test3');
+test('evict', async () => {
+  await cache.putIfAbsent('test', 'testnew');
+  await cache.putIfAbsent('test2', 'test2');
+  await cache.putIfAbsent('test3', 'test3');
   expect(cache).toMatchSnapshot();
-  cache.evict('test3');
+  await cache.evict('test3');
 });
 
-test('clear', () => {
-  cache.putIfAbsent('test', 'testnew');
-  cache.putIfAbsent('test2', 'test2');
-  cache.putIfAbsent('test3', 'test3');
+test('clear', async () => {
+  await cache.putIfAbsent('test', 'testnew');
+  await cache.putIfAbsent('test2', 'test2');
+  await cache.putIfAbsent('test3', 'test3');
   expect(cache).toMatchSnapshot();
-  cache.clear();
+  await cache.clear();
   expect(cache).toMatchSnapshot();
 });

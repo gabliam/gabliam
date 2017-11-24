@@ -38,7 +38,7 @@ export interface Cache {
    * @since 4.0
    * @see #get(Object)
    */
-  get<T>(key: string): T | undefined | null;
+  get<T>(key: string): Promise<T | undefined | null>;
 
   /**
    * Associate the specified value with the specified key in this cache.
@@ -47,7 +47,7 @@ export interface Cache {
    * @param key the key with which the specified value is to be associated
    * @param value the value to be associated with the specified key
    */
-  put(key: string, value: any): void;
+  put(key: string, value: any): Promise<void>;
 
   /**
    * Atomically associate the specified value with the specified key in this cache
@@ -78,16 +78,16 @@ export interface Cache {
   putIfAbsent<T>(
     key: string,
     value: T | null | undefined
-  ): T | undefined | null;
+  ): Promise<T | undefined | null>;
 
   /**
    * Evict the mapping for this key from this cache if it is present.
    * @param key the key whose mapping is to be removed from the cache
    */
-  evict(key: string): void;
+  evict(key: string): Promise<void>;
 
   /**
    * Remove all mappings from the cache.
    */
-  clear(): void;
+  clear(): Promise<void>;
 }
