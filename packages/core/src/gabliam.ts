@@ -18,6 +18,7 @@ import {
   ConfigRegistry,
   BeanMetadata
 } from './interfaces';
+import { ExpressionParser } from '../../expression/lib/index';
 
 const debug = d('Gabliam:core');
 
@@ -192,6 +193,9 @@ export class Gabliam {
     this.container
       .bind(VALUE_EXTRACTOR)
       .toConstantValue(configureValueExtractor(this.container));
+    this.container
+      .bind(ExpressionParser)
+      .toConstantValue(new ExpressionParser(config));
   }
 
   /**
