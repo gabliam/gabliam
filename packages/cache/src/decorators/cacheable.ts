@@ -25,6 +25,8 @@ export interface CacheableOptions {
   keyGenerator?: KeyGenerator;
 
   key?: string;
+
+  condition?: string;
 }
 
 function isCacheableOptions(obj: any): obj is CacheableOptions {
@@ -49,14 +51,15 @@ export function Cacheable(
 
     const cacheNames: string[] = [];
     let keyGenerator = defaultKeyGenerator;
-    let key: string | undefined | null;
+    let key: string | undefined;
+    let condition: string | undefined;
     if (isCacheableOptions(value)) {
       if (Array.isArray(value.cacheNames)) {
         cacheNames.push(...value.cacheNames);
       } else {
         cacheNames.push(value.cacheNames);
       }
-      ({ key, keyGenerator = defaultKeyGenerator } = value);
+      ({ key, keyGenerator = defaultKeyGenerator, condition } = value);
     } else {
       if (Array.isArray(value)) {
         cacheNames.push(...value);
@@ -67,7 +70,28 @@ export function Cacheable(
     const method = descriptor.value;
     descriptor.value = async function(...args: any[]) {
       const container: Container = (<any>this)[INJECT_CONTAINER_KEY];
+
       // arguments by default are all arguments
+      let mustCache = (...vals: any[]) => true;
+
+      if (condition !== undefined) {
+        mustCache = (...vals: any[]) => {
+          try {
+            const res = container
+              .get<ExpressionParser>(ExpressionParser)
+              .parseExpression(condition!)
+              .getValue<boolean>({ args: vals });
+            return typeof res === 'boolean' ? res : false;
+          } catch (e) {
+            console.log('error condition', e);
+            return false;
+          }
+        };
+      }
+      if (!mustCache(...args)) {
+        return method.apply(this, args);
+      }
+
       let extractArgs = (...vals: any[]) => vals;
 
       // if a key is passed, create a key
@@ -96,7 +120,7 @@ export function Cacheable(
 
       // cacheKey is undefined so we skip cache
       if (cacheKey === undefined) {
-        method.apply(this, args);
+        return method.apply(this, args);
       }
 
       const cacheManager: CacheManager = container.get<CacheManager>(
@@ -109,9 +133,11 @@ export function Cacheable(
         const cache = cacheManager.getCache(cacheName);
         if (cache) {
           caches.push(cache);
-          const val = await cache.get(cacheKey);
-          if (val !== undefined && result === NO_RESULT) {
-            result = val;
+          if (result === NO_RESULT) {
+            const val = await cache.get(cacheKey);
+            if (val !== undefined) {
+              result = val;
+            }
           }
         }
       }
