@@ -1,4 +1,4 @@
-import { ExpressionParser } from '@gabliam/expression';
+import { ExpressionParser, Expression } from '@gabliam/expression';
 import {
   InjectContainer,
   INJECT_CONTAINER_KEY,
@@ -27,6 +27,14 @@ export interface CacheableOptions {
   key?: string;
 
   condition?: string;
+}
+
+interface CacheConfig {
+  mustCache: (...vals: any[]) => boolean;
+
+  extractArgs: (...vals: any[]) => any;
+
+  caches: Cache[];
 }
 
 function isCacheableOptions(obj: any): obj is CacheableOptions {
@@ -68,77 +76,93 @@ export function Cacheable(
       }
     }
     const method = descriptor.value;
+    let cacheConfig: CacheConfig;
     descriptor.value = async function(...args: any[]) {
       const container: Container = (<any>this)[INJECT_CONTAINER_KEY];
 
-      // arguments by default are all arguments
-      let mustCache = (...vals: any[]) => true;
+      if (!cacheConfig) {
+        // arguments by default are all arguments
+        let mustCache = (...vals: any[]) => true;
 
-      if (condition !== undefined) {
-        mustCache = (...vals: any[]) => {
-          try {
-            const res = container
+        if (condition !== undefined) {
+          mustCache = ((e: Expression) => (...vals: any[]) => {
+            try {
+              const res = container
+                .get<ExpressionParser>(ExpressionParser)
+                .parseExpression(condition!)
+                .getValue<boolean>({ args: vals });
+              return typeof res === 'boolean' ? res : false;
+            } catch (e) {
+              console.log('error condition', e);
+              return false;
+            }
+          })(
+            container
               .get<ExpressionParser>(ExpressionParser)
               .parseExpression(condition!)
-              .getValue<boolean>({ args: vals });
-            return typeof res === 'boolean' ? res : false;
-          } catch (e) {
-            console.log('error condition', e);
-            return false;
+          );
+        }
+
+        let extractArgs = (...vals: any[]) => vals;
+
+        // if a key is passed, create a key
+        if (key) {
+          extractArgs = (...vals: any[]) => {
+            try {
+              let extractedArgs = container
+                .get<ExpressionParser>(ExpressionParser)
+                .parseExpression(key!)
+                .getValue<any>({ args: vals });
+
+              if (extractedArgs) {
+                extractedArgs = Array.isArray(extractedArgs)
+                  ? extractedArgs
+                  : [extractedArgs];
+              }
+              return extractedArgs;
+            } catch (e) {
+              console.error('cache Error', e);
+              return undefined;
+            }
+          };
+        }
+
+        const cacheManager: CacheManager = container.get<CacheManager>(
+          CACHE_MANAGER
+        );
+
+        const caches: Cache[] = [];
+        for (const cacheName of cacheNames) {
+          const cache = cacheManager.getCache(cacheName);
+          if (cache) {
+            caches.push(cache);
           }
+        }
+
+        cacheConfig = {
+          mustCache,
+          extractArgs,
+          caches
         };
       }
-      if (!mustCache(...args)) {
+
+      if (!cacheConfig.mustCache(...args)) {
         return method.apply(this, args);
       }
 
-      let extractArgs = (...vals: any[]) => vals;
-
-      // if a key is passed, create a key
-      if (key) {
-        extractArgs = (...vals: any[]) => {
-          try {
-            let extractedArgs = container
-              .get<ExpressionParser>(ExpressionParser)
-              .parseExpression(key!)
-              .getValue<any>({ args: vals });
-
-            if (extractedArgs) {
-              extractedArgs = Array.isArray(extractedArgs)
-                ? extractedArgs
-                : [extractedArgs];
-            }
-            return extractedArgs;
-          } catch (e) {
-            console.error('cache Error', e);
-            return undefined;
-          }
-        };
-      }
-
-      const cacheKey = keyGenerator(extractArgs(...args));
+      const cacheKey = keyGenerator(cacheConfig.extractArgs(...args));
 
       // cacheKey is undefined so we skip cache
       if (cacheKey === undefined) {
         return method.apply(this, args);
       }
 
-      const cacheManager: CacheManager = container.get<CacheManager>(
-        CACHE_MANAGER
-      );
-
       let result: any = NO_RESULT;
-      const caches: Cache[] = [];
-      for (const cacheName of cacheNames) {
-        const cache = cacheManager.getCache(cacheName);
-        if (cache) {
-          caches.push(cache);
-          if (result === NO_RESULT) {
-            const val = await cache.get(cacheKey);
-            if (val !== undefined) {
-              result = val;
-            }
-          }
+      for (const cache of cacheConfig.caches) {
+        const val = await cache.get(cacheKey);
+        if (val !== undefined && val !== NO_RESULT) {
+          result = val;
+          break;
         }
       }
 
@@ -146,7 +170,7 @@ export function Cacheable(
         result = method.apply(this, args);
       }
 
-      for (const cache of caches) {
+      for (const cache of cacheConfig.caches) {
         await cache.putIfAbsent(cacheKey, result);
       }
 
