@@ -21,6 +21,4 @@ Array [
 
 exports[`with no driver 1`] = `[DriverPackageNotInstalledError: Postgres package has not been found installed. Try to install it: npm install pg --save]`;
 
-exports[`with no driver 2`] = `[DriverPackageNotInstalledError: Postgres package has not been found installed. Try to install it: npm install pg --save]`;
-
 exports[`without config folder 1`] = `[Error: PluginTypeormConfig connectionOptions is mandatory]`;

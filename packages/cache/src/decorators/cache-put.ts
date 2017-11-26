@@ -9,9 +9,8 @@ import {
   CacheConfig,
   createCacheConfig
 } from './cache-options';
-import { NO_RESULT } from '../constant';
 
-export function Cacheable(
+export function CachePut(
   value: string | string[] | CacheOptions
 ): MethodDecorator {
   return function(
@@ -57,21 +56,10 @@ export function Cacheable(
         return method.apply(this, args);
       }
 
-      let result: any = NO_RESULT;
-      for (const cache of cacheConfig.caches) {
-        const val = await cache.get(cacheKey);
-        if (val !== undefined && val !== NO_RESULT) {
-          result = val;
-          break;
-        }
-      }
-
-      if (result === NO_RESULT) {
-        result = method.apply(this, args);
-      }
+      const result = method.apply(this, args);
 
       for (const cache of cacheConfig.caches) {
-        await cache.putIfAbsent(cacheKey, result);
+        await cache.put(cacheKey, result);
       }
 
       return result;

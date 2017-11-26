@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cacheable cache args object 1`] = `"hi test"`;
+
+exports[`cacheable cache args object 2`] = `"hi test"`;
+
+exports[`cacheable cache condition + key 1`] = `"hi test"`;
+
+exports[`cacheable cache condition + key 2`] = `"hi test"`;
+
+exports[`cacheable cache condition + key 3`] = `"hi test"`;
+
+exports[`cacheable cache condition + key 4`] = `"hi test"`;
+
+exports[`cacheable cache condition 1`] = `"hi test"`;
+
+exports[`cacheable cache condition 2`] = `"hi test"`;
+
+exports[`cacheable cache condition 3`] = `"hi test"`;
+
+exports[`cacheable cache key 1`] = `"hi test"`;
+
+exports[`cacheable cache key 2`] = `"hi test"`;
+
+exports[`cacheable cache key 3`] = `"hi test"`;
+
+exports[`cacheable cache muliple cachenames 1`] = `"hi test"`;
+
+exports[`cacheable cache muliple cachenames 2`] = `"hi test"`;
+
+exports[`cacheable cache muliple cachenames 3`] = `"hi test2"`;
+
+exports[`cacheable cache muliple cachenames 4`] = `"hi test2"`;
+
+exports[`cacheable cache muliple cachenames 5`] = `"hi test"`;
+
+exports[`cacheable cache muliple cachenames 6`] = `"hi test"`;
+
+exports[`cacheable cache muliple cachenames 7`] = `"hi test2"`;
+
+exports[`cacheable cache muliple cachenames 8`] = `"hi test2"`;
+
+exports[`cacheable errors Throw error when @Cacheable on a sync method 1`] = `"Cacheable must decorate an async method"`;
+
+exports[`cacheable errors error on condition 1`] = `"hi test test"`;
+
+exports[`cacheable errors error on condition 2`] = `"hi test test"`;
+
+exports[`cacheable errors error on condition 3`] = `"hi test2 test2"`;
+
+exports[`cacheable errors error on key 1`] = `"hi test test"`;
+
+exports[`cacheable errors error on key 2`] = `"hi test test"`;
+
+exports[`cacheable errors error on key 3`] = `"hi test2 test2"`;
+
+exports[`cacheable simple cache 1`] = `"hi test test"`;
+
+exports[`cacheable simple cache 2`] = `"hi test test"`;
+
+exports[`cacheable simple cache 3`] = `"hi test2 test2"`;
