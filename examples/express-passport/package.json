@@ -33,7 +33,7 @@
   "devDependencies": {
     "@types/helmet": "^0.0.37",
     "@types/lokijs": "^1.2.30",
-    "@types/passport": "^0.3.4",
+    "@types/passport": "^0.4.1",
     "@types/passport-local": "^1.0.31",
     "nodemon": "^1.11.0"
   }
