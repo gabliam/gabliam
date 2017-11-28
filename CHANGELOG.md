@@ -1,3 +1,23 @@
+<a name="6.2.0"></a>
+# [6.2.0](https://github.com/gabliam/gabliam/compare/v6.1.0...v6.2.0) (2017-11-28)
+
+
+### Features
+
+* add tslib and add importHelpers ([e8b790c](https://github.com/gabliam/gabliam/commit/e8b790c))
+* **@gabliam/cache:** add @Cacheable decorator ([162556d](https://github.com/gabliam/gabliam/commit/162556d))
+* **@gabliam/cache:** add @CacheEvict ([2672a4c](https://github.com/gabliam/gabliam/commit/2672a4c))
+* **@gabliam/cache:** add cachePut + tests ([4ef5569](https://github.com/gabliam/gabliam/commit/4ef5569))
+* **@gabliam/cache:** add condition in Cacheable ([396917f](https://github.com/gabliam/gabliam/commit/396917f))
+* **@gabliam/cache:** init cache plugin ([a6eccff](https://github.com/gabliam/gabliam/commit/a6eccff))
+* **@gabliam/cache:** refactor for best performance ([9983c00](https://github.com/gabliam/gabliam/commit/9983c00))
+* **@gabliam/core:** @OnMissingBean decorator for creation of bean when another is missing ([665d4b8](https://github.com/gabliam/gabliam/commit/665d4b8))
+* **@gabliam/core:** bind ExpressParser with config ([356efa1](https://github.com/gabliam/gabliam/commit/356efa1))
+* **@gabliam/core:** use expression parser for [@value](https://github.com/value) ([208f496](https://github.com/gabliam/gabliam/commit/208f496))
+* **@gabliam/expression:** begin expression package ([003c93b](https://github.com/gabliam/gabliam/commit/003c93b))
+
+
+
 <a name="6.1.0"></a>
 # [6.1.0](https://github.com/gabliam/gabliam/compare/v6.0.1...v6.1.0) (2017-11-17)
 
