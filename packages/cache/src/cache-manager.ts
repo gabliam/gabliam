@@ -10,7 +10,7 @@ export interface CacheManager {
    * @param name the cache identifier (must not be {@code null})
    * @return the associated cache, or {@code null} if none found
    */
-  getCache(name: string): Cache | undefined;
+  getCache(name: string): Promise<Cache | undefined>;
 
   /**
    * Return a collection of the cache names known by this manager.

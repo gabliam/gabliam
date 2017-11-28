@@ -10,6 +10,8 @@ export interface ConstructableCache {
  * cache methods that return {@code null}).
  */
 export interface Cache {
+  start(): Promise<void>;
+
   /**
    * Return the cache name.
    */

@@ -24,14 +24,14 @@ export interface CacheOptions {
 }
 
 export interface CacheConfig {
-  mustCache: (...vals: any[]) => boolean;
+  passCondition: (...vals: any[]) => boolean;
 
   extractArgs: (...vals: any[]) => any | undefined;
 
   caches: Cache[];
 }
 
-function isCacheOptions(obj: any): obj is CacheOptions {
+export function isCacheOptions(obj: any): obj is CacheOptions {
   return typeof obj === 'object' && obj.hasOwnProperty('cacheNames');
 }
 
@@ -79,16 +79,16 @@ export function extractCacheInternalOptions(
   };
 }
 
-export function createCacheConfig(
+export async function createCacheConfig(
   container: Container,
   cacheInternalOptions: CacheInternalOptions
-): CacheConfig {
+): Promise<CacheConfig> {
   const { cacheNames, condition, key } = cacheInternalOptions;
 
-  let mustCache = (...vals: any[]) => true;
+  let passCondition = (...vals: any[]) => true;
 
   if (condition !== undefined) {
-    mustCache = ((e: Expression) => (...vals: any[]) => {
+    passCondition = ((e: Expression) => (...vals: any[]) => {
       try {
         const res = e.getValue<boolean>({ args: vals });
         return typeof res === 'boolean' ? res : false;
@@ -132,14 +132,14 @@ export function createCacheConfig(
 
   const caches: Cache[] = [];
   for (const cacheName of cacheNames) {
-    const cache = cacheManager.getCache(cacheName);
+    const cache = await cacheManager.getCache(cacheName);
     if (cache) {
       caches.push(cache);
     }
   }
 
   return {
-    mustCache,
+    passCondition,
     extractArgs,
     caches
   };

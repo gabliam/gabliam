@@ -29,13 +29,12 @@ export function CachePut(
     const method = descriptor.value;
     let cacheConfig: CacheConfig;
     descriptor.value = async function(...args: any[]) {
-      const container: Container = (<any>this)[INJECT_CONTAINER_KEY];
-
       if (!cacheConfig) {
-        cacheConfig = createCacheConfig(container, cacheInternalOptions);
+        const container: Container = (<any>this)[INJECT_CONTAINER_KEY];
+        cacheConfig = await createCacheConfig(container, cacheInternalOptions);
       }
 
-      if (!cacheConfig.mustCache(...args)) {
+      if (!cacheConfig.passCondition(...args)) {
         return method.apply(this, args);
       }
 
@@ -56,7 +55,7 @@ export function CachePut(
         return method.apply(this, args);
       }
 
-      const result = method.apply(this, args);
+      const result = await method.apply(this, args);
 
       for (const cache of cacheConfig.caches) {
         await cache.put(cacheKey, result);

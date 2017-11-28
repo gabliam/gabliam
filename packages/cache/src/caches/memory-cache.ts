@@ -58,11 +58,14 @@ export interface MemoryCacheOptions<K = any, V = any> {
 export class MemoryCache implements Cache {
   private name: string;
 
-  private cache: any;
+  private store: any;
 
-  constructor(name: string, options?: MemoryCacheOptions) {
+  constructor(name: string, private options?: MemoryCacheOptions) {
     this.name = name;
-    this.cache = LRU(options);
+  }
+
+  async start() {
+    this.store = LRU(this.options);
   }
 
   getName(): string {
@@ -72,24 +75,24 @@ export class MemoryCache implements Cache {
     return this;
   }
   async get<T>(key: string): Promise<T | null | undefined> {
-    return this.cache.get(key);
+    return this.store.get(key);
   }
   async put(key: string, value: any): Promise<void> {
-    this.cache.set(key, value);
+    this.store.set(key, value);
   }
   async putIfAbsent<T>(
     key: string,
     value: T | null | undefined
   ): Promise<T | null | undefined> {
-    if (!this.cache.has(key)) {
-      this.cache.set(key, value);
+    if (!this.store.has(key)) {
+      this.store.set(key, value);
     }
-    return this.cache.get(key);
+    return this.store.get(key);
   }
   async evict(key: string): Promise<void> {
-    this.cache.del(key);
+    this.store.del(key);
   }
   async clear(): Promise<void> {
-    this.cache.reset();
+    this.store.reset();
   }
 }

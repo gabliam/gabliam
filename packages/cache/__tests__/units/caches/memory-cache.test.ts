@@ -2,8 +2,9 @@ import { MemoryCache } from '../../../src/index';
 
 let cache: MemoryCache;
 
-beforeEach(() => {
+beforeEach(async () => {
   cache = new MemoryCache('test');
+  await cache.start();
 });
 
 test('cache', () => {

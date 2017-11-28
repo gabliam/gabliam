@@ -6,6 +6,7 @@ import {
   CachePut
 } from '../../src/index';
 import { Bean, Config, Service } from '@gabliam/core';
+import { CacheEvict } from '../../src/decorators/cache-evict';
 
 let g: GabliamTest;
 let cache: SimpleCacheManager;
@@ -24,7 +25,7 @@ beforeEach(async () => {
   g.addClass(CacheConfig);
 });
 
-describe('cache put', async () => {
+describe('cache evict', async () => {
   test('simple cache', async () => {
     @Service()
     class TestService {
@@ -32,6 +33,9 @@ describe('cache put', async () => {
       async hi(surname: string, name: string) {
         return `hi ${surname} ${name}`;
       }
+
+      @CacheEvict('hi')
+      async evicthi(surname: string, name: string) {}
     }
     g.addClass(TestService);
     await g.build();
@@ -40,7 +44,7 @@ describe('cache put', async () => {
     expect(await s.hi('test', 'test')).toMatchSnapshot();
     expect(await s.hi('test', 'test')).toMatchSnapshot();
     expect(await cache.getCache('hi')).toMatchSnapshot();
-    expect(await s.hi('test2', 'test2')).toMatchSnapshot();
+    expect(await s.evicthi('test', 'test')).toMatchSnapshot();
     expect(await cache.getCache('hi')).toMatchSnapshot();
   });
 
@@ -51,6 +55,9 @@ describe('cache put', async () => {
       async hi(name: string) {
         return `hi ${name}`;
       }
+
+      @CacheEvict(['hi', 'hi2'])
+      async evicthi(name: string) {}
     }
     g.addClass(TestService);
     await g.build();
@@ -60,18 +67,21 @@ describe('cache put', async () => {
     expect(await s.hi('test')).toMatchSnapshot();
     expect(await cache.getCache('hi')).toMatchSnapshot();
     expect(await cache.getCache('hi2')).toMatchSnapshot();
-    expect(await s.hi('test2')).toMatchSnapshot();
+    expect(await s.evicthi('test2')).toMatchSnapshot();
     expect(await cache.getCache('hi')).toMatchSnapshot();
     expect(await cache.getCache('hi2')).toMatchSnapshot();
   });
 
-  test('cache muliple cachenames', async () => {
+  test('cache muliple cachenames 2', async () => {
     @Service()
     class TestService {
       @CachePut({ cacheNames: ['hi', 'hi2'] })
       async hi(name: string) {
         return `hi ${name}`;
       }
+
+      @CacheEvict({ cacheNames: ['hi', 'hi2'] })
+      async evicthi(name: string) {}
     }
     g.addClass(TestService);
     await g.build();
@@ -81,7 +91,7 @@ describe('cache put', async () => {
     expect(await s.hi('test')).toMatchSnapshot();
     expect(await cache.getCache('hi')).toMatchSnapshot();
     expect(await cache.getCache('hi2')).toMatchSnapshot();
-    expect(await s.hi('test2')).toMatchSnapshot();
+    expect(await s.evicthi('test2')).toMatchSnapshot();
     expect(await cache.getCache('hi')).toMatchSnapshot();
     expect(await cache.getCache('hi2')).toMatchSnapshot();
   });
@@ -93,6 +103,9 @@ describe('cache put', async () => {
       async hi(user: { name: string }) {
         return `hi ${user.name}`;
       }
+
+      @CacheEvict({ cacheNames: ['hi', 'hi2'] })
+      async hiEvict(user: { name: string }) {}
     }
     g.addClass(TestService);
     await g.build();
@@ -100,6 +113,8 @@ describe('cache put', async () => {
     const s = g.gab.container.get(TestService);
     expect(await s.hi({ name: 'test' })).toMatchSnapshot();
     expect(await s.hi({ name: 'test' })).toMatchSnapshot();
+    expect(await cache.getCache('hi')).toMatchSnapshot();
+    expect(await s.hiEvict({ name: 'test' })).toMatchSnapshot();
     expect(await cache.getCache('hi')).toMatchSnapshot();
   });
 
@@ -110,6 +125,9 @@ describe('cache put', async () => {
       async hi(user: { name: string; id: number }) {
         return `hi ${user.name}`;
       }
+
+      @CacheEvict({ cacheNames: ['hi'], key: '$args[0].id' })
+      async hiEvict(user: { name: string; id: number }) {}
     }
 
     g.addClass(TestService);
@@ -119,17 +137,20 @@ describe('cache put', async () => {
     expect(await s.hi({ name: 'test', id: 1 })).toMatchSnapshot();
     expect(await s.hi({ name: 'test', id: 2 })).toMatchSnapshot();
     expect(await cache.getCache('hi')).toMatchSnapshot();
-    expect(await s.hi({ name: 'test', id: 1 })).toMatchSnapshot();
+    expect(await s.hiEvict({ name: 'test', id: 1 })).toMatchSnapshot();
     expect(await cache.getCache('hi')).toMatchSnapshot();
   });
 
   test('cache condition', async () => {
     @Service()
     class TestService {
-      @CachePut({ cacheNames: ['hi'], condition: '$args[0].id !== 1' })
+      @CachePut({ cacheNames: ['hi'] })
       async hi(user: { name: string; id: number }) {
         return `hi ${user.name}`;
       }
+
+      @CacheEvict({ cacheNames: ['hi'], condition: '$args[0].id !== 1' })
+      async hiEvict(user: { name: string; id: number }) {}
     }
 
     g.addClass(TestService);
@@ -139,7 +160,9 @@ describe('cache put', async () => {
     expect(await s.hi({ name: 'test', id: 1 })).toMatchSnapshot();
     expect(await s.hi({ name: 'test', id: 2 })).toMatchSnapshot();
     expect(await cache.getCache('hi')).toMatchSnapshot();
-    expect(await s.hi({ name: 'test', id: 1 })).toMatchSnapshot();
+    expect(await s.hiEvict({ name: 'test', id: 1 })).toMatchSnapshot();
+    expect(await cache.getCache('hi')).toMatchSnapshot();
+    expect(await s.hiEvict({ name: 'test', id: 2 })).toMatchSnapshot();
     expect(await cache.getCache('hi')).toMatchSnapshot();
   });
 
@@ -148,32 +171,69 @@ describe('cache put', async () => {
     class TestService {
       @CachePut({
         cacheNames: 'hi',
-        condition: '$args[0].id !== 1',
         key: '$args[0].name'
       })
       async hi(user: { name: string; id: number }) {
         return `hi ${user.name}`;
       }
+
+      @CacheEvict({
+        cacheNames: 'hi',
+        condition: '$args[0].id !== 1',
+        key: '$args[0].name'
+      })
+      async hiEvict(user: { name: string; id: number }) {}
     }
 
     g.addClass(TestService);
     await g.build();
 
     const s = g.gab.container.get(TestService);
-    expect(await s.hi({ name: 'test', id: 1 })).toMatchSnapshot();
-    expect(await s.hi({ name: 'test', id: 2 })).toMatchSnapshot();
-    expect(await s.hi({ name: 'test', id: 3 })).toMatchSnapshot();
+    expect(await s.hi({ name: 'test1', id: 1 })).toMatchSnapshot();
+    expect(await s.hi({ name: 'test2', id: 2 })).toMatchSnapshot();
+    expect(await s.hi({ name: 'test3', id: 3 })).toMatchSnapshot();
     expect(await cache.getCache('hi')).toMatchSnapshot();
-    expect(await s.hi({ name: 'test', id: 4 })).toMatchSnapshot();
+    expect(await s.hiEvict({ name: 'test3', id: 3 })).toMatchSnapshot();
+    expect(await cache.getCache('hi')).toMatchSnapshot();
+  });
+
+  test('all entries', async () => {
+    @Service()
+    class TestService {
+      @CachePut({
+        cacheNames: 'hi',
+        key: '$args[0].name'
+      })
+      async hi(user: { name: string; id: number }) {
+        return `hi ${user.name}`;
+      }
+
+      @CacheEvict({
+        cacheNames: 'hi',
+        allEntries: true,
+        beforeInvocation: true
+      })
+      async clearAll() {}
+    }
+
+    g.addClass(TestService);
+    await g.build();
+
+    const s = g.gab.container.get(TestService);
+    expect(await s.hi({ name: 'test1', id: 1 })).toMatchSnapshot();
+    expect(await s.hi({ name: 'test2', id: 2 })).toMatchSnapshot();
+    expect(await s.hi({ name: 'test3', id: 3 })).toMatchSnapshot();
+    expect(await cache.getCache('hi')).toMatchSnapshot();
+    expect(await s.clearAll()).toMatchSnapshot();
     expect(await cache.getCache('hi')).toMatchSnapshot();
   });
 
   describe('errors', () => {
-    test('Throw error when @CachePut on a sync method', async () => {
+    test('Throw error when @CacheEvict on a sync method', async () => {
       expect(() => {
         @Service()
         class TestService {
-          @CachePut({
+          @CacheEvict({
             cacheNames: 'hi',
             condition: '$args[0].id !== 1',
             key: '$args[0].name'
@@ -190,7 +250,7 @@ describe('cache put', async () => {
     test('error on condition', async () => {
       @Service()
       class TestService {
-        @CachePut({ cacheNames: 'hi', condition: 'const test = lol' })
+        @CacheEvict({ cacheNames: 'hi', condition: 'const test = lol' })
         async hi(surname: string, name: string) {
           return `hi ${surname} ${name}`;
         }
@@ -209,7 +269,7 @@ describe('cache put', async () => {
     test('error on key', async () => {
       @Service()
       class TestService {
-        @CachePut({ cacheNames: 'hi', key: '{const test = lol}' })
+        @CacheEvict({ cacheNames: 'hi', key: '{const test = lol}' })
         async hi(surname: string, name: string) {
           return `hi ${surname} ${name}`;
         }

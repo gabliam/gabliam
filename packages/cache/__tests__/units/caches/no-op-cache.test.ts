@@ -2,8 +2,9 @@ import { NoOpCache } from '../../../src/index';
 
 let cache: NoOpCache;
 
-beforeEach(() => {
+beforeEach(async () => {
   cache = new NoOpCache('test');
+  await cache.start();
 });
 
 test('cache', () => {

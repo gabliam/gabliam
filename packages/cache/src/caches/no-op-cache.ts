@@ -3,9 +3,12 @@ import { Cache } from '../cache';
 export class NoOpCache implements Cache {
   private name: string;
 
-  constructor(name: string) {
+  constructor(name: string, options?: object) {
     this.name = name;
   }
+
+  async start() {}
+
   getName(): string {
     return this.name;
   }

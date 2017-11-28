@@ -4,7 +4,9 @@ exports[`cache 1`] = `"test"`;
 
 exports[`cache 2`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "test",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -19,7 +21,6 @@ MemoryCache {
     },
     Symbol(length): 0,
   },
-  "name": "test",
 }
 `;
 
@@ -27,7 +28,9 @@ exports[`cache get & put 1`] = `undefined`;
 
 exports[`cache get & put 2`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "test",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -81,7 +84,6 @@ MemoryCache {
     },
     Symbol(length): 1,
   },
-  "name": "test",
 }
 `;
 
@@ -89,7 +91,9 @@ exports[`cache get & put 3`] = `"test"`;
 
 exports[`cache putIfAbsent 1`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "test",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -419,7 +423,6 @@ MemoryCache {
     },
     Symbol(length): 3,
   },
-  "name": "test",
 }
 `;
 
@@ -429,7 +432,9 @@ exports[`cache putIfAbsent 3`] = `"test2"`;
 
 exports[`clear 1`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "test",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -759,13 +764,14 @@ MemoryCache {
     },
     Symbol(length): 3,
   },
-  "name": "test",
 }
 `;
 
 exports[`clear 2`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "test",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -780,13 +786,14 @@ MemoryCache {
     },
     Symbol(length): 0,
   },
-  "name": "test",
 }
 `;
 
 exports[`evict 1`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "test",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -1116,6 +1123,5 @@ MemoryCache {
     },
     Symbol(length): 3,
   },
-  "name": "test",
 }
 `;

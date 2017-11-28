@@ -6,7 +6,9 @@ exports[`cache put cache args object 2`] = `"hi test"`;
 
 exports[`cache put cache args object 3`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "hi",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -27,7 +29,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
@@ -41,7 +43,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
       "length": 1,
@@ -54,13 +56,12 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
     Symbol(length): 1,
   },
-  "name": "hi",
 }
 `;
 
@@ -72,7 +73,9 @@ exports[`cache put cache condition + key 3`] = `"hi test"`;
 
 exports[`cache put cache condition + key 4`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "hi",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -93,7 +96,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
@@ -107,7 +110,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
       "length": 1,
@@ -120,13 +123,12 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
     Symbol(length): 1,
   },
-  "name": "hi",
 }
 `;
 
@@ -134,7 +136,9 @@ exports[`cache put cache condition + key 5`] = `"hi test"`;
 
 exports[`cache put cache condition + key 6`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "hi",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -155,7 +159,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
@@ -169,7 +173,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
       "length": 1,
@@ -182,13 +186,12 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
     Symbol(length): 1,
   },
-  "name": "hi",
 }
 `;
 
@@ -198,7 +201,9 @@ exports[`cache put cache condition 2`] = `"hi test"`;
 
 exports[`cache put cache condition 3`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "hi",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -219,7 +224,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
@@ -233,7 +238,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
       "length": 1,
@@ -246,13 +251,12 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
     Symbol(length): 1,
   },
-  "name": "hi",
 }
 `;
 
@@ -260,7 +264,9 @@ exports[`cache put cache condition 4`] = `"hi test"`;
 
 exports[`cache put cache condition 5`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "hi",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -281,7 +287,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
@@ -295,7 +301,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
       "length": 1,
@@ -308,13 +314,12 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
     Symbol(length): 1,
   },
-  "name": "hi",
 }
 `;
 
@@ -324,7 +329,9 @@ exports[`cache put cache key 2`] = `"hi test"`;
 
 exports[`cache put cache key 3`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "hi",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -343,7 +350,7 @@ MemoryCache {
               "length": 1,
               "maxAge": 0,
               "now": 0,
-              "value": Promise {},
+              "value": "hi test",
             },
           },
           "length": 2,
@@ -363,7 +370,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test",
           },
         },
         "value": Entry {
@@ -371,7 +378,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
       "2" => Node {
@@ -387,7 +394,7 @@ MemoryCache {
               "length": 1,
               "maxAge": 0,
               "now": 0,
-              "value": Promise {},
+              "value": "hi test",
             },
           },
         },
@@ -404,7 +411,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test",
           },
         },
         "prev": null,
@@ -413,7 +420,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
@@ -429,7 +436,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test",
           },
         },
         "prev": null,
@@ -438,7 +445,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
       "length": 2,
@@ -454,7 +461,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test",
           },
         },
         "value": Entry {
@@ -462,13 +469,12 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
     Symbol(length): 2,
   },
-  "name": "hi",
 }
 `;
 
@@ -476,7 +482,9 @@ exports[`cache put cache key 4`] = `"hi test"`;
 
 exports[`cache put cache key 5`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "hi",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -497,7 +505,7 @@ MemoryCache {
               "length": 1,
               "maxAge": 0,
               "now": 0,
-              "value": Promise {},
+              "value": "hi test",
             },
           },
         },
@@ -514,7 +522,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test",
           },
         },
         "prev": null,
@@ -523,7 +531,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
       "2" => Node {
@@ -537,7 +545,7 @@ MemoryCache {
               "length": 1,
               "maxAge": 0,
               "now": 0,
-              "value": Promise {},
+              "value": "hi test",
             },
           },
           "length": 2,
@@ -557,7 +565,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test",
           },
         },
         "value": Entry {
@@ -565,7 +573,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
@@ -581,7 +589,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test",
           },
         },
         "prev": null,
@@ -590,7 +598,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
       "length": 2,
@@ -606,7 +614,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test",
           },
         },
         "value": Entry {
@@ -614,13 +622,12 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
     Symbol(length): 2,
   },
-  "name": "hi",
 }
 `;
 
@@ -630,7 +637,9 @@ exports[`cache put cache muliple cachenames 2`] = `"hi test"`;
 
 exports[`cache put cache muliple cachenames 3`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "hi",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -651,7 +660,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
@@ -665,7 +674,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
       "length": 1,
@@ -678,19 +687,20 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
     Symbol(length): 1,
   },
-  "name": "hi",
 }
 `;
 
 exports[`cache put cache muliple cachenames 4`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "hi2",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -711,7 +721,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
@@ -725,7 +735,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
       "length": 1,
@@ -738,13 +748,12 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
     Symbol(length): 1,
   },
-  "name": "hi2",
 }
 `;
 
@@ -752,7 +761,9 @@ exports[`cache put cache muliple cachenames 5`] = `"hi test2"`;
 
 exports[`cache put cache muliple cachenames 6`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "hi",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -771,7 +782,7 @@ MemoryCache {
               "length": 1,
               "maxAge": 0,
               "now": 0,
-              "value": Promise {},
+              "value": "hi test2",
             },
           },
           "length": 2,
@@ -791,7 +802,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test2",
           },
         },
         "value": Entry {
@@ -799,7 +810,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
       "test2" => Node {
@@ -815,7 +826,7 @@ MemoryCache {
               "length": 1,
               "maxAge": 0,
               "now": 0,
-              "value": Promise {},
+              "value": "hi test",
             },
           },
         },
@@ -832,7 +843,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test",
           },
         },
         "prev": null,
@@ -841,7 +852,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test2",
         },
       },
     },
@@ -857,7 +868,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test",
           },
         },
         "prev": null,
@@ -866,7 +877,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test2",
         },
       },
       "length": 2,
@@ -882,7 +893,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test2",
           },
         },
         "value": Entry {
@@ -890,19 +901,20 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
     Symbol(length): 2,
   },
-  "name": "hi",
 }
 `;
 
 exports[`cache put cache muliple cachenames 7`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "hi2",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -921,7 +933,7 @@ MemoryCache {
               "length": 1,
               "maxAge": 0,
               "now": 0,
-              "value": Promise {},
+              "value": "hi test2",
             },
           },
           "length": 2,
@@ -941,7 +953,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test2",
           },
         },
         "value": Entry {
@@ -949,7 +961,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
       "test2" => Node {
@@ -965,7 +977,7 @@ MemoryCache {
               "length": 1,
               "maxAge": 0,
               "now": 0,
-              "value": Promise {},
+              "value": "hi test",
             },
           },
         },
@@ -982,7 +994,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test",
           },
         },
         "prev": null,
@@ -991,7 +1003,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test2",
         },
       },
     },
@@ -1007,7 +1019,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test",
           },
         },
         "prev": null,
@@ -1016,7 +1028,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test2",
         },
       },
       "length": 2,
@@ -1032,7 +1044,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test2",
           },
         },
         "value": Entry {
@@ -1040,13 +1052,12 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
     Symbol(length): 2,
   },
-  "name": "hi2",
 }
 `;
 
@@ -1056,7 +1067,9 @@ exports[`cache put cache muliple cachenames 9`] = `"hi test"`;
 
 exports[`cache put cache muliple cachenames 10`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "hi",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -1077,7 +1090,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
@@ -1091,7 +1104,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
       "length": 1,
@@ -1104,19 +1117,20 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
     Symbol(length): 1,
   },
-  "name": "hi",
 }
 `;
 
 exports[`cache put cache muliple cachenames 11`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "hi2",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -1137,7 +1151,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
@@ -1151,7 +1165,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
       "length": 1,
@@ -1164,13 +1178,12 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
     Symbol(length): 1,
   },
-  "name": "hi2",
 }
 `;
 
@@ -1178,7 +1191,9 @@ exports[`cache put cache muliple cachenames 12`] = `"hi test2"`;
 
 exports[`cache put cache muliple cachenames 13`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "hi",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -1197,7 +1212,7 @@ MemoryCache {
               "length": 1,
               "maxAge": 0,
               "now": 0,
-              "value": Promise {},
+              "value": "hi test2",
             },
           },
           "length": 2,
@@ -1217,7 +1232,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test2",
           },
         },
         "value": Entry {
@@ -1225,7 +1240,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
       "test2" => Node {
@@ -1241,7 +1256,7 @@ MemoryCache {
               "length": 1,
               "maxAge": 0,
               "now": 0,
-              "value": Promise {},
+              "value": "hi test",
             },
           },
         },
@@ -1258,7 +1273,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test",
           },
         },
         "prev": null,
@@ -1267,7 +1282,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test2",
         },
       },
     },
@@ -1283,7 +1298,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test",
           },
         },
         "prev": null,
@@ -1292,7 +1307,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test2",
         },
       },
       "length": 2,
@@ -1308,7 +1323,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test2",
           },
         },
         "value": Entry {
@@ -1316,19 +1331,20 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
     Symbol(length): 2,
   },
-  "name": "hi",
 }
 `;
 
 exports[`cache put cache muliple cachenames 14`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "hi2",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -1347,7 +1363,7 @@ MemoryCache {
               "length": 1,
               "maxAge": 0,
               "now": 0,
-              "value": Promise {},
+              "value": "hi test2",
             },
           },
           "length": 2,
@@ -1367,7 +1383,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test2",
           },
         },
         "value": Entry {
@@ -1375,7 +1391,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
       "test2" => Node {
@@ -1391,7 +1407,7 @@ MemoryCache {
               "length": 1,
               "maxAge": 0,
               "now": 0,
-              "value": Promise {},
+              "value": "hi test",
             },
           },
         },
@@ -1408,7 +1424,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test",
           },
         },
         "prev": null,
@@ -1417,7 +1433,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test2",
         },
       },
     },
@@ -1433,7 +1449,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test",
           },
         },
         "prev": null,
@@ -1442,7 +1458,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test2",
         },
       },
       "length": 2,
@@ -1458,7 +1474,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test2",
           },
         },
         "value": Entry {
@@ -1466,13 +1482,12 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test",
         },
       },
     },
     Symbol(length): 2,
   },
-  "name": "hi2",
 }
 `;
 
@@ -1484,7 +1499,9 @@ exports[`cache put errors error on condition 2`] = `"hi test test"`;
 
 exports[`cache put errors error on condition 3`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "hi",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -1499,7 +1516,6 @@ MemoryCache {
     },
     Symbol(length): 0,
   },
-  "name": "hi",
 }
 `;
 
@@ -1507,7 +1523,9 @@ exports[`cache put errors error on condition 4`] = `"hi test2 test2"`;
 
 exports[`cache put errors error on condition 5`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "hi",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -1522,7 +1540,6 @@ MemoryCache {
     },
     Symbol(length): 0,
   },
-  "name": "hi",
 }
 `;
 
@@ -1532,7 +1549,9 @@ exports[`cache put errors error on key 2`] = `"hi test test"`;
 
 exports[`cache put errors error on key 3`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "hi",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -1547,7 +1566,6 @@ MemoryCache {
     },
     Symbol(length): 0,
   },
-  "name": "hi",
 }
 `;
 
@@ -1555,7 +1573,9 @@ exports[`cache put errors error on key 4`] = `"hi test2 test2"`;
 
 exports[`cache put errors error on key 5`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "hi",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -1570,7 +1590,6 @@ MemoryCache {
     },
     Symbol(length): 0,
   },
-  "name": "hi",
 }
 `;
 
@@ -1580,7 +1599,9 @@ exports[`cache put simple cache 2`] = `"hi test test"`;
 
 exports[`cache put simple cache 3`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "hi",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -1601,7 +1622,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test test",
         },
       },
     },
@@ -1615,7 +1636,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test test",
         },
       },
       "length": 1,
@@ -1628,13 +1649,12 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test test",
         },
       },
     },
     Symbol(length): 1,
   },
-  "name": "hi",
 }
 `;
 
@@ -1642,7 +1662,9 @@ exports[`cache put simple cache 4`] = `"hi test2 test2"`;
 
 exports[`cache put simple cache 5`] = `
 MemoryCache {
-  "cache": LRUCache {
+  "name": "hi",
+  "options": undefined,
+  "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
     Symbol(allowStale): false,
@@ -1661,7 +1683,7 @@ MemoryCache {
               "length": 1,
               "maxAge": 0,
               "now": 0,
-              "value": Promise {},
+              "value": "hi test2 test2",
             },
           },
           "length": 2,
@@ -1681,7 +1703,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test2 test2",
           },
         },
         "value": Entry {
@@ -1689,7 +1711,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test test",
         },
       },
       "test2test2" => Node {
@@ -1705,7 +1727,7 @@ MemoryCache {
               "length": 1,
               "maxAge": 0,
               "now": 0,
-              "value": Promise {},
+              "value": "hi test test",
             },
           },
         },
@@ -1722,7 +1744,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test test",
           },
         },
         "prev": null,
@@ -1731,7 +1753,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test2 test2",
         },
       },
     },
@@ -1747,7 +1769,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test test",
           },
         },
         "prev": null,
@@ -1756,7 +1778,7 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test2 test2",
         },
       },
       "length": 2,
@@ -1772,7 +1794,7 @@ MemoryCache {
             "length": 1,
             "maxAge": 0,
             "now": 0,
-            "value": Promise {},
+            "value": "hi test2 test2",
           },
         },
         "value": Entry {
@@ -1780,12 +1802,11 @@ MemoryCache {
           "length": 1,
           "maxAge": 0,
           "now": 0,
-          "value": Promise {},
+          "value": "hi test test",
         },
       },
     },
     Symbol(length): 2,
   },
-  "name": "hi",
 }
 `;

@@ -3,6 +3,7 @@ import { Cache, ConstructableCache } from './cache';
 import { NoOpCache } from './caches/no-op-cache';
 
 export class SimpleCacheManager implements CacheManager {
+  private startedCache: Map<string, boolean> = new Map();
   constructor(
     private cacheMap: Map<string, Cache>,
     private dynamic: boolean,
@@ -10,12 +11,23 @@ export class SimpleCacheManager implements CacheManager {
     private defaultOptionsCache?: object
   ) {}
 
-  getCache(name: string) {
+  async getCache(name: string) {
     if (!this.cacheMap.has(name) && this.dynamic) {
       this.cacheMap.set(name, this.constructCache(name));
     }
 
-    return this.cacheMap.get(name);
+    const cache = this.cacheMap.get(name);
+
+    if (!cache) {
+      return cache;
+    }
+
+    if (!this.startedCache.has(name)) {
+      await cache.start();
+      this.startedCache.set(name, true);
+    }
+
+    return cache;
   }
   getCacheNames() {
     const names: string[] = [];

@@ -22,7 +22,7 @@ beforeEach(async () => {
   g.addClass(CacheConfig);
 });
 
-describe.skip('cacheable', async () => {
+describe('cacheable', async () => {
   test('simple cache', async () => {
     let call = 0;
 
@@ -218,7 +218,7 @@ describe.skip('cacheable', async () => {
       let call = 0;
       @Service()
       class TestService {
-        @Cacheable({ cacheNames: 'hi', condition: 'const test = lol'})
+        @Cacheable({ cacheNames: 'hi', condition: 'const test = lol' })
         async hi(surname: string, name: string) {
           call++;
           return `hi ${surname} ${name}`;
@@ -239,7 +239,7 @@ describe.skip('cacheable', async () => {
       let call = 0;
       @Service()
       class TestService {
-        @Cacheable({ cacheNames: 'hi', key: '{const test = lol}'})
+        @Cacheable({ cacheNames: 'hi', key: '{const test = lol}' })
         async hi(surname: string, name: string) {
           call++;
           return `hi ${surname} ${name}`;
