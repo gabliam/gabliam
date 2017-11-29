@@ -23,9 +23,8 @@ import {
   TemplateElement,
   Statement
 } from 'estree';
-import { Symbol } from 'bson';
 
-const FAIL = new Symbol('FAIL');
+const FAIL = Symbol('FAIL');
 
 export class Parser {
   constructor(private ast: Expression) {}
