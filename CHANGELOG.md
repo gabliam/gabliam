@@ -1,3 +1,13 @@
+<a name="6.2.1"></a>
+## [6.2.1](https://github.com/gabliam/gabliam/compare/v6.2.0...v6.2.1) (2017-11-29)
+
+
+### Bug Fixes
+
+* **@gabliam/expression:** correction import bson ([c574406](https://github.com/gabliam/gabliam/commit/c574406))
+
+
+
 <a name="6.2.0"></a>
 # [6.2.0](https://github.com/gabliam/gabliam/compare/v6.1.0...v6.2.0) (2017-11-28)
 
