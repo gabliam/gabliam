@@ -66,7 +66,7 @@ export class LoaderConfig {
 
       if (typeof loader === 'string') {
         try {
-          loaderFunc = require(loader);
+          loaderFunc = require(loader).default;
         } catch {
           throw new LoaderConfigPgkNotInstalledError(loader);
         }
