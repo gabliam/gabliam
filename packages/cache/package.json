@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/cache",
-  "version": "6.2.1",
+  "version": "6.2.2",
   "description": "cache plugin for gabliam",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -27,10 +27,10 @@
   },
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/cache#readme",
   "peerDependencies": {
-    "@gabliam/core": "^6.2.1"
+    "@gabliam/core": "^6.2.2"
   },
   "devDependencies": {
-    "@gabliam/core": "^6.2.1",
+    "@gabliam/core": "^6.2.2",
     "@types/debug": "^0.0.30",
     "@types/node": "^8.0.14"
   },
