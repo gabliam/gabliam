@@ -18,7 +18,7 @@ import {
   ConfigRegistry,
   BeanMetadata
 } from './interfaces';
-import { ExpressionParser } from '../../expression/lib/index';
+import { ExpressionParser } from '@gabliam/expression';
 
 const debug = d('Gabliam:core');
 
