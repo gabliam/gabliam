@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/typeorm",
-  "version": "6.2.0",
+  "version": "6.2.1",
   "description": "",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/typeorm#readme",
   "peerDependencies": {
-    "@gabliam/core": "^6.2.0"
+    "@gabliam/core": "^6.2.1"
   },
   "dependencies": {
     "debug": "^3.0.0",
@@ -31,7 +31,7 @@
     "typeorm": "^0.1.1"
   },
   "devDependencies": {
-    "@gabliam/core": "^6.2.0",
+    "@gabliam/core": "^6.2.1",
     "@types/debug": "^0.0.30",
     "@types/node": "^8.0.24",
     "sqlite3": "^3.1.9"
