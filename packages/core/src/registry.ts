@@ -1,4 +1,5 @@
 import { ValueRegistry } from './interfaces';
+import * as _ from 'lodash';
 
 /**
  * Registry
@@ -36,7 +37,10 @@ export class Registry {
     type: symbol | string,
     target: ValueRegistry<T>
   ) {
-    this.get(type).push(target);
+    const values = this.get(type);
+    if (!_.find(values, target)) {
+      values.push(target);
+    }
   }
 
   /**
