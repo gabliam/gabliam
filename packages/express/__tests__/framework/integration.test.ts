@@ -28,7 +28,7 @@ afterEach(async () => {
 describe('Integration Tests:', () => {
   [Controller, RestController].forEach(decorator => {
     describe(`decorator ${decorator.name}`, () => {
-      test.only('should work with config', async () => {
+      test('should work with config', async () => {
         @decorator('rest.test.base')
         class TestController {
           @Get('rest.test.get')

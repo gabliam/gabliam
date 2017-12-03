@@ -3,7 +3,9 @@ import {
   Registry,
   Plugin,
   Container,
-  GabliamPlugin
+  GabliamPlugin,
+  ValueExtractor,
+  VALUE_EXTRACTOR
 } from '@gabliam/core';
 import {
   TYPE,
@@ -165,6 +167,7 @@ export class KoaPlugin implements GabliamPlugin {
    */
   private buildControllers(container: Container, registry: Registry) {
     const restConfig = container.get<KoaPluginConfig>(KOA_PLUGIN_CONFIG);
+    const valueExtractor = container.get<ValueExtractor>(VALUE_EXTRACTOR);
 
     // get the router creator
     let routerCreator: RouterCreator = (prefix?: string) =>
@@ -201,8 +204,13 @@ export class KoaPlugin implements GabliamPlugin {
       );
       // if the controller has controllerMetadata and methodMetadatas
       if (controllerMetadata && methodMetadatas) {
+        const controllerPath = valueExtractor(
+          controllerMetadata.path,
+          controllerMetadata.path
+        );
+
         let routerPath: string | undefined = cleanPath(
-          `${restConfig.rootPath}${controllerMetadata.path}`
+          `${restConfig.rootPath}${controllerPath}`
         );
 
         if (routerPath === '/') {
@@ -217,7 +225,14 @@ export class KoaPlugin implements GabliamPlugin {
           if (parameterMetadata) {
             paramList = parameterMetadata[methodMetadata.key] || [];
           }
-          const methodMetadataPath = cleanPath(methodMetadata.path);
+          let methodMetadataPath = cleanPath(
+            valueExtractor(methodMetadata.path, methodMetadata.path)
+          );
+
+          if (methodMetadataPath[0] !== '/') {
+            methodMetadataPath = '/' + methodMetadataPath;
+          }
+
           const methodMiddlewares = getMiddlewares(
             container,
             controller.constructor,

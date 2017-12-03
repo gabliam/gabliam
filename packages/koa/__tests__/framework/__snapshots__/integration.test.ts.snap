@@ -289,6 +289,23 @@ Object {
 }
 `;
 
+exports[`Integration Tests: decorator Controller should work with config 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "14",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "config ok !!!!",
+}
+`;
+
 exports[`Integration Tests: decorator RestController should use custom router passed from configuration 1`] = `
 Object {
   "header": Object {
@@ -575,5 +592,22 @@ Object {
   },
   "status": 200,
   "text": "PROPFIND",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should work with config 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "16",
+    "content-type": "application/json; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "\\"config ok !!!!\\"",
 }
 `;
