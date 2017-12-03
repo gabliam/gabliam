@@ -3,7 +3,9 @@ import {
   Registry,
   Plugin,
   Container,
-  GabliamPlugin
+  GabliamPlugin,
+  ValueExtractor,
+  VALUE_EXTRACTOR
 } from '@gabliam/core';
 import {
   TYPE,
@@ -206,6 +208,8 @@ export class ExpressPlugin implements GabliamPlugin {
       EXPRESS_PLUGIN_CONFIG
     );
 
+    const valueExtractor = container.get<ValueExtractor>(VALUE_EXTRACTOR);
+
     // get the router creator
     let routerCreator: RouterCreator = () => express.Router();
     try {
@@ -239,9 +243,11 @@ export class ExpressPlugin implements GabliamPlugin {
       // if the controller has controllerMetadata and methodMetadatas
       if (controllerMetadata && methodMetadatas) {
         const router = routerCreator();
-        const routerPath = cleanPath(
-          `${restConfig.rootPath}${controllerMetadata.path}`
+        const controllerPath = valueExtractor(
+          controllerMetadata.path,
+          controllerMetadata.path
         );
+        const routerPath = cleanPath(`${restConfig.rootPath}${controllerPath}`);
 
         debug(`New route : "${routerPath}"`);
 
@@ -250,7 +256,12 @@ export class ExpressPlugin implements GabliamPlugin {
           if (parameterMetadata) {
             paramList = parameterMetadata[methodMetadata.key] || [];
           }
-          const methodMetadataPath = cleanPath(methodMetadata.path);
+          let methodMetadataPath = cleanPath(
+            valueExtractor(methodMetadata.path, methodMetadata.path)
+          );
+          if (methodMetadataPath[0] !== '/') {
+            methodMetadataPath = '/' + methodMetadataPath;
+          }
           const methodMiddlewares = getMiddlewares(
             container,
             controller.constructor,
