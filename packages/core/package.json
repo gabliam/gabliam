@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/core",
-  "version": "6.2.4",
+  "version": "6.3.0",
   "description": "Gabliam is on top of inversify",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -13,7 +13,7 @@
     "src"
   ],
   "dependencies": {
-    "@gabliam/expression": "^6.2.1",
+    "@gabliam/expression": "^6.3.0",
     "@types/joi": "^13.0.0",
     "caller": "^1.0.1",
     "debug": "^3.0.0",
