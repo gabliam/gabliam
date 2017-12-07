@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/log4js",
-  "version": "6.3.0",
+  "version": "7.0.0",
   "description": "log4js plugin for gabliam",
   "keywords": [
     "log",
@@ -28,10 +28,10 @@
   },
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/log4js#readme",
   "peerDependencies": {
-    "@gabliam/core": "^6.3.0"
+    "@gabliam/core": "^7.0.0"
   },
   "devDependencies": {
-    "@gabliam/core": "^6.3.0"
+    "@gabliam/core": "^7.0.0"
   },
   "dependencies": {
     "log4js": "^2.3.3",
