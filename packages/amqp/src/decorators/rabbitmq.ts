@@ -6,6 +6,20 @@ import {
 } from '../interfaces';
 import { TYPE, METADATA_KEY, ERRORS_MSGS } from '../constants';
 
+/**
+ * RabbitController decorator
+ *
+ * Define a rabbit controller
+ *
+ * ## Simple example
+ * @RabbitController('/')
+ * class SampleController {
+ *    @RabbitListener('test')
+ *    hello() {
+ *      return 'Hello';
+ *    }
+ * }
+ */
 export function RabbitController() {
   return function(target: any) {
     if (

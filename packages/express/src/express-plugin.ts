@@ -299,7 +299,7 @@ export class ExpressPlugin implements GabliamPlugin {
     json: boolean,
     parameterMetadata: ParameterMetadata[]
   ): express.RequestHandler {
-    return (
+    return async (
       req: express.Request,
       res: express.Response,
       next: express.NextFunction
@@ -314,7 +314,6 @@ export class ExpressPlugin implements GabliamPlugin {
         next,
         parameterMetadata
       );
-      const result: any = controller[key](...args);
 
       // response handler if the result is a ResponseEntity
       function responseEntityHandler(value: ResponseEntity) {
@@ -326,31 +325,19 @@ export class ExpressPlugin implements GabliamPlugin {
         res.status(value.status).json(value.body);
       }
 
-      // try to resolve promise
-      if (result && result instanceof Promise) {
-        result
-          .then((value: any) => {
-            if (value !== undefined && !res.headersSent) {
-              if (value instanceof ResponseEntity) {
-                responseEntityHandler(value);
-              } else if (json) {
-                res.json(value);
-              } else {
-                res.send(value);
-              }
-            }
-          })
-          .catch((error: any) => {
-            next(error);
-          });
-      } else if (result && result instanceof ResponseEntity) {
-        responseEntityHandler(result);
-      } else if (result !== undefined && !res.headersSent) {
-        if (json) {
-          res.json(result);
-        } else {
-          res.send(result);
+      try {
+        const result: any = await Promise.resolve(controller[key](...args));
+        if (result !== undefined && !res.headersSent) {
+          if (result instanceof ResponseEntity) {
+            responseEntityHandler(result);
+          } else if (json) {
+            res.json(result);
+          } else {
+            res.send(result);
+          }
         }
+      } catch (err) {
+        next(err);
       }
     };
   }

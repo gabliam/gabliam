@@ -39,6 +39,9 @@ export class AmqpConnection {
     private valueExtractor: ValueExtractor
   ) {}
 
+  /**
+   * Start the connection
+   */
   async start() {
     if (this.state !== ConnectionState.stopped) {
       return;
@@ -58,6 +61,9 @@ export class AmqpConnection {
     this.state = ConnectionState.running;
   }
 
+  /**
+   * Add a consumer for a queue
+   */
   addConsume(
     queue: string,
     handler: ConsumerHandler,
