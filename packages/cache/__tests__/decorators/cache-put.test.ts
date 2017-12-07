@@ -123,6 +123,26 @@ describe('cache put', async () => {
     expect(await cache.getCache('hi')).toMatchSnapshot();
   });
 
+  test('cache key array', async () => {
+    @Service()
+    class TestService {
+      @CachePut({ cacheNames: ['hi'], key: '[$args[0].id]' })
+      async hi(user: { name: string; id: number }) {
+        return `hi ${user.name}`;
+      }
+    }
+
+    g.addClass(TestService);
+    await g.build();
+
+    const s = g.gab.container.get(TestService);
+    expect(await s.hi({ name: 'test', id: 1 })).toMatchSnapshot();
+    expect(await s.hi({ name: 'test', id: 2 })).toMatchSnapshot();
+    expect(await cache.getCache('hi')).toMatchSnapshot();
+    expect(await s.hi({ name: 'test', id: 1 })).toMatchSnapshot();
+    expect(await cache.getCache('hi')).toMatchSnapshot();
+  });
+
   test('cache condition', async () => {
     @Service()
     class TestService {

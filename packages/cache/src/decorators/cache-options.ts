@@ -101,7 +101,7 @@ export async function createCacheConfig(
     })(
       container
         .get<ExpressionParser>(ExpressionParser)
-        .parseExpression(condition!)
+        .parseExpression(condition)
     );
   }
 
@@ -125,7 +125,7 @@ export async function createCacheConfig(
           return undefined;
         }
       }
-    })(container.get<ExpressionParser>(ExpressionParser).parseExpression(key!));
+    })(container.get<ExpressionParser>(ExpressionParser).parseExpression(key));
   }
 
   const cacheManager: CacheManager = container.get<CacheManager>(CACHE_MANAGER);

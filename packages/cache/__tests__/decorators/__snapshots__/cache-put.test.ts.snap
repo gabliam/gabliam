@@ -631,6 +631,314 @@ MemoryCache {
 }
 `;
 
+exports[`cache put cache key array 1`] = `"hi test"`;
+
+exports[`cache put cache key array 2`] = `"hi test"`;
+
+exports[`cache put cache key array 3`] = `
+MemoryCache {
+  "name": "hi",
+  "options": undefined,
+  "store": LRUCache {
+    Symbol(max): Infinity,
+    Symbol(lengthCalculator): [Function],
+    Symbol(allowStale): false,
+    Symbol(maxAge): 0,
+    Symbol(dispose): undefined,
+    Symbol(noDisposeOnSet): false,
+    Symbol(cache): Map {
+      "1" => Node {
+        "list": Yallist {
+          "head": Node {
+            "list": [Circular],
+            "next": [Circular],
+            "prev": null,
+            "value": Entry {
+              "key": "2",
+              "length": 1,
+              "maxAge": 0,
+              "now": 0,
+              "value": "hi test",
+            },
+          },
+          "length": 2,
+          "tail": [Circular],
+        },
+        "next": null,
+        "prev": Node {
+          "list": Yallist {
+            "head": [Circular],
+            "length": 2,
+            "tail": [Circular],
+          },
+          "next": [Circular],
+          "prev": null,
+          "value": Entry {
+            "key": "2",
+            "length": 1,
+            "maxAge": 0,
+            "now": 0,
+            "value": "hi test",
+          },
+        },
+        "value": Entry {
+          "key": "1",
+          "length": 1,
+          "maxAge": 0,
+          "now": 0,
+          "value": "hi test",
+        },
+      },
+      "2" => Node {
+        "list": Yallist {
+          "head": [Circular],
+          "length": 2,
+          "tail": Node {
+            "list": [Circular],
+            "next": null,
+            "prev": [Circular],
+            "value": Entry {
+              "key": "1",
+              "length": 1,
+              "maxAge": 0,
+              "now": 0,
+              "value": "hi test",
+            },
+          },
+        },
+        "next": Node {
+          "list": Yallist {
+            "head": [Circular],
+            "length": 2,
+            "tail": [Circular],
+          },
+          "next": null,
+          "prev": [Circular],
+          "value": Entry {
+            "key": "1",
+            "length": 1,
+            "maxAge": 0,
+            "now": 0,
+            "value": "hi test",
+          },
+        },
+        "prev": null,
+        "value": Entry {
+          "key": "2",
+          "length": 1,
+          "maxAge": 0,
+          "now": 0,
+          "value": "hi test",
+        },
+      },
+    },
+    Symbol(lruList): Yallist {
+      "head": Node {
+        "list": [Circular],
+        "next": Node {
+          "list": [Circular],
+          "next": null,
+          "prev": [Circular],
+          "value": Entry {
+            "key": "1",
+            "length": 1,
+            "maxAge": 0,
+            "now": 0,
+            "value": "hi test",
+          },
+        },
+        "prev": null,
+        "value": Entry {
+          "key": "2",
+          "length": 1,
+          "maxAge": 0,
+          "now": 0,
+          "value": "hi test",
+        },
+      },
+      "length": 2,
+      "tail": Node {
+        "list": [Circular],
+        "next": null,
+        "prev": Node {
+          "list": [Circular],
+          "next": [Circular],
+          "prev": null,
+          "value": Entry {
+            "key": "2",
+            "length": 1,
+            "maxAge": 0,
+            "now": 0,
+            "value": "hi test",
+          },
+        },
+        "value": Entry {
+          "key": "1",
+          "length": 1,
+          "maxAge": 0,
+          "now": 0,
+          "value": "hi test",
+        },
+      },
+    },
+    Symbol(length): 2,
+  },
+}
+`;
+
+exports[`cache put cache key array 4`] = `"hi test"`;
+
+exports[`cache put cache key array 5`] = `
+MemoryCache {
+  "name": "hi",
+  "options": undefined,
+  "store": LRUCache {
+    Symbol(max): Infinity,
+    Symbol(lengthCalculator): [Function],
+    Symbol(allowStale): false,
+    Symbol(maxAge): 0,
+    Symbol(dispose): undefined,
+    Symbol(noDisposeOnSet): false,
+    Symbol(cache): Map {
+      "1" => Node {
+        "list": Yallist {
+          "head": [Circular],
+          "length": 2,
+          "tail": Node {
+            "list": [Circular],
+            "next": null,
+            "prev": [Circular],
+            "value": Entry {
+              "key": "2",
+              "length": 1,
+              "maxAge": 0,
+              "now": 0,
+              "value": "hi test",
+            },
+          },
+        },
+        "next": Node {
+          "list": Yallist {
+            "head": [Circular],
+            "length": 2,
+            "tail": [Circular],
+          },
+          "next": null,
+          "prev": [Circular],
+          "value": Entry {
+            "key": "2",
+            "length": 1,
+            "maxAge": 0,
+            "now": 0,
+            "value": "hi test",
+          },
+        },
+        "prev": null,
+        "value": Entry {
+          "key": "1",
+          "length": 1,
+          "maxAge": 0,
+          "now": 0,
+          "value": "hi test",
+        },
+      },
+      "2" => Node {
+        "list": Yallist {
+          "head": Node {
+            "list": [Circular],
+            "next": [Circular],
+            "prev": null,
+            "value": Entry {
+              "key": "1",
+              "length": 1,
+              "maxAge": 0,
+              "now": 0,
+              "value": "hi test",
+            },
+          },
+          "length": 2,
+          "tail": [Circular],
+        },
+        "next": null,
+        "prev": Node {
+          "list": Yallist {
+            "head": [Circular],
+            "length": 2,
+            "tail": [Circular],
+          },
+          "next": [Circular],
+          "prev": null,
+          "value": Entry {
+            "key": "1",
+            "length": 1,
+            "maxAge": 0,
+            "now": 0,
+            "value": "hi test",
+          },
+        },
+        "value": Entry {
+          "key": "2",
+          "length": 1,
+          "maxAge": 0,
+          "now": 0,
+          "value": "hi test",
+        },
+      },
+    },
+    Symbol(lruList): Yallist {
+      "head": Node {
+        "list": [Circular],
+        "next": Node {
+          "list": [Circular],
+          "next": null,
+          "prev": [Circular],
+          "value": Entry {
+            "key": "2",
+            "length": 1,
+            "maxAge": 0,
+            "now": 0,
+            "value": "hi test",
+          },
+        },
+        "prev": null,
+        "value": Entry {
+          "key": "1",
+          "length": 1,
+          "maxAge": 0,
+          "now": 0,
+          "value": "hi test",
+        },
+      },
+      "length": 2,
+      "tail": Node {
+        "list": [Circular],
+        "next": null,
+        "prev": Node {
+          "list": [Circular],
+          "next": [Circular],
+          "prev": null,
+          "value": Entry {
+            "key": "1",
+            "length": 1,
+            "maxAge": 0,
+            "now": 0,
+            "value": "hi test",
+          },
+        },
+        "value": Entry {
+          "key": "2",
+          "length": 1,
+          "maxAge": 0,
+          "now": 0,
+          "value": "hi test",
+        },
+      },
+    },
+    Symbol(length): 2,
+  },
+}
+`;
+
 exports[`cache put cache muliple cachenames 1`] = `"hi test"`;
 
 exports[`cache put cache muliple cachenames 2`] = `"hi test"`;
