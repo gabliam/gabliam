@@ -1,3 +1,55 @@
+<a name="7.0.0"></a>
+# [7.0.0](https://github.com/gabliam/gabliam/compare/v6.3.0...v7.0.0) (2017-12-07)
+
+
+### Features
+
+* add engines node >= 8.9.0 ([3e1a7f0](https://github.com/gabliam/gabliam/commit/3e1a7f0))
+* **@gabliam/*:** build target es2015 to es2017 ([971e882](https://github.com/gabliam/gabliam/commit/971e882))
+
+
+
+<a name="6.3.0"></a>
+# [6.3.0](https://github.com/gabliam/gabliam/compare/v6.2.4...v6.3.0) (2017-12-03)
+
+
+### Features
+
+* **@gabliam/express:** @Controller and @RestController now use valueExtractor ([8a4102c](https://github.com/gabliam/gabliam/commit/8a4102c))
+* **@gabliam/koa:** @Controller and @RestController now use valueExtractor ([33b150f](https://github.com/gabliam/gabliam/commit/33b150f))
+
+
+
+<a name="6.2.4"></a>
+## [6.2.4](https://github.com/gabliam/gabliam/compare/v6.2.3...v6.2.4) (2017-11-30)
+
+
+### Bug Fixes
+
+* **@gabliam/core:** prevent the multiple add of the same value in the registry ([0706cfe](https://github.com/gabliam/gabliam/commit/0706cfe))
+
+
+
+<a name="6.2.3"></a>
+## [6.2.3](https://github.com/gabliam/gabliam/compare/v6.2.2...v6.2.3) (2017-11-29)
+
+
+### Bug Fixes
+
+* **@gabliam/core:** fix path ([e69b0fa](https://github.com/gabliam/gabliam/commit/e69b0fa))
+
+
+
+<a name="6.2.2"></a>
+## [6.2.2](https://github.com/gabliam/gabliam/compare/v6.2.1...v6.2.2) (2017-11-29)
+
+
+### Bug Fixes
+
+* **@gabliam/core loader-config:** require default when loader is a string ([d41ac1f](https://github.com/gabliam/gabliam/commit/d41ac1f))
+
+
+
 <a name="6.2.1"></a>
 ## [6.2.1](https://github.com/gabliam/gabliam/compare/v6.2.0...v6.2.1) (2017-11-29)
 
