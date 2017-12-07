@@ -44,5 +44,8 @@
   "bugs": {
     "url": "https://github.com/gabliam/gabliam/issues"
   },
-  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/core#readme"
+  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/core#readme",
+  "engines": {
+    "node": ">=8.9.0"
+  }
 }

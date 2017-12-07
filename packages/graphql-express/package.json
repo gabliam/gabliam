@@ -47,5 +47,8 @@
     "debug": "^3.0.1",
     "graphql-server-express": "^1.1.2",
     "tslib": "^1.8.0"
+  },
+  "engines": {
+    "node": ">=8.9.0"
   }
 }

@@ -47,5 +47,8 @@
     "graphql-server-koa": "^1.2.0",
     "koa-bodyparser": "^4.2.0",
     "tslib": "^1.8.0"
+  },
+  "engines": {
+    "node": ">=8.9.0"
   }
 }

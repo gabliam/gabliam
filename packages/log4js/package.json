@@ -36,5 +36,8 @@
   "dependencies": {
     "log4js": "^2.3.3",
     "tslib": "^1.8.0"
+  },
+  "engines": {
+    "node": ">=8.9.0"
   }
 }
