@@ -1,3 +1,13 @@
+<a name="7.1.0"></a>
+# [7.1.0](https://github.com/gabliam/gabliam/compare/v7.0.0...v7.1.0) (2017-12-14)
+
+
+### Features
+
+* **@gabliam/cache:** add redis cache ([7be54d7](https://github.com/gabliam/gabliam/commit/7be54d7))
+
+
+
 <a name="7.0.0"></a>
 # [7.0.0](https://github.com/gabliam/gabliam/compare/v6.3.0...v7.0.0) (2017-12-07)
 
