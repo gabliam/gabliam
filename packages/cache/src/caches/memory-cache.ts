@@ -68,6 +68,10 @@ export class MemoryCache implements Cache {
     this.store = LRU(this.options);
   }
 
+  async stop() {
+    this.store.reset();
+  }
+
   getName(): string {
     return this.name;
   }
@@ -80,12 +84,14 @@ export class MemoryCache implements Cache {
   async put(key: string, value: any): Promise<void> {
     this.store.set(key, value);
   }
+
   async putIfAbsent<T>(
     key: string,
     value: T | null | undefined
   ): Promise<T | null | undefined> {
     if (!this.store.has(key)) {
       this.store.set(key, value);
+      return null;
     }
     return this.store.get(key);
   }

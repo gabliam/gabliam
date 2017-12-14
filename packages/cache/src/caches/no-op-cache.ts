@@ -9,6 +9,8 @@ export class NoOpCache implements Cache {
 
   async start() {}
 
+  async stop() {}
+
   getName(): string {
     return this.name;
   }

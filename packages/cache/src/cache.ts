@@ -12,6 +12,8 @@ export interface ConstructableCache {
 export interface Cache {
   start(): Promise<void>;
 
+  stop(): Promise<void>;
+
   /**
    * Return the cache name.
    */

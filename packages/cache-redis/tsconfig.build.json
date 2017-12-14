@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "sourceMap": false,
+    "outDir": "lib"
+  },
+  "include":[
+    "src/**/*.ts",
+    "custom-typings.d.ts"
+  ]
+}

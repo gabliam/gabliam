@@ -18,29 +18,47 @@ NoOpCache {
 
 exports[`cache get & put 3`] = `undefined`;
 
-exports[`cache putIfAbsent 1`] = `
-NoOpCache {
-  "name": "test",
-}
-`;
+exports[`cache putIfAbsent 1`] = `undefined`;
 
 exports[`cache putIfAbsent 2`] = `undefined`;
 
 exports[`cache putIfAbsent 3`] = `undefined`;
 
-exports[`clear 1`] = `
+exports[`cache putIfAbsent 4`] = `
 NoOpCache {
   "name": "test",
 }
 `;
 
-exports[`clear 2`] = `
+exports[`cache putIfAbsent 5`] = `undefined`;
+
+exports[`cache putIfAbsent 6`] = `undefined`;
+
+exports[`clear 1`] = `undefined`;
+
+exports[`clear 2`] = `undefined`;
+
+exports[`clear 3`] = `undefined`;
+
+exports[`clear 4`] = `
 NoOpCache {
   "name": "test",
 }
 `;
 
-exports[`evict 1`] = `
+exports[`clear 5`] = `
+NoOpCache {
+  "name": "test",
+}
+`;
+
+exports[`evict 1`] = `undefined`;
+
+exports[`evict 2`] = `undefined`;
+
+exports[`evict 3`] = `undefined`;
+
+exports[`evict 4`] = `
 NoOpCache {
   "name": "test",
 }

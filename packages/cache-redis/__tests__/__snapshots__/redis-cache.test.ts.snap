@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cache 1`] = `"test"`;
+
+exports[`cache get & put 1`] = `null`;
+
+exports[`cache get & put 2`] = `"test"`;
+
+exports[`cache get & put 3`] = `"test"`;
+
+exports[`cache get & put 4`] = `"test"`;
+
+exports[`cache get & put 5`] = `null`;
+
+exports[`cache putIfAbsent 1`] = `"test"`;
+
+exports[`cache putIfAbsent 2`] = `null`;
+
+exports[`cache putIfAbsent 3`] = `null`;
+
+exports[`cache putIfAbsent 4`] = `"test"`;
+
+exports[`cache putIfAbsent 5`] = `"test2"`;
+
+exports[`clear 1`] = `null`;
+
+exports[`clear 2`] = `null`;
+
+exports[`clear 3`] = `null`;
+
+exports[`clear 4`] = `"testnew"`;
+
+exports[`clear 5`] = `"test2"`;
+
+exports[`clear 6`] = `"test3"`;
+
+exports[`clear 7`] = `null`;
+
+exports[`clear 8`] = `null`;
+
+exports[`clear 9`] = `null`;
+
+exports[`evict 1`] = `null`;
+
+exports[`evict 2`] = `null`;
+
+exports[`evict 3`] = `null`;
+
+exports[`evict 4`] = `"test3"`;
+
+exports[`evict 5`] = `null`;
+
+exports[`put with duration 1`] = `"test"`;
+
+exports[`put with duration 2`] = `null`;

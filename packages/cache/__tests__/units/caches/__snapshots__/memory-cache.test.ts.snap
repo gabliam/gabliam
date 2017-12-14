@@ -89,7 +89,13 @@ MemoryCache {
 
 exports[`cache get & put 3`] = `"test"`;
 
-exports[`cache putIfAbsent 1`] = `
+exports[`cache putIfAbsent 1`] = `"test"`;
+
+exports[`cache putIfAbsent 2`] = `null`;
+
+exports[`cache putIfAbsent 3`] = `null`;
+
+exports[`cache putIfAbsent 4`] = `
 MemoryCache {
   "name": "test",
   "options": undefined,
@@ -426,11 +432,17 @@ MemoryCache {
 }
 `;
 
-exports[`cache putIfAbsent 2`] = `"test"`;
+exports[`cache putIfAbsent 5`] = `"test"`;
 
-exports[`cache putIfAbsent 3`] = `"test2"`;
+exports[`cache putIfAbsent 6`] = `"test2"`;
 
-exports[`clear 1`] = `
+exports[`clear 1`] = `null`;
+
+exports[`clear 2`] = `null`;
+
+exports[`clear 3`] = `null`;
+
+exports[`clear 4`] = `
 MemoryCache {
   "name": "test",
   "options": undefined,
@@ -767,7 +779,7 @@ MemoryCache {
 }
 `;
 
-exports[`clear 2`] = `
+exports[`clear 5`] = `
 MemoryCache {
   "name": "test",
   "options": undefined,
@@ -789,7 +801,13 @@ MemoryCache {
 }
 `;
 
-exports[`evict 1`] = `
+exports[`evict 1`] = `null`;
+
+exports[`evict 2`] = `null`;
+
+exports[`evict 3`] = `null`;
+
+exports[`evict 4`] = `
 MemoryCache {
   "name": "test",
   "options": undefined,

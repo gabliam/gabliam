@@ -2,9 +2,17 @@ import { NoOpCache } from '../../../src/index';
 
 let cache: NoOpCache;
 
-beforeEach(async () => {
+beforeAll(async () => {
   cache = new NoOpCache('test');
   await cache.start();
+});
+
+afterEach(async () => {
+  await cache.clear();
+});
+
+afterAll(async () => {
+  await cache.stop();
 });
 
 test('cache', () => {
@@ -21,26 +29,26 @@ test('cache get & put', async () => {
 
 test('cache putIfAbsent', async () => {
   await cache.put('test', 'test');
-  await cache.putIfAbsent('test', 'testnew');
-  await cache.putIfAbsent('test2', 'test2');
-  await cache.putIfAbsent('test3', 'test3');
+  expect(await cache.putIfAbsent('test', 'testnew')).toMatchSnapshot();
+  expect(await cache.putIfAbsent('test2', 'test2')).toMatchSnapshot();
+  expect(await cache.putIfAbsent('test3', 'test3')).toMatchSnapshot();
   expect(cache).toMatchSnapshot();
   expect(await cache.get('test')).toMatchSnapshot();
   expect(await cache.get('test2')).toMatchSnapshot();
 });
 
 test('evict', async () => {
-  await cache.putIfAbsent('test', 'testnew');
-  await cache.putIfAbsent('test2', 'test2');
-  await cache.putIfAbsent('test3', 'test3');
+  expect(await cache.putIfAbsent('test', 'testnew')).toMatchSnapshot();
+  expect(await cache.putIfAbsent('test2', 'test2')).toMatchSnapshot();
+  expect(await cache.putIfAbsent('test3', 'test3')).toMatchSnapshot();
   expect(cache).toMatchSnapshot();
   await cache.evict('test3');
 });
 
 test('clear', async () => {
-  await cache.putIfAbsent('test', 'testnew');
-  await cache.putIfAbsent('test2', 'test2');
-  await cache.putIfAbsent('test3', 'test3');
+  expect(await cache.putIfAbsent('test', 'testnew')).toMatchSnapshot();
+  expect(await cache.putIfAbsent('test2', 'test2')).toMatchSnapshot();
+  expect(await cache.putIfAbsent('test3', 'test3')).toMatchSnapshot();
   expect(cache).toMatchSnapshot();
   await cache.clear();
   expect(cache).toMatchSnapshot();
