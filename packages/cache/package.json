@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/cache",
-  "version": "7.0.0",
+  "version": "7.1.0",
   "description": "cache plugin for gabliam",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",

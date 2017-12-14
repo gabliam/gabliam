@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/cache-redis",
-  "version": "7.0.0",
+  "version": "7.1.0",
   "description": "cache redis plugin for gabliam",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -27,11 +27,11 @@
   },
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/cache-redis#readme",
   "peerDependencies": {
-    "@gabliam/cache": "^7.0.0",
+    "@gabliam/cache": "^7.1.0",
     "@gabliam/core": "^7.0.0"
   },
   "devDependencies": {
-    "@gabliam/cache": "^7.0.0",
+    "@gabliam/cache": "^7.1.0",
     "@gabliam/core": "^7.0.0",
     "@types/debug": "^0.0.30",
     "@types/node": "^8.0.14",
