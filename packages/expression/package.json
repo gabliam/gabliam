@@ -26,9 +26,6 @@
     "url": "https://github.com/gabliam/gabliam/issues"
   },
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/amqp#readme",
-  "peerDependencies": {
-    "@gabliam/core": "^6.1.0"
-  },
   "devDependencies": {
     "@types/escodegen": "^0.0.6",
     "@types/esprima": "^4.0.1",
