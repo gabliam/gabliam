@@ -8,6 +8,7 @@ export const METADATA_KEY = {
   bean: '_bean',
   onMissingBean: '_onMissingBean',
   init: '_init',
+  beforeCreate: '_beforeCreate',
   value: '_value',
   register: '_register',
   scan: '_scan',

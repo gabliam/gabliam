@@ -255,10 +255,22 @@ export class Gabliam {
             confInstance.constructor
           ) || [];
 
+        const beforeCreateMetas: string[] = Reflect.getMetadata(
+          METADATA_KEY.beforeCreate,
+          confInstance.constructor
+        );
+
         const initMetadas: string[] = Reflect.getMetadata(
           METADATA_KEY.init,
           confInstance.constructor
         );
+
+        if (Array.isArray(beforeCreateMetas)) {
+          // No promise.all and await because order of beans are important
+          for (const metada of beforeCreateMetas) {
+            await callInstance(confInstance, metada);
+          }
+        }
 
         // If config has bean metadata
         if (Array.isArray(beanMetadatas)) {

@@ -73,6 +73,10 @@ Object {
 
 exports[`should fail with Plugin with bad deps 1`] = `[Error: The plugin BadPlugin need the plugin BadDeps}]`;
 
+exports[`test BeforeCreate & init 1`] = `"|Conf2|BeforeCreateConf2|create2|InitCreateConf2|Conf|BeforeCreateConf|create|InitCreateConf"`;
+
+exports[`test BeforeCreate 1`] = `"|Conf2|BeforeCreateConf2|Conf|BeforeCreateConf"`;
+
 exports[`test init 1`] = `"|Conf2|initConf2|Conf|initConf"`;
 
 exports[`test plugin with config gabliam build 1`] = `2`;

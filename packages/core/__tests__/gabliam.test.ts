@@ -11,7 +11,8 @@ import {
   GabliamPlugin,
   Init,
   Bean,
-  OnMissingBean
+  OnMissingBean,
+  BeforeCreate
 } from '../src';
 import * as path from 'path';
 import { TestService } from './fixtures/gabliam/service';
@@ -378,5 +379,90 @@ test('@onMissingBean with multiple missing but just one is missing', async () =>
   g.addClass(Conf);
   g.addClass(Conf2);
   await g.build();
+  expect(res).toMatchSnapshot();
+});
+
+test('test BeforeCreate', async () => {
+  let res = '';
+  @Config(300)
+  class Conf {
+    constructor() {
+      res += '|Conf';
+    }
+
+    @BeforeCreate()
+    beforeCreate() {
+      res += '|BeforeCreateConf';
+    }
+  }
+  @Config(200)
+  class Conf2 {
+    constructor() {
+      res += '|Conf2';
+    }
+
+    @BeforeCreate()
+    beforeCreate() {
+      res += '|BeforeCreateConf2';
+    }
+  }
+  const g = new GabliamTest();
+  g.addClass(Conf);
+  g.addClass(Conf2);
+  await g.build();
+  expect(res).toMatchSnapshot();
+});
+
+test('test BeforeCreate & init', async () => {
+  let res = '';
+  @Config(300)
+  class Conf {
+    constructor() {
+      res += '|Conf';
+    }
+    @Init()
+    init() {
+      res += '|InitCreateConf';
+    }
+
+    @Bean('create')
+    create() {
+      res += '|create';
+      return 'create';
+    }
+
+    @BeforeCreate()
+    beforeCreate() {
+      res += '|BeforeCreateConf';
+    }
+  }
+  @Config(200)
+  class Conf2 {
+    constructor() {
+      res += '|Conf2';
+    }
+
+    @BeforeCreate()
+    beforeCreate() {
+      res += '|BeforeCreateConf2';
+    }
+
+    @Bean('create2')
+    create() {
+      res += '|create2';
+      return 'create2';
+    }
+
+    @Init()
+    init() {
+      res += '|InitCreateConf2';
+    }
+  }
+  const g = new GabliamTest();
+  g.addClass(Conf);
+  g.addClass(Conf2);
+  await g.build();
+  g.gab.container.get('create');
+  g.gab.container.get('create2');
   expect(res).toMatchSnapshot();
 });
