@@ -1,41 +1,66 @@
-import { PluginConfig, Value, optional, Bean, inject } from '@gabliam/core';
-import { ConnectionOptions, Connection, createConnection } from './typeorm';
-import { ConnectionOptionsBeanId, ENTITIES_PATH } from './constant';
+import {
+  PluginConfig,
+  Value,
+  optional,
+  Bean,
+  inject,
+  InjectContainer,
+  Init,
+  Container,
+  INJECT_CONTAINER_KEY
+} from '@gabliam/core';
+import { ConnectionOptions, Connection } from './typeorm';
+import { ConnectionOptionsBeanId, ENTITIES_TYPEORM } from './constant';
 import * as d from 'debug';
+import { ConnectionManager } from './connection-manager';
 
 const debug = d('Gabliam:Plugin:Typeorm');
 
+@InjectContainer()
 @PluginConfig()
 export class PluginTypeormConfig {
   @Value('application.typeorm.connectionOptions')
-  connectionOptions: ConnectionOptions;
+  connectionOptions: ConnectionOptions | ConnectionOptions[];
 
-  entitiesPath: string[];
+  entities: Function[];
 
   constructor(
     @inject(ConnectionOptionsBeanId)
     @optional()
-    connectionOptions: ConnectionOptions,
-    @inject(ENTITIES_PATH) entitiesPath: string[]
+    connectionOptions: ConnectionOptions | ConnectionOptions[],
+    @inject(ENTITIES_TYPEORM) entities: Function[]
   ) {
     debug('constructor PluginTypeormConfig', connectionOptions);
     this.connectionOptions = connectionOptions;
-    this.entitiesPath = entitiesPath;
+    this.entities = entities;
   }
 
-  @Bean(Connection)
-  create() {
+  // when all bean are created, we create bean Connection for back compat
+  @Init()
+  async init() {
+    const container: Container = (<any>this)[INJECT_CONTAINER_KEY];
+    const connectionManager = container.get(ConnectionManager);
+    await connectionManager.open();
+
+    // for back compat
+    container
+      .bind(Connection)
+      .toConstantValue(connectionManager.getDefaultConnection());
+  }
+
+  @Bean(ConnectionManager)
+  createManager() {
     debug('connectionOptions', this.connectionOptions);
     if (!this.connectionOptions) {
       throw new Error(`PluginTypeormConfig connectionOptions is mandatory`);
     }
-    const connectionOptions = this.connectionOptions;
-    const entities: any = connectionOptions.entities || [];
-    entities.push(...this.entitiesPath);
+    let connectionOptions: ConnectionOptions[];
+    if (Array.isArray(this.connectionOptions)) {
+      connectionOptions = this.connectionOptions;
+    } else {
+      connectionOptions = [this.connectionOptions];
+    }
 
-    return createConnection({
-      ...connectionOptions,
-      entities
-    });
+    return new ConnectionManager(connectionOptions, this.entities);
   }
 }

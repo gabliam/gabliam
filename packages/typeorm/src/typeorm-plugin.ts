@@ -6,23 +6,23 @@ import {
   ValueRegistry,
   Container
 } from '@gabliam/core';
-import { Connection } from './typeorm';
-import { TYPE, ENTITIES_PATH } from './constant';
+import { TYPE, ENTITIES_TYPEORM } from './constant';
+import { ConnectionManager } from './connection-manager';
 
 @Plugin()
 @Scan()
 export class TypeOrmPlugin implements GabliamPlugin {
   bind(container: Container, registry: Registry) {
-    const entitiesPaths = registry
+    const entities = registry
       .get<ValueRegistry>(TYPE.Entity)
       .map(({ target }) => {
         return target;
       });
-    container.bind<any>(ENTITIES_PATH).toConstantValue(entitiesPaths);
+    container.bind<any>(ENTITIES_TYPEORM).toConstantValue(entities);
   }
 
   async destroy(container: Container, registry: Registry) {
-    const connection = container.get<Connection>(Connection);
+    const connection = container.get(ConnectionManager);
     await connection.close();
   }
 }

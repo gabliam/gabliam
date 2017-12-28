@@ -4,7 +4,8 @@ import {
   Entity,
   ClassEntityChild,
   SingleEntityChild,
-  ClosureEntity
+  ClosureEntity,
+  CUnit
 } from './decorators';
 
-export { Entity, ClassEntityChild, SingleEntityChild, ClosureEntity };
+export { Entity, ClassEntityChild, SingleEntityChild, ClosureEntity, CUnit };
