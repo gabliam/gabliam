@@ -1,3 +1,30 @@
+<a name="7.2.0"></a>
+# [7.2.0](https://github.com/gabliam/gabliam/compare/v7.1.1...v7.2.0) (2018-01-02)
+
+
+### Bug Fixes
+
+* **@gabliam/amqp:** correction for getQueueName ([fd2d3d6](https://github.com/gabliam/gabliam/commit/fd2d3d6))
+
+
+### Features
+
+* **@gabliam/core:** add @BeforeCreate decorator ([9464367](https://github.com/gabliam/gabliam/commit/9464367))
+* **@gabliam/mongoose:** add multiple connection ([36fc101](https://github.com/gabliam/gabliam/commit/36fc101))
+* **@gabliam/typeorm:** add multiple connection ([687c607](https://github.com/gabliam/gabliam/commit/687c607))
+
+
+
+<a name="7.1.1"></a>
+## [7.1.1](https://github.com/gabliam/gabliam/compare/v7.1.0...v7.1.1) (2017-12-18)
+
+
+### Bug Fixes
+
+* **@gabliam/expression:** delete peerDeps for [@gabliam](https://github.com/gabliam)/expression ([413f46a](https://github.com/gabliam/gabliam/commit/413f46a))
+
+
+
 <a name="7.1.0"></a>
 # [7.1.0](https://github.com/gabliam/gabliam/compare/v7.0.0...v7.1.0) (2017-12-14)
 
