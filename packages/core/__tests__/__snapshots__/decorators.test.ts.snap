@@ -30,6 +30,13 @@ Array [
 ]
 `;
 
+exports[`@BeforeCreate should add BeforeCreate metadata to a class when decorating a method with @BeforeCreate 1`] = `
+Array [
+  "testMethod",
+  "test2Method",
+]
+`;
+
 exports[`@Config should add Registry and config metadata to a class when decorated with @Config 1`] = `true`;
 
 exports[`@Config should add Registry and config metadata to a class when decorated with @Config 2`] = `

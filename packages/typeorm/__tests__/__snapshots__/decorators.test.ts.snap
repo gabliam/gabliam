@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`CUnit decorators should add CUnit metadata to a class when decorating a method with @CUnit 1`] = `"default"`;
+
 exports[`ClassEntityChild decorators 1`] = `
 Object {
   "type": "EntityTypeOrm",

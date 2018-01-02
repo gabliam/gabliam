@@ -10,7 +10,8 @@ import {
   Value,
   Plugin,
   Init,
-  InjectContainer
+  InjectContainer,
+  BeforeCreate
 } from '../src/decorators';
 import { CoreConfig } from '../src/decorators/config';
 import { METADATA_KEY, TYPE } from '../src/constants';
@@ -40,6 +41,26 @@ describe('@init', () => {
     );
 
     expect(initMetadata).toMatchSnapshot();
+  });
+});
+
+describe('@BeforeCreate', () => {
+  test('should add BeforeCreate metadata to a class when decorating a method with @BeforeCreate', () => {
+    @Config()
+    class TestBean {
+      @BeforeCreate()
+      testMethod() {}
+
+      @BeforeCreate()
+      test2Method() {}
+    }
+
+    const beforeCreateMetadata: string[] = Reflect.getMetadata(
+      METADATA_KEY.beforeCreate,
+      TestBean
+    );
+
+    expect(beforeCreateMetadata).toMatchSnapshot();
   });
 });
 

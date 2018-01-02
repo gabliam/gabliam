@@ -7,7 +7,7 @@ import {
   ConnectionManager,
   CUnit
 } from '../src';
-import { Gabliam } from '@gabliam/core';
+import { Gabliam, Service } from '@gabliam/core';
 
 let appTest: TypeormPluginTest;
 beforeEach(async () => {
@@ -169,4 +169,53 @@ test('with config 2 database', async () => {
 
   await connection.getConnection('connection1').dropDatabase();
   await connection.getConnection('connection2').dropDatabase();
+});
+
+test('must fail when CUnit not found', async () => {
+  appTest.addConf('application.typeorm.connectionOptions', {
+    type: 'sqlite',
+    database: 'cunitnotfound.sqlite',
+    synchronize: true
+  });
+
+  @CUnit('bad')
+  @Entity('Photo')
+  class Photo {
+    @PrimaryGeneratedColumn() id?: number;
+
+    @Column({
+      length: 500
+    })
+    name: string;
+  }
+  appTest.addClass(Photo);
+  await expect(appTest.gab.buildAndStart()).rejects.toMatchSnapshot();
+});
+
+test('must fail when getConnection not found', async () => {
+  appTest.addConf('application.typeorm.connectionOptions', {
+    type: 'sqlite',
+    database: 'getConnection.sqlite',
+    synchronize: true
+  });
+
+  @Entity('Photo')
+  class Photo {
+    @PrimaryGeneratedColumn() id?: number;
+
+    @Column({
+      length: 500
+    })
+    name: string;
+  }
+
+  @Service()
+  class Test {
+    constructor(connectionManager: ConnectionManager) {
+      connectionManager.getConnection('notfound');
+    }
+  }
+  appTest.addClass(Photo);
+  appTest.addClass(Test);
+  await expect(appTest.gab.buildAndStart()).rejects.toMatchSnapshot();
 });

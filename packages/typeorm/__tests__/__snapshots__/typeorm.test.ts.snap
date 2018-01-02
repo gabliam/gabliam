@@ -1,5 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`must fail when CUnit not found 1`] = `[Error: CUnit bad not found]`;
+
+exports[`must fail when getConnection not found 1`] = `[AlreadyHasActiveConnectionError: Cannot create a new connection named "default", because connection with such name already exist and it now has an active connection session.]`;
+
 exports[`with bad config 1`] = `[MissingDriverError: Wrong driver undefined given. Supported drivers are: "cordova", "mysql", "postgres", "mssql", "oracle", "mariadb", "sqlite".]`;
 
 exports[`with config 1`] = `true`;
