@@ -7,6 +7,8 @@ const { Mongoose } = mongoose;
 (<any>mongoose).Promise = global.Promise;
 
 export class MongooseConnection {
+  public name: string;
+
   public conn: mongoose.Connection;
 
   private repositories = new Map<string, Repository<any>>();
@@ -14,9 +16,11 @@ export class MongooseConnection {
   private schemas = new Map<string, mongoose.Model<any>>();
 
   constructor(
+    connectionName: string,
     mongooseConfiguration: MongooseConfiguration,
     listDocument: any[]
   ) {
+    this.name = connectionName;
     const m = new Mongoose();
     if (mongooseConfiguration.host) {
       this.conn = m.createConnection(

@@ -8,7 +8,7 @@ import {
 import { TYPE, LIST_DOCUMENT } from './constants';
 import * as d from 'debug';
 const debug = d('Gabliam:Plugin:mongoose');
-import { MongooseConnection } from './mongoose-connection';
+import { MongooseConnectionManager } from './connection-manager';
 
 @Plugin()
 @Scan()
@@ -22,9 +22,7 @@ export class MongoosePlugin implements GabliamPlugin {
   }
 
   async destroy(container: Container, registry: Registry) {
-    const connection = container.get<MongooseConnection>(MongooseConnection);
-    if (connection) {
-      await connection.conn.close();
-    }
+    const connectionManager = container.get(MongooseConnectionManager);
+    await connectionManager.close();
   }
 }

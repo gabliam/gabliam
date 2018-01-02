@@ -1,5 +1,5 @@
 import { RegistryMetada } from '@gabliam/core/lib/interfaces';
-import { Document } from '../src';
+import { Document, MUnit } from '../src';
 import { METADATA_KEY as CORE_METADATA_KEY } from '@gabliam/core/lib/constants';
 import { DocumentMetadata } from '../src/interfaces/index';
 import { METADATA_KEY } from '../src/constants';
@@ -105,6 +105,31 @@ describe('errors', () => {
       }
       // tslint:disable-next-line:no-unused-expression
       new Hero();
+    }).toThrowError();
+  });
+});
+
+describe('CUnit decorators', () => {
+  test('should add CUnit metadata to a class when decorating a method with @CUnit', () => {
+    @MUnit('default')
+    class TestEntity {}
+
+    const entityMetadata: RegistryMetada = Reflect.getMetadata(
+      METADATA_KEY.munit,
+      TestEntity
+    );
+
+    expect(entityMetadata).toMatchSnapshot();
+  });
+
+  test('should fail when decorated multiple times with @CUnit', () => {
+    expect(function() {
+      @MUnit('default')
+      @MUnit('default2')
+      class TestBean {}
+
+      // tslint:disable-next-line:no-unused-expression
+      new TestBean();
     }).toThrowError();
   });
 });

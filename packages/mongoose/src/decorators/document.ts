@@ -3,6 +3,9 @@ import { TYPE, METADATA_KEY } from '../constants';
 import { DocumentOptions, DocumentMetadata } from '../interfaces';
 import { mongoose } from '../mongoose';
 
+/**
+ * Document decorator
+ */
 export function Document(v: string | DocumentOptions) {
   return function(target: any) {
     let opts: DocumentOptions;

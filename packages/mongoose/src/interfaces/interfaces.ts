@@ -20,6 +20,8 @@ export interface IWrite<T, U extends mongoose.Document> {
 }
 
 export interface MongooseConfiguration {
+  name?: string;
+
   uri?: string;
 
   host?: string;

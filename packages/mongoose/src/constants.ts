@@ -4,7 +4,12 @@ export const TYPE = {
 };
 
 export const METADATA_KEY = {
-  document: '_document'
+  document: '_document',
+  munit: '_munit'
+};
+
+export const ERRORS_MSGS = {
+  DUPLICATED_MUNIT_DECORATOR: `Cannot apply @MUnit decorator multiple times.`
 };
 
 export const LIST_DOCUMENT = Symbol('LIST_DOCUMENT');

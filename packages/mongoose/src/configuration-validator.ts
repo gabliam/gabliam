@@ -1,7 +1,8 @@
 import { Joi } from '@gabliam/core';
 
-export const configurationValidator = Joi.object()
+const mongooseValidator = Joi.object()
   .keys({
+    name: Joi.string(),
     uri: Joi.string(),
     host: Joi.string(),
     database_name: Joi.string(),
@@ -10,3 +11,8 @@ export const configurationValidator = Joi.object()
   })
   .xor('uri', 'host')
   .and('host', 'database_name');
+
+export const configurationValidator = Joi.alternatives(
+  mongooseValidator,
+  Joi.array().items(mongooseValidator)
+);
