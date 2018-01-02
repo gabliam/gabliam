@@ -1,6 +1,6 @@
 {
   "name": "typeorm-sample",
-  "version": "7.1.1",
+  "version": "7.2.0",
   "private": true,
   "description": "sample with decorator",
   "scripts": {
@@ -18,9 +18,9 @@
   },
   "homepage": "https://github.com/gabliam/sample#readme",
   "dependencies": {
-    "@gabliam/core": "^7.1.1",
-    "@gabliam/express": "^7.1.1",
-    "@gabliam/typeorm": "^7.1.1",
+    "@gabliam/core": "^7.2.0",
+    "@gabliam/express": "^7.2.0",
+    "@gabliam/typeorm": "^7.2.0",
     "body-parser": "^1.16.1",
     "helmet": "^3.4.0",
     "reflect-metadata": "^0.1.9",
