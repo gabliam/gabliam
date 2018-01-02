@@ -7,7 +7,7 @@ import {
   ConnectionManager,
   CUnit
 } from '../src';
-import { Gabliam, Service } from '@gabliam/core';
+import { Gabliam } from '@gabliam/core';
 
 let appTest: TypeormPluginTest;
 beforeEach(async () => {
@@ -194,11 +194,13 @@ test('must fail when CUnit not found', async () => {
 
 test('must fail when getConnection not found', async () => {
   appTest.addConf('application.typeorm.connectionOptions', {
+    name: 'getConnection',
     type: 'sqlite',
     database: 'getConnection.sqlite',
     synchronize: true
   });
 
+  @CUnit('getConnection')
   @Entity('Photo')
   class Photo {
     @PrimaryGeneratedColumn() id?: number;
@@ -209,13 +211,10 @@ test('must fail when getConnection not found', async () => {
     name: string;
   }
 
-  @Service()
-  class Test {
-    constructor(connectionManager: ConnectionManager) {
-      connectionManager.getConnection('notfound');
-    }
-  }
   appTest.addClass(Photo);
-  appTest.addClass(Test);
-  await expect(appTest.gab.buildAndStart()).rejects.toMatchSnapshot();
+  await appTest.gab.buildAndStart();
+  const connection = appTest.gab.container.get(ConnectionManager);
+  await expect(() =>
+    connection.getConnection('notfound')
+  ).toThrowErrorMatchingSnapshot();
 });
