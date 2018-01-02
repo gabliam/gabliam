@@ -199,9 +199,10 @@ export class AmqpConnection {
   }
 
   getQueueName(queueName: string) {
+    // The parser ast sometimes consider the string (with uuid) as a binary so return NaN.
     return this.valueExtractor(
-      `application.amqp.queues.${queueName}.queueName`,
-      this.valueExtractor(queueName, queueName)
+      `application.amqp.queues['${queueName}'].queueName`,
+      this.valueExtractor(`"${queueName}"`, queueName)
     );
   }
 
