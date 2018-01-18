@@ -4,8 +4,8 @@ exports[`Mutation test 1`] = `
 Object {
   "header": Object {
     "connection": "close",
+    "content-length": "47",
     "content-type": "application/json",
-    "transfer-encoding": "chunked",
     "x-powered-by": "Express",
   },
   "req": Object {
@@ -63,8 +63,8 @@ exports[`Query test 1`] = `
 Object {
   "header": Object {
     "connection": "close",
+    "content-length": "77",
     "content-type": "application/json",
-    "transfer-encoding": "chunked",
     "x-powered-by": "Express",
   },
   "req": Object {
