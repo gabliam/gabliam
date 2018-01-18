@@ -135,6 +135,40 @@ test('with config host & database', async () => {
   await connection.conn.dropDatabase();
 });
 
+test('with one connection with name and entity without cunit', async () => {
+  appTest.addConf('application.mongoose', {
+    host: '127.0.0.1',
+    database_name: 'mongoosetest',
+    name: 'test'
+  });
+
+  @Document('Hero')
+  class Hero {
+    static getSchema() {
+      return new mongoose.Schema({
+        name: {
+          type: String,
+          required: true
+        }
+      });
+    }
+  }
+
+  appTest.addClass(Hero);
+
+  await expect(appTest.gab.buildAndStart()).resolves.toBeInstanceOf(Gabliam);
+  const connection = appTest.gab.container.get(MongooseConnection);
+  const repo = connection.getRepository<HeroModel>('Hero');
+  let res = await repo.findAll();
+  expect(res).toMatchSnapshot();
+  await repo.create({
+    name: 'testoneconnection'
+  });
+  res = await repo.findAll();
+  expect(res[0].name).toMatchSnapshot();
+  await connection.conn.dropDatabase();
+});
+
 test('with config 2 database', async () => {
   appTest.addConf('application.mongoose', [
     {

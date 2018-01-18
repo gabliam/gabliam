@@ -27,3 +27,7 @@ exports[`with config host & database 2`] = `"test"`;
 exports[`with config uri 1`] = `Array []`;
 
 exports[`with config uri 2`] = `"test"`;
+
+exports[`with one connection with name and entity without cunit 1`] = `Array []`;
+
+exports[`with one connection with name and entity without cunit 2`] = `"testoneconnection"`;
