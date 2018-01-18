@@ -50,11 +50,11 @@ const spyD = sinon.spy(middleware, 'd');
 
 beforeEach(async () => {
   result = '';
-  spyA.reset();
-  spyB.reset();
-  spyC.reset();
-  spyE.reset();
-  spyD.reset();
+  spyA.resetHistory();
+  spyB.resetHistory();
+  spyC.resetHistory();
+  spyE.resetHistory();
+  spyD.resetHistory();
   appTest = new KoaPluginTest();
 });
 

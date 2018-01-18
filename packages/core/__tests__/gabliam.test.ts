@@ -115,12 +115,12 @@ describe('test plugin', async () => {
     });
 
     afterAll(() => {
-      build.reset();
-      bind.reset();
-      config.reset();
-      start.reset();
-      stop.reset();
-      destroy.reset();
+      build.resetHistory();
+      bind.resetHistory();
+      config.resetHistory();
+      start.resetHistory();
+      stop.resetHistory();
+      destroy.resetHistory();
     });
 
     test('gabliam build', async () => {
@@ -157,12 +157,12 @@ describe('test plugin', async () => {
     });
 
     afterAll(() => {
-      build.reset();
-      bind.reset();
-      config.reset();
-      start.reset();
-      stop.reset();
-      destroy.reset();
+      build.resetHistory();
+      bind.resetHistory();
+      config.resetHistory();
+      start.resetHistory();
+      stop.resetHistory();
+      destroy.resetHistory();
     });
 
     test('gabliam build', async () => {

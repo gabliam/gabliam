@@ -48,9 +48,9 @@ describe('Middleware:', () => {
 
   beforeEach(() => {
     result = '';
-    spyA.reset();
-    spyB.reset();
-    spyC.reset();
+    spyA.resetHistory();
+    spyB.resetHistory();
+    spyC.resetHistory();
   });
 
   test('should call method-level middleware correctly (GET)', async () => {

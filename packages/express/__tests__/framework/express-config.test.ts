@@ -52,11 +52,11 @@ const spyD = sinon.spy(middleware, 'd');
 
 beforeEach(async () => {
   result = '';
-  spyA.reset();
-  spyB.reset();
-  spyC.reset();
-  spyE.reset();
-  spyD.reset();
+  spyA.resetHistory();
+  spyB.resetHistory();
+  spyC.resetHistory();
+  spyE.resetHistory();
+  spyD.resetHistory();
   appTest = new ExpressPluginTest();
 });
 
@@ -87,7 +87,9 @@ test('@ExpressConfig', async () => {
   appTest.addClass(ServerConfig);
   await appTest.build();
 
-  const response = await supertest(appTest.app).get('/').expect(200);
+  const response = await supertest(appTest.app)
+    .get('/')
+    .expect(200);
   expect(spyA.calledOnce).toBe(true);
   expect(spyB.calledOnce).toBe(true);
   expect(spyC.calledOnce).toBe(true);
@@ -126,7 +128,9 @@ test('@ExpressConfig Order', async () => {
   appTest.addClass(ServerConfig);
   await appTest.build();
 
-  const response = await supertest(appTest.app).get('/').expect(200);
+  const response = await supertest(appTest.app)
+    .get('/')
+    .expect(200);
   expect(spyA.calledOnce).toBe(true);
   expect(spyB.calledOnce).toBe(true);
   expect(spyC.calledOnce).toBe(true);
@@ -155,7 +159,9 @@ test('ErrorConfig', async () => {
   appTest.addClass(ServerConfig);
   await appTest.build();
 
-  const response = await supertest(appTest.app).get('/').expect(500);
+  const response = await supertest(appTest.app)
+    .get('/')
+    .expect(500);
   expect(spyE.calledOnce).toBe(true);
   expect(response).toMatchSnapshot();
   expect(result).toMatchSnapshot();
@@ -187,7 +193,9 @@ test('ErrorConfig order', async () => {
   appTest.addClass(ServerConfig);
   await appTest.build();
 
-  const response = await supertest(appTest.app).get('/').expect(500);
+  const response = await supertest(appTest.app)
+    .get('/')
+    .expect(500);
   expect(spyE.calledOnce).toBe(true);
   expect(spyD.calledOnce).toBe(true);
   expect(response).toMatchSnapshot();

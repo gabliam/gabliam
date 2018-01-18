@@ -27,8 +27,8 @@ describe('with config', () => {
   });
 
   afterAll(() => {
-    build.reset();
-    bind.reset();
+    build.resetHistory();
+    bind.resetHistory();
   });
 
   test('gabliam build', async () => {
@@ -48,8 +48,8 @@ describe('without config', () => {
   });
 
   afterAll(() => {
-    build.reset();
-    bind.reset();
+    build.resetHistory();
+    bind.resetHistory();
   });
 
   test('gabliam build', async () => {

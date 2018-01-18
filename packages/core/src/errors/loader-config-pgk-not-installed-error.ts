@@ -7,10 +7,6 @@ export class LoaderConfigPgkNotInstalledError extends Error {
     Object.setPrototypeOf(this, LoaderConfigPgkNotInstalledError.prototype);
 
     // tslint:disable-next-line:max-line-length
-    this.message = `${
-      loaderName
-    } package has not been found installed. Try to install it: npm install ${
-      loaderName
-    } --save or yarn add ${loaderName}`;
+    this.message = `${loaderName} package has not been found installed. Try to install it: npm install ${loaderName} --save or yarn add ${loaderName}`;
   }
 }

@@ -14,7 +14,7 @@ describe('without config folder', () => {
 
   afterEach(async () => {
     await appTest.destroy();
-    p.reset();
+    p.resetHistory();
   });
 
   test('without config', async () => {
@@ -48,7 +48,7 @@ describe('with config folder', () => {
 
   afterEach(async () => {
     await appTest.destroy();
-    p.reset();
+    p.resetHistory();
   });
 
   test('logger', async () => {

@@ -100,7 +100,7 @@ describe('Listener test', () => {
       expect(resp).toMatchSnapshot();
       expect(spy.callCount).toMatchSnapshot();
       expect(spy.args).toMatchSnapshot();
-      spy.reset();
+      spy.resetHistory();
     });
   });
 });
@@ -148,7 +148,7 @@ describe('Consumer test', () => {
       expect(resp).toMatchSnapshot();
       expect(spy.callCount).toMatchSnapshot();
       expect(spy.args).toMatchSnapshot();
-      spy.reset();
+      spy.resetHistory();
     });
   });
 });
@@ -172,7 +172,7 @@ test('consumer throw error', async () => {
   expect(resp).toMatchSnapshot();
   expect(spy.callCount).toMatchSnapshot();
   expect(spy.args).toMatchSnapshot();
-  spy.reset();
+  spy.resetHistory();
 });
 
 test('sendAndReceive timeout', async () => {
@@ -221,5 +221,5 @@ test('start 2 times', async () => {
   expect(resp).toMatchSnapshot();
   expect(spy.callCount).toMatchSnapshot();
   expect(spy.args).toMatchSnapshot();
-  spy.reset();
+  spy.resetHistory();
 });

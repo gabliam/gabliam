@@ -54,7 +54,7 @@
   "lint-staged": {
     "*.ts": [
       "prettier --single-quote --write",
-      "tslint --type-check --project tsconfig.json",
+      "tslint --project tsconfig.json",
       "git add"
     ]
   },
