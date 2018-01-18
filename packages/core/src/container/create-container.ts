@@ -1,13 +1,34 @@
 import { makeLoggerMiddleware } from 'inversify-logger-middleware';
-import { makeValueMiddleware } from './value-middleware';
+import { makeActivationValue } from './value-activation';
 import { Container } from './container';
-import { makeInjectMiddleware } from './inject-container-middleware';
+import { makeActivationInject } from './inject-container-activation';
+import * as _ from 'lodash';
+import { ContainerActivationHook } from './interfaces';
 
 /**
  * Create the inversify container
  */
-export function createContainer(): Container {
+export function createContainer(
+  ...activationHooks: ContainerActivationHook[]
+): Container {
   const container = new Container();
+  activationHooks.unshift(
+    makeActivationInject(container),
+    makeActivationValue(container)
+  );
+
+  // add custom onActivation hooks
+  container.bind = <any>_.wrap(
+    container.bind,
+    (originalBind, ...rest: any[]) => {
+      const binding = originalBind.apply(container, rest);
+      binding._binding.onActivation = (context: any, instance: any) => {
+        const wires = _.flow(activationHooks);
+        return wires(instance);
+      };
+      return binding;
+    }
+  );
 
   const middlewares = [];
 
@@ -17,8 +38,6 @@ export function createContainer(): Container {
     middlewares.push(logger);
   }
 
-  middlewares.push(makeValueMiddleware(container));
-  middlewares.push(makeInjectMiddleware(container));
   container.applyMiddleware(...middlewares);
   return container;
 }
