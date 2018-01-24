@@ -47,7 +47,9 @@ export class PluginMongooseConfig {
   createManager() {
     debug('mongooseConfiguration', this.mongooseConfiguration);
     if (!this.mongooseConfiguration) {
-      throw new Error(`PluginTypeormConfig mongooseConfiguration is mandatory`);
+      throw new Error(
+        `PluginMongooseConfig mongooseConfiguration is mandatory`
+      );
     }
     let mongooseConfiguration: MongooseConfiguration[];
     if (Array.isArray(this.mongooseConfiguration)) {
