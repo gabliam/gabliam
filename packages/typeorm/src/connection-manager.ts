@@ -40,7 +40,7 @@ export class ConnectionManager {
   }
 
   async close() {
-    await Promise.all(this.connections.map(c => c.close));
+    await Promise.all(this.connections.map(c => c.close()));
   }
 
   getConnection(name: string) {
