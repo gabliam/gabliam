@@ -45,7 +45,9 @@ describe('Parameters:', () => {
     }
     appTest.addClass(TestController);
     await appTest.build();
-    const response = await supertest(appTest.app).get('/foo').expect(200);
+    const response = await supertest(appTest.app)
+      .get('/foo')
+      .expect(200);
     expect(response).toMatchSnapshot();
   });
 
@@ -63,7 +65,9 @@ describe('Parameters:', () => {
     }
     appTest.addClass(TestController);
     await appTest.build();
-    const response = await supertest(appTest.app).get('/42').expect(200);
+    const response = await supertest(appTest.app)
+      .get('/42')
+      .expect(200);
     expect(response).toMatchSnapshot();
   });
 
@@ -77,7 +81,9 @@ describe('Parameters:', () => {
     }
     appTest.addClass(TestController);
     await appTest.build();
-    const response = await supertest(appTest.app).get('/GET').expect(200);
+    const response = await supertest(appTest.app)
+      .get('/GET')
+      .expect(200);
     expect(response).toMatchSnapshot();
   });
 
@@ -92,7 +98,9 @@ describe('Parameters:', () => {
 
     appTest.addClass(TestController);
     await appTest.build();
-    const response = await supertest(appTest.app).get('/').expect(200);
+    const response = await supertest(appTest.app)
+      .get('/')
+      .expect(200);
     expect(response).toMatchSnapshot();
   });
 
@@ -177,7 +185,7 @@ describe('Parameters:', () => {
     expect(response).toMatchSnapshot();
   });
 
-  test('should bind a method parameter to a cookie', async () => {
+  test.only('should bind a method parameter to a cookie', async () => {
     @Controller('/')
     class TestController {
       @Get('/')
@@ -209,7 +217,9 @@ describe('Parameters:', () => {
     appTest.addClass(TestController);
     appTest.addClass(ServerConfig);
     await appTest.build();
-    const response = await supertest(appTest.app).get('/').expect(200);
+    const response = await supertest(appTest.app)
+      .get('/')
+      .expect(200);
     expect(response).toMatchSnapshot();
   });
 
@@ -232,7 +242,9 @@ describe('Parameters:', () => {
 
     appTest.addClass(TestController);
     await appTest.build();
-    const response = await supertest(appTest.app).get('/').expect(200);
+    const response = await supertest(appTest.app)
+      .get('/')
+      .expect(200);
     expect(spy.calledOnce).toBe(true);
     expect(response).toMatchSnapshot();
   });

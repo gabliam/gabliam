@@ -14,7 +14,8 @@ import {
   APP,
   SERVER,
   PARAMETER_TYPE,
-  CUSTOM_ROUTER_CREATOR
+  CUSTOM_ROUTER_CREATOR,
+  DEFAULT_PARAM_VALUE
 } from './constants';
 import { getMiddlewares } from './metadata';
 import { cleanPath } from './utils';
@@ -405,6 +406,7 @@ export class ExpressPlugin implements GabliamPlugin {
       }
 
       let res = param[name];
+
       if (res) {
         /**
          * For query, all value sare considered to string value.
@@ -427,7 +429,7 @@ export class ExpressPlugin implements GabliamPlugin {
         }
         return res;
       } else {
-        return paramType === 'query' ? undefined : param;
+        return name === DEFAULT_PARAM_VALUE ? param : undefined;
       }
     };
   }

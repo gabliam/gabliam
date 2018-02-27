@@ -5,8 +5,8 @@ Object {
   "header": Object {
     "connection": "close",
     "content-length": "2",
-    "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8\\"",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"2-ZP5c6gUPmMfHXLaW+alufW5DcRc\\"",
     "set-cookie": Array [
       "cookie=hey; Path=/",
     ],
@@ -18,7 +18,7 @@ Object {
     "method": "GET",
   },
   "status": 200,
-  "text": "{}",
+  "text": ":(",
 }
 `;
 

@@ -23,6 +23,8 @@ export enum PARAMETER_TYPE {
   NEXT
 }
 
+export const DEFAULT_PARAM_VALUE = '**$$DEFAULT_PARAM_VALUE$$**';
+
 export const DEFAULT_ROUTING_ROOT_PATH = '/';
 
 export const EXPRESS_PLUGIN_CONFIG = Symbol('GABLIAM/EXPRESS_PLUGIN_CONFIG');
