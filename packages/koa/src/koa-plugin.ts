@@ -14,7 +14,8 @@ import {
   APP,
   SERVER,
   PARAMETER_TYPE,
-  CUSTOM_ROUTER_CREATOR
+  CUSTOM_ROUTER_CREATOR,
+  DEFAULT_PARAM_VALUE
 } from './constants';
 import { getMiddlewares } from './metadata';
 import { cleanPath } from './utils';
@@ -404,7 +405,7 @@ export class KoaPlugin implements GabliamPlugin {
         }
         return res;
       } else {
-        return paramType === 'query' ? undefined : param;
+        return name === DEFAULT_PARAM_VALUE ? param : undefined;
       }
     };
   }

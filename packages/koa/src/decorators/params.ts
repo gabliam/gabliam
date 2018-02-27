@@ -1,4 +1,8 @@
-import { PARAMETER_TYPE, METADATA_KEY } from '../constants';
+import {
+  PARAMETER_TYPE,
+  METADATA_KEY,
+  DEFAULT_PARAM_VALUE
+} from '../constants';
 import { ControllerParameterMetadata, ParameterMetadata } from '../interfaces';
 
 /**
@@ -72,7 +76,7 @@ export const Next = paramDecoratorFactory(PARAMETER_TYPE.NEXT);
 function paramDecoratorFactory(
   parameterType: PARAMETER_TYPE
 ): (name?: string) => ParameterDecorator {
-  return function(name: string = 'default'): ParameterDecorator {
+  return function(name: string = DEFAULT_PARAM_VALUE): ParameterDecorator {
     return Params(parameterType, name);
   };
 }

@@ -28,6 +28,8 @@ export const KOA_PLUGIN_CONFIG = Symbol('GABLIAM/KOA_PLUGIN_CONFIG');
 
 export const APP = Symbol('GABLIAM/KOA_APP');
 
+export const DEFAULT_PARAM_VALUE = '**$$@gabliam/koa:DEFAULT_PARAM_VALUE$$**';
+
 /**
  * Represent a custom router creator
  *

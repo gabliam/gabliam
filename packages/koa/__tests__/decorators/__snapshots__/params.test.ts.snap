@@ -15,12 +15,12 @@ Object {
     },
     Object {
       "index": 2,
-      "parameterName": "default",
+      "parameterName": "**$$@gabliam/koa:DEFAULT_PARAM_VALUE$$**",
       "type": 0,
     },
     Object {
       "index": 3,
-      "parameterName": "default",
+      "parameterName": "**$$@gabliam/koa:DEFAULT_PARAM_VALUE$$**",
       "type": 1,
     },
   ],
@@ -39,12 +39,12 @@ Object {
     },
     Object {
       "index": 1,
-      "parameterName": "default",
+      "parameterName": "**$$@gabliam/koa:DEFAULT_PARAM_VALUE$$**",
       "type": 6,
     },
     Object {
       "index": 2,
-      "parameterName": "default",
+      "parameterName": "**$$@gabliam/koa:DEFAULT_PARAM_VALUE$$**",
       "type": 7,
     },
   ],
