@@ -184,10 +184,7 @@ export class Gabliam {
    * Load config file and bind result in APP_CONFIG
    */
   private async _initializeConfig() {
-    this.config = await this.loaderConfig.load(
-      this.options.scanPath,
-      this.options.config
-    );
+    this.config = await this.loaderConfig.load(this.options.config);
     const config = this.config;
     this.container.bind(APP_CONFIG).toConstantValue(config);
     this.container

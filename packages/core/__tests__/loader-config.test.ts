@@ -16,7 +16,6 @@ test(`with config folder doesn't exist`, async () => {
 
 test(`with bad application.yml`, async () => {
   const config = await loader.load(
-    __dirname,
     path.resolve(__dirname, './fixtures/badyml')
   );
   expect(config).toMatchSnapshot();
@@ -28,7 +27,7 @@ test(`with application.yml empty`, async () => {
       'application.yml': ``
     }
   });
-  const config = await loader.load(__dirname, 'test/config');
+  const config = await loader.load(path.resolve(__dirname, 'test/config'));
   expect(config).toMatchSnapshot();
   mock.restore();
 });
@@ -42,14 +41,13 @@ test(`with application.yml with nothing`, async () => {
               `
     }
   });
-  const config = await loader.load(__dirname, 'test/config');
+  const config = await loader.load(path.resolve(__dirname, 'test/config'));
   expect(config).toMatchSnapshot();
   mock.restore();
 });
 
 test(`with application.yml`, async () => {
   const config = await loader.load(
-    __dirname,
     path.resolve(__dirname, './fixtures/config')
   );
   expect(config).toMatchSnapshot();
@@ -74,17 +72,17 @@ describe('with application.yml', async () => {
   });
 
   test('load application.yml', async () => {
-    const config = await loader.load(__dirname, 'test/config');
+    const config = await loader.load('test/config');
     expect(config).toMatchSnapshot();
   });
 
   test('load with bad profile', async () => {
-    const config = await loader.load(__dirname, 'test/config', 'int');
+    const config = await loader.load('test/config', 'int');
     expect(config).toMatchSnapshot();
   });
 
   test('load with prod profile', async () => {
-    const config = await loader.load(__dirname, 'test/config', 'prod');
+    const config = await loader.load('test/config', 'prod');
     expect(config).toMatchSnapshot();
   });
 
@@ -110,7 +108,7 @@ describe('with application.yml with bad handler', async () => {
   });
 
   test('must throw error', async () => {
-    const config = loader.load(__dirname, 'test/config', 'int');
+    const config = loader.load('test/config', 'int');
     await expect(config).rejects.toMatchSnapshot();
   });
 
@@ -118,7 +116,7 @@ describe('with application.yml with bad handler', async () => {
 });
 
 test(`with application.json`, async () => {
-  const config = await loader.load(__dirname, [
+  const config = await loader.load([
     {
       loader: FileLoader,
       options: {
@@ -131,7 +129,7 @@ test(`with application.json`, async () => {
 });
 
 test(`with json and yml`, async () => {
-  const config = await loader.load(__dirname, [
+  const config = await loader.load([
     {
       loader: FileLoader,
       options: {
@@ -144,7 +142,7 @@ test(`with json and yml`, async () => {
 });
 
 test(`with yml and json`, async () => {
-  const config = await loader.load(__dirname, [
+  const config = await loader.load([
     {
       loader: FileLoader,
       options: {
@@ -157,7 +155,7 @@ test(`with yml and json`, async () => {
 });
 
 test(`with bad application.json`, async () => {
-  const config = await loader.load(__dirname, [
+  const config = await loader.load([
     {
       loader: FileLoader,
       options: {
@@ -175,7 +173,7 @@ test(`with application.json empty`, async () => {
       'application.json': ``
     }
   });
-  const config = await loader.load(__dirname, [
+  const config = await loader.load([
     {
       loader: FileLoader,
       options: {
@@ -197,7 +195,7 @@ test(`with application.json with nothing`, async () => {
               `
     }
   });
-  const config = await loader.load(__dirname, [
+  const config = await loader.load([
     {
       loader: FileLoader,
       options: {
@@ -211,7 +209,7 @@ test(`with application.json with nothing`, async () => {
 });
 
 test(`with bad parser`, async () => {
-  const config = loader.load(__dirname, [
+  const config = loader.load([
     {
       loader: FileLoader,
       options: {
@@ -224,7 +222,7 @@ test(`with bad parser`, async () => {
 });
 
 test(`with bad loader`, async () => {
-  const config = loader.load(__dirname, [
+  const config = loader.load([
     {
       loader: 'BadLoader'
     }

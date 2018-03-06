@@ -9,11 +9,10 @@ export class LoaderConfigTest extends LoaderConfig {
   }
 
   async load(
-    scanPath: string,
     folder: string,
     profile = process.env.PROFILE || undefined
   ): Promise<any> {
-    const config = await super.load(scanPath, folder, profile);
+    const config = await super.load(folder, profile);
     return _.merge({}, config, this.conf);
   }
 }

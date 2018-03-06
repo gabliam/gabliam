@@ -4,6 +4,7 @@ import * as _ from 'lodash';
 import * as d from 'debug';
 import { promisify } from 'util';
 import { ParserNotSupportedError } from '../errors';
+import { configResolver, Resolver } from './config-resolver';
 
 // Promisify
 const glob = promisify(require('glob')); // require and no import for typings bug
@@ -26,6 +27,8 @@ export default async function FileLoader(
   }
 
   debug('loadConfig', folder);
+  const resolver = configResolver(folder);
+
   const files: string[] = await glob(
     `**/application?(-+([a-zA-Z])).@(${types.join('|')})`,
     {
@@ -33,7 +36,7 @@ export default async function FileLoader(
     }
   );
 
-  let config = {};
+  let config: Object = {};
 
   if (!files || files.length === 0) {
     return config;
@@ -47,7 +50,7 @@ export default async function FileLoader(
       config = _.merge(
         {},
         config,
-        await loadFile(type, `${folder}/${defaultProfileFile}`)
+        await loadFile(type, `${folder}/${defaultProfileFile}`, resolver)
       );
     }
 
@@ -60,7 +63,7 @@ export default async function FileLoader(
         config = _.merge(
           {},
           config,
-          await loadFile(type, `${folder}/${profileFile}`)
+          await loadFile(type, `${folder}/${profileFile}`, resolver)
         );
       }
     }
@@ -69,17 +72,26 @@ export default async function FileLoader(
   return config;
 }
 
-async function loadFile(parserName: string, filePath: string): Promise<Object> {
+async function loadFile(
+  parserName: string,
+  filePath: string,
+  resolver: Resolver
+): Promise<Object> {
   const data = await readFile(filePath, 'utf8');
+  let config = {};
   switch (parserName) {
     case 'yml':
     case 'yaml':
-      return ymlParser(data);
+      config = ymlParser(data);
+      break;
     case 'json':
-      return jsonParser(data);
+      config = jsonParser(data);
+      break;
     default:
       throw new ParserNotSupportedError(parserName);
   }
+
+  return await resolver(config);
 }
 
 function jsonParser(data: string) {
