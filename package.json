@@ -11,7 +11,7 @@
     "build": "lerna run build",
     "test": "jest --runInBand",
     "test:ci": "jest --runInBand --coverage && yarn run coverage",
-    "coverage": "node remap_coverage.js && rimraf coverage_jest_raw && codecov",
+    "coverage": "codecov",
     "release": "yarn run build && yarn run lint && yarn run test && lerna publish",
     "prettier": "prettier --single-quote --write --parser typescript \"./{packages,examples}/**/src/**/*.ts\"",
     "example:graphql": "lerna run --scope graphql-sample start --stream",
@@ -40,7 +40,6 @@
     "prettier": "^1.7.4",
     "publish-please": "^2.3.1",
     "reflect-metadata": "^0.1.10",
-    "remap-istanbul": "^0.9.5",
     "rimraf": "^2.6.2",
     "sinon": "^4.0.0",
     "supertest": "^3.0.0",
@@ -62,7 +61,7 @@
     "transform": {
       ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
-    "collectCoverage": false,
+    "mapCoverage": true,
     "collectCoverageFrom": [
       "packages/**/src/**/*.{ts}",
       "!packages/**/src/interfaces/**",
@@ -73,7 +72,6 @@
       "!**/node_modules/**",
       "!**/vendor/**"
     ],
-    "coverageDirectory": "coverage_jest_raw",
     "setupTestFrameworkScriptFile": "<rootDir>/tests/setup.js",
     "testEnvironment": "node",
     "testRegex": "(/__tests__/.*)\\.test\\.(ts|tsx|js)$",
