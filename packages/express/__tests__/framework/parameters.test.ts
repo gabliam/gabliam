@@ -185,7 +185,7 @@ describe('Parameters:', () => {
     expect(response).toMatchSnapshot();
   });
 
-  test.only('should bind a method parameter to a cookie', async () => {
+  test('should bind a method parameter to a cookie', async () => {
     @Controller('/')
     class TestController {
       @Get('/')

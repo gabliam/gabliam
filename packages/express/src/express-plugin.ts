@@ -361,9 +361,6 @@ export class ExpressPlugin implements GabliamPlugin {
 
     for (const item of params) {
       switch (item.type) {
-        default:
-          args[item.index] = res;
-          break; // response
         case PARAMETER_TYPE.REQUEST:
           args[item.index] = getParam(req, null, item);
           break;
@@ -385,6 +382,9 @@ export class ExpressPlugin implements GabliamPlugin {
         case PARAMETER_TYPE.COOKIES:
           args[item.index] = getParam(req, 'cookies', item);
           break;
+        default:
+          args[item.index] = res;
+          break; // response
       }
     }
     args.push(req, res, next);
