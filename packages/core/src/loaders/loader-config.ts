@@ -29,12 +29,11 @@ export class LoaderConfig {
    * @returns any
    */
   async load(
-    scanPath: string,
+    configPath: string,
     configOptions: string | LoaderConfigOptions[],
     profile = process.env.PROFILE || undefined
   ): Promise<any> {
-    // console.log('load', scanPath)
-    // create resolver
+    debug('load', configPath);
 
     let loaderConfigOptions: LoaderConfigOptions[];
     if (typeof configOptions === 'string') {
@@ -51,13 +50,13 @@ export class LoaderConfig {
     }
 
     const resolver = shortstop.create();
-    resolver.use('file', handlers.file(scanPath));
-    resolver.use('path', handlers.path(scanPath));
+    resolver.use('file', handlers.file(configPath));
+    resolver.use('path', handlers.path(configPath));
     resolver.use('base64', handlers.base64());
     resolver.use('env', handlers.env());
-    resolver.use('require', handlers.require(scanPath));
-    resolver.use('exec', handlers.exec(scanPath));
-    resolver.use('glob', handlers.glob(scanPath));
+    resolver.use('require', handlers.require(configPath));
+    resolver.use('exec', handlers.exec(configPath));
+    resolver.use('glob', handlers.glob(configPath));
 
     let config = {};
 
