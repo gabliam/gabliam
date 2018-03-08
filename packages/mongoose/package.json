@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/mongoose",
-  "version": "7.3.1",
+  "version": "7.4.0",
   "description": "mongoose plugin for gabliam",
   "keywords": [
     "gabliam",
@@ -32,7 +32,7 @@
     "@gabliam/core": "^7.2.0"
   },
   "devDependencies": {
-    "@gabliam/core": "^7.3.0",
+    "@gabliam/core": "^7.4.0",
     "@types/debug": "^0.0.30"
   },
   "dependencies": {
