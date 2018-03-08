@@ -2,7 +2,6 @@ import { Gabliam } from '@gabliam/core';
 import { GabliamTest } from '@gabliam/core/lib/testing';
 import * as koa from 'koa';
 import * as http from 'http';
-import * as path from 'path';
 import KoaPlugin, { APP } from '../src/index';
 import * as supertest from 'supertest';
 
@@ -10,10 +9,7 @@ export class KoaPluginTest extends GabliamTest {
   public app: koa;
 
   constructor() {
-    const gab = new Gabliam({
-      scanPath: path.resolve(__dirname, 'gabliam'),
-      config: path.resolve(__dirname, 'gabliam')
-    }).addPlugin(KoaPlugin);
+    const gab = new Gabliam().addPlugin(KoaPlugin);
     super(gab);
   }
 

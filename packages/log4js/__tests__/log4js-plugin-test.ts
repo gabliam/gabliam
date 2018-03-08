@@ -4,9 +4,8 @@ import * as path from 'path';
 import Log4jsPlugin from '../src/index';
 
 export class Log4jsPluginTest extends GabliamTest {
-  constructor(p = path.resolve(__dirname, 'gabliam')) {
+  constructor(p?: string) {
     const gab = new Gabliam({
-      scanPath: p,
       config: p
     }).addPlugin(Log4jsPlugin);
     super(gab);

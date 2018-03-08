@@ -1,17 +1,13 @@
 import { Gabliam } from '@gabliam/core';
 import { GabliamTest } from '@gabliam/core/lib/testing';
 import * as e from 'express';
-import * as path from 'path';
 import ExpressPlugin, { APP } from '../src/index';
 
 export class ExpressPluginTest extends GabliamTest {
   public app: e.Application;
 
   constructor() {
-    const gab = new Gabliam({
-      scanPath: path.resolve(__dirname, 'gabliam'),
-      config: path.resolve(__dirname, 'gabliam')
-    }).addPlugin(ExpressPlugin);
+    const gab = new Gabliam().addPlugin(ExpressPlugin);
     super(gab);
   }
 

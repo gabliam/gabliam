@@ -12,12 +12,7 @@ let gab: Gabliam;
 describe('with config', () => {
   beforeAll(() => {
     const g = new GabliamTest(
-      new Gabliam({
-        scanPath: path.resolve(__dirname, 'gabliam'),
-        config: path.resolve(__dirname, 'gabliam')
-      })
-        .addPlugin(KoaPlugin)
-        .addPlugin(GraphqlPlugin)
+      new Gabliam().addPlugin(KoaPlugin).addPlugin(GraphqlPlugin)
     );
     gab = g.gab;
 

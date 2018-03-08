@@ -27,10 +27,14 @@ export class LoaderConfig {
    * @returns any
    */
   async load(
-    configOptions: string | LoaderConfigOptions[],
+    configOptions: string | LoaderConfigOptions[] | undefined,
     profile = process.env.PROFILE || undefined
   ): Promise<any> {
     debug('load', configOptions);
+
+    if (configOptions === undefined) {
+      return {};
+    }
 
     let loaderConfigOptions: LoaderConfigOptions[];
     if (typeof configOptions === 'string') {

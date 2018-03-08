@@ -24,24 +24,21 @@ export class LoaderModule {
    * @param  {string} scan
    * @param  {GabliamPlugin[]} plugins
    */
-  load(scan: string, plugins: GabliamPlugin[]) {
-    const folders = plugins.reduce(
-      (prev, current) => {
-        if (
-          isObject(current) &&
-          current.constructor &&
-          Reflect.hasMetadata(METADATA_KEY.scan, current.constructor)
-        ) {
-          const paths = <string[]>Reflect.getMetadata(
-            METADATA_KEY.scan,
-            current.constructor
-          );
-          prev.push(...paths);
-        }
-        return prev;
-      },
-      [scan]
-    );
+  load(scan: string | undefined, plugins: GabliamPlugin[]) {
+    const folders = plugins.reduce((prev, current) => {
+      if (
+        isObject(current) &&
+        current.constructor &&
+        Reflect.hasMetadata(METADATA_KEY.scan, current.constructor)
+      ) {
+        const paths = <string[]>Reflect.getMetadata(
+          METADATA_KEY.scan,
+          current.constructor
+        );
+        prev.push(...paths);
+      }
+      return prev;
+    }, scan ? [scan] : []);
     debug('folders to load', folders);
     return this.loadFolders(...folders);
   }

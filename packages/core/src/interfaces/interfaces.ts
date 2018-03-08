@@ -10,12 +10,12 @@ export interface GabliamConfig {
   /**
    * Path to scan
    */
-  scanPath: string;
+  scanPath?: string;
 
   /**
    * Path of config
    */
-  config: string | LoaderConfigOptions[];
+  config?: string | LoaderConfigOptions[];
 }
 
 /**

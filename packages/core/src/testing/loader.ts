@@ -1,4 +1,4 @@
-import { LoaderConfig } from '../loaders';
+import { LoaderConfig, LoaderConfigOptions } from '../loaders';
 import * as _ from 'lodash';
 
 export class LoaderConfigTest extends LoaderConfig {
@@ -9,10 +9,10 @@ export class LoaderConfigTest extends LoaderConfig {
   }
 
   async load(
-    folder: string,
+    configOptions: string | LoaderConfigOptions[] | undefined,
     profile = process.env.PROFILE || undefined
   ): Promise<any> {
-    const config = await super.load(folder, profile);
+    const config = await super.load(configOptions, profile);
     return _.merge({}, config, this.conf);
   }
 }

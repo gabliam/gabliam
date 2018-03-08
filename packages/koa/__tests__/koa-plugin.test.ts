@@ -15,12 +15,7 @@ describe('test plugin', async () => {
 
   describe('with config', () => {
     beforeAll(() => {
-      const g = new GabliamTest(
-        new Gabliam({
-          scanPath: path.resolve(__dirname, 'gabliam'),
-          config: path.resolve(__dirname, 'gabliam')
-        }).addPlugin(KoaPlugin)
-      );
+      const g = new GabliamTest(new Gabliam().addPlugin(KoaPlugin));
       gab = g.gab;
 
       @Config()

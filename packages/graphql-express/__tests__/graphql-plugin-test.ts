@@ -8,13 +8,8 @@ import GraphqlPlugin from '../src/index';
 export class GraphqlPluginTest extends GabliamTest {
   public app: e.Application;
 
-  constructor(p = path.resolve(__dirname, 'gabliam')) {
-    const gab = new Gabliam({
-      scanPath: p,
-      config: p
-    })
-      .addPlugin(ExpressPlugin)
-      .addPlugin(GraphqlPlugin);
+  constructor() {
+    const gab = new Gabliam().addPlugin(ExpressPlugin).addPlugin(GraphqlPlugin);
     super(gab);
   }
 

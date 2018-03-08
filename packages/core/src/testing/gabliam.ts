@@ -1,4 +1,3 @@
-import * as path from 'path';
 import { Gabliam } from '../gabliam';
 import { LoaderConfigTest } from './loader';
 import { METADATA_KEY } from '../constants';
@@ -14,10 +13,7 @@ export class GabliamTest {
     if (gab) {
       this.gab = gab;
     } else {
-      this.gab = new Gabliam({
-        scanPath: path.resolve(__dirname, 'gabliam'),
-        config: path.resolve(__dirname, 'gabliam')
-      });
+      this.gab = new Gabliam();
     }
 
     this.loaderConfig = this.gab.loaderConfig = new LoaderConfigTest();

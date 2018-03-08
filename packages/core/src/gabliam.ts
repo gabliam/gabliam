@@ -23,8 +23,7 @@ import { ExpressionParser } from '@gabliam/expression';
 const debug = d('Gabliam:core');
 
 const DEFAULT_CONFIG: GabliamConfig = {
-  scanPath: process.env.PWD!,
-  config: process.env.GABLIAM_CONFIG_PATH || process.env.PWD!
+  config: process.env.GABLIAM_CONFIG_PATH
 };
 
 /**
@@ -67,7 +66,7 @@ export class Gabliam {
     } else {
       if (_.isString(options)) {
         this.options = {
-          scanPath: options,
+          ...DEFAULT_CONFIG,
           config: options
         };
       } else {
