@@ -4,7 +4,7 @@ import { Configuration } from 'log4js';
 
 @PluginConfig()
 export class LoggerConfig {
-  @Value('application.loggerConfig') loggerConfig: Configuration | null;
+  @Value('application.loggerConfig') loggerConfig!: Configuration | null;
 
   @Bean('logger')
   createLogger() {

@@ -25,9 +25,9 @@ enum ConnectionState {
 }
 
 export class AmqpConnection {
-  private connection: amqp.Connection;
+  private connection!: amqp.Connection;
 
-  private channel: amqp.Channel;
+  private channel!: amqp.Channel;
 
   private state = ConnectionState.stopped;
 

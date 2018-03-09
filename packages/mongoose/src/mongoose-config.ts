@@ -21,7 +21,7 @@ const debug = d('Gabliam:Plugin:mongoose');
 @PluginConfig()
 export class PluginMongooseConfig {
   @Value('application.mongoose', configurationValidator)
-  mongooseConfiguration: MongooseConfiguration | MongooseConfiguration[];
+  mongooseConfiguration!: MongooseConfiguration | MongooseConfiguration[];
 
   listDocument: Function[];
 

@@ -34,7 +34,7 @@
     "@gabliam/cache": "^7.4.0",
     "@gabliam/core": "^7.4.0",
     "@types/debug": "^0.0.30",
-    "@types/node": "^8.0.14",
+    "@types/node": "^9.4.7",
     "@types/redis": "^2.8.2"
   },
   "dependencies": {

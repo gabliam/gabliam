@@ -15,10 +15,10 @@ import { AmqpConnection } from './amqp-connection';
 @PluginConfig()
 export class AmqpConfig {
   @Value('application.amqp.queues', schemaPlugin)
-  private queueConfig: { [k: string]: QueueConfiguration };
+  private queueConfig!: { [k: string]: QueueConfiguration };
 
   @Value('application.amqp.url', Joi.string().required())
-  private url: string;
+  private url!: string;
 
   constructor(@inject(VALUE_EXTRACTOR) public valueExtractor: ValueExtractor) {}
 

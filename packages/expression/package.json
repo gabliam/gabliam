@@ -29,7 +29,7 @@
   "devDependencies": {
     "@types/escodegen": "^0.0.6",
     "@types/esprima": "^4.0.1",
-    "@types/node": "^8.0.14"
+    "@types/node": "^9.4.7"
   },
   "dependencies": {
     "escodegen": "^1.9.0",

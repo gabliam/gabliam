@@ -11,7 +11,7 @@ export class RestPluginConfig {
   port: number = process.env.PORT ? parseInt(process.env.PORT!, 10) : 3000;
 
   @Value('application.koa.hostname', Joi.string())
-  hostname: string;
+  hostname!: string;
 
   @Bean(KOA_PLUGIN_CONFIG)
   restConfig(): KoaPluginConfig {

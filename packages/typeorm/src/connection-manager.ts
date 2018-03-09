@@ -3,7 +3,7 @@ import { createConnections } from 'typeorm';
 import { METADATA_KEY } from './constant';
 
 export class ConnectionManager {
-  private connections: Connection[];
+  private connections!: Connection[];
 
   constructor(
     private connectionOptions: ConnectionOptions[],

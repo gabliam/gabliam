@@ -14,7 +14,7 @@ export interface RedisCacheOptions {
 }
 
 export class RedisCache implements Cache {
-  private client: RedisClient;
+  private client!: RedisClient;
 
   constructor(private name: string, private options: RedisCacheOptions = {}) {}
 

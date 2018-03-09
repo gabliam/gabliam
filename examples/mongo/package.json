@@ -23,7 +23,6 @@
     "@gabliam/mongoose": "^7.4.0",
     "body-parser": "^1.16.1",
     "helmet": "^3.4.0",
-    "mongoose": "^4.8.5",
     "reflect-metadata": "^0.1.9",
     "tslib": "^1.8.0"
   },
