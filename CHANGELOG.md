@@ -1,3 +1,13 @@
+<a name="7.5.0"></a>
+# [7.5.0](https://github.com/gabliam/gabliam/compare/v7.4.0...v7.5.0) (2018-03-09)
+
+
+### Features
+
+* Update all deps + upgrade to ts 2.7.2 ([01ce131](https://github.com/gabliam/gabliam/commit/01ce131))
+
+
+
 <a name="7.4.0"></a>
 # [7.4.0](https://github.com/gabliam/gabliam/compare/v7.3.3...v7.4.0) (2018-03-08)
 
