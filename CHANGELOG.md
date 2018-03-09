@@ -1,3 +1,15 @@
+<a name="7.4.0"></a>
+# [7.4.0](https://github.com/gabliam/gabliam/compare/v7.3.3...v7.4.0) (2018-03-08)
+
+
+### Features
+
+* **@gabliam/core:** Base path for LoaderConfig and resolvers use the config path now ([dfd64da](https://github.com/gabliam/gabliam/commit/dfd64da))
+* **@gabliam/core:** loader config no longer use the resolver. All Loader must use resolver ([570d811](https://github.com/gabliam/gabliam/commit/570d811))
+* **@gabliam/core:** scanPath is not mandatory for Gabliam ([5801c1c](https://github.com/gabliam/gabliam/commit/5801c1c))
+
+
+
 <a name="7.3.3"></a>
 ## [7.3.3](https://github.com/gabliam/gabliam/compare/v7.3.2...v7.3.3) (2018-02-27)
 
