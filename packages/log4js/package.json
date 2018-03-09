@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/log4js",
-  "version": "7.4.0",
+  "version": "7.5.0",
   "description": "log4js plugin for gabliam",
   "keywords": [
     "log",
@@ -31,7 +31,7 @@
     "@gabliam/core": "^7.2.0"
   },
   "devDependencies": {
-    "@gabliam/core": "^7.4.0"
+    "@gabliam/core": "^7.5.0"
   },
   "dependencies": {
     "log4js": "^2.3.3",
