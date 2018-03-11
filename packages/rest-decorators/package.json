@@ -1,0 +1,45 @@
+{
+  "name": "@gabliam/rest-decorators",
+  "version": "7.5.0",
+  "description": "Gabliam plugin for add rest-decorators",
+  "keywords": [
+    "gabliam",
+    "gabliam-plugin",
+    "plugin",
+    "rest-decorators",
+    "rest"
+  ],
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "module": "lib/index.js",
+  "scripts": {
+    "build": "rimraf lib && tsc -p tsconfig.build.json"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabliam/gabliam.git"
+  },
+  "author": "David Touzet <dtouzet@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gabliam/gabliam/issues"
+  },
+  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/rest-decorators#readme",
+  "peerDependencies": {
+    "@gabliam/core": "^7.2.0"
+  },
+  "devDependencies": {
+    "@gabliam/core": "^7.5.0"
+  },
+  "dependencies": {
+    "http-status-codes": "^1.2.0",
+    "tslib": "^1.8.0"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  }
+}
