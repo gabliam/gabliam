@@ -6,61 +6,23 @@ import {
 import { METADATA_KEY } from '../constants';
 import { addMiddlewareMetadata } from '../metadata';
 
-export function All<T>(
+export type RestParamDecorator<T> = (
   path: string,
   ...middlewares: MiddlewareMetadata<T>[]
-): HandlerDecorator {
-  return Method('all', path, ...middlewares);
-}
+) => HandlerDecorator;
 
-export function Get<T>(
-  path: string,
-  ...middlewares: MiddlewareMetadata<T>[]
-): HandlerDecorator {
-  return Method('get', path, ...middlewares);
-}
-
-export function Post<T>(
-  path: string,
-  ...middlewares: MiddlewareMetadata<T>[]
-): HandlerDecorator {
-  return Method('post', path, ...middlewares);
-}
-
-export function Put<T>(
-  path: string,
-  ...middlewares: MiddlewareMetadata<T>[]
-): HandlerDecorator {
-  return Method('put', path, ...middlewares);
-}
-
-export function Patch<T>(
-  path: string,
-  ...middlewares: MiddlewareMetadata<T>[]
-): HandlerDecorator {
-  return Method('patch', path, ...middlewares);
-}
-
-export function Head<T>(
-  path: string,
-  ...middlewares: MiddlewareMetadata<T>[]
-): HandlerDecorator {
-  return Method('head', path, ...middlewares);
-}
-
-export function Delete<T>(
-  path: string,
-  ...middlewares: MiddlewareMetadata<T>[]
-): HandlerDecorator {
-  return Method('delete', path, ...middlewares);
-}
-
-export function Method<T>(
+export type RestMethodDecorator<T> = (
   method: string,
   path: string,
   ...middlewares: MiddlewareMetadata<T>[]
-): HandlerDecorator {
-  return function(target: any, key: string, descriptor: PropertyDescriptor) {
+) => HandlerDecorator;
+
+export function createMethodDecorator<T>(method: string) {
+  return (path: string, ...middlewares: MiddlewareMetadata<T>[]) => (
+    target: any,
+    key: string,
+    descriptor: PropertyDescriptor
+  ) => {
     const metadata: ControllerMethodMetadata = { path, method, key };
     let metadataList: ControllerMethodMetadata[] = [];
 

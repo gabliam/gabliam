@@ -8,30 +8,29 @@ import {
   VALUE_EXTRACTOR
 } from '@gabliam/core';
 import {
-  TYPE,
-  METADATA_KEY,
   EXPRESS_PLUGIN_CONFIG,
   APP,
   SERVER,
-  PARAMETER_TYPE,
-  CUSTOM_ROUTER_CREATOR,
-  DEFAULT_PARAM_VALUE
+  CUSTOM_ROUTER_CREATOR
 } from './constants';
-import { getMiddlewares } from './metadata';
-import { cleanPath } from './utils';
 import {
-  ExpressConfigMetadata,
-  ExpressPluginConfig,
+  TYPE,
+  METADATA_KEY,
+  PARAMETER_TYPE,
+  DEFAULT_PARAM_VALUE,
+  getMiddlewares,
+  ResponseEntity,
+  ConfigMetadata,
   ControllerMetadata,
   ControllerMethodMetadata,
-  ParameterMetadata,
   ControllerParameterMetadata,
-  RouterCreator
-} from './interfaces';
+  ParameterMetadata
+} from '@gabliam/rest-decorators';
+import { cleanPath } from './utils';
+import { ExpressPluginConfig, RouterCreator } from './interfaces';
 import * as d from 'debug';
 import * as http from 'http';
-import { MiddlewareConfig } from './middlewares';
-import { ResponseEntity } from './response-entity';
+import { MiddlewareConfig, ExpressMiddlewareConfig } from './middlewares';
 import { express } from './express';
 
 const debug = d('Gabliam:Plugin:ExpressPlugin');
@@ -72,7 +71,10 @@ export class ExpressPlugin implements GabliamPlugin {
    * @param  {any} confInstance
    */
   config(container: Container, registry: Registry, confInstance: any) {
-    const middlewareConfig = container.get<MiddlewareConfig>(MiddlewareConfig);
+    const middlewareConfig = container.get<ExpressMiddlewareConfig>(
+      MiddlewareConfig
+    );
+
     // if config class has a @middleware decorator, add in this.middlewares for add it in building phase
     if (
       Reflect.hasMetadata(
@@ -80,7 +82,7 @@ export class ExpressPlugin implements GabliamPlugin {
         confInstance.constructor
       )
     ) {
-      const metadataList: ExpressConfigMetadata[] = Reflect.getOwnMetadata(
+      const metadataList: ConfigMetadata[] = Reflect.getOwnMetadata(
         METADATA_KEY.MiddlewareConfig,
         confInstance.constructor
       );
@@ -100,7 +102,7 @@ export class ExpressPlugin implements GabliamPlugin {
         confInstance.constructor
       )
     ) {
-      const metadataList: ExpressConfigMetadata[] = Reflect.getOwnMetadata(
+      const metadataList: ConfigMetadata[] = Reflect.getOwnMetadata(
         METADATA_KEY.MiddlewareErrorConfig,
         confInstance.constructor
       );
@@ -177,7 +179,9 @@ export class ExpressPlugin implements GabliamPlugin {
    * @param  {Registry} registry
    */
   private buildExpressConfig(container: Container, registry: Registry) {
-    const middlewareConfig = container.get<MiddlewareConfig>(MiddlewareConfig);
+    const middlewareConfig = container.get<ExpressMiddlewareConfig>(
+      MiddlewareConfig
+    );
     const app = container.get<express.Application>(APP);
     middlewareConfig.middlewares
       .sort((a, b) => a.order - b.order)
@@ -191,7 +195,10 @@ export class ExpressPlugin implements GabliamPlugin {
    * @param  {Registry} registry
    */
   private buildExpressErrorConfig(container: Container, registry: Registry) {
-    const middlewareConfig = container.get<MiddlewareConfig>(MiddlewareConfig);
+    const middlewareConfig = container.get<ExpressMiddlewareConfig>(
+      MiddlewareConfig
+    );
+
     const app = container.get<express.Application>(APP);
     middlewareConfig.errorMiddlewares
       .sort((a, b) => a.order - b.order)

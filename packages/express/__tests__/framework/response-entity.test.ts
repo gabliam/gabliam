@@ -9,7 +9,7 @@ import {
   badRequest,
   noContent,
   notFound
-} from '../../src/response-entity';
+} from '@gabliam/rest-decorators';
 import * as HttpStatus from 'http-status-codes';
 
 let appTest: ExpressPluginTest;

@@ -1,4 +1,4 @@
-import { MiddlewareDefinition } from './interfaces';
+import { MiddlewareDefinition } from '@gabliam/rest-decorators';
 
 export function isMiddlewareDefinition(
   obj: Object

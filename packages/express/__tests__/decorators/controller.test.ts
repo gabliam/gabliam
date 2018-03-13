@@ -1,6 +1,9 @@
 import { Controller, RestController } from '../../src/decorators';
-import { ControllerMetadata, MiddlewareMetadata } from '../../src/interfaces';
-import { METADATA_KEY } from '../../src/constants';
+import {
+  ControllerMetadata,
+  MiddlewareMetadata,
+  METADATA_KEY
+} from '@gabliam/rest-decorators';
 import { RegistryMetada } from '@gabliam/core/lib/interfaces';
 import { METADATA_KEY as CORE_METADATA_KEY } from '@gabliam/core/lib/constants';
 
@@ -50,10 +53,9 @@ describe('Controller decorator', () => {
 
     expect(registryMetadata).toMatchSnapshot();
 
-    const middlewareMetadata: MiddlewareMetadata[] = Reflect.getOwnMetadata(
-      METADATA_KEY.middleware,
-      TestController
-    );
+    const middlewareMetadata: MiddlewareMetadata<
+      any
+    >[] = Reflect.getOwnMetadata(METADATA_KEY.middleware, TestController);
 
     expect(middlewareMetadata).toMatchSnapshot();
   });
@@ -124,10 +126,9 @@ describe('RestController decorator', () => {
 
     expect(registryMetadata).toMatchSnapshot();
 
-    const middlewareMetadata: MiddlewareMetadata[] = Reflect.getOwnMetadata(
-      METADATA_KEY.middleware,
-      TestController
-    );
+    const middlewareMetadata: MiddlewareMetadata<
+      any
+    >[] = Reflect.getOwnMetadata(METADATA_KEY.middleware, TestController);
 
     expect(middlewareMetadata).toMatchSnapshot();
   });

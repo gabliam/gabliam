@@ -1,6 +1,5 @@
 import { ExpressConfig, ExpressErrorConfig } from '../../src/decorators';
-import { ExpressConfigMetadata } from '../../src/interfaces';
-import { METADATA_KEY } from '../../src/constants';
+import { ConfigMetadata, METADATA_KEY } from '@gabliam/rest-decorators';
 
 describe('ExpressConfig decorator', () => {
   test('should add ExpressConfig metadata to a class when decorated with @ExpressConfig', () => {
@@ -12,7 +11,7 @@ describe('ExpressConfig decorator', () => {
       test2Method() {}
     }
 
-    const expressConfigMetadata: ExpressConfigMetadata[] = Reflect.getMetadata(
+    const expressConfigMetadata: ConfigMetadata[] = Reflect.getMetadata(
       METADATA_KEY.MiddlewareConfig,
       TestConfig
     );
@@ -29,7 +28,7 @@ describe('ExpressConfig decorator', () => {
       test2Method() {}
     }
 
-    const expressConfigMetadata: ExpressConfigMetadata[] = Reflect.getMetadata(
+    const expressConfigMetadata: ConfigMetadata[] = Reflect.getMetadata(
       METADATA_KEY.MiddlewareConfig,
       TestConfig
     );
@@ -63,7 +62,7 @@ describe('ExpressErrorConfig decorator', () => {
       test2Method() {}
     }
 
-    const expressErrorConfigMetadata: ExpressConfigMetadata[] = Reflect.getMetadata(
+    const expressErrorConfigMetadata: ConfigMetadata[] = Reflect.getMetadata(
       METADATA_KEY.MiddlewareErrorConfig,
       TestConfig
     );
@@ -80,7 +79,7 @@ describe('ExpressErrorConfig decorator', () => {
       test2Method() {}
     }
 
-    const expressErrorConfigMetadata: ExpressConfigMetadata[] = Reflect.getMetadata(
+    const expressErrorConfigMetadata: ConfigMetadata[] = Reflect.getMetadata(
       METADATA_KEY.MiddlewareErrorConfig,
       TestConfig
     );

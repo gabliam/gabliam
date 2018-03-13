@@ -23,6 +23,10 @@ export interface ControllerOptions<T> {
   middlewares?: MiddlewareMetadata<T>[];
 }
 
+export type ControllerDecorator<T> = (
+  options: ControllerOptions<T> | string
+) => (target: any) => void;
+
 /**
  * Controller decorator
  *
@@ -40,7 +44,9 @@ export interface ControllerOptions<T> {
  *
  * @param {ControllerOptions | string} options if options is a string, it's define the path
  */
-export function Controller<T>(options: ControllerOptions<T> | string) {
+export function createControllerDecorator<T>(
+  options: ControllerOptions<T> | string
+) {
   return function(target: any) {
     decorateController(options, target, false);
   };
@@ -63,13 +69,15 @@ export function Controller<T>(options: ControllerOptions<T> | string) {
  * }
  * @param options
  */
-export function RestController<T>(options: ControllerOptions<T> | string) {
+export function createRestControllerDecorator<T>(
+  options: ControllerOptions<T> | string
+) {
   return function(target: any) {
     decorateController(options, target, true);
   };
 }
 
-function decorateController<T>(
+export function decorateController<T>(
   options: ControllerOptions<T> | string,
   target: any,
   json: boolean

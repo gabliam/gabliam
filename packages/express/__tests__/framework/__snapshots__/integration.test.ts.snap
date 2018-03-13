@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Integration Tests: decorator Controller should use custom router passed from configuration 1`] = `
+exports[`Integration Tests: decorator createControllerDecorator should use custom router passed from configuration 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -19,7 +19,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator Controller should use custom router passed from configuration 2`] = `
+exports[`Integration Tests: decorator createControllerDecorator should use custom router passed from configuration 2`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -49,7 +49,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator Controller should use custom router passed from configuration 3`] = `
+exports[`Integration Tests: decorator createControllerDecorator should use custom router passed from configuration 3`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -79,7 +79,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator Controller should use custom routing configuration 1`] = `
+exports[`Integration Tests: decorator createControllerDecorator should use custom routing configuration 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -98,7 +98,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator Controller should use returned values as response 1`] = `
+exports[`Integration Tests: decorator createControllerDecorator should use returned values as response 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -117,7 +117,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator Controller should work for async controller methods 1`] = `
+exports[`Integration Tests: decorator createControllerDecorator should work for async controller methods 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -136,7 +136,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator Controller should work for async controller methods that fails 1`] = `
+exports[`Integration Tests: decorator createControllerDecorator should work for async controller methods that fails 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -166,7 +166,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator Controller should work for async methods called by nextFunc() 1`] = `
+exports[`Integration Tests: decorator createControllerDecorator should work for async methods called by nextFunc() 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -185,7 +185,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator Controller should work for async methods which call nextFunc() 1`] = `
+exports[`Integration Tests: decorator createControllerDecorator should work for async methods which call nextFunc() 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -204,7 +204,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator Controller should work for each shortcut decorator 1`] = `
+exports[`Integration Tests: decorator createControllerDecorator should work for each shortcut decorator 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -223,7 +223,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator Controller should work for each shortcut decorator 2`] = `
+exports[`Integration Tests: decorator createControllerDecorator should work for each shortcut decorator 2`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -242,7 +242,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator Controller should work for each shortcut decorator 3`] = `
+exports[`Integration Tests: decorator createControllerDecorator should work for each shortcut decorator 3`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -261,7 +261,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator Controller should work for each shortcut decorator 4`] = `
+exports[`Integration Tests: decorator createControllerDecorator should work for each shortcut decorator 4`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -280,7 +280,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator Controller should work for each shortcut decorator 5`] = `
+exports[`Integration Tests: decorator createControllerDecorator should work for each shortcut decorator 5`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -299,7 +299,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator Controller should work for each shortcut decorator 6`] = `
+exports[`Integration Tests: decorator createControllerDecorator should work for each shortcut decorator 6`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -318,7 +318,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator Controller should work for methods which call nextFunc() 1`] = `
+exports[`Integration Tests: decorator createControllerDecorator should work for methods which call nextFunc() 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -337,7 +337,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator Controller should work for more obscure HTTP methods using the httpMethod decorator 1`] = `
+exports[`Integration Tests: decorator createControllerDecorator should work for more obscure HTTP methods using the httpMethod decorator 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -356,7 +356,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator Controller should work with config 1`] = `
+exports[`Integration Tests: decorator createControllerDecorator should work with config 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -375,7 +375,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator RestController should use custom router passed from configuration 1`] = `
+exports[`Integration Tests: decorator createRestControllerDecorator should use custom router passed from configuration 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -394,7 +394,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator RestController should use custom router passed from configuration 2`] = `
+exports[`Integration Tests: decorator createRestControllerDecorator should use custom router passed from configuration 2`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -424,7 +424,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator RestController should use custom router passed from configuration 3`] = `
+exports[`Integration Tests: decorator createRestControllerDecorator should use custom router passed from configuration 3`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -454,7 +454,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator RestController should use custom routing configuration 1`] = `
+exports[`Integration Tests: decorator createRestControllerDecorator should use custom routing configuration 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -473,7 +473,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator RestController should use returned values as response 1`] = `
+exports[`Integration Tests: decorator createRestControllerDecorator should use returned values as response 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -492,7 +492,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator RestController should work for async controller methods 1`] = `
+exports[`Integration Tests: decorator createRestControllerDecorator should work for async controller methods 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -511,7 +511,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator RestController should work for async controller methods that fails 1`] = `
+exports[`Integration Tests: decorator createRestControllerDecorator should work for async controller methods that fails 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -541,7 +541,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator RestController should work for async methods called by nextFunc() 1`] = `
+exports[`Integration Tests: decorator createRestControllerDecorator should work for async methods called by nextFunc() 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -560,7 +560,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator RestController should work for async methods which call nextFunc() 1`] = `
+exports[`Integration Tests: decorator createRestControllerDecorator should work for async methods which call nextFunc() 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -579,7 +579,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator RestController should work for each shortcut decorator 1`] = `
+exports[`Integration Tests: decorator createRestControllerDecorator should work for each shortcut decorator 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -598,7 +598,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator RestController should work for each shortcut decorator 2`] = `
+exports[`Integration Tests: decorator createRestControllerDecorator should work for each shortcut decorator 2`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -617,7 +617,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator RestController should work for each shortcut decorator 3`] = `
+exports[`Integration Tests: decorator createRestControllerDecorator should work for each shortcut decorator 3`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -636,7 +636,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator RestController should work for each shortcut decorator 4`] = `
+exports[`Integration Tests: decorator createRestControllerDecorator should work for each shortcut decorator 4`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -655,7 +655,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator RestController should work for each shortcut decorator 5`] = `
+exports[`Integration Tests: decorator createRestControllerDecorator should work for each shortcut decorator 5`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -674,7 +674,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator RestController should work for each shortcut decorator 6`] = `
+exports[`Integration Tests: decorator createRestControllerDecorator should work for each shortcut decorator 6`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -693,7 +693,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator RestController should work for methods which call nextFunc() 1`] = `
+exports[`Integration Tests: decorator createRestControllerDecorator should work for methods which call nextFunc() 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -712,7 +712,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator RestController should work for more obscure HTTP methods using the httpMethod decorator 1`] = `
+exports[`Integration Tests: decorator createRestControllerDecorator should work for more obscure HTTP methods using the httpMethod decorator 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -731,7 +731,7 @@ Object {
 }
 `;
 
-exports[`Integration Tests: decorator RestController should work with config 1`] = `
+exports[`Integration Tests: decorator createRestControllerDecorator should work with config 1`] = `
 Object {
   "header": Object {
     "connection": "close",

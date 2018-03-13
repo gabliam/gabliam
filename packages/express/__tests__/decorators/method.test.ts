@@ -3,9 +3,9 @@ import * as methods from '../../src/decorators/method';
 import {
   ControllerMetadata,
   ControllerMethodMetadata,
-  MiddlewareMetadata
-} from '../../src/interfaces';
-import { METADATA_KEY } from '../../src/constants';
+  MiddlewareMetadata,
+  METADATA_KEY
+} from '@gabliam/rest-decorators';
 import { RegistryMetada } from '@gabliam/core/lib/interfaces';
 import { METADATA_KEY as CORE_METADATA_KEY } from '@gabliam/core/lib/constants';
 
@@ -40,7 +40,9 @@ describe('Methods decorators', () => {
       dec: methods.Delete
     }
   ].forEach(m => {
-    test(`should add Methods metadata to a class when decorated with @${m.name}`, async () => {
+    test(`should add Methods metadata to a class when decorated with @${
+      m.name
+    }`, async () => {
       const middlewares = [
         function() {
           return;
@@ -80,7 +82,9 @@ describe('Methods decorators', () => {
 
       expect(controllerMethodMetadata).toMatchSnapshot();
 
-      const middlewareMetadata: MiddlewareMetadata[] = Reflect.getOwnMetadata(
+      const middlewareMetadata: MiddlewareMetadata<
+        any
+      >[] = Reflect.getOwnMetadata(
         METADATA_KEY.middleware,
         TestController,
         'test2'
@@ -90,7 +94,7 @@ describe('Methods decorators', () => {
     });
   });
 
-  test('should add method metadata to a class when decorated with @httpMethod', () => {
+  test.only('should add method metadata to a class when decorated with @httpMethod', () => {
     const middleware = [
       function() {
         return;
@@ -135,10 +139,11 @@ describe('Methods decorators', () => {
       METADATA_KEY.controllerMethod,
       TestController
     );
-
     expect(controllerMethodMetadata).toMatchSnapshot();
 
-    const middlewareMetadata: MiddlewareMetadata[] = Reflect.getOwnMetadata(
+    const middlewareMetadata: MiddlewareMetadata<
+      any
+    >[] = Reflect.getOwnMetadata(
       METADATA_KEY.middleware,
       TestController,
       'test'
