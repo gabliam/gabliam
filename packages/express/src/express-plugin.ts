@@ -24,9 +24,9 @@ import {
   ControllerMetadata,
   ControllerMethodMetadata,
   ControllerParameterMetadata,
-  ParameterMetadata
+  ParameterMetadata,
+  cleanPath
 } from '@gabliam/rest-decorators';
-import { cleanPath } from './utils';
 import { ExpressPluginConfig, RouterCreator } from './interfaces';
 import * as d from 'debug';
 import * as http from 'http';

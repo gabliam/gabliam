@@ -23,8 +23,6 @@ export const APP = Symbol('GABLIAM/EXPRESS_APP');
  */
 export const CUSTOM_ROUTER_CREATOR = Symbol('GABLIAM/CUSTOM_ROUTER_CREATOR');
 
-export const MIDDLEWARECONFIG = Symbol('GABLIAM/MiddlewareConfig');
-
 export const SERVER = Symbol('GABLIAM/EXPRESS_SERVER');
 
 export const ERRORS_MSGS = {
