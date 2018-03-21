@@ -4,7 +4,7 @@ import {
   createMethodDecorator,
   RestMethodDecorator,
   MiddlewareMetadata
-} from '@gabliam/rest-decorators';
+} from '@gabliam/web-core';
 
 export const All: RestParamDecorator<
   express.RequestHandler

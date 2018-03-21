@@ -1,12 +1,12 @@
 {
-  "name": "@gabliam/rest-decorators",
+  "name": "@gabliam/web-core",
   "version": "7.5.0",
-  "description": "Gabliam plugin for add rest-decorators",
+  "description": "Gabliam plugin for add web-core",
   "keywords": [
     "gabliam",
     "gabliam-plugin",
     "plugin",
-    "rest-decorators",
+    "web-core",
     "rest"
   ],
   "main": "lib/index.js",
@@ -28,7 +28,7 @@
   "bugs": {
     "url": "https://github.com/gabliam/gabliam/issues"
   },
-  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/rest-decorators#readme",
+  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/web-core#readme",
   "peerDependencies": {
     "@gabliam/core": "^7.2.0"
   },

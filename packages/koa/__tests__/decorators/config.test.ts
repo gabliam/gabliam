@@ -1,5 +1,5 @@
 import { KoaConfig } from '../../src/decorators';
-import { ConfigMetadata, METADATA_KEY } from '@gabliam/rest-decorators';
+import { ConfigMetadata, METADATA_KEY } from '@gabliam/web-core';
 
 describe('KoaConfig decorator', () => {
   test('should add KoaConfig metadata to a class when decorated with @KoaConfig', () => {

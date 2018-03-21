@@ -1,4 +1,4 @@
-import { MiddlewareConfig } from '@gabliam/rest-decorators';
+import { MiddlewareConfig } from '@gabliam/web-core';
 import { koa } from './koa';
 
 export type KoaMiddlewareConfig = MiddlewareConfig<koa>;

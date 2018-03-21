@@ -5,7 +5,7 @@ import {
   ControllerMethodMetadata,
   MiddlewareMetadata,
   METADATA_KEY
-} from '@gabliam/rest-decorators';
+} from '@gabliam/web-core';
 import { RegistryMetada } from '@gabliam/core/lib/interfaces';
 import { METADATA_KEY as CORE_METADATA_KEY } from '@gabliam/core/lib/constants';
 

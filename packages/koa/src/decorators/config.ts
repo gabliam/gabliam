@@ -1,5 +1,5 @@
 import { ERRORS_MSGS } from '../constants';
-import { METADATA_KEY, createConfigDecorator } from '@gabliam/rest-decorators';
+import { METADATA_KEY, createConfigDecorator } from '@gabliam/web-core';
 
 /**
  * KoaConfig decorator

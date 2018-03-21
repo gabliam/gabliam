@@ -1,7 +1,7 @@
 import { APP, SERVER } from './constants';
 import { KoaPlugin } from './koa-plugin';
 
-export * from '@gabliam/rest-decorators';
+export * from '@gabliam/web-core';
 
 export * from './middlewares';
 export * from './koa';

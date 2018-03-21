@@ -27,7 +27,7 @@ import {
   ControllerParameterMetadata,
   ParameterMetadata,
   cleanPath
-} from '@gabliam/rest-decorators';
+} from '@gabliam/web-core';
 import * as d from 'debug';
 import * as http from 'http';
 import { MiddlewareConfig, KoaMiddlewareConfig } from './middlewares';

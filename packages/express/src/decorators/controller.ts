@@ -2,7 +2,7 @@ import {
   createControllerDecorator,
   createRestControllerDecorator,
   ControllerDecorator
-} from '@gabliam/rest-decorators';
+} from '@gabliam/web-core';
 import { express } from '../express';
 
 /**
