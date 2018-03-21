@@ -1,13 +1,15 @@
-import { Controller, RestController, Get } from '../../src/index';
-import { KoaPluginTest } from '../koa-plugin-test';
 import {
+  Controller,
+  RestController,
+  Get,
   ResponseEntity,
   ok,
   accepted,
   badRequest,
   noContent,
   notFound
-} from '../../src/response-entity';
+} from '../../src';
+import { KoaPluginTest } from '../koa-plugin-test';
 import * as HttpStatus from 'http-status-codes';
 
 let appTest: KoaPluginTest;
@@ -76,6 +78,7 @@ describe('Response entity Tests:', () => {
           .supertest()
           .get('/')
           .expect(HttpStatus.OK);
+
         expect(response).toMatchSnapshot();
       });
 

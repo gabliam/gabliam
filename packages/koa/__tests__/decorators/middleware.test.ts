@@ -1,8 +1,11 @@
-import { Middleware, MiddlewareInject } from '../../src/decorators';
+import {
+  Middleware,
+  MiddlewareInject,
+  MiddlewareMetadata,
+  METADATA_KEY
+} from '@gabliam/rest-decorators';
 import { BeanMetadata } from '@gabliam/core/lib/interfaces';
 import { METADATA_KEY as CORE_METADATA_KEY } from '@gabliam/core/lib/constants';
-import { MiddlewareMetadata } from '../../src/interfaces';
-import { METADATA_KEY } from '../../src/constants';
 
 describe('middleware decorators', () => {
   test('should add Bean metadata to a class when decorated with @Middleware', () => {
@@ -32,19 +35,16 @@ describe('middleware decorators', () => {
       test2Method() {}
     }
 
-    const middlewareMetadata: MiddlewareMetadata[] = Reflect.getOwnMetadata(
-      METADATA_KEY.middleware,
-      TestMiddleware
-    );
+    const middlewareMetadata: MiddlewareMetadata<
+      any
+    >[] = Reflect.getOwnMetadata(METADATA_KEY.middleware, TestMiddleware);
 
     expect(middlewareMetadata).toMatchSnapshot();
 
     ['testMethod', 'test2Method'].forEach(m => {
-      const middlewareMetadataMethod: MiddlewareMetadata[] = Reflect.getOwnMetadata(
-        METADATA_KEY.middleware,
-        TestMiddleware,
-        m
-      );
+      const middlewareMetadataMethod: MiddlewareMetadata<
+        any
+      >[] = Reflect.getOwnMetadata(METADATA_KEY.middleware, TestMiddleware, m);
 
       expect(middlewareMetadataMethod).toMatchSnapshot();
     });

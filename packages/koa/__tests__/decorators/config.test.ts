@@ -1,6 +1,5 @@
 import { KoaConfig } from '../../src/decorators';
-import { KoaConfigMetadata } from '../../src/interfaces';
-import { METADATA_KEY } from '../../src/constants';
+import { ConfigMetadata, METADATA_KEY } from '@gabliam/rest-decorators';
 
 describe('KoaConfig decorator', () => {
   test('should add KoaConfig metadata to a class when decorated with @KoaConfig', () => {
@@ -12,7 +11,7 @@ describe('KoaConfig decorator', () => {
       test2Method() {}
     }
 
-    const koaConfigMetadata: KoaConfigMetadata[] = Reflect.getMetadata(
+    const koaConfigMetadata: ConfigMetadata[] = Reflect.getMetadata(
       METADATA_KEY.MiddlewareConfig,
       TestConfig
     );
@@ -29,7 +28,7 @@ describe('KoaConfig decorator', () => {
       test2Method() {}
     }
 
-    const koaConfigMetadata: KoaConfigMetadata[] = Reflect.getMetadata(
+    const koaConfigMetadata: ConfigMetadata[] = Reflect.getMetadata(
       METADATA_KEY.MiddlewareConfig,
       TestConfig
     );
@@ -52,4 +51,3 @@ describe('KoaConfig decorator', () => {
     }).toThrowError();
   });
 });
-

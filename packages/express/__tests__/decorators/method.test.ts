@@ -94,7 +94,7 @@ describe('Methods decorators', () => {
     });
   });
 
-  test.only('should add method metadata to a class when decorated with @httpMethod', () => {
+  test('should add method metadata to a class when decorated with @httpMethod', () => {
     const middleware = [
       function() {
         return;
