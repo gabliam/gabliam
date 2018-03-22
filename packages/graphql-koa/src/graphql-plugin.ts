@@ -5,7 +5,7 @@ import {
   GabliamPlugin,
   Container
 } from '@gabliam/core';
-import { MiddlewareConfig, koaRouter } from '@gabliam/koa';
+import { MiddlewareConfig, koaRouter, KoaMiddlewareConfig } from '@gabliam/koa';
 import {
   graphqlKoa,
   graphiqlKoa,
@@ -28,7 +28,9 @@ export class GraphqlPlugin extends GraphqlCorePlugin implements GabliamPlugin {
     graphqlPluginConfig: GraphqlConfig,
     schema: GraphQLSchema
   ) {
-    const middlewareConfig = container.get<MiddlewareConfig>(MiddlewareConfig);
+    const middlewareConfig = container.get<KoaMiddlewareConfig>(
+      MiddlewareConfig
+    );
 
     middlewareConfig.addMiddleware({
       order: 50,

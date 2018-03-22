@@ -1,6 +1,5 @@
 import { MiddlewareDefinition } from './interfaces';
 import { inversifyInterfaces } from '@gabliam/core';
-import { express } from '../express';
 
 /**
  * Controller metadata
@@ -44,7 +43,7 @@ export interface ControllerMethodMetadata {
 /**
  * Express Config Metadata
  */
-export interface ExpressConfigMetadata {
+export interface ConfigMetadata {
   /**
    * id of class config
    */
@@ -64,7 +63,7 @@ export interface ExpressConfigMetadata {
 /**
  * Middleware Metadata
  */
-export type MiddlewareMetadata =
-  | express.RequestHandler
+export type MiddlewareMetadata<T> =
+  | T
   | MiddlewareDefinition
   | inversifyInterfaces.ServiceIdentifier<any>;

@@ -1,10 +1,10 @@
 import { APP, SERVER } from './constants';
-import { MiddlewareConfig } from './middlewares';
 import { ExpressPlugin } from './express-plugin';
 
+export * from '@gabliam/web-core';
+export * from './middlewares';
 export * from './express';
 export * from './interfaces';
 export * from './decorators';
-export * from './response-entity';
 export * from 'http-status-codes';
-export { APP, SERVER, MiddlewareConfig, ExpressPlugin as default };
+export { APP, SERVER, ExpressPlugin as default };

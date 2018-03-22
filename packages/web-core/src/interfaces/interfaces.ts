@@ -1,5 +1,4 @@
 import { PARAMETER_TYPE } from '../constants';
-import { express } from '../express';
 
 /**
  * Handler decorator
@@ -7,33 +6,11 @@ import { express } from '../express';
 export type HandlerDecorator = (target: any, key: string, value: any) => void;
 
 /**
- * Config for express plugin
- */
-export interface ExpressPluginConfig {
-  /**
-   * Root path of express plugin
-   */
-  rootPath: string;
-
-  /**
-   * Port of express
-   */
-  port: number;
-
-  /**
-   * Hostname of express
-   */
-  hostname: string;
-}
-
-/**
  * MiddlewareConfigurator
  *
  * Define a function that return a requestHandler
  */
-export type MiddlewareConfigurator = (
-  ...values: any[]
-) => express.RequestHandler | express.RequestHandler[];
+export type MiddlewareConfigurator<T> = (...values: any[]) => T | T[];
 
 /**
  * Middleware definition
@@ -55,12 +32,12 @@ export interface MiddlewareDefinition {
  *
  * For configure express application
  */
-export type ConfigFunction = (app: express.Application) => void;
+export type ConfigFunction<T> = (app: T) => void;
 
 /**
  * Express configuration
  */
-export interface ExpressConfiguration {
+export interface Configuration<T> {
   /**
    * execution order
    */
@@ -69,7 +46,7 @@ export interface ExpressConfiguration {
   /**
    * instance of configFunction
    */
-  instance: ConfigFunction;
+  instance: ConfigFunction<T>;
 }
 
 /**
@@ -98,8 +75,3 @@ export interface ParameterMetadata {
    */
   type: PARAMETER_TYPE;
 }
-
-/**
- * Represent a method that create an express router
- */
-export type RouterCreator = () => express.Router;

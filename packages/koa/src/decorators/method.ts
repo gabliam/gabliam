@@ -1,85 +1,43 @@
+import { koaRouter } from '../koa';
 import {
-  HandlerDecorator,
-  ControllerMethodMetadata,
+  RestParamDecorator,
+  createMethodDecorator,
+  RestMethodDecorator,
   MiddlewareMetadata
-} from '../interfaces';
-import { METADATA_KEY } from '../constants';
-import { addMiddlewareMetadata } from '../metadata';
+} from '@gabliam/web-core';
 
-export function All(
-  path: string,
-  ...middlewares: MiddlewareMetadata[]
-): HandlerDecorator {
-  return Method('all', path, ...middlewares);
-}
+export const All: RestParamDecorator<
+  koaRouter.IMiddleware
+> = createMethodDecorator('all');
 
-export function Get(
-  path: string,
-  ...middlewares: MiddlewareMetadata[]
-): HandlerDecorator {
-  return Method('get', path, ...middlewares);
-}
+export const Get: RestParamDecorator<
+  koaRouter.IMiddleware
+> = createMethodDecorator('get');
 
-export function Post(
-  path: string,
-  ...middlewares: MiddlewareMetadata[]
-): HandlerDecorator {
-  return Method('post', path, ...middlewares);
-}
+export const Post: RestParamDecorator<
+  koaRouter.IMiddleware
+> = createMethodDecorator('post');
 
-export function Put(
-  path: string,
-  ...middlewares: MiddlewareMetadata[]
-): HandlerDecorator {
-  return Method('put', path, ...middlewares);
-}
+export const Put: RestParamDecorator<
+  koaRouter.IMiddleware
+> = createMethodDecorator('put');
 
-export function Patch(
-  path: string,
-  ...middlewares: MiddlewareMetadata[]
-): HandlerDecorator {
-  return Method('patch', path, ...middlewares);
-}
+export const Patch: RestParamDecorator<
+  koaRouter.IMiddleware
+> = createMethodDecorator('patch');
 
-export function Head(
-  path: string,
-  ...middlewares: MiddlewareMetadata[]
-): HandlerDecorator {
-  return Method('head', path, ...middlewares);
-}
+export const Head: RestParamDecorator<
+  koaRouter.IMiddleware
+> = createMethodDecorator('head');
 
-export function Delete(
-  path: string,
-  ...middlewares: MiddlewareMetadata[]
-): HandlerDecorator {
-  return Method('delete', path, ...middlewares);
-}
+export const Delete: RestParamDecorator<
+  koaRouter.IMiddleware
+> = createMethodDecorator('delete');
 
-export function Method(
+export const Method: RestMethodDecorator<koaRouter.IMiddleware> = (
   method: string,
   path: string,
-  ...middlewares: MiddlewareMetadata[]
-): HandlerDecorator {
-  return function(target: any, key: string, descriptor: PropertyDescriptor) {
-    const metadata: ControllerMethodMetadata = { path, method, key };
-    let metadataList: ControllerMethodMetadata[] = [];
-
-    addMiddlewareMetadata(middlewares, target.constructor, key);
-    if (
-      !Reflect.hasOwnMetadata(METADATA_KEY.controllerMethod, target.constructor)
-    ) {
-      Reflect.defineMetadata(
-        METADATA_KEY.controllerMethod,
-        metadataList,
-        target.constructor
-      );
-    } else {
-      metadataList = Reflect.getOwnMetadata(
-        METADATA_KEY.controllerMethod,
-        target.constructor
-      );
-    }
-
-    metadataList.push(metadata);
-  };
-}
+  ...middlewares: MiddlewareMetadata<koaRouter.IMiddleware>[]
+) => {
+  return createMethodDecorator(method)(path, ...middlewares);
+};

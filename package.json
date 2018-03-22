@@ -57,34 +57,6 @@
       "git add"
     ]
   },
-  "jest": {
-    "transform": {
-      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "collectCoverageFrom": [
-      "packages/**/src/**/*.{ts}",
-      "!packages/**/src/interfaces/**",
-      "!packages/**/src/testing/**",
-      "!packages/**/src/typings/**",
-      "!packages/graphql-core/src/graphql-core-plugin.ts",
-      "!packages/expression/src/**/*.ts",
-      "!**/node_modules/**",
-      "!**/vendor/**"
-    ],
-    "setupTestFrameworkScriptFile": "<rootDir>/tests/setup.js",
-    "testEnvironment": "node",
-    "testRegex": "(/__tests__/.*)\\.test\\.(ts|tsx|js)$",
-    "snapshotSerializers": [
-      "jest-serializer-path",
-      "jest-serializer-supertest"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "json"
-    ]
-  },
   "workspaces": [
     "packages/*",
     "examples/*"

@@ -9,10 +9,8 @@ import {
   Next,
   Get,
   Post
-} from '../../src/decorators';
-
-import { ControllerParameterMetadata } from '../../src/interfaces';
-import { METADATA_KEY } from '../../src/constants';
+} from '../../src';
+import { ControllerParameterMetadata, METADATA_KEY } from '@gabliam/web-core';
 
 describe('params decorators', () => {
   test('should add parameter metadata to a class when decorated with @params', () => {

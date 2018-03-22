@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Response entity Tests: decorator Controller responseEntitie accepted() 1`] = `
+exports[`Response entity Tests: decorator createControllerDecorator responseEntitie accepted() 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -19,7 +19,7 @@ Object {
 }
 `;
 
-exports[`Response entity Tests: decorator Controller responseEntitie badRequest() 1`] = `
+exports[`Response entity Tests: decorator createControllerDecorator responseEntitie badRequest() 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -38,7 +38,7 @@ Object {
 }
 `;
 
-exports[`Response entity Tests: decorator Controller responseEntitie noContent() 1`] = `
+exports[`Response entity Tests: decorator createControllerDecorator responseEntitie noContent() 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -55,7 +55,7 @@ Object {
 }
 `;
 
-exports[`Response entity Tests: decorator Controller responseEntitie notFound() 1`] = `
+exports[`Response entity Tests: decorator createControllerDecorator responseEntitie notFound() 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -74,7 +74,7 @@ Object {
 }
 `;
 
-exports[`Response entity Tests: decorator Controller responseEntitie ok() 1`] = `
+exports[`Response entity Tests: decorator createControllerDecorator responseEntitie ok() 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -92,7 +92,7 @@ Object {
 }
 `;
 
-exports[`Response entity Tests: decorator Controller responseEntitie ok({get: 'get'}) 1`] = `
+exports[`Response entity Tests: decorator createControllerDecorator responseEntitie ok({get: 'get'}) 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -111,7 +111,7 @@ Object {
 }
 `;
 
-exports[`Response entity Tests: decorator Controller should work for async responseEntitie controller methods 1`] = `
+exports[`Response entity Tests: decorator createControllerDecorator should work for async responseEntitie controller methods 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -130,7 +130,7 @@ Object {
 }
 `;
 
-exports[`Response entity Tests: decorator Controller should work for responseEntitie and custom Header controller methods 1`] = `
+exports[`Response entity Tests: decorator createControllerDecorator should work for responseEntitie and custom Header controller methods 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -150,7 +150,7 @@ Object {
 }
 `;
 
-exports[`Response entity Tests: decorator Controller should work for responseEntitie controller methods 1`] = `
+exports[`Response entity Tests: decorator createControllerDecorator should work for responseEntitie controller methods 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -169,7 +169,7 @@ Object {
 }
 `;
 
-exports[`Response entity Tests: decorator RestController responseEntitie accepted() 1`] = `
+exports[`Response entity Tests: decorator createRestControllerDecorator responseEntitie accepted() 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -188,7 +188,7 @@ Object {
 }
 `;
 
-exports[`Response entity Tests: decorator RestController responseEntitie badRequest() 1`] = `
+exports[`Response entity Tests: decorator createRestControllerDecorator responseEntitie badRequest() 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -207,7 +207,7 @@ Object {
 }
 `;
 
-exports[`Response entity Tests: decorator RestController responseEntitie noContent() 1`] = `
+exports[`Response entity Tests: decorator createRestControllerDecorator responseEntitie noContent() 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -224,7 +224,7 @@ Object {
 }
 `;
 
-exports[`Response entity Tests: decorator RestController responseEntitie notFound() 1`] = `
+exports[`Response entity Tests: decorator createRestControllerDecorator responseEntitie notFound() 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -243,7 +243,7 @@ Object {
 }
 `;
 
-exports[`Response entity Tests: decorator RestController responseEntitie ok() 1`] = `
+exports[`Response entity Tests: decorator createRestControllerDecorator responseEntitie ok() 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -261,7 +261,7 @@ Object {
 }
 `;
 
-exports[`Response entity Tests: decorator RestController responseEntitie ok({get: 'get'}) 1`] = `
+exports[`Response entity Tests: decorator createRestControllerDecorator responseEntitie ok({get: 'get'}) 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -280,7 +280,7 @@ Object {
 }
 `;
 
-exports[`Response entity Tests: decorator RestController should work for async responseEntitie controller methods 1`] = `
+exports[`Response entity Tests: decorator createRestControllerDecorator should work for async responseEntitie controller methods 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -299,7 +299,7 @@ Object {
 }
 `;
 
-exports[`Response entity Tests: decorator RestController should work for responseEntitie and custom Header controller methods 1`] = `
+exports[`Response entity Tests: decorator createRestControllerDecorator should work for responseEntitie and custom Header controller methods 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -319,7 +319,7 @@ Object {
 }
 `;
 
-exports[`Response entity Tests: decorator RestController should work for responseEntitie controller methods 1`] = `
+exports[`Response entity Tests: decorator createRestControllerDecorator should work for responseEntitie controller methods 1`] = `
 Object {
   "header": Object {
     "connection": "close",

@@ -2,7 +2,7 @@ import { AmqpPluginTest } from './amqp-plugin-test';
 import { RabbitController, RabbitListener, RabbitConsumer } from '../src/index';
 import { config } from './conf';
 import { AmqpConnection } from '../src/amqp-connection';
-import { Gabliam } from '@gabliam/core/lib';
+import { Gabliam } from '@gabliam/core';
 import { Deferred } from './defered';
 import * as sinon from 'sinon';
 

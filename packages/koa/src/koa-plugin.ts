@@ -8,30 +8,29 @@ import {
   VALUE_EXTRACTOR
 } from '@gabliam/core';
 import {
-  TYPE,
-  METADATA_KEY,
   KOA_PLUGIN_CONFIG,
   APP,
   SERVER,
-  PARAMETER_TYPE,
-  CUSTOM_ROUTER_CREATOR,
-  DEFAULT_PARAM_VALUE
+  CUSTOM_ROUTER_CREATOR
 } from './constants';
-import { getMiddlewares } from './metadata';
-import { cleanPath } from './utils';
+import { KoaPluginConfig, RouterCreator } from './interfaces';
 import {
-  KoaConfigMetadata,
-  KoaPluginConfig,
+  TYPE,
+  METADATA_KEY,
+  PARAMETER_TYPE,
+  DEFAULT_PARAM_VALUE,
+  getMiddlewares,
+  ResponseEntity,
+  ConfigMetadata,
   ControllerMetadata,
   ControllerMethodMetadata,
-  ParameterMetadata,
   ControllerParameterMetadata,
-  RouterCreator
-} from './interfaces';
+  ParameterMetadata,
+  cleanPath
+} from '@gabliam/web-core';
 import * as d from 'debug';
 import * as http from 'http';
-import { MiddlewareConfig } from './middlewares';
-import { ResponseEntity } from './response-entity';
+import { MiddlewareConfig, KoaMiddlewareConfig } from './middlewares';
 import { koa, koaRouter } from './koa';
 
 const debug = d('Gabliam:Plugin:KoaPlugin');
@@ -71,7 +70,9 @@ export class KoaPlugin implements GabliamPlugin {
    * @param  {any} confInstance
    */
   config(container: Container, registry: Registry, confInstance: any) {
-    const middlewareConfig = container.get<MiddlewareConfig>(MiddlewareConfig);
+    const middlewareConfig = container.get<KoaMiddlewareConfig>(
+      MiddlewareConfig
+    );
     // if config class has a @middleware decorator, add in this.middlewares for add it in building phase
     if (
       Reflect.hasMetadata(
@@ -79,7 +80,7 @@ export class KoaPlugin implements GabliamPlugin {
         confInstance.constructor
       )
     ) {
-      const metadataList: KoaConfigMetadata[] = Reflect.getOwnMetadata(
+      const metadataList: ConfigMetadata[] = Reflect.getOwnMetadata(
         METADATA_KEY.MiddlewareConfig,
         confInstance.constructor
       );
@@ -153,7 +154,9 @@ export class KoaPlugin implements GabliamPlugin {
    * @param  {Registry} registry
    */
   private buildKoaConfig(container: Container, registry: Registry) {
-    const middlewareConfig = container.get<MiddlewareConfig>(MiddlewareConfig);
+    const middlewareConfig = container.get<KoaMiddlewareConfig>(
+      MiddlewareConfig
+    );
     const app = container.get<koa>(APP);
     middlewareConfig.middlewares
       .sort((a, b) => a.order - b.order)
@@ -284,7 +287,7 @@ export class KoaPlugin implements GabliamPlugin {
       );
       const result: any = await Promise.resolve(controller[key](...args));
 
-      const sendJsonValue = (value: any) => {
+      const sendJsonValue = (value: any = '') => {
         let val: any;
         try {
           val = JSON.stringify(value);

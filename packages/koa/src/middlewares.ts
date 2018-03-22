@@ -1,18 +1,5 @@
-import { KoaConfiguration } from './interfaces';
+import { MiddlewareConfig } from '@gabliam/web-core';
+import { koa } from './koa';
 
-/**
- * Middleware Config
- *
- * This class is a storage of all middlewares
- */
-export class MiddlewareConfig {
-  private _middlewares: KoaConfiguration[] = [];
-
-  addMiddleware(middleware: KoaConfiguration) {
-    this._middlewares.push(middleware);
-  }
-
-  get middlewares() {
-    return this._middlewares.slice();
-  }
-}
+export type KoaMiddlewareConfig = MiddlewareConfig<koa>;
+export { MiddlewareConfig };

@@ -1,85 +1,43 @@
+import { express } from '../express';
 import {
-  HandlerDecorator,
-  ControllerMethodMetadata,
+  RestParamDecorator,
+  createMethodDecorator,
+  RestMethodDecorator,
   MiddlewareMetadata
-} from '../interfaces';
-import { METADATA_KEY } from '../constants';
-import { addMiddlewareMetadata } from '../metadata';
+} from '@gabliam/web-core';
 
-export function All(
-  path: string,
-  ...middlewares: MiddlewareMetadata[]
-): HandlerDecorator {
-  return Method('all', path, ...middlewares);
-}
+export const All: RestParamDecorator<
+  express.RequestHandler
+> = createMethodDecorator('all');
 
-export function Get(
-  path: string,
-  ...middlewares: MiddlewareMetadata[]
-): HandlerDecorator {
-  return Method('get', path, ...middlewares);
-}
+export const Get: RestParamDecorator<
+  express.RequestHandler
+> = createMethodDecorator('get');
 
-export function Post(
-  path: string,
-  ...middlewares: MiddlewareMetadata[]
-): HandlerDecorator {
-  return Method('post', path, ...middlewares);
-}
+export const Post: RestParamDecorator<
+  express.RequestHandler
+> = createMethodDecorator('post');
 
-export function Put(
-  path: string,
-  ...middlewares: MiddlewareMetadata[]
-): HandlerDecorator {
-  return Method('put', path, ...middlewares);
-}
+export const Put: RestParamDecorator<
+  express.RequestHandler
+> = createMethodDecorator('put');
 
-export function Patch(
-  path: string,
-  ...middlewares: MiddlewareMetadata[]
-): HandlerDecorator {
-  return Method('patch', path, ...middlewares);
-}
+export const Patch: RestParamDecorator<
+  express.RequestHandler
+> = createMethodDecorator('patch');
 
-export function Head(
-  path: string,
-  ...middlewares: MiddlewareMetadata[]
-): HandlerDecorator {
-  return Method('head', path, ...middlewares);
-}
+export const Head: RestParamDecorator<
+  express.RequestHandler
+> = createMethodDecorator('head');
 
-export function Delete(
-  path: string,
-  ...middlewares: MiddlewareMetadata[]
-): HandlerDecorator {
-  return Method('delete', path, ...middlewares);
-}
+export const Delete: RestParamDecorator<
+  express.RequestHandler
+> = createMethodDecorator('delete');
 
-export function Method(
+export const Method: RestMethodDecorator<express.RequestHandler> = (
   method: string,
   path: string,
-  ...middlewares: MiddlewareMetadata[]
-): HandlerDecorator {
-  return function(target: any, key: string, descriptor: PropertyDescriptor) {
-    const metadata: ControllerMethodMetadata = { path, method, key };
-    let metadataList: ControllerMethodMetadata[] = [];
-
-    addMiddlewareMetadata(middlewares, target.constructor, key);
-    if (
-      !Reflect.hasOwnMetadata(METADATA_KEY.controllerMethod, target.constructor)
-    ) {
-      Reflect.defineMetadata(
-        METADATA_KEY.controllerMethod,
-        metadataList,
-        target.constructor
-      );
-    } else {
-      metadataList = Reflect.getOwnMetadata(
-        METADATA_KEY.controllerMethod,
-        target.constructor
-      );
-    }
-
-    metadataList.push(metadata);
-  };
-}
+  ...middlewares: MiddlewareMetadata<express.RequestHandler>[]
+) => {
+  return createMethodDecorator(method)(path, ...middlewares);
+};

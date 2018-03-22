@@ -4,7 +4,7 @@ import * as e from 'express';
 import ExpressPlugin, { APP } from '../src/index';
 
 export class ExpressPluginTest extends GabliamTest {
-  public app: e.Application;
+  public app!: e.Application;
 
   constructor() {
     const gab = new Gabliam().addPlugin(ExpressPlugin);

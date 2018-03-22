@@ -2,7 +2,6 @@ import { inversifyInterfaces, Container } from '@gabliam/core';
 import { MiddlewareMetadata, MiddlewareConfigurator } from '../interfaces';
 import { METADATA_KEY } from '../constants';
 import { isMiddlewareDefinition } from '../utils';
-import { koaRouter } from '../koa';
 
 /**
  * Add middlewares metadata.
@@ -13,12 +12,12 @@ import { koaRouter } from '../koa';
  * @param  {Object} target
  * @param  {string} key?
  */
-export function addMiddlewareMetadata(
-  middlewares: MiddlewareMetadata[],
+export function addMiddlewareMetadata<T>(
+  middlewares: MiddlewareMetadata<T>[],
   target: Object,
   key?: string
 ) {
-  let metadataList: MiddlewareMetadata[] = [];
+  let metadataList: MiddlewareMetadata<T>[] = [];
 
   // add key! for disable false error
   // if key is undefined => middleware metadata for class else for method
@@ -42,14 +41,14 @@ export function addMiddlewareMetadata(
  * @param  {Container} container
  * @param  {Object} target
  * @param  {string} key?
- * @returns koaRouter.IMiddleware[]
+ * @returns express.RequestHandler[]
  */
-export function getMiddlewares(
+export function getMiddlewares<T, U>(
   container: Container,
   target: Object,
   key?: string
-): koaRouter.IMiddleware[] {
-  let metadataList: MiddlewareMetadata[] = [];
+): U[] {
+  let metadataList: MiddlewareMetadata<T>[] = [];
   if (Reflect.hasOwnMetadata(METADATA_KEY.middleware, target, key!)) {
     metadataList = Reflect.getOwnMetadata(
       METADATA_KEY.middleware,
@@ -62,23 +61,21 @@ export function getMiddlewares(
    * resolve a middleware
    * @param middleware
    */
-  function resolveMiddleware(
-    middleware: MiddlewareMetadata
-  ): koaRouter.IMiddleware {
+  function resolveMiddleware(middleware: MiddlewareMetadata<T>): U {
     try {
       // test if the middleware is a ServiceIdentifier
-      return container.get<koaRouter.IMiddleware>(
-        <inversifyInterfaces.ServiceIdentifier<any>>middleware
-      );
+      return container.get<U>(<inversifyInterfaces.ServiceIdentifier<
+        any
+      >>middleware);
     } catch (e) {
-      return <koaRouter.IMiddleware>middleware;
+      return <U>(<any>middleware);
     }
   }
 
-  return metadataList.reduce<koaRouter.IMiddleware[]>((prev, metadata) => {
+  return metadataList.reduce<U[]>((prev, metadata) => {
     if (isMiddlewareDefinition(metadata)) {
       // if is a middleware definition, so get MiddlewareConfigurator and call with values
-      const middleware = container.get<MiddlewareConfigurator>(
+      const middleware = container.get<MiddlewareConfigurator<any>>(
         `${metadata.name}Middleware`
       )(...metadata.values);
 

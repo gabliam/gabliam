@@ -6,7 +6,7 @@ import KoaPlugin, { APP } from '../src/index';
 import * as supertest from 'supertest';
 
 export class KoaPluginTest extends GabliamTest {
-  public app: koa;
+  public app!: koa;
 
   constructor() {
     const gab = new Gabliam().addPlugin(KoaPlugin);

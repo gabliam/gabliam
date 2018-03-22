@@ -5,7 +5,7 @@ import {
   GabliamPlugin,
   Container
 } from '@gabliam/core';
-import { MiddlewareConfig } from '@gabliam/express';
+import { MiddlewareConfig, ExpressMiddlewareConfig } from '@gabliam/express';
 import {
   graphqlExpress,
   graphiqlExpress,
@@ -28,7 +28,9 @@ export class GraphqlPlugin extends GraphqlCorePlugin implements GabliamPlugin {
     graphqlPluginConfig: GraphqlConfig,
     schema: GraphQLSchema
   ) {
-    const middlewareConfig = container.get<MiddlewareConfig>(MiddlewareConfig);
+    const middlewareConfig = container.get<ExpressMiddlewareConfig>(
+      MiddlewareConfig
+    );
 
     middlewareConfig.addMiddleware({
       order: 50,
