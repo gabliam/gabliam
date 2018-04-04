@@ -38,6 +38,12 @@ DbConfig {
 }
 `;
 
+exports[`gabliam instance with config path 1`] = `
+Object {
+  "config": "<PROJECT_ROOT>/packages/core/__tests__/fixtures/gabliam/config",
+}
+`;
+
 exports[`gabliam instance with path 1`] = `
 Object {
   "application": Object {

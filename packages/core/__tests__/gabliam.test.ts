@@ -41,6 +41,12 @@ test('gabliam instance with default config', async () => {
   await gab.destroy();
 });
 
+test('gabliam instance with config path', async () => {
+  const gab = new Gabliam(path.resolve(__dirname, './fixtures/gabliam/config'));
+  expect(gab.options).toMatchSnapshot();
+  await gab.destroy();
+});
+
 test('gabliam instance with path', async () => {
   const gab = new Gabliam({
     scanPath: path.resolve(__dirname, './fixtures/gabliam'),
