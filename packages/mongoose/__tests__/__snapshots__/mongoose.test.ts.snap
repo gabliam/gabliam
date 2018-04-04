@@ -8,7 +8,7 @@ exports[`Errors with host without database_name 1`] = `[Error: Error for 'applic
 
 exports[`Errors without config folder 1`] = `[Error: PluginMongooseConfig mongooseConfiguration is mandatory]`;
 
-exports[`must fail when MUnit not found 1`] = `[Error: CUnit bad not found]`;
+exports[`must fail when MUnit not found 1`] = `[Error: MUnit bad not found]`;
 
 exports[`must fail when getConnection not found 1`] = `"Connection notfound not found"`;
 
@@ -28,6 +28,6 @@ exports[`with config uri 1`] = `Array []`;
 
 exports[`with config uri 2`] = `"test"`;
 
-exports[`with one connection with name and entity without cunit 1`] = `Array []`;
+exports[`with one connection with name and entity without munit 1`] = `Array []`;
 
-exports[`with one connection with name and entity without cunit 2`] = `"testoneconnection"`;
+exports[`with one connection with name and entity without munit 2`] = `"testoneconnection"`;

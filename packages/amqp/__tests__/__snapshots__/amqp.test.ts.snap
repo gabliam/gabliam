@@ -60,13 +60,13 @@ Array [
 ]
 `;
 
-exports[`Errors with bad config 1`] = `[Error: Error for 'application.amqp.url' value{"isJoi":true,"name":"ValidationError","details":[{"message":"/"value/" is required","path":[],"type":"any.required","context":{"label":"value"}}]}]`;
+exports[`Errors with bad config 1`] = `[Error: Error for 'application.amqp' value{"isJoi":true,"name":"ValidationError","details":[{"message":"/"value/" must be an object","path":[],"type":"object.base","context":{"label":"value"}},{"message":"/"value/" must be an array","path":[],"type":"array.base","context":{"label":"value"}}],"_object":"bad"}]`;
 
 exports[`Errors with bad url 1`] = `[Error: getaddrinfo ENOTFOUND bad bad:5672]`;
 
-exports[`Errors without config folder 1`] = `[Error: Error for 'application.amqp.url' value{"isJoi":true,"name":"ValidationError","details":[{"message":"/"value/" is required","path":[],"type":"any.required","context":{"label":"value"}}]}]`;
+exports[`Errors without config folder 1`] = `[Error: AmqpPluginConfig AmqpConfig is mandatory]`;
 
-exports[`Errors without queueName 1`] = `[Error: Error for 'application.amqp.queues' value{"isJoi":true,"name":"ValidationError","details":[{"message":"/"queueName/" is required","path":["queueTest","queueName"],"type":"any.required","context":{"key":"queueName","label":"queueName"}},{"message":"/"name/" is not allowed","path":["queueTest","name"],"type":"object.allowUnknown","context":{"child":"name","key":"name","label":"name"}}],"_object":{"queueTest":{"name":"lol"}}}]`;
+exports[`Errors without queueName 1`] = `[Error: Error for 'application.amqp' value{"isJoi":true,"name":"ValidationError","details":[{"message":"/"queueName/" is required","path":["queues","queueTest","queueName"],"type":"any.required","context":{"key":"queueName","label":"queueName"}},{"message":"/"name/" is not allowed","path":["queues","queueTest","name"],"type":"object.allowUnknown","context":{"child":"name","key":"name","label":"name"}},{"message":"/"value/" must be an array","path":[],"type":"array.base","context":{"label":"value"}}],"_object":{"url":"amqp://bad","queues":{"queueTest":{"name":"lol"}}}}]`;
 
 exports[`Listener test with buffer object 1`] = `
 Object {
@@ -142,6 +142,12 @@ Array [
 ]
 `;
 
+exports[`must fail when CUnit not found 1`] = `[Error: Connection bad not found]`;
+
+exports[`must fail when getConnection not found 1`] = `"Connection notfound not found"`;
+
+exports[`must fail with duplicate connections 1`] = `[Error: Duplicate connection connection1]`;
+
 exports[`sendAndReceive timeout 1`] = `[Error: operation timed out]`;
 
 exports[`start 2 times 1`] = `"testCase.content"`;
@@ -149,6 +155,22 @@ exports[`start 2 times 1`] = `"testCase.content"`;
 exports[`start 2 times 2`] = `1`;
 
 exports[`start 2 times 3`] = `
+Array [
+  Array [
+    "testCase.content",
+  ],
+]
+`;
+
+exports[`with config 2 database 1`] = `"connection1testCase"`;
+
+exports[`with config 2 database 2`] = `"connection1testCase"`;
+
+exports[`with one connection with name and entity without cunit 1`] = `"testCase.content"`;
+
+exports[`with one connection with name and entity without cunit 2`] = `1`;
+
+exports[`with one connection with name and entity without cunit 3`] = `
 Array [
   Array [
     "testCase.content",

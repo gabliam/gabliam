@@ -409,4 +409,4 @@ Object {
 }
 `;
 
-exports[`CUnit decorators should add CUnit metadata to a class when decorating a method with @CUnit 1`] = `"default"`;
+exports[`MUnit decorators should add MUnit metadata to a class when decorating a method with @MUnit 1`] = `"default"`;

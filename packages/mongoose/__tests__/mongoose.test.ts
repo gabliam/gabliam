@@ -135,7 +135,7 @@ test('with config host & database', async () => {
   await connection.conn.dropDatabase();
 });
 
-test('with one connection with name and entity without cunit', async () => {
+test('with one connection with name and entity without munit', async () => {
   appTest.addConf('application.mongoose', {
     host: '127.0.0.1',
     database_name: 'mongoosetest',

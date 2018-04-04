@@ -34,6 +34,8 @@ export class AmqpConnection {
   private consumerList: ConsumeConfig[] = [];
 
   constructor(
+    public indexConfig: number,
+    public name: string,
     private url: string,
     private queues: Queue[],
     private valueExtractor: ValueExtractor
@@ -199,11 +201,21 @@ export class AmqpConnection {
   }
 
   getQueueName(queueName: string) {
-    // The parser ast sometimes consider the string (with uuid) as a binary so return NaN.
-    return this.valueExtractor(
-      `application.amqp.queues['${queueName}'].queueName`,
-      this.valueExtractor(`"${queueName}"`, queueName)
-    );
+    const defaultValue = this.valueExtractor(`"${queueName}"`, queueName);
+
+    if (this.valueExtractor(`application.amqp[0] ? true : false`, false)) {
+      return this.valueExtractor(
+        `application.amqp[${
+          this.indexConfig
+        }].queues['${queueName}'].queueName`,
+        defaultValue
+      );
+    } else {
+      return this.valueExtractor(
+        `application.amqp.queues['${queueName}'].queueName`,
+        defaultValue
+      );
+    }
   }
 
   contentToBuffer(content: any) {

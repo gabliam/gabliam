@@ -7,8 +7,8 @@ import {
 } from '@gabliam/core';
 import { TYPE, METADATA_KEY } from './constants';
 import { RabbitHandlerMetadata } from './interfaces';
-import { AmqpConnection } from './amqp-connection';
 import * as d from 'debug';
+import { AmqpConnectionManager } from './amqp-manager';
 
 const debug = d('Gabliam:Plugin:AmqpPlugin');
 
@@ -35,7 +35,7 @@ export class AmqpPlugin implements GabliamPlugin {
   build(container: Container, registry: Registry) {
     debug('build AmqpPlugin');
     const controllerIds = registry.get(TYPE.RabbitController);
-    const connection = container.get(AmqpConnection);
+    const connectionManager = container.get(AmqpConnectionManager);
     debug('controllerIds', controllerIds, container);
     controllerIds.forEach(({ id: controllerId }) => {
       const controller = container.get<any>(controllerId);
@@ -48,19 +48,31 @@ export class AmqpPlugin implements GabliamPlugin {
 
       if (handlerMetadatas) {
         handlerMetadatas.forEach(handlerMetadata => {
-          connection.constructAndAddConsume(handlerMetadata, controller);
+          const cunit = <string>Reflect.getMetadata(
+            METADATA_KEY.cunit,
+            controller.constructor
+          );
+          if (cunit) {
+            connectionManager
+              .getConnection(cunit)
+              .constructAndAddConsume(handlerMetadata, controller);
+          } else {
+            connectionManager
+              .getDefaultConnection()
+              .constructAndAddConsume(handlerMetadata, controller);
+          }
         });
       }
     });
   }
 
   async start(container: Container, registry: Registry) {
-    const connection = container.get(AmqpConnection);
+    const connection = container.get(AmqpConnectionManager);
     await connection.start();
   }
 
   async stop(container: Container, registry: Registry) {
-    const connection = container.get(AmqpConnection);
+    const connection = container.get(AmqpConnectionManager);
     await connection.stop();
   }
 }

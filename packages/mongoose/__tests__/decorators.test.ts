@@ -109,8 +109,8 @@ describe('errors', () => {
   });
 });
 
-describe('CUnit decorators', () => {
-  test('should add CUnit metadata to a class when decorating a method with @CUnit', () => {
+describe('MUnit decorators', () => {
+  test('should add MUnit metadata to a class when decorating a method with @MUnit', () => {
     @MUnit('default')
     class TestEntity {}
 
@@ -122,7 +122,7 @@ describe('CUnit decorators', () => {
     expect(entityMetadata).toMatchSnapshot();
   });
 
-  test('should fail when decorated multiple times with @CUnit', () => {
+  test('should fail when decorated multiple times with @MUnit', () => {
     expect(function() {
       @MUnit('default')
       @MUnit('default2')

@@ -226,3 +226,17 @@ export interface ConsumeConfig {
   handler: ConsumerHandler;
   options?: ConsumeOptions;
 }
+
+export interface QueueDictionnary {
+  [k: string]: QueueConfiguration;
+}
+
+export interface ConnectionConfig {
+  indexConfig: number;
+
+  name: string;
+
+  url: string;
+
+  queues: QueueDictionnary;
+}

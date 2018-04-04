@@ -1,3 +1,4 @@
+export * from './amqp-manager';
 export * from './amqp-connection';
 export * from './interfaces';
 export * from './decorators';

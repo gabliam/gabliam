@@ -4,38 +4,49 @@ import {
   Value,
   inject,
   VALUE_EXTRACTOR,
-  Joi,
-  ValueExtractor
+  ValueExtractor,
+  InjectContainer,
+  Init,
+  Container,
+  INJECT_CONTAINER_KEY
 } from '@gabliam/core';
-import { QueueConfiguration } from './interfaces';
-import { schemaPlugin } from './schema';
-import { Queue } from './queue';
+import { ConnectionConfig } from './interfaces';
+import { configurationValidator } from './schema';
 import { AmqpConnection } from './amqp-connection';
+import { AmqpConnectionManager } from './amqp-manager';
 
+@InjectContainer()
 @PluginConfig()
 export class AmqpConfig {
-  @Value('application.amqp.queues', schemaPlugin)
-  private queueConfig!: { [k: string]: QueueConfiguration };
-
-  @Value('application.amqp.url', Joi.string().required())
-  private url!: string;
+  @Value('application.amqp', configurationValidator)
+  private connectionConfig!: ConnectionConfig | ConnectionConfig[];
 
   constructor(@inject(VALUE_EXTRACTOR) public valueExtractor: ValueExtractor) {}
 
-  createQueue() {
-    return Object.keys(this.queueConfig).map<Queue>((k: string) => {
-      const q = this.queueConfig[k];
-      return new Queue(q.queueName, q.options);
-    });
+  // when all bean are created, we create bean Connection for back compat
+  @Init()
+  async init() {
+    const container: Container = (<any>this)[INJECT_CONTAINER_KEY];
+    const connectionManager = container.get(AmqpConnectionManager);
+
+    // for back compat
+    container
+      .bind(AmqpConnection)
+      .toConstantValue(connectionManager.getDefaultConnection());
   }
 
-  @Bean(AmqpConnection)
-  async createConnection() {
-    const connection = new AmqpConnection(
-      this.url,
-      this.createQueue(),
-      this.valueExtractor
-    );
-    return connection;
+  @Bean(AmqpConnectionManager)
+  async createManager() {
+    if (!this.connectionConfig) {
+      throw new Error(`AmqpPluginConfig AmqpConfig is mandatory`);
+    }
+    let connectionConfig: ConnectionConfig[];
+    if (Array.isArray(this.connectionConfig)) {
+      connectionConfig = this.connectionConfig;
+    } else {
+      connectionConfig = [this.connectionConfig];
+    }
+
+    return new AmqpConnectionManager(connectionConfig, this.valueExtractor);
   }
 }

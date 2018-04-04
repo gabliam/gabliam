@@ -22,23 +22,23 @@ export class MongooseConnectionManager {
 
     // add entity to the correct connection
     for (const entity of this.models) {
-      let cunit =
+      let munit =
         <string>Reflect.getMetadata(METADATA_KEY.munit, entity) || 'default';
-      let index = connectionOptions.findIndex(c => c.name === cunit);
+      let index = connectionOptions.findIndex(c => c.name === munit);
 
-      if (index === -1 && cunit === 'default') {
+      if (index === -1 && munit === 'default') {
         index = 0;
-        cunit = connectionOptions[0].name;
+        munit = connectionOptions[0].name;
       }
       if (index === -1) {
-        throw new Error(`CUnit ${cunit} not found`);
+        throw new Error(`MUnit ${munit} not found`);
       }
 
-      if (!modelsByConnection.has(cunit)) {
-        modelsByConnection.set(cunit, []);
+      if (!modelsByConnection.has(munit)) {
+        modelsByConnection.set(munit, []);
       }
 
-      modelsByConnection.get(cunit)!.push(entity);
+      modelsByConnection.get(munit)!.push(entity);
     }
 
     for (const connectionOption of connectionOptions) {
