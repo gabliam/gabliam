@@ -10,7 +10,7 @@
   <a href="https://www.npmjs.com/package/@gabliam/core"><img src="https://img.shields.io/npm/v/@gabliam/core.svg?style=flat-square"></a>
   <a href="https://www.npmjs.com/package/@gabliam/core"><img src="https://img.shields.io/npm/dm/@gabliam/core.svg?style=flat-square"></a>
   <a href="https://travis-ci.org/gabliam/gabliam"><img src="https://img.shields.io/travis/gabliam/gabliam/master.svg?style=flat-square"></a>
-  <a href="https://codecov.io/gh/gabliam/gabliam"><img src="https://img.shields.io/codecov/c/github/gabliam/gabliam/master.svg?style=flat-square"></a>
+  <a href="https://coveralls.io/github/gabliam/gabliam?branch=master"><img src="https://img.shields.io/coveralls/github/gabliam/gabliam.svg?style=flat-square"></a>
 </p>
 
 
