@@ -1,3 +1,29 @@
+<a name="7.6.1"></a>
+## [7.6.1](https://github.com/gabliam/gabliam/compare/v7.6.0...v7.6.1) (2018-04-16)
+
+
+### Features
+
+* **@gabliam/core:** add plugins method ([c989995](https://github.com/gabliam/gabliam/commit/c989995))
+
+
+
+<a name="7.6.0"></a>
+# [7.6.0](https://github.com/gabliam/gabliam/compare/v7.5.0...v7.6.0) (2018-04-05)
+
+
+### Features
+
+* rename rest-decorators to web-core ([6c5f792](https://github.com/gabliam/gabliam/commit/6c5f792))
+* update deps ([3f6a865](https://github.com/gabliam/gabliam/commit/3f6a865))
+* **@gabliam/amqp:** add multiple connection for amqp ([86101e2](https://github.com/gabliam/gabliam/commit/86101e2))
+* **@gabliam/express:** delete useless code ([1099192](https://github.com/gabliam/gabliam/commit/1099192))
+* **@gabliam/express:** Integration of rest-decorators ([9573ac7](https://github.com/gabliam/gabliam/commit/9573ac7))
+* **@gabliam/koa:** Integration of rest-decorators ([1adc653](https://github.com/gabliam/gabliam/commit/1adc653))
+* **@gabliam/rest-decorators:** begin rest-decorators module ([396f61b](https://github.com/gabliam/gabliam/commit/396f61b))
+
+
+
 <a name="7.5.0"></a>
 # [7.5.0](https://github.com/gabliam/gabliam/compare/v7.4.0...v7.5.0) (2018-03-09)
 
