@@ -208,9 +208,7 @@ test('ok with Plugin', async () => {
   @Plugin({ dependencies: [{ name: 'Plugin2', order: 'before' }] })
   class Plugin3 {}
   const g = new GabliamTest();
-  g.gab.addPlugin(Plugin1);
-  g.gab.addPlugin(Plugin2);
-  g.gab.addPlugin(Plugin3);
+  g.gab.addPlugins(Plugin1, Plugin2, Plugin3);
   await expect(g.build()).resolves;
 });
 

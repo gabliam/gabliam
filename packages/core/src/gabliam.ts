@@ -82,12 +82,23 @@ export class Gabliam {
     this.container.bind(CORE_CONFIG).toConstantValue(this.options);
   }
   /**
-   * Add a plugin order
-   * @param  {GabliamPluginConstructor} ctor
+   * Add a plugin
+   * @param  {GabliamPluginConstructor} plugin
    * @returns Gabliam
    */
-  public addPlugin(ctor: GabliamPluginConstructor): Gabliam {
-    this.pluginList.add(ctor);
+  public addPlugin(plugin: GabliamPluginConstructor): Gabliam {
+    this.pluginList.add(plugin);
+    return this;
+  }
+  /**
+   * Add any plugins
+   * @param  {GabliamPluginConstructor[]} ...plugins
+   * @returns Gabliam
+   */
+  public addPlugins(...plugins: GabliamPluginConstructor[]): Gabliam {
+    for (const plugin of plugins) {
+      this.addPlugin(plugin);
+    }
     return this;
   }
 
