@@ -1,5 +1,9 @@
-import { MiddlewareDefinition } from './interfaces';
-import { inversifyInterfaces } from '@gabliam/core';
+import {
+  MiddlewareDefinition,
+  ValidationOptions,
+  ValidatorType
+} from './interfaces';
+import { inversifyInterfaces, Joi } from '@gabliam/core';
 
 /**
  * Controller metadata
@@ -67,3 +71,9 @@ export type MiddlewareMetadata<T> =
   | T
   | MiddlewareDefinition
   | inversifyInterfaces.ServiceIdentifier<any>;
+
+export interface ValidateMetadata {
+  rules: Map<ValidatorType, Joi.Schema>;
+
+  validationOptions: ValidationOptions;
+}

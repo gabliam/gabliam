@@ -14,7 +14,7 @@
   ],
   "dependencies": {
     "@gabliam/expression": "^7.5.0",
-    "@types/joi": "^13.0.0",
+    "@types/joi": "^13.0.8",
     "caller": "^1.0.1",
     "debug": "^3.0.0",
     "gert": "^2.0.0",

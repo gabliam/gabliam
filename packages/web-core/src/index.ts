@@ -6,3 +6,4 @@ export * from './decorators';
 export * from './response-entity';
 export * from './utils';
 export * from 'http-status-codes';
+export * from './validate-request';

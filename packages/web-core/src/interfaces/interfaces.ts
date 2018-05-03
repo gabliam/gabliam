@@ -1,3 +1,4 @@
+import { Joi } from '@gabliam/core';
 import { PARAMETER_TYPE } from '../constants';
 
 /**
@@ -74,4 +75,17 @@ export interface ParameterMetadata {
    * Type of parameter
    */
   type: PARAMETER_TYPE;
+}
+
+export interface Validator {
+  params?: Joi.SchemaLike;
+  headers?: Joi.SchemaLike;
+  query?: Joi.SchemaLike;
+  body?: Joi.SchemaLike;
+}
+
+export type ValidatorType = keyof Validator;
+
+export interface ValidationOptions extends Joi.ValidationOptions {
+  escapeHtml?: boolean;
 }

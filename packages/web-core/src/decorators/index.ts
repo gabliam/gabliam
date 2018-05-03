@@ -3,3 +3,4 @@ export * from './middleware';
 export * from './config';
 export * from './method';
 export * from './params';
+export * from './validate';

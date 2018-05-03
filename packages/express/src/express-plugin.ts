@@ -25,13 +25,19 @@ import {
   ControllerMethodMetadata,
   ControllerParameterMetadata,
   ParameterMetadata,
-  cleanPath
+  cleanPath,
+  ValidateMetadata,
+  listParamToValidate,
+  createValidateRequest,
+  NO_VALIDATION,
+  isValidateError
 } from '@gabliam/web-core';
 import { ExpressPluginConfig, RouterCreator } from './interfaces';
 import * as d from 'debug';
 import * as http from 'http';
 import { MiddlewareConfig, ExpressMiddlewareConfig } from './middlewares';
 import { express } from './express';
+import * as EscapeHtml from 'escape-html';
 
 const debug = d('Gabliam:Plugin:ExpressPlugin');
 
@@ -60,6 +66,7 @@ export class ExpressPlugin implements GabliamPlugin {
   build(container: Container, registry: Registry) {
     this.buildExpressConfig(container, registry);
     this.buildControllers(container, registry);
+    this.addValidateErrorMiddleware(container);
     this.buildExpressErrorConfig(container, registry);
   }
 
@@ -275,6 +282,13 @@ export class ExpressPlugin implements GabliamPlugin {
             controller.constructor,
             methodMetadata.key
           );
+
+          this.constructValidateMiddleware(
+            methodMiddlewares,
+            controller.constructor,
+            methodMetadata.key
+          );
+
           debug(methodMetadataPath);
           debug({ methodMiddlewares, controllerMiddlewares });
           // create handler
@@ -298,6 +312,91 @@ export class ExpressPlugin implements GabliamPlugin {
         app.use(routerPath, router);
       }
     });
+  }
+
+  /**
+   * Add Error Middleware for send an error
+   */
+  private addValidateErrorMiddleware(container: Container) {
+    const app = container.get<express.Application>(APP);
+    app.use(
+      (
+        err: any,
+        req: express.Request,
+        res: express.Response,
+        next: express.NextFunction
+      ) => {
+        if (isValidateError(err)) {
+          const error: any = {
+            statusCode: 400,
+            error: 'Bad Request',
+            message: err.message,
+            validation: {
+              source: err._meta.source,
+              keys: []
+            }
+          };
+
+          if (err.details) {
+            for (let i = 0; i < err.details.length; i += 1) {
+              /* istanbul ignore next */
+              const path = Array.isArray(err.details[i].path)
+                ? err.details[i].path.join('.')
+                : err.details[i].path;
+              error.validation.keys.push(EscapeHtml(path));
+            }
+          }
+          return res.status(400).send(error);
+        }
+
+        // If this isn't a Joi error, send it to the next error handler
+        return next(err);
+      }
+    );
+  }
+
+  /**
+   * Construct Validate Middleware for a method
+   */
+  private constructValidateMiddleware(
+    methodMiddlewares: {}[],
+    target: Object,
+    key: string
+  ) {
+    if (!Reflect.hasOwnMetadata(METADATA_KEY.validate, target, key)) {
+      return;
+    }
+
+    const metadata: ValidateMetadata = Reflect.getOwnMetadata(
+      METADATA_KEY.validate,
+      target,
+      key
+    );
+    const validateRequest = createValidateRequest(
+      metadata.rules,
+      metadata.validationOptions
+    );
+
+    const middleware = (
+      req: express.Request,
+      res: express.Response,
+      next: express.NextFunction
+    ) => {
+      for (const paramToValidate of listParamToValidate) {
+        try {
+          const val = validateRequest(paramToValidate, req[paramToValidate]);
+          if (val !== NO_VALIDATION) {
+            req[paramToValidate] = val;
+          }
+        } catch (err) {
+          return next(err);
+        }
+      }
+      next();
+    };
+
+    // add validate middleware on top of middleware
+    methodMiddlewares.unshift(middleware);
   }
 
   private handlerFactory(
@@ -416,7 +515,7 @@ export class ExpressPlugin implements GabliamPlugin {
 
       if (res) {
         /**
-         * For query, all value sare considered to string value.
+         * For query, all values are considered to string value.
          * If the query waits for a Number, we try to convert the value
          */
         if (paramType === 'query' || paramType === 'params') {

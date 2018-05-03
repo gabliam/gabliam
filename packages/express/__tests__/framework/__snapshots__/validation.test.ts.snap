@@ -1,0 +1,177 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`express integration update req values req.body 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-QDkmAz0AG1J53zfLvlKHt8fCZ/o\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": Object {
+      "first": "john",
+      "role": "admin",
+    },
+    "headers": Object {
+      "content-type": "application/json",
+    },
+    "method": "POST",
+  },
+  "status": 200,
+  "text": "lol",
+}
+`;
+
+exports[`express integration update req values req.headers 1`] = `
+Object {
+  "accept": "application/json",
+  "accept-encoding": "gzip, deflate",
+  "connection": "close",
+  "secret-header": "@@@@@@",
+  "user-agent": "node-superagent/3.8.2",
+}
+`;
+
+exports[`express integration update req values req.headers 2`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "1",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"1-E/vXnD05Dl1lhaIeEf9ewZcM/ww\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "accept": "application/json",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "k",
+}
+`;
+
+exports[`express integration update req values req.params 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "1",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"1-E/vXnD05Dl1lhaIeEf9ewZcM/ww\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "k",
+}
+`;
+
+exports[`express integration update req values req.query 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "1",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"1-E/vXnD05Dl1lhaIeEf9ewZcM/ww\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "k",
+}
+`;
+
+exports[`express integration validations req.body 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "156",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\\"9c-lb73tokNqpEcTzZIECgZmqLKScw\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": Object {
+      "first": "john",
+      "last": 123,
+    },
+    "headers": Object {
+      "content-type": "application/json",
+    },
+    "method": "POST",
+  },
+  "status": 400,
+  "text": "{\\"statusCode\\":400,\\"error\\":\\"Bad Request\\",\\"message\\":\\"child /\\"last/\\" fails because [/\\"last/\\" must be a string]\\",\\"validation\\":{\\"source\\":\\"body\\",\\"keys\\":[\\"last\\"]}}",
+}
+`;
+
+exports[`express integration validations req.headers 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "228",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\\"e4-9YBgGPA9onlm1wj0GlR/2HIQaBw\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "accept": "application/json",
+    },
+    "method": "GET",
+  },
+  "status": 400,
+  "text": "{\\"statusCode\\":400,\\"error\\":\\"Bad Request\\",\\"message\\":\\"child /\\"accept/\\" fails because [/\\"accept/\\" with value /\\"application&#x2f;json/\\" fails to match the required pattern: /xml/]\\",\\"validation\\":{\\"source\\":\\"headers\\",\\"keys\\":[\\"accept\\"]}}",
+}
+`;
+
+exports[`express integration validations req.params 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "193",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\\"c1-Ucg8TlfIGVQQWOvNPRCiHk8y61o\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 400,
+  "text": "{\\"statusCode\\":400,\\"error\\":\\"Bad Request\\",\\"message\\":\\"child /\\"id/\\" fails because [/\\"id/\\" must only contain alpha-numeric and underscore characters]\\",\\"validation\\":{\\"source\\":\\"params\\",\\"keys\\":[\\"id\\"]}}",
+}
+`;
+
+exports[`express integration validations req.query 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "122",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\\"7a-iJ+h5zB08gNswU0QtTTcpNELWzs\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 400,
+  "text": "{\\"statusCode\\":400,\\"error\\":\\"Bad Request\\",\\"message\\":\\"/\\"end/\\" is not allowed\\",\\"validation\\":{\\"source\\":\\"query\\",\\"keys\\":[\\"end\\"]}}",
+}
+`;
