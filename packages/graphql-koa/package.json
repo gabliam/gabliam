@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/graphql-koa",
-  "version": "7.6.1",
+  "version": "7.6.2",
   "description": "Graphql plugin for gabliam",
   "keywords": [
     "gabliam",
@@ -35,9 +35,9 @@
     "@gabliam/koa": "^7.2.0"
   },
   "devDependencies": {
-    "@gabliam/core": "7.6.1",
-    "@gabliam/graphql-core": "7.6.1",
-    "@gabliam/koa": "7.6.1",
+    "@gabliam/core": "7.6.2",
+    "@gabliam/graphql-core": "7.6.2",
+    "@gabliam/koa": "7.6.2",
     "@types/debug": "^0.0.30",
     "@types/koa-bodyparser": "^4.2.0",
     "@types/node": "^9.4.7"
