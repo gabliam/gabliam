@@ -52,7 +52,7 @@ export class AmqpConnectionManager {
     }
   }
 
-  private createQueue(queueConfig: QueueDictionnary) {
+  private createQueue(queueConfig: QueueDictionnary = {}) {
     return Object.keys(queueConfig).map<Queue>((k: string) => {
       const q = queueConfig[k];
       return new Queue(q.queueName, q.options);
