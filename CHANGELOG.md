@@ -1,3 +1,18 @@
+<a name="7.6.2"></a>
+## [7.6.2](https://github.com/gabliam/gabliam/compare/v7.6.1...v7.6.2) (2018-05-09)
+
+
+### Bug Fixes
+
+* **@gabliam/amqp:** correction when no queues ([e2ed25a](https://github.com/gabliam/gabliam/commit/e2ed25a))
+
+
+### Features
+
+* **@gabliam/web-core & @gabliam/express:** Add validate decorator ([163da30](https://github.com/gabliam/gabliam/commit/163da30))
+
+
+
 <a name="7.6.1"></a>
 ## [7.6.1](https://github.com/gabliam/gabliam/compare/v7.6.0...v7.6.1) (2018-04-16)
 
