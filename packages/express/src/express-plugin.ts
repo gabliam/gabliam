@@ -349,7 +349,7 @@ export class ExpressPlugin implements GabliamPlugin {
           return res.status(400).send(error);
         }
 
-        // If this isn't a Joi error, send it to the next error handler
+        // If this isn't a Valide error, send it to the next error handler
         return next(err);
       }
     );

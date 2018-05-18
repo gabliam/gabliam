@@ -3,9 +3,11 @@ import {
   ValidateMetadata,
   Validator,
   ValidationOptions,
-  ValidatorType
+  ValidatorType,
+  ValidatorOptions
 } from '../interfaces';
 import { Joi } from '@gabliam/core';
+import { isValidatorOptions } from '..';
 
 const DEFAULT_VAlIDATION_OPTIONS = {
   escapeHtml: true
@@ -19,7 +21,7 @@ export const listParamToValidate: ValidatorType[] = [
 ];
 
 export function Validate(
-  validator: Validator,
+  validator: Validator | ValidatorOptions,
   options: ValidationOptions = {}
 ): MethodDecorator {
   return (target: Object, propertyKey: string | symbol) => {
@@ -33,6 +35,14 @@ export function Validate(
       throw new Error(ERRORS_MSGS.DUPLICATED_VALIDATE_DECORATOR);
     }
 
+    let realValidator: Validator;
+    if (isValidatorOptions(validator)) {
+      realValidator = validator.validator;
+      options = validator.options || {};
+    } else {
+      realValidator = validator;
+    }
+
     const validationOptions = {
       ...DEFAULT_VAlIDATION_OPTIONS,
       ...options
@@ -41,8 +51,11 @@ export function Validate(
     const rules = new Map<ValidatorType, Joi.Schema>();
 
     for (const paramToValidate of listParamToValidate) {
-      if (validator[paramToValidate]) {
-        rules.set(paramToValidate, Joi.compile(validator[paramToValidate]!));
+      if (realValidator[paramToValidate]) {
+        rules.set(
+          paramToValidate,
+          Joi.compile(realValidator[paramToValidate]!)
+        );
       }
     }
 

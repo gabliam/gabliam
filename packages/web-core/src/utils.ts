@@ -1,4 +1,4 @@
-import { MiddlewareDefinition } from './interfaces';
+import { MiddlewareDefinition, ValidatorOptions } from './interfaces';
 
 export function isMiddlewareDefinition(
   obj: Object
@@ -12,4 +12,8 @@ export function isMiddlewareDefinition(
 
 export function cleanPath(path: string) {
   return path.replace(/\/+/gi, '/');
+}
+
+export function isValidatorOptions(value: any): value is ValidatorOptions {
+  return typeof value === 'object' && value.hasOwnProperty('validator');
 }

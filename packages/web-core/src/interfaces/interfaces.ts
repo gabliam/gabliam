@@ -84,6 +84,12 @@ export interface Validator {
   body?: Joi.SchemaLike;
 }
 
+export interface ValidatorOptions {
+  validator: Validator;
+
+  options?: ValidationOptions;
+}
+
 export type ValidatorType = keyof Validator;
 
 export interface ValidationOptions extends Joi.ValidationOptions {
