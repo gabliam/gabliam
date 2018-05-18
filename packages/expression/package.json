@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/expression",
-  "version": "7.5.0",
+  "version": "7.7.0",
   "description": "expression parser",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
