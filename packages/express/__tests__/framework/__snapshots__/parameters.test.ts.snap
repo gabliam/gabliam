@@ -1,5 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Parameters: bug parameter when value is number and passed 0 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "1",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"1-tlifxqsNyCzxIJnRwtQKuZToQQw\\"",
+    "x-powered-by": "Express",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "0",
+}
+`;
+
 exports[`Parameters: should bind a method parameter to a cookie 1`] = `
 Object {
   "header": Object {

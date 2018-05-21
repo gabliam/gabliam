@@ -386,7 +386,7 @@ export class KoaPlugin implements GabliamPlugin {
       }
 
       let res = getter ? param.get(name) : param[name];
-      if (res) {
+      if (res !== undefined) {
         /**
          * For query, all value sare considered to string value.
          * If the query waits for a Number, we try to convert the value

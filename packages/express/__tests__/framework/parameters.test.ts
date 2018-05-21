@@ -31,6 +31,27 @@ afterEach(async () => {
 });
 
 describe('Parameters:', () => {
+  test('bug parameter when value is number and passed 0', async () => {
+    @Controller('/')
+    class TestController {
+      @Get(':id')
+      public getTest(
+        @RequestParam('id') id: number,
+        req: e.Request,
+        res: e.Response
+      ) {
+        return id;
+      }
+    }
+    appTest.addClass(TestController);
+    await appTest.build();
+    const response = await supertest(appTest.app)
+      .get('/0')
+      .expect(200);
+
+    expect(response).toMatchSnapshot();
+  });
+
   test('should bind a method parameter to the url parameter of the web request', async () => {
     @Controller('/')
     class TestController {

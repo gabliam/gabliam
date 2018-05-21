@@ -440,7 +440,12 @@ export class ExpressPlugin implements GabliamPlugin {
           } else if (json) {
             res.json(result);
           } else {
-            res.send(result);
+            if (typeof result === 'string' || typeof result === 'object') {
+              res.send(result);
+            } else {
+              res.send(result !== undefined ? '' + result : undefined);
+            }
+            res.send('' + result);
           }
         }
       } catch (err) {
@@ -513,7 +518,7 @@ export class ExpressPlugin implements GabliamPlugin {
 
       let res = param[name];
 
-      if (res) {
+      if (res !== undefined) {
         /**
          * For query, all values are considered to string value.
          * If the query waits for a Number, we try to convert the value
