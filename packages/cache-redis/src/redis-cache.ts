@@ -1,29 +1,25 @@
 import { Cache } from '@gabliam/cache';
-import { createClient, RedisClient, Multi, ClientOpts } from 'redis';
-import * as bluebird from 'bluebird';
-
-bluebird.promisifyAll(RedisClient.prototype);
-bluebird.promisifyAll(Multi.prototype);
+import * as Redis from 'ioredis';
 
 export interface RedisCacheOptions {
   mode?: string;
 
   duration?: number;
 
-  redisOptions?: ClientOpts;
+  redisOptions?: Redis.RedisOptions;
 }
 
 export class RedisCache implements Cache {
-  private client!: RedisClient;
+  private client!: Redis.Redis;
 
   constructor(private name: string, private options: RedisCacheOptions = {}) {}
 
   async start() {
-    this.client = createClient(this.options.redisOptions);
+    this.client = new Redis(this.options.redisOptions);
   }
 
   async stop() {
-    this.client.end(true);
+    this.client.disconnect();
   }
 
   getName(): string {
@@ -36,7 +32,7 @@ export class RedisCache implements Cache {
   async get<T>(key: string): Promise<T | undefined | null> {
     const realKey = this.getKey(key);
     try {
-      return this.deserialize(await this.client.getAsync<T>(realKey));
+      return this.deserialize(await this.client.get(realKey));
     } catch {
       /* istanbul ignore next */ {
         return Promise.resolve(undefined);
@@ -58,14 +54,14 @@ export class RedisCache implements Cache {
         this.options.mode !== undefined &&
         this.options.duration !== undefined
       ) {
-        await this.client.setAsync(
+        await this.client.set(
           realKey,
           JSON.stringify(value),
           this.options.mode,
           this.options.duration
         );
       } else {
-        await this.client.setAsync(realKey, JSON.stringify(value));
+        await this.client.set(realKey, JSON.stringify(value));
       }
     } catch {}
   }
@@ -84,13 +80,13 @@ export class RedisCache implements Cache {
   }
   async evict(key: string): Promise<void> {
     try {
-      await this.client.delAsync(this.getKey(key));
+      await this.client.del(this.getKey(key));
     } catch {}
   }
 
   async clear(): Promise<void> {
     try {
-      await this.client.evalAsync(
+      await this.client.eval(
         `return redis.call('del', unpack(redis.call('keys', ARGV[1])))`,
         0,
         `${this.name}:*`

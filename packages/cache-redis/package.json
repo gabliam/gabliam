@@ -34,15 +34,12 @@
     "@gabliam/cache": "7.7.0",
     "@gabliam/core": "7.7.0",
     "@types/debug": "^0.0.30",
-    "@types/node": "^9.4.7",
-    "@types/redis": "^2.8.2"
+    "@types/ioredis": "^3.2.8",
+    "@types/node": "^9.4.7"
   },
   "dependencies": {
-    "@types/bluebird": "^3.5.18",
-    "bluebird": "^3.5.1",
     "debug": "^3.0.1",
-    "lru-cache": "^4.1.1",
-    "redis": "^2.8.0",
+    "ioredis": "^3.2.2",
     "tslib": "^1.8.0"
   },
   "engines": {
