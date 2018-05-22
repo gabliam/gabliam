@@ -39,7 +39,6 @@ export interface Cache {
    * the cache contains no mapping for this key
    * @throws IllegalStateException if a cache entry has been found
    * but failed to match the specified type
-   * @since 4.0
    * @see #get(Object)
    */
   get<T>(key: string): Promise<T | undefined | null>;

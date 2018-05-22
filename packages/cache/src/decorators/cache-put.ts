@@ -57,8 +57,10 @@ export function CachePut(
 
       const result = await method.apply(this, args);
 
-      for (const cache of cacheConfig.caches) {
-        await cache.put(cacheKey, result);
+      if (!cacheConfig.veto(args, result)) {
+        for (const cache of cacheConfig.caches) {
+          await cache.put(cacheKey, result);
+        }
       }
 
       return result;

@@ -14,17 +14,41 @@ export interface CacheOptions {
 
   /**
    * Key generator.
-   * By default it is a concatenation
+   * By default it is a concatenation of all arguments (Use JSON stringify)
    */
   keyGenerator?: KeyGenerator;
 
+  /**
+   * Define what it uses to generate the key. By default, use all arguments
+   * Can be an expression.
+   *
+   * $args can be used (represents the arguments passed to the method).
+   *
+   * sample: key: '$args[0].name'
+   */
   key?: string;
 
+  /**
+   * Condition for caching (used before invocation of method)
+   * $args can be used (represents the arguments passed to the method)
+   *
+   * sample : condition: '$args[0].id !== 1',
+   */
   condition?: string;
+
+  /**
+   * The unless parameter can be used to veto the adding of a value to the cache.
+   * Unlike condition, unless expressions are evaluated after the method has been called.
+   *
+   * sample : unless: '$result !== null'
+   */
+  unless?: string;
 }
 
 export interface CacheConfig {
   passCondition: (...vals: any[]) => boolean;
+
+  veto: (args: any[], result: any) => boolean;
 
   extractArgs: (...vals: any[]) => any | undefined;
 
@@ -40,13 +64,35 @@ export interface CacheInternalOptions {
 
   /**
    * Key generator.
-   * By default it is a concatenation
+   * By default it is a concatenation of all arguments (Use JSON stringify)
    */
   keyGenerator: KeyGenerator;
 
+  /**
+   * Define what it uses to generate the key. By default, use all arguments
+   * Can be an expression.
+   *
+   * $args can be used (represents the arguments passed to the method).
+   *
+   * sample: key: '$args[0].name'
+   */
   key?: string;
 
+  /**
+   * Condition for caching (used before invocation of method)
+   * $args can be used (represents the arguments passed to the method)
+   *
+   * sample : condition: '$args[0].id !== 1',
+   */
   condition?: string;
+
+  /**
+   * The unless parameter can be used to veto the adding of a value to the cache.
+   * Unlike condition, unless expressions are evaluated after the method has been called.
+   *
+   * sample : unless: '$result !== null'
+   */
+  unless?: string;
 }
 
 export function extractCacheInternalOptions(
@@ -56,13 +102,14 @@ export function extractCacheInternalOptions(
   let keyGenerator = defaultKeyGenerator;
   let key: string | undefined;
   let condition: string | undefined;
+  let unless: string | undefined;
   if (isCacheOptions(value)) {
     if (Array.isArray(value.cacheNames)) {
       cacheNames.push(...value.cacheNames);
     } else {
       cacheNames.push(value.cacheNames);
     }
-    ({ key, keyGenerator = defaultKeyGenerator, condition } = value);
+    ({ key, keyGenerator = defaultKeyGenerator, condition, unless } = value);
   } else {
     if (Array.isArray(value)) {
       cacheNames.push(...value);
@@ -75,7 +122,8 @@ export function extractCacheInternalOptions(
     cacheNames,
     key,
     keyGenerator,
-    condition
+    condition,
+    unless
   };
 }
 
@@ -83,7 +131,7 @@ export async function createCacheConfig(
   container: Container,
   cacheInternalOptions: CacheInternalOptions
 ): Promise<CacheConfig> {
-  const { cacheNames, condition, key } = cacheInternalOptions;
+  const { cacheNames, condition, key, unless } = cacheInternalOptions;
 
   let passCondition = (...vals: any[]) => true;
 
@@ -102,6 +150,23 @@ export async function createCacheConfig(
       container
         .get<ExpressionParser>(ExpressionParser)
         .parseExpression(condition)
+    );
+  }
+
+  let veto = (args: any[], result: any) => false;
+  if (unless !== undefined) {
+    veto = ((e: Expression) => (args: any[], result: any) => {
+      try {
+        const res = e.getValue<boolean>({ args, result });
+        return typeof res === 'boolean' ? res : false;
+      } catch (e) {
+        /* istanbul ignore next */ {
+          console.log('error condition', e);
+          return false;
+        }
+      }
+    })(
+      container.get<ExpressionParser>(ExpressionParser).parseExpression(unless)
     );
   }
 
@@ -141,7 +206,8 @@ export async function createCacheConfig(
   return {
     passCondition,
     extractArgs,
-    caches
+    caches,
+    veto
   };
 }
 

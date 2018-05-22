@@ -44,6 +44,10 @@ function extractCacheEvictInternalOptions(
   };
 }
 
+/**
+ * Annotation indicating that a method triggers a cache evict operation.
+ * @param value name of cache or CacheEvictOptions
+ */
 export function CacheEvict(
   value: string | string[] | CacheEvictOptions
 ): MethodDecorator {
@@ -97,7 +101,10 @@ export function CacheEvict(
       }
 
       const result = await method.apply(this, args);
-      if (!cacheInternalOptions.beforeInvocation) {
+      if (
+        !cacheInternalOptions.beforeInvocation &&
+        !cacheConfig.veto(args, result)
+      ) {
         await evict(
           cacheConfig.caches,
           cacheKey,

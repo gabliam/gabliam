@@ -197,6 +197,99 @@ describe('cache evict', async () => {
     expect(await cache.getCache('hi')).toMatchSnapshot();
   });
 
+  test('cache unless', async () => {
+    @Service()
+    class TestService {
+      @CachePut({ cacheNames: ['hi'] })
+      async hi(user: { name: string; id: number }) {
+        return user.id;
+      }
+
+      @CacheEvict({ cacheNames: ['hi'], unless: '$result === 1' })
+      async hiEvict(user: { name: string; id: number }) {
+        return user.id;
+      }
+    }
+
+    g.addClass(TestService);
+    await g.build();
+
+    const s = g.gab.container.get(TestService);
+    expect(await s.hi({ name: 'test', id: 1 })).toMatchSnapshot();
+    expect(await s.hi({ name: 'test', id: 2 })).toMatchSnapshot();
+    expect(await cache.getCache('hi')).toMatchSnapshot();
+    expect(await s.hiEvict({ name: 'test', id: 1 })).toMatchSnapshot();
+    expect(await cache.getCache('hi')).toMatchSnapshot();
+    expect(await s.hiEvict({ name: 'test', id: 2 })).toMatchSnapshot();
+    expect(await cache.getCache('hi')).toMatchSnapshot();
+  });
+
+  test('cache unless + key', async () => {
+    @Service()
+    class TestService {
+      @CachePut({ cacheNames: ['hi'], key: '$args[0].id' })
+      async hi(user: { name: string; id: number }) {
+        return user.id;
+      }
+
+      @CacheEvict({
+        cacheNames: ['hi'],
+        key: '$args[0].id',
+        unless: '$result === 1'
+      })
+      async hiEvict(user: { name: string; id: number }) {
+        return user.id;
+      }
+    }
+
+    g.addClass(TestService);
+    await g.build();
+
+    const s = g.gab.container.get(TestService);
+    expect(await s.hi({ name: 'test', id: 1 })).toMatchSnapshot();
+    expect(await s.hi({ name: 'test', id: 2 })).toMatchSnapshot();
+    expect(await cache.getCache('hi')).toMatchSnapshot();
+    expect(await s.hiEvict({ name: 'test', id: 1 })).toMatchSnapshot();
+    expect(await cache.getCache('hi')).toMatchSnapshot();
+    expect(await s.hiEvict({ name: 'test', id: 2 })).toMatchSnapshot();
+    expect(await cache.getCache('hi')).toMatchSnapshot();
+  });
+
+  test('cache unless + key + condition', async () => {
+    @Service()
+    class TestService {
+      @CachePut({ cacheNames: ['hi'], key: '$args[0].id' })
+      async hi(user: { name: string; id: number }) {
+        return user.id;
+      }
+
+      @CacheEvict({
+        cacheNames: ['hi'],
+        key: '$args[0].id',
+        unless: '$result === 1',
+        condition: '$args[0].id !== 2'
+      })
+      async hiEvict(user: { name: string; id: number }) {
+        return user.id;
+      }
+    }
+
+    g.addClass(TestService);
+    await g.build();
+
+    const s = g.gab.container.get(TestService);
+    expect(await s.hi({ name: 'test', id: 1 })).toMatchSnapshot();
+    expect(await s.hi({ name: 'test', id: 2 })).toMatchSnapshot();
+    expect(await s.hi({ name: 'test', id: 3 })).toMatchSnapshot();
+    expect(await cache.getCache('hi')).toMatchSnapshot();
+    expect(await s.hiEvict({ name: 'test', id: 1 })).toMatchSnapshot();
+    expect(await cache.getCache('hi')).toMatchSnapshot();
+    expect(await s.hiEvict({ name: 'test', id: 2 })).toMatchSnapshot();
+    expect(await cache.getCache('hi')).toMatchSnapshot();
+    expect(await s.hiEvict({ name: 'test', id: 3 })).toMatchSnapshot();
+    expect(await cache.getCache('hi')).toMatchSnapshot();
+  });
+
   test('all entries', async () => {
     @Service()
     class TestService {

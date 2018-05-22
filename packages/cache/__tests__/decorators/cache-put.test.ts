@@ -188,6 +188,76 @@ describe('cache put', async () => {
     expect(await cache.getCache('hi')).toMatchSnapshot();
   });
 
+  test('cache unless', async () => {
+    @Service()
+    class TestService {
+      @CachePut({ cacheNames: ['hi'], unless: '$result === 1' })
+      async hi(user: { name: string; id: number }) {
+        return user.id;
+      }
+    }
+
+    g.addClass(TestService);
+    await g.build();
+
+    const s = g.gab.container.get(TestService);
+    expect(await s.hi({ name: 'test', id: 1 })).toMatchSnapshot();
+    expect(await s.hi({ name: 'test', id: 2 })).toMatchSnapshot();
+    expect(await cache.getCache('hi')).toMatchSnapshot();
+    expect(await s.hi({ name: 'test', id: 1 })).toMatchSnapshot();
+    expect(await cache.getCache('hi')).toMatchSnapshot();
+  });
+
+  test('cache unless + key', async () => {
+    @Service()
+    class TestService {
+      @CachePut({
+        cacheNames: ['hi'],
+        unless: '$result === 1',
+        key: '$args[0].id'
+      })
+      async hi(user: { name: string; id: number }) {
+        return user.id;
+      }
+    }
+
+    g.addClass(TestService);
+    await g.build();
+
+    const s = g.gab.container.get(TestService);
+    expect(await s.hi({ name: 'test', id: 1 })).toMatchSnapshot();
+    expect(await s.hi({ name: 'test', id: 2 })).toMatchSnapshot();
+    expect(await cache.getCache('hi')).toMatchSnapshot();
+    expect(await s.hi({ name: 'test', id: 1 })).toMatchSnapshot();
+    expect(await cache.getCache('hi')).toMatchSnapshot();
+  });
+
+  test('cache unless + key + condition', async () => {
+    @Service()
+    class TestService {
+      @CachePut({
+        cacheNames: ['hi'],
+        unless: '$result === 1',
+        key: '$args[0].id',
+        condition: '$args[0].id !== 2'
+      })
+      async hi(user: { name: string; id: number }) {
+        return user.id;
+      }
+    }
+
+    g.addClass(TestService);
+    await g.build();
+
+    const s = g.gab.container.get(TestService);
+    expect(await s.hi({ name: 'test', id: 1 })).toMatchSnapshot();
+    expect(await s.hi({ name: 'test', id: 2 })).toMatchSnapshot();
+    expect(await s.hi({ name: 'test', id: 3 })).toMatchSnapshot();
+    expect(await cache.getCache('hi')).toMatchSnapshot();
+    expect(await s.hi({ name: 'test', id: 1 })).toMatchSnapshot();
+    expect(await cache.getCache('hi')).toMatchSnapshot();
+  });
+
   describe('errors', () => {
     test('Throw error when @CachePut on a sync method', async () => {
       expect(() => {

@@ -69,8 +69,10 @@ export function Cacheable(
         result = await method.apply(this, args);
       }
 
-      for (const cache of cacheConfig.caches) {
-        await cache.putIfAbsent(cacheKey, result);
+      if (!cacheConfig.veto(args, result)) {
+        for (const cache of cacheConfig.caches) {
+          await cache.putIfAbsent(cacheKey, result);
+        }
       }
 
       return result;

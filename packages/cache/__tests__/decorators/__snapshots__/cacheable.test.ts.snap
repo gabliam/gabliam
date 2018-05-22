@@ -14,9 +14,11 @@ exports[`cacheable cache condition + key 4`] = `"hi test"`;
 
 exports[`cacheable cache condition 1`] = `"hi test"`;
 
-exports[`cacheable cache condition 2`] = `"hi test"`;
+exports[`cacheable cache condition 2`] = `"hi test2"`;
 
 exports[`cacheable cache condition 3`] = `"hi test"`;
+
+exports[`cacheable cache condition 4`] = `"hi test2"`;
 
 exports[`cacheable cache key 1`] = `"hi test"`;
 
@@ -39,6 +41,30 @@ exports[`cacheable cache muliple cachenames 6`] = `"hi test"`;
 exports[`cacheable cache muliple cachenames 7`] = `"hi test2"`;
 
 exports[`cacheable cache muliple cachenames 8`] = `"hi test2"`;
+
+exports[`cacheable cache unless + key + condition 1`] = `1`;
+
+exports[`cacheable cache unless + key + condition 2`] = `2`;
+
+exports[`cacheable cache unless + key + condition 3`] = `3`;
+
+exports[`cacheable cache unless + key + condition 4`] = `3`;
+
+exports[`cacheable cache unless + key 1`] = `1`;
+
+exports[`cacheable cache unless + key 2`] = `2`;
+
+exports[`cacheable cache unless + key 3`] = `2`;
+
+exports[`cacheable cache unless + key 4`] = `2`;
+
+exports[`cacheable cache unless 1`] = `16`;
+
+exports[`cacheable cache unless 2`] = `19`;
+
+exports[`cacheable cache unless 3`] = `16`;
+
+exports[`cacheable cache unless 4`] = `19`;
 
 exports[`cacheable errors Throw error when @Cacheable on a sync method 1`] = `"Cacheable must decorate an async method"`;
 
