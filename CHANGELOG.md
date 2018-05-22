@@ -1,3 +1,34 @@
+<a name="7.7.2"></a>
+## [7.7.2](https://github.com/gabliam/gabliam/compare/v7.7.1...v7.7.2) (2018-05-22)
+
+
+### Features
+
+* **@gabliam/cache:** Add unless for @Cacheable, @CachePut and @CacheEvict ([48cf0ef](https://github.com/gabliam/gabliam/commit/48cf0ef))
+* **@gabliam/cache-redis:** replace node_redis by ioredis ([19c5018](https://github.com/gabliam/gabliam/commit/19c5018))
+
+
+
+<a name="7.7.1"></a>
+## [7.7.1](https://github.com/gabliam/gabliam/compare/v7.7.0...v7.7.1) (2018-05-21)
+
+
+### Bug Fixes
+
+* **@gabliam/express @gabliam/koa:** Correction for all parameters when they receive 0 ([cad3344](https://github.com/gabliam/gabliam/commit/cad3344))
+
+
+
+<a name="7.7.0"></a>
+# [7.7.0](https://github.com/gabliam/gabliam/compare/v7.6.2...v7.7.0) (2018-05-18)
+
+
+### Features
+
+* **@gabliam/express @gabliam/web-core:** add ValidatorOptions for @Validate ([fef77ac](https://github.com/gabliam/gabliam/commit/fef77ac))
+
+
+
 <a name="7.6.2"></a>
 ## [7.6.2](https://github.com/gabliam/gabliam/compare/v7.6.1...v7.6.2) (2018-05-09)
 
