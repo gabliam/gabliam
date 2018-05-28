@@ -1,3 +1,23 @@
+<a name="7.8.1"></a>
+## [7.8.1](https://github.com/gabliam/gabliam/compare/v7.8.0...v7.8.1) (2018-05-28)
+
+
+### Bug Fixes
+
+* **@gabliam/cache:** correction export decorators ([72ae45c](https://github.com/gabliam/gabliam/commit/72ae45c))
+
+
+
+<a name="7.8.0"></a>
+# [7.8.0](https://github.com/gabliam/gabliam/compare/v7.7.2...v7.8.0) (2018-05-28)
+
+
+### Features
+
+* **@gabliam/cache:** Add cache plugin for autoconfiguration of cache ([659f97f](https://github.com/gabliam/gabliam/commit/659f97f))
+
+
+
 <a name="7.7.2"></a>
 ## [7.7.2](https://github.com/gabliam/gabliam/compare/v7.7.1...v7.7.2) (2018-05-22)
 
