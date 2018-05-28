@@ -1,4 +1,4 @@
-import { RedisCache } from '../src/index';
+import RedisCache from '../src/index';
 
 let cache: RedisCache;
 let cache2: RedisCache;

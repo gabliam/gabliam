@@ -1,4 +1,4 @@
-import { Cache } from './cache';
+import { Cache, ConstructableCache } from './cache';
 
 /**
  * Gabliam central cache manager SPI.
@@ -8,7 +8,7 @@ export interface CacheManager {
   /**
    * Return the cache associated with the given name.
    * @param name the cache identifier (must not be {@code null})
-   * @return the associated cache, or {@code null} if none found
+   * @return the associated cache, or {@code undefined} if none found
    */
   getCache(name: string): Promise<Cache | undefined>;
 
@@ -17,4 +17,13 @@ export interface CacheManager {
    * @return the names of all caches known by the cache manager
    */
   getCacheNames(): string[];
+}
+
+export interface ConstructableCacheManager {
+  new (
+    cacheMap: Map<string, Cache>,
+    dynamic: boolean,
+    defaultCache: ConstructableCache,
+    defaultOptionsCache?: object
+  ): CacheManager;
 }

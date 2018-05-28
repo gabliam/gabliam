@@ -1,0 +1,261 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`config test bad config bad cacheManager 1`] = `[CacheManagerPgkNotInstalledError:  CacheManager "BadCacheManager" package has not been found installed. Try to install it: npm install BadCacheManager --save or yarn add BadCacheManager]`;
+
+exports[`config test bad config bad defaultCache 1`] = `[CachePgkNotInstalledError:  Cache "BadCache" package has not been found installed. Try to install it: npm install BadCache --save or yarn add BadCache]`;
+
+exports[`config test with config 1`] = `
+SimpleCacheManager {
+  "cacheMap": Map {},
+  "defaultCache": [Function],
+  "defaultOptionsCache": undefined,
+  "dynamic": true,
+  "startedCache": Map {},
+}
+`;
+
+exports[`config test without config 1`] = `
+SimpleCacheManager {
+  "cacheMap": Map {},
+  "defaultCache": [Function],
+  "defaultOptionsCache": undefined,
+  "dynamic": true,
+  "startedCache": Map {},
+}
+`;
+
+exports[`integrations test cache 1`] = `"hi test test"`;
+
+exports[`integrations test cache 2`] = `"hi test test"`;
+
+exports[`integrations test cache 3`] = `
+MemoryCache {
+  "name": "hi",
+  "options": undefined,
+  "store": LRUCache {
+    Symbol(max): Infinity,
+    Symbol(lengthCalculator): [Function],
+    Symbol(allowStale): false,
+    Symbol(maxAge): 0,
+    Symbol(dispose): undefined,
+    Symbol(noDisposeOnSet): false,
+    Symbol(cache): Map {
+      "testtest" => Node {
+        "list": Yallist {
+          "head": [Circular],
+          "length": 1,
+          "tail": [Circular],
+        },
+        "next": null,
+        "prev": null,
+        "value": Entry {
+          "key": "testtest",
+          "length": 1,
+          "maxAge": 0,
+          "now": 0,
+          "value": "hi test test",
+        },
+      },
+    },
+    Symbol(lruList): Yallist {
+      "head": Node {
+        "list": [Circular],
+        "next": null,
+        "prev": null,
+        "value": Entry {
+          "key": "testtest",
+          "length": 1,
+          "maxAge": 0,
+          "now": 0,
+          "value": "hi test test",
+        },
+      },
+      "length": 1,
+      "tail": Node {
+        "list": [Circular],
+        "next": null,
+        "prev": null,
+        "value": Entry {
+          "key": "testtest",
+          "length": 1,
+          "maxAge": 0,
+          "now": 0,
+          "value": "hi test test",
+        },
+      },
+    },
+    Symbol(length): 1,
+  },
+}
+`;
+
+exports[`integrations test cache 4`] = `"hi test2 test2"`;
+
+exports[`integrations test cache 5`] = `
+MemoryCache {
+  "name": "hi",
+  "options": undefined,
+  "store": LRUCache {
+    Symbol(max): Infinity,
+    Symbol(lengthCalculator): [Function],
+    Symbol(allowStale): false,
+    Symbol(maxAge): 0,
+    Symbol(dispose): undefined,
+    Symbol(noDisposeOnSet): false,
+    Symbol(cache): Map {
+      "testtest" => Node {
+        "list": Yallist {
+          "head": Node {
+            "list": [Circular],
+            "next": [Circular],
+            "prev": null,
+            "value": Entry {
+              "key": "test2test2",
+              "length": 1,
+              "maxAge": 0,
+              "now": 0,
+              "value": "hi test2 test2",
+            },
+          },
+          "length": 2,
+          "tail": [Circular],
+        },
+        "next": null,
+        "prev": Node {
+          "list": Yallist {
+            "head": [Circular],
+            "length": 2,
+            "tail": [Circular],
+          },
+          "next": [Circular],
+          "prev": null,
+          "value": Entry {
+            "key": "test2test2",
+            "length": 1,
+            "maxAge": 0,
+            "now": 0,
+            "value": "hi test2 test2",
+          },
+        },
+        "value": Entry {
+          "key": "testtest",
+          "length": 1,
+          "maxAge": 0,
+          "now": 0,
+          "value": "hi test test",
+        },
+      },
+      "test2test2" => Node {
+        "list": Yallist {
+          "head": [Circular],
+          "length": 2,
+          "tail": Node {
+            "list": [Circular],
+            "next": null,
+            "prev": [Circular],
+            "value": Entry {
+              "key": "testtest",
+              "length": 1,
+              "maxAge": 0,
+              "now": 0,
+              "value": "hi test test",
+            },
+          },
+        },
+        "next": Node {
+          "list": Yallist {
+            "head": [Circular],
+            "length": 2,
+            "tail": [Circular],
+          },
+          "next": null,
+          "prev": [Circular],
+          "value": Entry {
+            "key": "testtest",
+            "length": 1,
+            "maxAge": 0,
+            "now": 0,
+            "value": "hi test test",
+          },
+        },
+        "prev": null,
+        "value": Entry {
+          "key": "test2test2",
+          "length": 1,
+          "maxAge": 0,
+          "now": 0,
+          "value": "hi test2 test2",
+        },
+      },
+    },
+    Symbol(lruList): Yallist {
+      "head": Node {
+        "list": [Circular],
+        "next": Node {
+          "list": [Circular],
+          "next": null,
+          "prev": [Circular],
+          "value": Entry {
+            "key": "testtest",
+            "length": 1,
+            "maxAge": 0,
+            "now": 0,
+            "value": "hi test test",
+          },
+        },
+        "prev": null,
+        "value": Entry {
+          "key": "test2test2",
+          "length": 1,
+          "maxAge": 0,
+          "now": 0,
+          "value": "hi test2 test2",
+        },
+      },
+      "length": 2,
+      "tail": Node {
+        "list": [Circular],
+        "next": null,
+        "prev": Node {
+          "list": [Circular],
+          "next": [Circular],
+          "prev": null,
+          "value": Entry {
+            "key": "test2test2",
+            "length": 1,
+            "maxAge": 0,
+            "now": 0,
+            "value": "hi test2 test2",
+          },
+        },
+        "value": Entry {
+          "key": "testtest",
+          "length": 1,
+          "maxAge": 0,
+          "now": 0,
+          "value": "hi test test",
+        },
+      },
+    },
+    Symbol(length): 2,
+  },
+}
+`;
+
+exports[`integrations with mapCache 1`] = `"hi test test"`;
+
+exports[`integrations with mapCache 2`] = `"hi test test"`;
+
+exports[`integrations with mapCache 3`] = `
+NoOpCache {
+  "name": "hi",
+}
+`;
+
+exports[`integrations with mapCache 4`] = `"hi test2 test2"`;
+
+exports[`integrations with mapCache 5`] = `
+NoOpCache {
+  "name": "hi",
+}
+`;
