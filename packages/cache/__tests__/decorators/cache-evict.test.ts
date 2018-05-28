@@ -3,10 +3,10 @@ import {
   SimpleCacheManager,
   MemoryCache,
   CACHE_MANAGER,
-  CachePut
+  CachePut,
+  CacheEvict
 } from '../../src/index';
 import { Bean, Config, Service } from '@gabliam/core';
-import { CacheEvict } from '../../src/decorators/cache-evict';
 
 let g: GabliamTest;
 let cache: SimpleCacheManager;
