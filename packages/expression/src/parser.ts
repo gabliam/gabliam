@@ -193,6 +193,9 @@ export class Parser {
     if ({}.hasOwnProperty.call(vars, node.name)) {
       return (<any>vars)[node.name];
     }
+    if (global.hasOwnProperty(node.name)) {
+      return (<any>global)[node.name];
+    }
     return undefined;
   }
 
@@ -236,8 +239,7 @@ export class Parser {
       return undefined;
     }
 
-    // do not allow access to methods on Function
-    if (obj === FAIL || typeof obj === 'function') {
+    if (obj === FAIL) {
       return FAIL;
     }
     if (node.property.type === 'Identifier') {

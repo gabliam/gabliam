@@ -228,6 +228,45 @@ describe('cacheable', async () => {
     expect(call).toBe(3);
   });
 
+  test('cache unless 2', async () => {
+    let call = 0;
+
+    @Service()
+    class TestService {
+      @Cacheable({
+        cacheNames: ['hi'],
+        unless: 'Array.isArray($result) && $result.length === 0'
+      })
+      async nextYear(user: { name: string; id: number; age: number }) {
+        call++;
+        if (user.age === 15) {
+          return [];
+        }
+
+        return user.age + 1;
+      }
+    }
+
+    g.addClass(TestService);
+    await g.build();
+
+    const s = g.gab.container.get(TestService);
+    expect(
+      await s.nextYear({ name: 'test', id: 1, age: 15 })
+    ).toMatchSnapshot();
+    expect(
+      await s.nextYear({ name: 'test2', id: 2, age: 18 })
+    ).toMatchSnapshot();
+    expect(call).toBe(2);
+    expect(
+      await s.nextYear({ name: 'test', id: 1, age: 15 })
+    ).toMatchSnapshot();
+    expect(
+      await s.nextYear({ name: 'test2', id: 2, age: 18 })
+    ).toMatchSnapshot();
+    expect(call).toBe(3);
+  });
+
   test('cache unless + key', async () => {
     let call = 0;
 
