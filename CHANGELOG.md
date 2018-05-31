@@ -1,3 +1,13 @@
+<a name="7.8.2"></a>
+## [7.8.2](https://github.com/gabliam/gabliam/compare/v7.8.1...v7.8.2) (2018-05-31)
+
+
+### Bug Fixes
+
+* **@gabliam/expression:** Correction for expressions which use global var (ex: Array.isArray) ([d080ed5](https://github.com/gabliam/gabliam/commit/d080ed5))
+
+
+
 <a name="7.8.1"></a>
 ## [7.8.1](https://github.com/gabliam/gabliam/compare/v7.8.0...v7.8.1) (2018-05-28)
 
