@@ -26,68 +26,13 @@ MemoryCache {
 
 exports[`cache get & put 1`] = `undefined`;
 
-exports[`cache get & put 2`] = `
-MemoryCache {
-  "name": "test",
-  "options": undefined,
-  "store": LRUCache {
-    Symbol(max): Infinity,
-    Symbol(lengthCalculator): [Function],
-    Symbol(allowStale): false,
-    Symbol(maxAge): 0,
-    Symbol(dispose): undefined,
-    Symbol(noDisposeOnSet): false,
-    Symbol(cache): Map {
-      "test" => Node {
-        "list": Yallist {
-          "head": [Circular],
-          "length": 1,
-          "tail": [Circular],
-        },
-        "next": null,
-        "prev": null,
-        "value": Entry {
-          "key": "test",
-          "length": 1,
-          "maxAge": 0,
-          "now": 0,
-          "value": "test",
-        },
-      },
-    },
-    Symbol(lruList): Yallist {
-      "head": Node {
-        "list": [Circular],
-        "next": null,
-        "prev": null,
-        "value": Entry {
-          "key": "test",
-          "length": 1,
-          "maxAge": 0,
-          "now": 0,
-          "value": "test",
-        },
-      },
-      "length": 1,
-      "tail": Node {
-        "list": [Circular],
-        "next": null,
-        "prev": null,
-        "value": Entry {
-          "key": "test",
-          "length": 1,
-          "maxAge": 0,
-          "now": 0,
-          "value": "test",
-        },
-      },
-    },
-    Symbol(length): 1,
-  },
-}
-`;
+exports[`cache get & put 2`] = `"test"`;
 
 exports[`cache get & put 3`] = `"test"`;
+
+exports[`cache get & put 4`] = `undefined`;
+
+exports[`cache get & put 5`] = `null`;
 
 exports[`cache putIfAbsent 1`] = `"test"`;
 

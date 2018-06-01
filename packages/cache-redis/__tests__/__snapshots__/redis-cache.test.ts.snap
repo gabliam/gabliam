@@ -2,13 +2,13 @@
 
 exports[`cache 1`] = `"test"`;
 
-exports[`cache get & put 1`] = `null`;
+exports[`cache get & put 1`] = `undefined`;
 
 exports[`cache get & put 2`] = `"test"`;
 
 exports[`cache get & put 3`] = `"test"`;
 
-exports[`cache get & put 4`] = `"test"`;
+exports[`cache get & put 4`] = `undefined`;
 
 exports[`cache get & put 5`] = `null`;
 
@@ -34,11 +34,11 @@ exports[`clear 5`] = `"test2"`;
 
 exports[`clear 6`] = `"test3"`;
 
-exports[`clear 7`] = `null`;
+exports[`clear 7`] = `undefined`;
 
-exports[`clear 8`] = `null`;
+exports[`clear 8`] = `undefined`;
 
-exports[`clear 9`] = `null`;
+exports[`clear 9`] = `undefined`;
 
 exports[`evict 1`] = `null`;
 
@@ -48,8 +48,8 @@ exports[`evict 3`] = `null`;
 
 exports[`evict 4`] = `"test3"`;
 
-exports[`evict 5`] = `null`;
+exports[`evict 5`] = `undefined`;
 
 exports[`put with duration 1`] = `"test"`;
 
-exports[`put with duration 2`] = `null`;
+exports[`put with duration 2`] = `undefined`;

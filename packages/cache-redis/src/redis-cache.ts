@@ -30,6 +30,9 @@ export class RedisCache implements Cache {
   }
 
   async get<T>(key: string): Promise<T | undefined | null> {
+    if (!await this.hasKey(key)) {
+      return undefined;
+    }
     const realKey = this.getKey(key);
     try {
       return this.deserialize(await this.client.get(realKey));
@@ -40,10 +43,6 @@ export class RedisCache implements Cache {
     }
   }
   async put(key: string, value: any): Promise<void> {
-    if (value === undefined) {
-      return;
-    }
-
     const realKey = this.getKey(key);
     try {
       // why ? for prevent this message :
@@ -70,13 +69,12 @@ export class RedisCache implements Cache {
     key: string,
     value: T | null | undefined
   ): Promise<T | undefined | null> {
-    const result = await this.get<T>(key);
-    if (result === undefined || result === null) {
+    if (!await this.hasKey(key)) {
       await this.put(key, value);
       return null;
     }
 
-    return result;
+    return await this.get<T>(key);
   }
   async evict(key: string): Promise<void> {
     try {
@@ -92,6 +90,14 @@ export class RedisCache implements Cache {
         `${this.name}:*`
       );
     } catch {}
+  }
+
+  private async hasKey(key: string) {
+    try {
+      return (await this.client.exists(this.getKey(key))) === 1;
+    } catch {
+      return false;
+    }
   }
 
   private getKey(key: string) {

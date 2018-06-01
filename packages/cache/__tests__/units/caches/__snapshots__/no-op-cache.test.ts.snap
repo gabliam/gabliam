@@ -10,13 +10,13 @@ NoOpCache {
 
 exports[`cache get & put 1`] = `undefined`;
 
-exports[`cache get & put 2`] = `
-NoOpCache {
-  "name": "test",
-}
-`;
+exports[`cache get & put 2`] = `undefined`;
 
 exports[`cache get & put 3`] = `undefined`;
+
+exports[`cache get & put 4`] = `undefined`;
+
+exports[`cache get & put 5`] = `undefined`;
 
 exports[`cache putIfAbsent 1`] = `undefined`;
 

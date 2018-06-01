@@ -23,8 +23,12 @@ test('cache', () => {
 test('cache get & put', async () => {
   expect(await cache.get('test')).toMatchSnapshot();
   await cache.put('test', 'test');
-  expect(cache).toMatchSnapshot();
   expect(await cache.get('test')).toMatchSnapshot();
+  expect(await cache.get('test')).toMatchSnapshot();
+  await cache.put('test', undefined);
+  expect(await cache.get('test')).toMatchSnapshot();
+  await cache.put('test2', null);
+  expect(await cache.get('test2')).toMatchSnapshot();
 });
 
 test('cache putIfAbsent', async () => {
