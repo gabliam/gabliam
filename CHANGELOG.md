@@ -1,3 +1,13 @@
+<a name="7.8.3"></a>
+## [7.8.3](https://github.com/gabliam/gabliam/compare/v7.8.2...v7.8.3) (2018-06-01)
+
+
+### Bug Fixes
+
+* **@gabliam/cache-redis:** Use redis exist for test if value is in cache ([2a4bf7a](https://github.com/gabliam/gabliam/commit/2a4bf7a))
+
+
+
 <a name="7.8.2"></a>
 ## [7.8.2](https://github.com/gabliam/gabliam/compare/v7.8.1...v7.8.2) (2018-05-31)
 
