@@ -1,5 +1,9 @@
 import { METADATA_KEY, ERRORS_MSGS } from '../constants';
-import { PluginMetadata, PluginDependency } from '../interfaces';
+import {
+  PluginMetadata,
+  PluginDependency,
+  GabliamPluginConstructor
+} from '../interfaces';
 
 /**
  * Plugin options for decorator
@@ -14,7 +18,7 @@ export interface PluginOptions {
   /**
    * Define the dependencies
    */
-  dependencies?: (PluginDependency | string)[];
+  dependencies?: (PluginDependency | string | GabliamPluginConstructor)[];
 }
 
 function isPluginDependency(obj: any): obj is PluginDependency {

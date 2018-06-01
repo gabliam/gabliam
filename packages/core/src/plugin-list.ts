@@ -12,7 +12,7 @@ import * as TopoSort from 'gert-topo-sort';
 export class PluginList {
   private _plugins: GabliamPluginDefinition[] = [];
 
-  add(ctor: GabliamPluginConstructor) {
+  add(ctor: GabliamPluginConstructor): GabliamPluginDefinition {
     const pluginMetadata = <PluginMetadata | undefined>Reflect.getMetadata(
       METADATA_KEY.plugin,
       ctor
@@ -21,8 +21,9 @@ export class PluginList {
     if (!pluginMetadata) {
       throw new Error(ERRORS_MSGS.INVALID_PLUGIN);
     }
-
-    this._plugins.push({ ...pluginMetadata, plugin: new ctor() });
+    const def = { ...pluginMetadata, plugin: new ctor() };
+    this._plugins.push(def);
+    return def;
   }
 
   sort() {
@@ -31,18 +32,30 @@ export class PluginList {
       const orderedPlugin = [plugin.name];
       if (plugin.dependencies) {
         for (const deps of plugin.dependencies) {
-          if (!this.has(deps.name)) {
-            throw new Error(
-              `The plugin ${plugin.name} need the plugin ${deps.name}}`
-            );
-          }
-          switch (deps.order) {
-            case 'after':
-              orderedPlugin.unshift(deps.name);
-              break;
-            case 'before':
-              orderedPlugin.push(deps.name);
-              break;
+          if (typeof deps.name !== 'string') {
+            const def = this.add(deps.name);
+            switch (deps.order) {
+              case 'after':
+                orderedPlugin.unshift(def.name);
+                break;
+              case 'before':
+                orderedPlugin.push(def.name);
+                break;
+            }
+          } else {
+            if (!this.has(deps.name)) {
+              throw new Error(
+                `The plugin ${plugin.name} need the plugin ${deps.name}}`
+              );
+            }
+            switch (deps.order) {
+              case 'after':
+                orderedPlugin.unshift(deps.name);
+                break;
+              case 'before':
+                orderedPlugin.push(deps.name);
+                break;
+            }
           }
         }
       }

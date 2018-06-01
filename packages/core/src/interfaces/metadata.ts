@@ -1,5 +1,6 @@
 import { interfaces } from 'inversify';
 import { Joi } from '../joi';
+import { GabliamPluginConstructor } from './interfaces';
 
 /**
  * Bean metadata
@@ -85,7 +86,7 @@ export interface RegistryMetada<T = any> {
  * Plugin dependency
  */
 export interface PluginDependency {
-  name: string;
+  name: string | GabliamPluginConstructor;
 
   order: 'before' | 'after';
 }

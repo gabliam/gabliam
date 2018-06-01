@@ -96,7 +96,9 @@ export class RedisCache implements Cache {
     try {
       return (await this.client.exists(this.getKey(key))) === 1;
     } catch {
-      return false;
+      /* istanbul ignore next */ {
+        return false;
+      }
     }
   }
 
