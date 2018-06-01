@@ -19,12 +19,6 @@ export function Cacheable(
     propertyKey: string | symbol,
     descriptor: TypedPropertyDescriptor<any>
   ) {
-    if (
-      Reflect.getMetadata('design:returntype', target, propertyKey) !== Promise
-    ) {
-      throw new Error('Cacheable must decorate an async method');
-    }
-
     InjectContainer()(target.constructor);
     const cacheInternalOptions = extractCacheInternalOptions(value);
     const method = descriptor.value;

@@ -3957,8 +3957,6 @@ MemoryCache {
 }
 `;
 
-exports[`cache evict errors Throw error when @CacheEvict on a sync method 1`] = `"Cacheable must decorate an async method"`;
-
 exports[`cache evict errors error on condition 1`] = `"hi test test"`;
 
 exports[`cache evict errors error on condition 2`] = `"hi test test"`;

@@ -325,24 +325,6 @@ describe('cacheable', async () => {
   });
 
   describe('errors', () => {
-    test('Throw error when @Cacheable on a sync method', async () => {
-      expect(() => {
-        @Service()
-        class TestService {
-          @Cacheable({
-            cacheNames: 'hi',
-            condition: '$args[0].id !== 1',
-            key: '$args[0].name'
-          })
-          hi(user: { name: string; id: number }) {
-            return `hi ${user.name}`;
-          }
-        }
-        // tslint:disable-next-line:no-unused-expression
-        new TestService();
-      }).toThrowErrorMatchingSnapshot();
-    });
-
     test('error on condition', async () => {
       let call = 0;
       @Service()

@@ -259,24 +259,6 @@ describe('cache put', async () => {
   });
 
   describe('errors', () => {
-    test('Throw error when @CachePut on a sync method', async () => {
-      expect(() => {
-        @Service()
-        class TestService {
-          @CachePut({
-            cacheNames: 'hi',
-            condition: '$args[0].id !== 1',
-            key: '$args[0].name'
-          })
-          hi(user: { name: string; id: number }) {
-            return `hi ${user.name}`;
-          }
-        }
-        // tslint:disable-next-line:no-unused-expression
-        new TestService();
-      }).toThrowErrorMatchingSnapshot();
-    });
-
     test('error on condition', async () => {
       @Service()
       class TestService {

@@ -74,8 +74,6 @@ exports[`cacheable cache unless 3`] = `16`;
 
 exports[`cacheable cache unless 4`] = `19`;
 
-exports[`cacheable errors Throw error when @Cacheable on a sync method 1`] = `"Cacheable must decorate an async method"`;
-
 exports[`cacheable errors error on condition 1`] = `"hi test test"`;
 
 exports[`cacheable errors error on condition 2`] = `"hi test test"`;

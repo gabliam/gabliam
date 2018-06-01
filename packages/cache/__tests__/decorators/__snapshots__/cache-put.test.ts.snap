@@ -2185,8 +2185,6 @@ MemoryCache {
 }
 `;
 
-exports[`cache put errors Throw error when @CachePut on a sync method 1`] = `"Cacheable must decorate an async method"`;
-
 exports[`cache put errors error on condition 1`] = `"hi test test"`;
 
 exports[`cache put errors error on condition 2`] = `"hi test test"`;

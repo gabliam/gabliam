@@ -56,12 +56,6 @@ export function CacheEvict(
     propertyKey: string | symbol,
     descriptor: TypedPropertyDescriptor<any>
   ) {
-    if (
-      Reflect.getMetadata('design:returntype', target, propertyKey) !== Promise
-    ) {
-      throw new Error('Cacheable must decorate an async method');
-    }
-
     InjectContainer()(target.constructor);
     const cacheInternalOptions = extractCacheEvictInternalOptions(value);
     const method = descriptor.value;
