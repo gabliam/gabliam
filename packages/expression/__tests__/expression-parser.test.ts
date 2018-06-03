@@ -317,6 +317,18 @@ describe('expression evaluator', () => {
     });
   });
 
+  describe('logical', () => {
+    it('should return false and no throw error', () => {
+      const local = new ExpressionParser()
+        .parseExpression('Array.isArray($result) && $result.length !== 0')
+        .getValue({
+          result: null
+        });
+
+      expect(local).toBe(false);
+    });
+  });
+
   describe('locals', () => {
     it('should refer to a local variable', () => {
       const local = new ExpressionParser({

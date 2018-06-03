@@ -177,10 +177,17 @@ export class Parser {
   }
 
   private parseLogical(node: LogicalExpression, vars: object) {
-    const [l, r] = this.parseLeftRight(node, vars);
+    const l = this.walk(node.left, vars);
     if (l === FAIL) {
       return FAIL;
     }
+
+    if (l === false && node.operator === '&&') {
+      return false;
+    }
+
+    const r = this.walk(node.right, vars);
+
     switch (node.operator) {
       case '||':
         return l || r;
