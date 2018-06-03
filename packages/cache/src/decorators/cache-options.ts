@@ -3,6 +3,8 @@ import { Container } from '@gabliam/core';
 import { CacheManager } from '../cache-manager';
 import { CACHE_MANAGER } from '../constant';
 import { Cache } from '../cache';
+import * as d from 'debug';
+const debug = d('Gabliam:Plugin:CachePlugin:CacheOptions');
 
 export type KeyGenerator = (...args: any[]) => string | undefined;
 
@@ -142,7 +144,7 @@ export async function createCacheConfig(
         return typeof res === 'boolean' ? res : false;
       } catch (e) {
         /* istanbul ignore next */ {
-          console.log('error condition', e);
+          debug('error condition', e);
           return false;
         }
       }
@@ -161,7 +163,7 @@ export async function createCacheConfig(
         return typeof res === 'boolean' ? res : false;
       } catch (e) {
         /* istanbul ignore next */ {
-          console.log('error condition', e);
+          debug('error condition', e);
           return false;
         }
       }
@@ -186,7 +188,7 @@ export async function createCacheConfig(
         return extractedArgs;
       } catch (e) {
         /* istanbul ignore next */ {
-          console.error('cache Error', e);
+          debug('cache Error', e);
           return undefined;
         }
       }
