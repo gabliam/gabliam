@@ -312,16 +312,6 @@ describe('@Register', () => {
 
     expect(registryMetadata).toMatchSnapshot();
   });
-
-  test('should fail when decorated multiple times with @Register', () => {
-    expect(function() {
-      @register(TYPE.Config, { id: TestBean, target: TestBean })
-      @register(TYPE.Service, { id: TestBean, target: TestBean })
-      class TestBean {}
-
-      new TestBean();
-    }).toThrowError();
-  });
 }); // end describe @Register
 
 describe('@Scan', () => {
@@ -420,16 +410,6 @@ describe('@Service', () => {
 
     expect(serviceMetadata).toMatchSnapshot();
     expect(registryMetadata).toMatchSnapshot();
-  });
-
-  test('should fail when decorated multiple times with @Service', () => {
-    expect(function() {
-      @Service()
-      @Service()
-      class TestBean {}
-
-      new TestBean();
-    }).toThrowError();
   });
 }); // end describe @Service
 
