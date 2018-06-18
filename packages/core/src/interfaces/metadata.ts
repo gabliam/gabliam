@@ -73,6 +73,10 @@ export interface ConfigRegistry {
   order: number;
 }
 
+export interface PreDestroyRegistry {
+  preDestroys: Array<string | symbol>;
+}
+
 /**
  * Registry metadata
  */

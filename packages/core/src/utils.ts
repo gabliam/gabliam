@@ -72,11 +72,17 @@ export function configureValueExtractor(container: Container): ValueExtractor {
 
 /**
  * Test if val is an object
- * @param val
  */
 export function isObject(val: any): val is Object {
   if (val === null || val === undefined) {
     return false;
   }
   return typeof val === 'function' || typeof val === 'object';
+}
+
+/**
+ * Call an instance and wrap with promise
+ */
+export async function callInstance(instance: any, key: string | symbol) {
+  return Promise.resolve(instance[key]());
 }

@@ -11,7 +11,8 @@ import {
   Plugin,
   Init,
   InjectContainer,
-  BeforeCreate
+  BeforeCreate,
+  preDestroy
 } from '../src/decorators';
 import { CoreConfig } from '../src/decorators/config';
 import { METADATA_KEY, TYPE } from '../src/constants';
@@ -529,5 +530,22 @@ describe('@Plugin', () => {
 
       new TestBean();
     }).toThrowError();
+  });
+});
+
+describe('@preDestroy', () => {
+  test('should add preDestroy metadata to a class when decorated with @preDestroy', () => {
+    class TestBean {
+      @preDestroy()
+      preDestroy() {}
+
+      @preDestroy()
+      preDestroy2() {}
+    }
+    const pluginMetadata: PluginMetadata = Reflect.getMetadata(
+      METADATA_KEY.preDestroy,
+      TestBean
+    );
+    expect(pluginMetadata).toMatchSnapshot();
   });
 });

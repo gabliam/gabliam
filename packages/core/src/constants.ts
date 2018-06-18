@@ -1,7 +1,8 @@
 /** Type in registry */
 export const TYPE = {
   Service: 'ServiceType',
-  Config: 'ConfigType'
+  Config: 'ConfigType',
+  PreDestroy: 'PreDestroy'
 };
 
 export const METADATA_KEY = {
@@ -15,7 +16,8 @@ export const METADATA_KEY = {
   config: '_config',
   service: '_service',
   plugin: '_plugin',
-  injectContainer: '_inject_container'
+  injectContainer: '_inject_container',
+  preDestroy: '_preDestroy'
 };
 
 /**

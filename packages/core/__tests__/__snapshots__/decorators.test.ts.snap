@@ -5369,3 +5369,10 @@ Array [
   "test2Method",
 ]
 `;
+
+exports[`@preDestroy should add preDestroy metadata to a class when decorated with @preDestroy 1`] = `
+Array [
+  "preDestroy",
+  "preDestroy2",
+]
+`;

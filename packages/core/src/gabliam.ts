@@ -10,13 +10,15 @@ import { LoaderModule, LoaderConfig } from './loaders';
 import { createContainer, Container } from './container';
 import { Registry } from './registry';
 import * as d from 'debug';
-import { configureValueExtractor } from './utils';
+import { configureValueExtractor, callInstance } from './utils';
 import { PluginList } from './plugin-list';
 import {
   GabliamConfig,
   GabliamPluginConstructor,
   ConfigRegistry,
-  BeanMetadata
+  BeanMetadata,
+  ValueRegistry,
+  PreDestroyRegistry
 } from './interfaces';
 import { ExpressionParser } from '@gabliam/expression';
 
@@ -187,6 +189,26 @@ export class Gabliam {
       await plugin.destroy!(this.container, this.registry);
     }
 
+    const values = this.registry.get<PreDestroyRegistry>(TYPE.PreDestroy);
+
+    const instanceToDestroy = async (
+      value: ValueRegistry<PreDestroyRegistry>
+    ) => {
+      if (value.options) {
+        const instance = this.container.get(value.id);
+        for (const preDestroy of value.options.preDestroys) {
+          await callInstance(instance, preDestroy);
+        }
+      }
+    };
+
+    const p = [];
+    for (const value of values) {
+      p.push(instanceToDestroy(value));
+    }
+
+    await Promise.all(p);
+
     return this;
   }
 
@@ -238,9 +260,6 @@ export class Gabliam {
    */
   private async _loadConfig() {
     debug('_loadConfig');
-    async function callInstance(instance: any, key: string) {
-      return Promise.resolve(instance[key]());
-    }
 
     let configsRegistry = this.registry.get<ConfigRegistry>(TYPE.Config);
 
@@ -295,9 +314,24 @@ export class Gabliam {
               } catch {}
             }
             if (allMissing) {
-              this.container
-                .bind(id)
-                .toConstantValue(await callInstance(confInstance, key));
+              const bean = await callInstance(confInstance, key);
+              this.container.bind(id).toConstantValue(bean);
+
+              if (
+                Reflect.hasMetadata(METADATA_KEY.preDestroy, bean.constructor)
+              ) {
+                const preDestroys: Array<string | symbol> = Reflect.getMetadata(
+                  METADATA_KEY.preDestroy,
+                  bean.constructor
+                );
+                this.registry.add(TYPE.PreDestroy, <ValueRegistry>{
+                  id,
+                  target: bean,
+                  options: {
+                    preDestroys
+                  }
+                });
+              }
             }
           }
         }

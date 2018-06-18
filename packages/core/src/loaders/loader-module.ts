@@ -3,8 +3,8 @@ import * as _ from 'lodash';
 import * as d from 'debug';
 
 import { Registry } from '../registry';
-import { METADATA_KEY } from '../constants';
-import { RegistryMetada, GabliamPlugin } from '../interfaces';
+import { METADATA_KEY, TYPE } from '../constants';
+import { RegistryMetada, GabliamPlugin, ValueRegistry } from '../interfaces';
 import { isObject } from '../utils';
 
 const debug = d('Gabliam:loader');
@@ -71,6 +71,20 @@ export class LoaderModule {
             m
           );
           registry.add(metadata.type, metadata.value);
+
+          // if the module has preDestroy, registry this
+          if (Reflect.hasMetadata(METADATA_KEY.preDestroy, m)) {
+            const preDestroys: Array<string | symbol> = Reflect.getMetadata(
+              METADATA_KEY.preDestroy,
+              m
+            );
+            registry.add(TYPE.PreDestroy, <ValueRegistry>{
+              ...metadata.value,
+              options: {
+                preDestroys
+              }
+            });
+          }
         }
 
         // if the module is an objet and has a scan metadata => add in registry and load paths

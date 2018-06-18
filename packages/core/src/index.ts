@@ -25,5 +25,6 @@ export {
   multiInject,
   targetName,
   decorate,
+  postConstruct,
   interfaces as inversifyInterfaces
 } from 'inversify';
