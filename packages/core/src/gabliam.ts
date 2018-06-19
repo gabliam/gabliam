@@ -317,7 +317,10 @@ export class Gabliam {
               const bean = await callInstance(confInstance, key);
               this.container.bind(id).toConstantValue(bean);
 
+              // bean can return undefined or can be a constant value
               if (
+                bean &&
+                bean.constructor &&
                 Reflect.hasMetadata(METADATA_KEY.preDestroy, bean.constructor)
               ) {
                 const preDestroys: Array<string | symbol> = Reflect.getMetadata(
