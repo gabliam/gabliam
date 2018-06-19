@@ -1,9 +1,8 @@
 import { Config } from '@gabliam/core';
-import { ExpressConfig, express, ExpressErrorConfig } from '@gabliam/express';
+import { ExpressConfig, express } from '@gabliam/express';
 import * as bodyParser from 'body-parser';
 import * as helmet from 'helmet';
 import * as passport from 'passport';
-import * as Celebrate from 'celebrate';
 
 @Config(152)
 export class ServerConfig {
@@ -31,11 +30,5 @@ export class ServerConfig {
     // init passport
     app.use(passport.initialize());
     app.use(passport.session());
-  }
-
-  @ExpressErrorConfig()
-  addErrorConfig(app: express.Application) {
-    // user errors celebrate
-    app.use(Celebrate.errors());
   }
 }

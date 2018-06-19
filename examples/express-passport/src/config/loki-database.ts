@@ -1,24 +1,23 @@
 import * as lokijs from 'lokijs';
 import { User } from '../entities/user';
-import { Deferred } from '../defered';
 
 export class LokiDatabase {
-  private isInit: Deferred<any>;
-
   private db: Loki;
 
-  constructor(dbPath: string) {
-    this.isInit = new Deferred();
-    this.db = new lokijs(dbPath, {
-      autoload: true,
-      autoloadCallback: () => this.initialize(),
-      autosave: true,
-      autosaveInterval: 4000
-    });
-  }
+  constructor(private dbPath: string) {}
 
-  waitLoad() {
-    return this.isInit.promise;
+  start() {
+    return new Promise(resolve => {
+      this.db = new lokijs(this.dbPath, {
+        autoload: true,
+        autoloadCallback: () => {
+          this.initialize();
+          resolve();
+        },
+        autosave: true,
+        autosaveInterval: 4000
+      });
+    });
   }
 
   getUserCollection() {
@@ -40,7 +39,5 @@ export class LokiDatabase {
         }
       ]);
     }
-
-    this.isInit.resolve();
   }
 }

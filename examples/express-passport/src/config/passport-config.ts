@@ -1,5 +1,5 @@
 import { Config } from '@gabliam/core';
-import { Middleware, express, MiddlewareConfigurator } from '@gabliam/express';
+import { Middleware, express } from '@gabliam/express';
 import * as passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { LokiDatabase } from './loki-database';
@@ -37,7 +37,7 @@ export class PassportConfig {
    * Create Middleware
    */
   @Middleware('authenticated')
-  createAuthMiddleware(): MiddlewareConfigurator {
+  createAuthMiddleware() {
     return () => (
       req: express.Request,
       res: express.Response,
