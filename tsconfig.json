@@ -1,19 +1,10 @@
 {
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "target": "es2017",
-    "lib": ["es2017", "dom"],
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "strict": true,
-    "declaration": true,
-    "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "sourceMap": true,
-    "importHelpers": true
+    "baseUrl": ".",
+    "paths": {
+      "@gabliam/core/lib/*":  ["./packages/core/src/*"],
+      "@gabliam/*": ["./packages/*/src"]
+    }
   }
 }
