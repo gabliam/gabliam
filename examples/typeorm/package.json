@@ -21,6 +21,7 @@
     "@gabliam/core": "7.9.4",
     "@gabliam/express": "7.9.4",
     "@gabliam/typeorm": "7.9.4",
+    "@gabliam/web-core": "7.9.4",
     "body-parser": "^1.16.1",
     "helmet": "^3.4.0",
     "reflect-metadata": "^0.1.9",

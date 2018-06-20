@@ -1,4 +1,13 @@
-import { RestController, Get, Post, Delete, express } from '@gabliam/express';
+import {
+  RestController,
+  Get,
+  Post,
+  Delete,
+  express,
+  RequestBody,
+  Response,
+  RequestParam
+} from '@gabliam/express';
 import { Photo } from '../entities/photo';
 import { Connection, Repository } from '@gabliam/typeorm';
 
@@ -11,9 +20,9 @@ export class PhotoController {
   }
 
   @Post('/')
-  async create(req: express.Request, res: express.Response) {
+  async create(@RequestBody() photo: Photo, @Response() res: express.Response) {
     try {
-      return await this.photoRepository.save(req.body);
+      return await this.photoRepository.save(photo);
     } catch (err) {
       res.status(500);
       res.json(err);
@@ -21,8 +30,8 @@ export class PhotoController {
   }
 
   @Delete('/:id')
-  async del(req: express.Request, res: express.Response) {
-    const photo = await this.photoRepository.findOneById(req.params.id);
+  async del(@RequestParam('id') id: string, @Response() res: express.Response) {
+    const photo = await this.photoRepository.findOneById(id);
     if (photo) {
       try {
         await this.photoRepository.remove(photo);
@@ -37,8 +46,11 @@ export class PhotoController {
   }
 
   @Get('/:id')
-  async getById(req: express.Request, res: express.Response) {
-    const photo = await this.photoRepository.findOneById(req.params.id);
+  async getById(
+    @RequestParam('id') id: string,
+    @Response() res: express.Response
+  ) {
+    const photo = await this.photoRepository.findOneById(id);
     if (photo) {
       return photo;
     }
@@ -46,7 +58,7 @@ export class PhotoController {
   }
 
   @Get('/')
-  async getAll(req: express.Request, res: express.Response) {
+  async getAll(@Response() res: express.Response) {
     const photos = await this.photoRepository.find();
     if (photos.length > 0) {
       return photos;

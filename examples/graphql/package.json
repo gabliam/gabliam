@@ -23,6 +23,7 @@
     "@gabliam/graphql-core": "7.9.4",
     "@gabliam/graphql-express": "7.9.4",
     "@gabliam/typeorm": "7.9.4",
+    "@gabliam/web-core": "7.9.4",
     "body-parser": "^1.16.1",
     "helmet": "^3.4.0",
     "lodash": "^4.17.4",

@@ -6,7 +6,6 @@ import {
   express,
   RequestBody,
   Response,
-  Re,
   RequestParam
 } from '@gabliam/express';
 import { Hero } from '../entities/hero';
