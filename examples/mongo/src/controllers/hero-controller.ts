@@ -1,4 +1,14 @@
-import { RestController, Get, Post, Delete, express } from '@gabliam/express';
+import {
+  RestController,
+  Get,
+  Post,
+  Delete,
+  express,
+  RequestBody,
+  Response,
+  Re,
+  RequestParam
+} from '@gabliam/express';
 import { Hero } from '../entities/hero';
 import { Repository, MongooseConnection, mongoose } from '@gabliam/mongoose';
 
@@ -12,11 +22,11 @@ export class HeroController {
 
   @Post('/')
   async create(
-    req: express.Request,
-    res: express.Response
+    @RequestBody() hero: Hero,
+    @Response() res: express.Response
   ): Promise<(Hero & mongoose.Document) | undefined> {
     try {
-      return await this.heroRepository.create(req.body);
+      return await this.heroRepository.create(hero);
     } catch (err) {
       res.status(500);
       res.json(err);
@@ -24,14 +34,17 @@ export class HeroController {
   }
 
   @Delete('/:id')
-  async del(req: express.Request, res: express.Response) {
-    await this.heroRepository.delete(req.params.id);
+  async del(@RequestParam('id') id: string, @Response() res: express.Response) {
+    await this.heroRepository.delete(id);
     res.sendStatus(204);
   }
 
   @Get('/:id')
-  async getById(req: express.Request, res: express.Response) {
-    const hero = await this.heroRepository.findById(req.params.id);
+  async getById(
+    @RequestParam('id') id: string,
+    @Response() res: express.Response
+  ) {
+    const hero = await this.heroRepository.findById(id);
     if (hero) {
       return hero;
     }
@@ -39,7 +52,7 @@ export class HeroController {
   }
 
   @Get('/')
-  async getAll(req: express.Request, res: express.Response) {
+  async getAll(@Response() res: express.Response) {
     const photos = await this.heroRepository.find({});
     if (photos.length > 0) {
       return photos;
