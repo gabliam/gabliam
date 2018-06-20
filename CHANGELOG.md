@@ -1,3 +1,58 @@
+<a name="7.9.4"></a>
+## [7.9.4](https://github.com/gabliam/gabliam/compare/v7.9.3...v7.9.4) (2018-06-19)
+
+
+### Bug Fixes
+
+* **@gabliam/core:** add test if bean is defined and it's an instance ([1e8daad](https://github.com/gabliam/gabliam/commit/1e8daad))
+
+
+### Features
+
+* **@gabliam/core:** add preDestroy decorator ([ab0587b](https://github.com/gabliam/gabliam/commit/ab0587b))
+
+
+
+<a name="7.9.3"></a>
+## [7.9.3](https://github.com/gabliam/gabliam/compare/v7.9.2...v7.9.3) (2018-06-05)
+
+
+### Bug Fixes
+
+* **@gabliam/core:** delete error when decorate multiple times a class (for inheritance) ([594e668](https://github.com/gabliam/gabliam/commit/594e668))
+
+
+
+<a name="7.9.2"></a>
+## [7.9.2](https://github.com/gabliam/gabliam/compare/v7.9.1...v7.9.2) (2018-06-03)
+
+
+### Bug Fixes
+
+* **@gabliam/expression:** Correction for LogicalExpression ([dcf16f4](https://github.com/gabliam/gabliam/commit/dcf16f4))
+
+
+
+<a name="7.9.1"></a>
+## [7.9.1](https://github.com/gabliam/gabliam/compare/v7.9.0...v7.9.1) (2018-06-01)
+
+
+### Bug Fixes
+
+* **@gabliam/cache:** remove test if method is async ([d537d81](https://github.com/gabliam/gabliam/commit/d537d81))
+
+
+
+<a name="7.9.0"></a>
+# [7.9.0](https://github.com/gabliam/gabliam/compare/v7.8.3...v7.9.0) (2018-06-01)
+
+
+### Features
+
+* **@gabliam/core:** Plugin deps can be a plugin which is auto loaded by gabliam ([6240aeb](https://github.com/gabliam/gabliam/commit/6240aeb))
+
+
+
 <a name="7.8.3"></a>
 ## [7.8.3](https://github.com/gabliam/gabliam/compare/v7.8.2...v7.8.3) (2018-06-01)
 
