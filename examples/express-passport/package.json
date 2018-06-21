@@ -1,6 +1,6 @@
 {
   "name": "express-passport-sample",
-  "version": "7.9.4",
+  "version": "7.9.5",
   "private": true,
   "scripts": {
     "watch": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts",
