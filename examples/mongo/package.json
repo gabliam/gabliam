@@ -22,13 +22,13 @@
     "@gabliam/express": "7.9.4",
     "@gabliam/mongoose": "7.9.4",
     "@gabliam/web-core": "7.9.4",
-    "body-parser": "^1.16.1",
-    "helmet": "^3.4.0",
+    "body-parser": "^1.18.3",
+    "helmet": "^3.12.1",
     "reflect-metadata": "^0.1.9",
-    "tslib": "^1.8.0"
+    "tslib": "^1.9.2"
   },
   "devDependencies": {
-    "@types/helmet": "^0.0.37",
-    "nodemon": "^1.11.0"
+    "@types/helmet": "^0.0.38",
+    "nodemon": "^1.17.5"
   }
 }

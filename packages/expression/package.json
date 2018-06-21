@@ -28,13 +28,13 @@
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/amqp#readme",
   "devDependencies": {
     "@types/escodegen": "^0.0.6",
-    "@types/esprima": "^4.0.1",
-    "@types/node": "^9.4.7"
+    "@types/esprima": "^4.0.2",
+    "@types/node": "^10.3.4"
   },
   "dependencies": {
-    "escodegen": "^1.9.0",
+    "escodegen": "^1.10.0",
     "esprima": "^4.0.0",
-    "tslib": "^1.8.0"
+    "tslib": "^1.9.2"
   },
   "engines": {
     "node": ">=8.9.0"

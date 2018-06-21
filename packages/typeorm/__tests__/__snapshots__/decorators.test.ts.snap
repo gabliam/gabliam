@@ -2,6 +2,16 @@
 
 exports[`CUnit decorators should add CUnit metadata to a class when decorating a method with @CUnit 1`] = `"default"`;
 
+exports[`ChildEntity decorators 1`] = `
+Object {
+  "type": "EntityTypeOrm",
+  "value": Object {
+    "id": [Function],
+    "target": [Function],
+  },
+}
+`;
+
 exports[`ClassEntityChild decorators 1`] = `
 Object {
   "type": "EntityTypeOrm",

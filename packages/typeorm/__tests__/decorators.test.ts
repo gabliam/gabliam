@@ -1,15 +1,9 @@
 import { RegistryMetada } from '@gabliam/core/lib/interfaces';
-import {
-  Entity,
-  ClassEntityChild,
-  ClosureEntity,
-  SingleEntityChild,
-  CUnit
-} from '../src/decorators';
+import { Entity, ChildEntity, CUnit } from '../src/decorators';
 import { METADATA_KEY as CORE_METADATA_KEY } from '@gabliam/core/lib/constants';
 import { METADATA_KEY } from '../src/constant';
 
-[Entity, ClassEntityChild, ClosureEntity, SingleEntityChild].forEach(deco => {
+[Entity, ChildEntity].forEach(deco => {
   test(`${deco.name} decorators`, () => {
     @deco()
     class TestEntity {}

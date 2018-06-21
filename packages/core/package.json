@@ -14,26 +14,26 @@
   ],
   "dependencies": {
     "@gabliam/expression": "7.9.4",
-    "@types/joi": "^13.0.8",
+    "@types/joi": "^13.3.0",
     "caller": "^1.0.1",
     "debug": "^3.0.0",
     "gert": "^2.0.0",
     "gert-topo-sort": "^1.0.0",
     "glob": "^7.1.1",
-    "inversify": "^4.3.0",
+    "inversify": "^4.13.0",
     "inversify-logger-middleware": "^3.0.0",
-    "joi": "^13.0.0",
-    "js-yaml": "^3.8.1",
-    "lodash": "^4.17.4",
+    "joi": "^13.4.0",
+    "js-yaml": "^3.12.0",
+    "lodash": "^4.17.10",
     "shortstop": "^1.0.3",
     "shortstop-handlers": "^1.0.1",
-    "tslib": "^1.8.0"
+    "tslib": "^1.9.2"
   },
   "devDependencies": {
     "@types/debug": "^0.0.30",
     "@types/glob": "^5.0.30",
     "@types/js-yaml": "^3.5.29",
-    "@types/lodash": "^4.14.53"
+    "@types/lodash": "^4.14.110"
   },
   "repository": {
     "type": "git",

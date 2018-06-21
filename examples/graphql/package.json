@@ -24,16 +24,16 @@
     "@gabliam/graphql-express": "7.9.4",
     "@gabliam/typeorm": "7.9.4",
     "@gabliam/web-core": "7.9.4",
-    "body-parser": "^1.16.1",
-    "helmet": "^3.4.0",
-    "lodash": "^4.17.4",
+    "body-parser": "^1.18.3",
+    "helmet": "^3.12.1",
+    "lodash": "^4.17.10",
     "reflect-metadata": "^0.1.9",
-    "sqlite3": "^3.1.8",
-    "tslib": "^1.8.0"
+    "sqlite3": "^4.0.0",
+    "tslib": "^1.9.2"
   },
   "devDependencies": {
-    "@types/helmet": "^0.0.37",
-    "@types/lodash": "^4.14.64",
-    "nodemon": "^1.11.0"
+    "@types/helmet": "^0.0.38",
+    "@types/lodash": "^4.14.110",
+    "nodemon": "^1.17.5"
   }
 }

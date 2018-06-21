@@ -4,7 +4,7 @@ exports[`must fail when CUnit not found 1`] = `[Error: CUnit bad not found]`;
 
 exports[`must fail when getConnection not found 1`] = `"Connection notfound not found"`;
 
-exports[`with bad config 1`] = `[MissingDriverError: Wrong driver undefined given. Supported drivers are: "cordova", "mysql", "postgres", "mssql", "oracle", "mariadb", "sqlite".]`;
+exports[`with bad config 1`] = `[MissingDriverError: Wrong driver: "undefined" given. Supported drivers are: "cordova", "mariadb", "mongodb", "mssql", "mysql", "oracle", "postgres", "sqlite", "sqljs", "react-native".]`;
 
 exports[`with config 1`] = `true`;
 

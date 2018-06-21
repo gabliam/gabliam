@@ -34,14 +34,14 @@
     "@gabliam/core": "7.9.4",
     "@types/bluebird": "^3.5.8",
     "@types/debug": "^0.0.30",
-    "@types/node": "^9.4.7",
+    "@types/node": "^10.3.4",
     "@types/uuid": "^3.4.0"
   },
   "dependencies": {
     "amqplib": "^0.5.1",
     "bluebird": "^3.5.0",
     "debug": "^3.0.1",
-    "tslib": "^1.8.0",
+    "tslib": "^1.9.2",
     "uuid": "^3.0.1"
   },
   "engines": {

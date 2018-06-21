@@ -10,7 +10,7 @@ describe('Validate decorator', () => {
         body: [5]
       })
       test() {
-        return;
+        return '';
       }
     }
 

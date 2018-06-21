@@ -34,13 +34,13 @@
     "@gabliam/cache": "7.9.4",
     "@gabliam/core": "7.9.4",
     "@types/debug": "^0.0.30",
-    "@types/ioredis": "^3.2.8",
-    "@types/node": "^9.4.7"
+    "@types/ioredis": "^3.2.9",
+    "@types/node": "^10.3.4"
   },
   "dependencies": {
     "debug": "^3.0.1",
     "ioredis": "^3.2.2",
-    "tslib": "^1.8.0"
+    "tslib": "^1.9.2"
   },
   "engines": {
     "node": ">=8.9.0"

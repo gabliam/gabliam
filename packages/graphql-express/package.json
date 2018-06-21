@@ -38,15 +38,15 @@
     "@gabliam/core": "7.9.4",
     "@gabliam/express": "7.9.4",
     "@gabliam/graphql-core": "7.9.4",
-    "@types/body-parser": "^1.16.3",
+    "@types/body-parser": "^1.17.0",
     "@types/debug": "^0.0.30",
-    "@types/node": "^9.4.7"
+    "@types/node": "^10.3.4"
   },
   "dependencies": {
-    "body-parser": "^1.17.2",
+    "body-parser": "^1.18.3",
     "debug": "^3.0.1",
-    "graphql-server-express": "^1.1.2",
-    "tslib": "^1.8.0"
+    "graphql-server-express": "^1.3.6",
+    "tslib": "^1.9.2"
   },
   "engines": {
     "node": ">=8.9.0"
