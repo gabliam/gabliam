@@ -128,6 +128,18 @@ Array [
 ]
 `;
 
+exports[`Listener test with undefined 1`] = `undefined`;
+
+exports[`Listener test with undefined 2`] = `1`;
+
+exports[`Listener test with undefined 3`] = `
+Array [
+  Array [
+    undefined,
+  ],
+]
+`;
+
 exports[`bad queue 1`] = `[Error: queue "consumerTestBad" doesn't exist]`;
 
 exports[`consumer throw error 1`] = `Object {}`;

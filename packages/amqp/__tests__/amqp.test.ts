@@ -86,6 +86,10 @@ describe('Listener test', () => {
     {
       name: 'with object',
       content: { test: 'cool' }
+    },
+    {
+      name: 'with undefined',
+      content: undefined
     }
   ].forEach(testCase => {
     test(testCase.name, async () => {

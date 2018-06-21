@@ -231,12 +231,26 @@ export interface QueueDictionnary {
   [k: string]: QueueConfiguration;
 }
 
+/**
+ * Configuration for a connection
+ */
 export interface ConnectionConfig {
-  indexConfig: number;
-
+  /**
+   * Name of the connection
+   */
   name: string;
 
+  /**
+   * Url of the connection
+   */
   url: string;
+
+  /**
+   * Value passed to rabbitmq for an undefined value
+   * amqplib can not send an undefined value because the lib uses Buffer
+   *
+   */
+  undefinedValue: string;
 
   queues: QueueDictionnary;
 }

@@ -37,6 +37,7 @@ export class AmqpConnection {
     public indexConfig: number,
     public name: string,
     private url: string,
+    private undefinedValue: string,
     private queues: Queue[],
     private valueExtractor: ValueExtractor
   ) {}
@@ -219,6 +220,10 @@ export class AmqpConnection {
   }
 
   contentToBuffer(content: any) {
+    if (content === undefined) {
+      return new Buffer(this.undefinedValue);
+    }
+
     if (content instanceof Buffer) {
       return content;
     }
@@ -231,6 +236,10 @@ export class AmqpConnection {
   }
 
   parseContent(msg: Message) {
+    if (msg.content.toString() === this.undefinedValue) {
+      return undefined;
+    }
+
     try {
       return JSON.parse(msg.content.toString());
     } catch (e) {

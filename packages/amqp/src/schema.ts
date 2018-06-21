@@ -1,4 +1,5 @@
 import { Joi } from '@gabliam/core';
+import { UNDEFINED_VALUE } from './constants';
 
 const queueOptionsValidator = Joi.object().keys({
   exclusive: Joi.boolean(),
@@ -24,6 +25,9 @@ const connectionValidator = Joi.object().keys({
   url: Joi.string()
     .trim()
     .required(),
+  undefinedValue: Joi.string()
+    .trim()
+    .default(UNDEFINED_VALUE),
   queues: queuesValidor
 });
 
