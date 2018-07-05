@@ -2,10 +2,6 @@
 
 exports[`Errors with bad config 1`] = `[Error: Error for 'application.mongoose' value{"isJoi":true,"name":"ValidationError","details":[{"message":"/"value/" must be an object","path":[],"type":"object.base","context":{"label":"value"}},{"message":"/"value/" must be an array","path":[],"type":"array.base","context":{"label":"value"}}],"_object":"bad"}]`;
 
-exports[`Errors with host and database_name and unknown value 1`] = `[Error: Error for 'application.mongoose' value{"isJoi":true,"name":"ValidationError","details":[{"message":"/"lol/" is not allowed","path":["lol"],"type":"object.allowUnknown","context":{"child":"lol","key":"lol","label":"lol"}},{"message":"/"value/" must be an array","path":[],"type":"array.base","context":{"label":"value"}}],"_object":{"host":"localhost","database_name":"test","lol":"test"}}]`;
-
-exports[`Errors with host without database_name 1`] = `[Error: Error for 'application.mongoose' value{"isJoi":true,"name":"ValidationError","details":[{"message":"/"value/" contains [host] without its required peers [database_name]","path":[],"type":"object.and","context":{"present":["host"],"presentWithLabels":["host"],"missing":["database_name"],"missingWithLabels":["database_name"],"label":"value"}},{"message":"/"value/" must be an array","path":[],"type":"array.base","context":{"label":"value"}}],"_object":{"host":"localhost"}}]`;
-
 exports[`Errors without config folder 1`] = `[Error: PluginMongooseConfig mongooseConfiguration is mandatory]`;
 
 exports[`must fail when MUnit not found 1`] = `[Error: MUnit bad not found]`;
@@ -19,10 +15,6 @@ exports[`with config 2 database 2`] = `"test"`;
 exports[`with config 2 database 3`] = `Array []`;
 
 exports[`with config 2 database 4`] = `"test hero"`;
-
-exports[`with config host & database 1`] = `Array []`;
-
-exports[`with config host & database 2`] = `"test"`;
 
 exports[`with config uri 1`] = `Array []`;
 

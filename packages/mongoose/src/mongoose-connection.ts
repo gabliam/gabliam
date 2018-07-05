@@ -3,8 +3,30 @@ import { METADATA_KEY } from './constants';
 import { DocumentMetadata, MongooseConfiguration } from './interfaces';
 import { mongoose } from './mongoose';
 const { Mongoose } = mongoose;
+const uriFormat = require('mongodb-uri');
 
 (<any>mongoose).Promise = global.Promise;
+
+/**
+ * https://github.com/Automattic/mongoose/blob/master/migrating_to_5.md#required-uri-encoding-of-connection-strings
+ */
+function encodeMongoURI(urlString: string) {
+  if (urlString) {
+    const parsed = uriFormat.parse(urlString);
+
+    // add port for all hosts
+    if (Array.isArray(parsed.hosts)) {
+      parsed.hosts = parsed.hosts.map((h: any) => {
+        if (!h.port) {
+          h.port = 27017;
+        }
+        return h;
+      });
+    }
+    urlString = uriFormat.format(parsed);
+  }
+  return urlString;
+}
 
 export class MongooseConnection {
   public name: string;
@@ -22,28 +44,20 @@ export class MongooseConnection {
   ) {
     this.name = connectionName;
     const m = new Mongoose();
-    if (mongooseConfiguration.host) {
-      this.conn = m.createConnection(
-        mongooseConfiguration.host,
-        mongooseConfiguration.database_name!, // test by joi
-        mongooseConfiguration.port,
-        mongooseConfiguration.options
-      );
-    } else {
-      this.conn = m.createConnection(
-        mongooseConfiguration.uri!,
-        mongooseConfiguration.options
-      );
-    }
+
+    const options: any = {
+      ...(mongooseConfiguration.options || {}),
+      useNewUrlParser: true
+    };
+
+    this.conn = m.createConnection(
+      encodeMongoURI(mongooseConfiguration.uri!),
+      options
+    );
 
     for (const document of listDocument) {
-      const {
-        collectionName,
-        name,
-        schema
-      } = <DocumentMetadata>Reflect.getOwnMetadata(
-        METADATA_KEY.document,
-        document
+      const { collectionName, name, schema } = <DocumentMetadata>(
+        Reflect.getOwnMetadata(METADATA_KEY.document, document)
       );
       const documentName = name.toLowerCase();
       const clazzSchema = this.conn.model<mongoose.Document>(
@@ -55,17 +69,14 @@ export class MongooseConnection {
     }
   }
 
-  // getRepository<T>(documentName: string): Repository<T>;
   getRepository<T>(clazz: string | any): Repository<T> {
     if (typeof clazz === 'string') {
       return this.getRepositoryByName<T>(clazz);
     }
 
-    const {
-      collectionName,
-      name,
-      schema
-    } = <DocumentMetadata>Reflect.getOwnMetadata(METADATA_KEY.document, clazz);
+    const { collectionName, name, schema } = <DocumentMetadata>(
+      Reflect.getOwnMetadata(METADATA_KEY.document, clazz)
+    );
     const documentName = name.toLowerCase();
     if (this.repositories.has(documentName)) {
       return this.repositories.get(documentName)!;

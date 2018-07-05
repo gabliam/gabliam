@@ -15,20 +15,12 @@ Object {
   "name": "Hero",
   "schema": Schema {
     "_indexes": Array [],
-    "_userProvidedOptions": undefined,
+    "_userProvidedOptions": Object {},
     "aliases": Object {},
-    "callQueue": Array [
-      Array [
-        "pre",
-        Arguments [
-          "remove",
-          true,
-          [Function],
-        ],
-      ],
-    ],
+    "callQueue": Array [],
     "childSchemas": Array [],
     "inherits": Object {},
+    "methodOptions": Object {},
     "methods": Object {},
     "nested": Object {},
     "obj": Object {
@@ -48,7 +40,6 @@ Object {
       "noId": false,
       "noVirtualId": false,
       "read": null,
-      "retainKeyOrder": false,
       "shardKey": null,
       "strict": true,
       "typeKey": "type",
@@ -63,7 +54,6 @@ Object {
         "instance": "ObjectID",
         "options": Object {
           "auto": true,
-          "runSettersOnQuery": undefined,
           "type": [Function],
         },
         "path": "_id",
@@ -80,7 +70,6 @@ Object {
         "isRequired": true,
         "options": Object {
           "required": true,
-          "runSettersOnQuery": undefined,
           "type": [Function],
         },
         "originalRequiredValue": true,
@@ -101,21 +90,8 @@ Object {
     "query": Object {},
     "s": Object {
       "hooks": Kareem {
-        "_posts": Object {},
-        "_pres": Object {},
-      },
-      "kareemHooks": Object {
-        "aggregate": true,
-        "count": true,
-        "find": true,
-        "findOne": true,
-        "findOneAndRemove": true,
-        "findOneAndUpdate": true,
-        "insertMany": true,
-        "replaceOne": true,
-        "update": true,
-        "updateMany": true,
-        "updateOne": true,
+        "_posts": Map {},
+        "_pres": Map {},
       },
     },
     "singleNestedPaths": Object {},
@@ -151,20 +127,12 @@ Object {
   "name": "Hero",
   "schema": Schema {
     "_indexes": Array [],
-    "_userProvidedOptions": undefined,
+    "_userProvidedOptions": Object {},
     "aliases": Object {},
-    "callQueue": Array [
-      Array [
-        "pre",
-        Arguments [
-          "remove",
-          true,
-          [Function],
-        ],
-      ],
-    ],
+    "callQueue": Array [],
     "childSchemas": Array [],
     "inherits": Object {},
+    "methodOptions": Object {},
     "methods": Object {},
     "nested": Object {},
     "obj": Object {
@@ -184,7 +152,6 @@ Object {
       "noId": false,
       "noVirtualId": false,
       "read": null,
-      "retainKeyOrder": false,
       "shardKey": null,
       "strict": true,
       "typeKey": "type",
@@ -199,7 +166,6 @@ Object {
         "instance": "ObjectID",
         "options": Object {
           "auto": true,
-          "runSettersOnQuery": undefined,
           "type": [Function],
         },
         "path": "_id",
@@ -216,7 +182,6 @@ Object {
         "isRequired": true,
         "options": Object {
           "required": true,
-          "runSettersOnQuery": undefined,
           "type": [Function],
         },
         "originalRequiredValue": true,
@@ -237,21 +202,8 @@ Object {
     "query": Object {},
     "s": Object {
       "hooks": Kareem {
-        "_posts": Object {},
-        "_pres": Object {},
-      },
-      "kareemHooks": Object {
-        "aggregate": true,
-        "count": true,
-        "find": true,
-        "findOne": true,
-        "findOneAndRemove": true,
-        "findOneAndUpdate": true,
-        "insertMany": true,
-        "replaceOne": true,
-        "update": true,
-        "updateMany": true,
-        "updateOne": true,
+        "_posts": Map {},
+        "_pres": Map {},
       },
     },
     "singleNestedPaths": Object {},
@@ -288,20 +240,12 @@ Object {
   "name": "Hero",
   "schema": Schema {
     "_indexes": Array [],
-    "_userProvidedOptions": undefined,
+    "_userProvidedOptions": Object {},
     "aliases": Object {},
-    "callQueue": Array [
-      Array [
-        "pre",
-        Arguments [
-          "remove",
-          true,
-          [Function],
-        ],
-      ],
-    ],
+    "callQueue": Array [],
     "childSchemas": Array [],
     "inherits": Object {},
+    "methodOptions": Object {},
     "methods": Object {},
     "nested": Object {},
     "obj": Object {
@@ -321,7 +265,6 @@ Object {
       "noId": false,
       "noVirtualId": false,
       "read": null,
-      "retainKeyOrder": false,
       "shardKey": null,
       "strict": true,
       "typeKey": "type",
@@ -336,7 +279,6 @@ Object {
         "instance": "ObjectID",
         "options": Object {
           "auto": true,
-          "runSettersOnQuery": undefined,
           "type": [Function],
         },
         "path": "_id",
@@ -353,7 +295,6 @@ Object {
         "isRequired": true,
         "options": Object {
           "required": true,
-          "runSettersOnQuery": undefined,
           "type": [Function],
         },
         "originalRequiredValue": true,
@@ -374,21 +315,8 @@ Object {
     "query": Object {},
     "s": Object {
       "hooks": Kareem {
-        "_posts": Object {},
-        "_pres": Object {},
-      },
-      "kareemHooks": Object {
-        "aggregate": true,
-        "count": true,
-        "find": true,
-        "findOne": true,
-        "findOneAndRemove": true,
-        "findOneAndUpdate": true,
-        "insertMany": true,
-        "replaceOne": true,
-        "update": true,
-        "updateMany": true,
-        "updateOne": true,
+        "_posts": Map {},
+        "_pres": Map {},
       },
     },
     "singleNestedPaths": Object {},

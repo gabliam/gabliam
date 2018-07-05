@@ -12,37 +12,7 @@ Object {
 }
 `;
 
-exports[`ClassEntityChild decorators 1`] = `
-Object {
-  "type": "EntityTypeOrm",
-  "value": Object {
-    "id": [Function],
-    "target": [Function],
-  },
-}
-`;
-
-exports[`ClosureEntity decorators 1`] = `
-Object {
-  "type": "EntityTypeOrm",
-  "value": Object {
-    "id": [Function],
-    "target": [Function],
-  },
-}
-`;
-
 exports[`Entity decorators 1`] = `
-Object {
-  "type": "EntityTypeOrm",
-  "value": Object {
-    "id": [Function],
-    "target": [Function],
-  },
-}
-`;
-
-exports[`SingleEntityChild decorators 1`] = `
 Object {
   "type": "EntityTypeOrm",
   "value": Object {

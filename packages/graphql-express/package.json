@@ -40,13 +40,13 @@
     "@gabliam/graphql-core": "7.9.4",
     "@types/body-parser": "^1.17.0",
     "@types/debug": "^0.0.30",
-    "@types/node": "^10.3.4"
+    "@types/node": "^10.5.1"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
     "debug": "^3.0.1",
     "graphql-server-express": "^1.3.6",
-    "tslib": "^1.9.2"
+    "tslib": "^1.9.3"
   },
   "engines": {
     "node": ">=8.9.0"

@@ -43,21 +43,6 @@ describe('Errors', () => {
     await expect(appTest.gab.buildAndStart()).rejects.toMatchSnapshot();
   });
 
-  test('with host without database_name', async () => {
-    appTest.addConf('application.mongoose', {
-      host: 'localhost'
-    });
-    await expect(appTest.gab.buildAndStart()).rejects.toMatchSnapshot();
-  });
-
-  test('with host and database_name and unknown value', async () => {
-    appTest.addConf('application.mongoose', {
-      host: 'localhost',
-      database_name: 'test',
-      lol: 'test'
-    });
-    await expect(appTest.gab.buildAndStart()).rejects.toMatchSnapshot();
-  });
   test('bad repo', async () => {
     appTest.addConf(
       'application.mongoose.uri',
@@ -102,43 +87,9 @@ test('with config uri', async () => {
   await connection.conn.dropDatabase();
 });
 
-test('with config host & database', async () => {
-  appTest.addConf('application.mongoose', {
-    host: '127.0.0.1',
-    database_name: 'mongoosetest'
-  });
-
-  @Document('Hero')
-  class Hero {
-    static getSchema() {
-      return new mongoose.Schema({
-        name: {
-          type: String,
-          required: true
-        }
-      });
-    }
-  }
-
-  appTest.addClass(Hero);
-
-  await expect(appTest.gab.buildAndStart()).resolves.toBeInstanceOf(Gabliam);
-  const connection = appTest.gab.container.get(MongooseConnection);
-  const repo = connection.getRepository<HeroModel>('Hero');
-  let res = await repo.findAll();
-  expect(res).toMatchSnapshot();
-  await repo.create({
-    name: 'test'
-  });
-  res = await repo.findAll();
-  expect(res[0].name).toMatchSnapshot();
-  await connection.conn.dropDatabase();
-});
-
 test('with one connection with name and entity without munit', async () => {
   appTest.addConf('application.mongoose', {
-    host: '127.0.0.1',
-    database_name: 'mongoosetest',
+    uri: 'mongodb://127.0.0.1/mongoosetest',
     name: 'test'
   });
 
@@ -173,13 +124,11 @@ test('with config 2 database', async () => {
   appTest.addConf('application.mongoose', [
     {
       name: 'connection1',
-      host: '127.0.0.1',
-      database_name: 'mongoosetestconnection1'
+      uri: 'mongodb://127.0.0.1/mongoosetestconnection1'
     },
     {
       name: 'connection2',
-      host: '127.0.0.1',
-      database_name: 'mongoosetestconnection2'
+      uri: 'mongodb://127.0.0.1/mongoosetestconnection2'
     }
   ]);
 
@@ -257,8 +206,7 @@ test('with config 2 database', async () => {
 
 test('must fail when MUnit not found', async () => {
   appTest.addConf('application.mongoose', {
-    host: '127.0.0.1',
-    database_name: 'mongoosetestbadMunit'
+    uri: 'mongodb://127.0.0.1/mongoosetestbadMunit'
   });
 
   @MUnit('bad')
@@ -289,8 +237,7 @@ test('must fail when MUnit not found', async () => {
 
 test('must fail when getConnection not found', async () => {
   appTest.addConf('application.mongoose', {
-    host: '127.0.0.1',
-    database_name: 'mongoosetestbadMunit'
+    uri: 'mongodb://127.0.0.1/mongoosetestbadMunit'
   });
 
   @Document('Photo')

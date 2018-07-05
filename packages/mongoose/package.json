@@ -36,10 +36,11 @@
     "@types/debug": "^0.0.30"
   },
   "dependencies": {
-    "@types/mongoose": "^5.0.16",
+    "@types/mongoose": "^5.0.18",
     "debug": "^3.0.1",
-    "mongoose": "^5.1.6",
-    "tslib": "^1.9.2"
+    "mongodb-uri": "^0.9.7",
+    "mongoose": "^5.2.1",
+    "tslib": "^1.9.3"
   },
   "engines": {
     "node": ">=8.9.0"

@@ -4,7 +4,7 @@ module.exports = {
     ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
   },
   "collectCoverageFrom": [
-    "packages/**/src/**/*.{ts}",
+    "packages/**/src/**/*.ts",
     "!packages/**/src/interfaces/**",
     "!packages/**/src/testing/**",
     "!packages/**/src/typings/**",

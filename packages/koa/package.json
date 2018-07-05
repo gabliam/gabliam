@@ -41,15 +41,15 @@
     "@types/debug": "^0.0.30",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
-    "koa-body": "^4.0.3"
+    "koa-body": "^4.0.4"
   },
   "dependencies": {
     "@types/koa": "^2.0.46",
-    "@types/koa-router": "^7.0.28",
+    "@types/koa-router": "^7.0.30",
     "http-status-codes": "^1.2.0",
     "koa": "^2.5.1",
     "koa-router": "^7.2.1",
-    "tslib": "^1.9.2"
+    "tslib": "^1.9.3"
   },
   "engines": {
     "node": ">=8.9.0"

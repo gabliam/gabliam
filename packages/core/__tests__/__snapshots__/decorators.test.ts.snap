@@ -290,8 +290,9 @@ Array [
           "_examples": Array [],
           "_flags": Object {},
           "_inner": Object {},
-          "_invalids": Set {
-            "_set": Array [],
+          "_invalids": InternalSet {
+            "_hasRef": false,
+            "_set": Set {},
           },
           "_meta": Array [],
           "_notes": Array [],
@@ -301,8 +302,9 @@ Array [
           "_tests": Array [],
           "_type": "any",
           "_unit": null,
-          "_valids": Set {
-            "_set": Array [],
+          "_valids": InternalSet {
+            "_hasRef": false,
+            "_set": Set {},
           },
           "alt": [Function],
           "alternatives": [Function],
@@ -340,8 +342,9 @@ Array [
                       "patterns": Array [],
                       "renames": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -361,8 +364,9 @@ Array [
                     ],
                     "_type": "object",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -378,10 +382,11 @@ Array [
                       "presence": "required",
                     },
                     "_inner": Object {},
-                    "_invalids": Set {
-                      "_set": Array [
+                    "_invalids": InternalSet {
+                      "_hasRef": 0,
+                      "_set": Set {
                         "",
-                      ],
+                      },
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -391,8 +396,9 @@ Array [
                     "_tests": Array [],
                     "_type": "string",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -413,8 +419,9 @@ Array [
                       "patterns": Array [],
                       "renames": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -431,8 +438,9 @@ Array [
                     ],
                     "_type": "object",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -453,8 +461,9 @@ Array [
                       "patterns": Array [],
                       "renames": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -471,8 +480,9 @@ Array [
                     ],
                     "_type": "object",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -489,8 +499,9 @@ Array [
                       "patterns": Array [],
                       "renames": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -500,8 +511,9 @@ Array [
                     "_tests": Array [],
                     "_type": "object",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -522,8 +534,9 @@ Array [
                       "patterns": Array [],
                       "renames": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -540,8 +553,9 @@ Array [
                     ],
                     "_type": "object",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -578,10 +592,11 @@ Array [
                                     "presence": "required",
                                   },
                                   "_inner": Object {},
-                                  "_invalids": Set {
-                                    "_set": Array [
+                                  "_invalids": InternalSet {
+                                    "_hasRef": 0,
+                                    "_set": Set {
                                       "",
-                                    ],
+                                    },
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -591,8 +606,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "string",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -613,8 +629,9 @@ Array [
                                     "patterns": Array [],
                                     "renames": Array [],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -631,8 +648,9 @@ Array [
                                   ],
                                   "_type": "object",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -653,8 +671,9 @@ Array [
                                     "patterns": Array [],
                                     "renames": Array [],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -671,8 +690,9 @@ Array [
                                   ],
                                   "_type": "object",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -712,8 +732,9 @@ Array [
                                                     "patterns": Array [],
                                                     "renames": Array [],
                                                   },
-                                                  "_invalids": Set {
-                                                    "_set": Array [],
+                                                  "_invalids": InternalSet {
+                                                    "_hasRef": false,
+                                                    "_set": Set {},
                                                   },
                                                   "_meta": Array [],
                                                   "_notes": Array [],
@@ -733,8 +754,9 @@ Array [
                                                   ],
                                                   "_type": "object",
                                                   "_unit": null,
-                                                  "_valids": Set {
-                                                    "_set": Array [],
+                                                  "_valids": InternalSet {
+                                                    "_hasRef": false,
+                                                    "_set": Set {},
                                                   },
                                                   "isJoi": true,
                                                 },
@@ -742,8 +764,9 @@ Array [
                                             ],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -753,8 +776,9 @@ Array [
                                           "_tests": Array [],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
@@ -772,8 +796,9 @@ Array [
                                             "patterns": Array [],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -793,16 +818,18 @@ Array [
                                           ],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
                                       },
                                     ],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -812,8 +839,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "alternatives",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -846,8 +874,9 @@ Array [
                                             "patterns": Array [],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -864,16 +893,18 @@ Array [
                                           ],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
                                       },
                                     ],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -883,8 +914,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "alternatives",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -903,8 +935,9 @@ Array [
                             "patterns": Array [],
                             "renames": Array [],
                           },
-                          "_invalids": Set {
-                            "_set": Array [],
+                          "_invalids": InternalSet {
+                            "_hasRef": false,
+                            "_set": Set {},
                           },
                           "_meta": Array [],
                           "_notes": Array [],
@@ -914,8 +947,9 @@ Array [
                           "_tests": Array [],
                           "_type": "object",
                           "_unit": null,
-                          "_valids": Set {
-                            "_set": Array [],
+                          "_valids": InternalSet {
+                            "_hasRef": false,
+                            "_set": Set {},
                           },
                           "isJoi": true,
                         },
@@ -940,10 +974,11 @@ Array [
                                     "presence": "required",
                                   },
                                   "_inner": Object {},
-                                  "_invalids": Set {
-                                    "_set": Array [
+                                  "_invalids": InternalSet {
+                                    "_hasRef": 0,
+                                    "_set": Set {
                                       "",
-                                    ],
+                                    },
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -953,8 +988,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "string",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -975,8 +1011,9 @@ Array [
                                     "patterns": Array [],
                                     "renames": Array [],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -993,8 +1030,9 @@ Array [
                                   ],
                                   "_type": "object",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -1015,8 +1053,9 @@ Array [
                                     "patterns": Array [],
                                     "renames": Array [],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -1033,8 +1072,9 @@ Array [
                                   ],
                                   "_type": "object",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -1074,8 +1114,9 @@ Array [
                                                     "patterns": Array [],
                                                     "renames": Array [],
                                                   },
-                                                  "_invalids": Set {
-                                                    "_set": Array [],
+                                                  "_invalids": InternalSet {
+                                                    "_hasRef": false,
+                                                    "_set": Set {},
                                                   },
                                                   "_meta": Array [],
                                                   "_notes": Array [],
@@ -1095,8 +1136,9 @@ Array [
                                                   ],
                                                   "_type": "object",
                                                   "_unit": null,
-                                                  "_valids": Set {
-                                                    "_set": Array [],
+                                                  "_valids": InternalSet {
+                                                    "_hasRef": false,
+                                                    "_set": Set {},
                                                   },
                                                   "isJoi": true,
                                                 },
@@ -1104,8 +1146,9 @@ Array [
                                             ],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -1115,8 +1158,9 @@ Array [
                                           "_tests": Array [],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
@@ -1134,8 +1178,9 @@ Array [
                                             "patterns": Array [],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -1155,16 +1200,18 @@ Array [
                                           ],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
                                       },
                                     ],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -1174,8 +1221,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "alternatives",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -1208,8 +1256,9 @@ Array [
                                             "patterns": Array [],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -1226,16 +1275,18 @@ Array [
                                           ],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
                                       },
                                     ],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -1245,8 +1296,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "alternatives",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -1265,8 +1317,9 @@ Array [
                             "patterns": Array [],
                             "renames": Array [],
                           },
-                          "_invalids": Set {
-                            "_set": Array [],
+                          "_invalids": InternalSet {
+                            "_hasRef": false,
+                            "_set": Set {},
                           },
                           "_meta": Array [],
                           "_notes": Array [],
@@ -1276,8 +1329,9 @@ Array [
                           "_tests": Array [],
                           "_type": "object",
                           "_unit": null,
-                          "_valids": Set {
-                            "_set": Array [],
+                          "_valids": InternalSet {
+                            "_hasRef": false,
+                            "_set": Set {},
                           },
                           "isJoi": true,
                         },
@@ -1285,8 +1339,9 @@ Array [
                       "ordereds": Array [],
                       "requireds": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -1296,8 +1351,9 @@ Array [
                     "_tests": Array [],
                     "_type": "array",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -1307,8 +1363,9 @@ Array [
               "patterns": Array [],
               "renames": Array [],
             },
-            "_invalids": Set {
-              "_set": Array [],
+            "_invalids": InternalSet {
+              "_hasRef": false,
+              "_set": Set {},
             },
             "_meta": Array [],
             "_notes": Array [],
@@ -1320,8 +1377,9 @@ Array [
             "_tests": Array [],
             "_type": "object",
             "_unit": null,
-            "_valids": Set {
-              "_set": Array [],
+            "_valids": InternalSet {
+              "_hasRef": false,
+              "_set": Set {},
             },
             "isJoi": true,
           },
@@ -1346,8 +1404,9 @@ Array [
                     "patterns": Array [],
                     "renames": Array [],
                   },
-                  "_invalids": Set {
-                    "_set": Array [],
+                  "_invalids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "_meta": Array [],
                   "_notes": Array [],
@@ -1357,8 +1416,9 @@ Array [
                   "_tests": Array [],
                   "_type": "object",
                   "_unit": null,
-                  "_valids": Set {
-                    "_set": Array [],
+                  "_valids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "isJoi": true,
                 },
@@ -1376,8 +1436,9 @@ Array [
                     "patterns": Array [],
                     "renames": Array [],
                   },
-                  "_invalids": Set {
-                    "_set": Array [],
+                  "_invalids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "_meta": Array [],
                   "_notes": Array [],
@@ -1394,8 +1455,9 @@ Array [
                   ],
                   "_type": "object",
                   "_unit": null,
-                  "_valids": Set {
-                    "_set": Array [],
+                  "_valids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "isJoi": true,
                 },
@@ -1411,8 +1473,9 @@ Array [
                     "patterns": Array [],
                     "renames": Array [],
                   },
-                  "_invalids": Set {
-                    "_set": Array [],
+                  "_invalids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "_meta": Array [],
                   "_notes": Array [],
@@ -1422,8 +1485,9 @@ Array [
                   "_tests": Array [],
                   "_type": "object",
                   "_unit": null,
-                  "_valids": Set {
-                    "_set": Array [],
+                  "_valids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "isJoi": true,
                 },
@@ -1441,8 +1505,9 @@ Array [
                     "patterns": Array [],
                     "renames": Array [],
                   },
-                  "_invalids": Set {
-                    "_set": Array [],
+                  "_invalids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "_meta": Array [],
                   "_notes": Array [],
@@ -1459,8 +1524,9 @@ Array [
                   ],
                   "_type": "object",
                   "_unit": null,
-                  "_valids": Set {
-                    "_set": Array [],
+                  "_valids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "isJoi": true,
                 },
@@ -1468,8 +1534,9 @@ Array [
               "ordereds": Array [],
               "requireds": Array [],
             },
-            "_invalids": Set {
-              "_set": Array [],
+            "_invalids": InternalSet {
+              "_hasRef": false,
+              "_set": Set {},
             },
             "_meta": Array [],
             "_notes": Array [],
@@ -1481,8 +1548,9 @@ Array [
             "_tests": Array [],
             "_type": "array",
             "_unit": null,
-            "_valids": Set {
-              "_set": Array [],
+            "_valids": InternalSet {
+              "_hasRef": false,
+              "_set": Set {},
             },
             "isJoi": true,
           },
@@ -1496,16 +1564,17 @@ Array [
           "ref": [Function],
           "string": [Function],
           "validate": [Function],
-          "version": "13.1.2",
+          "version": "13.4.0",
         },
         "_description": null,
         "_examples": Array [],
         "_flags": Object {},
         "_inner": Object {},
-        "_invalids": Set {
-          "_set": Array [
+        "_invalids": InternalSet {
+          "_hasRef": 0,
+          "_set": Set {
             "",
-          ],
+          },
         },
         "_meta": Array [],
         "_notes": Array [],
@@ -1515,8 +1584,9 @@ Array [
         "_tests": Array [],
         "_type": "string",
         "_unit": null,
-        "_valids": Set {
-          "_set": Array [],
+        "_valids": InternalSet {
+          "_hasRef": false,
+          "_set": Set {},
         },
         "isJoi": true,
       },
@@ -1536,8 +1606,9 @@ Array [
           "_examples": Array [],
           "_flags": Object {},
           "_inner": Object {},
-          "_invalids": Set {
-            "_set": Array [],
+          "_invalids": InternalSet {
+            "_hasRef": false,
+            "_set": Set {},
           },
           "_meta": Array [],
           "_notes": Array [],
@@ -1547,8 +1618,9 @@ Array [
           "_tests": Array [],
           "_type": "any",
           "_unit": null,
-          "_valids": Set {
-            "_set": Array [],
+          "_valids": InternalSet {
+            "_hasRef": false,
+            "_set": Set {},
           },
           "alt": [Function],
           "alternatives": [Function],
@@ -1586,8 +1658,9 @@ Array [
                       "patterns": Array [],
                       "renames": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -1607,8 +1680,9 @@ Array [
                     ],
                     "_type": "object",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -1624,10 +1698,11 @@ Array [
                       "presence": "required",
                     },
                     "_inner": Object {},
-                    "_invalids": Set {
-                      "_set": Array [
+                    "_invalids": InternalSet {
+                      "_hasRef": 0,
+                      "_set": Set {
                         "",
-                      ],
+                      },
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -1637,8 +1712,9 @@ Array [
                     "_tests": Array [],
                     "_type": "string",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -1659,8 +1735,9 @@ Array [
                       "patterns": Array [],
                       "renames": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -1677,8 +1754,9 @@ Array [
                     ],
                     "_type": "object",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -1699,8 +1777,9 @@ Array [
                       "patterns": Array [],
                       "renames": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -1717,8 +1796,9 @@ Array [
                     ],
                     "_type": "object",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -1735,8 +1815,9 @@ Array [
                       "patterns": Array [],
                       "renames": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -1746,8 +1827,9 @@ Array [
                     "_tests": Array [],
                     "_type": "object",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -1768,8 +1850,9 @@ Array [
                       "patterns": Array [],
                       "renames": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -1786,8 +1869,9 @@ Array [
                     ],
                     "_type": "object",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -1824,10 +1908,11 @@ Array [
                                     "presence": "required",
                                   },
                                   "_inner": Object {},
-                                  "_invalids": Set {
-                                    "_set": Array [
+                                  "_invalids": InternalSet {
+                                    "_hasRef": 0,
+                                    "_set": Set {
                                       "",
-                                    ],
+                                    },
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -1837,8 +1922,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "string",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -1859,8 +1945,9 @@ Array [
                                     "patterns": Array [],
                                     "renames": Array [],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -1877,8 +1964,9 @@ Array [
                                   ],
                                   "_type": "object",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -1899,8 +1987,9 @@ Array [
                                     "patterns": Array [],
                                     "renames": Array [],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -1917,8 +2006,9 @@ Array [
                                   ],
                                   "_type": "object",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -1958,8 +2048,9 @@ Array [
                                                     "patterns": Array [],
                                                     "renames": Array [],
                                                   },
-                                                  "_invalids": Set {
-                                                    "_set": Array [],
+                                                  "_invalids": InternalSet {
+                                                    "_hasRef": false,
+                                                    "_set": Set {},
                                                   },
                                                   "_meta": Array [],
                                                   "_notes": Array [],
@@ -1979,8 +2070,9 @@ Array [
                                                   ],
                                                   "_type": "object",
                                                   "_unit": null,
-                                                  "_valids": Set {
-                                                    "_set": Array [],
+                                                  "_valids": InternalSet {
+                                                    "_hasRef": false,
+                                                    "_set": Set {},
                                                   },
                                                   "isJoi": true,
                                                 },
@@ -1988,8 +2080,9 @@ Array [
                                             ],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -1999,8 +2092,9 @@ Array [
                                           "_tests": Array [],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
@@ -2018,8 +2112,9 @@ Array [
                                             "patterns": Array [],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -2039,16 +2134,18 @@ Array [
                                           ],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
                                       },
                                     ],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -2058,8 +2155,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "alternatives",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -2092,8 +2190,9 @@ Array [
                                             "patterns": Array [],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -2110,16 +2209,18 @@ Array [
                                           ],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
                                       },
                                     ],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -2129,8 +2230,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "alternatives",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -2149,8 +2251,9 @@ Array [
                             "patterns": Array [],
                             "renames": Array [],
                           },
-                          "_invalids": Set {
-                            "_set": Array [],
+                          "_invalids": InternalSet {
+                            "_hasRef": false,
+                            "_set": Set {},
                           },
                           "_meta": Array [],
                           "_notes": Array [],
@@ -2160,8 +2263,9 @@ Array [
                           "_tests": Array [],
                           "_type": "object",
                           "_unit": null,
-                          "_valids": Set {
-                            "_set": Array [],
+                          "_valids": InternalSet {
+                            "_hasRef": false,
+                            "_set": Set {},
                           },
                           "isJoi": true,
                         },
@@ -2186,10 +2290,11 @@ Array [
                                     "presence": "required",
                                   },
                                   "_inner": Object {},
-                                  "_invalids": Set {
-                                    "_set": Array [
+                                  "_invalids": InternalSet {
+                                    "_hasRef": 0,
+                                    "_set": Set {
                                       "",
-                                    ],
+                                    },
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -2199,8 +2304,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "string",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -2221,8 +2327,9 @@ Array [
                                     "patterns": Array [],
                                     "renames": Array [],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -2239,8 +2346,9 @@ Array [
                                   ],
                                   "_type": "object",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -2261,8 +2369,9 @@ Array [
                                     "patterns": Array [],
                                     "renames": Array [],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -2279,8 +2388,9 @@ Array [
                                   ],
                                   "_type": "object",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -2320,8 +2430,9 @@ Array [
                                                     "patterns": Array [],
                                                     "renames": Array [],
                                                   },
-                                                  "_invalids": Set {
-                                                    "_set": Array [],
+                                                  "_invalids": InternalSet {
+                                                    "_hasRef": false,
+                                                    "_set": Set {},
                                                   },
                                                   "_meta": Array [],
                                                   "_notes": Array [],
@@ -2341,8 +2452,9 @@ Array [
                                                   ],
                                                   "_type": "object",
                                                   "_unit": null,
-                                                  "_valids": Set {
-                                                    "_set": Array [],
+                                                  "_valids": InternalSet {
+                                                    "_hasRef": false,
+                                                    "_set": Set {},
                                                   },
                                                   "isJoi": true,
                                                 },
@@ -2350,8 +2462,9 @@ Array [
                                             ],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -2361,8 +2474,9 @@ Array [
                                           "_tests": Array [],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
@@ -2380,8 +2494,9 @@ Array [
                                             "patterns": Array [],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -2401,16 +2516,18 @@ Array [
                                           ],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
                                       },
                                     ],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -2420,8 +2537,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "alternatives",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -2454,8 +2572,9 @@ Array [
                                             "patterns": Array [],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -2472,16 +2591,18 @@ Array [
                                           ],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
                                       },
                                     ],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -2491,8 +2612,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "alternatives",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -2511,8 +2633,9 @@ Array [
                             "patterns": Array [],
                             "renames": Array [],
                           },
-                          "_invalids": Set {
-                            "_set": Array [],
+                          "_invalids": InternalSet {
+                            "_hasRef": false,
+                            "_set": Set {},
                           },
                           "_meta": Array [],
                           "_notes": Array [],
@@ -2522,8 +2645,9 @@ Array [
                           "_tests": Array [],
                           "_type": "object",
                           "_unit": null,
-                          "_valids": Set {
-                            "_set": Array [],
+                          "_valids": InternalSet {
+                            "_hasRef": false,
+                            "_set": Set {},
                           },
                           "isJoi": true,
                         },
@@ -2531,8 +2655,9 @@ Array [
                       "ordereds": Array [],
                       "requireds": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -2542,8 +2667,9 @@ Array [
                     "_tests": Array [],
                     "_type": "array",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -2553,8 +2679,9 @@ Array [
               "patterns": Array [],
               "renames": Array [],
             },
-            "_invalids": Set {
-              "_set": Array [],
+            "_invalids": InternalSet {
+              "_hasRef": false,
+              "_set": Set {},
             },
             "_meta": Array [],
             "_notes": Array [],
@@ -2566,8 +2693,9 @@ Array [
             "_tests": Array [],
             "_type": "object",
             "_unit": null,
-            "_valids": Set {
-              "_set": Array [],
+            "_valids": InternalSet {
+              "_hasRef": false,
+              "_set": Set {},
             },
             "isJoi": true,
           },
@@ -2592,8 +2720,9 @@ Array [
                     "patterns": Array [],
                     "renames": Array [],
                   },
-                  "_invalids": Set {
-                    "_set": Array [],
+                  "_invalids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "_meta": Array [],
                   "_notes": Array [],
@@ -2603,8 +2732,9 @@ Array [
                   "_tests": Array [],
                   "_type": "object",
                   "_unit": null,
-                  "_valids": Set {
-                    "_set": Array [],
+                  "_valids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "isJoi": true,
                 },
@@ -2622,8 +2752,9 @@ Array [
                     "patterns": Array [],
                     "renames": Array [],
                   },
-                  "_invalids": Set {
-                    "_set": Array [],
+                  "_invalids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "_meta": Array [],
                   "_notes": Array [],
@@ -2640,8 +2771,9 @@ Array [
                   ],
                   "_type": "object",
                   "_unit": null,
-                  "_valids": Set {
-                    "_set": Array [],
+                  "_valids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "isJoi": true,
                 },
@@ -2657,8 +2789,9 @@ Array [
                     "patterns": Array [],
                     "renames": Array [],
                   },
-                  "_invalids": Set {
-                    "_set": Array [],
+                  "_invalids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "_meta": Array [],
                   "_notes": Array [],
@@ -2668,8 +2801,9 @@ Array [
                   "_tests": Array [],
                   "_type": "object",
                   "_unit": null,
-                  "_valids": Set {
-                    "_set": Array [],
+                  "_valids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "isJoi": true,
                 },
@@ -2687,8 +2821,9 @@ Array [
                     "patterns": Array [],
                     "renames": Array [],
                   },
-                  "_invalids": Set {
-                    "_set": Array [],
+                  "_invalids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "_meta": Array [],
                   "_notes": Array [],
@@ -2705,8 +2840,9 @@ Array [
                   ],
                   "_type": "object",
                   "_unit": null,
-                  "_valids": Set {
-                    "_set": Array [],
+                  "_valids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "isJoi": true,
                 },
@@ -2714,8 +2850,9 @@ Array [
               "ordereds": Array [],
               "requireds": Array [],
             },
-            "_invalids": Set {
-              "_set": Array [],
+            "_invalids": InternalSet {
+              "_hasRef": false,
+              "_set": Set {},
             },
             "_meta": Array [],
             "_notes": Array [],
@@ -2727,8 +2864,9 @@ Array [
             "_tests": Array [],
             "_type": "array",
             "_unit": null,
-            "_valids": Set {
-              "_set": Array [],
+            "_valids": InternalSet {
+              "_hasRef": false,
+              "_set": Set {},
             },
             "isJoi": true,
           },
@@ -2742,16 +2880,17 @@ Array [
           "ref": [Function],
           "string": [Function],
           "validate": [Function],
-          "version": "13.1.2",
+          "version": "13.4.0",
         },
         "_description": null,
         "_examples": Array [],
         "_flags": Object {},
         "_inner": Object {},
-        "_invalids": Set {
-          "_set": Array [
+        "_invalids": InternalSet {
+          "_hasRef": 0,
+          "_set": Set {
             "",
-          ],
+          },
         },
         "_meta": Array [],
         "_notes": Array [],
@@ -2761,8 +2900,9 @@ Array [
         "_tests": Array [],
         "_type": "string",
         "_unit": null,
-        "_valids": Set {
-          "_set": Array [],
+        "_valids": InternalSet {
+          "_hasRef": false,
+          "_set": Set {},
         },
         "isJoi": true,
       },
@@ -2784,8 +2924,9 @@ Array [
           "_examples": Array [],
           "_flags": Object {},
           "_inner": Object {},
-          "_invalids": Set {
-            "_set": Array [],
+          "_invalids": InternalSet {
+            "_hasRef": false,
+            "_set": Set {},
           },
           "_meta": Array [],
           "_notes": Array [],
@@ -2795,8 +2936,9 @@ Array [
           "_tests": Array [],
           "_type": "any",
           "_unit": null,
-          "_valids": Set {
-            "_set": Array [],
+          "_valids": InternalSet {
+            "_hasRef": false,
+            "_set": Set {},
           },
           "alt": [Function],
           "alternatives": [Function],
@@ -2834,8 +2976,9 @@ Array [
                       "patterns": Array [],
                       "renames": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -2855,8 +2998,9 @@ Array [
                     ],
                     "_type": "object",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -2872,10 +3016,11 @@ Array [
                       "presence": "required",
                     },
                     "_inner": Object {},
-                    "_invalids": Set {
-                      "_set": Array [
+                    "_invalids": InternalSet {
+                      "_hasRef": 0,
+                      "_set": Set {
                         "",
-                      ],
+                      },
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -2885,8 +3030,9 @@ Array [
                     "_tests": Array [],
                     "_type": "string",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -2907,8 +3053,9 @@ Array [
                       "patterns": Array [],
                       "renames": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -2925,8 +3072,9 @@ Array [
                     ],
                     "_type": "object",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -2947,8 +3095,9 @@ Array [
                       "patterns": Array [],
                       "renames": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -2965,8 +3114,9 @@ Array [
                     ],
                     "_type": "object",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -2983,8 +3133,9 @@ Array [
                       "patterns": Array [],
                       "renames": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -2994,8 +3145,9 @@ Array [
                     "_tests": Array [],
                     "_type": "object",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -3016,8 +3168,9 @@ Array [
                       "patterns": Array [],
                       "renames": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -3034,8 +3187,9 @@ Array [
                     ],
                     "_type": "object",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -3072,10 +3226,11 @@ Array [
                                     "presence": "required",
                                   },
                                   "_inner": Object {},
-                                  "_invalids": Set {
-                                    "_set": Array [
+                                  "_invalids": InternalSet {
+                                    "_hasRef": 0,
+                                    "_set": Set {
                                       "",
-                                    ],
+                                    },
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -3085,8 +3240,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "string",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -3107,8 +3263,9 @@ Array [
                                     "patterns": Array [],
                                     "renames": Array [],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -3125,8 +3282,9 @@ Array [
                                   ],
                                   "_type": "object",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -3147,8 +3305,9 @@ Array [
                                     "patterns": Array [],
                                     "renames": Array [],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -3165,8 +3324,9 @@ Array [
                                   ],
                                   "_type": "object",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -3206,8 +3366,9 @@ Array [
                                                     "patterns": Array [],
                                                     "renames": Array [],
                                                   },
-                                                  "_invalids": Set {
-                                                    "_set": Array [],
+                                                  "_invalids": InternalSet {
+                                                    "_hasRef": false,
+                                                    "_set": Set {},
                                                   },
                                                   "_meta": Array [],
                                                   "_notes": Array [],
@@ -3227,8 +3388,9 @@ Array [
                                                   ],
                                                   "_type": "object",
                                                   "_unit": null,
-                                                  "_valids": Set {
-                                                    "_set": Array [],
+                                                  "_valids": InternalSet {
+                                                    "_hasRef": false,
+                                                    "_set": Set {},
                                                   },
                                                   "isJoi": true,
                                                 },
@@ -3236,8 +3398,9 @@ Array [
                                             ],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -3247,8 +3410,9 @@ Array [
                                           "_tests": Array [],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
@@ -3266,8 +3430,9 @@ Array [
                                             "patterns": Array [],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -3287,16 +3452,18 @@ Array [
                                           ],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
                                       },
                                     ],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -3306,8 +3473,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "alternatives",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -3329,10 +3497,11 @@ Array [
                                           "_examples": Array [],
                                           "_flags": Object {},
                                           "_inner": Object {},
-                                          "_invalids": Set {
-                                            "_set": Array [
+                                          "_invalids": InternalSet {
+                                            "_hasRef": 0,
+                                            "_set": Set {
                                               "",
-                                            ],
+                                            },
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -3342,8 +3511,9 @@ Array [
                                           "_tests": Array [],
                                           "_type": "string",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
@@ -3363,8 +3533,9 @@ Array [
                                             "patterns": Array [],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -3381,16 +3552,18 @@ Array [
                                           ],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
                                       },
                                     ],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -3400,8 +3573,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "alternatives",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -3420,8 +3594,9 @@ Array [
                             "patterns": Array [],
                             "renames": Array [],
                           },
-                          "_invalids": Set {
-                            "_set": Array [],
+                          "_invalids": InternalSet {
+                            "_hasRef": false,
+                            "_set": Set {},
                           },
                           "_meta": Array [],
                           "_notes": Array [],
@@ -3431,8 +3606,9 @@ Array [
                           "_tests": Array [],
                           "_type": "object",
                           "_unit": null,
-                          "_valids": Set {
-                            "_set": Array [],
+                          "_valids": InternalSet {
+                            "_hasRef": false,
+                            "_set": Set {},
                           },
                           "isJoi": true,
                         },
@@ -3457,10 +3633,11 @@ Array [
                                     "presence": "required",
                                   },
                                   "_inner": Object {},
-                                  "_invalids": Set {
-                                    "_set": Array [
+                                  "_invalids": InternalSet {
+                                    "_hasRef": 0,
+                                    "_set": Set {
                                       "",
-                                    ],
+                                    },
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -3470,8 +3647,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "string",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -3492,8 +3670,9 @@ Array [
                                     "patterns": Array [],
                                     "renames": Array [],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -3510,8 +3689,9 @@ Array [
                                   ],
                                   "_type": "object",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -3532,8 +3712,9 @@ Array [
                                     "patterns": Array [],
                                     "renames": Array [],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -3550,8 +3731,9 @@ Array [
                                   ],
                                   "_type": "object",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -3591,8 +3773,9 @@ Array [
                                                     "patterns": Array [],
                                                     "renames": Array [],
                                                   },
-                                                  "_invalids": Set {
-                                                    "_set": Array [],
+                                                  "_invalids": InternalSet {
+                                                    "_hasRef": false,
+                                                    "_set": Set {},
                                                   },
                                                   "_meta": Array [],
                                                   "_notes": Array [],
@@ -3612,8 +3795,9 @@ Array [
                                                   ],
                                                   "_type": "object",
                                                   "_unit": null,
-                                                  "_valids": Set {
-                                                    "_set": Array [],
+                                                  "_valids": InternalSet {
+                                                    "_hasRef": false,
+                                                    "_set": Set {},
                                                   },
                                                   "isJoi": true,
                                                 },
@@ -3621,8 +3805,9 @@ Array [
                                             ],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -3632,8 +3817,9 @@ Array [
                                           "_tests": Array [],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
@@ -3651,8 +3837,9 @@ Array [
                                             "patterns": Array [],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -3672,16 +3859,18 @@ Array [
                                           ],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
                                       },
                                     ],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -3691,8 +3880,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "alternatives",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -3714,10 +3904,11 @@ Array [
                                           "_examples": Array [],
                                           "_flags": Object {},
                                           "_inner": Object {},
-                                          "_invalids": Set {
-                                            "_set": Array [
+                                          "_invalids": InternalSet {
+                                            "_hasRef": 0,
+                                            "_set": Set {
                                               "",
-                                            ],
+                                            },
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -3727,8 +3918,9 @@ Array [
                                           "_tests": Array [],
                                           "_type": "string",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
@@ -3748,8 +3940,9 @@ Array [
                                             "patterns": Array [],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -3766,16 +3959,18 @@ Array [
                                           ],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
                                       },
                                     ],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -3785,8 +3980,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "alternatives",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -3805,8 +4001,9 @@ Array [
                             "patterns": Array [],
                             "renames": Array [],
                           },
-                          "_invalids": Set {
-                            "_set": Array [],
+                          "_invalids": InternalSet {
+                            "_hasRef": false,
+                            "_set": Set {},
                           },
                           "_meta": Array [],
                           "_notes": Array [],
@@ -3816,8 +4013,9 @@ Array [
                           "_tests": Array [],
                           "_type": "object",
                           "_unit": null,
-                          "_valids": Set {
-                            "_set": Array [],
+                          "_valids": InternalSet {
+                            "_hasRef": false,
+                            "_set": Set {},
                           },
                           "isJoi": true,
                         },
@@ -3825,8 +4023,9 @@ Array [
                       "ordereds": Array [],
                       "requireds": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -3836,8 +4035,9 @@ Array [
                     "_tests": Array [],
                     "_type": "array",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -3847,8 +4047,9 @@ Array [
               "patterns": Array [],
               "renames": Array [],
             },
-            "_invalids": Set {
-              "_set": Array [],
+            "_invalids": InternalSet {
+              "_hasRef": false,
+              "_set": Set {},
             },
             "_meta": Array [],
             "_notes": Array [],
@@ -3860,8 +4061,9 @@ Array [
             "_tests": Array [],
             "_type": "object",
             "_unit": null,
-            "_valids": Set {
-              "_set": Array [],
+            "_valids": InternalSet {
+              "_hasRef": false,
+              "_set": Set {},
             },
             "isJoi": true,
           },
@@ -3886,8 +4088,9 @@ Array [
                     "patterns": Array [],
                     "renames": Array [],
                   },
-                  "_invalids": Set {
-                    "_set": Array [],
+                  "_invalids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "_meta": Array [],
                   "_notes": Array [],
@@ -3897,8 +4100,9 @@ Array [
                   "_tests": Array [],
                   "_type": "object",
                   "_unit": null,
-                  "_valids": Set {
-                    "_set": Array [],
+                  "_valids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "isJoi": true,
                 },
@@ -3916,8 +4120,9 @@ Array [
                     "patterns": Array [],
                     "renames": Array [],
                   },
-                  "_invalids": Set {
-                    "_set": Array [],
+                  "_invalids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "_meta": Array [],
                   "_notes": Array [],
@@ -3934,8 +4139,9 @@ Array [
                   ],
                   "_type": "object",
                   "_unit": null,
-                  "_valids": Set {
-                    "_set": Array [],
+                  "_valids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "isJoi": true,
                 },
@@ -3951,8 +4157,9 @@ Array [
                     "patterns": Array [],
                     "renames": Array [],
                   },
-                  "_invalids": Set {
-                    "_set": Array [],
+                  "_invalids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "_meta": Array [],
                   "_notes": Array [],
@@ -3962,8 +4169,9 @@ Array [
                   "_tests": Array [],
                   "_type": "object",
                   "_unit": null,
-                  "_valids": Set {
-                    "_set": Array [],
+                  "_valids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "isJoi": true,
                 },
@@ -3981,8 +4189,9 @@ Array [
                     "patterns": Array [],
                     "renames": Array [],
                   },
-                  "_invalids": Set {
-                    "_set": Array [],
+                  "_invalids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "_meta": Array [],
                   "_notes": Array [],
@@ -3999,8 +4208,9 @@ Array [
                   ],
                   "_type": "object",
                   "_unit": null,
-                  "_valids": Set {
-                    "_set": Array [],
+                  "_valids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "isJoi": true,
                 },
@@ -4008,8 +4218,9 @@ Array [
               "ordereds": Array [],
               "requireds": Array [],
             },
-            "_invalids": Set {
-              "_set": Array [],
+            "_invalids": InternalSet {
+              "_hasRef": false,
+              "_set": Set {},
             },
             "_meta": Array [],
             "_notes": Array [],
@@ -4021,8 +4232,9 @@ Array [
             "_tests": Array [],
             "_type": "array",
             "_unit": null,
-            "_valids": Set {
-              "_set": Array [],
+            "_valids": InternalSet {
+              "_hasRef": false,
+              "_set": Set {},
             },
             "isJoi": true,
           },
@@ -4036,7 +4248,7 @@ Array [
           "ref": [Function],
           "string": [Function],
           "validate": [Function],
-          "version": "13.1.2",
+          "version": "13.4.0",
         },
         "_description": null,
         "_examples": Array [],
@@ -4044,10 +4256,11 @@ Array [
           "presence": "required",
         },
         "_inner": Object {},
-        "_invalids": Set {
-          "_set": Array [
+        "_invalids": InternalSet {
+          "_hasRef": 0,
+          "_set": Set {
             "",
-          ],
+          },
         },
         "_meta": Array [],
         "_notes": Array [],
@@ -4057,8 +4270,9 @@ Array [
         "_tests": Array [],
         "_type": "string",
         "_unit": null,
-        "_valids": Set {
-          "_set": Array [],
+        "_valids": InternalSet {
+          "_hasRef": false,
+          "_set": Set {},
         },
         "isJoi": true,
       },
@@ -4079,8 +4293,9 @@ Array [
           "_examples": Array [],
           "_flags": Object {},
           "_inner": Object {},
-          "_invalids": Set {
-            "_set": Array [],
+          "_invalids": InternalSet {
+            "_hasRef": false,
+            "_set": Set {},
           },
           "_meta": Array [],
           "_notes": Array [],
@@ -4090,8 +4305,9 @@ Array [
           "_tests": Array [],
           "_type": "any",
           "_unit": null,
-          "_valids": Set {
-            "_set": Array [],
+          "_valids": InternalSet {
+            "_hasRef": false,
+            "_set": Set {},
           },
           "alt": [Function],
           "alternatives": [Function],
@@ -4129,8 +4345,9 @@ Array [
                       "patterns": Array [],
                       "renames": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -4150,8 +4367,9 @@ Array [
                     ],
                     "_type": "object",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -4167,10 +4385,11 @@ Array [
                       "presence": "required",
                     },
                     "_inner": Object {},
-                    "_invalids": Set {
-                      "_set": Array [
+                    "_invalids": InternalSet {
+                      "_hasRef": 0,
+                      "_set": Set {
                         "",
-                      ],
+                      },
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -4180,8 +4399,9 @@ Array [
                     "_tests": Array [],
                     "_type": "string",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -4202,8 +4422,9 @@ Array [
                       "patterns": Array [],
                       "renames": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -4220,8 +4441,9 @@ Array [
                     ],
                     "_type": "object",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -4242,8 +4464,9 @@ Array [
                       "patterns": Array [],
                       "renames": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -4260,8 +4483,9 @@ Array [
                     ],
                     "_type": "object",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -4278,8 +4502,9 @@ Array [
                       "patterns": Array [],
                       "renames": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -4289,8 +4514,9 @@ Array [
                     "_tests": Array [],
                     "_type": "object",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -4311,8 +4537,9 @@ Array [
                       "patterns": Array [],
                       "renames": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -4329,8 +4556,9 @@ Array [
                     ],
                     "_type": "object",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -4367,10 +4595,11 @@ Array [
                                     "presence": "required",
                                   },
                                   "_inner": Object {},
-                                  "_invalids": Set {
-                                    "_set": Array [
+                                  "_invalids": InternalSet {
+                                    "_hasRef": 0,
+                                    "_set": Set {
                                       "",
-                                    ],
+                                    },
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -4380,8 +4609,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "string",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -4402,8 +4632,9 @@ Array [
                                     "patterns": Array [],
                                     "renames": Array [],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -4420,8 +4651,9 @@ Array [
                                   ],
                                   "_type": "object",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -4442,8 +4674,9 @@ Array [
                                     "patterns": Array [],
                                     "renames": Array [],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -4460,8 +4693,9 @@ Array [
                                   ],
                                   "_type": "object",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -4501,8 +4735,9 @@ Array [
                                                     "patterns": Array [],
                                                     "renames": Array [],
                                                   },
-                                                  "_invalids": Set {
-                                                    "_set": Array [],
+                                                  "_invalids": InternalSet {
+                                                    "_hasRef": false,
+                                                    "_set": Set {},
                                                   },
                                                   "_meta": Array [],
                                                   "_notes": Array [],
@@ -4522,8 +4757,9 @@ Array [
                                                   ],
                                                   "_type": "object",
                                                   "_unit": null,
-                                                  "_valids": Set {
-                                                    "_set": Array [],
+                                                  "_valids": InternalSet {
+                                                    "_hasRef": false,
+                                                    "_set": Set {},
                                                   },
                                                   "isJoi": true,
                                                 },
@@ -4531,8 +4767,9 @@ Array [
                                             ],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -4542,8 +4779,9 @@ Array [
                                           "_tests": Array [],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
@@ -4561,8 +4799,9 @@ Array [
                                             "patterns": Array [],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -4582,16 +4821,18 @@ Array [
                                           ],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
                                       },
                                     ],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -4601,8 +4842,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "alternatives",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -4624,10 +4866,11 @@ Array [
                                           "_examples": Array [],
                                           "_flags": Object {},
                                           "_inner": Object {},
-                                          "_invalids": Set {
-                                            "_set": Array [
+                                          "_invalids": InternalSet {
+                                            "_hasRef": 0,
+                                            "_set": Set {
                                               "",
-                                            ],
+                                            },
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -4637,8 +4880,9 @@ Array [
                                           "_tests": Array [],
                                           "_type": "string",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
@@ -4658,8 +4902,9 @@ Array [
                                             "patterns": Array [],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -4676,16 +4921,18 @@ Array [
                                           ],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
                                       },
                                     ],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -4695,8 +4942,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "alternatives",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -4715,8 +4963,9 @@ Array [
                             "patterns": Array [],
                             "renames": Array [],
                           },
-                          "_invalids": Set {
-                            "_set": Array [],
+                          "_invalids": InternalSet {
+                            "_hasRef": false,
+                            "_set": Set {},
                           },
                           "_meta": Array [],
                           "_notes": Array [],
@@ -4726,8 +4975,9 @@ Array [
                           "_tests": Array [],
                           "_type": "object",
                           "_unit": null,
-                          "_valids": Set {
-                            "_set": Array [],
+                          "_valids": InternalSet {
+                            "_hasRef": false,
+                            "_set": Set {},
                           },
                           "isJoi": true,
                         },
@@ -4752,10 +5002,11 @@ Array [
                                     "presence": "required",
                                   },
                                   "_inner": Object {},
-                                  "_invalids": Set {
-                                    "_set": Array [
+                                  "_invalids": InternalSet {
+                                    "_hasRef": 0,
+                                    "_set": Set {
                                       "",
-                                    ],
+                                    },
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -4765,8 +5016,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "string",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -4787,8 +5039,9 @@ Array [
                                     "patterns": Array [],
                                     "renames": Array [],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -4805,8 +5058,9 @@ Array [
                                   ],
                                   "_type": "object",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -4827,8 +5081,9 @@ Array [
                                     "patterns": Array [],
                                     "renames": Array [],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -4845,8 +5100,9 @@ Array [
                                   ],
                                   "_type": "object",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -4886,8 +5142,9 @@ Array [
                                                     "patterns": Array [],
                                                     "renames": Array [],
                                                   },
-                                                  "_invalids": Set {
-                                                    "_set": Array [],
+                                                  "_invalids": InternalSet {
+                                                    "_hasRef": false,
+                                                    "_set": Set {},
                                                   },
                                                   "_meta": Array [],
                                                   "_notes": Array [],
@@ -4907,8 +5164,9 @@ Array [
                                                   ],
                                                   "_type": "object",
                                                   "_unit": null,
-                                                  "_valids": Set {
-                                                    "_set": Array [],
+                                                  "_valids": InternalSet {
+                                                    "_hasRef": false,
+                                                    "_set": Set {},
                                                   },
                                                   "isJoi": true,
                                                 },
@@ -4916,8 +5174,9 @@ Array [
                                             ],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -4927,8 +5186,9 @@ Array [
                                           "_tests": Array [],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
@@ -4946,8 +5206,9 @@ Array [
                                             "patterns": Array [],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -4967,16 +5228,18 @@ Array [
                                           ],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
                                       },
                                     ],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -4986,8 +5249,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "alternatives",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -5009,10 +5273,11 @@ Array [
                                           "_examples": Array [],
                                           "_flags": Object {},
                                           "_inner": Object {},
-                                          "_invalids": Set {
-                                            "_set": Array [
+                                          "_invalids": InternalSet {
+                                            "_hasRef": 0,
+                                            "_set": Set {
                                               "",
-                                            ],
+                                            },
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -5022,8 +5287,9 @@ Array [
                                           "_tests": Array [],
                                           "_type": "string",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
@@ -5043,8 +5309,9 @@ Array [
                                             "patterns": Array [],
                                             "renames": Array [],
                                           },
-                                          "_invalids": Set {
-                                            "_set": Array [],
+                                          "_invalids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "_meta": Array [],
                                           "_notes": Array [],
@@ -5061,16 +5328,18 @@ Array [
                                           ],
                                           "_type": "object",
                                           "_unit": null,
-                                          "_valids": Set {
-                                            "_set": Array [],
+                                          "_valids": InternalSet {
+                                            "_hasRef": false,
+                                            "_set": Set {},
                                           },
                                           "isJoi": true,
                                         },
                                       },
                                     ],
                                   },
-                                  "_invalids": Set {
-                                    "_set": Array [],
+                                  "_invalids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "_meta": Array [],
                                   "_notes": Array [],
@@ -5080,8 +5349,9 @@ Array [
                                   "_tests": Array [],
                                   "_type": "alternatives",
                                   "_unit": null,
-                                  "_valids": Set {
-                                    "_set": Array [],
+                                  "_valids": InternalSet {
+                                    "_hasRef": false,
+                                    "_set": Set {},
                                   },
                                   "isJoi": true,
                                 },
@@ -5100,8 +5370,9 @@ Array [
                             "patterns": Array [],
                             "renames": Array [],
                           },
-                          "_invalids": Set {
-                            "_set": Array [],
+                          "_invalids": InternalSet {
+                            "_hasRef": false,
+                            "_set": Set {},
                           },
                           "_meta": Array [],
                           "_notes": Array [],
@@ -5111,8 +5382,9 @@ Array [
                           "_tests": Array [],
                           "_type": "object",
                           "_unit": null,
-                          "_valids": Set {
-                            "_set": Array [],
+                          "_valids": InternalSet {
+                            "_hasRef": false,
+                            "_set": Set {},
                           },
                           "isJoi": true,
                         },
@@ -5120,8 +5392,9 @@ Array [
                       "ordereds": Array [],
                       "requireds": Array [],
                     },
-                    "_invalids": Set {
-                      "_set": Array [],
+                    "_invalids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "_meta": Array [],
                     "_notes": Array [],
@@ -5131,8 +5404,9 @@ Array [
                     "_tests": Array [],
                     "_type": "array",
                     "_unit": null,
-                    "_valids": Set {
-                      "_set": Array [],
+                    "_valids": InternalSet {
+                      "_hasRef": false,
+                      "_set": Set {},
                     },
                     "isJoi": true,
                   },
@@ -5142,8 +5416,9 @@ Array [
               "patterns": Array [],
               "renames": Array [],
             },
-            "_invalids": Set {
-              "_set": Array [],
+            "_invalids": InternalSet {
+              "_hasRef": false,
+              "_set": Set {},
             },
             "_meta": Array [],
             "_notes": Array [],
@@ -5155,8 +5430,9 @@ Array [
             "_tests": Array [],
             "_type": "object",
             "_unit": null,
-            "_valids": Set {
-              "_set": Array [],
+            "_valids": InternalSet {
+              "_hasRef": false,
+              "_set": Set {},
             },
             "isJoi": true,
           },
@@ -5181,8 +5457,9 @@ Array [
                     "patterns": Array [],
                     "renames": Array [],
                   },
-                  "_invalids": Set {
-                    "_set": Array [],
+                  "_invalids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "_meta": Array [],
                   "_notes": Array [],
@@ -5192,8 +5469,9 @@ Array [
                   "_tests": Array [],
                   "_type": "object",
                   "_unit": null,
-                  "_valids": Set {
-                    "_set": Array [],
+                  "_valids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "isJoi": true,
                 },
@@ -5211,8 +5489,9 @@ Array [
                     "patterns": Array [],
                     "renames": Array [],
                   },
-                  "_invalids": Set {
-                    "_set": Array [],
+                  "_invalids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "_meta": Array [],
                   "_notes": Array [],
@@ -5229,8 +5508,9 @@ Array [
                   ],
                   "_type": "object",
                   "_unit": null,
-                  "_valids": Set {
-                    "_set": Array [],
+                  "_valids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "isJoi": true,
                 },
@@ -5246,8 +5526,9 @@ Array [
                     "patterns": Array [],
                     "renames": Array [],
                   },
-                  "_invalids": Set {
-                    "_set": Array [],
+                  "_invalids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "_meta": Array [],
                   "_notes": Array [],
@@ -5257,8 +5538,9 @@ Array [
                   "_tests": Array [],
                   "_type": "object",
                   "_unit": null,
-                  "_valids": Set {
-                    "_set": Array [],
+                  "_valids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "isJoi": true,
                 },
@@ -5276,8 +5558,9 @@ Array [
                     "patterns": Array [],
                     "renames": Array [],
                   },
-                  "_invalids": Set {
-                    "_set": Array [],
+                  "_invalids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "_meta": Array [],
                   "_notes": Array [],
@@ -5294,8 +5577,9 @@ Array [
                   ],
                   "_type": "object",
                   "_unit": null,
-                  "_valids": Set {
-                    "_set": Array [],
+                  "_valids": InternalSet {
+                    "_hasRef": false,
+                    "_set": Set {},
                   },
                   "isJoi": true,
                 },
@@ -5303,8 +5587,9 @@ Array [
               "ordereds": Array [],
               "requireds": Array [],
             },
-            "_invalids": Set {
-              "_set": Array [],
+            "_invalids": InternalSet {
+              "_hasRef": false,
+              "_set": Set {},
             },
             "_meta": Array [],
             "_notes": Array [],
@@ -5316,8 +5601,9 @@ Array [
             "_tests": Array [],
             "_type": "array",
             "_unit": null,
-            "_valids": Set {
-              "_set": Array [],
+            "_valids": InternalSet {
+              "_hasRef": false,
+              "_set": Set {},
             },
             "isJoi": true,
           },
@@ -5331,7 +5617,7 @@ Array [
           "ref": [Function],
           "string": [Function],
           "validate": [Function],
-          "version": "13.1.2",
+          "version": "13.4.0",
         },
         "_description": null,
         "_examples": Array [],
@@ -5339,10 +5625,11 @@ Array [
           "presence": "required",
         },
         "_inner": Object {},
-        "_invalids": Set {
-          "_set": Array [
+        "_invalids": InternalSet {
+          "_hasRef": 0,
+          "_set": Set {
             "",
-          ],
+          },
         },
         "_meta": Array [],
         "_notes": Array [],
@@ -5352,8 +5639,9 @@ Array [
         "_tests": Array [],
         "_type": "string",
         "_unit": null,
-        "_valids": Set {
-          "_set": Array [],
+        "_valids": InternalSet {
+          "_hasRef": false,
+          "_set": Set {},
         },
         "isJoi": true,
       },

@@ -22,13 +22,7 @@ export interface IWrite<T, U extends mongoose.Document> {
 export interface MongooseConfiguration {
   name?: string;
 
-  uri?: string;
+  uri: string;
 
-  host?: string;
-
-  database_name?: string;
-
-  port?: number;
-
-  options: mongoose.ConnectionOptions;
+  options?: mongoose.ConnectionOptions;
 }
