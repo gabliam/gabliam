@@ -31,9 +31,11 @@
   },
   "devDependencies": {
     "@types/debug": "^0.0.30",
+    "@types/fs-extra": "^5.0.4",
     "@types/glob": "^5.0.30",
     "@types/js-yaml": "^3.11.2",
-    "@types/lodash": "^4.14.110"
+    "@types/lodash": "^4.14.111",
+    "fs-extra": "^6.0.1"
   },
   "repository": {
     "type": "git",

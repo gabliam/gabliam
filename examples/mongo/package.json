@@ -29,6 +29,6 @@
   },
   "devDependencies": {
     "@types/helmet": "^0.0.38",
-    "nodemon": "^1.17.5"
+    "nodemon": "^1.18.1"
   }
 }

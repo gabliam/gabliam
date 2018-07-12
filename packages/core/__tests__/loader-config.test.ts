@@ -1,7 +1,8 @@
 // tslint:disable:one-line
 // tslint:disable:no-unused-expression
 import { LoaderConfig, FileLoader } from '../src/loaders';
-import * as mock from 'mock-fs';
+// import * as mock from 'mock-fs';
+import { MockFs } from './mock-fs';
 import * as path from 'path';
 
 let loader: LoaderConfig;
@@ -22,18 +23,18 @@ test(`with bad application.yml`, async () => {
 });
 
 test(`with application.yml empty`, async () => {
-  mock({
+  const mock = new MockFs({
     'test/config': {
       'application.yml': ``
     }
   });
-  const config = await loader.load(path.resolve(__dirname, 'test/config'));
+  const config = await loader.load(mock.resolve('test/config'));
   expect(config).toMatchSnapshot();
   mock.restore();
 });
 
 test(`with application.yml with nothing`, async () => {
-  mock({
+  const mock = new MockFs({
     'test/config': {
       // tslint:disable-next-line:no-trailing-whitespace
       'application.yml': `
@@ -41,7 +42,7 @@ test(`with application.yml with nothing`, async () => {
               `
     }
   });
-  const config = await loader.load(path.resolve(__dirname, 'test/config'));
+  const config = await loader.load(mock.resolve('test/config'));
   expect(config).toMatchSnapshot();
   mock.restore();
 });
@@ -54,8 +55,9 @@ test(`with application.yml`, async () => {
 });
 
 describe('with application.yml', async () => {
+  let mock: MockFs;
   beforeAll(async () => {
-    mock({
+    mock = new MockFs({
       'test/config': {
         'application.yml': `
               application:
@@ -72,26 +74,30 @@ describe('with application.yml', async () => {
   });
 
   test('load application.yml', async () => {
-    const config = await loader.load('test/config');
+    const config = await loader.load(mock.resolve('test/config'));
     expect(config).toMatchSnapshot();
   });
 
   test('load with bad profile', async () => {
-    const config = await loader.load('test/config', 'int');
+    const config = await loader.load(mock.resolve('test/config'), 'int');
     expect(config).toMatchSnapshot();
   });
 
   test('load with prod profile', async () => {
-    const config = await loader.load('test/config', 'prod');
+    const config = await loader.load(mock.resolve('test/config'), 'prod');
     expect(config).toMatchSnapshot();
+    // expect(config).toMatchSnapshot(<any>{
+    //   testPath: expect.any(String)
+    // });
   });
 
   afterAll(() => mock.restore());
 });
 
 describe('with application.yml with bad handler', async () => {
+  let mock: MockFs;
   beforeAll(async () => {
-    mock({
+    mock = new MockFs({
       'test/config': {
         'application.yml': `
               application:
@@ -108,7 +114,7 @@ describe('with application.yml with bad handler', async () => {
   });
 
   test('must throw error', async () => {
-    const config = loader.load('test/config', 'int');
+    const config = loader.load(mock.resolve('test/config'), 'int');
     await expect(config).rejects.toMatchSnapshot();
   });
 
@@ -168,7 +174,7 @@ test(`with bad application.json`, async () => {
 });
 
 test(`with application.json empty`, async () => {
-  mock({
+  const mock = new MockFs({
     'test/config': {
       'application.json': ``
     }
@@ -177,7 +183,7 @@ test(`with application.json empty`, async () => {
     {
       loader: FileLoader,
       options: {
-        folder: 'test/config',
+        folder: mock.resolve('test/config'),
         types: ['json']
       }
     }
@@ -187,7 +193,7 @@ test(`with application.json empty`, async () => {
 });
 
 test(`with application.json with nothing`, async () => {
-  mock({
+  const mock = new MockFs({
     'test/config': {
       // tslint:disable-next-line:no-trailing-whitespace
       'application.json': `
@@ -199,7 +205,7 @@ test(`with application.json with nothing`, async () => {
     {
       loader: FileLoader,
       options: {
-        folder: 'test/config',
+        folder: mock.resolve('test/config'),
         types: ['json']
       }
     }

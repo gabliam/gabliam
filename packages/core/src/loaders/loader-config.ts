@@ -35,7 +35,7 @@ export class LoaderConfig {
     if (configOptions === undefined) {
       return {};
     }
-
+    debug('ici');
     let loaderConfigOptions: LoaderConfigOptions[];
     if (typeof configOptions === 'string') {
       loaderConfigOptions = [
@@ -49,7 +49,7 @@ export class LoaderConfig {
     } else {
       loaderConfigOptions = configOptions;
     }
-
+    debug('ici', { loaderConfigOptions });
     let config = {};
 
     for (const { loader, options } of loaderConfigOptions) {
@@ -64,6 +64,7 @@ export class LoaderConfig {
       } else {
         loaderFunc = loader;
       }
+      debug('ici', { loaderFunc });
       const loadedConfig = await loaderFunc(options, profile);
 
       config = _.merge({}, config, loadedConfig);

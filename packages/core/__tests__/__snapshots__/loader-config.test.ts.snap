@@ -40,7 +40,7 @@ Object {
     "db": "test",
     "host": "127.0.0.1",
   },
-  "testPath": "<PROJECT_ROOT>/test/config/test.json",
+  "testPath": "<TEMP_DIR>/mock-fs-test/test/config/test.json",
 }
 `;
 
@@ -50,7 +50,7 @@ Object {
     "db": "test",
     "host": "127.0.0.1",
   },
-  "testPath": "<PROJECT_ROOT>/test/config/test.json",
+  "testPath": "<TEMP_DIR>/mock-fs-test/test/config/test.json",
 }
 `;
 
@@ -60,11 +60,11 @@ Object {
     "db": "test",
     "host": "prod.app.com",
   },
-  "testPath": "<PROJECT_ROOT>/test/config/test.json",
+  "testPath": "<TEMP_DIR>/mock-fs-test/test/config/test.json",
 }
 `;
 
-exports[`with application.yml with bad handler must throw error 1`] = `[Error: ENOENT, no such file or directory '<PROJECT_ROOT>/test/config/test.json']`;
+exports[`with application.yml with bad handler must throw error 1`] = `[Error: ENOENT: no such file or directory, open '<TEMP_DIR>/mock-fs-test/test/config/test.json']`;
 
 exports[`with application.yml with nothing 1`] = `Object {}`;
 

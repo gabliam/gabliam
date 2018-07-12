@@ -40,7 +40,7 @@
     "@gabliam/graphql-core": "7.9.4",
     "@types/body-parser": "^1.17.0",
     "@types/debug": "^0.0.30",
-    "@types/node": "^10.5.1"
+    "@types/node": "^10.5.2"
   },
   "dependencies": {
     "body-parser": "^1.18.3",

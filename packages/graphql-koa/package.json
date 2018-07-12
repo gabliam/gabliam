@@ -39,8 +39,8 @@
     "@gabliam/graphql-core": "7.9.4",
     "@gabliam/koa": "7.9.4",
     "@types/debug": "^0.0.30",
-    "@types/koa-bodyparser": "^5.0.0",
-    "@types/node": "^10.5.1"
+    "@types/koa-bodyparser": "^5.0.1",
+    "@types/node": "^10.5.2"
   },
   "dependencies": {
     "debug": "^3.0.1",

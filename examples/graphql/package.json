@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@types/helmet": "^0.0.38",
-    "@types/lodash": "^4.14.110",
-    "nodemon": "^1.17.5"
+    "@types/lodash": "^4.14.111",
+    "nodemon": "^1.18.1"
   }
 }
