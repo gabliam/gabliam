@@ -1,3 +1,6 @@
+/**
+ * Exception when paser is not supported by Gabliam
+ */
 export class ParserNotSupportedError extends Error {
   name = 'ParserNotSupportedError';
 

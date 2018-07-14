@@ -11,7 +11,7 @@ const debug = d('Gabliam:loader');
 const reg = /^.*(git|svn|node_modules|dist|build).*/;
 
 /**
- * Loader
+ * Class that load all module and register all classes
  */
 export class LoaderModule {
   /**
@@ -31,9 +31,8 @@ export class LoaderModule {
         current.constructor &&
         Reflect.hasMetadata(METADATA_KEY.scan, current.constructor)
       ) {
-        const paths = <string[]>Reflect.getMetadata(
-          METADATA_KEY.scan,
-          current.constructor
+        const paths = <string[]>(
+          Reflect.getMetadata(METADATA_KEY.scan, current.constructor)
         );
         prev.push(...paths);
       }
@@ -66,9 +65,8 @@ export class LoaderModule {
 
         // if the module is an objet and has a register metadata => add in registry
         if (isObject(m) && Reflect.hasMetadata(METADATA_KEY.register, m)) {
-          const metadata = <RegistryMetada>Reflect.getMetadata(
-            METADATA_KEY.register,
-            m
+          const metadata = <RegistryMetada>(
+            Reflect.getMetadata(METADATA_KEY.register, m)
           );
           registry.add(metadata.type, metadata.value);
 

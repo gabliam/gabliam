@@ -20,11 +20,14 @@ export interface LoaderConfigOptions {
   options?: Object;
 }
 
+/**
+ * Class that load config
+ *
+ * By default if there is no loaderConfigOptions, use FileLoader
+ */
 export class LoaderConfig {
   /**
    * Load configuration
-   * @param  {string} folder the configuration folder
-   * @returns any
    */
   async load(
     configOptions: string | LoaderConfigOptions[] | undefined,
@@ -35,8 +38,10 @@ export class LoaderConfig {
     if (configOptions === undefined) {
       return {};
     }
-    debug('ici');
+
     let loaderConfigOptions: LoaderConfigOptions[];
+
+    // If configOptions is a string, create the default loaderconfig
     if (typeof configOptions === 'string') {
       loaderConfigOptions = [
         {
@@ -49,7 +54,7 @@ export class LoaderConfig {
     } else {
       loaderConfigOptions = configOptions;
     }
-    debug('ici', { loaderConfigOptions });
+    debug('loaderConfigOptions', { loaderConfigOptions });
     let config = {};
 
     for (const { loader, options } of loaderConfigOptions) {
@@ -64,7 +69,7 @@ export class LoaderConfig {
       } else {
         loaderFunc = loader;
       }
-      debug('ici', { loaderFunc });
+      debug('loaderFunc', { loaderFunc });
       const loadedConfig = await loaderFunc(options, profile);
 
       config = _.merge({}, config, loadedConfig);

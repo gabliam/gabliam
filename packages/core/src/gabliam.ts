@@ -34,7 +34,7 @@ const DEFAULT_CONFIG: GabliamConfig = {
 export class Gabliam {
   public container: Container = createContainer();
 
-  public config: any;
+  public config: object;
 
   /**
    * Registry
@@ -261,6 +261,7 @@ export class Gabliam {
   private async _loadConfig() {
     debug('_loadConfig');
 
+    // Get all config classes in registry
     let configsRegistry = this.registry.get<ConfigRegistry>(TYPE.Config);
 
     debug('configsRegistry', configsRegistry);
@@ -268,13 +269,16 @@ export class Gabliam {
       configsRegistry = _.sortBy(configsRegistry, 'options.order');
 
       for (const { id: configId } of configsRegistry) {
+        // Get config instance
         const confInstance = this.container.get<object>(configId);
 
+        // get all bean metadata in config classes
         const beanMetadatas: BeanMetadata[] = Reflect.getMetadata(
           METADATA_KEY.bean,
           confInstance.constructor
         );
 
+        // get on missing bean metadata
         const onMissingBeanMetadatas: BeanMetadata[] =
           Reflect.getMetadata(
             METADATA_KEY.onMissingBean,
@@ -291,6 +295,7 @@ export class Gabliam {
           confInstance.constructor
         );
 
+        // call all beforeCreate method if exist
         if (Array.isArray(beforeCreateMetas)) {
           // No promise.all and await because order of beans are important
           for (const metada of beforeCreateMetas) {
@@ -306,13 +311,18 @@ export class Gabliam {
               m => m.key === key
             );
 
+            // by default all bean are missing
             let allMissing = true;
+
+            // if there are onMissingBeans config, check if bean exist or no
             for (const onMissingBean of onMissingBeans) {
               try {
                 this.container.getAll(onMissingBean.id);
                 allMissing = false;
               } catch {}
             }
+
+            // if all beans are missing, so we create the bean
             if (allMissing) {
               const bean = await callInstance(confInstance, key);
               this.container.bind(id).toConstantValue(bean);

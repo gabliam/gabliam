@@ -13,7 +13,7 @@ Gabilliam is modular with plugins.
 
 ## Build phase
 
-1. Load all config file (yml for the moment)
+1. Load all config file
 2. Load all file in scanPath of main
 	- All decorators on class add metadata and can register this class
 	- if an class has @scanPath, add this folder in queue for load

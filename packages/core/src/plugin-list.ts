@@ -9,23 +9,33 @@ import * as _ from 'lodash';
 import { Graph } from 'gert';
 import * as TopoSort from 'gert-topo-sort';
 
+/**
+ * Plugin registry
+ */
 export class PluginList {
   private _plugins: GabliamPluginDefinition[] = [];
 
+  /**
+   * Add a plugin
+   */
   add(ctor: GabliamPluginConstructor): GabliamPluginDefinition {
-    const pluginMetadata = <PluginMetadata | undefined>Reflect.getMetadata(
-      METADATA_KEY.plugin,
-      ctor
+    const pluginMetadata = <PluginMetadata | undefined>(
+      Reflect.getMetadata(METADATA_KEY.plugin, ctor)
     );
 
+    // if class doesn't have plugin metadata, so throw error
     if (!pluginMetadata) {
       throw new Error(ERRORS_MSGS.INVALID_PLUGIN);
     }
+
     const def = { ...pluginMetadata, plugin: new ctor() };
     this._plugins.push(def);
     return def;
   }
 
+  /**
+   * Sort plugin with the good order
+   */
   sort() {
     const vertices: { [k: string]: string[] } = {};
     for (const plugin of this._plugins) {
@@ -99,38 +109,66 @@ export class PluginList {
     this._plugins = listPlugin;
   }
 
+  /**
+   * Checks if `name` is in plugin list.
+   */
   has(name: string) {
     return !!this.findByName(name);
   }
 
+  /**
+   * Find if `name` is in plugin list
+   */
   findByName(name: string) {
     return this._plugins.find(p => p.name === name);
   }
 
+  /**
+   * return list of plugin
+   */
   get plugins(): GabliamPlugin[] {
+    // use this._plugins.map for immutability
     return this._plugins.map(p => p.plugin);
   }
 
+  /**
+   * return plugin with build phase
+   */
   get pluginsWithBuild(): GabliamPlugin[] {
     return this.plugins.filter(plugin => _.isFunction(plugin.build));
   }
 
+  /**
+   * return plugin with start phase
+   */
   get pluginsWithStart(): GabliamPlugin[] {
     return this.plugins.filter(plugin => _.isFunction(plugin.start));
   }
 
+  /**
+   * return plugin with stop phase
+   */
   get pluginsWithStop(): GabliamPlugin[] {
     return this.plugins.filter(plugin => _.isFunction(plugin.stop));
   }
 
+  /**
+   * return plugin with destroy phase
+   */
   get pluginsWithDestroy(): GabliamPlugin[] {
     return this.plugins.filter(plugin => _.isFunction(plugin.destroy));
   }
 
+  /**
+   * return plugin with bind phase
+   */
   get pluginsWithBind(): GabliamPlugin[] {
     return this.plugins.filter(plugin => _.isFunction(plugin.bind));
   }
 
+  /**
+   * return plugin with config phase
+   */
   get pluginWithConfig(): GabliamPlugin[] {
     return this.plugins.filter(plugin => _.isFunction(plugin.config));
   }

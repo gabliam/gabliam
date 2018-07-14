@@ -2,7 +2,7 @@ import { ValueRegistry } from './interfaces';
 import * as _ from 'lodash';
 
 /**
- * Registry
+ * Registry of all classes in gabliam instance
  */
 export class Registry {
   public registry = new Map<symbol | string, Array<ValueRegistry<any>>>();

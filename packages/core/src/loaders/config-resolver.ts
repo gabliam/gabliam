@@ -3,6 +3,10 @@ import * as handlers from 'shortstop-handlers';
 
 export type Resolver = (config: any) => Promise<Object>;
 
+/**
+ * Create a config resolver
+ * @see https://github.com/krakenjs/shortstop
+ */
 export const configResolver = (configPath: string): Resolver => {
   const resolver = shortstop.create();
   resolver.use('file', handlers.file(configPath));
