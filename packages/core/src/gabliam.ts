@@ -151,6 +151,16 @@ export class Gabliam {
   }
 
   /**
+   * Stop and destroy gabliam application
+   * @returns Promise
+   */
+  async stopAndDestroy(): Promise<Gabliam> {
+    await this.stop();
+    await this.destroy();
+    return this;
+  }
+
+  /**
    * Start gabliam application
    *
    * call all plugin.start

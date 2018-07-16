@@ -21,5 +21,5 @@ test('gabliam instance', async () => {
   expect(gab.registry).toMatchSnapshot();
   gab.registry.remove(TYPE.Config);
   expect(gab.registry).toMatchSnapshot();
-  await gab.destroy();
+  await gab.stopAndDestroy();
 });
