@@ -16,7 +16,7 @@ import { TYPE, METADATA_KEY, ERRORS_MSGS } from '../constants';
  * class SampleController {
  *    @RabbitListener('test')
  *    hello() {
- *      return 'Hello';
+ *      console.log('Hello');
  *    }
  * }
  */
@@ -33,6 +33,23 @@ export function RabbitController() {
   };
 }
 
+/**
+ * RabbitListener
+ *
+ * RabbitController decorator
+ *
+ * Define a rabbit controller
+ *
+ * ## Simple example
+ * @RabbitController('/')
+ * class SampleController {
+ *    @RabbitListener('test')
+ *    hello() {
+ *      console.log('Hello');
+ *    }
+ * }
+ *
+ */
 export const RabbitListener = createRabbitHandlerDecorator('Listener');
 
 export const RabbitConsumer = createRabbitHandlerDecorator('Consumer');

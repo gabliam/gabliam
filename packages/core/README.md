@@ -45,17 +45,7 @@ Go to [Samples]
 
 
 
-# TODO LIST
-
-
-todo list
-- [ ] add doc
-- [x] add tests
-- [ ] add @Contraint for load class
-- [ ] add before and after for config
-- [x] delete express in core
-
-[Samples]: <https://github.com/gabliam/sample>
+[Samples]: <https://github.com/gabliam/gabliam/tree/master/examples>
 
 # License
 
