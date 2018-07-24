@@ -165,7 +165,7 @@ export class AmqpConnection {
           // prettier-ignore
           /* istanbul ignore next */
           (err) => {
-            reject(err)
+            reject(err);
           }
         );
     });
