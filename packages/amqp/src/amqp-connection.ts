@@ -24,6 +24,9 @@ enum ConnectionState {
   stopping
 }
 
+/**
+ * Amqp Connection
+ */
 export class AmqpConnection {
   private connection!: amqp.Connection;
 
@@ -79,6 +82,9 @@ export class AmqpConnection {
     this.consumerList.push({ queueName, handler, options });
   }
 
+  /**
+   * contrust consumer with controller instance and HandlerMetadata
+   */
   constructAndAddConsume(
     handlerMetadata: RabbitHandlerMetadata,
     controller: Controller
@@ -97,6 +103,10 @@ export class AmqpConnection {
     );
   }
 
+  /**
+   * Send a content to a queue.
+   * Content can be undefined
+   */
   async sendToQueue(queue: string, content: any, options?: SendOptions) {
     const queueName = this.getQueueName(queue);
     await this.channel.sendToQueue(
@@ -106,6 +116,10 @@ export class AmqpConnection {
     );
   }
 
+  /**
+   * Send a content to a queue and Ack the message
+   * Content can be undefined
+   */
   async sendToQueueAck(
     queue: string,
     content: any,
@@ -121,6 +135,11 @@ export class AmqpConnection {
     await this.channel.ack(msg);
   }
 
+  /**
+   * Basic RPC pattern with conversion.
+   * Send a Javascrip object converted to a message to a queue and attempt to receive a response, converting that to a Java object.
+   * Implementations will normally set the reply-to header to an exclusive queue and wait up for some time limited by a timeout.
+   */
   async sendAndReceive<T = any>(
     queue: string,
     content: any,
@@ -180,6 +199,9 @@ export class AmqpConnection {
     return promise;
   }
 
+  /**
+   * Stop the connection
+   */
   async stop() {
     if (this.state !== ConnectionState.running) {
       return;
@@ -192,6 +214,9 @@ export class AmqpConnection {
     this.state = ConnectionState.stopped;
   }
 
+  /**
+   * Test if queue exist
+   */
   queueExist(queueName: string) {
     for (const queue of this.queues) {
       if (queue.queueName === queueName) {
@@ -201,6 +226,13 @@ export class AmqpConnection {
     return false;
   }
 
+  /**
+   * Get the real queueName
+   *
+   * Search if the queueName is the index of the map of queues => return queueName
+   * Search if the queueName is a key value => return the value
+   * else return the queue passed on parameter
+   */
   getQueueName(queueName: string) {
     const defaultValue = this.valueExtractor(`"${queueName}"`, queueName);
 
@@ -219,6 +251,9 @@ export class AmqpConnection {
     }
   }
 
+  /**
+   * Convert content to buffer for send in queue
+   */
   contentToBuffer(content: any) {
     if (content === undefined) {
       return new Buffer(this.undefinedValue);
@@ -235,6 +270,9 @@ export class AmqpConnection {
     return new Buffer(JSON.stringify(content));
   }
 
+  /**
+   * Parse content in message
+   */
   parseContent(msg: Message) {
     if (msg.content.toString() === this.undefinedValue) {
       return undefined;
