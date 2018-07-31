@@ -20,7 +20,7 @@ You can add just one [connection configuration](#connection-configuration) or an
 |--|--|--|--|--|
 | name | string |  | default | name of the connection |
 | url | string | X |  | url of the rabbitmq |
-| undefinedValue | string |  | $$__##UNDEFINED##__$$ | value that's send when content is undefined |
+| undefinedValue | string |  | $$\_\_##UNDEFINED##\_\_$$ | value that's send when content is undefined |
 | queues | Map of [queue configuration](#queue-configuration) | X | | Map of queues |
 
 ## Queue configuration
