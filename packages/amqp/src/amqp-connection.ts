@@ -5,14 +5,16 @@ import {
   ConsumerHandler,
   ConsumeOptions,
   SendOptions,
-  Message,
+  AmqpMessage,
   ConsumeConfig,
   RabbitHandlerMetadata,
-  Controller
+  Controller,
+  ParameterMetadata,
 } from './interfaces';
 import * as uuid from 'uuid';
 import * as PromiseB from 'bluebird';
 import { AmqpTimeout } from './errors';
+import { PARAMETER_TYPE, DEFAULT_PARAM_VALUE } from './constants';
 
 enum ConnectionState {
   stopped,
@@ -21,7 +23,7 @@ enum ConnectionState {
 
   starting,
 
-  stopping
+  stopping,
 }
 
 /**
@@ -87,13 +89,22 @@ export class AmqpConnection {
    */
   constructAndAddConsume(
     handlerMetadata: RabbitHandlerMetadata,
+    parameterMetadata: ParameterMetadata[],
     controller: Controller
   ) {
     let consumeHandler: ConsumerHandler;
     if (handlerMetadata.type === 'Listener') {
-      consumeHandler = this.constructListener(handlerMetadata, controller);
+      consumeHandler = this.constructListener(
+        handlerMetadata,
+        parameterMetadata,
+        controller
+      );
     } else {
-      consumeHandler = this.constructConsumer(handlerMetadata, controller);
+      consumeHandler = this.constructConsumer(
+        handlerMetadata,
+        parameterMetadata,
+        controller
+      );
     }
 
     this.addConsume(
@@ -123,7 +134,7 @@ export class AmqpConnection {
   async sendToQueueAck(
     queue: string,
     content: any,
-    msg: Message,
+    msg: AmqpMessage,
     options?: SendOptions
   ) {
     const queueName = this.getQueueName(queue);
@@ -169,7 +180,7 @@ export class AmqpConnection {
       chan
         .assertQueue(replyTo, { exclusive: true, autoDelete: true })
         .then(() => {
-          return chan.consume(replyTo, (msg: Message) => {
+          return chan.consume(replyTo, (msg: AmqpMessage) => {
             if (!onTimeout && msg.properties.correlationId === correlationId) {
               resolve(this.parseContent(msg));
             }
@@ -273,7 +284,7 @@ export class AmqpConnection {
   /**
    * Parse content in message
    */
-  parseContent(msg: Message) {
+  parseContent(msg: AmqpMessage) {
     if (msg.content.toString() === this.undefinedValue) {
       return undefined;
     }
@@ -287,33 +298,35 @@ export class AmqpConnection {
 
   private constructListener(
     handlerMetadata: RabbitHandlerMetadata,
+    parametersMetadata: ParameterMetadata[],
     controller: Controller
   ): ConsumerHandler {
-    return async (msg: Message) => {
-      const content = this.parseContent(msg);
-      await Promise.resolve(controller[handlerMetadata.key](content));
+    return async (msg: AmqpMessage) => {
+      const args = this.extractArgs(parametersMetadata, msg);
+      await Promise.resolve(controller[handlerMetadata.key](...args));
       await this.channel.ack(msg);
     };
   }
 
   private constructConsumer(
     handlerMetadata: RabbitHandlerMetadata,
+    parametersMetadata: ParameterMetadata[],
     controller: Controller
   ): ConsumerHandler {
-    return async (msg: Message) => {
+    return async (msg: AmqpMessage) => {
       // catch when error amqp (untestable)
       /* istanbul ignore next */
       if (msg.properties.replyTo === undefined) {
         throw new Error(`replyTo is missing`);
       }
 
-      const content = this.parseContent(msg);
+      const args = this.extractArgs(parametersMetadata, msg);
 
       let response: any;
       let sendOptions: SendOptions;
       try {
         response = await Promise.resolve(
-          controller[handlerMetadata.key](content)
+          controller[handlerMetadata.key](...args)
         );
         sendOptions = handlerMetadata.sendOptions || {};
       } catch (err) {
@@ -324,8 +337,62 @@ export class AmqpConnection {
       this.sendToQueueAck(msg.properties.replyTo, response, msg, {
         correlationId: msg.properties.correlationId,
         contentType: 'application/json',
-        ...sendOptions
+        ...sendOptions,
       });
     };
+  }
+
+  private extractArgs(params: ParameterMetadata[], msg: AmqpMessage): any[] {
+    const args = [];
+    const content = this.parseContent(msg);
+
+    if (!params || !params.length) {
+      return [content];
+    }
+
+    for (const item of params) {
+      switch (item.type) {
+        case PARAMETER_TYPE.MESSAGE:
+          args[item.index] = msg;
+          break;
+        case PARAMETER_TYPE.CONTENT:
+          args[item.index] = this.getParam(content, null, item);
+          break;
+        case PARAMETER_TYPE.PROPERTIES:
+          args[item.index] = this.getParam(msg, 'properties', item);
+          break;
+        case PARAMETER_TYPE.FIELDS:
+          args[item.index] = this.getParam(msg, 'fields', item);
+          break;
+        default:
+          args[item.index] = msg;
+          break; // response
+      }
+    }
+
+    args.push(content);
+    return args;
+  }
+
+  private getParam(
+    source: any,
+    paramType: string | null,
+    itemParam: ParameterMetadata
+  ) {
+    const name = itemParam.parameterName;
+
+    // get the param source
+    let param = source;
+    if (paramType !== null && source[paramType]) {
+      param = source[paramType];
+    }
+
+    const res = param[name];
+
+    if (res !== undefined) {
+      return res;
+    } else {
+      return name === DEFAULT_PARAM_VALUE ? param : undefined;
+    }
   }
 }

@@ -31,13 +31,9 @@ export interface QueueConfiguration {
   options: QueueOptions;
 }
 
-// export type ConsumerHandler = (
-//   chan: amqp.Channel
-// ) => (msg: Message) => void | Promise<void>;
+export type ConsumerHandler = (msg: AmqpMessage) => void | Promise<void>;
 
-export type ConsumerHandler = (msg: Message) => void | Promise<void>;
-
-export type Handler = (content: any) => any | Promise<any>;
+export type Handler = (...args: any[]) => any | Promise<any>;
 
 export interface Controller {
   [k: string]: Handler;
@@ -51,7 +47,7 @@ export interface MessageFields {
   routingKey: string;
 }
 
-export interface Message {
+export interface AmqpMessage {
   content: Buffer;
 
   properties: SendOptions;

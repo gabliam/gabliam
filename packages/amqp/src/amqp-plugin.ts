@@ -3,10 +3,14 @@ import {
   Container,
   Registry,
   Plugin,
-  GabliamPlugin
+  GabliamPlugin,
 } from '@gabliam/core';
 import { TYPE, METADATA_KEY } from './constants';
-import { RabbitHandlerMetadata } from './interfaces';
+import {
+  RabbitHandlerMetadata,
+  RabbitHandlerParameterMetadata,
+  ParameterMetadata,
+} from './interfaces';
 import * as d from 'debug';
 import { AmqpConnectionManager } from './amqp-manager';
 
@@ -46,20 +50,29 @@ export class AmqpPlugin implements GabliamPlugin {
         controller.constructor
       );
 
+      const parameterMetadata: RabbitHandlerParameterMetadata = Reflect.getOwnMetadata(
+        METADATA_KEY.RabbitcontrollerParameter,
+        controller.constructor
+      );
+
       if (handlerMetadatas) {
         handlerMetadatas.forEach(handlerMetadata => {
-          const cunit = <string>Reflect.getMetadata(
-            METADATA_KEY.cunit,
-            controller.constructor
+          const cunit = <string>(
+            Reflect.getMetadata(METADATA_KEY.cunit, controller.constructor)
           );
+          let paramList: ParameterMetadata[] = [];
+          if (parameterMetadata) {
+            paramList = parameterMetadata.get(handlerMetadata.key) || [];
+          }
+
           if (cunit) {
             connectionManager
               .getConnection(cunit)
-              .constructAndAddConsume(handlerMetadata, controller);
+              .constructAndAddConsume(handlerMetadata, paramList, controller);
           } else {
             connectionManager
               .getDefaultConnection()
-              .constructAndAddConsume(handlerMetadata, controller);
+              .constructAndAddConsume(handlerMetadata, paramList, controller);
           }
         });
       }

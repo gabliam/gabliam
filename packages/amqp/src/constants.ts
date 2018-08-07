@@ -1,18 +1,28 @@
 export const LIST_QUEUE_BEAN = `LIST_QUEUE_BEAN`;
 
 export const TYPE = {
-  RabbitController: 'RabbitControllerType'
+  RabbitController: 'RabbitControllerType',
 };
 
 export const METADATA_KEY = {
   cunit: '_RabbitCuni',
   RabbitController: '_RabbitController',
-  RabbitHandler: '_RabbitHandler'
+  RabbitcontrollerParameter: '_Rabbitcontroller-parameter',
+  RabbitHandler: '_RabbitHandler',
 };
+
+export enum PARAMETER_TYPE {
+  MESSAGE,
+  CONTENT,
+  PROPERTIES,
+  FIELDS,
+}
+
+export const DEFAULT_PARAM_VALUE = '**$$DEFAULT_PARAM_VALUE$$**';
 
 export const ERRORS_MSGS = {
   DUPLICATED_CONTROLLER_DECORATOR: `Cannot apply @RabbitController decorator multiple times.`,
-  DUPLICATED_CUNIT_DECORATOR: `Cannot apply @CUnit decorator multiple times.`
+  DUPLICATED_CUNIT_DECORATOR: `Cannot apply @CUnit decorator multiple times.`,
 };
 
 export const UNDEFINED_VALUE = '$$__##UNDEFINED##__$$';

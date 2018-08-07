@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cunit decorators should add Cunit metadata to a class when decorating a method with @Cunit 1`] = `"default"`;
