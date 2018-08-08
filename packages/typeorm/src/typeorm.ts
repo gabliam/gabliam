@@ -1,11 +1,5 @@
 export * from 'typeorm';
 
-import {
-  Entity,
-  ClassEntityChild,
-  SingleEntityChild,
-  ClosureEntity,
-  CUnit
-} from './decorators';
+import { Entity, ChildEntity, CUnit } from './decorators';
 
-export { Entity, ClassEntityChild, SingleEntityChild, ClosureEntity, CUnit };
+export { Entity, ChildEntity, CUnit };
