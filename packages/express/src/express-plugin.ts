@@ -5,13 +5,13 @@ import {
   Container,
   GabliamPlugin,
   ValueExtractor,
-  VALUE_EXTRACTOR
+  VALUE_EXTRACTOR,
 } from '@gabliam/core';
 import {
   EXPRESS_PLUGIN_CONFIG,
   APP,
   SERVER,
-  CUSTOM_ROUTER_CREATOR
+  CUSTOM_ROUTER_CREATOR,
 } from './constants';
 import {
   TYPE,
@@ -30,7 +30,7 @@ import {
   listParamToValidate,
   createValidateRequest,
   NO_VALIDATION,
-  isValidateError
+  isValidateError,
 } from '@gabliam/web-core';
 import { ExpressPluginConfig, RouterCreator } from './interfaces';
 import * as d from 'debug';
@@ -97,7 +97,7 @@ export class ExpressPlugin implements GabliamPlugin {
       metadataList.forEach(({ key, order }) => {
         middlewareConfig.addMiddleware({
           order,
-          instance: confInstance[key].bind(confInstance[key])
+          instance: confInstance[key].bind(confInstance[key]),
         });
       });
     }
@@ -117,7 +117,7 @@ export class ExpressPlugin implements GabliamPlugin {
       metadataList.forEach(({ key, order }) => {
         middlewareConfig.addErrorMiddleware({
           order,
-          instance: confInstance[key].bind(confInstance[key])
+          instance: confInstance[key].bind(confInstance[key]),
         });
       });
     }
@@ -333,8 +333,8 @@ export class ExpressPlugin implements GabliamPlugin {
             message: err.message,
             validation: {
               source: err._meta.source,
-              keys: []
-            }
+              keys: [],
+            },
           };
 
           if (err.details) {
@@ -445,7 +445,6 @@ export class ExpressPlugin implements GabliamPlugin {
             } else {
               res.send(result !== undefined ? '' + result : undefined);
             }
-            res.send('' + result);
           }
         }
       } catch (err) {
