@@ -5,7 +5,6 @@
     "outDir": "lib"
   },
   "include":[
-    "src/**/*.ts",
-    "custom-typings.d.ts"
+    "src/**/*.ts"
   ]
 }

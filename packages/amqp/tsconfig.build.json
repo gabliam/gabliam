@@ -6,6 +6,5 @@
   },
   "include":[
     "src/**/*.ts",
-    "custom-typings.d.ts"
   ]
 }
