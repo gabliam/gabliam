@@ -5,6 +5,7 @@ import { ValueValidationError } from './errors';
 import { APP_CONFIG } from './constants';
 import { Container } from './container';
 import { ExpressionParser } from '@gabliam/expression';
+import { toPromise } from './promise-utils';
 
 /**
  * Validate a value
@@ -15,7 +16,7 @@ import { ExpressionParser } from '@gabliam/expression';
 function valueValidator(path: string, value: any, validator: ValueValidator) {
   const options: Joi.ValidationOptions = {
     abortEarly: false,
-    ...(validator.options || {})
+    ...(validator.options || {}),
   };
   const validate = Joi.validate(value, validator.schema, options);
   if (validate.error) {
@@ -84,5 +85,5 @@ export function isObject(val: any): val is Object {
  * Call an instance and wrap with promise
  */
 export async function callInstance(instance: any, key: string | symbol) {
-  return Promise.resolve(instance[key]());
+  return toPromise(instance[key]());
 }

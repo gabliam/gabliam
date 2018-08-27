@@ -4,7 +4,7 @@ import {
   METADATA_KEY,
   APP_CONFIG,
   CORE_CONFIG,
-  VALUE_EXTRACTOR
+  VALUE_EXTRACTOR,
 } from './constants';
 import { LoaderModule, LoaderConfig } from './loaders';
 import { createContainer, Container } from './container';
@@ -18,14 +18,15 @@ import {
   ConfigRegistry,
   BeanMetadata,
   ValueRegistry,
-  PreDestroyRegistry
+  PreDestroyRegistry,
 } from './interfaces';
 import { ExpressionParser } from '@gabliam/expression';
+import { toPromise } from './promise-utils';
 
 const debug = d('Gabliam:core');
 
 const DEFAULT_CONFIG: GabliamConfig = {
-  config: process.env.GABLIAM_CONFIG_PATH
+  config: process.env.GABLIAM_CONFIG_PATH,
 };
 
 /**
@@ -69,12 +70,12 @@ export class Gabliam {
       if (_.isString(options)) {
         this.options = {
           ...DEFAULT_CONFIG,
-          config: options
+          config: options,
         };
       } else {
         this.options = {
           ...DEFAULT_CONFIG,
-          ...options
+          ...options,
         };
       }
     }
@@ -134,7 +135,7 @@ export class Gabliam {
     await this._loadConfig();
 
     for (const plugin of this.pluginList.pluginsWithBuild) {
-      await Promise.resolve(plugin.build!(this.container, this.registry));
+      await toPromise(plugin.build(this.container, this.registry));
     }
 
     return this;
@@ -168,7 +169,7 @@ export class Gabliam {
    */
   async start(): Promise<Gabliam> {
     for (const plugin of this.pluginList.pluginsWithStart) {
-      await plugin.start!(this.container, this.registry);
+      await toPromise(plugin.start(this.container, this.registry));
     }
 
     return this;
@@ -182,7 +183,7 @@ export class Gabliam {
    */
   async stop(): Promise<Gabliam> {
     for (const plugin of this.pluginList.pluginsWithStop) {
-      await plugin.stop!(this.container, this.registry);
+      await toPromise(plugin.stop(this.container, this.registry));
     }
 
     return this;
@@ -196,7 +197,7 @@ export class Gabliam {
    */
   async destroy(): Promise<Gabliam> {
     for (const plugin of this.pluginList.pluginsWithDestroy) {
-      await plugin.destroy!(this.container, this.registry);
+      await toPromise(plugin.destroy(this.container, this.registry));
     }
 
     const values = this.registry.get<PreDestroyRegistry>(TYPE.PreDestroy);
@@ -261,7 +262,7 @@ export class Gabliam {
     );
 
     for (const plugin of this.pluginList.pluginsWithBind) {
-      await Promise.resolve(plugin.bind!(this.container, this.registry));
+      await toPromise(plugin.bind(this.container, this.registry));
     }
   }
 
@@ -351,8 +352,8 @@ export class Gabliam {
                   id,
                   target: bean,
                   options: {
-                    preDestroys
-                  }
+                    preDestroys,
+                  },
                 });
               }
             }
@@ -367,8 +368,8 @@ export class Gabliam {
         }
 
         for (const plugin of this.pluginList.pluginWithConfig) {
-          await Promise.resolve(
-            plugin.config!(this.container, this.registry, confInstance)
+          await toPromise(
+            plugin.config(this.container, this.registry, confInstance)
           );
         }
       }
