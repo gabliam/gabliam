@@ -1,23 +1,44 @@
 import { METADATA_KEY, ERRORS_MSGS } from '../constants';
-import {
-  ValidateMetadata,
-  Validator,
-  ValidationOptions,
-  ValidatorType,
-  ValidatorOptions
-} from '../interfaces';
 import { Joi } from '@gabliam/core';
-import { isValidatorOptions } from '..';
+
+export function isValidatorOptions(value: any): value is ValidatorOptions {
+  return typeof value === 'object' && value.hasOwnProperty('validator');
+}
+
+export interface Validator {
+  params?: Joi.SchemaLike;
+  headers?: Joi.SchemaLike;
+  query?: Joi.SchemaLike;
+  body?: Joi.SchemaLike;
+}
+
+export interface ValidatorOptions {
+  validator: Validator;
+
+  options?: ValidationOptions;
+}
+
+export interface ValidateMetadata {
+  rules: Map<ValidatorType, Joi.Schema>;
+
+  validationOptions: ValidationOptions;
+}
+
+export type ValidatorType = keyof Validator;
+
+export interface ValidationOptions extends Joi.ValidationOptions {
+  escapeHtml?: boolean;
+}
 
 const DEFAULT_VAlIDATION_OPTIONS = {
-  escapeHtml: true
+  escapeHtml: true,
 };
 
 export const listParamToValidate: ValidatorType[] = [
   'headers',
   'params',
   'query',
-  'body'
+  'body',
 ];
 
 export function Validate(
@@ -45,7 +66,7 @@ export function Validate(
 
     const validationOptions = {
       ...DEFAULT_VAlIDATION_OPTIONS,
-      ...options
+      ...options,
     };
 
     const rules = new Map<ValidatorType, Joi.Schema>();

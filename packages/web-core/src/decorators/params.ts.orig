@@ -156,7 +156,10 @@ export function Params(
         parameterMetadataList = metadataList.get(propertyKey)!;
       }
     }
+<<<<<<< HEAD
+=======
 
+>>>>>>> feat(@gabliam/web-core): total rewrite web-core
     parameterMetadataList.unshift(parameterMetadata);
     metadataList.set(propertyKey, parameterMetadataList);
     Reflect.defineMetadata(

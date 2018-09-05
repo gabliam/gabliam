@@ -1,12 +1,28 @@
-import { ControllerMetadata, MiddlewareMetadata } from '../interfaces';
-import { METADATA_KEY, TYPE, ERRORS_MSGS } from '../constants';
-import { inversifyInterfaces, injectable, register } from '@gabliam/core';
-import { addMiddlewareMetadata } from '../metadata';
+import { injectable, inversifyInterfaces, register } from '@gabliam/core';
+import { ERRORS_MSGS, METADATA_KEY, TYPE } from '../constants';
+
+/**
+ * Controller metadata
+ */
+export interface ControllerMetadata {
+  /**
+   * path for the controller
+   * this path is concatenated with path of each method
+   */
+  path: string;
+
+  /**
+   * If a method return a value :
+   *  - if true : res.json
+   *  - if false: res.send
+   */
+  json: boolean;
+}
 
 /**
  * Controller options
  */
-export interface ControllerOptions<T> {
+export interface ControllerOptions {
   /**
    * Name of controller
    */
@@ -16,16 +32,7 @@ export interface ControllerOptions<T> {
    * Path of controller
    */
   path: string;
-
-  /**
-   * List of middlewares
-   */
-  middlewares?: MiddlewareMetadata<T>[];
 }
-
-export type ControllerDecorator<T> = (
-  options: ControllerOptions<T> | string
-) => (target: any) => void;
 
 /**
  * Controller decorator
@@ -44,9 +51,7 @@ export type ControllerDecorator<T> = (
  *
  * @param {ControllerOptions | string} options if options is a string, it's define the path
  */
-export function createControllerDecorator<T>(
-  options: ControllerOptions<T> | string
-) {
+export function Controller(options: ControllerOptions | string) {
   return function(target: any) {
     decorateController(options, target, false);
   };
@@ -69,16 +74,14 @@ export function createControllerDecorator<T>(
  * }
  * @param options
  */
-export function createRestControllerDecorator<T>(
-  options: ControllerOptions<T> | string
-) {
+export function RestController(options: ControllerOptions | string) {
   return function(target: any) {
     decorateController(options, target, true);
   };
 }
 
-export function decorateController<T>(
-  options: ControllerOptions<T> | string,
+function decorateController(
+  options: ControllerOptions | string,
   target: any,
   json: boolean
 ) {
@@ -88,18 +91,14 @@ export function decorateController<T>(
 
   let path: string;
   let id: inversifyInterfaces.ServiceIdentifier<any> = target;
-  let middlewares: MiddlewareMetadata<T>[] = [];
   if (typeof options === 'string') {
     path = options;
   } else {
     path = options.path;
-    middlewares = options.middlewares || [];
     if (options.name) {
       id = options.name;
     }
   }
-
-  addMiddlewareMetadata(middlewares, target);
 
   const metadata: ControllerMetadata = { path, json };
   Reflect.defineMetadata(METADATA_KEY.controller, metadata, target);

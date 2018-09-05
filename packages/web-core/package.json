@@ -39,6 +39,7 @@
   "dependencies": {
     "escape-html": "^1.0.3",
     "http-status-codes": "^1.2.0",
+    "property-tunnel": "^1.2.2",
     "tslib": "^1.9.3"
   },
   "engines": {

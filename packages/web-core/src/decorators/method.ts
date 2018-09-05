@@ -1,32 +1,52 @@
-import {
-  HandlerDecorator,
-  ControllerMethodMetadata,
-  MiddlewareMetadata
-} from '../interfaces';
 import { METADATA_KEY } from '../constants';
-import { addMiddlewareMetadata } from '../metadata';
 
-export type RestParamDecorator<T> = (
-  path: string,
-  ...middlewares: MiddlewareMetadata<T>[]
-) => HandlerDecorator;
+/**
+ * Controller method metadata
+ */
+export interface ControllerMethodMetadata {
+  /**
+   * path of the method
+   */
+  path: string;
 
-export type RestMethodDecorator<T> = (
-  method: string,
-  path: string,
-  ...middlewares: MiddlewareMetadata<T>[]
-) => HandlerDecorator;
+  /**
+   * method use for express router
+   * get, all, put ...
+   */
+  method: string;
 
-export function createMethodDecorator<T>(method: string) {
-  return (path: string, ...middlewares: MiddlewareMetadata<T>[]) => (
+  /**
+   * Key of the method
+   */
+  key: string;
+}
+
+export const All = createMethodDecorator('all');
+
+export const Get = createMethodDecorator('get');
+
+export const Post = createMethodDecorator('post');
+
+export const Put = createMethodDecorator('put');
+
+export const Patch = createMethodDecorator('patch');
+
+export const Head = createMethodDecorator('head');
+
+export const Delete = createMethodDecorator('delete');
+
+export const Method = (method: string, path: string) => {
+  return createMethodDecorator(method)(path);
+};
+
+export function createMethodDecorator(method: string) {
+  return (path: string) => (
     target: any,
     key: string,
     descriptor: PropertyDescriptor
   ) => {
     const metadata: ControllerMethodMetadata = { path, method, key };
     let metadataList: ControllerMethodMetadata[] = [];
-
-    addMiddlewareMetadata(middlewares, target.constructor, key);
     if (
       !Reflect.hasOwnMetadata(METADATA_KEY.controllerMethod, target.constructor)
     ) {

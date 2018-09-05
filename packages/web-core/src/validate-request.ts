@@ -1,5 +1,5 @@
-import { ValidationOptions, ValidatorType } from './interfaces';
 import { Joi } from '@gabliam/core';
+import { ValidatorType, ValidationOptions } from './decorators';
 
 export const NO_VALIDATION = Symbol('@gabliam/web-core/NO_VALIDATION');
 
