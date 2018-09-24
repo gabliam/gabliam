@@ -1,7 +1,7 @@
 import { inversifyInterfaces } from '@gabliam/core';
-import { ParameterMetadata, Interceptor } from './decorators';
+import { Interceptors, ParameterMetadata } from './decorators';
 
-export interface PluginConfig {
+export interface WebPluginConfig {
   /**
    * Root path
    */
@@ -18,16 +18,26 @@ export interface PluginConfig {
   hostname: string;
 }
 
-export interface RestMetadata extends PluginConfig {
-  controllers: ControllerInfo[];
+export interface RestMetadata extends WebPluginConfig {
+  controllerInfo: Map<
+    inversifyInterfaces.ServiceIdentifier<any>,
+    ControllerInfo
+  >;
 }
 
 export interface ControllerInfo {
+  controllerPath: string;
+
+  methods: MethodInfo[];
+}
+
+export interface MethodInfo {
   controllerId: inversifyInterfaces.ServiceIdentifier<any>;
   methodName: string;
   json: boolean;
   paramList: ParameterMetadata[];
   methodPath: string;
-  controllerInterceptors: Interceptor[];
-  methodInterceptors: Interceptor[];
+  method: string;
+  controllerInterceptors: Interceptors;
+  methodInterceptors: Interceptors;
 }

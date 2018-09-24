@@ -32,12 +32,6 @@ Array [
 ]
 `;
 
-exports[`Methods decorators should add Methods metadata to a class when decorated with @All 4`] = `
-Array [
-  [Function],
-]
-`;
-
 exports[`Methods decorators should add Methods metadata to a class when decorated with @Delete 1`] = `
 Object {
   "json": false,
@@ -67,12 +61,6 @@ Array [
     "method": "delete",
     "path": "/Delete2",
   },
-]
-`;
-
-exports[`Methods decorators should add Methods metadata to a class when decorated with @Delete 4`] = `
-Array [
-  [Function],
 ]
 `;
 
@@ -108,12 +96,6 @@ Array [
 ]
 `;
 
-exports[`Methods decorators should add Methods metadata to a class when decorated with @Get 4`] = `
-Array [
-  [Function],
-]
-`;
-
 exports[`Methods decorators should add Methods metadata to a class when decorated with @Head 1`] = `
 Object {
   "json": false,
@@ -143,12 +125,6 @@ Array [
     "method": "head",
     "path": "/Head2",
   },
-]
-`;
-
-exports[`Methods decorators should add Methods metadata to a class when decorated with @Head 4`] = `
-Array [
-  [Function],
 ]
 `;
 
@@ -184,12 +160,6 @@ Array [
 ]
 `;
 
-exports[`Methods decorators should add Methods metadata to a class when decorated with @Patch 4`] = `
-Array [
-  [Function],
-]
-`;
-
 exports[`Methods decorators should add Methods metadata to a class when decorated with @Post 1`] = `
 Object {
   "json": false,
@@ -222,12 +192,6 @@ Array [
 ]
 `;
 
-exports[`Methods decorators should add Methods metadata to a class when decorated with @Post 4`] = `
-Array [
-  [Function],
-]
-`;
-
 exports[`Methods decorators should add Methods metadata to a class when decorated with @Put 1`] = `
 Object {
   "json": false,
@@ -257,12 +221,6 @@ Array [
     "method": "put",
     "path": "/Put2",
   },
-]
-`;
-
-exports[`Methods decorators should add Methods metadata to a class when decorated with @Put 4`] = `
-Array [
-  [Function],
 ]
 `;
 
@@ -300,11 +258,5 @@ Array [
     "method": "bar",
     "path": "foo",
   },
-]
-`;
-
-exports[`Methods decorators should add method metadata to a class when decorated with @httpMethod 4`] = `
-Array [
-  [Function],
 ]
 `;

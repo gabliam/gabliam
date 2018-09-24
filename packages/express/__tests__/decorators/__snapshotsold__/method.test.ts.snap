@@ -1,0 +1,310 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @All 1`] = `
+Object {
+  "json": false,
+  "path": "/test",
+}
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @All 2`] = `
+Object {
+  "type": "ControllerType",
+  "value": Object {
+    "id": [Function],
+    "target": [Function],
+  },
+}
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @All 3`] = `
+Array [
+  Object {
+    "key": "test",
+    "method": "all",
+    "path": "/All",
+  },
+  Object {
+    "key": "test2",
+    "method": "all",
+    "path": "/All2",
+  },
+]
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @All 4`] = `
+Array [
+  [Function],
+]
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Delete 1`] = `
+Object {
+  "json": false,
+  "path": "/test",
+}
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Delete 2`] = `
+Object {
+  "type": "ControllerType",
+  "value": Object {
+    "id": [Function],
+    "target": [Function],
+  },
+}
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Delete 3`] = `
+Array [
+  Object {
+    "key": "test",
+    "method": "delete",
+    "path": "/Delete",
+  },
+  Object {
+    "key": "test2",
+    "method": "delete",
+    "path": "/Delete2",
+  },
+]
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Delete 4`] = `
+Array [
+  [Function],
+]
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Get 1`] = `
+Object {
+  "json": false,
+  "path": "/test",
+}
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Get 2`] = `
+Object {
+  "type": "ControllerType",
+  "value": Object {
+    "id": [Function],
+    "target": [Function],
+  },
+}
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Get 3`] = `
+Array [
+  Object {
+    "key": "test",
+    "method": "get",
+    "path": "/Get",
+  },
+  Object {
+    "key": "test2",
+    "method": "get",
+    "path": "/Get2",
+  },
+]
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Get 4`] = `
+Array [
+  [Function],
+]
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Head 1`] = `
+Object {
+  "json": false,
+  "path": "/test",
+}
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Head 2`] = `
+Object {
+  "type": "ControllerType",
+  "value": Object {
+    "id": [Function],
+    "target": [Function],
+  },
+}
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Head 3`] = `
+Array [
+  Object {
+    "key": "test",
+    "method": "head",
+    "path": "/Head",
+  },
+  Object {
+    "key": "test2",
+    "method": "head",
+    "path": "/Head2",
+  },
+]
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Head 4`] = `
+Array [
+  [Function],
+]
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Patch 1`] = `
+Object {
+  "json": false,
+  "path": "/test",
+}
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Patch 2`] = `
+Object {
+  "type": "ControllerType",
+  "value": Object {
+    "id": [Function],
+    "target": [Function],
+  },
+}
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Patch 3`] = `
+Array [
+  Object {
+    "key": "test",
+    "method": "patch",
+    "path": "/Patch",
+  },
+  Object {
+    "key": "test2",
+    "method": "patch",
+    "path": "/Patch2",
+  },
+]
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Patch 4`] = `
+Array [
+  [Function],
+]
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Post 1`] = `
+Object {
+  "json": false,
+  "path": "/test",
+}
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Post 2`] = `
+Object {
+  "type": "ControllerType",
+  "value": Object {
+    "id": [Function],
+    "target": [Function],
+  },
+}
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Post 3`] = `
+Array [
+  Object {
+    "key": "test",
+    "method": "post",
+    "path": "/Post",
+  },
+  Object {
+    "key": "test2",
+    "method": "post",
+    "path": "/Post2",
+  },
+]
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Post 4`] = `
+Array [
+  [Function],
+]
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Put 1`] = `
+Object {
+  "json": false,
+  "path": "/test",
+}
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Put 2`] = `
+Object {
+  "type": "ControllerType",
+  "value": Object {
+    "id": [Function],
+    "target": [Function],
+  },
+}
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Put 3`] = `
+Array [
+  Object {
+    "key": "test",
+    "method": "put",
+    "path": "/Put",
+  },
+  Object {
+    "key": "test2",
+    "method": "put",
+    "path": "/Put2",
+  },
+]
+`;
+
+exports[`Methods decorators should add Methods metadata to a class when decorated with @Put 4`] = `
+Array [
+  [Function],
+]
+`;
+
+exports[`Methods decorators should add method metadata to a class when decorated with @httpMethod 1`] = `
+Object {
+  "json": false,
+  "path": "/test",
+}
+`;
+
+exports[`Methods decorators should add method metadata to a class when decorated with @httpMethod 2`] = `
+Object {
+  "type": "ControllerType",
+  "value": Object {
+    "id": [Function],
+    "target": [Function],
+  },
+}
+`;
+
+exports[`Methods decorators should add method metadata to a class when decorated with @httpMethod 3`] = `
+Array [
+  Object {
+    "key": "test",
+    "method": "get",
+    "path": "foo",
+  },
+  Object {
+    "key": "test2",
+    "method": "foo",
+    "path": "bar",
+  },
+  Object {
+    "key": "test3",
+    "method": "bar",
+    "path": "foo",
+  },
+]
+`;
+
+exports[`Methods decorators should add method metadata to a class when decorated with @httpMethod 4`] = `
+Array [
+  [Function],
+]
+`;

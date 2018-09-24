@@ -7,9 +7,9 @@ import {
   Patch,
   Head,
   Delete,
-  Method
-} from '../../src/index';
-import * as e from 'express';
+  Method,
+} from '@gabliam/web-core';
+import { express as e } from '../../src';
 import { ExpressPluginTest } from '../express-plugin-test';
 import * as supertest from 'supertest';
 import { Config, Bean } from '@gabliam/core';
@@ -40,7 +40,7 @@ describe('Integration Tests:', () => {
         appTest.addClass(TestController);
         appTest.addConf('rest.test', {
           base: '/test',
-          get: '/'
+          get: '/',
         });
         appTest.addClass(TestController);
         await appTest.build();
@@ -275,7 +275,7 @@ describe('Integration Tests:', () => {
           custom() {
             return () =>
               e.Router({
-                caseSensitive: true
+                caseSensitive: true,
               });
           }
         }

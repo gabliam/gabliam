@@ -5,15 +5,7 @@ import {
   ValueExtractor,
   VALUE_EXTRACTOR,
 } from '@gabliam/core';
-import * as EscapeHtml from 'escape-html';
-import {
-  APP,
-  DEFAULT_PARAM_VALUE,
-  METADATA_KEY,
-  PARAMETER_TYPE,
-  TYPE,
-  WEB_PLUGIN_CONFIG,
-} from './constants';
+import { APP, METADATA_KEY, TYPE, WEB_PLUGIN_CONFIG } from './constants';
 import {
   ControllerMetadata,
   ControllerMethodMetadata,
@@ -22,14 +14,20 @@ import {
   ParameterMetadata,
   WebConfigMetadata,
 } from './decorators';
-import { GabContext } from './gab-context';
-import { PluginConfig, RestMetadata } from './plugin-config';
+import { MethodInfo, WebPluginConfig, RestMetadata } from './plugin-config';
 import { cleanPath } from './utils';
-import { ValidationError } from './validate-request';
+import {
+  getValidateInterceptor,
+  ValidateInterceptor,
+} from './validate-interceptor';
 import { WebConfiguration } from './web-configuration';
 
 export abstract class WebPluginBase {
-  abstract bindApp(container: Container, registry: Registry, app: Symbol): void;
+  abstract bindApp(
+    container: Container,
+    registry: Registry,
+    webConfiguration: WebConfiguration
+  ): void;
 
   abstract buildControllers(
     restMetadata: RestMetadata,
@@ -44,15 +42,19 @@ export abstract class WebPluginBase {
    * @param  {Registry} registry
    */
   bind(container: Container, registry: Registry) {
-    this.bindApp(container, registry, APP);
     registry.get(TYPE.Controller).forEach(({ id, target }) =>
       container
         .bind<any>(id)
         .to(target)
         .inSingletonScope()
     );
-
-    container.bind(WebConfiguration).toConstantValue(new WebConfiguration());
+    container
+      .bind(ValidateInterceptor)
+      .to(ValidateInterceptor)
+      .inSingletonScope();
+    const webConfiguration = new WebConfiguration();
+    container.bind(WebConfiguration).toConstantValue(webConfiguration);
+    this.bindApp(container, registry, webConfiguration);
   }
 
   build(container: Container, registry: Registry) {
@@ -117,75 +119,6 @@ export abstract class WebPluginBase {
 
   abstract stop(container: Container, registry: Registry): gabliamValue<void>;
 
-  protected getValidateError(err: ValidationError) {
-    const error: any = {
-      statusCode: 400,
-      error: 'Bad Request',
-      message: err.message,
-      validation: {
-        source: err._meta.source,
-        keys: [],
-      },
-    };
-
-    if (err.details) {
-      for (let i = 0; i < err.details.length; i += 1) {
-        /* istanbul ignore next */
-        const path: string = Array.isArray(err.details[i].path)
-          ? err.details[i].path.join('.')
-          : (err.details[i].path as any);
-        error.validation.keys.push(EscapeHtml(path));
-      }
-    }
-  }
-
-  protected extractParameters<T>(
-    target: any,
-    key: string,
-    ctx: GabContext,
-    next: T,
-    params: ParameterMetadata[]
-  ): any[] {
-    const args = [];
-    if (!params || !params.length) {
-      return [ctx.request, ctx.response, next];
-    }
-
-    // create de param getter
-    const getParam = this.getFuncParam(target, key);
-    for (const item of params) {
-      switch (item.type) {
-        case PARAMETER_TYPE.CONTEXT:
-        default:
-          args[item.index] = ctx;
-          break; // response
-        case PARAMETER_TYPE.REQUEST:
-          args[item.index] = getParam(ctx.request, null, item);
-          break;
-        case PARAMETER_TYPE.NEXT:
-          args[item.index] = next;
-          break;
-        case PARAMETER_TYPE.PARAMS:
-          args[item.index] = getParam(ctx, 'params', item);
-          break;
-        case PARAMETER_TYPE.QUERY:
-          args[item.index] = getParam(ctx.request, 'query', item);
-          break;
-        case PARAMETER_TYPE.BODY:
-          args[item.index] = getParam(ctx.request, 'body', item);
-          break;
-        case PARAMETER_TYPE.HEADERS:
-          args[item.index] = getParam(ctx.request, 'headers', item);
-          break;
-        case PARAMETER_TYPE.COOKIES:
-          args[item.index] = getParam(ctx, 'cookies', item, true);
-          break;
-      }
-    }
-
-    return args;
-  }
-
   /**
    * Build express middleware
    *
@@ -222,13 +155,13 @@ export abstract class WebPluginBase {
    * @param  {Registry} registry
    */
   private extractControllerMetadata(container: Container, registry: Registry) {
-    const restConfig = container.get<PluginConfig>(WEB_PLUGIN_CONFIG);
+    const restConfig = container.get<WebPluginConfig>(WEB_PLUGIN_CONFIG);
     const valueExtractor = container.get<ValueExtractor>(VALUE_EXTRACTOR);
 
     const controllerIds = registry.get(TYPE.Controller);
     const restMetadata: RestMetadata = {
       ...restConfig,
-      controllers: [],
+      controllerInfo: new Map(),
     };
 
     controllerIds.forEach(({ id: controllerId }) => {
@@ -255,6 +188,17 @@ export abstract class WebPluginBase {
       );
       // if the controller has controllerMetadata and methodMetadatas
       if (controllerMetadata && methodMetadatas) {
+        const controllerPath = valueExtractor(
+          controllerMetadata.path,
+          controllerMetadata.path
+        );
+
+        const methods: MethodInfo[] = [];
+
+        restMetadata.controllerInfo.set(controllerId, {
+          controllerPath,
+          methods,
+        });
         methodMetadatas.forEach((methodMetadata: ControllerMethodMetadata) => {
           let paramList: ParameterMetadata[] = [];
           if (parameterMetadata) {
@@ -274,12 +218,17 @@ export abstract class WebPluginBase {
             methodMetadata.key
           );
 
-          restMetadata.controllers.push({
+          methodInterceptors.interceptors.unshift(
+            getValidateInterceptor(container)
+          );
+
+          methods.push({
             controllerId,
             methodName: methodMetadata.key,
             json: controllerMetadata.json,
             paramList,
             methodPath,
+            method: methodMetadata.method,
             controllerInterceptors,
             methodInterceptors,
           });
@@ -288,48 +237,5 @@ export abstract class WebPluginBase {
     });
 
     return restMetadata;
-  }
-
-  private getFuncParam(target: any, key: string) {
-    return (
-      source: any,
-      paramType: string | null,
-      itemParam: ParameterMetadata,
-      getter = false
-    ) => {
-      const name = itemParam.parameterName;
-
-      // get the param source
-      let param = source;
-      if (paramType !== null && source[paramType]) {
-        param = source[paramType];
-      }
-
-      let res = getter ? param.get(name) : param[name];
-      if (res !== undefined) {
-        /**
-         * For query, all value sare considered to string value.
-         * If the query waits for a Number, we try to convert the value
-         */
-        if (paramType === 'query' || paramType === 'params') {
-          const type: Function[] = Reflect.getMetadata(
-            'design:paramtypes',
-            target,
-            key
-          );
-          if (Array.isArray(type) && type[itemParam.index]) {
-            try {
-              if (type[itemParam.index].name === 'Number') {
-                // parseFloat for compatibility with integer and float
-                res = Number.parseFloat(res);
-              }
-            } catch (e) {}
-          }
-        }
-        return res;
-      } else {
-        return name === DEFAULT_PARAM_VALUE ? param : undefined;
-      }
-    };
   }
 }

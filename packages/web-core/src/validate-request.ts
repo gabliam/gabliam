@@ -1,5 +1,6 @@
 import { Joi } from '@gabliam/core';
-import { ValidatorType, ValidationOptions } from './decorators';
+import * as EscapeHtml from 'escape-html';
+import { ValidationOptions, ValidatorType } from './decorators';
 
 export const NO_VALIDATION = Symbol('@gabliam/web-core/NO_VALIDATION');
 
@@ -35,4 +36,26 @@ export const createValidateRequest = (
   }
 
   return value;
+};
+
+export const getValidateError = (err: ValidationError) => {
+  const error: any = {
+    statusCode: 400,
+    error: 'Bad Request',
+    message: err.message,
+    validation: {
+      source: err._meta.source,
+      keys: [],
+    },
+  };
+
+  if (err.details) {
+    for (let i = 0; i < err.details.length; i += 1) {
+      /* istanbul ignore next */
+      const path: string = Array.isArray(err.details[i].path)
+        ? err.details[i].path.join('.')
+        : (err.details[i].path as any);
+      error.validation.keys.push(EscapeHtml(path));
+    }
+  }
 };

@@ -1,5 +1,6 @@
-import { Container, inversifyInterfaces, gabliamValue } from '@gabliam/core';
+import { Container, gabliamValue, inversifyInterfaces } from '@gabliam/core';
 import { METADATA_KEY } from '../constants';
+import { ParameterMetadata, getParameterMetadata } from './params';
 
 export type InterceptorMetadata = inversifyInterfaces.ServiceIdentifier<any>;
 
@@ -7,113 +8,24 @@ export type InterceptorMetadata = inversifyInterfaces.ServiceIdentifier<any>;
  * Interceptor
  */
 export interface Interceptor {
-  intercept(): gabliamValue<void>;
-  intercept<T1>(a1: T1): gabliamValue<void>;
-  intercept<T1, T2>(a1: T1, a2: T2): gabliamValue<void>;
-  intercept<T1, T2, T3>(a1: T1, a2: T2, a3: T3): gabliamValue<void>;
-  intercept<T1, T2, T3, T4>(a1: T1, a2: T2, a3: T3, a4: T4): gabliamValue<void>;
-  intercept<T1, T2, T3, T4, T5>(
-    a1: T1,
-    a2: T2,
-    a3: T3,
-    a4: T4,
-    a5: T5
-  ): gabliamValue<void>;
-  intercept<T1, T2, T3, T4, T5, T6>(
-    a1: T1,
-    a2: T2,
-    a3: T3,
-    a4: T4,
-    a5: T5,
-    a6: T6
-  ): gabliamValue<void>;
-  intercept<T1, T2, T3, T4, T5, T6, T7>(
-    a1: T1,
-    a2: T2,
-    a3: T3,
-    a4: T4,
-    a5: T5,
-    a6: T6,
-    a7: T7
-  ): gabliamValue<void>;
-  intercept<T1, T2, T3, T4, T5, T6, T7, T8>(
-    a1: T1,
-    a2: T2,
-    a3: T3,
-    a4: T4,
-    a5: T5,
-    a6: T6,
-    a7: T7,
-    a8: T8
-  ): gabliamValue<void>;
-  intercept<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
-    a1: T1,
-    a2: T2,
-    a3: T3,
-    a4: T4,
-    a5: T5,
-    a6: T6,
-    a7: T7,
-    a8: T8,
-    a9: T9
-  ): gabliamValue<void>;
-
-  afterResponse(): gabliamValue<void>;
-  afterResponse<T1>(a1: T1): gabliamValue<void>;
-  afterResponse<T1, T2>(a1: T1, a2: T2): gabliamValue<void>;
-  afterResponse<T1, T2, T3>(a1: T1, a2: T2, a3: T3): gabliamValue<void>;
-  afterResponse<T1, T2, T3, T4>(
-    a1: T1,
-    a2: T2,
-    a3: T3,
-    a4: T4
-  ): gabliamValue<void>;
-  afterResponse<T1, T2, T3, T4, T5>(
-    a1: T1,
-    a2: T2,
-    a3: T3,
-    a4: T4,
-    a5: T5
-  ): gabliamValue<void>;
-  afterResponse<T1, T2, T3, T4, T5, T6>(
-    a1: T1,
-    a2: T2,
-    a3: T3,
-    a4: T4,
-    a5: T5,
-    a6: T6
-  ): gabliamValue<void>;
-  afterResponse<T1, T2, T3, T4, T5, T6, T7>(
-    a1: T1,
-    a2: T2,
-    a3: T3,
-    a4: T4,
-    a5: T5,
-    a6: T6,
-    a7: T7
-  ): gabliamValue<void>;
-  afterResponse<T1, T2, T3, T4, T5, T6, T7, T8>(
-    a1: T1,
-    a2: T2,
-    a3: T3,
-    a4: T4,
-    a5: T5,
-    a6: T6,
-    a7: T7,
-    a8: T8
-  ): gabliamValue<void>;
-  afterResponse<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
-    a1: T1,
-    a2: T2,
-    a3: T3,
-    a4: T4,
-    a5: T5,
-    a6: T6,
-    a7: T7,
-    a8: T8,
-    a9: T9
-  ): gabliamValue<void>;
+  intercept(...args: any[]): gabliamValue<any>;
 }
+
+export interface AfterResponseInterceptor {
+  afterResponse(...args: any[]): gabliamValue<any>;
+}
+
+export function isInterceptor(value: any): value is Interceptor {
+  return value && typeof value.intercept === 'function';
+}
+
+export function isAfterResponseInterceptor(
+  value: any
+): value is AfterResponseInterceptor {
+  return value && typeof value.afterResponse === 'function';
+}
+
+export type InterceptorMethod = keyof (AfterResponseInterceptor & Interceptor);
 
 /**
  * Interceptor decorator
@@ -184,6 +96,20 @@ export function addInterceptorMetadata(
   metadataList.push(...interceptors);
 }
 
+export const createInterceptorResolver = (container: Container) =>
+  function interceptorResolver(
+    interceptor: InterceptorMetadata
+  ): AfterResponseInterceptor | Interceptor {
+    try {
+      // test if the interceptor is a ServiceIdentifier
+      return container.get(<inversifyInterfaces.ServiceIdentifier<any>>(
+        interceptor
+      ));
+    } catch (e) {
+      return new (<any>interceptor)();
+    }
+  };
+
 /**
  * Get interceptors metadata.
  * If key is undefined, return the list of interceptors for a class (target)
@@ -197,7 +123,7 @@ export function getInterceptors(
   container: Container,
   target: Object,
   key?: string
-): Interceptor[] {
+): Interceptors {
   let metadataList: InterceptorMetadata[] = [];
   if (Reflect.hasOwnMetadata(METADATA_KEY.interceptor, target, key!)) {
     metadataList = Reflect.getOwnMetadata(
@@ -207,23 +133,44 @@ export function getInterceptors(
     );
   }
 
-  /**
-   * resolve a interceptor
-   * @param interceptor
-   */
-  function resolveInterceptor(interceptor: InterceptorMetadata): Interceptor {
-    try {
-      // test if the interceptor is a ServiceIdentifier
-      return container.get<Interceptor>(<
-        inversifyInterfaces.ServiceIdentifier<any>
-      >interceptor);
-    } catch (e) {
-      return <Interceptor>(<any>interceptor);
+  const interceptorResolver = createInterceptorResolver(container);
+
+  const interceptors: InterceptorInfo<Interceptor>[] = [];
+  const afterResponseInterceptors: InterceptorInfo<
+    AfterResponseInterceptor
+  >[] = [];
+
+  for (const metadata of metadataList) {
+    const interceptor = interceptorResolver(metadata);
+
+    if (isInterceptor(interceptor)) {
+      interceptors.push({
+        instance: interceptor,
+        paramList: getParameterMetadata(interceptor, 'intercept'),
+      });
+    }
+
+    if (isAfterResponseInterceptor(interceptor)) {
+      afterResponseInterceptors.push({
+        instance: interceptor,
+        paramList: getParameterMetadata(interceptor, 'afterResponse'),
+      });
     }
   }
 
-  return metadataList.reduce<Interceptor[]>((prev, metadata) => {
-    prev.push(resolveInterceptor(metadata));
-    return prev;
-  }, []);
+  return {
+    interceptors,
+    afterResponseInterceptors,
+  };
+}
+
+export interface InterceptorInfo<T> {
+  instance: T;
+
+  paramList: ParameterMetadata[];
+}
+
+export interface Interceptors {
+  interceptors: InterceptorInfo<Interceptor>[];
+  afterResponseInterceptors: InterceptorInfo<AfterResponseInterceptor>[];
 }

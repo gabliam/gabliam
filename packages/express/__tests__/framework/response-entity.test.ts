@@ -1,5 +1,4 @@
-import { Controller, RestController, Get } from '../../src/index';
-import * as e from 'express';
+import { express as e } from '../../src';
 import { ExpressPluginTest } from '../express-plugin-test';
 import * as supertest from 'supertest';
 import {
@@ -8,7 +7,10 @@ import {
   accepted,
   badRequest,
   noContent,
-  notFound
+  notFound,
+  Controller,
+  RestController,
+  Get,
 } from '@gabliam/web-core';
 import * as HttpStatus from 'http-status-codes';
 

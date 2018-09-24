@@ -5,7 +5,7 @@ import { Container } from '@gabliam/core';
  *
  * For configure application
  */
-export type ConfigFunction<T> = (app: T, container: Container) => void;
+export type ConfigFunction<T = any> = (app: T, container: Container) => void;
 
 /**
  * Configuration

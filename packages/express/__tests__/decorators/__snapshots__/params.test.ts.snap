@@ -6,46 +6,46 @@ Map {
     Object {
       "index": 0,
       "parameterName": "id",
-      "type": 2,
+      "type": 4,
     },
     Object {
       "index": 1,
       "parameterName": "cat",
-      "type": 3,
+      "type": 5,
     },
     Object {
       "index": 2,
       "parameterName": "**$$DEFAULT_PARAM_VALUE$$**",
-      "type": 0,
+      "type": 2,
     },
     Object {
       "index": 3,
       "parameterName": "**$$DEFAULT_PARAM_VALUE$$**",
-      "type": 1,
+      "type": 3,
     },
   ],
   "test2" => Array [
     Object {
       "index": 0,
       "parameterName": "dog",
-      "type": 4,
+      "type": 6,
     },
   ],
   "test3" => Array [
     Object {
       "index": 0,
       "parameterName": "Auth",
-      "type": 5,
+      "type": 7,
     },
     Object {
       "index": 1,
       "parameterName": "**$$DEFAULT_PARAM_VALUE$$**",
-      "type": 6,
+      "type": 8,
     },
     Object {
       "index": 2,
       "parameterName": "**$$DEFAULT_PARAM_VALUE$$**",
-      "type": 7,
+      "type": 9,
     },
   ],
 }

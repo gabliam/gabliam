@@ -1,8 +1,9 @@
 import { alias } from 'property-tunnel';
+import { Cookie } from './cookies';
 import { GabRequest } from './gab-request';
 import { GabResponse } from './gab-response';
 
-export class GabContext<T = any> {
+export class GabContext<T = any, U = any> {
   /**
    * Return request header.
    */
@@ -315,5 +316,9 @@ export class GabContext<T = any> {
   @alias(['response', 'append'])
   append: (field: string, val: string | string[]) => void;
 
-  constructor(public request: GabRequest<T>, public response: GabResponse<T>) {}
+  constructor(
+    public request: GabRequest<T>,
+    public response: GabResponse<U>,
+    public cookies: Cookie
+  ) {}
 }

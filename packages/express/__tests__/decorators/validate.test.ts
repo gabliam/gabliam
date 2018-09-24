@@ -1,5 +1,10 @@
-import { Validate, Controller, Get } from '../../src';
-import { METADATA_KEY, ValidateMetadata } from '@gabliam/web-core';
+import {
+  Validate,
+  Controller,
+  Get,
+  METADATA_KEY,
+  ValidateMetadata,
+} from '@gabliam/web-core';
 
 describe('Validate decorator', () => {
   test('should add Validate metadata to a method when decorated with @Validate', () => {
@@ -7,7 +12,7 @@ describe('Validate decorator', () => {
     class TestController {
       @Get(`/`)
       @Validate({
-        body: [5]
+        body: [5],
       })
       test() {
         return '';
@@ -28,8 +33,8 @@ describe('Validate decorator', () => {
       @Get(`/`)
       @Validate({
         validator: {
-          body: [5]
-        }
+          body: [5],
+        },
       })
       test() {
         return;
@@ -51,10 +56,10 @@ describe('Validate decorator', () => {
       class TestController {
         @Get(`/`)
         @Validate({
-          body: [5]
+          body: [5],
         })
         @Validate({
-          body: [5]
+          body: [5],
         })
         test() {
           return;

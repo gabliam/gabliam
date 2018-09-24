@@ -1,0 +1,54 @@
+{
+  "name": "@gabliam/web-core",
+  "version": "7.10.0",
+  "description": "Gabliam plugin for add web-core",
+  "keywords": [
+    "gabliam",
+    "gabliam-plugin",
+    "plugin",
+    "web-core",
+    "rest"
+  ],
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "module": "lib/index.js",
+  "scripts": {
+    "build": "rimraf lib && tsc -p tsconfig.build.json"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabliam/gabliam.git"
+  },
+  "author": "David Touzet <dtouzet@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gabliam/gabliam/issues"
+  },
+  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/web-core#readme",
+  "peerDependencies": {
+    "@gabliam/core": "^7.2.0"
+  },
+  "devDependencies": {
+<<<<<<< HEAD
+    "@gabliam/core": "^7.10.0",
+=======
+    "@gabliam/core": "7.9.4",
+    "@types/cookies": "^0.7.1",
+>>>>>>> before upgrade mac osx ><
+    "@types/escape-html": "^0.0.20"
+  },
+  "dependencies": {
+    "cookies": "^0.7.2",
+    "escape-html": "^1.0.3",
+    "http-status-codes": "^1.2.0",
+    "property-tunnel": "^1.2.2",
+    "tslib": "^1.9.3"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  }
+}

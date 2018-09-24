@@ -1,4 +1,4 @@
-export interface GabRequest<T> {
+export interface GabRequest<T = any> {
   /**
    * Return the original request
    */
@@ -6,16 +6,6 @@ export interface GabRequest<T> {
 
   // body
   body: object;
-
-  /**
-   * return rawBody
-   */
-  rawBody: string;
-
-  /**
-   * Cookies
-   */
-  cookies: any;
 
   /**
    * Request headers
@@ -216,7 +206,7 @@ export interface GabRequest<T> {
    *     this.get('Something');
    *     // => undefined
    */
-  get(field: string): string;
+  get(field: string): string | undefined;
 
   /**
    * Check if the incoming request contains the "Content-Type"

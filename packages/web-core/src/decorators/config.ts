@@ -1,5 +1,5 @@
-import { ERRORS_MSGS, METADATA_KEY } from '../constants';
 import { inversifyInterfaces } from '@gabliam/core';
+import { ERRORS_MSGS, METADATA_KEY } from '../constants';
 
 /**
  * Web Config Metadata

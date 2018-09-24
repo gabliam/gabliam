@@ -1,8 +1,8 @@
-import { Controller, RestController } from '../../src/decorators';
 import {
+  Controller,
+  RestController,
   ControllerMetadata,
-  MiddlewareMetadata,
-  METADATA_KEY
+  METADATA_KEY,
 } from '@gabliam/web-core';
 import { RegistryMetada } from '@gabliam/core/lib/interfaces';
 import { METADATA_KEY as CORE_METADATA_KEY } from '@gabliam/core/lib/constants';
@@ -27,15 +27,9 @@ describe('Controller decorator', () => {
   });
 
   test('should add Controller metadata to a class when decorated with @Controller(ControllerOptions)', async () => {
-    const middlewares = [
-      function() {
-        return;
-      }
-    ];
     @Controller({
       name: 'TestControllerName',
       path: '/test',
-      middlewares
     })
     class TestController {}
 
@@ -52,25 +46,13 @@ describe('Controller decorator', () => {
     );
 
     expect(registryMetadata).toMatchSnapshot();
-
-    const middlewareMetadata: MiddlewareMetadata<
-      any
-    >[] = Reflect.getOwnMetadata(METADATA_KEY.middleware, TestController);
-
-    expect(middlewareMetadata).toMatchSnapshot();
   });
 
   test('should fail when decorated multiple times the same class with @Controller', () => {
     expect(function() {
-      const middlewares = [
-        function() {
-          return;
-        }
-      ];
       @Controller({
         name: 'TestControllerName',
         path: '/test2',
-        middlewares
       })
       @Controller('/test')
       class TestConfig {}
@@ -100,15 +82,9 @@ describe('RestController decorator', () => {
   });
 
   test('should add Controller metadata to a class when decorated with @RestController(ControllerOptions)', async () => {
-    const middlewares = [
-      function() {
-        return;
-      }
-    ];
     @RestController({
       name: 'TestControllerName',
       path: '/test',
-      middlewares
     })
     class TestController {}
 
@@ -125,25 +101,13 @@ describe('RestController decorator', () => {
     );
 
     expect(registryMetadata).toMatchSnapshot();
-
-    const middlewareMetadata: MiddlewareMetadata<
-      any
-    >[] = Reflect.getOwnMetadata(METADATA_KEY.middleware, TestController);
-
-    expect(middlewareMetadata).toMatchSnapshot();
   });
 
   test('should fail when decorated multiple times the same class with @RestController', () => {
     expect(function() {
-      const middlewares = [
-        function() {
-          return;
-        }
-      ];
       @RestController({
         name: 'TestControllerName',
         path: '/test2',
-        middlewares
       })
       @RestController('/test')
       class TestConfig {}

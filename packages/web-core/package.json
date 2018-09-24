@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/web-core",
-  "version": "7.10.0",
+  "version": "7.9.4",
   "description": "Gabliam plugin for add web-core",
   "keywords": [
     "gabliam",
@@ -33,10 +33,12 @@
     "@gabliam/core": "^7.2.0"
   },
   "devDependencies": {
-    "@gabliam/core": "^7.10.0",
+    "@gabliam/core": "7.9.4",
+    "@types/cookies": "^0.7.1",
     "@types/escape-html": "^0.0.20"
   },
   "dependencies": {
+    "cookies": "^0.7.2",
     "escape-html": "^1.0.3",
     "http-status-codes": "^1.2.0",
     "property-tunnel": "^1.2.2",

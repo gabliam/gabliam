@@ -1,5 +1,5 @@
-import { METADATA_KEY, ERRORS_MSGS } from '../constants';
 import { Joi } from '@gabliam/core';
+import { ERRORS_MSGS, METADATA_KEY } from '../constants';
 
 export function isValidatorOptions(value: any): value is ValidatorOptions {
   return typeof value === 'object' && value.hasOwnProperty('validator');

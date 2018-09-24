@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ExpressConfig decorator should add ExpressConfig metadata to a class when decorated with @ExpressConfig 1`] = `
+exports[`WebConfig decorator should add WebConfig metadata to a class when decorated with @WebConfig 1`] = `
 Array [
   Object {
     "id": "TestConfig",
@@ -15,7 +15,7 @@ Array [
 ]
 `;
 
-exports[`ExpressConfig decorator should add ExpressConfig metadata to a class when decorated with @ExpressConfig(order) 1`] = `
+exports[`WebConfig decorator should add WebConfig metadata to a class when decorated with @WebConfig(order) 1`] = `
 Array [
   Object {
     "id": "TestConfig",
@@ -30,7 +30,7 @@ Array [
 ]
 `;
 
-exports[`ExpressErrorConfig decorator should add ExpressErrorConfig metadata to a class when decorated with @ExpressErrorConfig 1`] = `
+exports[`WebConfigAfterControllers decorator should add WebConfigAfterControllers metadata to a class when decorated with @WebConfigAfterControllers 1`] = `
 Array [
   Object {
     "id": "TestConfig",
@@ -45,7 +45,7 @@ Array [
 ]
 `;
 
-exports[`ExpressErrorConfig decorator should add ExpressErrorConfig metadata to a class when decorated with @ExpressErrorConfig(order) 1`] = `
+exports[`WebConfigAfterControllers decorator should add WebConfigAfterControllers metadata to a class when decorated with @WebConfigAfterControllers(order) 1`] = `
 Array [
   Object {
     "id": "TestConfig",

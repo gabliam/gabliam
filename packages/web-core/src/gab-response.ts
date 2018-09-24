@@ -1,4 +1,4 @@
-export interface GabResponse<T> {
+export interface GabResponse<T = any> {
   readonly originalResponse: T;
 
   /**
@@ -9,12 +9,12 @@ export interface GabResponse<T> {
   /**
    * Get/Set response status code.
    */
-  status: number;
+  status: number | undefined;
 
   /**
    * Get/Set response status message
    */
-  message: string;
+  message: string | undefined;
 
   /**
    * Get/Set response body.

@@ -1,10 +1,10 @@
 import {
   Controller,
   Get,
-  ExpressConfig,
-  ExpressErrorConfig
-} from '../../src/index';
-import * as e from 'express';
+  WebConfig,
+  WebConfigAfterControllers,
+} from '@gabliam/web-core';
+import { express as e } from '../../src';
 import { ExpressPluginTest } from '../express-plugin-test';
 import * as supertest from 'supertest';
 import { Config } from '@gabliam/core';
@@ -42,7 +42,7 @@ const middleware: any = {
   ) {
     result += 'd';
     nextFunc(error);
-  }
+  },
 };
 const spyA = sinon.spy(middleware, 'a');
 const spyB = sinon.spy(middleware, 'b');
@@ -75,7 +75,7 @@ test('@ExpressConfig', async () => {
 
   @Config()
   class ServerConfig {
-    @ExpressConfig()
+    @WebConfig()
     serverConfig(app: e.Application) {
       app.use(spyA);
       app.use(spyB);
@@ -108,17 +108,17 @@ test('@ExpressConfig Order', async () => {
 
   @Config()
   class ServerConfig {
-    @ExpressConfig(150)
+    @WebConfig(150)
     serverConfigC(app: e.Application) {
       app.use(spyC);
     }
 
-    @ExpressConfig(100)
+    @WebConfig(100)
     serverConfigB(app: e.Application) {
       app.use(spyB);
     }
 
-    @ExpressConfig(50)
+    @WebConfig(50)
     serverConfigA(app: e.Application) {
       app.use(spyA);
     }
@@ -149,7 +149,7 @@ test('ErrorConfig', async () => {
 
   @Config()
   class ServerConfig {
-    @ExpressErrorConfig()
+    @WebConfigAfterControllers()
     serverConfig(app: e.Application) {
       app.use(spyE);
     }
@@ -178,12 +178,12 @@ test('ErrorConfig order', async () => {
 
   @Config()
   class ServerConfig {
-    @ExpressErrorConfig(100)
+    @WebConfigAfterControllers(100)
     serverConfig(app: e.Application) {
       app.use(spyE);
     }
 
-    @ExpressErrorConfig(50)
+    @WebConfigAfterControllers(50)
     serverConfigD(app: e.Application) {
       app.use(spyD);
     }

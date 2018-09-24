@@ -1,10 +1,10 @@
 import { Gabliam } from '@gabliam/core';
 import { GabliamTest } from '@gabliam/core/lib/testing';
-import * as e from 'express';
-import ExpressPlugin, { APP } from '../src/index';
+import { APP } from '@gabliam/web-core';
+import ExpressPlugin, { express as e } from '../src/index';
 
 export class ExpressPluginTest extends GabliamTest {
-  public app!: e.Application;
+  public app: e.Application;
 
   constructor() {
     const gab = new Gabliam().addPlugin(ExpressPlugin);

@@ -1,126 +1,63 @@
 import {
-  Scan,
-  Registry,
-  Plugin,
   Container,
   GabliamPlugin,
-  ValueExtractor,
-  VALUE_EXTRACTOR,
+  Plugin,
+  Registry,
+  Scan,
+  toPromise,
 } from '@gabliam/core';
 import {
-  EXPRESS_PLUGIN_CONFIG,
+  AfterResponseInterceptor,
   APP,
-  SERVER,
-  CUSTOM_ROUTER_CREATOR,
-} from './constants';
-import {
-  TYPE,
-  METADATA_KEY,
-  PARAMETER_TYPE,
-  DEFAULT_PARAM_VALUE,
-  getMiddlewares,
-  ResponseEntity,
-  ConfigMetadata,
-  ControllerMetadata,
-  ControllerMethodMetadata,
-  ControllerParameterMetadata,
-  ParameterMetadata,
   cleanPath,
-  ValidateMetadata,
-  listParamToValidate,
-  createValidateRequest,
-  NO_VALIDATION,
-  isValidateError,
+  ExecutionContext,
+  extractParameters,
+  Interceptor,
+  InterceptorInfo,
+  ResponseEntity,
+  RestMetadata,
+  SERVER,
+  WebConfiguration,
+  WebPluginBase,
+  WebPluginConfig,
+  WEB_PLUGIN_CONFIG,
 } from '@gabliam/web-core';
-import { ExpressPluginConfig, RouterCreator } from './interfaces';
 import * as d from 'debug';
 import * as http from 'http';
-import { MiddlewareConfig, ExpressMiddlewareConfig } from './middlewares';
+import { CUSTOM_ROUTER_CREATOR } from './constants';
 import { express } from './express';
-import * as EscapeHtml from 'escape-html';
+import { RouterCreator } from './interfaces';
+import {
+  addContextMiddleware,
+  addMiddlewares,
+  valideErrorMiddleware,
+} from './middleware';
+import { getContext } from './utils';
 
 const debug = d('Gabliam:Plugin:ExpressPlugin');
 
 @Plugin('ExpressPlugin')
 @Scan()
-export class ExpressPlugin implements GabliamPlugin {
-  /**
-   * binding phase
-   *
-   * Bind all controller and bind express app
-   * @param  {Container} container
-   * @param  {Registry} registry
-   */
-  bind(container: Container, registry: Registry) {
+export class ExpressPlugin extends WebPluginBase implements GabliamPlugin {
+  bindApp(
+    container: Container,
+    registry: Registry,
+    webConfiguration: WebConfiguration
+  ): void {
     container.bind(APP).toConstantValue(express());
-    registry.get(TYPE.Controller).forEach(({ id, target }) =>
-      container
-        .bind<any>(id)
-        .to(target)
-        .inSingletonScope()
-    );
+    webConfiguration.addwebConfig({
+      instance: addMiddlewares,
+      order: 0,
+    });
 
-    container.bind(MiddlewareConfig).toConstantValue(new MiddlewareConfig());
-  }
-
-  build(container: Container, registry: Registry) {
-    this.buildExpressConfig(container, registry);
-    this.buildControllers(container, registry);
-    this.addValidateErrorMiddleware(container);
-    this.buildExpressErrorConfig(container, registry);
-  }
-
-  /**
-   * Management of @middleware decorator in config class
-   *
-   * @param  {Container} container
-   * @param  {Registry} registry
-   * @param  {any} confInstance
-   */
-  config(container: Container, registry: Registry, confInstance: any) {
-    const middlewareConfig = container.get<ExpressMiddlewareConfig>(
-      MiddlewareConfig
-    );
-
-    // if config class has a @middleware decorator, add in this.middlewares for add it in building phase
-    if (
-      Reflect.hasMetadata(
-        METADATA_KEY.MiddlewareConfig,
-        confInstance.constructor
-      )
-    ) {
-      const metadataList: ConfigMetadata[] = Reflect.getOwnMetadata(
-        METADATA_KEY.MiddlewareConfig,
-        confInstance.constructor
-      );
-
-      metadataList.forEach(({ key, order }) => {
-        middlewareConfig.addMiddleware({
-          order,
-          instance: confInstance[key].bind(confInstance[key]),
-        });
-      });
-    }
-
-    // if config class has a @middleware decorator, add in this.errorMiddlewares for add it in building phase
-    if (
-      Reflect.hasMetadata(
-        METADATA_KEY.MiddlewareErrorConfig,
-        confInstance.constructor
-      )
-    ) {
-      const metadataList: ConfigMetadata[] = Reflect.getOwnMetadata(
-        METADATA_KEY.MiddlewareErrorConfig,
-        confInstance.constructor
-      );
-
-      metadataList.forEach(({ key, order }) => {
-        middlewareConfig.addErrorMiddleware({
-          order,
-          instance: confInstance[key].bind(confInstance[key]),
-        });
-      });
-    }
+    webConfiguration.addwebConfig({
+      instance: addContextMiddleware,
+      order: 1,
+    });
+    webConfiguration.addWebConfigAfterCtrl({
+      instance: valideErrorMiddleware,
+      order: 0,
+    });
   }
 
   async destroy(container: Container, registry: Registry) {
@@ -138,9 +75,7 @@ export class ExpressPlugin implements GabliamPlugin {
   }
 
   async start(container: Container, registry: Registry) {
-    const restConfig = container.get<ExpressPluginConfig>(
-      EXPRESS_PLUGIN_CONFIG
-    );
+    const restConfig = container.get<WebPluginConfig>(WEB_PLUGIN_CONFIG);
     const app = container.get<express.Application>(APP);
     const port = restConfig.port;
     app.set('port', port);
@@ -179,51 +114,8 @@ export class ExpressPlugin implements GabliamPlugin {
     }
   }
 
-  /**
-   * Build express middleware
-   *
-   * @param  {Container} container
-   * @param  {Registry} registry
-   */
-  private buildExpressConfig(container: Container, registry: Registry) {
-    const middlewareConfig = container.get<ExpressMiddlewareConfig>(
-      MiddlewareConfig
-    );
+  buildControllers(restMetadata: RestMetadata, container: Container): void {
     const app = container.get<express.Application>(APP);
-    middlewareConfig.middlewares
-      .sort((a, b) => a.order - b.order)
-      .forEach(({ instance }) => instance(app));
-  }
-
-  /**
-   * Build express error middleware
-   *
-   * @param  {Container} container
-   * @param  {Registry} registry
-   */
-  private buildExpressErrorConfig(container: Container, registry: Registry) {
-    const middlewareConfig = container.get<ExpressMiddlewareConfig>(
-      MiddlewareConfig
-    );
-
-    const app = container.get<express.Application>(APP);
-    middlewareConfig.errorMiddlewares
-      .sort((a, b) => a.order - b.order)
-      .forEach(({ instance }) => instance(app));
-  }
-
-  /**
-   * Build all controllers
-   *
-   * @param  {Container} container
-   * @param  {Registry} registry
-   */
-  private buildControllers(container: Container, registry: Registry) {
-    const restConfig = container.get<ExpressPluginConfig>(
-      EXPRESS_PLUGIN_CONFIG
-    );
-
-    const valueExtractor = container.get<ValueExtractor>(VALUE_EXTRACTOR);
 
     // get the router creator
     let routerCreator: RouterCreator = () => express.Router();
@@ -231,195 +123,94 @@ export class ExpressPlugin implements GabliamPlugin {
       routerCreator = container.get<RouterCreator>(CUSTOM_ROUTER_CREATOR);
     } catch (e) {}
 
-    debug('registerControllers', TYPE.Controller);
-    const controllerIds = registry.get(TYPE.Controller);
-    controllerIds.forEach(({ id: controllerId }) => {
+    for (const [
+      controllerId,
+      { methods, controllerPath },
+    ] of restMetadata.controllerInfo) {
       const controller = container.get<object>(controllerId);
+      const router = routerCreator();
+      const routerPath = cleanPath(`${restMetadata.rootPath}${controllerPath}`);
 
-      const controllerMetadata: ControllerMetadata = Reflect.getOwnMetadata(
-        METADATA_KEY.controller,
-        controller.constructor
-      );
+      debug(`New route : "${routerPath}"`);
 
-      const controllerMiddlewares = getMiddlewares(
-        container,
-        controller.constructor
-      );
+      for (const methodInfo of methods) {
+        const execCtx = new ExecutionContext(controller, methodInfo);
 
-      const methodMetadatas: ControllerMethodMetadata[] = Reflect.getOwnMetadata(
-        METADATA_KEY.controllerMethod,
-        controller.constructor
-      );
+        // create handler
+        const handler: express.RequestHandler = this.handlerFactory(execCtx);
 
-      const parameterMetadata: ControllerParameterMetadata = Reflect.getOwnMetadata(
-        METADATA_KEY.controllerParameter,
-        controller.constructor
-      );
-      // if the controller has controllerMetadata and methodMetadatas
-      if (controllerMetadata && methodMetadatas) {
-        const router = routerCreator();
-        const controllerPath = valueExtractor(
-          controllerMetadata.path,
-          controllerMetadata.path
+        // register handler in router
+        (router as any)[methodInfo.method](
+          methodInfo.methodPath,
+          ...methodInfo.controllerInterceptors.interceptors.map(i =>
+            this.interceptorToMiddleware(execCtx, i, 'intercept')
+          ),
+          ...methodInfo.methodInterceptors.interceptors.map(i =>
+            this.interceptorToMiddleware(execCtx, i, 'intercept')
+          ),
+          handler,
+          ...methodInfo.methodInterceptors.afterResponseInterceptors.map(i =>
+            this.interceptorToMiddleware(execCtx, i, 'afterResponse')
+          ),
+          ...methodInfo.controllerInterceptors.afterResponseInterceptors.map(
+            i => this.interceptorToMiddleware(execCtx, i, 'afterResponse')
+          )
         );
-        const routerPath = cleanPath(`${restConfig.rootPath}${controllerPath}`);
-
-        debug(`New route : "${routerPath}"`);
-
-        methodMetadatas.forEach((methodMetadata: ControllerMethodMetadata) => {
-          let paramList: ParameterMetadata[] = [];
-          if (parameterMetadata) {
-            paramList = parameterMetadata.get(methodMetadata.key) || [];
-          }
-          let methodMetadataPath = cleanPath(
-            valueExtractor(methodMetadata.path, methodMetadata.path)
-          );
-          if (methodMetadataPath[0] !== '/') {
-            methodMetadataPath = '/' + methodMetadataPath;
-          }
-          const methodMiddlewares = getMiddlewares(
-            container,
-            controller.constructor,
-            methodMetadata.key
-          );
-
-          this.constructValidateMiddleware(
-            methodMiddlewares,
-            controller.constructor,
-            methodMetadata.key
-          );
-
-          debug(methodMetadataPath);
-          debug({ methodMiddlewares, controllerMiddlewares });
-          // create handler
-          const handler: express.RequestHandler = this.handlerFactory(
-            container,
-            controllerId,
-            methodMetadata.key,
-            controllerMetadata.json,
-            paramList
-          );
-
-          // register handler in router
-          (router as any)[methodMetadata.method](
-            methodMetadataPath,
-            ...controllerMiddlewares,
-            ...methodMiddlewares,
-            handler
-          );
-        });
-        const app = container.get<express.Application>(APP);
-        app.use(routerPath, router);
       }
-    });
-  }
-
-  /**
-   * Add Error Middleware for send an error
-   */
-  private addValidateErrorMiddleware(container: Container) {
-    const app = container.get<express.Application>(APP);
-    app.use(
-      (
-        err: any,
-        req: express.Request,
-        res: express.Response,
-        next: express.NextFunction
-      ) => {
-        if (isValidateError(err)) {
-          const error: any = {
-            statusCode: 400,
-            error: 'Bad Request',
-            message: err.message,
-            validation: {
-              source: err._meta.source,
-              keys: [],
-            },
-          };
-
-          if (err.details) {
-            for (let i = 0; i < err.details.length; i += 1) {
-              /* istanbul ignore next */
-              const path = Array.isArray(err.details[i].path)
-                ? err.details[i].path.join('.')
-                : err.details[i].path;
-              error.validation.keys.push(EscapeHtml(path));
-            }
-          }
-          return res.status(400).send(error);
-        }
-
-        // If this isn't a Valide error, send it to the next error handler
-        return next(err);
-      }
-    );
-  }
-
-  /**
-   * Construct Validate Middleware for a method
-   */
-  private constructValidateMiddleware(
-    methodMiddlewares: {}[],
-    target: Object,
-    key: string
-  ) {
-    if (!Reflect.hasOwnMetadata(METADATA_KEY.validate, target, key)) {
-      return;
+      app.use(routerPath, router);
     }
-
-    const metadata: ValidateMetadata = Reflect.getOwnMetadata(
-      METADATA_KEY.validate,
-      target,
-      key
-    );
-    const validateRequest = createValidateRequest(
-      metadata.rules,
-      metadata.validationOptions
-    );
-
-    const middleware = (
-      req: express.Request,
-      res: express.Response,
-      next: express.NextFunction
-    ) => {
-      for (const paramToValidate of listParamToValidate) {
-        try {
-          const val = validateRequest(paramToValidate, req[paramToValidate]);
-          if (val !== NO_VALIDATION) {
-            req[paramToValidate] = val;
-          }
-        } catch (err) {
-          return next(err);
-        }
-      }
-      next();
-    };
-
-    // add validate middleware on top of middleware
-    methodMiddlewares.unshift(middleware);
   }
-
-  private handlerFactory(
-    container: Container,
-    controllerId: any,
-    key: string,
-    json: boolean,
-    parameterMetadata: ParameterMetadata[]
+  private interceptorToMiddleware<
+    T extends Interceptor | AfterResponseInterceptor,
+    U extends keyof T
+  >(
+    execCtx: ExecutionContext,
+    { instance, paramList }: InterceptorInfo<T>,
+    type: U
   ): express.RequestHandler {
     return async (
       req: express.Request,
       res: express.Response,
       next: express.NextFunction
     ) => {
-      const controller = container.get<any>(controllerId);
-      // extract all args
-      const args = this.extractParameters(
-        controller,
-        key,
-        req,
-        res,
+      const args = extractParameters(
+        instance,
+        type,
+        execCtx,
+        getContext(req),
         next,
-        parameterMetadata
+        paramList
+      );
+
+      try {
+        await toPromise((instance[type] as any)(...args));
+        next();
+      } catch (err) {
+        next(err);
+      }
+    };
+  }
+
+  private handlerFactory(execCtx: ExecutionContext): express.RequestHandler {
+    return async (
+      req: express.Request,
+      res: express.Response,
+      next: express.NextFunction
+    ) => {
+      const ctx = getContext(req);
+      const methodInfo = execCtx.getMethodInfo();
+      const controller = execCtx.getClass();
+
+      (req as any).jsonHandler = methodInfo.json;
+
+      // extract all args
+      const args = extractParameters(
+        controller,
+        methodInfo.methodName,
+        execCtx,
+        ctx,
+        next,
+        methodInfo.paramList
       );
 
       // response handler if the result is a ResponseEntity
@@ -433,113 +224,46 @@ export class ExpressPlugin implements GabliamPlugin {
       }
 
       try {
-        const result: any = await Promise.resolve(controller[key](...args));
-        if (result !== undefined && !res.headersSent) {
-          if (result instanceof ResponseEntity) {
-            responseEntityHandler(result);
-          } else if (json) {
-            res.json(result);
-          } else {
-            if (typeof result === 'string' || typeof result === 'object') {
-              res.send(result);
+        const result: any = await Promise.resolve(
+          controller[methodInfo.methodName](...args)
+        );
+        if (!res.headersSent) {
+          if (result !== undefined) {
+            if (result instanceof ResponseEntity) {
+              responseEntityHandler(result);
+            } else if (methodInfo.json) {
+              res.json(result);
             } else {
-              res.send(result !== undefined ? '' + result : undefined);
+              if (typeof result === 'string' || typeof result === 'object') {
+                res.send(result);
+              } else {
+                res.send(result !== undefined ? '' + result : undefined);
+              }
+            }
+          } else {
+            const { status, message, body, type } = ctx;
+            if (type) {
+              res.type(type);
+            }
+            if (message) {
+              res.statusMessage = message;
+            }
+
+            if (status) {
+              res.status(status);
+            }
+
+            if (body) {
+              if (methodInfo.json) {
+                res.json(body);
+              } else {
+                res.send(body);
+              }
             }
           }
         }
       } catch (err) {
         next(err);
-      }
-    };
-  }
-
-  private extractParameters(
-    target: any,
-    key: string,
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction,
-    params: ParameterMetadata[]
-  ): any[] {
-    const args = [];
-    if (!params || !params.length) {
-      return [req, res, next];
-    }
-
-    // create de param getter
-    const getParam = this.getFuncParam(target, key);
-
-    for (const item of params) {
-      switch (item.type) {
-        case PARAMETER_TYPE.REQUEST:
-          args[item.index] = getParam(req, null, item);
-          break;
-        case PARAMETER_TYPE.NEXT:
-          args[item.index] = next;
-          break;
-        case PARAMETER_TYPE.PARAMS:
-          args[item.index] = getParam(req, 'params', item);
-          break;
-        case PARAMETER_TYPE.QUERY:
-          args[item.index] = getParam(req, 'query', item);
-          break;
-        case PARAMETER_TYPE.BODY:
-          args[item.index] = getParam(req, 'body', item);
-          break;
-        case PARAMETER_TYPE.HEADERS:
-          args[item.index] = getParam(req, 'headers', item);
-          break;
-        case PARAMETER_TYPE.COOKIES:
-          args[item.index] = getParam(req, 'cookies', item);
-          break;
-        default:
-          args[item.index] = res;
-          break; // response
-      }
-    }
-    args.push(req, res, next);
-    return args;
-  }
-
-  private getFuncParam(target: any, key: string) {
-    return (
-      source: any,
-      paramType: string | null,
-      itemParam: ParameterMetadata
-    ) => {
-      const name = itemParam.parameterName;
-
-      // get the param source
-      let param = source;
-      if (paramType !== null && source[paramType]) {
-        param = source[paramType];
-      }
-
-      let res = param[name];
-
-      if (res !== undefined) {
-        /**
-         * For query, all values are considered to string value.
-         * If the query waits for a Number, we try to convert the value
-         */
-        if (paramType === 'query' || paramType === 'params') {
-          const type: Function[] = Reflect.getMetadata(
-            'design:paramtypes',
-            target,
-            key
-          );
-          if (Array.isArray(type) && type[itemParam.index]) {
-            try {
-              if (type[itemParam.index].name === 'Number') {
-                // parseFloat for compatibility with integer and float
-                res = Number.parseFloat(res);
-              }
-            } catch (e) {}
-          }
-        }
-        return res;
-      } else {
-        return name === DEFAULT_PARAM_VALUE ? param : undefined;
       }
     };
   }

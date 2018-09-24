@@ -1,49 +1,53 @@
-import { ExpressConfig, ExpressErrorConfig } from '../../src/decorators';
-import { ConfigMetadata, METADATA_KEY } from '@gabliam/web-core';
+import {
+  WebConfig,
+  WebConfigAfterControllers,
+  WebConfigMetadata,
+  METADATA_KEY,
+} from '@gabliam/web-core';
 
-describe('ExpressConfig decorator', () => {
-  test('should add ExpressConfig metadata to a class when decorated with @ExpressConfig', () => {
+describe('WebConfig decorator', () => {
+  test('should add WebConfig metadata to a class when decorated with @WebConfig', () => {
     class TestConfig {
-      @ExpressConfig()
+      @WebConfig()
       testMethod() {}
 
-      @ExpressConfig()
+      @WebConfig()
       test2Method() {}
     }
 
-    const expressConfigMetadata: ConfigMetadata[] = Reflect.getMetadata(
-      METADATA_KEY.MiddlewareConfig,
+    const webConfigMetadata: WebConfigMetadata[] = Reflect.getMetadata(
+      METADATA_KEY.webConfig,
       TestConfig
     );
 
-    expect(expressConfigMetadata).toMatchSnapshot();
+    expect(webConfigMetadata).toMatchSnapshot();
   });
 
-  test('should add ExpressConfig metadata to a class when decorated with @ExpressConfig(order)', () => {
+  test('should add WebConfig metadata to a class when decorated with @WebConfig(order)', () => {
     class TestConfig {
-      @ExpressConfig(50)
+      @WebConfig(50)
       testMethod() {}
 
-      @ExpressConfig(100)
+      @WebConfig(100)
       test2Method() {}
     }
 
-    const expressConfigMetadata: ConfigMetadata[] = Reflect.getMetadata(
-      METADATA_KEY.MiddlewareConfig,
+    const webConfigMetadata: WebConfigMetadata[] = Reflect.getMetadata(
+      METADATA_KEY.webConfig,
       TestConfig
     );
 
-    expect(expressConfigMetadata).toMatchSnapshot();
+    expect(webConfigMetadata).toMatchSnapshot();
   });
 
-  test('should fail when decorated multiple times the same method with @ExpressConfig', () => {
+  test('should fail when decorated multiple times the same method with @WebConfig', () => {
     expect(function() {
       class TestConfig {
-        @ExpressConfig()
-        @ExpressConfig(50)
+        @WebConfig()
+        @WebConfig(50)
         testMethod() {}
 
-        @ExpressConfig(100)
+        @WebConfig(100)
         test2Method() {}
       }
       // tslint:disable-next-line:no-unused-expression
@@ -52,49 +56,49 @@ describe('ExpressConfig decorator', () => {
   });
 });
 
-describe('ExpressErrorConfig decorator', () => {
-  test('should add ExpressErrorConfig metadata to a class when decorated with @ExpressErrorConfig', () => {
+describe('WebConfigAfterControllers decorator', () => {
+  test('should add WebConfigAfterControllers metadata to a class when decorated with @WebConfigAfterControllers', () => {
     class TestConfig {
-      @ExpressErrorConfig()
+      @WebConfigAfterControllers()
       testMethod() {}
 
-      @ExpressErrorConfig()
+      @WebConfigAfterControllers()
       test2Method() {}
     }
 
-    const expressErrorConfigMetadata: ConfigMetadata[] = Reflect.getMetadata(
-      METADATA_KEY.MiddlewareErrorConfig,
+    const webConfigAfterControllersMetadata: WebConfigMetadata[] = Reflect.getMetadata(
+      METADATA_KEY.webConfigAfterControllers,
       TestConfig
     );
 
-    expect(expressErrorConfigMetadata).toMatchSnapshot();
+    expect(webConfigAfterControllersMetadata).toMatchSnapshot();
   });
 
-  test('should add ExpressErrorConfig metadata to a class when decorated with @ExpressErrorConfig(order)', () => {
+  test('should add WebConfigAfterControllers metadata to a class when decorated with @WebConfigAfterControllers(order)', () => {
     class TestConfig {
-      @ExpressErrorConfig(50)
+      @WebConfigAfterControllers(50)
       testMethod() {}
 
-      @ExpressErrorConfig(100)
+      @WebConfigAfterControllers(100)
       test2Method() {}
     }
 
-    const expressErrorConfigMetadata: ConfigMetadata[] = Reflect.getMetadata(
-      METADATA_KEY.MiddlewareErrorConfig,
+    const webConfigAfterControllersMetadata: WebConfigMetadata[] = Reflect.getMetadata(
+      METADATA_KEY.webConfigAfterControllers,
       TestConfig
     );
 
-    expect(expressErrorConfigMetadata).toMatchSnapshot();
+    expect(webConfigAfterControllersMetadata).toMatchSnapshot();
   });
 
-  test('should fail when decorated multiple times the same method with @ExpressErrorConfig', () => {
+  test('should fail when decorated multiple times the same method with @WebConfigAfterControllers', () => {
     expect(function() {
       class TestConfig {
-        @ExpressErrorConfig()
-        @ExpressErrorConfig(50)
+        @WebConfigAfterControllers()
+        @WebConfigAfterControllers(50)
         testMethod() {}
 
-        @ExpressErrorConfig(100)
+        @WebConfigAfterControllers(100)
         test2Method() {}
       }
       // tslint:disable-next-line:no-unused-expression

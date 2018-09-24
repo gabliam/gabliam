@@ -46,6 +46,7 @@
     "@types/express": "^4.16.0",
     "express": "^4.16.2",
     "http-status-codes": "^1.2.0",
+    "property-tunnel": "^1.2.2",
     "tslib": "^1.9.3"
   },
   "engines": {

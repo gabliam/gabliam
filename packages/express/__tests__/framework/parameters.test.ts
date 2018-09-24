@@ -7,14 +7,12 @@ import {
   QueryParam,
   Post,
   RequestBody,
-  ExpressConfig,
+  WebConfig,
   RequestHeaders,
   Cookies,
-  Next
-} from '../../src/index';
-import * as bodyParser from 'body-parser';
-import * as cookieParser from 'cookie-parser';
-import * as e from 'express';
+  Next,
+} from '@gabliam/web-core';
+import { express as e } from '../../src';
 import { ExpressPluginTest } from '../express-plugin-test';
 import * as supertest from 'supertest';
 import { Config } from '@gabliam/core';
@@ -170,16 +168,7 @@ describe('Parameters:', () => {
       }
     }
 
-    @Config()
-    class ServerConfig {
-      @ExpressConfig()
-      serverConfig(app: e.Application) {
-        app.use(bodyParser.json());
-      }
-    }
-
     appTest.addClass(TestController);
-    appTest.addClass(ServerConfig);
     await appTest.build();
     const response = await supertest(appTest.app)
       .post('/')
@@ -223,20 +212,7 @@ describe('Parameters:', () => {
       }
     }
 
-    @Config()
-    class ServerConfig {
-      @ExpressConfig()
-      serverConfig(app: e.Application) {
-        app.use(cookieParser());
-        app.use(function(req, res, nextFunc) {
-          res.cookie('cookie', 'hey');
-          nextFunc();
-        });
-      }
-    }
-
     appTest.addClass(TestController);
-    appTest.addClass(ServerConfig);
     await appTest.build();
     const response = await supertest(appTest.app)
       .get('/')

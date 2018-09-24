@@ -1,14 +1,14 @@
 import {
-  PARAMETER_TYPE,
-  METADATA_KEY,
   DEFAULT_PARAM_VALUE,
+  METADATA_KEY,
+  PARAMETER_TYPE,
 } from '../constants';
 
 /**
  * Represent all parameters metadata for a controller
  */
 export type ControllerParameterMetadata = Map<
-  string | symbol,
+  string | symbol | number,
   ParameterMetadata[]
 >;
 
@@ -31,6 +31,13 @@ export interface ParameterMetadata {
    */
   type: PARAMETER_TYPE;
 }
+
+/**
+ * Exec context decorator
+ *
+ * Binds a method parameter to the execution context.
+ */
+export const ExecContext = paramDecoratorFactory(PARAMETER_TYPE.EXEC_CONTEXT);
 
 /**
  * Context decorator
@@ -165,4 +172,26 @@ export function Params(
       target.constructor
     );
   };
+}
+
+/**
+ * Get parameter metadata of method
+ */
+export function getParameterMetadata<T extends Object, U extends keyof T>(
+  target: T,
+  method: U
+) {
+  let paramList: ParameterMetadata[] = [];
+  if (target.constructor) {
+    const parameterMetadata: ControllerParameterMetadata = Reflect.getOwnMetadata(
+      METADATA_KEY.controllerParameter,
+      target.constructor
+    );
+
+    if (parameterMetadata) {
+      paramList = parameterMetadata.get(method) || [];
+    }
+  }
+
+  return paramList;
 }

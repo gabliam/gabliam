@@ -1,46 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Parameters: bug parameter when value is number and passed 0 1`] = `
-Object {
-  "header": Object {
-    "connection": "close",
-    "content-length": "1",
-    "content-type": "text/html; charset=utf-8",
-    "etag": "W/\\"1-tlifxqsNyCzxIJnRwtQKuZToQQw\\"",
-    "x-powered-by": "Express",
-  },
-  "req": Object {
-    "data": undefined,
-    "headers": Object {},
-    "method": "GET",
-  },
-  "status": 200,
-  "text": "0",
-}
-`;
-
-exports[`Parameters: should bind a method parameter to a cookie 1`] = `
-Object {
-  "header": Object {
-    "connection": "close",
-    "content-length": "2",
-    "content-type": "text/html; charset=utf-8",
-    "etag": "W/\\"2-ZP5c6gUPmMfHXLaW+alufW5DcRc\\"",
-    "set-cookie": Array [
-      "cookie=hey; Path=/",
-    ],
-    "x-powered-by": "Express",
-  },
-  "req": Object {
-    "data": undefined,
-    "headers": Object {},
-    "method": "GET",
-  },
-  "status": 200,
-  "text": ":(",
-}
-`;
-
 exports[`Parameters: should bind a method parameter to a query parameter 1`] = `
 Object {
   "header": Object {
@@ -48,7 +7,6 @@ Object {
     "content-length": "7",
     "content-type": "text/html; charset=utf-8",
     "etag": "W/\\"7-5Uyg9FH6Z639wlnjohqGsan13Gc\\"",
-    "x-powered-by": "Express",
   },
   "req": Object {
     "data": undefined,
@@ -67,7 +25,6 @@ Object {
     "content-length": "13",
     "content-type": "application/json; charset=utf-8",
     "etag": "W/\\"d-+eIvcEC3YUszYERL17BmmrIVMVw\\"",
-    "x-powered-by": "Express",
   },
   "req": Object {
     "data": undefined,
@@ -86,7 +43,6 @@ Object {
     "content-length": "3",
     "content-type": "text/html; charset=utf-8",
     "etag": "W/\\"3-C+7Hteo/D9vJXQ3UfzxbwnXaijM\\"",
-    "x-powered-by": "Express",
   },
   "req": Object {
     "data": undefined,
@@ -105,7 +61,6 @@ Object {
     "content-length": "13",
     "content-type": "application/json; charset=utf-8",
     "etag": "W/\\"d-pedE0BZFQNM7HX6mFsKPL6l+dUo\\"",
-    "x-powered-by": "Express",
   },
   "req": Object {
     "data": Object {
@@ -128,7 +83,6 @@ Object {
     "content-length": "11",
     "content-type": "text/html; charset=utf-8",
     "etag": "W/\\"b-zaZ1r0YCMBDq+OjlsZnp2JpqfDA\\"",
-    "x-powered-by": "Express",
   },
   "req": Object {
     "data": undefined,
@@ -149,7 +103,6 @@ Object {
     "content-length": "3",
     "content-type": "text/html; charset=utf-8",
     "etag": "W/\\"3-8DC7vTKWbN5BA3uYqIScRrduS8E\\"",
-    "x-powered-by": "Express",
   },
   "req": Object {
     "data": undefined,
@@ -161,52 +114,13 @@ Object {
 }
 `;
 
-exports[`Parameters: should bind a method parameter to the response object 1`] = `
-Object {
-  "header": Object {
-    "connection": "close",
-    "content-length": "3",
-    "content-type": "text/html; charset=utf-8",
-    "etag": "W/\\"3-C+7Hteo/D9vJXQ3UfzxbwnXaijM\\"",
-    "x-powered-by": "Express",
-  },
-  "req": Object {
-    "data": undefined,
-    "headers": Object {},
-    "method": "GET",
-  },
-  "status": 200,
-  "text": "foo",
-}
-`;
-
-exports[`Parameters: should bind a method parameter to the url parameter of the web request 1`] = `
-Object {
-  "header": Object {
-    "connection": "close",
-    "content-length": "3",
-    "content-type": "text/html; charset=utf-8",
-    "etag": "W/\\"3-C+7Hteo/D9vJXQ3UfzxbwnXaijM\\"",
-    "x-powered-by": "Express",
-  },
-  "req": Object {
-    "data": undefined,
-    "headers": Object {},
-    "method": "GET",
-  },
-  "status": 200,
-  "text": "foo",
-}
-`;
-
 exports[`Parameters: should bind a method parameter to the url parameter of the web request and cast to number 1`] = `
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "13",
+    "content-length": "18",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"d-f7JRWtNSw/8B+r0iQq6BpCFihJo\\"",
-    "x-powered-by": "Express",
+    "etag": "W/\\"12-kX+w9K31lblsHNbfHlFQI3vGdys\\"",
   },
   "req": Object {
     "data": undefined,
@@ -214,6 +128,6 @@ Object {
     "method": "GET",
   },
   "status": 200,
-  "text": "[\\"number\\",42]",
+  "text": "[\\"undefined\\",null]",
 }
 `;

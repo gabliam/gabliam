@@ -1,5 +1,6 @@
-import { Get, Post } from '../../src/decorators';
 import {
+  Get,
+  Post,
   Request,
   Response,
   RequestParam,
@@ -9,19 +10,13 @@ import {
   Cookies,
   Next,
   ControllerParameterMetadata,
-  METADATA_KEY
+  METADATA_KEY,
 } from '@gabliam/web-core';
 
 describe('params decorators', () => {
   test('should add parameter metadata to a class when decorated with @params', () => {
-    const middleware = [
-      function() {
-        return;
-      }
-    ];
-
     class TestController {
-      @Get('/foo/:id', ...middleware)
+      @Get('/foo/:id')
       public test(
         @RequestParam('id') id: any,
         @QueryParam('cat') cat: any,
