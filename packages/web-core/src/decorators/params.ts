@@ -1,7 +1,7 @@
 import {
   PARAMETER_TYPE,
   METADATA_KEY,
-  DEFAULT_PARAM_VALUE
+  DEFAULT_PARAM_VALUE,
 } from '../constants';
 import { ControllerParameterMetadata, ParameterMetadata } from '../interfaces';
 
@@ -98,12 +98,12 @@ export function Params(
     propertyKey: string | symbol,
     parameterIndex: number
   ) {
-    let metadataList: ControllerParameterMetadata = {};
+    let metadataList: ControllerParameterMetadata;
     let parameterMetadataList: ParameterMetadata[] = [];
     const parameterMetadata: ParameterMetadata = {
       index: parameterIndex,
       parameterName: parameterName,
-      type: type
+      type: type,
     };
     if (
       !Reflect.hasOwnMetadata(
@@ -111,18 +111,18 @@ export function Params(
         target.constructor
       )
     ) {
-      parameterMetadataList.unshift(parameterMetadata);
+      metadataList = new Map();
     } else {
       metadataList = Reflect.getOwnMetadata(
         METADATA_KEY.controllerParameter,
         target.constructor
       );
-      if (metadataList.hasOwnProperty(propertyKey)) {
-        parameterMetadataList = metadataList[propertyKey];
+      if (metadataList.has(propertyKey)) {
+        parameterMetadataList = metadataList.get(propertyKey)!;
       }
-      parameterMetadataList.unshift(parameterMetadata);
     }
-    metadataList[propertyKey] = parameterMetadataList;
+    parameterMetadataList.unshift(parameterMetadata);
+    metadataList.set(propertyKey, parameterMetadataList);
     Reflect.defineMetadata(
       METADATA_KEY.controllerParameter,
       metadataList,

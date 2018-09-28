@@ -53,9 +53,10 @@ export interface Configuration<T> {
 /**
  * Represent all parameters metadata for a controller
  */
-export interface ControllerParameterMetadata {
-  [methodName: string]: ParameterMetadata[];
-}
+export type ControllerParameterMetadata = Map<
+  string | symbol,
+  ParameterMetadata[]
+>;
 
 /**
  * Parameter metadata

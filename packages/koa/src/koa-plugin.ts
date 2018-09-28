@@ -5,13 +5,13 @@ import {
   Container,
   GabliamPlugin,
   ValueExtractor,
-  VALUE_EXTRACTOR
+  VALUE_EXTRACTOR,
 } from '@gabliam/core';
 import {
   KOA_PLUGIN_CONFIG,
   APP,
   SERVER,
-  CUSTOM_ROUTER_CREATOR
+  CUSTOM_ROUTER_CREATOR,
 } from './constants';
 import { KoaPluginConfig, RouterCreator } from './interfaces';
 import {
@@ -26,7 +26,7 @@ import {
   ControllerMethodMetadata,
   ControllerParameterMetadata,
   ParameterMetadata,
-  cleanPath
+  cleanPath,
 } from '@gabliam/web-core';
 import * as d from 'debug';
 import * as http from 'http';
@@ -88,7 +88,7 @@ export class KoaPlugin implements GabliamPlugin {
       metadataList.forEach(({ key, order }) => {
         middlewareConfig.addMiddleware({
           order,
-          instance: confInstance[key].bind(confInstance[key])
+          instance: confInstance[key].bind(confInstance[key]),
         });
       });
     }
@@ -176,7 +176,7 @@ export class KoaPlugin implements GabliamPlugin {
     // get the router creator
     let routerCreator: RouterCreator = (prefix?: string) =>
       new koaRouter({
-        prefix
+        prefix,
       });
     try {
       routerCreator = container.get<RouterCreator>(CUSTOM_ROUTER_CREATOR);
@@ -227,7 +227,7 @@ export class KoaPlugin implements GabliamPlugin {
         methodMetadatas.forEach((methodMetadata: ControllerMethodMetadata) => {
           let paramList: ParameterMetadata[] = [];
           if (parameterMetadata) {
-            paramList = parameterMetadata[methodMetadata.key] || [];
+            paramList = parameterMetadata.get(methodMetadata.key) || [];
           }
           let methodMetadataPath = cleanPath(
             valueExtractor(methodMetadata.path, methodMetadata.path)

@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`params decorators should add parameter metadata to a class when decorated with @params 1`] = `
-Object {
-  "test": Array [
+Map {
+  "test" => Array [
     Object {
       "index": 0,
       "parameterName": "id",
@@ -24,14 +24,14 @@ Object {
       "type": 1,
     },
   ],
-  "test2": Array [
+  "test2" => Array [
     Object {
       "index": 0,
       "parameterName": "dog",
       "type": 4,
     },
   ],
-  "test3": Array [
+  "test3" => Array [
     Object {
       "index": 0,
       "parameterName": "Auth",

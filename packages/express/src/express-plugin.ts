@@ -269,7 +269,7 @@ export class ExpressPlugin implements GabliamPlugin {
         methodMetadatas.forEach((methodMetadata: ControllerMethodMetadata) => {
           let paramList: ParameterMetadata[] = [];
           if (parameterMetadata) {
-            paramList = parameterMetadata[methodMetadata.key] || [];
+            paramList = parameterMetadata.get(methodMetadata.key) || [];
           }
           let methodMetadataPath = cleanPath(
             valueExtractor(methodMetadata.path, methodMetadata.path)
