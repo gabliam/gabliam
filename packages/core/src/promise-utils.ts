@@ -58,7 +58,7 @@ export function toPromise<T = any>(
     return observableToPromise<T>(value);
   }
 
-  if ('function' !== typeof value && !isGenerator(value)) {
+  if (!isGenerator(value)) {
     return Promise.resolve<T>(value);
   }
   return co<T>(value);
