@@ -31,8 +31,8 @@
     "@gabliam/core": "^7.2.0"
   },
   "devDependencies": {
-    "@gabliam/cache": "7.10.0",
-    "@gabliam/core": "7.10.0",
+    "@gabliam/cache": "^7.10.0",
+    "@gabliam/core": "^7.10.0",
     "@types/debug": "^0.0.30",
     "@types/ioredis": "^3.2.12",
     "@types/node": "^10.5.2"

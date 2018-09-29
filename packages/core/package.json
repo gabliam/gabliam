@@ -13,7 +13,7 @@
     "src"
   ],
   "dependencies": {
-    "@gabliam/expression": "7.10.0",
+    "@gabliam/expression": "^7.10.0",
     "@types/joi": "^13.3.0",
     "caller": "^1.0.1",
     "co": "^4.6.0",
