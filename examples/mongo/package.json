@@ -1,6 +1,6 @@
 {
   "name": "mongo-sample",
-  "version": "7.9.5",
+  "version": "7.10.0",
   "private": true,
   "description": "sample with decorator",
   "scripts": {
@@ -18,10 +18,10 @@
   },
   "homepage": "https://github.com/gabliam/sample#readme",
   "dependencies": {
-    "@gabliam/core": "7.9.4",
-    "@gabliam/express": "7.9.4",
-    "@gabliam/mongoose": "7.9.4",
-    "@gabliam/web-core": "7.9.4",
+    "@gabliam/core": "7.10.0",
+    "@gabliam/express": "7.10.0",
+    "@gabliam/mongoose": "7.10.0",
+    "@gabliam/web-core": "7.10.0",
     "body-parser": "^1.18.3",
     "helmet": "^3.12.1",
     "reflect-metadata": "^0.1.9",
