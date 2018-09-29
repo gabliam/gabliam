@@ -1,17 +1,17 @@
 import {
+  Container,
   InjectContainer,
   INJECT_CONTAINER_KEY,
-  Container
 } from '@gabliam/core';
 import {
-  CacheOptions,
-  extractCacheInternalOptions,
   CacheConfig,
-  createCacheConfig
+  CacheOptions,
+  createCacheConfig,
+  extractCacheInternalOptions,
 } from './cache-options';
 
 export function CachePut(
-  value: string | string[] | CacheOptions
+  value?: string | string[] | CacheOptions
 ): MethodDecorator {
   return function(
     target: Object,
@@ -19,7 +19,7 @@ export function CachePut(
     descriptor: TypedPropertyDescriptor<any>
   ) {
     InjectContainer()(target.constructor);
-    const cacheInternalOptions = extractCacheInternalOptions(value);
+    const cacheInternalOptions = extractCacheInternalOptions(target, value);
     const method = descriptor.value;
     let cacheConfig: CacheConfig;
     descriptor.value = async function(...args: any[]) {

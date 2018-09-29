@@ -4,7 +4,7 @@ import {
   CacheManager,
   CachePut,
   SimpleCacheManager,
-  NoOpCache
+  NoOpCache,
 } from '../../src/index';
 import { Service } from '@gabliam/core';
 
@@ -27,7 +27,7 @@ describe('config test', () => {
 
   it('with config', async () => {
     appTest.addConf('application.cacheConfig', {
-      defaultCache: 'MemoryCache'
+      defaultCache: 'MemoryCache',
     });
     await appTest.build();
     const cacheManager = appTest.gab.container.get<CacheManager>(CACHE_MANAGER);
@@ -37,14 +37,14 @@ describe('config test', () => {
   describe('bad config', () => {
     it('bad defaultCache', async () => {
       appTest.addConf('application.cacheConfig', {
-        defaultCache: 'BadCache'
+        defaultCache: 'BadCache',
       });
       await expect(appTest.gab.buildAndStart()).rejects.toMatchSnapshot();
     });
 
     it('bad cacheManager', async () => {
       appTest.addConf('application.cacheConfig', {
-        cacheManager: 'BadCacheManager'
+        cacheManager: 'BadCacheManager',
       });
       await expect(appTest.gab.buildAndStart()).rejects.toMatchSnapshot();
     });
@@ -62,7 +62,7 @@ describe('integrations', () => {
     }
     appTest.addClass(TestService);
     appTest.addConf('application.cacheConfig', {
-      defaultCache: 'MemoryCache'
+      defaultCache: 'MemoryCache',
     });
     await appTest.build();
     const s = appTest.gab.container.get(TestService);
@@ -87,14 +87,18 @@ describe('integrations', () => {
     appTest.addClass(TestService);
     appTest.addConf('application.cacheConfig', {
       cacheManager: CustomCacheManager,
-      cacheMap: {
-        test: {
-          cache: 'MemoryCache'
+      groups: {
+        default: {
+          caches: {
+            test: {
+              cache: 'MemoryCache',
+            },
+            test2: {
+              cache: NoOpCache,
+            },
+          },
         },
-        test2: {
-          cache: NoOpCache
-        }
-      }
+      },
     });
     await appTest.build();
     const s = appTest.gab.container.get(TestService);

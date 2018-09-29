@@ -7,7 +7,7 @@ exports[`cache put cache args object 2`] = `"hi test"`;
 exports[`cache put cache args object 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -74,7 +74,7 @@ exports[`cache put cache condition + key 3`] = `"hi test"`;
 exports[`cache put cache condition + key 4`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -137,7 +137,7 @@ exports[`cache put cache condition + key 5`] = `"hi test"`;
 exports[`cache put cache condition + key 6`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -202,7 +202,7 @@ exports[`cache put cache condition 2`] = `"hi test"`;
 exports[`cache put cache condition 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -265,7 +265,7 @@ exports[`cache put cache condition 4`] = `"hi test"`;
 exports[`cache put cache condition 5`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -330,7 +330,7 @@ exports[`cache put cache key 2`] = `"hi test"`;
 exports[`cache put cache key 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -483,7 +483,7 @@ exports[`cache put cache key 4`] = `"hi test"`;
 exports[`cache put cache key 5`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -638,7 +638,7 @@ exports[`cache put cache key array 2`] = `"hi test"`;
 exports[`cache put cache key array 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -791,7 +791,7 @@ exports[`cache put cache key array 4`] = `"hi test"`;
 exports[`cache put cache key array 5`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -946,7 +946,7 @@ exports[`cache put cache muliple cachenames 2`] = `"hi test"`;
 exports[`cache put cache muliple cachenames 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -1007,7 +1007,7 @@ MemoryCache {
 exports[`cache put cache muliple cachenames 4`] = `
 MemoryCache {
   "name": "hi2",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -1070,7 +1070,7 @@ exports[`cache put cache muliple cachenames 5`] = `"hi test2"`;
 exports[`cache put cache muliple cachenames 6`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -1221,7 +1221,7 @@ MemoryCache {
 exports[`cache put cache muliple cachenames 7`] = `
 MemoryCache {
   "name": "hi2",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -1376,7 +1376,7 @@ exports[`cache put cache muliple cachenames 9`] = `"hi test"`;
 exports[`cache put cache muliple cachenames 10`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -1437,7 +1437,7 @@ MemoryCache {
 exports[`cache put cache muliple cachenames 11`] = `
 MemoryCache {
   "name": "hi2",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -1500,7 +1500,7 @@ exports[`cache put cache muliple cachenames 12`] = `"hi test2"`;
 exports[`cache put cache muliple cachenames 13`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -1651,7 +1651,7 @@ MemoryCache {
 exports[`cache put cache muliple cachenames 14`] = `
 MemoryCache {
   "name": "hi2",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -1808,7 +1808,7 @@ exports[`cache put cache unless + key + condition 3`] = `3`;
 exports[`cache put cache unless + key + condition 4`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -1871,7 +1871,7 @@ exports[`cache put cache unless + key + condition 5`] = `1`;
 exports[`cache put cache unless + key + condition 6`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -1936,7 +1936,7 @@ exports[`cache put cache unless + key 2`] = `2`;
 exports[`cache put cache unless + key 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -1999,7 +1999,7 @@ exports[`cache put cache unless + key 4`] = `1`;
 exports[`cache put cache unless + key 5`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -2064,7 +2064,7 @@ exports[`cache put cache unless 2`] = `2`;
 exports[`cache put cache unless 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -2127,7 +2127,7 @@ exports[`cache put cache unless 4`] = `1`;
 exports[`cache put cache unless 5`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -2192,7 +2192,7 @@ exports[`cache put errors error on condition 2`] = `"hi test test"`;
 exports[`cache put errors error on condition 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -2216,7 +2216,7 @@ exports[`cache put errors error on condition 4`] = `"hi test2 test2"`;
 exports[`cache put errors error on condition 5`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -2242,7 +2242,7 @@ exports[`cache put errors error on key 2`] = `"hi test test"`;
 exports[`cache put errors error on key 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -2266,7 +2266,7 @@ exports[`cache put errors error on key 4`] = `"hi test2 test2"`;
 exports[`cache put errors error on key 5`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -2292,7 +2292,7 @@ exports[`cache put simple cache 2`] = `"hi test test"`;
 exports[`cache put simple cache 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -2355,7 +2355,7 @@ exports[`cache put simple cache 4`] = `"hi test2 test2"`;
 exports[`cache put simple cache 5`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],

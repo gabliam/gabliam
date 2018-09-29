@@ -1,20 +1,21 @@
 import { Bean, InjectContainer, PluginConfig, Value, Joi } from '@gabliam/core';
 import { CACHE_MANAGER } from './constant';
-import { ConstructableCacheManager } from './cache-manager';
-import { ConstructableCache, Cache } from './cache';
+import { ConstructableCacheManager, CacheGroup } from './cache-manager';
+import { ConstructableCache } from './cache';
 import * as d from 'debug';
 import { SimpleCacheManager } from './simple-cache-manager';
 import {
   CachePgkNotInstalledError,
-  CacheManagerPgkNotInstalledError
+  CacheManagerPgkNotInstalledError,
 } from './error';
 import { MemoryCache, NoOpCache } from './caches';
+import * as _ from 'lodash';
 const debug = d('Gabliam:Plugin:CachePlugin');
 
 export interface PluginConfig {
   cacheManager: string | ConstructableCacheManager;
 
-  cacheMap: { [k: string]: PluginCacheConfig } | undefined;
+  groups: { [k: string]: PluginGroupConfig } | undefined;
 
   dynamic: boolean;
 
@@ -23,28 +24,42 @@ export interface PluginConfig {
   defaultOptionsCache?: Object;
 }
 
+export interface PluginGroupConfig {
+  defaultCache?: ConstructableCache;
+
+  defaultOptionsCache?: object;
+
+  caches: { [k: string]: PluginCacheConfig } | undefined;
+}
+
 export interface PluginCacheConfig {
-  cache: string | ConstructableCache;
+  cache?: string | ConstructableCache;
 
   options?: Object;
 }
 
 const stringOrClass = Joi.alternatives().try([Joi.string(), Joi.func()]);
 
+const cacheValidator = Joi.object({
+  cache: stringOrClass,
+  options: Joi.object(),
+});
+
 const pluginValidator = Joi.object().keys({
   cacheManager: stringOrClass.default('SimpleCacheManager'),
   dynamic: Joi.boolean().default(true),
-  cacheMap: Joi.object()
+  groups: Joi.object()
     .pattern(
       /.*/,
       Joi.object({
-        cache: stringOrClass.required(),
-        options: Joi.object()
+        defaultCache: stringOrClass,
+        defaultOptionsCache: Joi.object(),
+        caches: Joi.object().pattern(/.*/, cacheValidator),
       })
     )
     .default(undefined),
   defaultCache: stringOrClass.default('NoOpCache'),
-  defaultOptionsCache: Joi.object()
+  defaultOptionsCache: Joi.object(),
 });
 
 @InjectContainer()
@@ -58,13 +73,37 @@ export class CachePluginConfig {
     if (this.cacheConfig === undefined) {
       return this.createDefaultManager();
     }
-    const cacheMap = new Map<string, Cache>();
-    if (this.cacheConfig.cacheMap) {
-      for (const [cacheKey, { cache, options }] of Object.entries(
-        this.cacheConfig.cacheMap
-      )) {
-        const CacheConstruc = this.getCacheConstruct(cache);
-        cacheMap.set(cacheKey, new CacheConstruc(cacheKey, options));
+    const groups = new Map<string, CacheGroup>();
+    if (this.cacheConfig.groups) {
+      for (const [
+        groupKey,
+        { defaultCache, caches, defaultOptionsCache },
+      ] of Object.entries(this.cacheConfig.groups)) {
+        const groupCache: CacheGroup = {
+          defaultCache,
+          defaultOptionsCache,
+          caches: new Map(),
+        };
+
+        groups.set(groupKey, groupCache);
+        if (caches) {
+          for (const [cacheKey, { cache, options }] of Object.entries(caches)) {
+            const CacheConstruc = this.getCacheConstruct(
+              cache || defaultCache || this.cacheConfig.defaultCache
+            );
+            const cacheOptions = _.merge(
+              {},
+              this.cacheConfig.defaultOptionsCache || {},
+              defaultOptionsCache || {},
+              options || {}
+            );
+
+            groupCache.caches.set(
+              cacheKey,
+              new CacheConstruc(cacheKey, cacheOptions)
+            );
+          }
+        }
       }
     }
     const CacheManagerConstruct = this.getCacheManagerConstruct(
@@ -72,7 +111,7 @@ export class CachePluginConfig {
     );
 
     return new CacheManagerConstruct(
-      cacheMap,
+      groups,
       this.cacheConfig.dynamic,
       this.getCacheConstruct(this.cacheConfig.defaultCache),
       this.cacheConfig.defaultOptionsCache
@@ -120,6 +159,6 @@ export class CachePluginConfig {
 
   private createDefaultManager() {
     debug('Create Defaut cache Manager');
-    return new SimpleCacheManager(new Map<string, Cache>(), true);
+    return new SimpleCacheManager(new Map(), true);
   }
 }

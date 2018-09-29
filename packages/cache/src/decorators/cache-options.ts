@@ -1,9 +1,10 @@
-import { ExpressionParser, Expression } from '@gabliam/expression';
 import { Container } from '@gabliam/core';
-import { CacheManager } from '../cache-manager';
-import { CACHE_MANAGER } from '../constant';
-import { Cache } from '../cache';
+import { Expression, ExpressionParser } from '@gabliam/expression';
 import * as d from 'debug';
+import { Cache } from '../cache';
+import { CacheManager } from '../cache-manager';
+import { CACHE_MANAGER, METADATA_KEY } from '../constant';
+import { CacheNameIsMandatoryError } from '../error';
 const debug = d('Gabliam:Plugin:CachePlugin:CacheOptions');
 
 export type KeyGenerator = (...args: any[]) => string | undefined;
@@ -12,7 +13,7 @@ export interface CacheOptions {
   /**
    * names of caches
    */
-  cacheNames: string | string[];
+  cacheNames?: string | string[];
 
   /**
    * Key generator.
@@ -62,6 +63,8 @@ export function isCacheOptions(obj: any): obj is CacheOptions {
 }
 
 export interface CacheInternalOptions {
+  cacheGroup: string;
+
   cacheNames: string | string[];
 
   /**
@@ -97,22 +100,34 @@ export interface CacheInternalOptions {
   unless?: string;
 }
 
+const getCacheGroup = (target: Object) => {
+  return (
+    <string>Reflect.getMetadata(METADATA_KEY.cacheGroup, target.constructor) ||
+    'default'
+  );
+};
+
 export function extractCacheInternalOptions(
-  value: string | string[] | CacheOptions
+  target: Object,
+  value?: string | string[] | CacheOptions
 ): CacheInternalOptions {
+  const cacheGroup = getCacheGroup(target);
   const cacheNames: string[] = [];
   let keyGenerator = defaultKeyGenerator;
   let key: string | undefined;
   let condition: string | undefined;
   let unless: string | undefined;
+
   if (isCacheOptions(value)) {
-    if (Array.isArray(value.cacheNames)) {
-      cacheNames.push(...value.cacheNames);
-    } else {
-      cacheNames.push(value.cacheNames);
+    if (value.cacheNames) {
+      if (Array.isArray(value.cacheNames)) {
+        cacheNames.push(...value.cacheNames);
+      } else {
+        cacheNames.push(value.cacheNames);
+      }
     }
     ({ key, keyGenerator = defaultKeyGenerator, condition, unless } = value);
-  } else {
+  } else if (value) {
     if (Array.isArray(value)) {
       cacheNames.push(...value);
     } else {
@@ -120,12 +135,17 @@ export function extractCacheInternalOptions(
     }
   }
 
+  if (cacheNames.length === 0) {
+    throw new CacheNameIsMandatoryError();
+  }
+
   return {
     cacheNames,
+    cacheGroup,
     key,
     keyGenerator,
     condition,
-    unless
+    unless,
   };
 }
 
@@ -133,7 +153,13 @@ export async function createCacheConfig(
   container: Container,
   cacheInternalOptions: CacheInternalOptions
 ): Promise<CacheConfig> {
-  const { cacheNames, condition, key, unless } = cacheInternalOptions;
+  const {
+    cacheGroup,
+    cacheNames,
+    condition,
+    key,
+    unless,
+  } = cacheInternalOptions;
 
   let passCondition = (...vals: any[]) => true;
 
@@ -199,7 +225,7 @@ export async function createCacheConfig(
 
   const caches: Cache[] = [];
   for (const cacheName of cacheNames) {
-    const cache = await cacheManager.getCache(cacheName);
+    const cache = await cacheManager.getCache(cacheName, cacheGroup);
     if (cache) {
       caches.push(cache);
     }
@@ -209,7 +235,7 @@ export async function createCacheConfig(
     passCondition,
     extractArgs,
     caches,
-    veto
+    veto,
   };
 }
 

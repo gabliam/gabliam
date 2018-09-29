@@ -1,16 +1,16 @@
 import {
-  CacheOptions,
-  extractCacheInternalOptions,
-  CacheConfig,
-  createCacheConfig,
-  CacheInternalOptions
-} from './cache-options';
+  Container,
+  InjectContainer,
+  INJECT_CONTAINER_KEY,
+} from '@gabliam/core';
 import { Cache } from '../cache';
 import {
-  InjectContainer,
-  Container,
-  INJECT_CONTAINER_KEY
-} from '@gabliam/core';
+  CacheConfig,
+  CacheInternalOptions,
+  CacheOptions,
+  createCacheConfig,
+  extractCacheInternalOptions,
+} from './cache-options';
 
 export interface CacheEvictOptions extends CacheOptions {
   allEntries?: boolean;
@@ -29,7 +29,8 @@ function isCacheEvictOptions(obj: any): obj is CacheEvictOptions {
 }
 
 function extractCacheEvictInternalOptions(
-  value: string | string[] | CacheEvictOptions
+  target: Object,
+  value?: string | string[] | CacheEvictOptions
 ): CacheInternalEvictOptions {
   let allEntries = false;
   let beforeInvocation = false;
@@ -38,9 +39,9 @@ function extractCacheEvictInternalOptions(
   }
 
   return {
-    ...extractCacheInternalOptions(value),
+    ...extractCacheInternalOptions(target, value),
     allEntries,
-    beforeInvocation
+    beforeInvocation,
   };
 }
 
@@ -49,7 +50,7 @@ function extractCacheEvictInternalOptions(
  * @param value name of cache or CacheEvictOptions
  */
 export function CacheEvict(
-  value: string | string[] | CacheEvictOptions
+  value?: string | string[] | CacheEvictOptions
 ): MethodDecorator {
   return function(
     target: Object,
@@ -57,7 +58,10 @@ export function CacheEvict(
     descriptor: TypedPropertyDescriptor<any>
   ) {
     InjectContainer()(target.constructor);
-    const cacheInternalOptions = extractCacheEvictInternalOptions(value);
+    const cacheInternalOptions = extractCacheEvictInternalOptions(
+      target,
+      value
+    );
     const method = descriptor.value;
     let cacheConfig: CacheConfig;
     descriptor.value = async function(...args: any[]) {

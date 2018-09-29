@@ -6,20 +6,20 @@ exports[`config test bad config bad defaultCache 1`] = `[CachePgkNotInstalledErr
 
 exports[`config test with config 1`] = `
 SimpleCacheManager {
-  "cacheMap": Map {},
   "defaultCache": [Function],
   "defaultOptionsCache": undefined,
   "dynamic": true,
+  "group": Map {},
   "startedCache": Map {},
 }
 `;
 
 exports[`config test without config 1`] = `
 SimpleCacheManager {
-  "cacheMap": Map {},
   "defaultCache": [Function],
   "defaultOptionsCache": undefined,
   "dynamic": true,
+  "group": Map {},
   "startedCache": Map {},
 }
 `;
@@ -31,7 +31,7 @@ exports[`integrations test cache 2`] = `"hi test test"`;
 exports[`integrations test cache 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
@@ -94,7 +94,7 @@ exports[`integrations test cache 4`] = `"hi test2 test2"`;
 exports[`integrations test cache 5`] = `
 MemoryCache {
   "name": "hi",
-  "options": undefined,
+  "options": Object {},
   "store": LRUCache {
     Symbol(max): Infinity,
     Symbol(lengthCalculator): [Function],
