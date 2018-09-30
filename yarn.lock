@@ -16,6 +16,42 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
+"@gabliam/core@7.9.4":
+  version "7.9.4"
+  resolved "https://registry.yarnpkg.com/@gabliam/core/-/core-7.9.4.tgz#3c6ef0006d064bda0f0e416c878cbd34b899bc4f"
+  dependencies:
+    "@gabliam/expression" "7.9.4"
+    "@types/joi" "^13.0.8"
+    caller "^1.0.1"
+    debug "^3.0.0"
+    gert "^2.0.0"
+    gert-topo-sort "^1.0.0"
+    glob "^7.1.1"
+    inversify "^4.3.0"
+    inversify-logger-middleware "^3.0.0"
+    joi "^13.0.0"
+    js-yaml "^3.8.1"
+    lodash "^4.17.4"
+    shortstop "^1.0.3"
+    shortstop-handlers "^1.0.1"
+    tslib "^1.8.0"
+
+"@gabliam/expression@7.9.4":
+  version "7.9.4"
+  resolved "https://registry.yarnpkg.com/@gabliam/expression/-/expression-7.9.4.tgz#e9108f31cfd94bb3a384c3d94ada7d3565739b10"
+  dependencies:
+    escodegen "^1.9.0"
+    esprima "^4.0.0"
+    tslib "^1.8.0"
+
+"@gabliam/web-core@^7.10.0":
+  version "7.10.0"
+  resolved "https://registry.yarnpkg.com/@gabliam/web-core/-/web-core-7.10.0.tgz#a317e17be8cfc46f519f619a7dfa3054842b3206"
+  dependencies:
+    escape-html "^1.0.3"
+    http-status-codes "^1.2.0"
+    tslib "^1.9.3"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -178,6 +214,10 @@
 "@types/jest@^23.3.1":
   version "23.3.1"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.1.tgz#a4319aedb071d478e6f407d1c4578ec8156829cf"
+
+"@types/joi@^13.0.8":
+  version "13.6.0"
+  resolved "https://registry.yarnpkg.com/@types/joi/-/joi-13.6.0.tgz#69b289d18619efb298aed9a3efdc9ad286fb0c64"
 
 "@types/joi@^13.3.0":
   version "13.3.0"
@@ -3576,7 +3616,7 @@ inversify-logger-middleware@^3.0.0:
   dependencies:
     chalk "2.3.0"
 
-inversify@^4.13.0:
+inversify@^4.13.0, inversify@^4.3.0:
   version "4.13.0"
   resolved "https://registry.yarnpkg.com/inversify/-/inversify-4.13.0.tgz#0ab40570bfa4474b04d5b919bbab3a4f682a72f5"
 
@@ -4421,6 +4461,14 @@ jest@^23.4.0:
     import-local "^1.0.0"
     jest-cli "^23.4.0"
 
+joi@^13.0.0:
+  version "13.7.0"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-13.7.0.tgz#cfd85ebfe67e8a1900432400b4d03bbd93fb879f"
+  dependencies:
+    hoek "5.x.x"
+    isemail "3.x.x"
+    topo "3.x.x"
+
 joi@^13.4.0:
   version "13.4.0"
   resolved "https://registry.yarnpkg.com/joi/-/joi-13.4.0.tgz#afc359ee3d8bc5f9b9ba6cdc31b46d44af14cecc"
@@ -4442,7 +4490,7 @@ js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
 
-js-yaml@^3.11.0, js-yaml@^3.12.0, js-yaml@^3.7.0, js-yaml@^3.9.0:
+js-yaml@^3.11.0, js-yaml@^3.12.0, js-yaml@^3.7.0, js-yaml@^3.8.1, js-yaml@^3.9.0:
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.12.0.tgz#eaed656ec8344f10f527c6bfa1b6e2244de167d1"
   dependencies:

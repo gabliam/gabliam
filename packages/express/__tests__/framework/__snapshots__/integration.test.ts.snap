@@ -1,5 +1,81 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Integration Tests: decorator Controller should use custom router passed from configuration 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "9",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"9-pQ/Pu6+qfOrXcJtZvB+frrlxk/c\\"",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "Such Text",
+}
+`;
+
+exports[`Integration Tests: decorator Controller should use custom router passed from configuration 2`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "161",
+    "content-security-policy": "default-src 'self'",
+    "content-type": "text/html; charset=utf-8",
+    "x-content-type-options": "nosniff",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 404,
+  "text": "<!DOCTYPE html>
+<html lang=\\"en\\">
+<head>
+<meta charset=\\"utf-8\\">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /casesensitive/endpoint</pre>
+</body>
+</html>
+",
+}
+`;
+
+exports[`Integration Tests: decorator Controller should use custom router passed from configuration 3`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "161",
+    "content-security-policy": "default-src 'self'",
+    "content-type": "text/html; charset=utf-8",
+    "x-content-type-options": "nosniff",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 404,
+  "text": "<!DOCTYPE html>
+<html lang=\\"en\\">
+<head>
+<meta charset=\\"utf-8\\">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /CaseSensitive/endpoint</pre>
+</body>
+</html>
+",
+}
+`;
+
 exports[`Integration Tests: decorator Controller should use returned values as response 1`] = `
 Object {
   "header": Object {
@@ -134,6 +210,82 @@ Object {
   },
   "status": 200,
   "text": "config ok !!!!",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should use custom router passed from configuration 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "11",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\\"b-vqDL+6YwrE3yJSTRBCWcavKRhdk\\"",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "\\"Such Text\\"",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should use custom router passed from configuration 2`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "161",
+    "content-security-policy": "default-src 'self'",
+    "content-type": "text/html; charset=utf-8",
+    "x-content-type-options": "nosniff",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 404,
+  "text": "<!DOCTYPE html>
+<html lang=\\"en\\">
+<head>
+<meta charset=\\"utf-8\\">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /casesensitive/endpoint</pre>
+</body>
+</html>
+",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should use custom router passed from configuration 3`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "161",
+    "content-security-policy": "default-src 'self'",
+    "content-type": "text/html; charset=utf-8",
+    "x-content-type-options": "nosniff",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 404,
+  "text": "<!DOCTYPE html>
+<html lang=\\"en\\">
+<head>
+<meta charset=\\"utf-8\\">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /CaseSensitive/endpoint</pre>
+</body>
+</html>
+",
 }
 `;
 
