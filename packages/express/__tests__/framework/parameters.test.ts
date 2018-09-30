@@ -7,16 +7,18 @@ import {
   QueryParam,
   Post,
   RequestBody,
-  WebConfig,
   RequestHeaders,
   Cookies,
   Next,
+  GabRequest,
+  GabResponse,
+  WebConfig,
 } from '@gabliam/web-core';
-import { express as e } from '../../src';
 import { ExpressPluginTest } from '../express-plugin-test';
+import { express as e } from '../../src';
 import * as supertest from 'supertest';
-import { Config } from '@gabliam/core';
 import * as sinon from 'sinon';
+import { Config } from '@gabliam/core';
 
 let appTest: ExpressPluginTest;
 
@@ -33,11 +35,7 @@ describe('Parameters:', () => {
     @Controller('/')
     class TestController {
       @Get(':id')
-      public getTest(
-        @RequestParam('id') id: number,
-        req: e.Request,
-        res: e.Response
-      ) {
+      public getTest(@RequestParam('id') id: number) {
         return id;
       }
     }
@@ -54,11 +52,7 @@ describe('Parameters:', () => {
     @Controller('/')
     class TestController {
       @Get(':id')
-      public getTest(
-        @RequestParam('id') id: string,
-        req: e.Request,
-        res: e.Response
-      ) {
+      public getTest(@RequestParam('id') id: string) {
         return id;
       }
     }
@@ -74,11 +68,7 @@ describe('Parameters:', () => {
     @Controller('/')
     class TestController {
       @Get(':id')
-      public getTest(
-        @RequestParam('id') id: number,
-        req: e.Request,
-        res: e.Response
-      ) {
+      public getTest(@RequestParam('id') id: number) {
         return [typeof id, id];
       }
     }
@@ -94,7 +84,7 @@ describe('Parameters:', () => {
     @Controller('/')
     class TestController {
       @Get(':id')
-      public getTest(@Request() req: e.Request) {
+      public getTest(@Request() req: GabRequest) {
         return req.params.id;
       }
     }
@@ -110,8 +100,8 @@ describe('Parameters:', () => {
     @Controller('/')
     class TestController {
       @Get('/')
-      public getTest(@Response() res: e.Response) {
-        return res.send('foo');
+      public getTest(@Response() res: GabResponse) {
+        return res.originalResponse.send('foo');
       }
     }
 
@@ -199,19 +189,27 @@ describe('Parameters:', () => {
     @Controller('/')
     class TestController {
       @Get('/')
-      public getCookie(
-        @Cookies('cookie') cookie: any,
-        req: e.Request,
-        res: e.Response
-      ) {
+      public getCookie(@Cookies('cookie') cookie: any) {
         if (cookie) {
-          res.send(cookie);
+          return cookie;
         } else {
-          res.send(':(');
+          return ':(';
         }
       }
     }
 
+    @Config()
+    class ServiceConfig {
+      @WebConfig()
+      ServerConfig(app: e.Application) {
+        app.use((req, res, nextFunc) => {
+          res.cookie('cookie', 'hey');
+          nextFunc();
+        });
+      }
+    }
+
+    appTest.addClass(ServiceConfig);
     appTest.addClass(TestController);
     await appTest.build();
     const response = await supertest(appTest.app)

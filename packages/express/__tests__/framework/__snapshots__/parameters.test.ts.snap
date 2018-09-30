@@ -1,5 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Parameters: bug parameter when value is number and passed 0 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "1",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"1-tlifxqsNyCzxIJnRwtQKuZToQQw\\"",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "0",
+}
+`;
+
+exports[`Parameters: should bind a method parameter to a cookie 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "2",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"2-ZP5c6gUPmMfHXLaW+alufW5DcRc\\"",
+    "set-cookie": Array [
+      "cookie=hey; Path=/",
+    ],
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": ":(",
+}
+`;
+
 exports[`Parameters: should bind a method parameter to a query parameter 1`] = `
 Object {
   "header": Object {
@@ -114,13 +153,13 @@ Object {
 }
 `;
 
-exports[`Parameters: should bind a method parameter to the url parameter of the web request and cast to number 1`] = `
+exports[`Parameters: should bind a method parameter to the response object 1`] = `
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "18",
-    "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"12-kX+w9K31lblsHNbfHlFQI3vGdys\\"",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-C+7Hteo/D9vJXQ3UfzxbwnXaijM\\"",
   },
   "req": Object {
     "data": undefined,
@@ -128,6 +167,42 @@ Object {
     "method": "GET",
   },
   "status": 200,
-  "text": "[\\"undefined\\",null]",
+  "text": "foo",
+}
+`;
+
+exports[`Parameters: should bind a method parameter to the url parameter of the web request 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-C+7Hteo/D9vJXQ3UfzxbwnXaijM\\"",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "foo",
+}
+`;
+
+exports[`Parameters: should bind a method parameter to the url parameter of the web request and cast to number 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "13",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\\"d-f7JRWtNSw/8B+r0iQq6BpCFihJo\\"",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "[\\"number\\",42]",
 }
 `;

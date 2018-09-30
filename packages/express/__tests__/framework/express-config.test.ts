@@ -68,8 +68,8 @@ test('@ExpressConfig', async () => {
   @Controller('/')
   class TestController {
     @Get('/')
-    public getTest(req: e.Request, res: e.Response) {
-      res.send('GET');
+    public getTest() {
+      return 'GET';
     }
   }
 
@@ -102,7 +102,7 @@ test('@ExpressConfig Order', async () => {
   class TestController {
     @Get('/')
     public getTest(req: e.Request, res: e.Response) {
-      res.send('GET');
+      return 'GET';
     }
   }
 

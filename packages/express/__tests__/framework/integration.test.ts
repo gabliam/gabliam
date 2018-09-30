@@ -8,6 +8,7 @@ import {
   Head,
   Delete,
   Method,
+  Next,
 } from '@gabliam/web-core';
 import { express as e } from '../../src';
 import { ExpressPluginTest } from '../express-plugin-test';
@@ -32,7 +33,7 @@ describe('Integration Tests:', () => {
         @decorator('rest.test.base')
         class TestController {
           @Get('rest.test.get')
-          async getTest(req: e.Request, res: e.Response) {
+          async getTest() {
             return 'config ok !!!!';
           }
         }
@@ -54,7 +55,7 @@ describe('Integration Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          async getTest(req: e.Request, res: e.Response) {
+          async getTest() {
             return new Promise(resolve => {
               setTimeout(resolve, 100, 'GET');
             });
@@ -72,8 +73,8 @@ describe('Integration Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          public getTest(req: e.Request, res: e.Response) {
-            return new Promise((resolve, reject) => {
+          public getTest() {
+            return new Promise((_, reject) => {
               setTimeout(reject, 100, 'GET');
             });
           }
@@ -90,16 +91,12 @@ describe('Integration Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          public getTest(
-            req: e.Request,
-            res: e.Response,
-            nextFunc: e.NextFunction
-          ) {
+          public getTest(@Next() nextFunc: e.NextFunction) {
             nextFunc();
           }
 
           @Get('/')
-          public getTest2(req: e.Request, res: e.Response) {
+          public getTest2() {
             return 'GET';
           }
         }
@@ -116,11 +113,7 @@ describe('Integration Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          public getTest(
-            req: e.Request,
-            res: e.Response,
-            nextFunc: e.NextFunction
-          ) {
+          public getTest(@Next() nextFunc: e.NextFunction) {
             return new Promise(resolve => {
               setTimeout(
                 () => {
@@ -134,7 +127,7 @@ describe('Integration Tests:', () => {
           }
 
           @Get('/')
-          public getTest2(req: e.Request, res: e.Response) {
+          public getTest2() {
             return 'GET';
           }
         }
@@ -150,16 +143,12 @@ describe('Integration Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          public getTest(
-            req: e.Request,
-            res: e.Response,
-            nextFunc: e.NextFunction
-          ) {
+          public getTest(@Next() nextFunc: e.NextFunction) {
             nextFunc();
           }
 
           @Get('/')
-          public getTest2(req: e.Request, res: e.Response) {
+          public getTest2() {
             return new Promise(resolve => {
               setTimeout(resolve, 100, 'GET');
             });
@@ -177,28 +166,28 @@ describe('Integration Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          public getTest(req: e.Request, res: e.Response) {
-            res.send('GET');
+          public getTest() {
+            return 'GET';
           }
           @Post('/')
-          public postTest(req: e.Request, res: e.Response) {
-            res.send('POST');
+          public postTest() {
+            return 'POST';
           }
           @Put('/')
-          public putTest(req: e.Request, res: e.Response) {
-            res.send('PUT');
+          public putTest() {
+            return 'PUT';
           }
           @Patch('/')
-          public patchTest(req: e.Request, res: e.Response) {
-            res.send('PATCH');
+          public patchTest() {
+            return 'PATCH';
           }
           @Head('/')
-          public headTest(req: e.Request, res: e.Response) {
-            res.send('HEAD');
+          public headTest() {
+            return 'HEAD';
           }
           @Delete('/')
-          public deleteTest(req: e.Request, res: e.Response) {
-            res.send('DELETE');
+          public deleteTest() {
+            return 'DELETE';
           }
         }
         appTest.addClass(TestController);
@@ -228,8 +217,8 @@ describe('Integration Tests:', () => {
         @decorator('/')
         class TestController {
           @Method('propfind', '/')
-          public getTest(req: e.Request, res: e.Response) {
-            res.send('PROPFIND');
+          public getTest() {
+            return 'PROPFIND';
           }
         }
 
@@ -246,7 +235,7 @@ describe('Integration Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          public getTest(req: e.Request, res: e.Response) {
+          public getTest() {
             return { hello: 'world' };
           }
         }
@@ -314,7 +303,7 @@ describe('Integration Tests:', () => {
         }
 
         appTest.addClass(TestController);
-        appTest.addConf('application.express.rootPath', '/api/v1');
+        appTest.addConf('application.web.rootPath', '/api/v1');
         await appTest.build();
 
         const response = await supertest(appTest.app)

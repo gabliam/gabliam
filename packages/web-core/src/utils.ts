@@ -38,7 +38,7 @@ export const extractParameters = <T extends Object, U extends keyof T, V>(
         args[item.index] = next;
         break;
       case PARAMETER_TYPE.PARAMS:
-        args[item.index] = getParam(ctx, 'params', item);
+        args[item.index] = getParam(ctx.request, 'params', item);
         break;
       case PARAMETER_TYPE.QUERY:
         args[item.index] = getParam(ctx.request, 'query', item);

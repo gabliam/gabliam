@@ -224,9 +224,10 @@ export class ExpressPlugin extends WebPluginBase implements GabliamPlugin {
       }
 
       try {
-        const result: any = await Promise.resolve(
+        const result: any = await toPromise(
           controller[methodInfo.methodName](...args)
         );
+
         if (!res.headersSent) {
           if (result !== undefined) {
             if (result instanceof ResponseEntity) {
@@ -240,7 +241,7 @@ export class ExpressPlugin extends WebPluginBase implements GabliamPlugin {
                 res.send(result !== undefined ? '' + result : undefined);
               }
             }
-          } else {
+          } else if (ctx.body !== undefined) {
             const { status, message, body, type } = ctx;
             if (type) {
               res.type(type);
@@ -252,13 +253,10 @@ export class ExpressPlugin extends WebPluginBase implements GabliamPlugin {
             if (status) {
               res.status(status);
             }
-
-            if (body) {
-              if (methodInfo.json) {
-                res.json(body);
-              } else {
-                res.send(body);
-              }
+            if (methodInfo.json) {
+              res.json(body);
+            } else {
+              res.send(body);
             }
           }
         }

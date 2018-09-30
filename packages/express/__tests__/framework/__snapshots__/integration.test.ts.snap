@@ -76,6 +76,24 @@ Object {
 }
 `;
 
+exports[`Integration Tests: decorator Controller should use custom routing configuration 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "4",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"4-DlFKBmK8tp3IY5U9HOJuPUDoGoc\\"",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "pong",
+}
+`;
+
 exports[`Integration Tests: decorator Controller should use returned values as response 1`] = `
 Object {
   "header": Object {
@@ -177,6 +195,114 @@ Object {
 }
 `;
 
+exports[`Integration Tests: decorator Controller should work for each shortcut decorator 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "6",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"6-1vVjYJjNRYzp0ik5+OPo3qsOm9A\\"",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "DELETE",
+  },
+  "status": 200,
+  "text": "DELETE",
+}
+`;
+
+exports[`Integration Tests: decorator Controller should work for each shortcut decorator 2`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-8DC7vTKWbN5BA3uYqIScRrduS8E\\"",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "HEAD",
+  },
+  "status": 200,
+  "text": undefined,
+}
+`;
+
+exports[`Integration Tests: decorator Controller should work for each shortcut decorator 3`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "5",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"5-n74p1Ndux1ZCGu4G4PNPF/pIj/M\\"",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "PATCH",
+  },
+  "status": 200,
+  "text": "PATCH",
+}
+`;
+
+exports[`Integration Tests: decorator Controller should work for each shortcut decorator 4`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-CRsM5C6wvZYWnqALFt2Tj21jrJU\\"",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "PUT",
+  },
+  "status": 200,
+  "text": "PUT",
+}
+`;
+
+exports[`Integration Tests: decorator Controller should work for each shortcut decorator 5`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "4",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"4-Yf+Bwwqjx254r+pisuO9HfpJ6FQ\\"",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "POST",
+  },
+  "status": 200,
+  "text": "POST",
+}
+`;
+
+exports[`Integration Tests: decorator Controller should work for each shortcut decorator 6`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"3-8DC7vTKWbN5BA3uYqIScRrduS8E\\"",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "GET",
+}
+`;
+
 exports[`Integration Tests: decorator Controller should work for methods which call nextFunc() 1`] = `
 Object {
   "header": Object {
@@ -192,6 +318,24 @@ Object {
   },
   "status": 200,
   "text": "GET",
+}
+`;
+
+exports[`Integration Tests: decorator Controller should work for more obscure HTTP methods using the httpMethod decorator 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "8",
+    "content-type": "text/html; charset=utf-8",
+    "etag": "W/\\"8-q7JH/ElbTfQ5LDMKp+kb5Bpx9So\\"",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "PROPFIND",
+  },
+  "status": 200,
+  "text": "PROPFIND",
 }
 `;
 
@@ -286,6 +430,24 @@ Object {
 </body>
 </html>
 ",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should use custom routing configuration 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "6",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\\"6-uBnwlsJiQ3kuZAgKKWB4aV5ugdE\\"",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "\\"pong\\"",
 }
 `;
 
@@ -390,6 +552,114 @@ Object {
 }
 `;
 
+exports[`Integration Tests: decorator RestController should work for each shortcut decorator 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "8",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\\"8-PDfvjgKxQeEYNWN9J46lRZdHKLY\\"",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "DELETE",
+  },
+  "status": 200,
+  "text": "\\"DELETE\\"",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should work for each shortcut decorator 2`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "5",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\\"5-F+E/6Ma6IsYxNfQFCboz97TKFWQ\\"",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "HEAD",
+  },
+  "status": 200,
+  "text": undefined,
+}
+`;
+
+exports[`Integration Tests: decorator RestController should work for each shortcut decorator 3`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "7",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\\"7-mNm0wYpcKHDJ05ojttZ1jfYZxN8\\"",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "PATCH",
+  },
+  "status": 200,
+  "text": "\\"PATCH\\"",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should work for each shortcut decorator 4`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "5",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\\"5-+aKGlys1cZbZLo8jkwP3lP7mFno\\"",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "PUT",
+  },
+  "status": 200,
+  "text": "\\"PUT\\"",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should work for each shortcut decorator 5`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "6",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\\"6-PpOkd7zy9ULD7+lhEeuSzVf3X7M\\"",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "POST",
+  },
+  "status": 200,
+  "text": "\\"POST\\"",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should work for each shortcut decorator 6`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "5",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\\"5-F+E/6Ma6IsYxNfQFCboz97TKFWQ\\"",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "\\"GET\\"",
+}
+`;
+
 exports[`Integration Tests: decorator RestController should work for methods which call nextFunc() 1`] = `
 Object {
   "header": Object {
@@ -405,6 +675,24 @@ Object {
   },
   "status": 200,
   "text": "\\"GET\\"",
+}
+`;
+
+exports[`Integration Tests: decorator RestController should work for more obscure HTTP methods using the httpMethod decorator 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "10",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\\"a-5oOXDrDg+Wb8S7UXS4EcAmh9uIM\\"",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "PROPFIND",
+  },
+  "status": 200,
+  "text": "\\"PROPFIND\\"",
 }
 `;
 
