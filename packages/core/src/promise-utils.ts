@@ -1,4 +1,4 @@
-import * as co from 'co';
+const co = require('co');
 
 export type gabliamValue<T = any> =
   | Observable
@@ -61,5 +61,5 @@ export function toPromise<T = any>(
   if (!isGenerator(value)) {
     return Promise.resolve<T>(value);
   }
-  return co<T>(value);
+  return co(value);
 }
