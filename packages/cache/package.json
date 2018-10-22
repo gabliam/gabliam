@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/cache",
-  "version": "7.10.0",
+  "version": "7.10.1",
   "description": "cache plugin for gabliam",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -30,7 +30,7 @@
     "@gabliam/core": "^7.2.0"
   },
   "devDependencies": {
-    "@gabliam/core": "^7.10.0",
+    "@gabliam/core": "7.10.1",
     "@types/debug": "^0.0.30",
     "@types/node": "^10.5.2"
   },

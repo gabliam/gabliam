@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/graphql-core",
-  "version": "7.10.0",
+  "version": "7.10.1",
   "description": "Graphql core for gabliam",
   "keywords": [
     "gabliam",
@@ -32,7 +32,7 @@
     "@gabliam/core": "^7.2.0"
   },
   "devDependencies": {
-    "@gabliam/core": "^7.10.0",
+    "@gabliam/core": "7.10.1",
     "@types/debug": "^0.0.30",
     "@types/lodash": "^4.14.111",
     "@types/node": "^10.5.2"
