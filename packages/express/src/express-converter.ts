@@ -10,13 +10,9 @@ import {
   extractParameters,
   getParameterMetadata,
   isInterceptor,
-  InterceptorMethod,
-  Interceptor,
-  AfterResponseInterceptor,
 } from '@gabliam/web-core';
 import { express } from './express';
 import { getContext } from './utils';
-import { METADATA_KEY } from './constants';
 
 @InjectContainer()
 @Service()
@@ -51,33 +47,3 @@ export class ExpressConverter {
     };
   }
 }
-
-export const isExpressInterceptor = (target: any) =>
-  Reflect.getOwnMetadata(METADATA_KEY.expressInterceptor, target) === true;
-
-const addExpressInterceptorMetadata = (target: any) => {
-  Reflect.defineMetadata(METADATA_KEY.expressInterceptor, true, target);
-};
-
-export const middlewareToInterceptor = (
-  mid: express.RequestHandler | express.ErrorRequestHandler,
-  type: InterceptorMethod
-) => {
-  if (type === 'intercept') {
-    const clazz = class implements Interceptor {
-      intercept() {
-        return mid;
-      }
-    };
-    addExpressInterceptorMetadata(clazz);
-    return clazz;
-  } else {
-    const clazz = class implements AfterResponseInterceptor {
-      afterResponse() {
-        return mid;
-      }
-    };
-    addExpressInterceptorMetadata(clazz);
-    return clazz;
-  }
-};

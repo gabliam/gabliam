@@ -33,6 +33,7 @@ import {
   valideErrorMiddleware,
 } from './middleware';
 import { getContext } from './utils';
+import { isExpressInterceptor } from './express-interceptor';
 
 const debug = d('Gabliam:Plugin:ExpressPlugin');
 
@@ -114,7 +115,7 @@ export class ExpressPlugin extends WebPluginBase implements GabliamPlugin {
     }
   }
 
-  buildControllers(restMetadata: RestMetadata, container: Container): void {
+  async buildControllers(restMetadata: RestMetadata, container: Container) {
     const app = container.get<express.Application>(APP);
 
     // get the router creator
@@ -139,56 +140,75 @@ export class ExpressPlugin extends WebPluginBase implements GabliamPlugin {
         // create handler
         const handler: express.RequestHandler = this.handlerFactory(execCtx);
 
+        const interceptors: express.RequestHandler[] = [];
+        for (const i of [
+          ...methodInfo.controllerInterceptors.interceptors,
+          ...methodInfo.methodInterceptors.interceptors,
+        ]) {
+          interceptors.push(
+            ...(await this.interceptorToMiddleware(execCtx, i, 'intercept'))
+          );
+        }
+
+        const afterResponseInterceptors: express.RequestHandler[] = [];
+        for (const i of [
+          ...methodInfo.methodInterceptors.afterResponseInterceptors,
+          ...methodInfo.controllerInterceptors.afterResponseInterceptors,
+        ]) {
+          afterResponseInterceptors.push(
+            ...(await this.interceptorToMiddleware(execCtx, i, 'afterResponse'))
+          );
+        }
+
         // register handler in router
         (router as any)[methodInfo.method](
           methodInfo.methodPath,
-          ...methodInfo.controllerInterceptors.interceptors.map(i =>
-            this.interceptorToMiddleware(execCtx, i, 'intercept')
-          ),
-          ...methodInfo.methodInterceptors.interceptors.map(i =>
-            this.interceptorToMiddleware(execCtx, i, 'intercept')
-          ),
+          ...interceptors,
           handler,
-          ...methodInfo.methodInterceptors.afterResponseInterceptors.map(i =>
-            this.interceptorToMiddleware(execCtx, i, 'afterResponse')
-          ),
-          ...methodInfo.controllerInterceptors.afterResponseInterceptors.map(
-            i => this.interceptorToMiddleware(execCtx, i, 'afterResponse')
-          )
+          ...afterResponseInterceptors
         );
       }
       app.use(routerPath, router);
     }
   }
-  private interceptorToMiddleware<
+  private async interceptorToMiddleware<
     T extends Interceptor | AfterResponseInterceptor,
     U extends keyof T
   >(
     execCtx: ExecutionContext,
     { instance, paramList }: InterceptorInfo<T>,
     type: U
-  ): express.RequestHandler {
-    return async (
-      req: express.Request,
-      res: express.Response,
-      next: express.NextFunction
-    ) => {
-      const args = extractParameters(
-        instance,
-        type,
-        execCtx,
-        getContext(req),
-        next,
-        paramList
-      );
-
-      try {
-        await toPromise((instance[type] as any)(...args));
-        next();
-      } catch (err) {
-        next(err);
+  ): Promise<express.RequestHandler[]> {
+    if (isExpressInterceptor(instance)) {
+      const res = await toPromise((instance[type] as any)());
+      if (!Array.isArray(res)) {
+        return [res];
       }
-    };
+      return res;
+    }
+    return [
+      async (
+        req: express.Request,
+        res: express.Response,
+        next: express.NextFunction
+      ) => {
+        const args = extractParameters(
+          instance,
+          type,
+          execCtx,
+          getContext(req),
+          next,
+          paramList
+        );
+
+        try {
+          await toPromise((instance[type] as any)(...args));
+          next();
+        } catch (err) {
+          next(err);
+        }
+      },
+    ];
   }
 
   private handlerFactory(execCtx: ExecutionContext): express.RequestHandler {

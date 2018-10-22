@@ -81,6 +81,12 @@ export function WebConfigAfterControllers(order: number = 1) {
  */
 export const WebConfigAfterCtl = WebConfigAfterControllers;
 
+/**
+ * Create a web config decorator
+ * @param type type of decorator
+ * @param order order of the config
+ * @param errorMsg Error message when duplicated config decorator
+ */
 function createWebConfigDecorator(
   type: string,
   order: number,

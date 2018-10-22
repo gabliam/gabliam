@@ -1,6 +1,6 @@
 import { Container, gabliamValue, inversifyInterfaces } from '@gabliam/core';
 import { METADATA_KEY } from '../constants';
-import { ParameterMetadata, getParameterMetadata } from './params';
+import { getParameterMetadata, ParameterMetadata } from './params';
 
 export type InterceptorMetadata = inversifyInterfaces.ServiceIdentifier<any>;
 

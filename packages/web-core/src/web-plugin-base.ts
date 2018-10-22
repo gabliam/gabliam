@@ -4,6 +4,7 @@ import {
   Registry,
   ValueExtractor,
   VALUE_EXTRACTOR,
+  toPromise,
 } from '@gabliam/core';
 import { APP, METADATA_KEY, TYPE, WEB_PLUGIN_CONFIG } from './constants';
 import {
@@ -27,12 +28,12 @@ export abstract class WebPluginBase {
     container: Container,
     registry: Registry,
     webConfiguration: WebConfiguration
-  ): void;
+  ): gabliamValue<void>;
 
   abstract buildControllers(
     restMetadata: RestMetadata,
     container: Container
-  ): void;
+  ): gabliamValue<void>;
 
   /**
    * binding phase
@@ -41,7 +42,7 @@ export abstract class WebPluginBase {
    * @param  {Container} container
    * @param  {Registry} registry
    */
-  bind(container: Container, registry: Registry) {
+  async bind(container: Container, registry: Registry) {
     registry.get(TYPE.Controller).forEach(({ id, target }) =>
       container
         .bind<any>(id)
@@ -54,14 +55,16 @@ export abstract class WebPluginBase {
       .inSingletonScope();
     const webConfiguration = new WebConfiguration();
     container.bind(WebConfiguration).toConstantValue(webConfiguration);
-    this.bindApp(container, registry, webConfiguration);
+    await toPromise(this.bindApp(container, registry, webConfiguration));
   }
 
-  build(container: Container, registry: Registry) {
+  async build(container: Container, registry: Registry) {
     this.buildWebConfig(container, registry);
-    this.buildControllers(
-      this.extractControllerMetadata(container, registry),
-      container
+    await toPromise(
+      this.buildControllers(
+        this.extractControllerMetadata(container, registry),
+        container
+      )
     );
     this.buildWebConfigAfterCtrl(container, registry);
   }

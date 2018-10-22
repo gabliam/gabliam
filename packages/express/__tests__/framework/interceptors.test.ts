@@ -22,7 +22,7 @@ import {
 } from '@gabliam/web-core';
 import * as sinon from 'sinon';
 import * as supertest from 'supertest';
-import { express as e, ExpressConverter } from '../../src';
+import { express as e, ExpressConverter, toInterceptor } from '../../src';
 import { ExpressPluginTest } from '../express-plugin-test';
 
 let appTest: ExpressPluginTest;
@@ -45,12 +45,12 @@ describe('Interceptors:', () => {
     }
   }
 
-  @Service()
-  class B implements Interceptor {
-    intercept() {
-      result += 'b';
-    }
+  function b(req: e.Request, res: e.Response, nextFunc: e.NextFunction) {
+    result += 'b';
+    nextFunc();
   }
+
+  const B = toInterceptor(b);
 
   @Service()
   class C implements Interceptor {
@@ -269,7 +269,7 @@ describe('Interceptors:', () => {
       serverConfig(app: e.Application, container: Container) {
         const converter = container.get(ExpressConverter);
         app.use(converter.interceptorToMiddleware(A));
-        app.use(converter.interceptorToMiddleware(B));
+        app.use(b);
         app.use(converter.interceptorToMiddleware(C));
       }
     }
@@ -282,7 +282,6 @@ describe('Interceptors:', () => {
       .get('/')
       .expect(200);
     expect(spyA.calledOnce).toBe(true);
-    expect(spyB.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);
     expect(response).toMatchSnapshot();
     expect(result).toMatchSnapshot();

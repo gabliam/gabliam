@@ -53,7 +53,7 @@ export interface ExpressConfig extends WebPluginConfig {
 }
 
 @PluginConfig()
-export class ExpressPluginConfig implements WebPluginConfig {
+export class ExpressPluginConfig implements ExpressConfig {
   @Value('application.web.rootPath', Joi.string())
   rootPath = '/';
 
