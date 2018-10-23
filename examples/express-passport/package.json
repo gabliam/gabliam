@@ -1,6 +1,6 @@
 {
   "name": "express-passport-sample",
-  "version": "7.10.1",
+  "version": "7.10.2",
   "private": true,
   "scripts": {
     "watch": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts",
@@ -18,7 +18,7 @@
   "homepage": "https://github.com/gabliam/sample#readme",
   "dependencies": {
     "@gabliam/core": "7.10.1",
-    "@gabliam/express": "7.10.1",
+    "@gabliam/express": "7.10.2",
     "@gabliam/web-core": "7.10.1",
     "body-parser": "^1.18.3",
     "cerialize": "^0.1.18",
