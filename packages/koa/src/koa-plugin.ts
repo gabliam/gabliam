@@ -88,7 +88,7 @@ export class KoaPlugin implements GabliamPlugin {
       metadataList.forEach(({ key, order }) => {
         middlewareConfig.addMiddleware({
           order,
-          instance: confInstance[key].bind(confInstance[key]),
+          instance: confInstance[key].bind(confInstance),
         });
       });
     }

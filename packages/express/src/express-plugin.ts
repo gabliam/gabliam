@@ -97,7 +97,7 @@ export class ExpressPlugin implements GabliamPlugin {
       metadataList.forEach(({ key, order }) => {
         middlewareConfig.addMiddleware({
           order,
-          instance: confInstance[key].bind(confInstance[key]),
+          instance: confInstance[key].bind(confInstance),
         });
       });
     }
@@ -117,7 +117,7 @@ export class ExpressPlugin implements GabliamPlugin {
       metadataList.forEach(({ key, order }) => {
         middlewareConfig.addErrorMiddleware({
           order,
-          instance: confInstance[key].bind(confInstance[key]),
+          instance: confInstance[key].bind(confInstance),
         });
       });
     }
