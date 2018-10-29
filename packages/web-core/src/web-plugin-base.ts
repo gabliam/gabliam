@@ -1,26 +1,9 @@
-import {
-  Container,
-  gabliamValue,
-  Registry,
-  ValueExtractor,
-  VALUE_EXTRACTOR,
-  toPromise,
-} from '@gabliam/core';
-import { APP, METADATA_KEY, TYPE, WEB_PLUGIN_CONFIG } from './constants';
-import {
-  ControllerMetadata,
-  ControllerMethodMetadata,
-  ControllerParameterMetadata,
-  getInterceptors,
-  ParameterMetadata,
-  WebConfigMetadata,
-} from './decorators';
-import { MethodInfo, WebPluginConfig, RestMetadata } from './plugin-config';
-import { cleanPath } from './utils';
-import {
-  getValidateInterceptor,
-  ValidateInterceptor,
-} from './validate-interceptor';
+import { Container, gabliamValue, Registry, toPromise } from '@gabliam/core';
+import { APP, METADATA_KEY, TYPE } from './constants';
+import { WebConfigMetadata } from './decorators';
+import { RestMetadata } from './plugin-config';
+import { extractControllerMetadata } from './utils';
+import { ValidateInterceptor } from './validate-interceptor';
 import { WebConfiguration } from './web-configuration';
 
 export abstract class WebPluginBase {
@@ -62,7 +45,7 @@ export abstract class WebPluginBase {
     this.buildWebConfig(container, registry);
     await toPromise(
       this.buildControllers(
-        this.extractControllerMetadata(container, registry),
+        extractControllerMetadata(container, registry),
         container
       )
     );
@@ -149,96 +132,5 @@ export abstract class WebPluginBase {
     middlewareConfig.WebConfigAfterCtrls.sort(
       (a, b) => a.order - b.order
     ).forEach(({ instance }) => instance(app, container));
-  }
-
-  /**
-   * Build all controllers
-   *
-   * @param  {Container} container
-   * @param  {Registry} registry
-   */
-  private extractControllerMetadata(container: Container, registry: Registry) {
-    const restConfig = container.get<WebPluginConfig>(WEB_PLUGIN_CONFIG);
-    const valueExtractor = container.get<ValueExtractor>(VALUE_EXTRACTOR);
-
-    const controllerIds = registry.get(TYPE.Controller);
-    const restMetadata: RestMetadata = {
-      ...restConfig,
-      controllerInfo: new Map(),
-    };
-
-    controllerIds.forEach(({ id: controllerId }) => {
-      const controller = container.get<object>(controllerId);
-
-      const controllerMetadata: ControllerMetadata = Reflect.getOwnMetadata(
-        METADATA_KEY.controller,
-        controller.constructor
-      );
-
-      const controllerInterceptors = getInterceptors(
-        container,
-        controller.constructor
-      );
-
-      const methodMetadatas: ControllerMethodMetadata[] = Reflect.getOwnMetadata(
-        METADATA_KEY.controllerMethod,
-        controller.constructor
-      );
-
-      const parameterMetadata: ControllerParameterMetadata = Reflect.getOwnMetadata(
-        METADATA_KEY.controllerParameter,
-        controller.constructor
-      );
-      // if the controller has controllerMetadata and methodMetadatas
-      if (controllerMetadata && methodMetadatas) {
-        const controllerPath = valueExtractor(
-          controllerMetadata.path,
-          controllerMetadata.path
-        );
-
-        const methods: MethodInfo[] = [];
-
-        restMetadata.controllerInfo.set(controllerId, {
-          controllerPath,
-          methods,
-        });
-        methodMetadatas.forEach((methodMetadata: ControllerMethodMetadata) => {
-          let paramList: ParameterMetadata[] = [];
-          if (parameterMetadata) {
-            paramList = parameterMetadata.get(methodMetadata.key) || [];
-          }
-          let methodPath = cleanPath(
-            valueExtractor(methodMetadata.path, methodMetadata.path)
-          );
-
-          if (methodPath[0] !== '/') {
-            methodPath = '/' + methodPath;
-          }
-
-          const methodInterceptors = getInterceptors(
-            container,
-            controller.constructor,
-            methodMetadata.key
-          );
-
-          methodInterceptors.interceptors.unshift(
-            getValidateInterceptor(container)
-          );
-
-          methods.push({
-            controllerId,
-            methodName: methodMetadata.key,
-            json: controllerMetadata.json,
-            paramList,
-            methodPath,
-            method: methodMetadata.method,
-            controllerInterceptors,
-            methodInterceptors,
-          });
-        });
-      }
-    });
-
-    return restMetadata;
   }
 }

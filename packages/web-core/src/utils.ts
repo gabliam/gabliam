@@ -1,7 +1,27 @@
-import { DEFAULT_PARAM_VALUE, PARAMETER_TYPE } from './constants';
-import { ParameterMetadata } from './decorators';
+import {
+  Container,
+  Registry,
+  ValueExtractor,
+  VALUE_EXTRACTOR,
+} from '@gabliam/core';
+import {
+  DEFAULT_PARAM_VALUE,
+  METADATA_KEY,
+  PARAMETER_TYPE,
+  TYPE,
+  WEB_PLUGIN_CONFIG,
+} from './constants';
+import {
+  ControllerMetadata,
+  ControllerMethodMetadata,
+  ControllerParameterMetadata,
+  getInterceptors,
+  ParameterMetadata,
+} from './decorators';
 import { ExecutionContext } from './execution-context';
 import { GabContext } from './gab-context';
+import { MethodInfo, RestMetadata, WebPluginConfig } from './plugin-config';
+import { getValidateInterceptor } from './validate-interceptor';
 
 export const cleanPath = (path: string) => {
   return path.replace(/\/+/gi, '/');
@@ -105,4 +125,98 @@ const getFuncParam = <T extends Object, U extends keyof T>(
       return name === DEFAULT_PARAM_VALUE ? param : undefined;
     }
   };
+};
+
+/**
+ * Build all controllers
+ *
+ * @param  {Container} container
+ * @param  {Registry} registry
+ */
+export const extractControllerMetadata = (
+  container: Container,
+  registry: Registry
+) => {
+  const restConfig = container.get<WebPluginConfig>(WEB_PLUGIN_CONFIG);
+  const valueExtractor = container.get<ValueExtractor>(VALUE_EXTRACTOR);
+
+  const controllerIds = registry.get(TYPE.Controller);
+  const restMetadata: RestMetadata = {
+    ...restConfig,
+    controllerInfo: new Map(),
+  };
+
+  controllerIds.forEach(({ id: controllerId }) => {
+    const controller = container.get<object>(controllerId);
+
+    const controllerMetadata: ControllerMetadata = Reflect.getOwnMetadata(
+      METADATA_KEY.controller,
+      controller.constructor
+    );
+
+    const controllerInterceptors = getInterceptors(
+      container,
+      controller.constructor
+    );
+
+    const methodMetadatas: ControllerMethodMetadata[] = Reflect.getOwnMetadata(
+      METADATA_KEY.controllerMethod,
+      controller.constructor
+    );
+
+    const parameterMetadata: ControllerParameterMetadata = Reflect.getOwnMetadata(
+      METADATA_KEY.controllerParameter,
+      controller.constructor
+    );
+    // if the controller has controllerMetadata and methodMetadatas
+    if (controllerMetadata && methodMetadatas) {
+      const controllerPath = valueExtractor(
+        controllerMetadata.path,
+        controllerMetadata.path
+      );
+
+      const methods: MethodInfo[] = [];
+
+      restMetadata.controllerInfo.set(controllerId, {
+        controllerPath,
+        methods,
+      });
+      methodMetadatas.forEach((methodMetadata: ControllerMethodMetadata) => {
+        let paramList: ParameterMetadata[] = [];
+        if (parameterMetadata) {
+          paramList = parameterMetadata.get(methodMetadata.key) || [];
+        }
+        let methodPath = cleanPath(
+          valueExtractor(methodMetadata.path, methodMetadata.path)
+        );
+
+        if (methodPath[0] !== '/') {
+          methodPath = '/' + methodPath;
+        }
+
+        const methodInterceptors = getInterceptors(
+          container,
+          controller.constructor,
+          methodMetadata.key
+        );
+
+        methodInterceptors.interceptors.unshift(
+          getValidateInterceptor(container)
+        );
+
+        methods.push({
+          controllerId,
+          methodName: methodMetadata.key,
+          json: controllerMetadata.json,
+          paramList,
+          methodPath,
+          method: methodMetadata.method,
+          controllerInterceptors,
+          methodInterceptors,
+        });
+      });
+    }
+  });
+
+  return restMetadata;
 };
