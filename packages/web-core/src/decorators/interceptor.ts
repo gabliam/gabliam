@@ -5,12 +5,22 @@ import { getParameterMetadata, ParameterMetadata } from './params';
 export type InterceptorMetadata = inversifyInterfaces.ServiceIdentifier<any>;
 
 /**
+ * InterceptorConstructor
+ */
+export type InterceptorConstructor =
+  | { new (): Interceptor }
+  | { new (): AfterResponseInterceptor };
+
+/**
  * Interceptor
  */
 export interface Interceptor {
   intercept(...args: any[]): gabliamValue<any>;
 }
 
+/**
+ * After response interceptor
+ */
 export interface AfterResponseInterceptor {
   afterResponse(...args: any[]): gabliamValue<any>;
 }

@@ -14,6 +14,9 @@ import {
 import { express } from './express';
 import { getContext } from './utils';
 
+/**
+ * Class for convert interceptor to Express Middleware
+ */
 @InjectContainer()
 @Service()
 export class ExpressConverter {

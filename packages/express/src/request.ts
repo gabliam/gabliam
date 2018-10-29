@@ -1,6 +1,8 @@
 import { GabRequest } from '@gabliam/web-core';
-import { express } from './express';
 import { alias } from 'property-tunnel';
+import * as qs from 'qs';
+import * as url from 'url';
+import { express } from './express';
 
 export class ExpressRequest implements GabRequest<express.Request> {
   /**
@@ -13,12 +15,6 @@ export class ExpressRequest implements GabRequest<express.Request> {
   @alias(['request', 'body'])
   // body
   body: object;
-
-  /**
-   * Cookies
-   */
-  @alias(['request', 'cookies'])
-  cookies: any;
 
   /**
    * Request headers
@@ -107,11 +103,6 @@ export class ExpressRequest implements GabRequest<express.Request> {
    */
   @alias(['request', 'query'])
   query: any;
-
-  /**
-   * Get/Set query string.
-   */
-  querystring: string;
 
   // route;
 
@@ -282,9 +273,26 @@ export class ExpressRequest implements GabRequest<express.Request> {
    *      // => true
    *
    *      req.is('html');
-   *      // => false
+   *       // => false
    */
   is(type: string): string | false {
     return this.request.is(type);
+  }
+
+  /**
+   * Get/Set query string.
+   */
+  get querystring() {
+    let search = url.parse(this.request.url, true).search || '';
+    if (search && search[0] === '?') {
+      search = search.slice(1);
+    }
+    return search;
+  }
+
+  set querystring(querystring: string) {
+    if (querystring) {
+      this.request.query = qs.parse(querystring);
+    }
   }
 }

@@ -2,25 +2,34 @@ import {
   AfterResponseInterceptor,
   Interceptor,
   InterceptorMethod,
+  InterceptorConstructor,
 } from '@gabliam/web-core';
 import { METADATA_KEY } from './constants';
 import { express } from './express';
 import { Service } from '@gabliam/core';
 
+/**
+ * Test if target is an express interceptor
+ * @param target any
+ */
 export const isExpressInterceptor = (target: any) =>
   Reflect.getOwnMetadata(
     METADATA_KEY.expressInterceptor,
     target.constructor || target
   ) === true;
 
+/**
+ * ExpressInterceptor decorator
+ * class is an express interceptor.
+ * Must return express middleware
+ */
 const ExpressInterceptor = () => (target: any) => {
   Reflect.defineMetadata(METADATA_KEY.expressInterceptor, true, target);
 };
 
-export type InterceptorConstructor =
-  | { new (): Interceptor }
-  | { new (): AfterResponseInterceptor };
-
+/**
+ * Convert a Express middleware to an express interceptor
+ */
 export const toInterceptor = (
   mid: express.RequestHandler | express.ErrorRequestHandler,
   type: InterceptorMethod = 'intercept'
