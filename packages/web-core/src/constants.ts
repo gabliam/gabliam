@@ -9,6 +9,8 @@ export const SERVER = Symbol('GABLIAM/WEB_APP_SERVER');
 
 export const WEB_PLUGIN_CONFIG = Symbol('GABLIAM/WEB_PLUGIN_CONFIG');
 
+export const CONTEXT = Symbol('GABLIAM/WEB_CONTEXT');
+
 export const METADATA_KEY = {
   controller: '_controller',
   controllerMethod: '_controller-method',

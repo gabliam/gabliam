@@ -10,9 +10,9 @@ import {
   extractParameters,
   getParameterMetadata,
   isInterceptor,
+  getContext
 } from '@gabliam/web-core';
 import { express } from './express';
-import { getContext } from './utils';
 
 /**
  * Class for convert interceptor to Express Middleware

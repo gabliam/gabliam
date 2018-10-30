@@ -21,6 +21,7 @@ import {
   WebPluginBase,
   WebPluginConfig,
   WEB_PLUGIN_CONFIG,
+  getContext
 } from '@gabliam/web-core';
 import * as d from 'debug';
 import * as http from 'http';
@@ -32,7 +33,6 @@ import {
   addMiddlewares,
   valideErrorMiddleware,
 } from './middleware';
-import { getContext } from './utils';
 import { isExpressInterceptor } from './express-interceptor';
 
 const debug = d('Gabliam:Plugin:ExpressPlugin');

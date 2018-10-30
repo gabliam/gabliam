@@ -1,8 +1,7 @@
-import { ConfigFunction, GabContext, Cookie } from '@gabliam/web-core';
+import { ConfigFunction, Cookie, GabContext, setContext } from '@gabliam/web-core';
 import { express } from '../express';
 import { ExpressRequest } from '../request';
 import { ExpressResponse } from '../response';
-import { CONTEXT } from '../constants';
 
 export const addContextMiddleware: ConfigFunction<
   express.Application
@@ -19,7 +18,7 @@ export const addContextMiddleware: ConfigFunction<
         new Cookie(req, res)
       );
 
-      (req as any)[CONTEXT] = context;
+      setContext(req, context);
       next();
     }
   );

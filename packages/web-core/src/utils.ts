@@ -10,6 +10,7 @@ import {
   PARAMETER_TYPE,
   TYPE,
   WEB_PLUGIN_CONFIG,
+  CONTEXT,
 } from './constants';
 import {
   ControllerMetadata,
@@ -219,4 +220,13 @@ export const extractControllerMetadata = (
   });
 
   return restMetadata;
+};
+
+
+export const getContext = (req: any) => {
+  return <GabContext>(<any>req)[CONTEXT];
+};
+
+export const setContext = (req: any, context: GabContext) => {
+  (<any>req)[CONTEXT] = context;
 };
