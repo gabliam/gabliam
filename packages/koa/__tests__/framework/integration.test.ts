@@ -1,3 +1,4 @@
+import { koaRouter } from '../../src/index';
 import {
   Controller,
   RestController,
@@ -8,8 +9,10 @@ import {
   Head,
   Delete,
   Method,
-  koaRouter
-} from '../../src/index';
+  Next,
+  Context,
+  GabContext,
+} from '@gabliam/web-core';
 import { KoaPluginTest } from '../koa-plugin-test';
 import { Config, Bean } from '@gabliam/core';
 import { CUSTOM_ROUTER_CREATOR } from '../../src/constants';
@@ -27,7 +30,7 @@ afterEach(async () => {
 describe('Integration Tests:', () => {
   [Controller, RestController].forEach(decorator => {
     describe(`decorator ${decorator.name}`, () => {
-      test('should work with config', async () => {
+      test.only('should work with config', async () => {
         @decorator('rest.test.base')
         class TestController {
           @Get('rest.test.get')
@@ -39,14 +42,13 @@ describe('Integration Tests:', () => {
         appTest.addClass(TestController);
         appTest.addConf('rest.test', {
           base: '/test',
-          get: '/'
+          get: '/',
         });
         appTest.addClass(TestController);
         await appTest.build();
-        const response = await appTest
-          .supertest()
-          .get('/test')
-          .expect(200);
+        const response = await appTest.supertest().get('/test');
+        console.log(response);
+        // .expect(200);
         expect(response).toMatchSnapshot();
       });
 
@@ -92,15 +94,12 @@ describe('Integration Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          public async getTest(
-            ctx: koaRouter.IRouterContext,
-            nextFunc: () => Promise<any>
-          ) {
+          public async getTest(@Next() nextFunc: () => Promise<any>) {
             await nextFunc();
           }
 
           @Get('/')
-          public getTest2(ctx: koaRouter.IRouterContext) {
+          public getTest2() {
             return 'GET';
           }
         }
@@ -118,10 +117,7 @@ describe('Integration Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          public getTest(
-            ctx: koaRouter.IRouterContext,
-            nextFunc: () => Promise<any>
-          ) {
+          public getTest(@Next() nextFunc: () => Promise<any>) {
             return new Promise(resolve => {
               setTimeout(
                 () => {
@@ -134,7 +130,7 @@ describe('Integration Tests:', () => {
           }
 
           @Get('/')
-          public getTest2(ctx: koaRouter.IRouterContext) {
+          public getTest2() {
             return 'GET';
           }
         }
@@ -151,15 +147,12 @@ describe('Integration Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          public async getTest(
-            ctx: koaRouter.IRouterContext,
-            nextFunc: () => Promise<any>
-          ) {
+          public async getTest(@Next() nextFunc: () => Promise<any>) {
             await nextFunc();
           }
 
           @Get('/')
-          public getTest2(ctx: koaRouter.IRouterContext) {
+          public getTest2() {
             return new Promise(resolve => {
               setTimeout(resolve, 100, 'GET');
             });
@@ -178,27 +171,27 @@ describe('Integration Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          public getTest(ctx: koaRouter.IRouterContext) {
+          public getTest(@Context() ctx: GabContext) {
             ctx.body = 'GET';
           }
           @Post('/')
-          public postTest(ctx: koaRouter.IRouterContext) {
+          public postTest(@Context() ctx: GabContext) {
             ctx.body = 'POST';
           }
           @Put('/')
-          public putTest(ctx: koaRouter.IRouterContext) {
+          public putTest(@Context() ctx: GabContext) {
             ctx.body = 'PUT';
           }
           @Patch('/')
-          public patchTest(ctx: koaRouter.IRouterContext) {
+          public patchTest(@Context() ctx: GabContext) {
             ctx.body = 'PATCH';
           }
           @Head('/')
-          public headTest(ctx: koaRouter.IRouterContext) {
+          public headTest(@Context() ctx: GabContext) {
             ctx.body = 'HEAD';
           }
           @Delete('/')
-          public deleteTest(ctx: koaRouter.IRouterContext) {
+          public deleteTest(@Context() ctx: GabContext) {
             ctx.body = 'DELETE';
           }
         }
@@ -229,7 +222,7 @@ describe('Integration Tests:', () => {
         @decorator('/')
         class TestController {
           @Method('propfind', '/')
-          public getTest(ctx: koaRouter.IRouterContext) {
+          public getTest(@Context() ctx: GabContext) {
             ctx.body = 'PROPFIND';
           }
         }
@@ -248,7 +241,7 @@ describe('Integration Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          public getTest(ctx: koaRouter.IRouterContext) {
+          public getTest() {
             return { hello: 'world' };
           }
         }
@@ -279,7 +272,7 @@ describe('Integration Tests:', () => {
             return (prefix: string) =>
               new koaRouter({
                 prefix,
-                sensitive: true
+                sensitive: true,
               });
           }
         }

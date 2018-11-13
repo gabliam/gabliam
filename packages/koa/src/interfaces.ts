@@ -1,26 +1,10 @@
 import { koaRouter } from './koa';
-
-/**
- * Config for koa plugin
- */
-export interface KoaPluginConfig {
-  /**
-   * Root path of koa plugin
-   */
-  rootPath: string;
-
-  /**
-   * Port of koa
-   */
-  port: number;
-
-  /**
-   * Hostname of koa
-   */
-  hostname: string;
-}
-
+import { defaultMethods } from '@gabliam/web-core';
 /**
  * Represent a method that create an koa router
  */
 export type RouterCreator = (path?: string) => koaRouter;
+
+type Filter<T, U> = T extends U ? T : never;
+
+export type KoaMethods = Filter<keyof koaRouter, defaultMethods>;

@@ -21,7 +21,6 @@ module.exports = {
   "testEnvironment": "node",
   "testRegex": "(/__tests__/.*)\\.test\\.(ts|tsx|js)$",
   "testPathIgnorePatterns": [
-    "packages/koa",
     "packages/graphql-express",
     "packages/graphql-koa"
   ],

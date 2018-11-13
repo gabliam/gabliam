@@ -1,5 +1,14 @@
 import { METADATA_KEY } from '../constants';
 
+export type defaultMethods =
+  | 'all'
+  | 'get'
+  | 'post'
+  | 'put'
+  | 'patch'
+  | 'head'
+  | 'delete';
+
 /**
  * Controller method metadata
  */

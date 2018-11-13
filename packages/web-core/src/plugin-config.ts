@@ -18,26 +18,26 @@ export interface WebPluginConfig {
   hostname: string;
 }
 
-export interface RestMetadata extends WebPluginConfig {
+export interface RestMetadata<T = string> extends WebPluginConfig {
   controllerInfo: Map<
     inversifyInterfaces.ServiceIdentifier<any>,
-    ControllerInfo
+    ControllerInfo<T>
   >;
 }
 
-export interface ControllerInfo {
+export interface ControllerInfo<T = string> {
   controllerPath: string;
 
-  methods: MethodInfo[];
+  methods: MethodInfo<T>[];
 }
 
-export interface MethodInfo {
+export interface MethodInfo<T = string> {
   controllerId: inversifyInterfaces.ServiceIdentifier<any>;
   methodName: string;
   json: boolean;
   paramList: ParameterMetadata[];
   methodPath: string;
-  method: string;
+  method: T;
   controllerInterceptors: Interceptors;
   methodInterceptors: Interceptors;
 }

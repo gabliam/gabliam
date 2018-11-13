@@ -1,9 +1,3 @@
-export const DEFAULT_ROUTING_ROOT_PATH = '/';
-
-export const KOA_PLUGIN_CONFIG = Symbol('GABLIAM/KOA_PLUGIN_CONFIG');
-
-export const APP = Symbol('GABLIAM/KOA_APP');
-
 /**
  * Represent a custom router creator
  *
@@ -21,12 +15,8 @@ export const APP = Symbol('GABLIAM/KOA_APP');
  *  }
  * }
  */
-export const CUSTOM_ROUTER_CREATOR = Symbol(
-  'GABLIAM/CUSTOM_KOA_ROUTER_CREATOR'
-);
+export const CUSTOM_ROUTER_CREATOR = Symbol('GABLIAM/CUSTOM_ROUTER_CREATOR');
 
-export const SERVER = Symbol('GABLIAM/KOA_SERVER');
-
-export const ERRORS_MSGS = {
-  DUPLICATED_CONFIG_DECORATOR: `Cannot apply @KoaConfig decorator multiple times on same method.`
+export const METADATA_KEY = {
+  koaInterceptor: '_koa_interceptor',
 };

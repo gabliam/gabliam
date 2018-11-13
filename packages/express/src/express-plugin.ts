@@ -21,13 +21,13 @@ import {
   WebPluginBase,
   WebPluginConfig,
   WEB_PLUGIN_CONFIG,
-  getContext
+  getContext,
 } from '@gabliam/web-core';
 import * as d from 'debug';
 import * as http from 'http';
 import { CUSTOM_ROUTER_CREATOR } from './constants';
 import { express } from './express';
-import { RouterCreator } from './interfaces';
+import { RouterCreator, ExpressMethods } from './interfaces';
 import {
   addContextMiddleware,
   addMiddlewares,
@@ -115,7 +115,10 @@ export class ExpressPlugin extends WebPluginBase implements GabliamPlugin {
     }
   }
 
-  async buildControllers(restMetadata: RestMetadata, container: Container) {
+  async buildControllers(
+    restMetadata: RestMetadata<ExpressMethods>,
+    container: Container
+  ) {
     const app = container.get<express.Application>(APP);
 
     // get the router creator
@@ -138,7 +141,7 @@ export class ExpressPlugin extends WebPluginBase implements GabliamPlugin {
         const execCtx = new ExecutionContext(controller, methodInfo);
 
         // create handler
-        const handler: express.RequestHandler = this.handlerFactory(execCtx);
+        const handler = this.handlerFactory(execCtx);
 
         const interceptors: express.RequestHandler[] = [];
         for (const i of [
@@ -161,7 +164,7 @@ export class ExpressPlugin extends WebPluginBase implements GabliamPlugin {
         }
 
         // register handler in router
-        (router as any)[methodInfo.method](
+        router[methodInfo.method](
           methodInfo.methodPath,
           ...interceptors,
           handler,

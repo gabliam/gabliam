@@ -1,10 +1,8 @@
 import { GabRequest } from '@gabliam/web-core';
 import { alias } from 'property-tunnel';
-import * as qs from 'qs';
-import * as url from 'url';
-import { express } from './express';
+import { koa } from './koa';
 
-export class ExpressRequest implements GabRequest<express.Request> {
+export class KoaRequest implements GabRequest<koa.Request> {
   /**
    * Return the original request
    */
@@ -76,7 +74,7 @@ export class ExpressRequest implements GabRequest<express.Request> {
   /**
    * Get/Set request param
    */
-  @alias(['request', 'params'])
+  @alias(['context', 'params'])
   params: any;
 
   /**
@@ -103,6 +101,9 @@ export class ExpressRequest implements GabRequest<express.Request> {
    */
   @alias(['request', 'query'])
   query: any;
+
+  @alias(['request', 'querystring'])
+  querystring: string;
 
   // route;
 
@@ -136,13 +137,16 @@ export class ExpressRequest implements GabRequest<express.Request> {
    */
   @alias(['request', 'subdomains'], { access: 'readonly' })
   readonly subdomains: string[];
+
+  // @ts-ignore : context use with property-tunnel
+  constructor(private context: koa.Context, private request: koa.Request) {}
+
   /**
    * Check if the request was an _XMLHttpRequest_.
    */
-  @alias(['request', 'xhr'], { access: 'readonly' })
-  readonly xhr: boolean;
-
-  constructor(private request: express.Request) {}
+  get xhr() {
+    return this.request.get('X-Requested-With') === 'XMLHttpRequest';
+  }
 
   /**
    * Check if the given `type(s)` is acceptable, returning
@@ -183,9 +187,9 @@ export class ExpressRequest implements GabRequest<express.Request> {
    */
   accepts(...type: string[]): string[] | string | false {
     if (type.length) {
-      return this.request.accepts(...type);
+      return <string[] | string | false>this.request.accepts(...type);
     }
-    return this.request.accepts();
+    return <string[] | string | false>this.request.accepts();
   }
 
   /**
@@ -276,23 +280,6 @@ export class ExpressRequest implements GabRequest<express.Request> {
    *       // => false
    */
   is(type: string): string | false {
-    return this.request.is(type);
-  }
-
-  /**
-   * Get/Set query string.
-   */
-  get querystring() {
-    let search = url.parse(this.request.url, true).search || '';
-    if (search && search[0] === '?') {
-      search = search.slice(1);
-    }
-    return search;
-  }
-
-  set querystring(querystring: string) {
-    if (querystring) {
-      this.request.query = qs.parse(querystring);
-    }
+    return <string | false>this.request.is(type);
   }
 }

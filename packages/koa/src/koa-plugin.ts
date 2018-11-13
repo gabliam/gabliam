@@ -1,97 +1,66 @@
 import {
-  Scan,
-  Registry,
-  Plugin,
   Container,
   GabliamPlugin,
-  ValueExtractor,
-  VALUE_EXTRACTOR,
+  Plugin,
+  Registry,
+  Scan,
+  toPromise,
 } from '@gabliam/core';
 import {
-  KOA_PLUGIN_CONFIG,
+  AfterResponseInterceptor,
   APP,
-  SERVER,
-  CUSTOM_ROUTER_CREATOR,
-} from './constants';
-import { KoaPluginConfig, RouterCreator } from './interfaces';
-import {
-  TYPE,
-  METADATA_KEY,
-  PARAMETER_TYPE,
-  DEFAULT_PARAM_VALUE,
-  getMiddlewares,
-  ResponseEntity,
-  ConfigMetadata,
-  ControllerMetadata,
-  ControllerMethodMetadata,
-  ControllerParameterMetadata,
-  ParameterMetadata,
   cleanPath,
+  ExecutionContext,
+  extractParameters,
+  Interceptor,
+  InterceptorInfo,
+  ResponseEntity,
+  RestMetadata,
+  SERVER,
+  WebConfiguration,
+  WebPluginBase,
+  WebPluginConfig,
+  WEB_PLUGIN_CONFIG,
+  getContext,
 } from '@gabliam/web-core';
 import * as d from 'debug';
 import * as http from 'http';
-import { MiddlewareConfig, KoaMiddlewareConfig } from './middlewares';
+import { CUSTOM_ROUTER_CREATOR } from './constants';
 import { koa, koaRouter } from './koa';
+import { RouterCreator, KoaMethods } from './interfaces';
+import {
+  addContextMiddleware,
+  addMiddlewares,
+  valideErrorMiddleware,
+} from './middleware';
+import { isKoaInterceptor } from './koa-interceptor';
 
-const debug = d('Gabliam:Plugin:KoaPlugin');
+const debug = d('Gabliam:Plugin:ExpressPlugin');
 
 @Plugin('KoaPlugin')
 @Scan()
-export class KoaPlugin implements GabliamPlugin {
-  /**
-   * binding phase
-   *
-   * Bind all controller and bind koa app
-   * @param  {Container} container
-   * @param  {Registry} registry
-   */
-  bind(container: Container, registry: Registry) {
+export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
+  bindApp(
+    container: Container,
+    registry: Registry,
+    webConfiguration: WebConfiguration
+  ): void {
     container.bind(APP).toConstantValue(new koa());
-    registry.get(TYPE.Controller).forEach(({ id, target }) =>
-      container
-        .bind<any>(id)
-        .to(target)
-        .inSingletonScope()
-    );
 
-    container.bind(MiddlewareConfig).toConstantValue(new MiddlewareConfig());
-  }
+    webConfiguration.addwebConfig({
+      instance: valideErrorMiddleware,
+      order: 0,
+    });
 
-  build(container: Container, registry: Registry) {
-    this.buildKoaConfig(container, registry);
-    this.buildControllers(container, registry);
-  }
+    webConfiguration.addwebConfig({
+      instance: addMiddlewares,
+      order: 1,
+    });
 
-  /**
-   * Management of @middleware decorator in config class
-   *
-   * @param  {Container} container
-   * @param  {Registry} registry
-   * @param  {any} confInstance
-   */
-  config(container: Container, registry: Registry, confInstance: any) {
-    const middlewareConfig = container.get<KoaMiddlewareConfig>(
-      MiddlewareConfig
-    );
-    // if config class has a @middleware decorator, add in this.middlewares for add it in building phase
-    if (
-      Reflect.hasMetadata(
-        METADATA_KEY.MiddlewareConfig,
-        confInstance.constructor
-      )
-    ) {
-      const metadataList: ConfigMetadata[] = Reflect.getOwnMetadata(
-        METADATA_KEY.MiddlewareConfig,
-        confInstance.constructor
-      );
-
-      metadataList.forEach(({ key, order }) => {
-        middlewareConfig.addMiddleware({
-          order,
-          instance: confInstance[key].bind(confInstance[key]),
-        });
-      });
-    }
+    webConfiguration.addwebConfig({
+      instance: addContextMiddleware,
+      order: 2,
+    });
   }
 
   async destroy(container: Container, registry: Registry) {
@@ -109,11 +78,11 @@ export class KoaPlugin implements GabliamPlugin {
   }
 
   async start(container: Container, registry: Registry) {
-    const restConfig = container.get<KoaPluginConfig>(KOA_PLUGIN_CONFIG);
+    const restConfig = container.get<WebPluginConfig>(WEB_PLUGIN_CONFIG);
     const app = container.get<koa>(APP);
     const port = restConfig.port;
 
-    const server = http.createServer(app.callback());
+    const server = http.createServer(<any>app);
     server.listen(port, restConfig.hostname);
     server.on('error', onError);
     server.on('listening', onListening);
@@ -147,31 +116,11 @@ export class KoaPlugin implements GabliamPlugin {
     }
   }
 
-  /**
-   * Build koa middleware
-   *
-   * @param  {Container} container
-   * @param  {Registry} registry
-   */
-  private buildKoaConfig(container: Container, registry: Registry) {
-    const middlewareConfig = container.get<KoaMiddlewareConfig>(
-      MiddlewareConfig
-    );
+  async buildControllers(
+    restMetadata: RestMetadata<KoaMethods>,
+    container: Container
+  ) {
     const app = container.get<koa>(APP);
-    middlewareConfig.middlewares
-      .sort((a, b) => a.order - b.order)
-      .forEach(({ instance }) => instance(app));
-  }
-
-  /**
-   * Build all controllers
-   *
-   * @param  {Container} container
-   * @param  {Registry} registry
-   */
-  private buildControllers(container: Container, registry: Registry) {
-    const restConfig = container.get<KoaPluginConfig>(KOA_PLUGIN_CONFIG);
-    const valueExtractor = container.get<ValueExtractor>(VALUE_EXTRACTOR);
 
     // get the router creator
     let routerCreator: RouterCreator = (prefix?: string) =>
@@ -182,110 +131,105 @@ export class KoaPlugin implements GabliamPlugin {
       routerCreator = container.get<RouterCreator>(CUSTOM_ROUTER_CREATOR);
     } catch (e) {}
 
-    debug('registerControllers', TYPE.Controller);
-    const controllerIds = registry.get(TYPE.Controller);
-    controllerIds.forEach(({ id: controllerId }) => {
+    for (const [
+      controllerId,
+      { methods, controllerPath },
+    ] of restMetadata.controllerInfo) {
       const controller = container.get<object>(controllerId);
+      const router = routerCreator();
+      const routerPath = cleanPath(`${restMetadata.rootPath}${controllerPath}`);
 
-      const controllerMetadata: ControllerMetadata = Reflect.getOwnMetadata(
-        METADATA_KEY.controller,
-        controller.constructor
-      );
+      debug(`New route : "${routerPath}"`);
 
-      const controllerMiddlewares = getMiddlewares(
-        container,
-        controller.constructor
-      );
+      for (const methodInfo of methods) {
+        const execCtx = new ExecutionContext(controller, methodInfo);
 
-      const methodMetadatas: ControllerMethodMetadata[] = Reflect.getOwnMetadata(
-        METADATA_KEY.controllerMethod,
-        controller.constructor
-      );
+        // create handler
+        const handler = this.handlerFactory(execCtx);
 
-      const parameterMetadata: ControllerParameterMetadata = Reflect.getOwnMetadata(
-        METADATA_KEY.controllerParameter,
-        controller.constructor
-      );
-      // if the controller has controllerMetadata and methodMetadatas
-      if (controllerMetadata && methodMetadatas) {
-        const controllerPath = valueExtractor(
-          controllerMetadata.path,
-          controllerMetadata.path
-        );
-
-        let routerPath: string | undefined = cleanPath(
-          `${restConfig.rootPath}${controllerPath}`
-        );
-
-        if (routerPath === '/') {
-          routerPath = undefined;
+        const interceptors: koaRouter.IMiddleware[] = [];
+        for (const i of [
+          ...methodInfo.controllerInterceptors.interceptors,
+          ...methodInfo.methodInterceptors.interceptors,
+        ]) {
+          interceptors.push(
+            ...(await this.interceptorToMiddleware(execCtx, i, 'intercept'))
+          );
         }
 
-        debug(`New route : "${routerPath}"`);
-        const router = routerCreator(routerPath);
-
-        methodMetadatas.forEach((methodMetadata: ControllerMethodMetadata) => {
-          let paramList: ParameterMetadata[] = [];
-          if (parameterMetadata) {
-            paramList = parameterMetadata.get(methodMetadata.key) || [];
-          }
-          let methodMetadataPath = cleanPath(
-            valueExtractor(methodMetadata.path, methodMetadata.path)
+        const afterResponseInterceptors: koaRouter.IMiddleware[] = [];
+        for (const i of [
+          ...methodInfo.methodInterceptors.afterResponseInterceptors,
+          ...methodInfo.controllerInterceptors.afterResponseInterceptors,
+        ]) {
+          afterResponseInterceptors.push(
+            ...(await this.interceptorToMiddleware(execCtx, i, 'afterResponse'))
           );
+        }
 
-          if (methodMetadataPath[0] !== '/') {
-            methodMetadataPath = '/' + methodMetadataPath;
-          }
-
-          const methodMiddlewares = getMiddlewares(
-            container,
-            controller.constructor,
-            methodMetadata.key
-          );
-          debug(methodMetadataPath);
-          debug({ methodMiddlewares, controllerMiddlewares });
-          // create handler
-          const handler: koaRouter.IMiddleware = this.handlerFactory(
-            container,
-            controllerId,
-            methodMetadata.key,
-            controllerMetadata.json,
-            paramList
-          );
-
-          // register handler in router
-          (router as any)[methodMetadata.method](
-            methodMetadataPath,
-            ...controllerMiddlewares,
-            ...methodMiddlewares,
-            handler
-          );
-        });
-        const app = container.get<koa>(APP);
-        app.use(router.routes()).use(router.allowedMethods());
+        // register handler in router
+        router[methodInfo.method](
+          methodInfo.methodPath,
+          ...interceptors,
+          handler,
+          ...afterResponseInterceptors
+        );
       }
-    });
+      app.use(router.routes()).use(router.allowedMethods());
+    }
+  }
+  private async interceptorToMiddleware<
+    T extends Interceptor | AfterResponseInterceptor,
+    U extends keyof T
+  >(
+    execCtx: ExecutionContext,
+    { instance, paramList }: InterceptorInfo<T>,
+    type: U
+  ): Promise<koaRouter.IMiddleware[]> {
+    if (isKoaInterceptor(instance)) {
+      const res = await toPromise((instance[type] as any)());
+      if (!Array.isArray(res)) {
+        return [res];
+      }
+      return res;
+    }
+    return [
+      async (context: koa.Context, next: () => Promise<any>) => {
+        const args = extractParameters(
+          instance,
+          type,
+          execCtx,
+          getContext(context.req),
+          next,
+          paramList
+        );
+
+        await toPromise((instance[type] as any)(...args));
+      },
+    ];
   }
 
-  private handlerFactory(
-    container: Container,
-    controllerId: any,
-    key: string,
-    json: boolean,
-    parameterMetadata: ParameterMetadata[]
-  ): koaRouter.IMiddleware {
-    return async (ctx: koaRouter.IRouterContext, next: () => Promise<any>) => {
-      const controller = container.get<any>(controllerId);
+  private handlerFactory(execCtx: ExecutionContext): koaRouter.IMiddleware {
+    return async (
+      context: koaRouter.IRouterContext,
+      next: () => Promise<any>
+    ) => {
+      const req = context.req;
+      const ctx = getContext(req);
+      const methodInfo = execCtx.getMethodInfo();
+      const controller = execCtx.getClass();
+
+      (req as any).jsonHandler = methodInfo.json;
 
       // extract all args
-      const args = this.extractParameters(
+      const args = extractParameters(
         controller,
-        key,
+        methodInfo.methodName,
+        execCtx,
         ctx,
         next,
-        parameterMetadata
+        methodInfo.paramList
       );
-      const result: any = await Promise.resolve(controller[key](...args));
 
       const sendJsonValue = (value: any = '') => {
         let val: any;
@@ -295,120 +239,51 @@ export class KoaPlugin implements GabliamPlugin {
           /* istanbul ignore next */
           val = value;
         }
-        ctx.type = 'application/json';
-        ctx.body = val;
+        context.type = 'application/json';
+        context.body = val;
       };
 
       // response handler if the result is a ResponseEntity
       function responseEntityHandler(value: ResponseEntity) {
         if (value.hasHeader()) {
           Object.keys(value.headers).forEach(k =>
-            ctx.set(k, '' + value.headers[k])
+            context.set(k, '' + value.headers[k])
           );
         }
-        ctx.status = value.status;
+        context.status = value.status;
         sendJsonValue(value.body);
       }
+      const result: any = await toPromise(
+        controller[methodInfo.methodName](...args)
+      );
 
-      // try to resolve promise
-      if (result && result instanceof ResponseEntity) {
-        responseEntityHandler(result);
-      } else if (result !== undefined && !ctx.headerSent) {
-        if (json) {
-          sendJsonValue(result);
-        } else {
-          ctx.body = result;
-        }
-      }
-    };
-  }
+      if (!context.headerSent) {
+        if (result !== undefined) {
+          if (result instanceof ResponseEntity) {
+            responseEntityHandler(result);
+          } else if (methodInfo.json) {
+            sendJsonValue(result);
+          } else {
+            context.body = result;
+          }
+        } else if (ctx.body !== undefined) {
+          const { status, message, body, type } = ctx;
+          if (type) {
+            context.response.type = type;
+          }
+          if (message) {
+            context.response.message = message;
+          }
 
-  private extractParameters(
-    target: any,
-    key: string,
-    ctx: koaRouter.IRouterContext,
-    next: () => Promise<any>,
-    params: ParameterMetadata[]
-  ): any[] {
-    const args = [];
-    if (!params || !params.length) {
-      return [ctx, next];
-    }
-
-    // create de param getter
-    const getParam = this.getFuncParam(target, key);
-
-    for (const item of params) {
-      switch (item.type) {
-        default:
-          args[item.index] = ctx.response;
-          break; // response
-        case PARAMETER_TYPE.REQUEST:
-          args[item.index] = getParam(ctx.request, null, item);
-          break;
-        case PARAMETER_TYPE.NEXT:
-          args[item.index] = next;
-          break;
-        case PARAMETER_TYPE.PARAMS:
-          args[item.index] = getParam(ctx, 'params', item);
-          break;
-        case PARAMETER_TYPE.QUERY:
-          args[item.index] = getParam(ctx.request, 'query', item);
-          break;
-        case PARAMETER_TYPE.BODY:
-          args[item.index] = getParam(ctx.request, 'body', item);
-          break;
-        case PARAMETER_TYPE.HEADERS:
-          args[item.index] = getParam(ctx.request, 'headers', item);
-          break;
-        case PARAMETER_TYPE.COOKIES:
-          args[item.index] = getParam(ctx, 'cookies', item, true);
-          break;
-      }
-    }
-    args.push(ctx, next);
-    return args;
-  }
-
-  private getFuncParam(target: any, key: string) {
-    return (
-      source: any,
-      paramType: string | null,
-      itemParam: ParameterMetadata,
-      getter = false
-    ) => {
-      const name = itemParam.parameterName;
-
-      // get the param source
-      let param = source;
-      if (paramType !== null && source[paramType]) {
-        param = source[paramType];
-      }
-
-      let res = getter ? param.get(name) : param[name];
-      if (res !== undefined) {
-        /**
-         * For query, all value sare considered to string value.
-         * If the query waits for a Number, we try to convert the value
-         */
-        if (paramType === 'query' || paramType === 'params') {
-          const type: Function[] = Reflect.getMetadata(
-            'design:paramtypes',
-            target,
-            key
-          );
-          if (Array.isArray(type) && type[itemParam.index]) {
-            try {
-              if (type[itemParam.index].name === 'Number') {
-                // parseFloat for compatibility with integer and float
-                res = Number.parseFloat(res);
-              }
-            } catch (e) {}
+          if (status) {
+            context.response.status = status;
+          }
+          if (methodInfo.json) {
+            sendJsonValue(body);
+          } else {
+            context.body = body;
           }
         }
-        return res;
-      } else {
-        return name === DEFAULT_PARAM_VALUE ? param : undefined;
       }
     };
   }
