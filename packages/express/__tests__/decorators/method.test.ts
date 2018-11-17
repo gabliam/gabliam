@@ -12,7 +12,7 @@ import {
   Delete,
   Method,
 } from '@gabliam/web-core';
-import { RegistryMetada } from '@gabliam/core/lib/interfaces';
+import { RegistryMetada } from '@gabliam/core';
 import { METADATA_KEY as CORE_METADATA_KEY } from '@gabliam/core/lib/constants';
 
 describe('Methods decorators', () => {

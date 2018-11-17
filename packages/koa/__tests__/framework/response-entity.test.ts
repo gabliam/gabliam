@@ -7,8 +7,8 @@ import {
   accepted,
   badRequest,
   noContent,
-  notFound
-} from '../../src';
+  notFound,
+} from '@gabliam/web-core';
 import { KoaPluginTest } from '../koa-plugin-test';
 import * as HttpStatus from 'http-status-codes';
 

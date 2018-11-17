@@ -1,53 +1,54 @@
-import { Controller } from '../../src/decorators';
-import * as methods from '../../src/decorators/method';
 import {
   ControllerMetadata,
   ControllerMethodMetadata,
-  MiddlewareMetadata,
-  METADATA_KEY
+  Controller,
+  METADATA_KEY,
+  All,
+  Get,
+  Post,
+  Put,
+  Patch,
+  Head,
+  Delete,
+  Method,
 } from '@gabliam/web-core';
-import { RegistryMetada } from '@gabliam/core/lib/interfaces';
+import { RegistryMetada } from '@gabliam/core';
 import { METADATA_KEY as CORE_METADATA_KEY } from '@gabliam/core/lib/constants';
 
 describe('Methods decorators', () => {
   [
     {
       name: 'All',
-      dec: methods.All
+      dec: All,
     },
     {
       name: 'Get',
-      dec: methods.Get
+      dec: Get,
     },
     {
       name: 'Post',
-      dec: methods.Post
+      dec: Post,
     },
     {
       name: 'Put',
-      dec: methods.Put
+      dec: Put,
     },
     {
       name: 'Patch',
-      dec: methods.Patch
+      dec: Patch,
     },
     {
       name: 'Head',
-      dec: methods.Head
+      dec: Head,
     },
     {
       name: 'Delete',
-      dec: methods.Delete
-    }
+      dec: Delete,
+    },
   ].forEach(m => {
     test(`should add Methods metadata to a class when decorated with @${
       m.name
     }`, async () => {
-      const middlewares = [
-        function() {
-          return;
-        }
-      ];
       @Controller('/test')
       class TestController {
         @m.dec(`/${m.name}`)
@@ -55,7 +56,7 @@ describe('Methods decorators', () => {
           return;
         }
 
-        @m.dec(`/${m.name}2`, ...middlewares)
+        @m.dec(`/${m.name}2`)
         test2() {
           return;
         }
@@ -81,41 +82,26 @@ describe('Methods decorators', () => {
       );
 
       expect(controllerMethodMetadata).toMatchSnapshot();
-
-      const middlewareMetadata: MiddlewareMetadata<
-        any
-      >[] = Reflect.getOwnMetadata(
-        METADATA_KEY.middleware,
-        TestController,
-        'test2'
-      );
-
-      expect(middlewareMetadata).toMatchSnapshot();
     });
   });
 
   test('should add method metadata to a class when decorated with @httpMethod', () => {
-    const middleware = [
-      function() {
-        return;
-      }
-    ];
     const path = 'foo';
     const method = 'get';
 
     @Controller('/test')
     class TestController {
-      @methods.Method(method, path, ...middleware)
+      @Method(method, path)
       public test() {
         return;
       }
 
-      @methods.Method('foo', 'bar')
+      @Method('foo', 'bar')
       public test2() {
         return;
       }
 
-      @methods.Method('bar', 'foo')
+      @Method('bar', 'foo')
       public test3() {
         return;
       }
@@ -139,17 +125,6 @@ describe('Methods decorators', () => {
       METADATA_KEY.controllerMethod,
       TestController
     );
-
     expect(controllerMethodMetadata).toMatchSnapshot();
-
-    const middlewareMetadata: MiddlewareMetadata<
-      any
-    >[] = Reflect.getOwnMetadata(
-      METADATA_KEY.middleware,
-      TestController,
-      'test'
-    );
-
-    expect(middlewareMetadata).toMatchSnapshot();
   });
 });

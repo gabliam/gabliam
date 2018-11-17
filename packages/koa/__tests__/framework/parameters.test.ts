@@ -1,22 +1,19 @@
 import {
   Controller,
-  Get,
-  RequestParam,
-  Request,
-  Response,
-  QueryParam,
-  Post,
-  RequestBody,
-  KoaConfig,
-  RequestHeaders,
   Cookies,
-  koa,
-  koaRouter,
-  Next
-} from '../../src/index';
-import { KoaPluginTest } from '../koa-plugin-test';
-import { Config } from '@gabliam/core';
+  Get,
+  Next,
+  Post,
+  QueryParam,
+  Request,
+  RequestBody,
+  RequestHeaders,
+  RequestParam,
+  Response,
+} from '@gabliam/web-core';
 import * as sinon from 'sinon';
+import { koa, koaRouter } from '../../src/index';
+import { KoaPluginTest } from '../koa-plugin-test';
 const koaBody = require('koa-body');
 
 let appTest: KoaPluginTest;
@@ -181,20 +178,7 @@ describe('Parameters:', () => {
       }
     }
 
-    @Config()
-    class ServerConfig {
-      @KoaConfig()
-      serverConfig(app: koa) {
-        app.use(
-          koaBody({
-            jsonLimit: '1kb'
-          })
-        );
-      }
-    }
-
     appTest.addClass(TestController);
-    appTest.addClass(ServerConfig);
     await appTest.build();
     const response = await appTest
       .supertest()
@@ -227,15 +211,12 @@ describe('Parameters:', () => {
     @Controller('/')
     class TestController {
       @Get('/')
-      public getCookie(
-        @Cookies('cookie') cookie: any,
-        ctx: koaRouter.IRouterContext
-      ) {
+      public getCookie(@Cookies('cookie') cookie: any) {
         // console.log('cookie', cookie)
         if (cookie) {
-          ctx.body = cookie;
+          return cookie;
         } else {
-          ctx.body = ':(';
+          return ':(';
         }
       }
     }

@@ -48,16 +48,16 @@ export class ExpressPlugin extends WebPluginBase implements GabliamPlugin {
     container.bind(APP).toConstantValue(express());
     webConfiguration.addwebConfig({
       instance: addMiddlewares,
-      order: 0,
+      order: -2,
     });
 
     webConfiguration.addwebConfig({
       instance: addContextMiddleware,
-      order: 1,
+      order: -1,
     });
     webConfiguration.addWebConfigAfterCtrl({
       instance: valideErrorMiddleware,
-      order: 0,
+      order: -1,
     });
   }
 

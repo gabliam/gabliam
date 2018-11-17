@@ -49,17 +49,17 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
 
     webConfiguration.addwebConfig({
       instance: valideErrorMiddleware,
-      order: 0,
+      order: -3,
     });
 
     webConfiguration.addwebConfig({
       instance: addMiddlewares,
-      order: 1,
+      order: -2,
     });
 
     webConfiguration.addwebConfig({
       instance: addContextMiddleware,
-      order: 2,
+      order: -1,
     });
   }
 
@@ -120,8 +120,6 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
     restMetadata: RestMetadata<KoaMethods>,
     container: Container
   ) {
-    const app = container.get<koa>(APP);
-
     // get the router creator
     let routerCreator: RouterCreator = (prefix?: string) =>
       new koaRouter({
@@ -136,10 +134,16 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
       { methods, controllerPath },
     ] of restMetadata.controllerInfo) {
       const controller = container.get<object>(controllerId);
-      const router = routerCreator();
-      const routerPath = cleanPath(`${restMetadata.rootPath}${controllerPath}`);
+      let routerPath: string | undefined = cleanPath(
+        `${restMetadata.rootPath}${controllerPath}`
+      );
+
+      if (routerPath === '/') {
+        routerPath = undefined;
+      }
 
       debug(`New route : "${routerPath}"`);
+      const router = routerCreator(routerPath);
 
       for (const methodInfo of methods) {
         const execCtx = new ExecutionContext(controller, methodInfo);
@@ -170,11 +174,11 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
         // register handler in router
         router[methodInfo.method](
           methodInfo.methodPath,
-          ...interceptors,
-          handler,
-          ...afterResponseInterceptors
+          ...[...afterResponseInterceptors, ...interceptors, handler]
         );
       }
+      const app = container.get<koa>(APP);
+
       app.use(router.routes()).use(router.allowedMethods());
     }
   }
@@ -205,6 +209,7 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
         );
 
         await toPromise((instance[type] as any)(...args));
+        await next();
       },
     ];
   }

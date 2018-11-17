@@ -7,7 +7,7 @@ import * as supertest from 'supertest';
 import { APP } from '@gabliam/web-core';
 
 export class KoaPluginTest extends GabliamTest {
-  public app!: koa;
+  public app: koa;
 
   constructor() {
     const gab = new Gabliam().addPlugin(KoaPlugin);

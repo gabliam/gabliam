@@ -1,4 +1,6 @@
 import {
+  Get,
+  Post,
   Request,
   Response,
   RequestParam,
@@ -7,21 +9,14 @@ import {
   RequestHeaders,
   Cookies,
   Next,
-  Get,
-  Post
-} from '../../src';
-import { ControllerParameterMetadata, METADATA_KEY } from '@gabliam/web-core';
+  ControllerParameterMetadata,
+  METADATA_KEY,
+} from '@gabliam/web-core';
 
 describe('params decorators', () => {
   test('should add parameter metadata to a class when decorated with @params', () => {
-    const middleware = [
-      function() {
-        return;
-      }
-    ];
-
     class TestController {
-      @Get('/foo/:id', ...middleware)
+      @Get('/foo/:id')
       public test(
         @RequestParam('id') id: any,
         @QueryParam('cat') cat: any,

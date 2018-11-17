@@ -1,4 +1,5 @@
-import { Controller, Get, KoaConfig, koa, koaRouter } from '../../src/index';
+import { Controller, Get, WebConfig } from '@gabliam/web-core';
+import { koa, koaRouter } from '../../src';
 import { KoaPluginTest } from '../koa-plugin-test';
 import { Config } from '@gabliam/core';
 import * as sinon from 'sinon';
@@ -40,7 +41,7 @@ const middleware: any = {
   ) {
     result += 'd';
     await nextFunc();
-  }
+  },
 };
 const spyA = sinon.spy(middleware, 'a');
 const spyB = sinon.spy(middleware, 'b');
@@ -66,14 +67,14 @@ test('@KoaConfig', async () => {
   @Controller('/')
   class TestController {
     @Get('/')
-    public getTest(ctx: koaRouter.IRouterContext) {
-      ctx.body = 'GET';
+    public getTest() {
+      return 'GET';
     }
   }
 
   @Config()
   class ServerConfig {
-    @KoaConfig()
+    @WebConfig()
     serverConfig(app: koa) {
       app.use(spyA);
       app.use(spyB);
@@ -100,24 +101,24 @@ test('@KoaConfig Order', async () => {
   @Controller('/')
   class TestController {
     @Get('/')
-    public getTest(ctx: koaRouter.IRouterContext) {
-      ctx.body = 'GET';
+    public getTest() {
+      return 'GET';
     }
   }
 
   @Config()
   class ServerConfig {
-    @KoaConfig(150)
+    @WebConfig(150)
     serverConfigC(app: koa) {
       app.use(spyC);
     }
 
-    @KoaConfig(100)
+    @WebConfig(100)
     serverConfigB(app: koa) {
       app.use(spyB);
     }
 
-    @KoaConfig(50)
+    @WebConfig(50)
     serverConfigA(app: koa) {
       app.use(spyA);
     }
@@ -149,7 +150,7 @@ test('ErrorConfig', async () => {
 
   @Config()
   class ServerConfig {
-    @KoaConfig()
+    @WebConfig()
     serverConfig(app: koa) {
       app.use(spyE);
     }
@@ -179,12 +180,12 @@ test('ErrorConfig order', async () => {
 
   @Config()
   class ServerConfig {
-    @KoaConfig(100)
+    @WebConfig(100)
     serverConfig(app: koa) {
       app.use(spyE);
     }
 
-    @KoaConfig(50)
+    @WebConfig(50)
     serverConfigD(app: koa) {
       app.use(spyD);
     }

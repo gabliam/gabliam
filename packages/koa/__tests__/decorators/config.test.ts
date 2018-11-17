@@ -1,49 +1,48 @@
-import { KoaConfig } from '../../src/decorators';
-import { ConfigMetadata, METADATA_KEY } from '@gabliam/web-core';
+import { WebConfigMetadata, METADATA_KEY, WebConfig } from '@gabliam/web-core';
 
-describe('KoaConfig decorator', () => {
-  test('should add KoaConfig metadata to a class when decorated with @KoaConfig', () => {
+describe('WebConfig decorator', () => {
+  test('should add WebConfig metadata to a class when decorated with @WebConfig', () => {
     class TestConfig {
-      @KoaConfig()
+      @WebConfig()
       testMethod() {}
 
-      @KoaConfig()
+      @WebConfig()
       test2Method() {}
     }
 
-    const koaConfigMetadata: ConfigMetadata[] = Reflect.getMetadata(
-      METADATA_KEY.MiddlewareConfig,
+    const webConfigMetadata: WebConfigMetadata[] = Reflect.getMetadata(
+      METADATA_KEY.webConfig,
       TestConfig
     );
 
-    expect(koaConfigMetadata).toMatchSnapshot();
+    expect(webConfigMetadata).toMatchSnapshot();
   });
 
-  test('should add KoaConfig metadata to a class when decorated with @KoaConfig(order)', () => {
+  test('should add WebConfig metadata to a class when decorated with @WebConfig(order)', () => {
     class TestConfig {
-      @KoaConfig(50)
+      @WebConfig(50)
       testMethod() {}
 
-      @KoaConfig(100)
+      @WebConfig(100)
       test2Method() {}
     }
 
-    const koaConfigMetadata: ConfigMetadata[] = Reflect.getMetadata(
-      METADATA_KEY.MiddlewareConfig,
+    const webConfigMetadata: WebConfigMetadata[] = Reflect.getMetadata(
+      METADATA_KEY.webConfig,
       TestConfig
     );
 
-    expect(koaConfigMetadata).toMatchSnapshot();
+    expect(webConfigMetadata).toMatchSnapshot();
   });
 
-  test('should fail when decorated multiple times the same method with @KoaConfig', () => {
+  test('should fail when decorated multiple times the same method with @WebConfig', () => {
     expect(function() {
       class TestConfig {
-        @KoaConfig()
-        @KoaConfig(50)
+        @WebConfig()
+        @WebConfig(50)
         testMethod() {}
 
-        @KoaConfig(100)
+        @WebConfig(100)
         test2Method() {}
       }
       // tslint:disable-next-line:no-unused-expression

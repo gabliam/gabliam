@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`KoaConfig decorator should add KoaConfig metadata to a class when decorated with @KoaConfig 1`] = `
+exports[`WebConfig decorator should add WebConfig metadata to a class when decorated with @WebConfig 1`] = `
 Array [
   Object {
     "id": "TestConfig",
@@ -15,7 +15,7 @@ Array [
 ]
 `;
 
-exports[`KoaConfig decorator should add KoaConfig metadata to a class when decorated with @KoaConfig(order) 1`] = `
+exports[`WebConfig decorator should add WebConfig metadata to a class when decorated with @WebConfig(order) 1`] = `
 Array [
   Object {
     "id": "TestConfig",

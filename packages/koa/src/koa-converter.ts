@@ -37,6 +37,7 @@ export class KoaConverter {
         getParameterMetadata(instance, 'intercept')
       );
       await toPromise((instance['intercept'] as any)(...args));
+      await next();
     };
   }
 }

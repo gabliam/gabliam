@@ -1,20 +1,28 @@
 import {
+  Config,
+  Container,
+  getMetadata,
+  ReflectMetadata,
+  Service,
+} from '@gabliam/core';
+import { koa, KoaConverter, toInterceptor } from '@gabliam/koa';
+import {
+  All,
   Controller,
+  Delete,
+  ExecContext,
+  ExecutionContext,
   Get,
+  Head,
+  Interceptor,
+  Patch,
   Post,
   Put,
-  Patch,
-  Head,
-  Delete,
-  All,
-  koa,
-  KoaConfig,
-  Middleware,
-  MiddlewareInject
-} from '../../src/index';
-import { KoaPluginTest } from '../koa-plugin-test';
-import { Config } from '@gabliam/core';
+  UseInterceptors,
+  WebConfig,
+} from '@gabliam/web-core';
 import * as sinon from 'sinon';
+import { KoaPluginTest } from '../koa-plugin-test';
 
 let appTest: KoaPluginTest;
 
@@ -28,26 +36,37 @@ afterEach(async () => {
 
 describe('Middleware:', () => {
   let result: string;
-  const middleware: any = {
-    a: async function(ctx: koa.Context, nextFunc: () => Promise<any>) {
+
+  @Service()
+  class A implements Interceptor {
+    intercept() {
       result += 'a';
-      await nextFunc();
-    },
-    b: async function(ctx: koa.Context, nextFunc: () => Promise<any>) {
-      result += 'b';
-      await nextFunc();
-    },
-    c: async function(ctx: koa.Context, nextFunc: () => Promise<any>) {
-      result += 'c';
-      await nextFunc();
     }
-  };
-  const spyA = sinon.spy(middleware, 'a');
-  const spyB = sinon.spy(middleware, 'b');
-  const spyC = sinon.spy(middleware, 'c');
+  }
+
+  async function b(ctx: koa.Context, nextFunc: () => Promise<any>) {
+    result += 'b';
+    await nextFunc();
+  }
+
+  const B = toInterceptor(b);
+
+  @Service()
+  class C implements Interceptor {
+    intercept() {
+      result += 'c';
+    }
+  }
+
+  const spyA = sinon.spy(A.prototype, 'intercept');
+  const spyB = sinon.spy(B.prototype, 'intercept');
+  const spyC = sinon.spy(C.prototype, 'intercept');
 
   beforeEach(() => {
     result = '';
+    appTest.addClass(A);
+    appTest.addClass(B);
+    appTest.addClass(C);
     spyA.resetHistory();
     spyB.resetHistory();
     spyC.resetHistory();
@@ -56,9 +75,10 @@ describe('Middleware:', () => {
   test('should call method-level middleware correctly (GET)', async () => {
     @Controller('/')
     class TestController {
-      @Get('/', spyA, spyB, spyC)
-      public getTest(ctx: koa.Context) {
-        ctx.body = 'GET';
+      @UseInterceptors(A, B, C)
+      @Get('/')
+      public getTest() {
+        return 'GET';
       }
     }
     appTest.addClass(TestController);
@@ -79,9 +99,10 @@ describe('Middleware:', () => {
   test('should call method-level middleware correctly (POST)', async () => {
     @Controller('/')
     class TestController {
-      @Post('/', spyA, spyB, spyC)
-      public postTest(ctx: koa.Context) {
-        ctx.body = 'POST';
+      @UseInterceptors(A, B, C)
+      @Post('/')
+      public postTest() {
+        return 'POST';
       }
     }
 
@@ -102,9 +123,10 @@ describe('Middleware:', () => {
   test('should call method-level middleware correctly (PUT)', async () => {
     @Controller('/')
     class TestController {
-      @Put('/', spyA, spyB, spyC)
+      @UseInterceptors(A, B, C)
+      @Put('/')
       public postTest(ctx: koa.Context) {
-        ctx.body = 'PUT';
+        return 'PUT';
       }
     }
     appTest.addClass(TestController);
@@ -124,9 +146,10 @@ describe('Middleware:', () => {
   test('should call method-level middleware correctly (PATCH)', async () => {
     @Controller('/')
     class TestController {
-      @Patch('/', spyA, spyB, spyC)
+      @UseInterceptors(A, B, C)
+      @Patch('/')
       public postTest(ctx: koa.Context) {
-        ctx.body = 'PATCH';
+        return 'PATCH';
       }
     }
 
@@ -147,9 +170,10 @@ describe('Middleware:', () => {
   test('should call method-level middleware correctly (HEAD)', async () => {
     @Controller('/')
     class TestController {
-      @Head('/', spyA, spyB, spyC)
-      public postTest(ctx: koa.Context) {
-        ctx.body = 'HEAD';
+      @UseInterceptors(A, B, C)
+      @Head('/')
+      public postTest() {
+        return 'HEAD';
       }
     }
     appTest.addClass(TestController);
@@ -169,9 +193,10 @@ describe('Middleware:', () => {
   test('should call method-level middleware correctly (DELETE)', async () => {
     @Controller('/')
     class TestController {
-      @Delete('/', spyA, spyB, spyC)
-      public postTest(ctx: koa.Context) {
-        ctx.body = 'DELETE';
+      @UseInterceptors(A, B, C)
+      @Delete('/')
+      public postTest() {
+        return 'DELETE';
       }
     }
     appTest.addClass(TestController);
@@ -191,9 +216,10 @@ describe('Middleware:', () => {
   test('should call method-level middleware correctly (ALL)', async () => {
     @Controller('/')
     class TestController {
-      @All('/', spyA, spyB, spyC)
-      public postTest(ctx: koa.Context) {
-        ctx.body = 'ALL';
+      @UseInterceptors(A, B, C)
+      @All('/')
+      public postTest() {
+        return 'ALL';
       }
     }
     appTest.addClass(TestController);
@@ -211,14 +237,14 @@ describe('Middleware:', () => {
   });
 
   test('should call controller-level middleware correctly', async () => {
+    @UseInterceptors(A, B, C)
     @Controller({
       path: '/',
-      middlewares: [spyA, spyB, spyC]
     })
     class TestController {
       @Get('/')
-      public getTest(ctx: koa.Context) {
-        ctx.body = 'GET';
+      public getTest() {
+        return 'GET';
       }
     }
 
@@ -240,18 +266,19 @@ describe('Middleware:', () => {
     @Controller('/')
     class TestController {
       @Get('/')
-      public getTest(ctx: koa.Context) {
-        ctx.body = 'GET';
+      public getTest() {
+        return 'GET';
       }
     }
 
     @Config()
     class ServerConfig {
-      @KoaConfig()
-      serverConfig(app: koa) {
-        app.use(spyA);
-        app.use(spyB);
-        app.use(spyC);
+      @WebConfig()
+      serverConfig(app: koa, container: Container) {
+        const converter = container.get(KoaConverter);
+        app.use(converter.interceptorToMiddleware(A));
+        app.use(b);
+        app.use(converter.interceptorToMiddleware(C));
       }
     }
 
@@ -264,29 +291,30 @@ describe('Middleware:', () => {
       .get('/')
       .expect(200);
     expect(spyA.calledOnce).toBe(true);
-    expect(spyB.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);
     expect(response).toMatchSnapshot();
     expect(result).toMatchSnapshot();
   });
 
   test('should call all middleware in correct order', async () => {
+    @UseInterceptors(B)
     @Controller({
       path: '/',
-      middlewares: [spyB]
     })
     class TestController {
-      @Get('/', spyC)
-      public getTest(ctx: koa.Context) {
-        ctx.body = 'GET';
+      @UseInterceptors(C)
+      @Get('/')
+      public getTest() {
+        return 'GET';
       }
     }
 
     @Config()
     class ServerConfig {
-      @KoaConfig()
-      serverConfig(app: koa) {
-        app.use(spyA);
+      @WebConfig()
+      serverConfig(app: koa, container: Container) {
+        const converter = container.get(KoaConverter);
+        app.use(converter.interceptorToMiddleware(A));
       }
     }
 
@@ -309,20 +337,26 @@ describe('Middleware:', () => {
     const symbolId = Symbol('spyA');
     const strId = 'spyB';
 
+    @UseInterceptors(symbolId, strId)
     @Controller({
       path: '/',
-      middlewares: [symbolId, strId]
     })
     class TestController {
       @Get('/')
-      public getTest(ctx: koa.Context) {
-        ctx.body = 'GET';
+      public getTest() {
+        return 'GET';
       }
     }
 
     appTest.addClass(TestController);
-    appTest.gab.container.bind<koa.Middleware>(symbolId).toConstantValue(spyA);
-    appTest.gab.container.bind<koa.Middleware>(strId).toConstantValue(spyB);
+    appTest.gab.container
+      .bind(symbolId)
+      .to(A)
+      .inSingletonScope();
+    appTest.gab.container
+      .bind(strId)
+      .to(B)
+      .inSingletonScope();
     await appTest.build();
 
     const response = await appTest
@@ -341,15 +375,22 @@ describe('Middleware:', () => {
 
     @Controller('/')
     class TestController {
-      @Get('/', symbolId, strId)
-      public getTest(ctx: koa.Context) {
-        ctx.body = 'GET';
+      @UseInterceptors(symbolId, strId)
+      @Get('/')
+      public getTest() {
+        return 'GET';
       }
     }
 
     appTest.addClass(TestController);
-    appTest.gab.container.bind<koa.Middleware>(symbolId).toConstantValue(spyA);
-    appTest.gab.container.bind<koa.Middleware>(strId).toConstantValue(spyB);
+    appTest.gab.container
+      .bind(symbolId)
+      .to(A)
+      .inSingletonScope();
+    appTest.gab.container
+      .bind(strId)
+      .to(B)
+      .inSingletonScope();
     await appTest.build();
 
     const response = await appTest
@@ -366,20 +407,27 @@ describe('Middleware:', () => {
     const symbolId = Symbol('spyA');
     const strId = 'spyB';
 
+    @UseInterceptors(symbolId)
     @Controller({
       path: '/',
-      middlewares: [symbolId]
     })
     class TestController {
-      @Get('/', strId)
-      public getTest(ctx: koa.Context) {
-        ctx.body = 'GET';
+      @UseInterceptors(strId)
+      @Get('/')
+      public getTest() {
+        return 'GET';
       }
     }
 
     appTest.addClass(TestController);
-    appTest.gab.container.bind<koa.Middleware>(symbolId).toConstantValue(spyA);
-    appTest.gab.container.bind<koa.Middleware>(strId).toConstantValue(spyB);
+    appTest.gab.container
+      .bind(symbolId)
+      .to(A)
+      .inSingletonScope();
+    appTest.gab.container
+      .bind(strId)
+      .to(B)
+      .inSingletonScope();
     await appTest.build();
 
     const response = await appTest
@@ -396,81 +444,67 @@ describe('Middleware:', () => {
 describe('Middleware inject:', () => {
   let result: string;
   let args: string;
-  @Config()
-  class TestConfig {
-    @Middleware('a')
-    a() {
-      return () => async (ctx: koa.Context, nextFunc: () => Promise<any>) => {
-        result += 'a';
-        await nextFunc();
-      };
-    }
-
-    @Middleware('b')
-    b() {
-      return () => async (ctx: koa.Context, nextFunc: () => Promise<any>) => {
-        result += 'b';
-        await nextFunc();
-      };
-    }
-
-    @Middleware('c')
-    c(arg?: string) {
-      return () => async (ctx: koa.Context, nextFunc: () => Promise<any>) => {
-        result += 'c';
-        if (arg) {
-          args += arg;
-        }
-        await nextFunc();
-      };
-    }
-
-    @Middleware('de')
-    de() {
-      return (arg?: string, arg2?: string) => [
-        async (ctx: koa.Context, nextFunc: () => Promise<any>) => {
-          result += 'd';
-          if (arg) {
-            args += 'd' + arg;
-          }
-          if (arg2) {
-            args += 'd' + arg2;
-          }
-          await nextFunc();
-        },
-        async (ctx: koa.Context, nextFunc: () => Promise<any>) => {
-          result += 'e';
-          if (arg) {
-            args += 'e' + arg;
-          }
-          if (arg2) {
-            args += 'e' + arg2;
-          }
-          await nextFunc();
-        }
-      ];
+  @Service()
+  class A implements Interceptor {
+    intercept() {
+      result += 'a';
     }
   }
+
+  @Service()
+  class B implements Interceptor {
+    intercept() {
+      result += 'b';
+    }
+  }
+
+  @Service()
+  class C implements Interceptor {
+    intercept(@ExecContext() execCtx: ExecutionContext) {
+      result += 'c';
+      const argsCtx = getMetadata<string[]>('args', execCtx.getHandler());
+      if (argsCtx) {
+        args += argsCtx;
+      }
+    }
+  }
+
+  @Service()
+  class D implements Interceptor {
+    intercept(@ExecContext() execCtx: ExecutionContext) {
+      result += 'd';
+      const argsCtx = getMetadata<string[]>('args2', execCtx.getHandler());
+      if (argsCtx) {
+        args += argsCtx.join('');
+      }
+    }
+  }
+
+  const AddArgs = (...s: string[]) => ReflectMetadata('args', s);
+  const AddArgs2 = (...s: string[]) => ReflectMetadata('args2', s);
 
   beforeEach(() => {
     result = '';
     args = '';
+    appTest
+      .addClass(A)
+      .addClass(B)
+      .addClass(C)
+      .addClass(D);
   });
 
   test('should call method-level middleware correctly (GET)', async () => {
     @Controller('/')
     class TestController {
-      @MiddlewareInject('de', 'dearg', 'dearg2')
-      @MiddlewareInject('c', 'carg')
-      @MiddlewareInject('b')
-      @MiddlewareInject('a')
+      @UseInterceptors(A, B, C, D)
+      @AddArgs('carg')
+      @AddArgs2('dearg', 'dearg2')
       @Get('/')
-      public getTest(ctx: koa.Context) {
-        ctx.body = 'GET';
+      public getTest() {
+        return 'GET';
       }
     }
 
-    appTest.addClass(TestConfig);
     appTest.addClass(TestController);
     await appTest.build();
 
@@ -486,17 +520,15 @@ describe('Middleware inject:', () => {
   test('should call method-level middleware correctly (POST)', async () => {
     @Controller('/')
     class TestController {
-      @MiddlewareInject('de', 'dearg', 'dearg2')
-      @MiddlewareInject('c', 'carg')
-      @MiddlewareInject('b')
-      @MiddlewareInject('a')
+      @UseInterceptors(A, B, C, D)
+      @AddArgs('carg')
+      @AddArgs2('dearg', 'dearg2')
       @Post('/')
-      public postTest(ctx: koa.Context) {
-        ctx.body = 'POST';
+      public postTest() {
+        return 'POST';
       }
     }
 
-    appTest.addClass(TestConfig);
     appTest.addClass(TestController);
     await appTest.build();
 
@@ -512,17 +544,15 @@ describe('Middleware inject:', () => {
   test('should call method-level middleware correctly (PUT)', async () => {
     @Controller('/')
     class TestController {
-      @MiddlewareInject('de', 'dearg', 'dearg2')
-      @MiddlewareInject('c', 'carg')
-      @MiddlewareInject('b')
-      @MiddlewareInject('a')
+      @UseInterceptors(A, B, C, D)
+      @AddArgs('carg')
+      @AddArgs2('dearg', 'dearg2')
       @Put('/')
-      public postTest(ctx: koa.Context) {
-        ctx.body = 'PUT';
+      public postTest() {
+        return 'PUT';
       }
     }
 
-    appTest.addClass(TestConfig);
     appTest.addClass(TestController);
     await appTest.build();
 
@@ -538,17 +568,15 @@ describe('Middleware inject:', () => {
   test('should call method-level middleware correctly (PATCH)', async () => {
     @Controller('/')
     class TestController {
-      @MiddlewareInject('de', 'dearg', 'dearg2')
-      @MiddlewareInject('c', 'carg')
-      @MiddlewareInject('b')
-      @MiddlewareInject('a')
+      @UseInterceptors(A, B, C, D)
+      @AddArgs('carg')
+      @AddArgs2('dearg', 'dearg2')
       @Patch('/')
-      public postTest(ctx: koa.Context) {
-        ctx.body = 'PATCH';
+      public postTest() {
+        return 'PATCH';
       }
     }
 
-    appTest.addClass(TestConfig);
     appTest.addClass(TestController);
     await appTest.build();
 
@@ -564,16 +592,14 @@ describe('Middleware inject:', () => {
   test('should call method-level middleware correctly (HEAD)', async () => {
     @Controller('/')
     class TestController {
-      @MiddlewareInject('de', 'dearg', 'dearg2')
-      @MiddlewareInject('c', 'carg')
-      @MiddlewareInject('b')
-      @MiddlewareInject('a')
+      @UseInterceptors(A, B, C, D)
+      @AddArgs('carg')
+      @AddArgs2('dearg', 'dearg2')
       @Head('/')
-      public postTest(ctx: koa.Context) {
-        ctx.body = 'HEAD';
+      public postTest() {
+        return 'HEAD';
       }
     }
-    appTest.addClass(TestConfig);
     appTest.addClass(TestController);
     await appTest.build();
 
@@ -589,17 +615,15 @@ describe('Middleware inject:', () => {
   test('should call method-level middleware correctly (DELETE)', async () => {
     @Controller('/')
     class TestController {
-      @MiddlewareInject('de', 'dearg', 'dearg2')
-      @MiddlewareInject('c', 'carg')
-      @MiddlewareInject('b')
-      @MiddlewareInject('a')
+      @UseInterceptors(A, B, C, D)
+      @AddArgs('carg')
+      @AddArgs2('dearg', 'dearg2')
       @Delete('/')
-      public postTest(ctx: koa.Context) {
-        ctx.body = 'DELETE';
+      public postTest() {
+        return 'DELETE';
       }
     }
 
-    appTest.addClass(TestConfig);
     appTest.addClass(TestController);
     await appTest.build();
 
@@ -615,17 +639,15 @@ describe('Middleware inject:', () => {
   test('should call method-level middleware correctly (ALL)', async () => {
     @Controller('/')
     class TestController {
-      @MiddlewareInject('de', 'dearg', 'dearg2')
-      @MiddlewareInject('c', 'carg')
-      @MiddlewareInject('b')
-      @MiddlewareInject('a')
+      @UseInterceptors(A, B, C, D)
+      @AddArgs('carg')
+      @AddArgs2('dearg', 'dearg2')
       @All('/')
-      public postTest(ctx: koa.Context) {
-        ctx.body = 'ALL';
+      public postTest() {
+        return 'ALL';
       }
     }
 
-    appTest.addClass(TestConfig);
     appTest.addClass(TestController);
     await appTest.build();
 
@@ -639,21 +661,19 @@ describe('Middleware inject:', () => {
   });
 
   test('should call controller-level middleware correctly', async () => {
-    @MiddlewareInject('de', 'dearg', 'dearg2')
-    @MiddlewareInject('c', 'carg')
-    @MiddlewareInject('b')
-    @MiddlewareInject('a')
+    @UseInterceptors(A, B, C, D)
+    @AddArgs('carg')
+    @AddArgs2('dearg', 'dearg2')
     @Controller({
-      path: '/'
+      path: '/',
     })
     class TestController {
       @Get('/')
-      public getTest(ctx: koa.Context) {
-        ctx.body = 'GET';
+      public getTest() {
+        return 'GET';
       }
     }
 
-    appTest.addClass(TestConfig);
     appTest.addClass(TestController);
     await appTest.build();
 
@@ -667,22 +687,21 @@ describe('Middleware inject:', () => {
   });
 
   test('should call all middleware in correct order', async () => {
-    @MiddlewareInject('b')
-    @MiddlewareInject('a')
+    @UseInterceptors(A, B)
     @Controller({
-      path: '/'
+      path: '/',
     })
     class TestController {
-      @MiddlewareInject('de', 'dearg', 'dearg2')
-      @MiddlewareInject('c', 'carg')
+      @UseInterceptors(C, D)
+      @AddArgs('carg')
+      @AddArgs2('dearg', 'dearg2')
       @Get('/')
-      public getTest(ctx: koa.Context) {
-        ctx.body = 'GET';
+      public getTest() {
+        return 'GET';
       }
     }
 
     appTest.addClass(TestController);
-    appTest.addClass(TestConfig);
     await appTest.build();
 
     const response = await appTest

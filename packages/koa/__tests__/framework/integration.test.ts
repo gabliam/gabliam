@@ -1,21 +1,21 @@
-import { koaRouter } from '../../src/index';
+import { Bean, Config } from '@gabliam/core';
 import {
+  Context,
   Controller,
-  RestController,
-  Get,
-  Post,
-  Put,
-  Patch,
-  Head,
   Delete,
+  GabContext,
+  Get,
+  Head,
   Method,
   Next,
-  Context,
-  GabContext,
+  Patch,
+  Post,
+  Put,
+  RestController,
 } from '@gabliam/web-core';
-import { KoaPluginTest } from '../koa-plugin-test';
-import { Config, Bean } from '@gabliam/core';
 import { CUSTOM_ROUTER_CREATOR } from '../../src/constants';
+import { koaRouter } from '../../src/index';
+import { KoaPluginTest } from '../koa-plugin-test';
 
 let appTest: KoaPluginTest;
 
@@ -30,7 +30,7 @@ afterEach(async () => {
 describe('Integration Tests:', () => {
   [Controller, RestController].forEach(decorator => {
     describe(`decorator ${decorator.name}`, () => {
-      test.only('should work with config', async () => {
+      test('should work with config', async () => {
         @decorator('rest.test.base')
         class TestController {
           @Get('rest.test.get')
@@ -44,11 +44,11 @@ describe('Integration Tests:', () => {
           base: '/test',
           get: '/',
         });
-        appTest.addClass(TestController);
         await appTest.build();
-        const response = await appTest.supertest().get('/test');
-        console.log(response);
-        // .expect(200);
+        const response = await appTest
+          .supertest()
+          .get('/test')
+          .expect(200);
         expect(response).toMatchSnapshot();
       });
 
@@ -311,7 +311,7 @@ describe('Integration Tests:', () => {
         }
 
         appTest.addClass(TestController);
-        appTest.addConf('application.koa.rootPath', '/api/v1');
+        appTest.addConf('application.web.rootPath', '/api/v1');
         await appTest.build();
 
         const response = await appTest
