@@ -14,8 +14,6 @@ import {
 import * as sinon from 'sinon';
 import { koa, koaRouter } from '../../src/index';
 import { KoaPluginTest } from '../koa-plugin-test';
-const koaBody = require('koa-body');
-
 let appTest: KoaPluginTest;
 
 beforeEach(async () => {
