@@ -26,15 +26,15 @@
     "@gabliam/core": "^7.2.0"
   },
   "dependencies": {
-    "debug": "^3.0.0",
+    "debug": "^4.1.0",
     "tslib": "^1.9.3",
-    "typeorm": "^0.2.7"
+    "typeorm": "^0.2.9"
   },
   "devDependencies": {
     "@gabliam/core": "^7.10.0",
-    "@types/debug": "^0.0.30",
-    "@types/node": "^10.5.2",
-    "sqlite3": "^4.0.1"
+    "@types/debug": "^0.0.31",
+    "@types/node": "^10.12.9",
+    "sqlite3": "^4.0.4"
   },
   "engines": {
     "node": ">=8.9.0"

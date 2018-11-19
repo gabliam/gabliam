@@ -18,11 +18,11 @@ export class Repository<T>
   }
 
   update(_id: string | mongoose.Types.ObjectId, item: Object): Promise<any> {
-    return this.model.update({ _id: this.toObjectId(_id) }, item).exec();
+    return this.model.updateOne({ _id: this.toObjectId(_id) }, item).exec();
   }
 
   delete(_id: string | mongoose.Types.ObjectId): Promise<void> {
-    return this.model.remove({ _id: this.toObjectId(_id) }).exec();
+    return this.model.deleteOne({ _id: this.toObjectId(_id) }).exec();
   }
 
   findById(_id: string): Promise<T & mongoose.Document | null> {
@@ -42,7 +42,7 @@ export class Repository<T>
   }
 
   deleteAll() {
-    return this.model.remove({}).exec();
+    return this.model.deleteMany({}).exec();
   }
 
   private toObjectId(

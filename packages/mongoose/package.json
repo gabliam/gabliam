@@ -33,13 +33,13 @@
   },
   "devDependencies": {
     "@gabliam/core": "^7.10.0",
-    "@types/debug": "^0.0.30"
+    "@types/debug": "^0.0.31"
   },
   "dependencies": {
-    "@types/mongoose": "^5.2.0",
-    "debug": "^3.0.1",
+    "@types/mongoose": "^5.3.1",
+    "debug": "^4.1.0",
     "mongodb-uri": "^0.9.7",
-    "mongoose": "^5.2.3",
+    "mongoose": "^5.3.12",
     "tslib": "^1.9.3"
   },
   "engines": {

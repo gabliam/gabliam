@@ -33,13 +33,13 @@
   "devDependencies": {
     "@gabliam/cache": "^7.10.0",
     "@gabliam/core": "^7.10.0",
-    "@types/debug": "^0.0.30",
-    "@types/ioredis": "^3.2.12",
-    "@types/node": "^10.5.2"
+    "@types/debug": "^0.0.31",
+    "@types/ioredis": "^4.0.4",
+    "@types/node": "^10.12.9"
   },
   "dependencies": {
-    "debug": "^3.0.1",
-    "ioredis": "^3.2.2",
+    "debug": "^4.1.0",
+    "ioredis": "^4.2.0",
     "tslib": "^1.9.3"
   },
   "engines": {

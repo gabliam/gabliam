@@ -29,7 +29,7 @@ Object {
   "accept-encoding": "gzip, deflate",
   "connection": "close",
   "secret-header": "@@@@@@",
-  "user-agent": "node-superagent/3.8.2",
+  "user-agent": "node-superagent/3.8.3",
 }
 `;
 

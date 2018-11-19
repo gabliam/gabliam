@@ -60,13 +60,13 @@ Array [
 ]
 `;
 
-exports[`Errors with bad config 1`] = `[Error: Error for 'application.amqp' value{"isJoi":true,"name":"ValidationError","details":[{"message":"/"value/" must be an object","path":[],"type":"object.base","context":{"label":"value"}},{"message":"/"value/" must be an array","path":[],"type":"array.base","context":{"label":"value"}}],"_object":"bad"}]`;
+exports[`Errors with bad config 1`] = `[Error: Error for 'application.amqp' value{"isJoi":true,"name":"ValidationError","details":[{"message":"/"value/" must be an object","path":[],"type":"object.base","context":{"value":"bad","label":"value"}},{"message":"/"value/" must be an array","path":[],"type":"array.base","context":{"label":"value"}}],"_object":"bad"}]`;
 
 exports[`Errors with bad url 1`] = `[Error: getaddrinfo ENOTFOUND bad bad:5672]`;
 
 exports[`Errors without config folder 1`] = `[Error: AmqpPluginConfig AmqpConfig is mandatory]`;
 
-exports[`Errors without queueName 1`] = `[Error: Error for 'application.amqp' value{"isJoi":true,"name":"ValidationError","details":[{"message":"/"queueName/" is required","path":["queues","queueTest","queueName"],"type":"any.required","context":{"key":"queueName","label":"queueName"}},{"message":"/"name/" is not allowed","path":["queues","queueTest","name"],"type":"object.allowUnknown","context":{"child":"name","key":"name","label":"name"}},{"message":"/"value/" must be an array","path":[],"type":"array.base","context":{"label":"value"}}],"_object":{"url":"amqp://bad","queues":{"queueTest":{"name":"lol"}}}}]`;
+exports[`Errors without queueName 1`] = `[Error: Error for 'application.amqp' value{"isJoi":true,"name":"ValidationError","details":[{"message":"/"queueName/" is required","path":["queues","queueTest","queueName"],"type":"any.required","context":{"key":"queueName","label":"queueName"}},{"message":"/"name/" is not allowed","path":["queues","queueTest","name"],"type":"object.allowUnknown","context":{"child":"name","value":"lol","key":"name","label":"name"}},{"message":"/"value/" must be an array","path":[],"type":"array.base","context":{"label":"value"}}],"_object":{"url":"amqp://bad","queues":{"queueTest":{"name":"lol"}}}}]`;
 
 exports[`Listener test with buffer object 1`] = `
 Object {

@@ -32,15 +32,15 @@
   },
   "devDependencies": {
     "@gabliam/core": "^7.10.0",
-    "@types/bluebird": "^3.5.21",
-    "@types/debug": "^0.0.30",
-    "@types/node": "^10.5.2",
-    "@types/uuid": "^3.4.0"
+    "@types/bluebird": "^3.5.24",
+    "@types/debug": "^0.0.31",
+    "@types/node": "^10.12.9",
+    "@types/uuid": "^3.4.4"
   },
   "dependencies": {
     "amqplib": "^0.5.1",
-    "bluebird": "^3.5.0",
-    "debug": "^3.0.1",
+    "bluebird": "^3.5.3",
+    "debug": "^4.1.0",
     "tslib": "^1.9.3",
     "uuid": "^3.3.2"
   },

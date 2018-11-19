@@ -38,7 +38,7 @@
     "@types/escape-html": "^0.0.20"
   },
   "dependencies": {
-    "cookies": "^0.7.2",
+    "cookies": "^0.7.3",
     "escape-html": "^1.0.3",
     "http-status-codes": "^1.2.0",
     "property-tunnel": "^1.2.2",
