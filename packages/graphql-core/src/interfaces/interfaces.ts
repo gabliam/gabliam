@@ -4,8 +4,6 @@ import { GraphQLFieldResolver } from 'graphql';
 
 export type listControllers = inversifyInterfaces.ServiceIdentifier<any>[];
 
-export type resolverType = 'Query' | 'Mutation' | 'Subscription';
-
 export interface GraphiqlOptions {
   endpointURL?: string;
 

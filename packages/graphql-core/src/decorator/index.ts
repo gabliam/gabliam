@@ -1,1 +1,2 @@
-export * from './graphql-controller';
+export * from './controller';
+export * from './method';

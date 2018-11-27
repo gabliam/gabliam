@@ -41,9 +41,9 @@
     "@types/graphql": "^14.0.3",
     "caller": "^1.0.1",
     "debug": "^4.1.0",
-    "graphql": "^0.13.2",
-    "graphql-server-module-graphiql": "^1.1.2",
-    "graphql-tools": "^3.0.5",
+    "graphql": "^14.0.2",
+    "graphql-server-module-graphiql": "^1.4.0",
+    "graphql-tools": "^4.0.3",
     "lodash": "^4.17.11",
     "tslib": "^1.9.3"
   },

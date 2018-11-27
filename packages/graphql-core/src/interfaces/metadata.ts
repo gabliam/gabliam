@@ -1,4 +1,4 @@
-import { resolverType } from './interfaces';
+import { ResolverType } from '../decorator';
 
 export interface ControllerMetadata {
   schema: string[];
@@ -7,7 +7,7 @@ export interface ControllerMetadata {
 }
 
 export interface ResolverMetadata {
-  type: resolverType | null;
+  type: ResolverType;
 
   path: string;
 

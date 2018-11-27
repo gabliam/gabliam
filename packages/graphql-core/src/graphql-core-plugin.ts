@@ -4,7 +4,7 @@ import { TYPE, METADATA_KEY, DEBUG_PATH, GRAPHQL_CONFIG } from './constants';
 import {
   ResolverMetadata,
   ControllerMetadata,
-  GraphqlConfig
+  GraphqlConfig,
 } from './interfaces';
 import { IResolvers } from 'graphql-tools/dist/Interfaces';
 import * as _ from 'lodash';
@@ -19,7 +19,7 @@ export abstract class GraphqlCorePlugin implements GabliamPlugin {
   bind(container: Container, registry: Registry) {
     registry.get(TYPE.Controller).map(({ id, target }) => {
       container
-        .bind<any>(id)
+        .bind(id)
         .to(target)
         .inSingletonScope();
       return id;
@@ -119,7 +119,9 @@ export abstract class GraphqlCorePlugin implements GabliamPlugin {
 
     typeDefs.push(...others);
 
+    console.log(resolverList);
     const resolvers = <IResolvers>_.merge({}, ...resolverList);
+    console.log(resolvers);
 
     if (Object.keys(resolvers).length === 0) {
       return;
@@ -128,7 +130,7 @@ export abstract class GraphqlCorePlugin implements GabliamPlugin {
     debug('typeDefs', typeDefs);
     const schema = <GraphQLSchema>(<any>makeExecutableSchema({
       typeDefs,
-      resolvers
+      resolvers,
     }));
 
     this.registerMiddleware(container, registry, graphqlPluginConfig, schema);
