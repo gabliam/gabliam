@@ -4,7 +4,10 @@
     "node_modules/tslint-eslint-rules/dist/rules"
   ],
   "linterOptions": {
-    "typeCheck": true
+    "typeCheck": true,
+    "exclude": [
+      "node_modules/**/*.{j,t}s"
+    ]
   },
   "rules": {
     "no-duplicate-imports": true,

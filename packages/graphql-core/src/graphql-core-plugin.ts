@@ -1,16 +1,22 @@
-import { Registry, GabliamPlugin, Container, Scan } from '@gabliam/core';
-import { makeExecutableSchema } from 'graphql-tools';
-import { TYPE, METADATA_KEY, DEBUG_PATH, GRAPHQL_CONFIG } from './constants';
 import {
-  ResolverMetadata,
+  Container,
+  GabliamPlugin,
+  Registry,
+  Scan,
+  toPromise,
+} from '@gabliam/core';
+import * as d from 'debug';
+import * as fs from 'fs';
+import { GraphQLSchema } from 'graphql';
+import { IResolvers, makeExecutableSchema } from 'graphql-tools';
+import * as _ from 'lodash';
+import { DEBUG_PATH, GRAPHQL_CONFIG, METADATA_KEY, TYPE } from './constants';
+import { ResolverType } from './decorator';
+import {
   ControllerMetadata,
   GraphqlConfig,
+  ResolverMetadata,
 } from './interfaces';
-import { IResolvers } from 'graphql-tools/dist/Interfaces';
-import * as _ from 'lodash';
-import * as fs from 'fs';
-import * as d from 'debug';
-import { GraphQLSchema } from 'graphql';
 
 const debug = d(DEBUG_PATH);
 
@@ -153,18 +159,21 @@ export abstract class GraphqlCorePlugin implements GabliamPlugin {
     resolverMetadata: ResolverMetadata
   ): IResolvers {
     const instance = container.get<any>(controllerId);
-    const result: any = instance[resolverMetadata.key]();
+    // const result: any = instance[resolverMetadata.key]();
+    let resolver: any;
 
-    if (_.isFunction(result)) {
-      // IResolverObject
-      return _.set<IResolvers>(
-        {},
-        resolverMetadata.path,
-        result.bind(instance)
-      );
-    } else {
-      // GraphQLScalarType
-      return _.set<IResolvers>({}, resolverMetadata.path, result);
+    switch (resolverMetadata.type) {
+      case ResolverType.Query:
+      case ResolverType.Mutation:
+      case ResolverType.Subscription:
+        resolver = (...args: any[]) => instance[resolverMetadata.key](...args);
+        break;
+      case ResolverType.Map:
+      case ResolverType.ResolveType:
+        resolver = toPromise(instance[resolverMetadata.key]());
+        break;
     }
+
+    return _.set<IResolvers>({}, resolverMetadata.path, resolver);
   }
 }

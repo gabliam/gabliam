@@ -1,20 +1,15 @@
 import {
-  Scan,
+  Container,
+  GabliamPlugin,
   Plugin,
   Registry,
-  GabliamPlugin,
-  Container
+  Scan,
 } from '@gabliam/core';
-import { MiddlewareConfig, ExpressMiddlewareConfig } from '@gabliam/express';
-import {
-  graphqlExpress,
-  graphiqlExpress,
-  ExpressGraphQLOptionsFunction
-} from 'graphql-server-express';
-import * as bodyParser from 'body-parser';
+import { express } from '@gabliam/express';
+import { GraphqlConfig, GraphqlCorePlugin } from '@gabliam/graphql-core';
+import { ConfigFunction, WebConfiguration } from '@gabliam/web-core';
+import { ApolloServer } from 'apollo-server-express';
 import * as d from 'debug';
-import { GraphQLOptions } from 'apollo-server-core';
-import { GraphqlCorePlugin, GraphqlConfig } from '@gabliam/graphql-core';
 import { GraphQLSchema } from 'graphql';
 
 const debug = d('Gabliam:Plugin:GraphqlPluginExpress');
@@ -28,42 +23,25 @@ export class GraphqlPlugin extends GraphqlCorePlugin implements GabliamPlugin {
     graphqlPluginConfig: GraphqlConfig,
     schema: GraphQLSchema
   ) {
-    const middlewareConfig = container.get<ExpressMiddlewareConfig>(
-      MiddlewareConfig
-    );
+    debug('register Middleware', graphqlPluginConfig);
+    const webConfiguration = container.get<
+      WebConfiguration<express.Application>
+    >(WebConfiguration);
 
-    middlewareConfig.addMiddleware({
+    const instance: ConfigFunction<express.Application> = (app, _container) => {
+      const server = new ApolloServer({
+        schema,
+        playground: graphqlPluginConfig.playground,
+      });
+      server.applyMiddleware({
+        path: graphqlPluginConfig.endpointUrl,
+        app,
+      });
+    };
+
+    webConfiguration.addwebConfig({
       order: 50,
-      instance: app => {
-        debug('add graphql middleware to ExpressPlugin');
-        app.use(bodyParser.urlencoded({ extended: true }));
-        app.use(bodyParser.json());
-
-        app.use(
-          graphqlPluginConfig.endpointUrl,
-          graphqlExpress(<ExpressGraphQLOptionsFunction>((req: any) => {
-            let options = {};
-
-            /* istanbul ignore if  */
-            if ((<any>req).graphqlOptions) {
-              options = (<any>req).graphqlOptions;
-            }
-            // makeExecutableSchema and ExpressGraphQLOptionsFunction use different version of GraphQLSchema typings
-            // (GraphQLOptions use apollo-server-core and makeExecutableSchema use @types/graphql)
-            return <GraphQLOptions>(<any>{
-              schema,
-              ...options
-            });
-          }))
-        );
-
-        if (graphqlPluginConfig.graphiqlEnabled) {
-          app.use(
-            graphqlPluginConfig.endpointUrlGraphiql,
-            graphiqlExpress(graphqlPluginConfig.graphiqlOptions)
-          );
-        }
-      }
+      instance,
     });
   }
 }

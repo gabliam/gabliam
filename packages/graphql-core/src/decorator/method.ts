@@ -3,7 +3,6 @@ import * as path from 'path';
 import { METADATA_KEY } from '../constants';
 import { ResolverMetadata } from '../interfaces';
 import { absoluteGraphqlFile } from './utils';
-import { checkForResolveTypeResolver } from 'graphql-tools';
 
 export interface ResolverOptions {
   schema?: string;
