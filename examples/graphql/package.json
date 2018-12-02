@@ -22,17 +22,16 @@
     "@gabliam/express": "^7.10.0",
     "@gabliam/graphql-core": "^7.10.0",
     "@gabliam/graphql-express": "^7.10.0",
+    "@gabliam/graphql-koa": "^7.10.0",
+    "@gabliam/koa": "^7.10.0",
     "@gabliam/typeorm": "^7.10.0",
     "@gabliam/web-core": "^7.10.0",
-    "body-parser": "^1.18.3",
-    "helmet": "^3.15.0",
     "lodash": "^4.17.11",
     "reflect-metadata": "^0.1.9",
     "sqlite3": "^4.0.4",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@types/helmet": "^0.0.42",
     "@types/lodash": "^4.14.118",
     "nodemon": "^1.18.6"
   }

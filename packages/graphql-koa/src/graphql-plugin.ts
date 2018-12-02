@@ -1,21 +1,16 @@
 import {
-  Scan,
+  Container,
+  GabliamPlugin,
   Plugin,
   Registry,
-  GabliamPlugin,
-  Container
+  Scan,
 } from '@gabliam/core';
-import { MiddlewareConfig, koaRouter, KoaMiddlewareConfig } from '@gabliam/koa';
-import {
-  graphqlKoa,
-  graphiqlKoa,
-  KoaGraphQLOptionsFunction
-} from 'graphql-server-koa';
-import * as bodyParser from 'koa-bodyparser';
+import { GraphqlConfig, GraphqlCorePlugin } from '@gabliam/graphql-core';
+import { koa } from '@gabliam/koa';
 import * as d from 'debug';
-import { GraphQLOptions } from 'apollo-server-core';
-import { GraphqlCorePlugin, GraphqlConfig } from '@gabliam/graphql-core';
 import { GraphQLSchema } from 'graphql';
+import { WebConfiguration, ConfigFunction } from '@gabliam/web-core/src';
+import { ApolloServer } from 'apollo-server-koa';
 
 const debug = d('Gabliam:Plugin:GraphqlPluginKoa');
 
@@ -28,44 +23,25 @@ export class GraphqlPlugin extends GraphqlCorePlugin implements GabliamPlugin {
     graphqlPluginConfig: GraphqlConfig,
     schema: GraphQLSchema
   ) {
-    const middlewareConfig = container.get<KoaMiddlewareConfig>(
-      MiddlewareConfig
+    debug('register Middleware', graphqlPluginConfig);
+    const webConfiguration = container.get<WebConfiguration<koa>>(
+      WebConfiguration
     );
 
-    middlewareConfig.addMiddleware({
+    const instance: ConfigFunction<koa> = (app, _container) => {
+      const server = new ApolloServer({
+        schema,
+        playground: graphqlPluginConfig.playground,
+      });
+      server.applyMiddleware({
+        path: graphqlPluginConfig.endpointUrl,
+        app,
+      });
+    };
+
+    webConfiguration.addwebConfig({
       order: 50,
-      instance: app => {
-        debug('add graphql middleware to ExpressPlugin');
-        app.use(bodyParser());
-
-        const router = new koaRouter();
-        router.post(
-          graphqlPluginConfig.endpointUrl,
-          graphqlKoa(<KoaGraphQLOptionsFunction>((req: any) => {
-            let options = {};
-
-            /* istanbul ignore if  */
-            if ((<any>req).graphqlOptions) {
-              options = (<any>req).graphqlOptions;
-            }
-            // makeExecutableSchema and ExpressGraphQLOptionsFunction use different version of GraphQLSchema typings
-            // (GraphQLOptions use apollo-server-core and makeExecutableSchema use @types/graphql)
-            return <GraphQLOptions>(<any>{
-              schema,
-              ...options
-            });
-          }))
-        );
-
-        if (graphqlPluginConfig.graphiqlEnabled) {
-          router.get(
-            graphqlPluginConfig.endpointUrlGraphiql,
-            graphiqlKoa(graphqlPluginConfig.graphiqlOptions)
-          );
-        }
-        app.use(router.routes());
-        app.use(router.allowedMethods());
-      }
+      instance,
     });
   }
 }

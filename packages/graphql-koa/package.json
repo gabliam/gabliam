@@ -39,13 +39,11 @@
     "@gabliam/graphql-core": "^7.10.0",
     "@gabliam/koa": "^7.10.0",
     "@types/debug": "^0.0.31",
-    "@types/koa-bodyparser": "^5.0.1",
     "@types/node": "^10.12.9"
   },
   "dependencies": {
+    "apollo-server-koa": "^2.2.5",
     "debug": "^4.1.0",
-    "graphql-server-koa": "^1.4.0",
-    "koa-bodyparser": "^4.2.1",
     "tslib": "^1.9.3"
   },
   "engines": {

@@ -1,18 +1,35 @@
 import 'reflect-metadata';
 import * as path from 'path';
 import { Gabliam } from '@gabliam/core';
-import expressPlugin from '@gabliam/express';
+// import expressPlugin from '@gabliam/express';
 import dbPlugin from '@gabliam/typeorm';
-import graphqlPlugin from '@gabliam/graphql-express';
+// import graphqlPlugin from '@gabliam/graphql-express';
 
-new Gabliam({
-  scanPath: __dirname,
-  config: path.resolve(__dirname, '../config')
-})
-  .addPlugin(graphqlPlugin)
-  .addPlugin(expressPlugin)
-  .addPlugin(dbPlugin)
-  .buildAndStart();
+const bootstrap = async () => {
+  const plugins = [dbPlugin];
+  if (process.env.SERVER_TYPE === 'koa') {
+    console.log('start with koa');
+    plugins.push(
+      require('@gabliam/koa').default,
+      require('@gabliam/graphql-koa').default
+    );
+  } else {
+    console.log('start with express');
+    plugins.push(
+      require('@gabliam/express').default,
+      require('@gabliam/graphql-express').default
+    );
+  }
+
+  return new Gabliam({
+    scanPath: __dirname,
+    config: path.resolve(__dirname, '../config'),
+  })
+    .addPlugins(...plugins)
+    .buildAndStart();
+};
+
+bootstrap();
 
 process.on('unhandledRejection', (err: any, p: any) => {
   console.error('An unhandledRejection occurred');

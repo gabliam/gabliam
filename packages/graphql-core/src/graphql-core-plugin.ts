@@ -7,16 +7,21 @@ import {
 } from '@gabliam/core';
 import * as d from 'debug';
 import * as fs from 'fs';
-import { GraphQLSchema } from 'graphql';
+import { GraphQLSchema, GraphQLResolveInfo } from 'graphql';
 import { IResolvers, makeExecutableSchema } from 'graphql-tools';
 import * as _ from 'lodash';
 import { DEBUG_PATH, GRAPHQL_CONFIG, METADATA_KEY, TYPE } from './constants';
-import { ResolverType } from './decorator';
+import {
+  ResolverType,
+  ParameterMetadata,
+  ControllerParameterMetadata,
+} from './decorator';
 import {
   ControllerMetadata,
   GraphqlConfig,
   ResolverMetadata,
 } from './interfaces';
+import { extractParameters } from './utils';
 
 const debug = d(DEBUG_PATH);
 
@@ -47,6 +52,11 @@ export abstract class GraphqlCorePlugin implements GabliamPlugin {
 
     for (const { id: controllerId } of controllerIds) {
       const controller = container.get<object>(controllerId);
+      const paramList: ControllerParameterMetadata =
+        Reflect.getOwnMetadata(
+          METADATA_KEY.controllerParameter,
+          controller.constructor
+        ) || new Map();
 
       const controllerMetadata: ControllerMetadata = Reflect.getOwnMetadata(
         METADATA_KEY.controller,
@@ -73,9 +83,9 @@ export abstract class GraphqlCorePlugin implements GabliamPlugin {
               ...this.loadGraphqlFiles(resolverMetadata.graphqlFile)
             );
           }
-
+          const params = paramList.get(resolverMetadata.key) || [];
           resolverList.push(
-            this.getResolver(container, controllerId, resolverMetadata)
+            this.getResolver(controller, resolverMetadata, params)
           );
         }
       }
@@ -125,9 +135,7 @@ export abstract class GraphqlCorePlugin implements GabliamPlugin {
 
     typeDefs.push(...others);
 
-    console.log(resolverList);
     const resolvers = <IResolvers>_.merge({}, ...resolverList);
-    console.log(resolvers);
 
     if (Object.keys(resolvers).length === 0) {
       return;
@@ -154,19 +162,25 @@ export abstract class GraphqlCorePlugin implements GabliamPlugin {
   }
 
   private getResolver(
-    container: Container,
-    controllerId: any,
-    resolverMetadata: ResolverMetadata
+    instance: any,
+    resolverMetadata: ResolverMetadata,
+    params: ParameterMetadata[]
   ): IResolvers {
-    const instance = container.get<any>(controllerId);
-    // const result: any = instance[resolverMetadata.key]();
     let resolver: any;
 
     switch (resolverMetadata.type) {
       case ResolverType.Query:
       case ResolverType.Mutation:
       case ResolverType.Subscription:
-        resolver = (...args: any[]) => instance[resolverMetadata.key](...args);
+        resolver = (
+          source: any,
+          args: any,
+          context: any,
+          info: GraphQLResolveInfo
+        ) =>
+          instance[resolverMetadata.key](
+            ...extractParameters(source, args, context, info, params)
+          );
         break;
       case ResolverType.Map:
       case ResolverType.ResolveType:

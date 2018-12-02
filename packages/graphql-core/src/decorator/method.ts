@@ -71,10 +71,6 @@ function resolver(
         resolverPath = resolverPath;
     }
 
-    if (type) {
-      resolverPath = `${type}.${resolverPath}`;
-    }
-
     if (resolverOptions.graphqlFile) {
       const pwd = resolverOptions.pwd || defaultPwd;
       resolverOptions.graphqlFile = absoluteGraphqlFile(

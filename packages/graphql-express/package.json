@@ -38,13 +38,11 @@
     "@gabliam/core": "^7.10.0",
     "@gabliam/express": "^7.10.0",
     "@gabliam/graphql-core": "^7.10.0",
-    "@types/body-parser": "^1.17.0",
     "@types/debug": "^0.0.31",
     "@types/node": "^10.12.9"
   },
   "dependencies": {
     "apollo-server-express": "^2.2.3",
-    "body-parser": "^1.18.3",
     "debug": "^4.1.0",
     "tslib": "^1.9.3"
   },

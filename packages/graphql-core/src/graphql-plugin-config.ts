@@ -21,7 +21,7 @@ export class GraphqlPluginConfig {
   @Value('application.graphql.endpointUrl', Joi.string())
   private endpointUrl: string = DEFAULT_END_POINT_URL;
 
-  @Value('application.playground.config', GraphiqlOptionsValidator)
+  @Value('application.graphql.playground.config', GraphiqlOptionsValidator)
   private playground: PlaygroundConfig;
 
   @Value('application.graphql.graphqlFiles', Joi.array().items(Joi.string()))
@@ -34,7 +34,6 @@ export class GraphqlPluginConfig {
       graphqlFiles: this.graphqlFiles,
       playground: this.playground,
     };
-
     debug('GraphqlConfig', graphqlConfig);
 
     return graphqlConfig;
