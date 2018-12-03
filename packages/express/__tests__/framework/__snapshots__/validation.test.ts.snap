@@ -93,7 +93,9 @@ exports[`express integration validations req.body 1`] = `
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "0",
+    "content-length": "156",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\\"9c-lb73tokNqpEcTzZIECgZmqLKScw\\"",
   },
   "req": Object {
     "data": Object {
@@ -106,7 +108,7 @@ Object {
     "method": "POST",
   },
   "status": 400,
-  "text": "",
+  "text": "{\\"statusCode\\":400,\\"error\\":\\"Bad Request\\",\\"message\\":\\"child /\\"last/\\" fails because [/\\"last/\\" must be a string]\\",\\"validation\\":{\\"source\\":\\"body\\",\\"keys\\":[\\"last\\"]}}",
 }
 `;
 
@@ -114,7 +116,9 @@ exports[`express integration validations req.headers 1`] = `
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "0",
+    "content-length": "228",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\\"e4-9YBgGPA9onlm1wj0GlR/2HIQaBw\\"",
   },
   "req": Object {
     "data": undefined,
@@ -124,7 +128,7 @@ Object {
     "method": "GET",
   },
   "status": 400,
-  "text": "",
+  "text": "{\\"statusCode\\":400,\\"error\\":\\"Bad Request\\",\\"message\\":\\"child /\\"accept/\\" fails because [/\\"accept/\\" with value /\\"application&#x2f;json/\\" fails to match the required pattern: /xml/]\\",\\"validation\\":{\\"source\\":\\"headers\\",\\"keys\\":[\\"accept\\"]}}",
 }
 `;
 
@@ -132,7 +136,9 @@ exports[`express integration validations req.params 1`] = `
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "0",
+    "content-length": "193",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\\"c1-Ucg8TlfIGVQQWOvNPRCiHk8y61o\\"",
   },
   "req": Object {
     "data": undefined,
@@ -140,7 +146,7 @@ Object {
     "method": "GET",
   },
   "status": 400,
-  "text": "",
+  "text": "{\\"statusCode\\":400,\\"error\\":\\"Bad Request\\",\\"message\\":\\"child /\\"id/\\" fails because [/\\"id/\\" must only contain alpha-numeric and underscore characters]\\",\\"validation\\":{\\"source\\":\\"params\\",\\"keys\\":[\\"id\\"]}}",
 }
 `;
 
@@ -148,7 +154,9 @@ exports[`express integration validations req.query 1`] = `
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "0",
+    "content-length": "122",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\\"7a-iJ+h5zB08gNswU0QtTTcpNELWzs\\"",
   },
   "req": Object {
     "data": undefined,
@@ -156,6 +164,6 @@ Object {
     "method": "GET",
   },
   "status": 400,
-  "text": "",
+  "text": "{\\"statusCode\\":400,\\"error\\":\\"Bad Request\\",\\"message\\":\\"/\\"end/\\" is not allowed\\",\\"validation\\":{\\"source\\":\\"query\\",\\"keys\\":[\\"end\\"]}}",
 }
 `;

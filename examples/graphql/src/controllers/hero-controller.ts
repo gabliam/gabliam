@@ -5,7 +5,6 @@ import {
   QueryResolver,
 } from '@gabliam/graphql-core';
 import { Connection, Repository } from '@gabliam/typeorm';
-import { HeroModel } from 'examples/mongo/src/entities/hero';
 import { Hero } from '../entities/hero';
 
 @GraphqlController({
@@ -19,7 +18,7 @@ export class HeroController {
   }
 
   @MutationResolver()
-  async submitHero(@Args('heroInput') heroInput: HeroModel) {
+  async submitHero(@Args('heroInput') heroInput: Hero) {
     console.log('submitHero', heroInput);
     return await this.heroRepository.save(heroInput);
   }
@@ -35,7 +34,7 @@ export class HeroController {
 
   @QueryResolver()
   async getPageOfHeroes(
-    @Args('sortField') sortField: keyof HeroModel | undefined,
+    @Args('sortField') sortField: keyof Hero | undefined,
     @Args('sortOrder') sortOrder: 'ASC' | 'DESC' | undefined,
     @Args('page') page = 0,
     @Args('perPage') perPage = 10

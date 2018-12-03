@@ -2,9 +2,10 @@ import { Gabliam } from '@gabliam/core';
 import { GabliamTest } from '@gabliam/core/lib/testing';
 import * as koa from 'koa';
 import * as http from 'http';
-import KoaPlugin, { APP } from '@gabliam/koa';
+import KoaPlugin from '@gabliam/koa';
 import GraphqlPlugin from '../src/index';
 import * as supertest from 'supertest';
+import { APP } from '@gabliam/web-core';
 
 export class GraphqlPluginTest extends GabliamTest {
   public app: koa;

@@ -1,16 +1,16 @@
 import {
+  Args,
   GraphqlController,
-  QueryResolver,
+  MapResolver,
   MutationResolver,
-  GraphQLFieldResolver,
-  Resolver
+  QueryResolver,
 } from '@gabliam/graphql-core';
-import { Photo } from './interfaces';
 import * as _ from 'lodash';
 import { Paginate } from './array-util';
+import { Photo } from './interfaces';
 
 @GraphqlController({
-  graphqlFiles: ['./schemas/photo.gql']
+  graphqlFiles: ['./schemas/photo.gql'],
 })
 export class PhotoController {
   public photoRepository: Photo[] = [
@@ -20,7 +20,7 @@ export class PhotoController {
       fileName: 'cat.png',
       isPublished: true,
       name: 'cat',
-      views: 0
+      views: 0,
     },
     {
       id: 2,
@@ -28,7 +28,7 @@ export class PhotoController {
       fileName: 'dog.png',
       isPublished: true,
       name: 'dog',
-      views: 0
+      views: 0,
     },
     {
       id: 3,
@@ -36,14 +36,14 @@ export class PhotoController {
       fileName: 'fish.png',
       isPublished: true,
       name: 'fish',
-      views: 0
-    }
+      views: 0,
+    },
   ];
 
   private nextId = this.photoRepository.length + 2;
 
-  @Resolver({
-    path: 'Photo'
+  @MapResolver({
+    path: 'Photo',
   })
   photoResolver() {
     return {
@@ -55,54 +55,48 @@ export class PhotoController {
       description: _.property('name'),
       fileName: _.property('fileName'),
       views: _.property('views'),
-      isPublished: _.property('isPublished')
+      isPublished: _.property('isPublished'),
     };
   }
 
   @MutationResolver()
-  submitPhoto(): GraphQLFieldResolver<any, any> {
-    return async (obj, { photoInput }, context, info) => {
-      const photo: Photo = {
-        ...photoInput,
-        id: this.nextId++
-      };
-      this.photoRepository.push(photo);
+  async submitPhoto(@Args('photoInput') photoInput: Photo) {
+    const photo: Photo = {
+      ...photoInput,
+      id: this.nextId++,
     };
+    this.photoRepository.push(photo);
   }
 
   @QueryResolver()
-  photos(): GraphQLFieldResolver<any, any> {
-    return async (obj, args, context, info) => {
-      return this.photoRepository;
-    };
+  async photos() {
+    return this.photoRepository;
   }
 
   @QueryResolver()
-  getPageOfPhotos(): GraphQLFieldResolver<any, any> {
-    return async (
-      obj,
-      { page = 0, perPage = 10, sortField, sortOrder, filter },
-      context,
-      info
-    ) => {
-      if (page < 0) {
-        page = 0;
-      }
-      if (perPage < 1) {
-        perPage = 1;
-      }
-      const start = (page + 1) * perPage;
-      const end = start + perPage - 1;
+  async getPageOfPhotos(
+    @Args('sortField') sortField: keyof Photo | undefined,
+    @Args('sortOrder') sortOrder: 'ASC' | 'DESC' | undefined,
+    @Args('page') page = 0,
+    @Args('perPage') perPage = 10
+  ) {
+    if (page < 0) {
+      page = 0;
+    }
+    if (perPage < 1) {
+      perPage = 1;
+    }
+    const start = (page + 1) * perPage;
+    const end = start + perPage - 1;
 
-      const items = new Paginate(this.photoRepository)
-        .setOffset(start)
-        .setLimit(end - start)
-        .get();
+    const items = new Paginate(this.photoRepository)
+      .setOffset(start)
+      .setLimit(end - start)
+      .get();
 
-      return {
-        items,
-        totalCount: items.length
-      };
+    return {
+      items,
+      totalCount: items.length,
     };
   }
 }
