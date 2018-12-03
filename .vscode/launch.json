@@ -4,6 +4,7 @@
     // Pour plus d'informations, visitez : https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         {
         "type": "node",
         "request": "launch",
@@ -21,6 +22,110 @@
         "args": ["${relativeFile}"],
         "console": "integratedTerminal",
         "internalConsoleOptions": "neverOpen"
+      },
+      {
+        "name": "Debug typeorm koa",
+        "type": "node",
+        "request": "launch",
+        "address": "localhost",
+        "protocol": "inspector",
+        "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/lerna",
+        "env": {
+          "SERVER_TYPE": "koa"
+        },
+        "runtimeArgs": [
+            "exec",
+            "--scope",
+            "typeorm-sample",
+            "--",
+            "node",
+            "--nolazy",
+            "-r",
+            "ts-node/register",
+            "-r",
+            "tsconfig-paths/register",
+            "--inspect-brk=4189",
+            "src/index.ts"
+        ],
+        "port": 4189
+      },
+      {
+        "name": "Debug typeorm express",
+        "type": "node",
+        "request": "launch",
+        "address": "localhost",
+        "protocol": "inspector",
+        "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/lerna",
+        "env": {
+          "SERVER_TYPE": "express"
+        },
+        "runtimeArgs": [
+            "exec",
+            "--scope",
+            "typeorm-sample",
+            "--",
+            "node",
+            "--nolazy",
+            "-r",
+            "ts-node/register",
+            "-r",
+            "tsconfig-paths/register",
+            "--inspect-brk=4189",
+            "src/index.ts"
+        ],
+        "port": 4189
+      },
+      {
+        "name": "Debug mongoose koa",
+        "type": "node",
+        "request": "launch",
+        "address": "localhost",
+        "protocol": "inspector",
+        "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/lerna",
+        "env": {
+          "SERVER_TYPE": "koa"
+        },
+        "runtimeArgs": [
+            "exec",
+            "--scope",
+            "mongo-sample",
+            "--",
+            "node",
+            "--nolazy",
+            "-r",
+            "ts-node/register",
+            "-r",
+            "tsconfig-paths/register",
+            "--inspect-brk=4189",
+            "src/index.ts"
+        ],
+        "port": 4189
+      },
+      {
+        "name": "Debug mongoose express",
+        "type": "node",
+        "request": "launch",
+        "address": "localhost",
+        "protocol": "inspector",
+        "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/lerna",
+        "env": {
+          "SERVER_TYPE": "express"
+        },
+        "runtimeArgs": [
+            "exec",
+            "--scope",
+            "mongo-sample",
+            "--",
+            "node",
+            "--nolazy",
+            "-r",
+            "ts-node/register",
+            "-r",
+            "tsconfig-paths/register",
+            "--inspect-brk=4189",
+            "src/index.ts"
+        ],
+        "port": 4189
       }
     ]
 }

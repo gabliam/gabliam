@@ -11,7 +11,7 @@ export const valideErrorMiddleware: ConfigFunction<koa> = app => {
       await next();
     } catch (err) {
       if (isValidateError(err)) {
-        if ((<any>ctx).jsonHandler) {
+        if (ctx.state.jsonHandler) {
           ctx.type = 'application/json';
         }
         ctx.status = 400;

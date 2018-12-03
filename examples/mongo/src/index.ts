@@ -1,13 +1,24 @@
 import 'reflect-metadata';
-import * as path from 'path';
 import { Gabliam } from '@gabliam/core';
-import expressPlugin from '@gabliam/express';
 import dbPlugin from '@gabliam/mongoose';
+import * as path from 'path';
 
-new Gabliam({
-  scanPath: __dirname,
-  config: path.resolve(__dirname, '../config')
-})
-  .addPlugin(expressPlugin)
-  .addPlugin(dbPlugin)
-  .buildAndStart();
+const bootstrap = async () => {
+  const plugins = [dbPlugin];
+  if (process.env.SERVER_TYPE === 'koa') {
+    console.log('start with koa');
+    plugins.push(require('@gabliam/koa').default);
+  } else {
+    console.log('start with express');
+    plugins.push(require('@gabliam/express').default);
+  }
+
+  return new Gabliam({
+    scanPath: __dirname,
+    config: path.resolve(__dirname, '../config'),
+  })
+    .addPlugins(...plugins)
+    .buildAndStart();
+};
+
+bootstrap();

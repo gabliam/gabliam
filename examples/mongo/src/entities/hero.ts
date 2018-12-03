@@ -14,27 +14,27 @@ export class Hero {
     const schema = new mongoose.Schema({
       name: {
         type: String,
-        required: true
+        required: true,
       },
       power: {
         type: String,
-        required: true
+        required: true,
       },
       amountPeopleSaved: {
         type: Number,
-        required: false
+        required: false,
       },
       createdAt: {
         type: Date,
-        required: false
+        required: false,
       },
       modifiedAt: {
         type: Date,
-        required: false
-      }
+        required: false,
+      },
     });
 
-    schema.pre('save', function(this: HeroModel, next) {
+    schema.pre('save', <any>function(this: HeroModel, next: any) {
       if (this) {
         const now = new Date();
         if (!this.createdAt) {

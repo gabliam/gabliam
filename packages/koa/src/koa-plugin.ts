@@ -82,7 +82,7 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
     const app = container.get<koa>(APP);
     const port = restConfig.port;
 
-    const server = http.createServer(<any>app);
+    const server = http.createServer(app.callback());
     server.listen(port, restConfig.hostname);
     server.on('error', onError);
     server.on('listening', onListening);
@@ -171,10 +171,26 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
           );
         }
 
+        let methodMetadataPath = methodInfo.methodPath;
+        if (methodMetadataPath[0] !== '/') {
+          methodMetadataPath = '/' + methodMetadataPath;
+        }
+
+        const addJsonHandler = async (
+          context: koaRouter.IRouterContext,
+          next: () => Promise<any>
+        ) => {
+          context.state.jsonHandler = methodInfo.json;
+          await next();
+        };
+
         // register handler in router
         router[methodInfo.method](
-          methodInfo.methodPath,
-          ...[...afterResponseInterceptors, ...interceptors, handler]
+          methodMetadataPath,
+          addJsonHandler,
+          ...afterResponseInterceptors,
+          ...interceptors,
+          handler
         );
       }
       const app = container.get<koa>(APP);
@@ -223,8 +239,6 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
       const ctx = getContext(req);
       const methodInfo = execCtx.getMethodInfo();
       const controller = execCtx.getClass();
-
-      (req as any).jsonHandler = methodInfo.json;
 
       // extract all args
       const args = extractParameters(

@@ -163,9 +163,19 @@ export class ExpressPlugin extends WebPluginBase implements GabliamPlugin {
           );
         }
 
+        const addJsonHandler = (
+          req: express.Request,
+          res: express.Response,
+          next: express.NextFunction
+        ) => {
+          (req as any).jsonHandler = methodInfo.json;
+          next();
+        };
+
         // register handler in router
         router[methodInfo.method](
           methodInfo.methodPath,
+          addJsonHandler,
           ...interceptors,
           handler,
           ...afterResponseInterceptors
@@ -223,8 +233,6 @@ export class ExpressPlugin extends WebPluginBase implements GabliamPlugin {
       const ctx = getContext(req);
       const methodInfo = execCtx.getMethodInfo();
       const controller = execCtx.getClass();
-
-      (req as any).jsonHandler = methodInfo.json;
 
       // extract all args
       const args = extractParameters(

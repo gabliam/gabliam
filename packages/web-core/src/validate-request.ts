@@ -58,4 +58,6 @@ export const getValidateError = (err: ValidationError) => {
       error.validation.keys.push(EscapeHtml(path));
     }
   }
+
+  return error;
 };

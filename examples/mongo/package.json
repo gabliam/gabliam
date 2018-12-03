@@ -4,8 +4,8 @@
   "private": true,
   "description": "sample with decorator",
   "scripts": {
-    "watch": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts",
-    "start": "ts-node src/index.ts"
+    "watch": "TS_NODE_FILES=true nodemon --watch 'src/**/*.ts' --exec 'ts-node' --type-check -r tsconfig-paths/register src/index.ts",
+    "start": "TS_NODE_FILES=true ts-node --type-check -r tsconfig-paths/register src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -20,15 +20,15 @@
   "dependencies": {
     "@gabliam/core": "^7.10.0",
     "@gabliam/express": "^7.10.0",
+    "@gabliam/koa": "^7.10.0",
     "@gabliam/mongoose": "^7.10.0",
     "@gabliam/web-core": "^7.10.0",
-    "body-parser": "^1.18.3",
-    "helmet": "^3.15.0",
+    "boom": "^7.3.0",
     "reflect-metadata": "^0.1.9",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@types/helmet": "^0.0.42",
+    "@types/boom": "^7.2.1",
     "nodemon": "^1.18.6"
   }
 }

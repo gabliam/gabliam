@@ -1,15 +1,15 @@
-import {
-  RestController,
-  Get,
-  Post,
-  Delete,
-  express,
-  RequestBody,
-  Response,
-  RequestParam
-} from '@gabliam/express';
-import { Photo } from '../entities/photo';
 import { Connection, Repository } from '@gabliam/typeorm';
+import {
+  Delete,
+  Get,
+  noContent,
+  Post,
+  RequestBody,
+  RequestParam,
+  RestController,
+} from '@gabliam/web-core';
+import * as Boom from 'boom';
+import { Photo } from '../entities/photo';
 
 @RestController('/photos')
 export class PhotoController {
@@ -20,49 +20,43 @@ export class PhotoController {
   }
 
   @Post('/')
-  async create(@RequestBody() photo: Photo, @Response() res: express.Response) {
+  async create(@RequestBody() photo: Photo) {
     try {
       return await this.photoRepository.save(photo);
     } catch (err) {
-      res.status(500);
-      res.json(err);
+      throw Boom.internal(err);
     }
   }
 
   @Delete('/:id')
-  async del(@RequestParam('id') id: string, @Response() res: express.Response) {
-    const photo = await this.photoRepository.findOneById(id);
+  async del(@RequestParam('id') id: string) {
+    const photo = await this.photoRepository.findOne(id);
     if (photo) {
       try {
         await this.photoRepository.remove(photo);
-        res.sendStatus(204);
+        return noContent();
       } catch (err) {
-        res.status(500);
-        res.json(err);
+        throw Boom.internal(err);
       }
-      return;
     }
-    res.sendStatus(404);
+    throw Boom.notFound();
   }
 
   @Get('/:id')
-  async getById(
-    @RequestParam('id') id: string,
-    @Response() res: express.Response
-  ) {
-    const photo = await this.photoRepository.findOneById(id);
+  async getById(@RequestParam('id') id: string) {
+    const photo = await this.photoRepository.findOne(id);
     if (photo) {
       return photo;
     }
-    res.sendStatus(404);
+    throw Boom.notFound();
   }
 
   @Get('/')
-  async getAll(@Response() res: express.Response) {
+  async getAll() {
     const photos = await this.photoRepository.find();
     if (photos.length > 0) {
       return photos;
     }
-    res.sendStatus(404);
+    throw Boom.notFound();
   }
 }
