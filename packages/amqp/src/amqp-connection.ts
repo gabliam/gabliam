@@ -1,20 +1,22 @@
-import amqp = require('amqplib');
-import { Queue } from './queue';
 import { ValueExtractor } from '@gabliam/core';
+import * as amqp from 'amqp-connection-manager';
+import { ConfirmChannel, ConsumeMessage, Message } from 'amqplib';
+import * as PromiseB from 'bluebird';
+import * as _ from 'lodash';
+import * as uuid from 'uuid';
+import { DEFAULT_PARAM_VALUE, PARAMETER_TYPE } from './constants';
+import { AmqpConnectionError, AmqpTimeoutError } from './errors';
 import {
-  ConsumerHandler,
-  ConsumeOptions,
-  SendOptions,
-  AmqpMessage,
   ConsumeConfig,
-  RabbitHandlerMetadata,
+  ConsumeOptions,
+  ConsumerHandler,
   Controller,
   ParameterMetadata,
+  RabbitHandlerMetadata,
+  SendOptions,
 } from './interfaces';
-import * as uuid from 'uuid';
-import * as PromiseB from 'bluebird';
-import { AmqpTimeout } from './errors';
-import { PARAMETER_TYPE, DEFAULT_PARAM_VALUE } from './constants';
+import { Queue } from './queue';
+import { log4js } from '@gabliam/log4js';
 
 enum ConnectionState {
   stopped,
@@ -30,11 +32,14 @@ enum ConnectionState {
  * Amqp Connection
  */
 export class AmqpConnection {
-  private connection!: amqp.Connection;
+  private logger = log4js.getLogger(AmqpConnection.name);
 
-  private channel!: amqp.Channel;
 
   private state = ConnectionState.stopped;
+
+  private connection: amqp.AmqpConnectionManager;
+
+  private channel: amqp.ChannelWrapper;
 
   private consumerList: ConsumeConfig[] = [];
 
@@ -56,17 +61,38 @@ export class AmqpConnection {
     }
 
     this.state = ConnectionState.starting;
-    this.connection = await amqp.connect(this.url);
-    const ch = (this.channel = await this.connection.createChannel());
-    for (const queue of this.queues) {
-      await ch.assertQueue(queue.queueName, queue.queueOptions);
-    }
+    this.connection = amqp.connect([this.url]);
+    this.channel = this.connection.createChannel({
+      setup: async (channel: ConfirmChannel) => {
+        for (const queue of this.queues) {
+          await channel.assertQueue(queue.queueName, queue.queueOptions);
+        }
+        for (const { queueName, handler, options } of this.consumerList) {
+          await channel.consume(queueName, handler, options);
+        }
+      },
+    });
 
-    for (const { queueName, handler, options } of this.consumerList) {
-      await ch.consume(queueName, handler, options);
-    }
+    return new Promise((resolve, reject) => {
+      this.connection.once('disconnect', (err: any) => {
+        if (_.get(err, 'err.errno', undefined) === 'ENOTFOUND') {
+          this.connection.close();
+          this.channel.removeAllListeners('connect');
+          this.channel.removeAllListeners('error');
+          reject(err.err);
+        } else {
+          this.logger.error(`Amqp error %O`, err);
+        }
+      });
 
-    this.state = ConnectionState.running;
+      this.state = ConnectionState.running;
+      const isConnect = () => {
+        this.connection.removeAllListeners('disconnect');
+        resolve();
+      };
+      this.channel.once('connect', isConnect);
+      this.channel.once('error', isConnect);
+    });
   }
 
   /**
@@ -120,7 +146,11 @@ export class AmqpConnection {
    */
   async sendToQueue(queue: string, content: any, options?: SendOptions) {
     const queueName = this.getQueueName(queue);
-    await this.channel.sendToQueue(
+    const channel = this.getChannel();
+    if (channel === null) {
+      throw new AmqpConnectionError('Connection error');
+    }
+    await channel.sendToQueue(
       queueName,
       this.contentToBuffer(content),
       options
@@ -134,11 +164,15 @@ export class AmqpConnection {
   async sendToQueueAck(
     queue: string,
     content: any,
-    msg: AmqpMessage,
+    msg: Message,
     options?: SendOptions
   ) {
     const queueName = this.getQueueName(queue);
-    await this.channel.sendToQueue(
+    const channel = this.getChannel();
+    if (channel === null) {
+      throw new AmqpConnectionError('Connection error');
+    }
+    await channel.sendToQueue(
       queueName,
       this.contentToBuffer(content),
       options
@@ -156,9 +190,9 @@ export class AmqpConnection {
     content: any,
     options: SendOptions = {},
     timeout: number = 5000
-  ): Promise<T> {
+  ): Promise<T | null> {
     let onTimeout = false;
-    let promise = new PromiseB<T>((resolve, reject) => {
+    let promise = new PromiseB<T | null>((resolve, reject) => {
       const queueName = this.getQueueName(queue);
       if (!options.correlationId) {
         options.correlationId = uuid();
@@ -174,13 +208,18 @@ export class AmqpConnection {
       }
 
       const replyTo = options.replyTo;
-      const chan = this.channel;
-
+      const chan = this.getChannel();
+      if (chan === null) {
+        return reject(new AmqpConnectionError('Connection error'));
+      }
       // create new Queue for get the response
       chan
         .assertQueue(replyTo, { exclusive: true, autoDelete: true })
         .then(() => {
-          return chan.consume(replyTo, (msg: AmqpMessage) => {
+          return chan.consume(replyTo, (msg: ConsumeMessage | null) => {
+            if (msg === null) {
+              return resolve(null);
+            }
             if (!onTimeout && msg.properties.correlationId === correlationId) {
               resolve(this.parseContent(msg));
             }
@@ -194,7 +233,7 @@ export class AmqpConnection {
         .catch(
           // prettier-ignore
           /* istanbul ignore next */
-          (err) => {
+          (err: any) => {
             reject(err);
           }
         );
@@ -203,7 +242,7 @@ export class AmqpConnection {
     if (timeout) {
       promise = promise.timeout(timeout).catch(PromiseB.TimeoutError, e => {
         onTimeout = true;
-        throw new AmqpTimeout((<any>e).message);
+        throw new AmqpTimeoutError((<any>e).message);
       });
     }
 
@@ -219,8 +258,11 @@ export class AmqpConnection {
     }
     this.state = ConnectionState.stopping;
 
-    await this.channel.close();
-    await this.connection.close();
+    try {
+      this.channel.removeAllListeners('connect');
+      this.channel.removeAllListeners('error');
+      await this.connection.close();
+    } catch {}
 
     this.state = ConnectionState.stopped;
   }
@@ -284,7 +326,7 @@ export class AmqpConnection {
   /**
    * Parse content in message
    */
-  parseContent(msg: AmqpMessage) {
+  parseContent(msg: Message) {
     if (msg.content.toString() === this.undefinedValue) {
       return undefined;
     }
@@ -301,7 +343,11 @@ export class AmqpConnection {
     parametersMetadata: ParameterMetadata[],
     controller: Controller
   ): ConsumerHandler {
-    return async (msg: AmqpMessage) => {
+    return async (msg: ConsumeMessage | null) => {
+      if (msg === null) {
+        return;
+      }
+
       const args = this.extractArgs(parametersMetadata, msg);
       await Promise.resolve(controller[handlerMetadata.key](...args));
       await this.channel.ack(msg);
@@ -313,7 +359,11 @@ export class AmqpConnection {
     parametersMetadata: ParameterMetadata[],
     controller: Controller
   ): ConsumerHandler {
-    return async (msg: AmqpMessage) => {
+    return async (msg: Message | null) => {
+      if (msg === null) {
+        return;
+      }
+
       // catch when error amqp (untestable)
       /* istanbul ignore next */
       if (msg.properties.replyTo === undefined) {
@@ -342,7 +392,7 @@ export class AmqpConnection {
     };
   }
 
-  private extractArgs(params: ParameterMetadata[], msg: AmqpMessage): any[] {
+  private extractArgs(params: ParameterMetadata[], msg: Message): any[] {
     const args = [];
     const content = this.parseContent(msg);
 
@@ -394,5 +444,9 @@ export class AmqpConnection {
     } else {
       return name === DEFAULT_PARAM_VALUE ? param : undefined;
     }
+  }
+
+  private getChannel(): ConfirmChannel | null {
+    return (<any>this.channel)._channel;
   }
 }

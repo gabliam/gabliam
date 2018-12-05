@@ -49,6 +49,22 @@
   dependencies:
     "@types/node" "*"
 
+"@types/amqp-connection-manager@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@types/amqp-connection-manager/-/amqp-connection-manager-2.0.1.tgz#a367c1302df132eae1e9742ec4e62594607b9733"
+  integrity sha512-KLtsbyflrGSEjraUwbk+nGFTgx+ehuA0RtzsWG4zaV5TCQujhtHtdM2yAYcrPi8Uy1xw3lVArDZl/k5AlhtT9g==
+  dependencies:
+    "@types/amqplib" "*"
+    "@types/events" "*"
+
+"@types/amqplib@*", "@types/amqplib@^0.5.9":
+  version "0.5.9"
+  resolved "https://registry.yarnpkg.com/@types/amqplib/-/amqplib-0.5.9.tgz#94fa80fad2fdbe78f458ccb9c5fb0abfe62f817c"
+  integrity sha512-V4OFDKeu8rY2DnbHAh7J7DaJ8L8LZ7EyOLBoXsN2rtlCoB2QwaTgx2SsBd22mPUC9kl+vK7D+nfLq34jLhEjlA==
+  dependencies:
+    "@types/bluebird" "*"
+    "@types/node" "*"
+
 "@types/bluebird@*", "@types/bluebird@^3.5.21":
   version "3.5.21"
   resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.5.21.tgz#567615589cc913e84a28ecf9edb031732bdf2634"
@@ -223,6 +239,11 @@
   version "4.14.111"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.111.tgz#d926250baa9526c0ffe85914dd10363068e7893a"
 
+"@types/lodash@^4.14.119":
+  version "4.14.119"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.119.tgz#be847e5f4bc3e35e46d041c394ead8b603ad8b39"
+  integrity sha512-Z3TNyBL8Vd/M9D9Ms2S3LmFq2sSMzahodD6rCS9V2N44HUMINb75jNkSuwAx7eo2ufqTdfOdtGQpNbieUjPQmw==
+
 "@types/lokijs@^1.2.30":
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/@types/lokijs/-/lokijs-1.5.2.tgz#ed228f080033ce1fb16eff4acde65cb9ae0f1bf2"
@@ -389,6 +410,13 @@ always-error@1.0.0:
 amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
+
+amqp-connection-manager@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/amqp-connection-manager/-/amqp-connection-manager-2.3.0.tgz#bb6650479cb5df9952b365a8f55fa93e32d7edd6"
+  integrity sha512-DvebklFknBkareuf3wxE9X1Eo7l0UK1MgeO9m4B2T/h0OvzLRYsXTtQ8OrkXfgkg98FgKRRR9Nyz9+86aJFEaQ==
+  dependencies:
+    promise-breaker "^4.1.2"
 
 amqplib@^0.5.1, amqplib@^0.5.2:
   version "0.5.2"
@@ -4989,6 +5017,11 @@ lodash@^3.10.1:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
+lodash@^4.17.11:
+  version "4.17.11"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
+  integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
+
 log-symbols@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/log-symbols/-/log-symbols-1.0.2.tgz#376ff7b58ea3086a0f09facc74617eca501e1a18"
@@ -6137,6 +6170,11 @@ process-nextick-args@~1.0.6:
 process-nextick-args@~2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.0.tgz#a37d732f4271b4ab1ad070d35508e8290788ffaa"
+
+promise-breaker@^4.1.2:
+  version "4.1.13"
+  resolved "https://registry.yarnpkg.com/promise-breaker/-/promise-breaker-4.1.13.tgz#fe57ad0a1f14912682942391de1e6a2b4e2e447b"
+  integrity sha512-+lGBqmBEgyvKweIrK4smdN1YxdYp5YjSL1us2XhTMBbZf98jdeGys/Edt5S1b1NXMVRQrvh4DrMgGpYPbXZf3g==
 
 promisify-call@^2.0.2:
   version "2.0.4"
