@@ -1,22 +1,15 @@
+import { Config, Joi } from '@gabliam/core';
+import * as bodyParser from 'body-parser';
+import * as e from 'express';
+import * as supertest from 'supertest';
 import {
   Controller,
-  RestController,
   ExpressConfig,
   Get,
   Post,
-  Put,
-  Patch,
-  Head,
-  Delete,
-  Method,
-  Validate
+  Validate,
 } from '../../src/index';
-import * as e from 'express';
 import { ExpressPluginTest } from '../express-plugin-test';
-import * as supertest from 'supertest';
-import * as bodyParser from 'body-parser';
-import { Config, Bean, Joi } from '@gabliam/core';
-import { CUSTOM_ROUTER_CREATOR } from '../../src/constants';
 
 let appTest: ExpressPluginTest;
 
@@ -37,8 +30,8 @@ describe('express integration', () => {
         @Validate(
           {
             headers: {
-              accept: Joi.string().regex(/xml/)
-            }
+              accept: Joi.string().regex(/xml/),
+            },
           },
           { allowUnknown: true }
         )
@@ -62,8 +55,8 @@ describe('express integration', () => {
         @Get('/user/:id')
         @Validate({
           params: {
-            id: Joi.string().token()
-          }
+            id: Joi.string().token(),
+          },
         })
         async getTest(req: e.Request, res: e.Response) {
           return 'lol';
@@ -84,8 +77,8 @@ describe('express integration', () => {
         @Get('/')
         @Validate({
           query: Joi.object().keys({
-            start: Joi.date()
-          })
+            start: Joi.date(),
+          }),
         })
         async getTest(req: e.Request, res: e.Response) {
           return 'lol';
@@ -108,8 +101,8 @@ describe('express integration', () => {
           body: {
             first: Joi.string().required(),
             last: Joi.string(),
-            role: Joi.number().integer()
-          }
+            role: Joi.number().integer(),
+          },
         })
         async getTest(req: e.Request, res: e.Response) {
           return 'lol';
@@ -132,7 +125,7 @@ describe('express integration', () => {
         .post('/')
         .send({
           first: 'john',
-          last: 123
+          last: 123,
         })
         .expect(400);
       expect(response).toMatchSnapshot();
@@ -148,8 +141,8 @@ describe('express integration', () => {
           {
             headers: {
               accept: Joi.string().regex(/json/),
-              'secret-header': Joi.string().default('@@@@@@')
-            }
+              'secret-header': Joi.string().default('@@@@@@'),
+            },
           },
           { allowUnknown: true }
         )
@@ -175,8 +168,8 @@ describe('express integration', () => {
         @Get('/user/:id')
         @Validate({
           params: {
-            id: Joi.string().uppercase()
-          }
+            id: Joi.string().uppercase(),
+          },
         })
         async getTest(req: e.Request, res: e.Response) {
           expect(req.params.id).toBe('ADAM');
@@ -199,13 +192,13 @@ describe('express integration', () => {
         @Validate({
           query: Joi.object().keys({
             name: Joi.string().uppercase(),
-            page: Joi.number().default(1)
-          })
+            page: Joi.number().default(1),
+          }),
         })
         async getTest(req: e.Request, res: e.Response) {
           expect(req.query).toEqual({
             name: 'JOHN',
-            page: 1
+            page: 1,
           });
           return 'k';
         }
@@ -227,14 +220,14 @@ describe('express integration', () => {
           body: {
             first: Joi.string().required(),
             last: Joi.string().default('Smith'),
-            role: Joi.string().uppercase()
-          }
+            role: Joi.string().uppercase(),
+          },
         })
         async getTest(req: e.Request, res: e.Response) {
           expect(req.body).toEqual({
             first: 'john',
             role: 'ADMIN',
-            last: 'Smith'
+            last: 'Smith',
           });
           return 'lol';
         }
@@ -256,7 +249,7 @@ describe('express integration', () => {
         .post('/?end=lol')
         .send({
           first: 'john',
-          role: 'admin'
+          role: 'admin',
         })
         .expect(200);
       expect(response).toMatchSnapshot();

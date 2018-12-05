@@ -1,7 +1,7 @@
 // jest.config.js
 module.exports = {
   "transform": {
-    ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    ".(ts|tsx)": "ts-jest"
   },
   "collectCoverageFrom": [
     "packages/**/src/**/*.ts",
@@ -17,7 +17,7 @@ module.exports = {
     "@gabliam/(.*)/lib/(.*)": "<rootDir>/packages/$1/src/$2",
     "@gabliam/(.*)": "<rootDir>/packages/$1/src/index.ts"
   },
-  "setupTestFrameworkScriptFile": "<rootDir>/tests/setup.js",
+  "setupTestFrameworkScriptFile": "<rootDir>/tests/setup.ts",
   "testEnvironment": "node",
   "testRegex": "(/__tests__/.*)\\.test\\.(ts|tsx|js)$",
   "snapshotSerializers": [

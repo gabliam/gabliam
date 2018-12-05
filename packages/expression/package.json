@@ -29,11 +29,11 @@
   "devDependencies": {
     "@types/escodegen": "^0.0.6",
     "@types/esprima": "^4.0.2",
-    "@types/node": "^10.5.2"
+    "@types/node": "^10.12.12"
   },
   "dependencies": {
-    "escodegen": "^1.10.0",
-    "esprima": "^4.0.0",
+    "escodegen": "^1.11.0",
+    "esprima": "^4.0.1",
     "tslib": "^1.9.3"
   },
   "engines": {

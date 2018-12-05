@@ -16,6 +16,7 @@
     "sourceMap": true,
     "importHelpers": true,
     "strictPropertyInitialization": false,
+    "strictBindCallApply": false,
     "typeRoots": [
       "node_modules/@types",
       "./typings"

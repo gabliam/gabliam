@@ -1,8 +1,7 @@
 import { Gabliam } from '@gabliam/core';
 import { GabliamTest } from '@gabliam/core/lib/testing';
-import * as e from 'express';
-import * as path from 'path';
 import ExpressPlugin, { APP } from '@gabliam/express';
+import * as e from 'express';
 import GraphqlPlugin from '../src/index';
 
 export class GraphqlPluginTest extends GabliamTest {

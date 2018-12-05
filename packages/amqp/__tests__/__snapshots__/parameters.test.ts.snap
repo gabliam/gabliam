@@ -13,9 +13,15 @@ Object {
   },
   "fields": Object {
     "consumerTag": Any<String>,
+    "deliveryTag": 1,
+    "exchange": "",
+    "redelivered": false,
+    "routingKey": "consumerTest",
   },
   "properties": Object {
     "correlationId": Any<String>,
+    "expiration": "5000",
+    "headers": Object {},
     "replyTo": Any<String>,
   },
 }
@@ -36,6 +42,10 @@ Object {
   },
   "fields": Object {
     "consumerTag": Any<String>,
+    "deliveryTag": 3,
+    "exchange": "",
+    "redelivered": false,
+    "routingKey": "listenerTest",
   },
   "properties": Object {
     "appId": undefined,

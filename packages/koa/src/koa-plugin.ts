@@ -262,6 +262,8 @@ export class KoaPlugin implements GabliamPlugin {
           );
         });
         const app = container.get<koa>(APP);
+
+        // @ts-ignore TS2345
         app.use(router.routes()).use(router.allowedMethods());
       }
     });

@@ -3,13 +3,13 @@ import {
   Plugin,
   Registry,
   GabliamPlugin,
-  Container
+  Container,
 } from '@gabliam/core';
 import { MiddlewareConfig, koaRouter, KoaMiddlewareConfig } from '@gabliam/koa';
 import {
   graphqlKoa,
   graphiqlKoa,
-  KoaGraphQLOptionsFunction
+  KoaGraphQLOptionsFunction,
 } from 'graphql-server-koa';
 import * as bodyParser from 'koa-bodyparser';
 import * as d from 'debug';
@@ -36,6 +36,7 @@ export class GraphqlPlugin extends GraphqlCorePlugin implements GabliamPlugin {
       order: 50,
       instance: app => {
         debug('add graphql middleware to ExpressPlugin');
+        // @ts-ignore TS2345
         app.use(bodyParser());
 
         const router = new koaRouter();
@@ -52,7 +53,7 @@ export class GraphqlPlugin extends GraphqlCorePlugin implements GabliamPlugin {
             // (GraphQLOptions use apollo-server-core and makeExecutableSchema use @types/graphql)
             return <GraphQLOptions>(<any>{
               schema,
-              ...options
+              ...options,
             });
           }))
         );
@@ -63,9 +64,12 @@ export class GraphqlPlugin extends GraphqlCorePlugin implements GabliamPlugin {
             graphiqlKoa(graphqlPluginConfig.graphiqlOptions)
           );
         }
+        // @ts-ignore TS2345
         app.use(router.routes());
+
+        // @ts-ignore TS2345
         app.use(router.allowedMethods());
-      }
+      },
     });
   }
 }
