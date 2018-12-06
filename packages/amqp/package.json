@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/amqp",
-  "version": "7.10.1",
+  "version": "7.11.0",
   "description": "amqp plugin for gabliam",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -31,8 +31,8 @@
     "@gabliam/core": "^7.2.0"
   },
   "devDependencies": {
-    "@gabliam/core": "7.10.1",
-    "@gabliam/log4js": "7.10.1",
+    "@gabliam/core": "7.11.0",
+    "@gabliam/log4js": "7.11.0",
     "@types/amqp-connection-manager": "^2.0.1",
     "@types/amqplib": "^0.5.9",
     "@types/bluebird": "^3.5.24",

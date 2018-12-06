@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/cache-redis",
-  "version": "7.10.1",
+  "version": "7.11.0",
   "description": "cache redis plugin for gabliam",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -31,8 +31,8 @@
     "@gabliam/core": "^7.2.0"
   },
   "devDependencies": {
-    "@gabliam/cache": "7.10.1",
-    "@gabliam/core": "7.10.1",
+    "@gabliam/cache": "7.11.0",
+    "@gabliam/core": "7.11.0",
     "@types/debug": "^0.0.31",
     "@types/ioredis": "^4.0.4",
     "@types/node": "^10.12.12"
