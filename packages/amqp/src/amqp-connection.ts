@@ -34,7 +34,6 @@ enum ConnectionState {
 export class AmqpConnection {
   private logger = log4js.getLogger(AmqpConnection.name);
 
-
   private state = ConnectionState.stopped;
 
   private connection: amqp.AmqpConnectionManager;
@@ -190,9 +189,9 @@ export class AmqpConnection {
     content: any,
     options: SendOptions = {},
     timeout: number = 5000
-  ): Promise<T | null> {
+  ): Promise<T> {
     let onTimeout = false;
-    let promise = new PromiseB<T | null>((resolve, reject) => {
+    let promise = new PromiseB<T>((resolve, reject) => {
       const queueName = this.getQueueName(queue);
       if (!options.correlationId) {
         options.correlationId = uuid();
@@ -218,7 +217,7 @@ export class AmqpConnection {
         .then(() => {
           return chan.consume(replyTo, (msg: ConsumeMessage | null) => {
             if (msg === null) {
-              return resolve(null);
+              return reject(new Error('Message is null'));
             }
             if (!onTimeout && msg.properties.correlationId === correlationId) {
               resolve(this.parseContent(msg));
