@@ -36,7 +36,6 @@ export class GraphqlPlugin extends GraphqlCorePlugin implements GabliamPlugin {
       order: 50,
       instance: app => {
         debug('add graphql middleware to ExpressPlugin');
-        // @ts-ignore TS2345
         app.use(bodyParser());
 
         const router = new koaRouter();
@@ -64,10 +63,9 @@ export class GraphqlPlugin extends GraphqlCorePlugin implements GabliamPlugin {
             graphiqlKoa(graphqlPluginConfig.graphiqlOptions)
           );
         }
-        // @ts-ignore TS2345
+
         app.use(router.routes());
 
-        // @ts-ignore TS2345
         app.use(router.allowedMethods());
       },
     });
