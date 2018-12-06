@@ -28,7 +28,7 @@
   "dependencies": {
     "debug": "^4.1.0",
     "tslib": "^1.9.3",
-    "typeorm": "^0.2.9"
+    "typeorm": "^0.1.21"
   },
   "devDependencies": {
     "@gabliam/core": "7.11.0",
