@@ -35,11 +35,11 @@
     "@gabliam/core": "^7.10.0",
     "@types/debug": "^0.0.31",
     "@types/graphql": "^14.0.3",
-    "@types/lodash": "^4.14.118",
-    "@types/node": "^10.12.9"
+    "@types/lodash": "^4.14.119",
+    "@types/node": "^10.12.12"
   },
   "dependencies": {
-    "apollo-server-core": "^2.2.5",
+    "apollo-server-core": "^2.2.6",
     "caller": "^1.0.1",
     "debug": "^4.1.0",
     "graphql": "^14.0.2",

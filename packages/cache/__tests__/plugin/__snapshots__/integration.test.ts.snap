@@ -39,6 +39,7 @@ MemoryCache {
     Symbol(maxAge): 0,
     Symbol(dispose): undefined,
     Symbol(noDisposeOnSet): false,
+    Symbol(updateAgeOnGet): false,
     Symbol(cache): Map {
       "testtest" => Node {
         "list": Yallist {
@@ -102,6 +103,7 @@ MemoryCache {
     Symbol(maxAge): 0,
     Symbol(dispose): undefined,
     Symbol(noDisposeOnSet): false,
+    Symbol(updateAgeOnGet): false,
     Symbol(cache): Map {
       "testtest" => Node {
         "list": Yallist {

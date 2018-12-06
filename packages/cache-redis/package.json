@@ -35,7 +35,7 @@
     "@gabliam/core": "^7.10.0",
     "@types/debug": "^0.0.31",
     "@types/ioredis": "^4.0.4",
-    "@types/node": "^10.12.9"
+    "@types/node": "^10.12.12"
   },
   "dependencies": {
     "debug": "^4.1.0",

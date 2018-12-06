@@ -33,7 +33,7 @@
   "devDependencies": {
     "@gabliam/core": "^7.10.0",
     "@types/debug": "^0.0.31",
-    "@types/node": "^10.12.9",
+    "@types/node": "^10.12.12",
     "sqlite3": "^4.0.4"
   },
   "engines": {

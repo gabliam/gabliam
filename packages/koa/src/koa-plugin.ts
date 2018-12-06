@@ -213,6 +213,7 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
       }
       return res;
     }
+
     return [
       async (context: koa.Context, next: () => Promise<any>) => {
         const args = extractParameters(
