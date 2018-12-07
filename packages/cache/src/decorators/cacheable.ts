@@ -9,6 +9,7 @@ import {
   CacheOptions,
   createCacheConfig,
   extractCacheInternalOptions,
+  CacheInternalOptions,
 } from './cache-options';
 
 export function Cacheable(
@@ -20,10 +21,13 @@ export function Cacheable(
     descriptor: TypedPropertyDescriptor<any>
   ) {
     InjectContainer()(target.constructor);
-    const cacheInternalOptions = extractCacheInternalOptions(target, value);
+    let cacheInternalOptions: CacheInternalOptions;
     const method = descriptor.value;
     let cacheConfig: CacheConfig;
     descriptor.value = async function(...args: any[]) {
+      if (!cacheInternalOptions) {
+        cacheInternalOptions = extractCacheInternalOptions(target, value);
+      }
       if (!cacheConfig) {
         const container: Container = (<any>this)[INJECT_CONTAINER_KEY];
         cacheConfig = await createCacheConfig(container, cacheInternalOptions);

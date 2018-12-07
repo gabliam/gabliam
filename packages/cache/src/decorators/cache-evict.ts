@@ -58,13 +58,14 @@ export function CacheEvict(
     descriptor: TypedPropertyDescriptor<any>
   ) {
     InjectContainer()(target.constructor);
-    const cacheInternalOptions = extractCacheEvictInternalOptions(
-      target,
-      value
-    );
+    let cacheInternalOptions: CacheInternalEvictOptions;
     const method = descriptor.value;
     let cacheConfig: CacheConfig;
     descriptor.value = async function(...args: any[]) {
+      if (!cacheInternalOptions) {
+        cacheInternalOptions = extractCacheEvictInternalOptions(target, value);
+      }
+
       if (!cacheConfig) {
         const container: Container = (<any>this)[INJECT_CONTAINER_KEY];
         cacheConfig = await createCacheConfig(container, cacheInternalOptions);
