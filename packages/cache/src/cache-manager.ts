@@ -1,6 +1,6 @@
 import { Cache, ConstructableCache } from './cache';
 
-export interface CacheGroup {
+export interface ICacheGroup {
   defaultCache?: ConstructableCache;
 
   defaultOptionsCache?: object;
@@ -30,7 +30,7 @@ export interface CacheManager {
 
 export interface ConstructableCacheManager {
   new (
-    groups: Map<string, CacheGroup>,
+    groups: Map<string, ICacheGroup>,
     dynamic: boolean,
     defaultCache: ConstructableCache,
     defaultOptionsCache?: object
