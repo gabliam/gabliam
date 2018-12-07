@@ -3,7 +3,7 @@ import { METADATA_KEY, ERRORS_MSGS } from '../constant';
 /**
  * Add Cache on class
  */
-export const Cache = (cacheGroupName: string): ClassDecorator => <
+export const CacheGroup = (cacheGroupName: string): ClassDecorator => <
   T extends Function
 >(
   target: T
