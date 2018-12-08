@@ -1,6 +1,6 @@
 import { Bean, InjectContainer, PluginConfig, Value, Joi } from '@gabliam/core';
 import { CACHE_MANAGER } from './constant';
-import { ConstructableCacheManager, CacheGroup } from './cache-manager';
+import { ConstructableCacheManager, ICacheGroup } from './cache-manager';
 import { ConstructableCache } from './cache';
 import * as d from 'debug';
 import { SimpleCacheManager } from './simple-cache-manager';
@@ -73,13 +73,13 @@ export class CachePluginConfig {
     if (this.cacheConfig === undefined) {
       return this.createDefaultManager();
     }
-    const groups = new Map<string, CacheGroup>();
+    const groups = new Map<string, ICacheGroup>();
     if (this.cacheConfig.groups) {
       for (const [
         groupKey,
         { defaultCache, caches, defaultOptionsCache },
       ] of Object.entries(this.cacheConfig.groups)) {
-        const groupCache: CacheGroup = {
+        const groupCache: ICacheGroup = {
           defaultCache,
           defaultOptionsCache,
           caches: new Map(),
