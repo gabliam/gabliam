@@ -1,15 +1,20 @@
+import { UseExpressInterceptors } from '@gabliam/express';
+import { UseKoaInterceptors } from '@gabliam/koa';
 import { Connection, Repository } from '@gabliam/typeorm';
 import {
   Delete,
+  GabRequest,
   Get,
   noContent,
   Post,
+  Request,
   RequestBody,
   RequestParam,
   RestController,
 } from '@gabliam/web-core';
 import * as Boom from 'boom';
 import { Photo } from '../entities/photo';
+import { expressMulter, koaMulter } from '../multer';
 
 @RestController('/photos')
 export class PhotoController {
@@ -58,5 +63,12 @@ export class PhotoController {
       return photos;
     }
     throw Boom.notFound();
+  }
+
+  @UseKoaInterceptors(koaMulter.single('avatar'))
+  @UseExpressInterceptors(expressMulter.single('avatar'))
+  @Post('/upload')
+  async upload(@Request() req: GabRequest) {
+    return req.file;
   }
 }

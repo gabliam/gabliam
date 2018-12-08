@@ -55,6 +55,12 @@ export class ExpressRequest implements GabRequest<express.Request> {
   @alias(['request', 'ips'], { access: 'readonly' })
   readonly ips: string[];
 
+  @alias(['request', 'file'], { access: 'readonly' })
+  readonly file: any;
+
+  @alias(['request', 'files'], { access: 'readonly' })
+  readonly files: any;
+
   /**
    * Get/Set request method.
    */

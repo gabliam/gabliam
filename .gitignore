@@ -8,3 +8,4 @@ coverage_jest_raw
 *.sqlite
 test.json
 lol/
+uploads/

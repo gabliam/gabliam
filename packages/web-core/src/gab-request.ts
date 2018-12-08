@@ -40,6 +40,10 @@ export interface GabRequest<T = any> {
    */
   readonly ips: string[];
 
+  readonly file: any;
+
+  readonly files: any;
+
   /**
    * Get/Set request method.
    */

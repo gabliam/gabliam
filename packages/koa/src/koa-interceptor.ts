@@ -1,12 +1,13 @@
+import { Service } from '@gabliam/core';
 import {
   AfterResponseInterceptor,
   Interceptor,
-  InterceptorMethod,
   InterceptorConstructor,
+  InterceptorMethod,
+  UseInterceptors,
 } from '@gabliam/web-core';
 import { METADATA_KEY } from './constants';
 import { koaRouter } from './koa';
-import { Service } from '@gabliam/core';
 
 /**
  * Test if target is an koa interceptor
@@ -52,3 +53,9 @@ export const toInterceptor = (
   KoaInterceptor()(clazz);
   return clazz;
 };
+
+/**
+ * Alias for evict to use: UseInterceptors(toInterceptor(koaMid))
+ */
+export const UseKoaInterceptors = (...mids: koaRouter.IMiddleware[]) =>
+  UseInterceptors(...mids.map(m => toInterceptor(m)));

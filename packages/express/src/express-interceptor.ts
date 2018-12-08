@@ -3,6 +3,7 @@ import {
   Interceptor,
   InterceptorMethod,
   InterceptorConstructor,
+  UseInterceptors,
 } from '@gabliam/web-core';
 import { METADATA_KEY } from './constants';
 import { express } from './express';
@@ -52,3 +53,10 @@ export const toInterceptor = (
   ExpressInterceptor()(clazz);
   return clazz;
 };
+
+/**
+ * Alias for evict to use: UseInterceptors(toInterceptor(expressMid))
+ */
+export const UseExpressInterceptors = (
+  ...mids: (express.RequestHandler | express.ErrorRequestHandler)[]
+) => UseInterceptors(...mids.map(m => toInterceptor(m)));
