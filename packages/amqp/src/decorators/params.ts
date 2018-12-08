@@ -7,8 +7,8 @@ import {
   RabbitHandlerParameterMetadata,
   ParameterMetadata,
   SendOptions,
-  MessageFields,
 } from '../interfaces';
+import { MessageFields, ConsumeMessageFields } from 'amqplib';
 
 /**
  * Message decorator
@@ -41,9 +41,9 @@ export const Properties = paramDecoratorFactory<keyof SendOptions>(
  *
  * @param  {string} name name of specific request.query
  */
-export const Fields = paramDecoratorFactory<keyof MessageFields>(
-  PARAMETER_TYPE.FIELDS
-);
+export const Fields = paramDecoratorFactory<
+  keyof (MessageFields & ConsumeMessageFields)
+>(PARAMETER_TYPE.FIELDS);
 
 function paramDecoratorFactory<T extends string>(
   parameterType: PARAMETER_TYPE
