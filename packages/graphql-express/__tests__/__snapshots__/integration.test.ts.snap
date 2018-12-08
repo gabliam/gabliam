@@ -3,10 +3,10 @@
 exports[`Mutation test 1`] = `
 Object {
   "header": Object {
+    "access-control-allow-origin": "*",
     "connection": "close",
-    "content-length": "47",
+    "content-length": "48",
     "content-type": "application/json",
-    "x-powered-by": "Express",
   },
   "req": Object {
     "data": Object {
@@ -32,7 +32,8 @@ Object {
     "method": "POST",
   },
   "status": 200,
-  "text": "{\\"data\\":{\\"submitHero\\":{\\"id\\":4,\\"name\\":\\"Rogue\\"}}}",
+  "text": "{\\"data\\":{\\"submitHero\\":{\\"id\\":4,\\"name\\":\\"Rogue\\"}}}
+",
 }
 `;
 
@@ -62,10 +63,10 @@ Array [
 exports[`Query test 1`] = `
 Object {
   "header": Object {
+    "access-control-allow-origin": "*",
     "connection": "close",
-    "content-length": "77",
+    "content-length": "78",
     "content-type": "application/json",
-    "x-powered-by": "Express",
   },
   "req": Object {
     "data": Object {
@@ -82,6 +83,7 @@ Object {
     "method": "POST",
   },
   "status": 200,
-  "text": "{\\"data\\":{\\"heroes\\":[{\\"id\\":1,\\"name\\":\\"spiderman\\"},{\\"id\\":2,\\"name\\":\\"Wolverine\\"}]}}",
+  "text": "{\\"data\\":{\\"heroes\\":[{\\"id\\":1,\\"name\\":\\"spiderman\\"},{\\"id\\":2,\\"name\\":\\"Wolverine\\"}]}}
+",
 }
 `;

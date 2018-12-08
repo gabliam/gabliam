@@ -9,7 +9,7 @@ import { GraphqlConfig, GraphqlCorePlugin } from '@gabliam/graphql-core';
 import { koa } from '@gabliam/koa';
 import * as d from 'debug';
 import { GraphQLSchema } from 'graphql';
-import { WebConfiguration, ConfigFunction } from '@gabliam/web-core/src';
+import { WebConfiguration, ConfigFunction } from '@gabliam/web-core';
 import { ApolloServer } from 'apollo-server-koa';
 
 const debug = d('Gabliam:Plugin:GraphqlPluginKoa');

@@ -20,10 +20,6 @@ module.exports = {
   "setupTestFrameworkScriptFile": "<rootDir>/tests/setup.ts",
   "testEnvironment": "node",
   "testRegex": "(/__tests__/.*)\\.test\\.(ts|tsx|js)$",
-  "testPathIgnorePatterns": [
-    "packages/graphql-express",
-    "packages/graphql-koa"
-  ],
   "snapshotSerializers": [
     "jest-serializer-path",
     "jest-serializer-supertest"
