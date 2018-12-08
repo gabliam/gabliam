@@ -56,7 +56,12 @@
     ]
   },
   "workspaces": [
-    "packages/*",
+    "packages/core/*",
+    "packages/broker/*",
+    "packages/cache/*",
+    "packages/database/*",
+    "packages/web/*",
+    "packages/tools/*",
     "examples/*"
   ],
   "engines": {

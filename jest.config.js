@@ -14,8 +14,21 @@ module.exports = {
     "!**/vendor/**"
   ],
   "moduleNameMapper": {
-    "@gabliam/(.*)/lib/(.*)": "<rootDir>/packages/$1/src/$2",
-    "@gabliam/(.*)": "<rootDir>/packages/$1/src/index.ts"
+    "@gabliam/core/lib/(.*)": "<rootDir>/packages/core/core/src/$1",
+    "@gabliam/amqp": "<rootDir>/packages/broker/amqp/src/index.ts",
+    "@gabliam/cache": "<rootDir>/packages/cache/cache/src/index.ts",
+    "@gabliam/cache-redis": "<rootDir>/packages/cache/cache-redis/src/index.ts",
+    "@gabliam/core": "<rootDir>/packages/core/core/src/index.ts",
+    "@gabliam/expression": "<rootDir>/packages/core/expression/src/index.ts",
+    "@gabliam/mongoose": "<rootDir>/packages/database/mongoose/src/index.ts",
+    "@gabliam/typeorm": "<rootDir>/packages/database/typeorm/src/index.ts",
+    "@gabliam/log4js": "<rootDir>/packages/tools/log4js/src/index.ts",
+    "@gabliam/express": "<rootDir>/packages/web/express/src/index.ts",
+    "@gabliam/graphql-core": "<rootDir>/packages/web/graphql-core/src/index.ts",
+    "@gabliam/graphql-express": "<rootDir>/packages/web/graphql-express/src/index.ts",
+    "@gabliam/graphql-koa": "<rootDir>/packages/web/graphql-koa/src/index.ts",
+    "@gabliam/koa": "<rootDir>/packages/web/koa/src/index.ts",
+    "@gabliam/web-core": "<rootDir>/packages/web/web-core/src/index.ts",
   },
   "setupTestFrameworkScriptFile": "<rootDir>/tests/setup.ts",
   "testEnvironment": "node",

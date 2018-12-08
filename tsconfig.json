@@ -3,8 +3,14 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@gabliam/core/lib/*":  ["./packages/core/src/*"],
-      "@gabliam/*": ["./packages/*/src"]
+      "@gabliam/core/lib/*":  ["./packages/core/core/src/*"],
+      "@gabliam/*": [
+        "./packages/broker/*/src",
+        "./packages/cache/*/src",
+        "./packages/core/*/src",
+        "./packages/database/*/src",
+        "./packages/web/*/src",
+      ]
     }
   }
 }
