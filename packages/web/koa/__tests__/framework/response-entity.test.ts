@@ -3,11 +3,6 @@ import {
   RestController,
   Get,
   ResponseEntity,
-  ok,
-  accepted,
-  badRequest,
-  noContent,
-  notFound,
 } from '@gabliam/web-core';
 import { KoaPluginTest } from '../koa-plugin-test';
 import * as HttpStatus from 'http-status-codes';
@@ -87,7 +82,7 @@ describe('Response entity Tests:', () => {
         class TestController {
           @Get('/')
           async getTest() {
-            return ok();
+            return ResponseEntity.ok();
           }
         }
         appTest.addClass(TestController);
@@ -104,7 +99,7 @@ describe('Response entity Tests:', () => {
         class TestController {
           @Get('/')
           async getTest() {
-            return ok({ get: 'get' });
+            return ResponseEntity.ok({ get: 'get' });
           }
         }
         appTest.addClass(TestController);
@@ -121,7 +116,7 @@ describe('Response entity Tests:', () => {
         class TestController {
           @Get('/')
           async getTest() {
-            return accepted();
+            return ResponseEntity.accepted();
           }
         }
         appTest.addClass(TestController);
@@ -138,7 +133,7 @@ describe('Response entity Tests:', () => {
         class TestController {
           @Get('/')
           async getTest() {
-            return badRequest();
+            return ResponseEntity.badRequest();
           }
         }
         appTest.addClass(TestController);
@@ -155,7 +150,7 @@ describe('Response entity Tests:', () => {
         class TestController {
           @Get('/')
           async getTest() {
-            return noContent();
+            return ResponseEntity.noContent();
           }
         }
         appTest.addClass(TestController);
@@ -172,7 +167,7 @@ describe('Response entity Tests:', () => {
         class TestController {
           @Get('/')
           async getTest() {
-            return notFound();
+            return ResponseEntity.notFound();
           }
         }
         appTest.addClass(TestController);

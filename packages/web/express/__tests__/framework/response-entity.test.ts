@@ -3,11 +3,6 @@ import { ExpressPluginTest } from '../express-plugin-test';
 import * as supertest from 'supertest';
 import {
   ResponseEntity,
-  ok,
-  accepted,
-  badRequest,
-  noContent,
-  notFound,
   Controller,
   RestController,
   Get,
@@ -84,7 +79,7 @@ describe('Response entity Tests:', () => {
         class TestController {
           @Get('/')
           async getTest(req: e.Request, res: e.Response) {
-            return ok();
+            return ResponseEntity.ok();
           }
         }
         appTest.addClass(TestController);
@@ -100,7 +95,7 @@ describe('Response entity Tests:', () => {
         class TestController {
           @Get('/')
           async getTest(req: e.Request, res: e.Response) {
-            return ok({ get: 'get' });
+            return ResponseEntity.ok({ get: 'get' });
           }
         }
         appTest.addClass(TestController);
@@ -116,7 +111,7 @@ describe('Response entity Tests:', () => {
         class TestController {
           @Get('/')
           async getTest(req: e.Request, res: e.Response) {
-            return accepted();
+            return ResponseEntity.accepted();
           }
         }
         appTest.addClass(TestController);
@@ -132,7 +127,7 @@ describe('Response entity Tests:', () => {
         class TestController {
           @Get('/')
           async getTest(req: e.Request, res: e.Response) {
-            return badRequest();
+            return ResponseEntity.badRequest();
           }
         }
         appTest.addClass(TestController);
@@ -148,7 +143,7 @@ describe('Response entity Tests:', () => {
         class TestController {
           @Get('/')
           async getTest(req: e.Request, res: e.Response) {
-            return noContent();
+            return ResponseEntity.noContent();
           }
         }
         appTest.addClass(TestController);
@@ -164,7 +159,7 @@ describe('Response entity Tests:', () => {
         class TestController {
           @Get('/')
           async getTest(req: e.Request, res: e.Response) {
-            return notFound();
+            return ResponseEntity.notFound();
           }
         }
         appTest.addClass(TestController);

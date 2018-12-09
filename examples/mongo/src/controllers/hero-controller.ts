@@ -2,7 +2,6 @@ import { mongoose, MongooseConnection, Repository } from '@gabliam/mongoose';
 import {
   Delete,
   Get,
-  noContent,
   Post,
   RequestBody,
   RequestParam,
@@ -49,7 +48,7 @@ export class HeroController {
   @Delete('/:id')
   async del(@RequestParam('id') id: string) {
     await this.heroRepository.delete(id);
-    return noContent();
+    return ResponseEntity.noContent();
   }
 
   @Get('/:id')

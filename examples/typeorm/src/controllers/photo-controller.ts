@@ -5,11 +5,11 @@ import {
   Delete,
   GabRequest,
   Get,
-  noContent,
   Post,
   Request,
   RequestBody,
   RequestParam,
+  ResponseEntity,
   RestController,
 } from '@gabliam/web-core';
 import * as Boom from 'boom';
@@ -39,7 +39,7 @@ export class PhotoController {
     if (photo) {
       try {
         await this.photoRepository.remove(photo);
-        return noContent();
+        return ResponseEntity.noContent();
       } catch (err) {
         throw Boom.internal(err);
       }
