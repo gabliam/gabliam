@@ -1,5 +1,4 @@
 import { Config } from '@gabliam/core';
-import { Middleware, express } from '@gabliam/express';
 import * as passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { LokiDatabase } from './loki-database';
@@ -31,22 +30,5 @@ export class PassportConfig {
 
     passport.serializeUser((user, done) => done(null, user));
     passport.deserializeUser((user, done) => done(null, user));
-  }
-
-  /**
-   * Create Middleware
-   */
-  @Middleware('authenticated')
-  createAuthMiddleware() {
-    return () => (
-      req: express.Request,
-      res: express.Response,
-      next: express.NextFunction
-    ) => {
-      if (!req.isAuthenticated || !req.isAuthenticated()) {
-        return res.sendStatus(403);
-      }
-      next();
-    };
   }
 }

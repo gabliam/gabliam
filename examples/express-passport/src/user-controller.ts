@@ -1,10 +1,11 @@
-import { RestController, Get, MiddlewareInject } from '@gabliam/express';
+import { RestController, Get, UseInterceptors } from '@gabliam/web-core';
 import { LokiDatabase } from './config/loki-database';
 import { User, UserSerialize } from './entities/user';
 import { Serialize } from 'cerialize';
+import { AuthInterceptor } from './config/authenticated-interceptor';
 
 @RestController('/test')
-@MiddlewareInject('authenticated')
+@UseInterceptors(AuthInterceptor)
 export class UserController {
   userCollection: Collection<User>;
 
