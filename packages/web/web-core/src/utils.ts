@@ -182,6 +182,7 @@ export const extractControllerMetadata = (
         controllerPath,
         methods,
       });
+
       methodMetadatas.forEach((methodMetadata: ControllerMethodMetadata) => {
         let paramList: ParameterMetadata[] = [];
         if (parameterMetadata) {
@@ -205,10 +206,20 @@ export const extractControllerMetadata = (
           getValidateInterceptor(container)
         );
 
+        const methodJson = Reflect.getMetadata(
+          METADATA_KEY.responseBody,
+          controller.constructor,
+          methodMetadata.key
+        );
+
+        // if method is true or controller is true and method undefined
+        const json =
+          methodJson || (controllerMetadata.json && methodJson === undefined);
+
         methods.push({
           controllerId,
           methodName: methodMetadata.key,
-          json: controllerMetadata.json,
+          json,
           paramList,
           methodPath,
           method: methodMetadata.method,

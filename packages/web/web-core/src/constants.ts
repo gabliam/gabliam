@@ -19,6 +19,7 @@ export const METADATA_KEY = {
   webConfigAfterControllers: '_web-config-after-controllers',
   interceptor: '_interceptor',
   validate: '_validate',
+  responseBody: '_responseBody',
 };
 
 export enum PARAMETER_TYPE {

@@ -1,10 +1,15 @@
-import { RestController, Get, UseInterceptors } from '@gabliam/web-core';
-import { LokiDatabase } from './config/loki-database';
-import { User, UserSerialize } from './entities/user';
+import {
+  Controller,
+  Get,
+  ResponseBody,
+  UseInterceptors,
+} from '@gabliam/web-core';
 import { Serialize } from 'cerialize';
 import { AuthInterceptor } from './config/authenticated-interceptor';
+import { LokiDatabase } from './config/loki-database';
+import { User, UserSerialize } from './entities/user';
 
-@RestController('/test')
+@Controller('/test')
 @UseInterceptors(AuthInterceptor)
 export class UserController {
   userCollection: Collection<User>;
@@ -13,8 +18,15 @@ export class UserController {
     this.userCollection = lokiDatabase.getUserCollection();
   }
 
+  @ResponseBody()
+  @Get('/hi')
+  async hi() {
+    return 'Hi';
+  }
+
   @Get('/')
   async getAll() {
+    return 'lol';
     return Serialize(this.userCollection.find(), UserSerialize);
   }
 }
