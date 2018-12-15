@@ -1,8 +1,8 @@
 import {
-  Validate,
   Controller,
   Get,
   METADATA_KEY,
+  Validate,
   ValidateMetadata,
 } from '@gabliam/web-core';
 

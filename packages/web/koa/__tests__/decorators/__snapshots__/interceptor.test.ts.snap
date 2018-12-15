@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`interceptors decorators should add Bean metadata to a class when decorated with @UseInterceptors 1`] = `undefined`;
