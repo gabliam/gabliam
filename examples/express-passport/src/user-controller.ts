@@ -1,6 +1,7 @@
 import {
   Controller,
   Get,
+  Request,
   ResponseBody,
   UseInterceptors,
 } from '@gabliam/web-core';
@@ -20,13 +21,12 @@ export class UserController {
 
   @ResponseBody()
   @Get('/hi')
-  async hi() {
-    return 'Hi';
+  async hi(@Request('originalRequest.user.username') username: string) {
+    return `Hi ${username}`;
   }
 
   @Get('/')
   async getAll() {
-    return 'lol';
     return Serialize(this.userCollection.find(), UserSerialize);
   }
 }

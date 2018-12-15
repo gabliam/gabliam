@@ -23,6 +23,7 @@ import { ExecutionContext } from './execution-context';
 import { GabContext } from './gab-context';
 import { MethodInfo, RestMetadata, WebPluginConfig } from './plugin-config';
 import { getValidateInterceptor } from './validate';
+import { get } from 'lodash';
 
 export const cleanPath = (path: string) => {
   return path.replace(/\/+/gi, '/');
@@ -104,7 +105,7 @@ const getFuncParam = <T extends Object, U extends keyof T>(
       param = source[paramType];
     }
 
-    let res = getter ? param.get(name) : param[name];
+    let res = getter ? param.get(name) : get(param, name, undefined);
     if (res !== undefined) {
       /**
        * For query, all value sare considered to string value.
