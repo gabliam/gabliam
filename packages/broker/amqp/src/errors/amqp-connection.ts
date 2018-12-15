@@ -1,3 +1,4 @@
+/* istanbul ignore next */
 export class AmqpConnectionError extends Error {
   constructor(m: string) {
     super(m);

@@ -8,8 +8,7 @@ module.exports = {
     "!packages/**/src/interfaces/**",
     "!packages/**/src/testing/**",
     "!packages/**/src/typings/**",
-    "!packages/graphql-core/src/graphql-core-plugin.ts",
-    "!packages/expression/src/**/*.ts",
+    "!packages/core/expression/src/**/*.ts",
     "!**/node_modules/**",
     "!**/vendor/**"
   ],

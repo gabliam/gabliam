@@ -80,6 +80,7 @@ export class AmqpConnection {
           this.channel.removeAllListeners('error');
           reject(err.err);
         } else {
+          /* istanbul ignore next */
           this.logger.error(`Amqp error %O`, err);
         }
       });
@@ -147,6 +148,7 @@ export class AmqpConnection {
     const queueName = this.getQueueName(queue);
     const channel = this.getChannel();
     if (channel === null) {
+      /* istanbul ignore next */
       throw new AmqpConnectionError('Connection error');
     }
     await channel.sendToQueue(
@@ -169,6 +171,7 @@ export class AmqpConnection {
     const queueName = this.getQueueName(queue);
     const channel = this.getChannel();
     if (channel === null) {
+      /* istanbul ignore next */
       throw new AmqpConnectionError('Connection error');
     }
     await channel.sendToQueue(
@@ -209,6 +212,7 @@ export class AmqpConnection {
       const replyTo = options.replyTo;
       const chan = this.getChannel();
       if (chan === null) {
+        /* istanbul ignore next */
         return reject(new AmqpConnectionError('Connection error'));
       }
       // create new Queue for get the response
@@ -217,6 +221,7 @@ export class AmqpConnection {
         .then(() => {
           return chan.consume(replyTo, (msg: ConsumeMessage | null) => {
             if (msg === null) {
+              /* istanbul ignore next */
               return reject(new Error('Message is null'));
             }
             if (!onTimeout && msg.properties.correlationId === correlationId) {
@@ -343,6 +348,7 @@ export class AmqpConnection {
     controller: Controller
   ): ConsumerHandler {
     return async (msg: ConsumeMessage | null) => {
+      /* istanbul ignore next */
       if (msg === null) {
         return;
       }
@@ -360,6 +366,7 @@ export class AmqpConnection {
   ): ConsumerHandler {
     return async (msg: Message | null) => {
       if (msg === null) {
+        /* istanbul ignore next */
         return;
       }
 
@@ -413,6 +420,7 @@ export class AmqpConnection {
         case PARAMETER_TYPE.FIELDS:
           args[item.index] = this.getParam(msg, 'fields', item);
           break;
+        /* istanbul ignore next */
         default:
           args[item.index] = msg;
           break; // response
