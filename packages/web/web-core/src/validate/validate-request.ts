@@ -1,6 +1,6 @@
 import { Joi } from '@gabliam/core';
 import * as EscapeHtml from 'escape-html';
-import { ValidationOptions, ValidatorType } from './decorators';
+import { ValidationOptions, ValidatorType } from '../decorators';
 
 export const NO_VALIDATION = Symbol('@gabliam/web-core/NO_VALIDATION');
 

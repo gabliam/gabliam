@@ -7,9 +7,9 @@ export type InterceptorMetadata = inversifyInterfaces.ServiceIdentifier<any>;
 /**
  * InterceptorConstructor
  */
-export type InterceptorConstructor =
-  | { new (): Interceptor }
-  | { new (): AfterResponseInterceptor };
+export interface InterceptorConstructor {
+  new (): Interceptor;
+}
 
 /**
  * Interceptor
@@ -18,24 +18,11 @@ export interface Interceptor {
   intercept(...args: any[]): gabliamValue<any>;
 }
 
-/**
- * After response interceptor
- */
-export interface AfterResponseInterceptor {
-  afterResponse(...args: any[]): gabliamValue<any>;
-}
-
 export function isInterceptor(value: any): value is Interceptor {
   return value && typeof value.intercept === 'function';
 }
 
-export function isAfterResponseInterceptor(
-  value: any
-): value is AfterResponseInterceptor {
-  return value && typeof value.afterResponse === 'function';
-}
-
-export type InterceptorMethod = keyof (AfterResponseInterceptor & Interceptor);
+export type InterceptorMethod = keyof Interceptor;
 
 /**
  * Interceptor decorator
@@ -107,9 +94,7 @@ export function addInterceptorMetadata(
 }
 
 export const createInterceptorResolver = (container: Container) =>
-  function interceptorResolver(
-    interceptor: InterceptorMetadata
-  ): AfterResponseInterceptor | Interceptor {
+  function interceptorResolver(interceptor: InterceptorMetadata): Interceptor {
     try {
       // test if the interceptor is a ServiceIdentifier
       return container.get(<inversifyInterfaces.ServiceIdentifier<any>>(
@@ -146,9 +131,6 @@ export function getInterceptors(
   const interceptorResolver = createInterceptorResolver(container);
 
   const interceptors: InterceptorInfo<Interceptor>[] = [];
-  const afterResponseInterceptors: InterceptorInfo<
-    AfterResponseInterceptor
-  >[] = [];
 
   for (const metadata of metadataList) {
     const interceptor = interceptorResolver(metadata);
@@ -159,19 +141,9 @@ export function getInterceptors(
         paramList: getParameterMetadata(interceptor, 'intercept'),
       });
     }
-
-    if (isAfterResponseInterceptor(interceptor)) {
-      afterResponseInterceptors.push({
-        instance: interceptor,
-        paramList: getParameterMetadata(interceptor, 'afterResponse'),
-      });
-    }
   }
 
-  return {
-    interceptors,
-    afterResponseInterceptors,
-  };
+  return interceptors;
 }
 
 export interface InterceptorInfo<T> {
@@ -180,7 +152,4 @@ export interface InterceptorInfo<T> {
   paramList: ParameterMetadata[];
 }
 
-export interface Interceptors {
-  interceptors: InterceptorInfo<Interceptor>[];
-  afterResponseInterceptors: InterceptorInfo<AfterResponseInterceptor>[];
-}
+export type Interceptors = InterceptorInfo<Interceptor>[];

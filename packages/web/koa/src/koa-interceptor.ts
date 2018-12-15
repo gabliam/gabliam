@@ -1,9 +1,7 @@
 import { Service } from '@gabliam/core';
 import {
-  AfterResponseInterceptor,
   Interceptor,
   InterceptorConstructor,
-  InterceptorMethod,
   UseInterceptors,
 } from '@gabliam/web-core';
 import { METADATA_KEY } from './constants';
@@ -32,23 +30,13 @@ const KoaInterceptor = () => (target: any) => {
  * Convert a Koa router middleware to an express interceptor
  */
 export const toInterceptor = (
-  mid: koaRouter.IMiddleware,
-  type: InterceptorMethod = 'intercept'
+  mid: koaRouter.IMiddleware
 ): InterceptorConstructor => {
-  let clazz: InterceptorConstructor;
-  if (type === 'intercept') {
-    clazz = class implements Interceptor {
-      intercept() {
-        return mid;
-      }
-    };
-  } else {
-    clazz = class implements AfterResponseInterceptor {
-      afterResponse() {
-        return mid;
-      }
-    };
-  }
+  const clazz: InterceptorConstructor = class implements Interceptor {
+    intercept() {
+      return mid;
+    }
+  };
   Service()(clazz);
   KoaInterceptor()(clazz);
   return clazz;

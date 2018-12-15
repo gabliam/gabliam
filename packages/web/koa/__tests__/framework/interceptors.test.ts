@@ -20,6 +20,7 @@ import {
   Put,
   UseInterceptors,
   WebConfig,
+  Call,
 } from '@gabliam/web-core';
 import * as sinon from 'sinon';
 import { KoaPluginTest } from '../koa-plugin-test';
@@ -34,7 +35,47 @@ afterEach(async () => {
   await appTest.destroy();
 });
 
-describe('Middleware:', () => {
+describe('Complex interceptor', () => {
+  let result: string;
+  @Service()
+  class A implements Interceptor {
+    async intercept(@Call() call: Promise<any>) {
+      result += 'a';
+      await call;
+      result += 'b';
+    }
+  }
+
+  const spyA = sinon.spy(A.prototype, 'intercept');
+  beforeEach(() => {
+    result = '';
+    spyA.resetHistory();
+  });
+
+  test('should call method-level interceptor correctly (GET)', async () => {
+    @Controller('/')
+    class TestController {
+      @UseInterceptors(A)
+      @Get('/')
+      public getTest() {
+        return 'GET';
+      }
+    }
+    appTest.addClass(TestController);
+    await appTest.build();
+
+    const response = await appTest
+      .supertest()
+      .get('/')
+      .expect(200);
+
+    expect(spyA.calledOnce).toBe(true);
+    expect(response).toMatchSnapshot();
+    expect(result).toMatchSnapshot();
+  });
+});
+
+describe('Interceptor:', () => {
   let result: string;
 
   @Service()
@@ -72,7 +113,7 @@ describe('Middleware:', () => {
     spyC.resetHistory();
   });
 
-  test('should call method-level middleware correctly (GET)', async () => {
+  test('should call method-level interceptor correctly (GET)', async () => {
     @Controller('/')
     class TestController {
       @UseInterceptors(A, B, C)
@@ -96,7 +137,7 @@ describe('Middleware:', () => {
     expect(result).toMatchSnapshot();
   });
 
-  test('should call method-level middleware correctly (POST)', async () => {
+  test('should call method-level interceptor correctly (POST)', async () => {
     @Controller('/')
     class TestController {
       @UseInterceptors(A, B, C)
@@ -120,7 +161,7 @@ describe('Middleware:', () => {
     expect(result).toMatchSnapshot();
   });
 
-  test('should call method-level middleware correctly (PUT)', async () => {
+  test('should call method-level interceptor correctly (PUT)', async () => {
     @Controller('/')
     class TestController {
       @UseInterceptors(A, B, C)
@@ -143,7 +184,7 @@ describe('Middleware:', () => {
     expect(result).toMatchSnapshot();
   });
 
-  test('should call method-level middleware correctly (PATCH)', async () => {
+  test('should call method-level interceptor correctly (PATCH)', async () => {
     @Controller('/')
     class TestController {
       @UseInterceptors(A, B, C)
@@ -167,7 +208,7 @@ describe('Middleware:', () => {
     expect(result).toMatchSnapshot();
   });
 
-  test('should call method-level middleware correctly (HEAD)', async () => {
+  test('should call method-level interceptor correctly (HEAD)', async () => {
     @Controller('/')
     class TestController {
       @UseInterceptors(A, B, C)
@@ -190,7 +231,7 @@ describe('Middleware:', () => {
     expect(result).toMatchSnapshot();
   });
 
-  test('should call method-level middleware correctly (DELETE)', async () => {
+  test('should call method-level interceptor correctly (DELETE)', async () => {
     @Controller('/')
     class TestController {
       @UseInterceptors(A, B, C)
@@ -213,7 +254,7 @@ describe('Middleware:', () => {
     expect(result).toMatchSnapshot();
   });
 
-  test('should call method-level middleware correctly (ALL)', async () => {
+  test('should call method-level interceptor correctly (ALL)', async () => {
     @Controller('/')
     class TestController {
       @UseInterceptors(A, B, C)
@@ -236,7 +277,7 @@ describe('Middleware:', () => {
     expect(result).toMatchSnapshot();
   });
 
-  test('should call controller-level middleware correctly', async () => {
+  test('should call controller-level interceptor correctly', async () => {
     @UseInterceptors(A, B, C)
     @Controller({
       path: '/',
@@ -262,7 +303,7 @@ describe('Middleware:', () => {
     expect(result).toMatchSnapshot();
   });
 
-  test('should call server-level middleware correctly', async () => {
+  test('should call server-level interceptor correctly', async () => {
     @Controller('/')
     class TestController {
       @Get('/')
@@ -296,7 +337,7 @@ describe('Middleware:', () => {
     expect(result).toMatchSnapshot();
   });
 
-  test('should call all middleware in correct order', async () => {
+  test('should call all interceptor in correct order', async () => {
     @UseInterceptors(B)
     @Controller({
       path: '/',
@@ -333,7 +374,7 @@ describe('Middleware:', () => {
     expect(result).toMatchSnapshot();
   });
 
-  test('should resolve controller-level middleware', async () => {
+  test('should resolve controller-level interceptor', async () => {
     const symbolId = Symbol('spyA');
     const strId = 'spyB';
 
@@ -369,7 +410,7 @@ describe('Middleware:', () => {
     expect(result).toMatchSnapshot();
   });
 
-  test('should resolve method-level middleware', async () => {
+  test('should resolve method-level interceptor', async () => {
     const symbolId = Symbol('spyA');
     const strId = 'spyB';
 
@@ -403,7 +444,7 @@ describe('Middleware:', () => {
     expect(result).toMatchSnapshot();
   });
 
-  test('should compose controller- and method-level middleware', async () => {
+  test('should compose controller- and method-level interceptor', async () => {
     const symbolId = Symbol('spyA');
     const strId = 'spyB';
 
@@ -441,7 +482,7 @@ describe('Middleware:', () => {
   });
 });
 
-describe('Middleware inject:', () => {
+describe('Interceptor inject:', () => {
   let result: string;
   let args: string;
   @Service()
@@ -493,7 +534,7 @@ describe('Middleware inject:', () => {
       .addClass(D);
   });
 
-  test('should call method-level middleware correctly (GET)', async () => {
+  test('should call method-level interceptor correctly (GET)', async () => {
     @Controller('/')
     class TestController {
       @UseInterceptors(A, B, C, D)
@@ -517,7 +558,7 @@ describe('Middleware inject:', () => {
     expect(args).toMatchSnapshot();
   });
 
-  test('should call method-level middleware correctly (POST)', async () => {
+  test('should call method-level interceptor correctly (POST)', async () => {
     @Controller('/')
     class TestController {
       @UseInterceptors(A, B, C, D)
@@ -541,7 +582,7 @@ describe('Middleware inject:', () => {
     expect(args).toMatchSnapshot();
   });
 
-  test('should call method-level middleware correctly (PUT)', async () => {
+  test('should call method-level interceptor correctly (PUT)', async () => {
     @Controller('/')
     class TestController {
       @UseInterceptors(A, B, C, D)
@@ -565,7 +606,7 @@ describe('Middleware inject:', () => {
     expect(args).toMatchSnapshot();
   });
 
-  test('should call method-level middleware correctly (PATCH)', async () => {
+  test('should call method-level interceptor correctly (PATCH)', async () => {
     @Controller('/')
     class TestController {
       @UseInterceptors(A, B, C, D)
@@ -589,7 +630,7 @@ describe('Middleware inject:', () => {
     expect(args).toMatchSnapshot();
   });
 
-  test('should call method-level middleware correctly (HEAD)', async () => {
+  test('should call method-level interceptor correctly (HEAD)', async () => {
     @Controller('/')
     class TestController {
       @UseInterceptors(A, B, C, D)
@@ -612,7 +653,7 @@ describe('Middleware inject:', () => {
     expect(args).toMatchSnapshot();
   });
 
-  test('should call method-level middleware correctly (DELETE)', async () => {
+  test('should call method-level interceptor correctly (DELETE)', async () => {
     @Controller('/')
     class TestController {
       @UseInterceptors(A, B, C, D)
@@ -636,7 +677,7 @@ describe('Middleware inject:', () => {
     expect(args).toMatchSnapshot();
   });
 
-  test('should call method-level middleware correctly (ALL)', async () => {
+  test('should call method-level interceptor correctly (ALL)', async () => {
     @Controller('/')
     class TestController {
       @UseInterceptors(A, B, C, D)
@@ -660,7 +701,7 @@ describe('Middleware inject:', () => {
     expect(args).toMatchSnapshot();
   });
 
-  test('should call controller-level middleware correctly', async () => {
+  test('should call controller-level interceptor correctly', async () => {
     @UseInterceptors(A, B, C, D)
     @AddArgs('carg')
     @AddArgs2('dearg', 'dearg2')
@@ -686,7 +727,7 @@ describe('Middleware inject:', () => {
     expect(args).toMatchSnapshot();
   });
 
-  test('should call all middleware in correct order', async () => {
+  test('should call all interceptor in correct order', async () => {
     @UseInterceptors(A, B)
     @Controller({
       path: '/',

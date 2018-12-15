@@ -1,4 +1,5 @@
 import { GabRequest } from '@gabliam/web-core';
+import { merge } from 'lodash';
 import { alias } from 'property-tunnel';
 import { koa } from './koa';
 
@@ -101,13 +102,6 @@ export class KoaRequest implements GabRequest<koa.Request> {
   @alias(['request', 'protocol'], { access: 'readonly' })
   readonly protocol: string;
 
-  /**
-   * Get parsed query-string.
-   * Set query-string as an object.
-   */
-  @alias(['request', 'query'])
-  query: any;
-
   @alias(['request', 'querystring'])
   querystring: string;
 
@@ -144,8 +138,30 @@ export class KoaRequest implements GabRequest<koa.Request> {
   @alias(['request', 'subdomains'], { access: 'readonly' })
   readonly subdomains: string[];
 
+  /**
+   * Add private query.
+   * In koa, when you set value to query, koa update querystring with qs.stringify.
+   * When validate interceptor is used, if you set Joi.number, validate cast query to number.
+   *
+   * @see {@link https://github.com/koajs/koa/blob/master/lib/request.js#L186}
+   */
+  private _query: any = {};
+
   // @ts-ignore : context use with property-tunnel
   constructor(private context: koa.Context, private request: koa.Request) {}
+
+  /**
+   * Get parsed query-string.
+   * Set query-string as an object.
+   */
+  set query(query: any) {
+    this._query = query;
+    this.request.query = query;
+  }
+
+  get query() {
+    return merge({}, this.request.query, this._query);
+  }
 
   /**
    * Check if the request was an _XMLHttpRequest_.

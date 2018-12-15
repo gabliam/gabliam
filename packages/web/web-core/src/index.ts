@@ -8,7 +8,6 @@ export * from './gab-response';
 export * from './plugin-config';
 export * from './response-entity';
 export * from './utils';
-export * from './validate-interceptor';
-export * from './validate-request';
+export * from './validate';
 export * from './web-configuration';
 export * from './web-plugin-base';

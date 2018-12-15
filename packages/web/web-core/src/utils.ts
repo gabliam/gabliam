@@ -22,7 +22,7 @@ import {
 import { ExecutionContext } from './execution-context';
 import { GabContext } from './gab-context';
 import { MethodInfo, RestMetadata, WebPluginConfig } from './plugin-config';
-import { getValidateInterceptor } from './validate-interceptor';
+import { getValidateInterceptor } from './validate';
 
 export const cleanPath = (path: string) => {
   return path.replace(/\/+/gi, '/');
@@ -34,7 +34,8 @@ export const extractParameters = <T extends Object, U extends keyof T, V>(
   execCtx: ExecutionContext | null | undefined,
   ctx: GabContext,
   next: V,
-  params: ParameterMetadata[]
+  params: ParameterMetadata[],
+  call?: Promise<any>
 ): any[] => {
   const args = [];
   if (!params || !params.length) {
@@ -75,6 +76,9 @@ export const extractParameters = <T extends Object, U extends keyof T, V>(
         break;
       case PARAMETER_TYPE.EXEC_CONTEXT:
         args[item.index] = execCtx;
+        break;
+      case PARAMETER_TYPE.CALL:
+        args[item.index] = call;
         break;
     }
   }
@@ -202,9 +206,7 @@ export const extractControllerMetadata = (
           methodMetadata.key
         );
 
-        methodInterceptors.interceptors.unshift(
-          getValidateInterceptor(container)
-        );
+        const validatorInterceptor = getValidateInterceptor(container);
 
         const methodJson = Reflect.getMetadata(
           METADATA_KEY.responseBody,
@@ -225,6 +227,7 @@ export const extractControllerMetadata = (
           method: methodMetadata.method,
           controllerInterceptors,
           methodInterceptors,
+          validatorInterceptor,
         });
       });
     }

@@ -7,7 +7,6 @@ import {
   toPromise,
 } from '@gabliam/core';
 import {
-  AfterResponseInterceptor,
   APP,
   cleanPath,
   ExecutionContext,
@@ -34,6 +33,10 @@ import {
   valideErrorMiddleware,
 } from './middleware';
 import { isKoaInterceptor } from './koa-interceptor';
+import {
+  validatorInterceptorToMiddleware,
+  convertKoaInterceptorToMiddleware,
+} from './utils';
 
 const debug = d('Gabliam:Plugin:ExpressPlugin');
 
@@ -148,28 +151,30 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
       for (const methodInfo of methods) {
         const execCtx = new ExecutionContext(controller, methodInfo);
 
-        // create handler
-        const handler = this.handlerFactory(execCtx);
+        const allInterceptors = [
+          ...methodInfo.controllerInterceptors,
+          ...methodInfo.methodInterceptors,
+        ];
 
-        const interceptors: koaRouter.IMiddleware[] = [];
-        for (const i of [
-          ...methodInfo.controllerInterceptors.interceptors,
-          ...methodInfo.methodInterceptors.interceptors,
-        ]) {
-          interceptors.push(
-            ...(await this.interceptorToMiddleware(execCtx, i, 'intercept'))
-          );
-        }
+        // get koa interceptor
+        const koaInterceptors = allInterceptors.filter(({ instance }) =>
+          isKoaInterceptor(instance)
+        );
 
-        const afterResponseInterceptors: koaRouter.IMiddleware[] = [];
-        for (const i of [
-          ...methodInfo.methodInterceptors.afterResponseInterceptors,
-          ...methodInfo.controllerInterceptors.afterResponseInterceptors,
-        ]) {
-          afterResponseInterceptors.push(
-            ...(await this.interceptorToMiddleware(execCtx, i, 'afterResponse'))
-          );
-        }
+        const interceptors = allInterceptors.filter(
+          ({ instance }) => !isKoaInterceptor(instance)
+        );
+
+        const koaMiddlewares = await convertKoaInterceptorToMiddleware(
+          koaInterceptors
+        );
+
+        koaMiddlewares.unshift(
+          await validatorInterceptorToMiddleware(
+            execCtx,
+            methodInfo.validatorInterceptor
+          )
+        );
 
         let methodMetadataPath = methodInfo.methodPath;
         if (methodMetadataPath[0] !== '/') {
@@ -184,12 +189,14 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
           await next();
         };
 
+        // create handler
+        const handler = this.handlerFactory(execCtx, interceptors);
+
         // register handler in router
         router[methodInfo.method](
           methodMetadataPath,
           addJsonHandler,
-          ...afterResponseInterceptors,
-          ...interceptors,
+          ...koaMiddlewares,
           handler
         );
       }
@@ -198,40 +205,11 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
       app.use(router.routes()).use(router.allowedMethods());
     }
   }
-  private async interceptorToMiddleware<
-    T extends Interceptor | AfterResponseInterceptor,
-    U extends keyof T
-  >(
+
+  private handlerFactory(
     execCtx: ExecutionContext,
-    { instance, paramList }: InterceptorInfo<T>,
-    type: U
-  ): Promise<koaRouter.IMiddleware[]> {
-    if (isKoaInterceptor(instance)) {
-      const res = await toPromise((instance[type] as any)());
-      if (!Array.isArray(res)) {
-        return [res];
-      }
-      return res;
-    }
-
-    return [
-      async (context: koa.Context, next: () => Promise<any>) => {
-        const args = extractParameters(
-          instance,
-          type,
-          execCtx,
-          getContext(context.req),
-          next,
-          paramList
-        );
-
-        await toPromise((instance[type] as any)(...args));
-        await next();
-      },
-    ];
-  }
-
-  private handlerFactory(execCtx: ExecutionContext): koaRouter.IMiddleware {
+    interceptors: InterceptorInfo<Interceptor>[]
+  ): koaRouter.IMiddleware {
     return async (
       context: koaRouter.IRouterContext,
       next: () => Promise<any>
@@ -273,9 +251,26 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
         context.status = value.status;
         sendJsonValue(value.body);
       }
-      const result: any = await toPromise(
-        controller[methodInfo.methodName](...args)
-      );
+
+      let result: any;
+      if (Array.isArray(interceptors) && interceptors.length) {
+        const r = toPromise(controller[methodInfo.methodName](...args));
+        for (const { instance, paramList } of interceptors) {
+          const interceptorArgs = extractParameters(
+            instance,
+            'intercept',
+            execCtx,
+            ctx,
+            next,
+            paramList,
+            r
+          );
+          await toPromise(instance.intercept(...interceptorArgs));
+        }
+        result = await r;
+      } else {
+        result = await toPromise(controller[methodInfo.methodName](...args));
+      }
 
       if (!context.headerSent) {
         if (result !== undefined) {

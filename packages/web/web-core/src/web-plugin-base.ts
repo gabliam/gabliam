@@ -3,10 +3,21 @@ import { APP, METADATA_KEY, TYPE } from './constants';
 import { WebConfigMetadata } from './decorators';
 import { RestMetadata } from './plugin-config';
 import { extractControllerMetadata } from './utils';
-import { ValidateInterceptor } from './validate-interceptor';
+import { ValidateInterceptor } from './validate';
 import { WebConfiguration } from './web-configuration';
 
+/**
+ * Base class for web plugin.
+ */
 export abstract class WebPluginBase {
+  /**
+   * Bind the app. In this method, you create the application and bind.
+   *
+   * @param  {Container} container - The container.
+   * @param  {Registry} registry - The registry.
+   * @param  {WebConfiguration} webConfiguration - The WebConfiguration instance for add configuration.
+   * @returns gabliamValue
+   */
   abstract bindApp(
     container: Container,
     registry: Registry,
@@ -21,17 +32,19 @@ export abstract class WebPluginBase {
   /**
    * binding phase
    *
-   * Bind all controller and bind express app
-   * @param  {Container} container
-   * @param  {Registry} registry
+   * @param  {Container} container - The container.
+   * @param  {Registry} registry - The registry.
    */
   async bind(container: Container, registry: Registry) {
+    // Bind all controller
     registry.get(TYPE.Controller).forEach(({ id, target }) =>
       container
         .bind<any>(id)
         .to(target)
         .inSingletonScope()
     );
+
+    // Bind the validate interceptor
     container
       .bind(ValidateInterceptor)
       .to(ValidateInterceptor)
@@ -41,6 +54,12 @@ export abstract class WebPluginBase {
     await toPromise(this.bindApp(container, registry, webConfiguration));
   }
 
+  /**
+   * Building phase
+   *
+   * @param  {Container} container - The container
+   * @param  {Registry} registry - The registry
+   */
   async build(container: Container, registry: Registry) {
     this.buildWebConfig(container, registry);
     await toPromise(
@@ -53,11 +72,11 @@ export abstract class WebPluginBase {
   }
 
   /**
-   * Management of @middleware decorator in config class
+   * Management of @WebConfig and @WebConfigAfterControllers decorator in config class
    *
-   * @param  {Container} container
-   * @param  {Registry} registry
-   * @param  {any} confInstance
+   * @param  {Container} container - The container
+   * @param  {Registry} registry - The registry
+   * @param  {any} confInstance - The current instance of confi class
    */
   config(container: Container, registry: Registry, confInstance: any) {
     const webConfig = container.get(WebConfiguration);

@@ -1,7 +1,8 @@
 import { MethodInfo } from './plugin-config';
 
 /**
- * Execution context for the controller
+ * Execution context for the controller.
+ * This class can be injected in interceptors
  */
 export class ExecutionContext {
   constructor(private instance: any, private methodInfo: MethodInfo) {}

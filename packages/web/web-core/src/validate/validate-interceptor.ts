@@ -1,5 +1,5 @@
 import { Container, Service } from '@gabliam/core';
-import { METADATA_KEY } from './constants';
+import { METADATA_KEY } from '../constants';
 import {
   ExecContext,
   getParameterMetadata,
@@ -8,9 +8,9 @@ import {
   listParamToValidate,
   Request,
   ValidateMetadata,
-} from './decorators';
-import { ExecutionContext } from './execution-context';
-import { GabRequest } from './gab-request';
+} from '../decorators';
+import { ExecutionContext } from '../execution-context';
+import { GabRequest } from '../gab-request';
 import { createValidateRequest, NO_VALIDATION } from './validate-request';
 
 @Service()

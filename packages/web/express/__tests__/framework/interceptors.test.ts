@@ -19,6 +19,7 @@ import {
   Put,
   UseInterceptors,
   WebConfig,
+  Call,
 } from '@gabliam/web-core';
 import * as sinon from 'sinon';
 import * as supertest from 'supertest';
@@ -33,6 +34,45 @@ beforeEach(async () => {
 
 afterEach(async () => {
   await appTest.destroy();
+});
+
+describe('Complex interceptor', () => {
+  let result: string;
+  @Service()
+  class A implements Interceptor {
+    async intercept(@Call() call: Promise<any>) {
+      result += 'a';
+      await call;
+      result += 'b';
+    }
+  }
+
+  const spyA = sinon.spy(A.prototype, 'intercept');
+  beforeEach(() => {
+    result = '';
+    spyA.resetHistory();
+  });
+
+  test('should call method-level interceptor correctly (GET)', async () => {
+    @Controller('/')
+    class TestController {
+      @UseInterceptors(A)
+      @Get('/')
+      public getTest() {
+        return 'GET';
+      }
+    }
+    appTest.addClass(TestController);
+    await appTest.build();
+
+    const response = await supertest(appTest.app)
+      .get('/')
+      .expect(200);
+
+    expect(spyA.calledOnce).toBe(true);
+    expect(response).toMatchSnapshot();
+    expect(result).toMatchSnapshot();
+  });
 });
 
 describe('Interceptors:', () => {

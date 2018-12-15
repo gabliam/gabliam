@@ -7,11 +7,11 @@ import {
   toPromise,
 } from '@gabliam/core';
 import {
-  AfterResponseInterceptor,
   APP,
   cleanPath,
   ExecutionContext,
   extractParameters,
+  getContext,
   Interceptor,
   InterceptorInfo,
   ResponseEntity,
@@ -21,19 +21,22 @@ import {
   WebPluginBase,
   WebPluginConfig,
   WEB_PLUGIN_CONFIG,
-  getContext,
 } from '@gabliam/web-core';
 import * as d from 'debug';
 import * as http from 'http';
 import { CUSTOM_ROUTER_CREATOR } from './constants';
 import { express } from './express';
-import { RouterCreator, ExpressMethods } from './interfaces';
+import { isExpressInterceptor } from './express-interceptor';
+import { ExpressMethods, RouterCreator } from './interfaces';
 import {
   addContextMiddleware,
   addMiddlewares,
   valideErrorMiddleware,
 } from './middleware';
-import { isExpressInterceptor } from './express-interceptor';
+import {
+  convertExpressInterceptorToMiddleware,
+  validatorInterceptorToMiddleware,
+} from './utils';
 
 const debug = d('Gabliam:Plugin:ExpressPlugin');
 
@@ -140,28 +143,35 @@ export class ExpressPlugin extends WebPluginBase implements GabliamPlugin {
       for (const methodInfo of methods) {
         const execCtx = new ExecutionContext(controller, methodInfo);
 
+        const allInterceptors = [
+          ...methodInfo.controllerInterceptors,
+          ...methodInfo.methodInterceptors,
+        ];
+        // const requestHandlers: express.RequestHandler[] = [];
+        // const errorRequestHandler: express.ErrorRequestHandler[] = [];
+
+        const expressInterceptors = allInterceptors.filter(({ instance }) =>
+          isExpressInterceptor(instance)
+        );
+
+        const interceptors = allInterceptors.filter(
+          ({ instance }) => !isExpressInterceptor(instance)
+        );
+
+        const {
+          requestHandlers,
+          errorRequestHandler,
+        } = await convertExpressInterceptorToMiddleware(expressInterceptors);
+
+        requestHandlers.unshift(
+          await validatorInterceptorToMiddleware(
+            execCtx,
+            methodInfo.validatorInterceptor
+          )
+        );
+
         // create handler
-        const handler = this.handlerFactory(execCtx);
-
-        const interceptors: express.RequestHandler[] = [];
-        for (const i of [
-          ...methodInfo.controllerInterceptors.interceptors,
-          ...methodInfo.methodInterceptors.interceptors,
-        ]) {
-          interceptors.push(
-            ...(await this.interceptorToMiddleware(execCtx, i, 'intercept'))
-          );
-        }
-
-        const afterResponseInterceptors: express.RequestHandler[] = [];
-        for (const i of [
-          ...methodInfo.methodInterceptors.afterResponseInterceptors,
-          ...methodInfo.controllerInterceptors.afterResponseInterceptors,
-        ]) {
-          afterResponseInterceptors.push(
-            ...(await this.interceptorToMiddleware(execCtx, i, 'afterResponse'))
-          );
-        }
+        const handler = this.handlerFactory(execCtx, interceptors);
 
         const addJsonHandler = (
           req: express.Request,
@@ -176,55 +186,19 @@ export class ExpressPlugin extends WebPluginBase implements GabliamPlugin {
         router[methodInfo.method](
           methodInfo.methodPath,
           addJsonHandler,
-          ...interceptors,
+          ...requestHandlers,
           handler,
-          ...afterResponseInterceptors
+          ...errorRequestHandler
         );
       }
       app.use(routerPath, router);
     }
   }
-  private async interceptorToMiddleware<
-    T extends Interceptor | AfterResponseInterceptor,
-    U extends keyof T
-  >(
+
+  private handlerFactory(
     execCtx: ExecutionContext,
-    { instance, paramList }: InterceptorInfo<T>,
-    type: U
-  ): Promise<express.RequestHandler[]> {
-    if (isExpressInterceptor(instance)) {
-      const res = await toPromise((instance[type] as any)());
-      if (!Array.isArray(res)) {
-        return [res];
-      }
-      return res;
-    }
-    return [
-      async (
-        req: express.Request,
-        res: express.Response,
-        next: express.NextFunction
-      ) => {
-        const args = extractParameters(
-          instance,
-          type,
-          execCtx,
-          getContext(req),
-          next,
-          paramList
-        );
-
-        try {
-          await toPromise((instance[type] as any)(...args));
-          next();
-        } catch (err) {
-          next(err);
-        }
-      },
-    ];
-  }
-
-  private handlerFactory(execCtx: ExecutionContext): express.RequestHandler {
+    interceptors: InterceptorInfo<Interceptor>[]
+  ): express.RequestHandler {
     return async (
       req: express.Request,
       res: express.Response,
@@ -255,9 +229,25 @@ export class ExpressPlugin extends WebPluginBase implements GabliamPlugin {
       }
 
       try {
-        const result: any = await toPromise(
-          controller[methodInfo.methodName](...args)
-        );
+        let result: any;
+        if (Array.isArray(interceptors)) {
+          const r = toPromise(controller[methodInfo.methodName](...args));
+          for (const { instance, paramList } of interceptors) {
+            const interceptorArgs = extractParameters(
+              instance,
+              'intercept',
+              execCtx,
+              ctx,
+              next,
+              paramList,
+              r
+            );
+            await toPromise(instance.intercept(...interceptorArgs));
+          }
+          result = await r;
+        } else {
+          result = await toPromise(controller[methodInfo.methodName](...args));
+        }
 
         if (!res.headersSent) {
           if (result !== undefined) {

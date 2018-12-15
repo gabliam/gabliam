@@ -1,12 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`express integration update req values req.body 1`] = `
+exports[`koa integration update req values req.body 1`] = `
 Object {
   "header": Object {
     "connection": "close",
     "content-length": "3",
-    "content-type": "text/html; charset=utf-8",
-    "etag": "W/\\"3-QDkmAz0AG1J53zfLvlKHt8fCZ/o\\"",
+    "content-type": "text/plain; charset=utf-8",
   },
   "req": Object {
     "data": Object {
@@ -23,7 +22,7 @@ Object {
 }
 `;
 
-exports[`express integration update req values req.headers 1`] = `
+exports[`koa integration update req values req.headers 1`] = `
 Object {
   "accept": "application/json",
   "accept-encoding": "gzip, deflate",
@@ -34,13 +33,12 @@ Object {
 }
 `;
 
-exports[`express integration update req values req.headers 2`] = `
+exports[`koa integration update req values req.headers 2`] = `
 Object {
   "header": Object {
     "connection": "close",
     "content-length": "1",
-    "content-type": "text/html; charset=utf-8",
-    "etag": "W/\\"1-E/vXnD05Dl1lhaIeEf9ewZcM/ww\\"",
+    "content-type": "text/plain; charset=utf-8",
   },
   "req": Object {
     "data": undefined,
@@ -54,13 +52,12 @@ Object {
 }
 `;
 
-exports[`express integration update req values req.params 1`] = `
+exports[`koa integration update req values req.params 1`] = `
 Object {
   "header": Object {
     "connection": "close",
     "content-length": "1",
-    "content-type": "text/html; charset=utf-8",
-    "etag": "W/\\"1-E/vXnD05Dl1lhaIeEf9ewZcM/ww\\"",
+    "content-type": "text/plain; charset=utf-8",
   },
   "req": Object {
     "data": undefined,
@@ -72,13 +69,12 @@ Object {
 }
 `;
 
-exports[`express integration update req values req.query 1`] = `
+exports[`koa integration update req values req.query 1`] = `
 Object {
   "header": Object {
     "connection": "close",
     "content-length": "1",
-    "content-type": "text/html; charset=utf-8",
-    "etag": "W/\\"1-E/vXnD05Dl1lhaIeEf9ewZcM/ww\\"",
+    "content-type": "text/plain; charset=utf-8",
   },
   "req": Object {
     "data": undefined,
@@ -90,13 +86,12 @@ Object {
 }
 `;
 
-exports[`express integration validations req.body 1`] = `
+exports[`koa integration validations req.body 1`] = `
 Object {
   "header": Object {
     "connection": "close",
     "content-length": "156",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"9c-lb73tokNqpEcTzZIECgZmqLKScw\\"",
   },
   "req": Object {
     "data": Object {
@@ -113,13 +108,12 @@ Object {
 }
 `;
 
-exports[`express integration validations req.headers 1`] = `
+exports[`koa integration validations req.headers 1`] = `
 Object {
   "header": Object {
     "connection": "close",
     "content-length": "228",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"e4-9YBgGPA9onlm1wj0GlR/2HIQaBw\\"",
   },
   "req": Object {
     "data": undefined,
@@ -133,13 +127,12 @@ Object {
 }
 `;
 
-exports[`express integration validations req.params 1`] = `
+exports[`koa integration validations req.params 1`] = `
 Object {
   "header": Object {
     "connection": "close",
     "content-length": "193",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"c1-Ucg8TlfIGVQQWOvNPRCiHk8y61o\\"",
   },
   "req": Object {
     "data": undefined,
@@ -151,13 +144,12 @@ Object {
 }
 `;
 
-exports[`express integration validations req.query 1`] = `
+exports[`koa integration validations req.query 1`] = `
 Object {
   "header": Object {
     "connection": "close",
     "content-length": "122",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"7a-iJ+h5zB08gNswU0QtTTcpNELWzs\\"",
   },
   "req": Object {
     "data": undefined,

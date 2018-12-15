@@ -1,5 +1,10 @@
 import { inversifyInterfaces } from '@gabliam/core';
-import { Interceptors, ParameterMetadata } from './decorators';
+import {
+  Interceptors,
+  ParameterMetadata,
+  Interceptor,
+  InterceptorInfo,
+} from './decorators';
 
 export interface WebPluginConfig {
   /**
@@ -40,4 +45,5 @@ export interface MethodInfo<T = string> {
   method: T;
   controllerInterceptors: Interceptors;
   methodInterceptors: Interceptors;
+  validatorInterceptor: InterceptorInfo<Interceptor>;
 }

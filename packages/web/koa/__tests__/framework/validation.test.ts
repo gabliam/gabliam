@@ -9,20 +9,19 @@ import {
   RequestParam,
   Validate,
 } from '@gabliam/web-core';
-import * as supertest from 'supertest';
-import { ExpressPluginTest } from '../express-plugin-test';
+import { KoaPluginTest } from '../koa-plugin-test';
 
-let appTest: ExpressPluginTest;
+let appTest: KoaPluginTest;
 
 beforeEach(async () => {
-  appTest = new ExpressPluginTest();
+  appTest = new KoaPluginTest();
 });
 
 afterEach(async () => {
   await appTest.destroy();
 });
 
-describe('express integration', () => {
+describe('koa integration', () => {
   describe('validations', () => {
     it('req.headers', async () => {
       @Controller('/')
@@ -43,7 +42,8 @@ describe('express integration', () => {
 
       appTest.addClass(TestController);
       await appTest.build();
-      const response = await supertest(appTest.app)
+      const response = await appTest
+        .supertest()
         .get('/')
         .set('Accept', 'application/json')
         .expect(400);
@@ -66,7 +66,8 @@ describe('express integration', () => {
 
       appTest.addClass(TestController);
       await appTest.build();
-      const response = await supertest(appTest.app)
+      const response = await appTest
+        .supertest()
         .get('/user/@@')
         .expect(400);
       expect(response).toMatchSnapshot();
@@ -88,7 +89,8 @@ describe('express integration', () => {
 
       appTest.addClass(TestController);
       await appTest.build();
-      const response = await supertest(appTest.app)
+      const response = await appTest
+        .supertest()
         .get('/?end=lol')
         .expect(400);
       expect(response).toMatchSnapshot();
@@ -113,7 +115,8 @@ describe('express integration', () => {
       appTest.addClass(TestController);
 
       await appTest.build();
-      const response = await supertest(appTest.app)
+      const response = await appTest
+        .supertest()
         .post('/')
         .send({
           first: 'john',
@@ -148,7 +151,8 @@ describe('express integration', () => {
 
       appTest.addClass(TestController);
       await appTest.build();
-      const response = await supertest(appTest.app)
+      const response = await appTest
+        .supertest()
         .get('/')
         .set('Accept', 'application/json')
         .expect(200);
@@ -177,7 +181,8 @@ describe('express integration', () => {
 
       appTest.addClass(TestController);
       await appTest.build();
-      const response = await supertest(appTest.app)
+      const response = await appTest
+        .supertest()
         .get('/12/user/adam')
         .expect(200);
       expect(response).toMatchSnapshot();
@@ -206,7 +211,8 @@ describe('express integration', () => {
 
       appTest.addClass(TestController);
       await appTest.build();
-      const response = await supertest(appTest.app)
+      const response = await appTest
+        .supertest()
         .get('/?name=john&id=42')
         .expect(200);
       expect(response).toMatchSnapshot();
@@ -238,7 +244,8 @@ describe('express integration', () => {
       appTest.addClass(TestController);
 
       await appTest.build();
-      const response = await supertest(appTest.app)
+      const response = await appTest
+        .supertest()
         .post('/?end=lol')
         .send({
           first: 'john',
