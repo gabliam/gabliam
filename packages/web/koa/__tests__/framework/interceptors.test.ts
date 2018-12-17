@@ -20,7 +20,7 @@ import {
   Put,
   UseInterceptors,
   WebConfig,
-  Call,
+  Next,
 } from '@gabliam/web-core';
 import * as sinon from 'sinon';
 import { KoaPluginTest } from '../koa-plugin-test';
@@ -39,9 +39,9 @@ describe('Complex interceptor', () => {
   let result: string;
   @Service()
   class A implements Interceptor {
-    async intercept(@Call() call: Promise<any>) {
+    async intercept(@Next() next: () => Promise<any>) {
       result += 'a';
-      await call;
+      await next();
       result += 'b';
     }
   }
@@ -80,8 +80,9 @@ describe('Interceptor:', () => {
 
   @Service()
   class A implements Interceptor {
-    intercept() {
+    async intercept(@Next() next: () => Promise<any>) {
       result += 'a';
+      await next();
     }
   }
 
@@ -94,7 +95,7 @@ describe('Interceptor:', () => {
 
   @Service()
   class C implements Interceptor {
-    intercept() {
+    async intercept() {
       result += 'c';
     }
   }

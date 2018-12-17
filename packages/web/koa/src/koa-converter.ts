@@ -11,8 +11,10 @@ import {
   getParameterMetadata,
   isInterceptor,
   getContext,
+  PARAMETER_TYPE,
 } from '@gabliam/web-core';
 import { koa } from './koa';
+import { find } from 'lodash';
 
 /**
  * Class for convert interceptor to Koa Middleware
@@ -28,16 +30,20 @@ export class KoaConverter {
     }
 
     return async (context: koa.Context, next: () => Promise<any>) => {
+      const paramList = getParameterMetadata(instance, 'intercept');
       const args = extractParameters(
         instance,
         'intercept',
         null,
         getContext(context.req),
         next,
-        getParameterMetadata(instance, 'intercept')
+        paramList
       );
       await toPromise((instance['intercept'] as any)(...args));
-      await next();
+
+      if (find(paramList, { type: PARAMETER_TYPE.NEXT }) === undefined) {
+        await next();
+      }
     };
   }
 }

@@ -11,6 +11,8 @@ import {
   cleanPath,
   ExecutionContext,
   extractParameters,
+  GabContext,
+  getContext,
   Interceptor,
   InterceptorInfo,
   ResponseEntity,
@@ -20,23 +22,24 @@ import {
   WebPluginBase,
   WebPluginConfig,
   WEB_PLUGIN_CONFIG,
-  getContext,
+  PARAMETER_TYPE,
 } from '@gabliam/web-core';
 import * as d from 'debug';
 import * as http from 'http';
 import { CUSTOM_ROUTER_CREATOR } from './constants';
+import { KoaMethods, RouterCreator } from './interfaces';
 import { koa, koaRouter } from './koa';
-import { RouterCreator, KoaMethods } from './interfaces';
+import { isKoaInterceptor } from './koa-interceptor';
 import {
   addContextMiddleware,
   addMiddlewares,
   valideErrorMiddleware,
 } from './middleware';
-import { isKoaInterceptor } from './koa-interceptor';
 import {
-  validatorInterceptorToMiddleware,
   convertKoaInterceptorToMiddleware,
+  validatorInterceptorToMiddleware,
 } from './utils';
+import { find } from 'lodash';
 
 const debug = d('Gabliam:Plugin:ExpressPlugin');
 
@@ -214,6 +217,10 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
       context: koaRouter.IRouterContext,
       next: () => Promise<any>
     ) => {
+      const composeInterceptor = compose(
+        interceptors,
+        createConverterValue(context)
+      );
       const req = context.req;
       const ctx = getContext(req);
       const methodInfo = execCtx.getMethodInfo();
@@ -229,77 +236,125 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
         methodInfo.paramList
       );
 
-      const sendJsonValue = (value: any = '') => {
-        let val: any;
-        try {
-          val = JSON.stringify(value);
-        } catch {
-          /* istanbul ignore next */
-          val = value;
-        }
-        context.type = 'application/json';
-        context.body = val;
-      };
-
-      // response handler if the result is a ResponseEntity
-      function responseEntityHandler(value: ResponseEntity) {
-        if (value.hasHeader()) {
-          Object.keys(value.headers).forEach(k =>
-            context.set(k, '' + value.headers[k])
-          );
-        }
-        context.status = value.status;
-        sendJsonValue(value.body);
-      }
-
-      let result: any;
-      if (Array.isArray(interceptors) && interceptors.length) {
-        const r = toPromise(controller[methodInfo.methodName](...args));
-        for (const { instance, paramList } of interceptors) {
-          const interceptorArgs = extractParameters(
-            instance,
-            'intercept',
-            execCtx,
-            ctx,
-            next,
-            paramList,
-            r
-          );
-          await toPromise(instance.intercept(...interceptorArgs));
-        }
-        result = await r;
-      } else {
-        result = await toPromise(controller[methodInfo.methodName](...args));
-      }
-
-      if (!context.headerSent) {
-        if (result !== undefined) {
-          if (result instanceof ResponseEntity) {
-            responseEntityHandler(result);
-          } else if (methodInfo.json) {
-            sendJsonValue(result);
-          } else {
-            context.body = result;
-          }
-        } else if (ctx.body !== undefined) {
-          const { status, message, body, type } = ctx;
-          if (type) {
-            context.response.type = type;
-          }
-          if (message) {
-            context.response.message = message;
-          }
-
-          if (status) {
-            context.response.status = status;
-          }
-          if (methodInfo.json) {
-            sendJsonValue(body);
-          } else {
-            context.body = body;
-          }
-        }
-      }
+      await composeInterceptor(
+        ctx,
+        execCtx,
+        async () => await toPromise(controller[methodInfo.methodName](...args))
+      );
     };
   }
+}
+
+function createConverterValue(context: koaRouter.IRouterContext) {
+  return function convertValue(
+    ctx: GabContext,
+    execCtx: ExecutionContext,
+    result: any
+  ) {
+    const methodInfo = execCtx.getMethodInfo();
+    const sendJsonValue = (value: any = '') => {
+      let val: any;
+      try {
+        val = JSON.stringify(value);
+      } catch {
+        /* istanbul ignore next */
+        val = value;
+      }
+      context.type = 'application/json';
+      context.body = val;
+    };
+
+    // response handler if the result is a ResponseEntity
+    function responseEntityHandler(value: ResponseEntity) {
+      if (value.hasHeader()) {
+        Object.keys(value.headers).forEach(k =>
+          context.set(k, '' + value.headers[k])
+        );
+      }
+      context.status = value.status;
+      sendJsonValue(value.body);
+    }
+
+    if (!context.headerSent) {
+      if (result !== undefined) {
+        if (result instanceof ResponseEntity) {
+          responseEntityHandler(result);
+        } else if (methodInfo.json) {
+          sendJsonValue(result);
+        } else {
+          context.body = result;
+        }
+      } else if (ctx.body !== undefined) {
+        const { status, message, body, type } = ctx;
+        if (type) {
+          context.response.type = type;
+        }
+        if (message) {
+          context.response.message = message;
+        }
+
+        if (status) {
+          context.response.status = status;
+        }
+        if (methodInfo.json) {
+          sendJsonValue(body);
+        } else {
+          context.body = body;
+        }
+      }
+    }
+  };
+}
+
+function compose(
+  interceptors: InterceptorInfo<Interceptor>[],
+  converterValue: (
+    ctx: GabContext<any, any>,
+    execCtx: ExecutionContext,
+    result: any
+  ) => void
+) {
+  return async function(
+    ctx: GabContext,
+    execCtx: ExecutionContext,
+    next: () => Promise<any>
+  ) {
+    let index = -1;
+    async function dispatch(i: number) {
+      if (i <= index) {
+        throw new Error('next() called multiple times');
+      }
+      index = i;
+      const interceptor = interceptors[i];
+
+      if (i === interceptors.length) {
+        const nextRes = converterValue(ctx, execCtx, await next());
+        return Promise.resolve(nextRes);
+      }
+
+      if (!interceptor) {
+        return Promise.resolve();
+      }
+
+      const { instance, paramList } = interceptor;
+
+      const callNext = dispatch.bind(null, i + 1);
+      const interceptorArgs = extractParameters(
+        instance,
+        'intercept',
+        execCtx,
+        ctx,
+        callNext,
+        paramList
+      );
+      const res = await toPromise(instance.intercept(...interceptorArgs));
+      converterValue(ctx, execCtx, res);
+      // call next if interceptor not use next
+      if (find(paramList, { type: PARAMETER_TYPE.NEXT }) === undefined) {
+        await callNext();
+      }
+    }
+
+    return dispatch(0);
+  };
 }

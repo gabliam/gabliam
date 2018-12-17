@@ -33,8 +33,6 @@ export enum PARAMETER_TYPE {
   HEADERS,
   COOKIES,
   NEXT,
-
-  CALL,
 }
 
 export const DEFAULT_PARAM_VALUE = '**$$DEFAULT_PARAM_VALUE$$**';

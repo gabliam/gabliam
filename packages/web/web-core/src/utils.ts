@@ -35,8 +35,7 @@ export const extractParameters = <T extends Object, U extends keyof T, V>(
   execCtx: ExecutionContext | null | undefined,
   ctx: GabContext,
   next: V,
-  params: ParameterMetadata[],
-  call?: Promise<any>
+  params: ParameterMetadata[]
 ): any[] => {
   const args = [];
   if (!params || !params.length) {
@@ -77,9 +76,6 @@ export const extractParameters = <T extends Object, U extends keyof T, V>(
         break;
       case PARAMETER_TYPE.EXEC_CONTEXT:
         args[item.index] = execCtx;
-        break;
-      case PARAMETER_TYPE.CALL:
-        args[item.index] = call;
         break;
     }
   }

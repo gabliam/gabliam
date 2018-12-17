@@ -114,13 +114,6 @@ export const Cookies = paramDecoratorFactory(PARAMETER_TYPE.COOKIES);
  */
 export const Next = paramDecoratorFactory(PARAMETER_TYPE.NEXT);
 
-/**
- * Call decorator
- *
- * Binds a method parameter to the call() function.
- */
-export const Call = paramDecoratorFactory(PARAMETER_TYPE.CALL);
-
 function paramDecoratorFactory(
   parameterType: PARAMETER_TYPE
 ): (name?: string) => ParameterDecorator {
