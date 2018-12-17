@@ -34,7 +34,6 @@ import {
   addMiddlewares,
   valideErrorMiddleware,
 } from './middleware';
-import { validatorInterceptorToMiddleware } from './utils';
 import { find } from 'lodash';
 
 const debug = d('Gabliam:Plugin:ExpressPlugin');
@@ -150,21 +149,11 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
       for (const methodInfo of methods) {
         const execCtx = new ExecutionContext(controller, methodInfo);
 
-        const allInterceptors = [
+        const interceptors = [
+          methodInfo.validatorInterceptor,
           ...methodInfo.controllerInterceptors,
           ...methodInfo.methodInterceptors,
         ];
-
-        const interceptors = allInterceptors;
-
-        const koaMiddlewares = [];
-
-        koaMiddlewares.unshift(
-          await validatorInterceptorToMiddleware(
-            execCtx,
-            methodInfo.validatorInterceptor
-          )
-        );
 
         let methodMetadataPath = methodInfo.methodPath;
         if (methodMetadataPath[0] !== '/') {
@@ -183,12 +172,7 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
         const handler = this.handlerFactory(execCtx, interceptors);
 
         // register handler in router
-        router[methodInfo.method](
-          methodMetadataPath,
-          addJsonHandler,
-          ...koaMiddlewares,
-          handler
-        );
+        router[methodInfo.method](methodMetadataPath, addJsonHandler, handler);
       }
       const app = container.get<koa>(APP);
 
@@ -213,21 +197,19 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
       const methodInfo = execCtx.getMethodInfo();
       const controller = execCtx.getClass();
 
-      // extract all args
-      const args = extractParameters(
-        controller,
-        methodInfo.methodName,
-        execCtx,
-        ctx,
-        next,
-        methodInfo.paramList
-      );
+      const callNext = async () => {
+        const args = extractParameters(
+          controller,
+          methodInfo.methodName,
+          execCtx,
+          ctx,
+          next,
+          methodInfo.paramList
+        );
+        return await toPromise(controller[methodInfo.methodName](...args));
+      };
 
-      await composeInterceptor(
-        ctx,
-        execCtx,
-        async () => await toPromise(controller[methodInfo.methodName](...args))
-      );
+      await composeInterceptor(ctx, execCtx, callNext);
     };
   }
 }
