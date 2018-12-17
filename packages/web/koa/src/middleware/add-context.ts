@@ -17,6 +17,8 @@ export const addContextMiddleware: ConfigFunction<koa> = app => {
       new Cookie(req, res)
     );
 
+    gabContext.state.context = context;
+
     setContext(req, gabContext);
     await next();
   });

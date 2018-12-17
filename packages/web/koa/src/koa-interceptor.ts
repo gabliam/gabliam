@@ -1,7 +1,10 @@
 import { Service } from '@gabliam/core';
 import {
+  Context,
+  GabContext,
   Interceptor,
   InterceptorConstructor,
+  Next,
   UseInterceptors,
 } from '@gabliam/web-core';
 import { METADATA_KEY } from './constants';
@@ -33,10 +36,13 @@ export const toInterceptor = (
   mid: koaRouter.IMiddleware
 ): InterceptorConstructor => {
   const clazz: InterceptorConstructor = class implements Interceptor {
-    intercept() {
-      return mid;
+    async intercept(context: GabContext, next: () => Promise<any>) {
+      const ctx: koaRouter.IRouterContext = context.state.context;
+      return await mid(ctx, next);
     }
   };
+  Context()(clazz.prototype, 'intercept', 0);
+  Next()(clazz.prototype, 'intercept', 1);
   Service()(clazz);
   KoaInterceptor()(clazz);
   return clazz;

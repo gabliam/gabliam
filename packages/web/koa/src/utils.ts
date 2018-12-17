@@ -26,26 +26,3 @@ export const validatorInterceptorToMiddleware = async (
     await next();
   };
 };
-
-export const convertKoaInterceptorToMiddleware = async (
-  koaInterceptors: InterceptorInfo<Interceptor>[]
-) => {
-  const koaMiddlewares: koaRouter.IMiddleware[] = [];
-  for (const { instance } of koaInterceptors) {
-    const res = await toPromise<
-      koaRouter.IMiddleware | koaRouter.IMiddleware[]
-    >(instance['intercept']());
-
-    if (res === undefined) {
-      continue;
-    }
-
-    if (!Array.isArray(res)) {
-      koaMiddlewares.push(res);
-    } else {
-      koaMiddlewares.push(...res);
-    }
-  }
-
-  return koaMiddlewares;
-};

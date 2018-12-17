@@ -29,16 +29,12 @@ import * as http from 'http';
 import { CUSTOM_ROUTER_CREATOR } from './constants';
 import { KoaMethods, RouterCreator } from './interfaces';
 import { koa, koaRouter } from './koa';
-import { isKoaInterceptor } from './koa-interceptor';
 import {
   addContextMiddleware,
   addMiddlewares,
   valideErrorMiddleware,
 } from './middleware';
-import {
-  convertKoaInterceptorToMiddleware,
-  validatorInterceptorToMiddleware,
-} from './utils';
+import { validatorInterceptorToMiddleware } from './utils';
 import { find } from 'lodash';
 
 const debug = d('Gabliam:Plugin:ExpressPlugin');
@@ -159,18 +155,9 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
           ...methodInfo.methodInterceptors,
         ];
 
-        // get koa interceptor
-        const koaInterceptors = allInterceptors.filter(({ instance }) =>
-          isKoaInterceptor(instance)
-        );
+        const interceptors = allInterceptors;
 
-        const interceptors = allInterceptors.filter(
-          ({ instance }) => !isKoaInterceptor(instance)
-        );
-
-        const koaMiddlewares = await convertKoaInterceptorToMiddleware(
-          koaInterceptors
-        );
+        const koaMiddlewares = [];
 
         koaMiddlewares.unshift(
           await validatorInterceptorToMiddleware(

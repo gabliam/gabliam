@@ -316,6 +316,8 @@ export class GabContext<T = any, U = any> {
   @alias(['response', 'append'])
   append: (field: string, val: string | string[]) => void;
 
+  state: { [k: string]: any } = {};
+
   constructor(
     public request: GabRequest<T>,
     public response: GabResponse<U>,
