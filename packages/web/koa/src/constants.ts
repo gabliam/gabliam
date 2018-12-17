@@ -16,7 +16,3 @@
  * }
  */
 export const CUSTOM_ROUTER_CREATOR = Symbol('GABLIAM/CUSTOM_ROUTER_CREATOR');
-
-export const METADATA_KEY = {
-  koaInterceptor: '_koa_interceptor',
-};

@@ -1,29 +1,32 @@
 import {
   Container,
   Registry,
+  toPromise,
   ValueExtractor,
   VALUE_EXTRACTOR,
 } from '@gabliam/core';
+import { find, get } from 'lodash';
 import {
+  CONTEXT,
   DEFAULT_PARAM_VALUE,
   METADATA_KEY,
   PARAMETER_TYPE,
   TYPE,
   WEB_PLUGIN_CONFIG,
-  CONTEXT,
 } from './constants';
 import {
   ControllerMetadata,
   ControllerMethodMetadata,
   ControllerParameterMetadata,
   getInterceptors,
+  InterceptorInfo,
   ParameterMetadata,
 } from './decorators';
 import { ExecutionContext } from './execution-context';
 import { GabContext } from './gab-context';
 import { MethodInfo, RestMetadata, WebPluginConfig } from './plugin-config';
 import { getValidateInterceptor } from './validate';
-import { get } from 'lodash';
+import { convertValueFn } from './interface';
 
 export const cleanPath = (path: string) => {
   return path.replace(/\/+/gi, '/');
@@ -211,6 +214,12 @@ export const extractControllerMetadata = (
           methodMetadata.key
         );
 
+        const interceptors = [
+          ...validatorInterceptors,
+          ...controllerInterceptors,
+          ...methodInterceptors,
+        ];
+
         // if method is true or controller is true and method undefined
         const json =
           methodJson || (controllerMetadata.json && methodJson === undefined);
@@ -222,9 +231,7 @@ export const extractControllerMetadata = (
           paramList,
           methodPath,
           method: methodMetadata.method,
-          controllerInterceptors,
-          methodInterceptors,
-          validatorInterceptors,
+          interceptors,
         });
       });
     }
@@ -240,3 +247,52 @@ export const getContext = (req: any) => {
 export const setContext = (req: any, context: GabContext) => {
   (<any>req)[CONTEXT] = context;
 };
+
+export function compose(
+  interceptors: InterceptorInfo[],
+  converterValue: convertValueFn
+) {
+  return async function(
+    ctx: GabContext,
+    execCtx: ExecutionContext,
+    next: () => Promise<any>
+  ) {
+    let index = -1;
+    async function dispatch(i: number) {
+      if (i <= index) {
+        throw new Error('next() called multiple times');
+      }
+      index = i;
+      const interceptor = interceptors[i];
+
+      if (i === interceptors.length) {
+        const nextRes = converterValue(ctx, execCtx, await next());
+        return Promise.resolve(nextRes);
+      }
+
+      if (!interceptor) {
+        return Promise.resolve();
+      }
+
+      const { instance, paramList } = interceptor;
+
+      const callNext = dispatch.bind(null, i + 1);
+      const interceptorArgs = extractParameters(
+        instance,
+        'intercept',
+        execCtx,
+        ctx,
+        callNext,
+        paramList
+      );
+      const res = await toPromise(instance.intercept(...interceptorArgs));
+      converterValue(ctx, execCtx, res);
+      // call next if interceptor not use next
+      if (find(paramList, { type: PARAMETER_TYPE.NEXT }) === undefined) {
+        await callNext();
+      }
+    }
+
+    return dispatch(0);
+  };
+}

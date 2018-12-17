@@ -118,7 +118,7 @@ export function getInterceptors(
   container: Container,
   target: Object,
   key?: string
-): Interceptors {
+): InterceptorInfo[] {
   let metadataList: InterceptorMetadata[] = [];
   if (Reflect.hasOwnMetadata(METADATA_KEY.interceptor, target, key!)) {
     metadataList = Reflect.getOwnMetadata(
@@ -130,7 +130,7 @@ export function getInterceptors(
 
   const interceptorResolver = createInterceptorResolver(container);
 
-  const interceptors: InterceptorInfo<Interceptor>[] = [];
+  const interceptors: InterceptorInfo[] = [];
 
   for (const metadata of metadataList) {
     const interceptor = interceptorResolver(metadata);
@@ -146,10 +146,8 @@ export function getInterceptors(
   return interceptors;
 }
 
-export interface InterceptorInfo<T> {
-  instance: T;
+export interface InterceptorInfo {
+  instance: Interceptor;
 
   paramList: ParameterMetadata[];
 }
-
-export type Interceptors = InterceptorInfo<Interceptor>[];

@@ -9,13 +9,12 @@ import {
 import {
   APP,
   cleanPath,
+  compose,
   ExecutionContext,
   extractParameters,
   GabContext,
   getContext,
-  Interceptor,
   InterceptorInfo,
-  PARAMETER_TYPE,
   ResponseEntity,
   RestMetadata,
   SERVER,
@@ -26,11 +25,11 @@ import {
 } from '@gabliam/web-core';
 import * as d from 'debug';
 import * as http from 'http';
-import { find } from 'lodash';
 import { CUSTOM_ROUTER_CREATOR } from './constants';
 import { KoaMethods, RouterCreator } from './interfaces';
 import { koa, koaRouter } from './koa';
 import { addContextMiddleware, addMiddlewares } from './middleware';
+import { isValidInterceptor } from './koa-interceptor';
 
 const debug = d('Gabliam:Plugin:ExpressPlugin');
 
@@ -43,11 +42,6 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
     webConfiguration: WebConfiguration
   ): void {
     container.bind(APP).toConstantValue(new koa());
-
-    // webConfiguration.addwebConfig({
-    //   instance: valideErrorMiddleware,
-    //   order: -3,
-    // });
 
     webConfiguration.addwebConfig({
       instance: addMiddlewares,
@@ -145,12 +139,6 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
       for (const methodInfo of methods) {
         const execCtx = new ExecutionContext(controller, methodInfo);
 
-        const interceptors = [
-          ...methodInfo.validatorInterceptors,
-          ...methodInfo.controllerInterceptors,
-          ...methodInfo.methodInterceptors,
-        ];
-
         let methodMetadataPath = methodInfo.methodPath;
         if (methodMetadataPath[0] !== '/') {
           methodMetadataPath = '/' + methodMetadataPath;
@@ -163,6 +151,10 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
           context.state.jsonHandler = methodInfo.json;
           await next();
         };
+
+        const interceptors = methodInfo.interceptors.filter(i =>
+          isValidInterceptor(i)
+        );
 
         // create handler
         const handler = this.handlerFactory(execCtx, interceptors);
@@ -178,7 +170,7 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
 
   private handlerFactory(
     execCtx: ExecutionContext,
-    interceptors: InterceptorInfo<Interceptor>[]
+    interceptors: InterceptorInfo[]
   ): koaRouter.IMiddleware {
     return async (
       context: koaRouter.IRouterContext,
@@ -268,58 +260,5 @@ function createConverterValue(context: koaRouter.IRouterContext) {
         }
       }
     }
-  };
-}
-
-function compose(
-  interceptors: InterceptorInfo<Interceptor>[],
-  converterValue: (
-    ctx: GabContext<any, any>,
-    execCtx: ExecutionContext,
-    result: any
-  ) => void
-) {
-  return async function(
-    ctx: GabContext,
-    execCtx: ExecutionContext,
-    next: () => Promise<any>
-  ) {
-    let index = -1;
-    async function dispatch(i: number) {
-      if (i <= index) {
-        throw new Error('next() called multiple times');
-      }
-      index = i;
-      const interceptor = interceptors[i];
-
-      if (i === interceptors.length) {
-        const nextRes = converterValue(ctx, execCtx, await next());
-        return Promise.resolve(nextRes);
-      }
-
-      if (!interceptor) {
-        return Promise.resolve();
-      }
-
-      const { instance, paramList } = interceptor;
-
-      const callNext = dispatch.bind(null, i + 1);
-      const interceptorArgs = extractParameters(
-        instance,
-        'intercept',
-        execCtx,
-        ctx,
-        callNext,
-        paramList
-      );
-      const res = await toPromise(instance.intercept(...interceptorArgs));
-      converterValue(ctx, execCtx, res);
-      // call next if interceptor not use next
-      if (find(paramList, { type: PARAMETER_TYPE.NEXT }) === undefined) {
-        await callNext();
-      }
-    }
-
-    return dispatch(0);
   };
 }

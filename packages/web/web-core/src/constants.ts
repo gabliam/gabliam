@@ -20,6 +20,7 @@ export const METADATA_KEY = {
   interceptor: '_interceptor',
   validate: '_validate',
   responseBody: '_responseBody',
+  specialInterceptor: '_specialInterceptor',
 };
 
 export enum PARAMETER_TYPE {

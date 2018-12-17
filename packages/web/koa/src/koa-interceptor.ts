@@ -4,21 +4,24 @@ import {
   GabContext,
   Interceptor,
   InterceptorConstructor,
+  METADATA_KEY,
   Next,
   UseInterceptors,
 } from '@gabliam/web-core';
-import { METADATA_KEY } from './constants';
 import { koaRouter } from './koa';
 
 /**
- * Test if target is an koa interceptor
+ * Test if target is a valid interceptor
  * @param target any
  */
-export const isKoaInterceptor = (target: any) =>
-  Reflect.getOwnMetadata(
-    METADATA_KEY.koaInterceptor,
+export const isValidInterceptor = (target: any) => {
+  const meta = Reflect.getOwnMetadata(
+    METADATA_KEY.specialInterceptor,
     target.constructor || target
-  ) === true;
+  );
+
+  return meta === undefined || meta === 'koa';
+};
 
 /**
  * KoaInterceptor decorator
@@ -26,7 +29,7 @@ export const isKoaInterceptor = (target: any) =>
  * Must return koaRouter middleware
  */
 const KoaInterceptor = () => (target: any) => {
-  Reflect.defineMetadata(METADATA_KEY.koaInterceptor, true, target);
+  Reflect.defineMetadata(METADATA_KEY.specialInterceptor, 'koa', target);
 };
 
 /**
