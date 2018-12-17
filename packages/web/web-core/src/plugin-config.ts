@@ -45,5 +45,5 @@ export interface MethodInfo<T = string> {
   method: T;
   controllerInterceptors: Interceptors;
   methodInterceptors: Interceptors;
-  validatorInterceptor: InterceptorInfo<Interceptor>;
+  validatorInterceptors: Interceptors;
 }

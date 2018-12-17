@@ -15,6 +15,7 @@ import {
   getContext,
   Interceptor,
   InterceptorInfo,
+  PARAMETER_TYPE,
   ResponseEntity,
   RestMetadata,
   SERVER,
@@ -22,19 +23,14 @@ import {
   WebPluginBase,
   WebPluginConfig,
   WEB_PLUGIN_CONFIG,
-  PARAMETER_TYPE,
 } from '@gabliam/web-core';
 import * as d from 'debug';
 import * as http from 'http';
+import { find } from 'lodash';
 import { CUSTOM_ROUTER_CREATOR } from './constants';
 import { KoaMethods, RouterCreator } from './interfaces';
 import { koa, koaRouter } from './koa';
-import {
-  addContextMiddleware,
-  addMiddlewares,
-  valideErrorMiddleware,
-} from './middleware';
-import { find } from 'lodash';
+import { addContextMiddleware, addMiddlewares } from './middleware';
 
 const debug = d('Gabliam:Plugin:ExpressPlugin');
 
@@ -48,10 +44,10 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
   ): void {
     container.bind(APP).toConstantValue(new koa());
 
-    webConfiguration.addwebConfig({
-      instance: valideErrorMiddleware,
-      order: -3,
-    });
+    // webConfiguration.addwebConfig({
+    //   instance: valideErrorMiddleware,
+    //   order: -3,
+    // });
 
     webConfiguration.addwebConfig({
       instance: addMiddlewares,
@@ -150,7 +146,7 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
         const execCtx = new ExecutionContext(controller, methodInfo);
 
         const interceptors = [
-          methodInfo.validatorInterceptor,
+          ...methodInfo.validatorInterceptors,
           ...methodInfo.controllerInterceptors,
           ...methodInfo.methodInterceptors,
         ];

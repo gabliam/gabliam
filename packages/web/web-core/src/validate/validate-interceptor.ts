@@ -1,10 +1,8 @@
-import { Container, Service } from '@gabliam/core';
+import { Service } from '@gabliam/core';
 import { METADATA_KEY } from '../constants';
 import {
   ExecContext,
-  getParameterMetadata,
   Interceptor,
-  InterceptorInfo,
   listParamToValidate,
   Request,
   ValidateMetadata,
@@ -15,7 +13,7 @@ import { createValidateRequest, NO_VALIDATION } from './validate-request';
 
 @Service()
 export class ValidateInterceptor implements Interceptor {
-  intercept(
+  async intercept(
     @ExecContext() execCtx: ExecutionContext,
     @Request() req: GabRequest
   ) {
@@ -43,13 +41,3 @@ export class ValidateInterceptor implements Interceptor {
     }
   }
 }
-
-export const getValidateInterceptor = (
-  container: Container
-): InterceptorInfo<Interceptor> => {
-  const validateInterceptor = container.get(ValidateInterceptor);
-  return {
-    instance: validateInterceptor,
-    paramList: getParameterMetadata(validateInterceptor, 'intercept'),
-  };
-};

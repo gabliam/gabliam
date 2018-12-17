@@ -1,5 +1,7 @@
 import * as HttpStatus from 'http-status-codes';
 
+export { HttpStatus };
+
 export class ResponseEntity<T = any> {
   /**
    * A shortcut for creating a ResponseEntity with the given body and the status set to OK.

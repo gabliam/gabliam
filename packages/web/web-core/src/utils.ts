@@ -203,7 +203,7 @@ export const extractControllerMetadata = (
           methodMetadata.key
         );
 
-        const validatorInterceptor = getValidateInterceptor(container);
+        const validatorInterceptors = getValidateInterceptor(container);
 
         const methodJson = Reflect.getMetadata(
           METADATA_KEY.responseBody,
@@ -224,7 +224,7 @@ export const extractControllerMetadata = (
           method: methodMetadata.method,
           controllerInterceptors,
           methodInterceptors,
-          validatorInterceptor,
+          validatorInterceptors,
         });
       });
     }

@@ -5,6 +5,7 @@ import { RestMetadata } from './plugin-config';
 import { extractControllerMetadata } from './utils';
 import { ValidateInterceptor } from './validate';
 import { WebConfiguration } from './web-configuration';
+import { ValidateSendErrorInterceptor } from './validate/validate-senderror-interceptor';
 
 /**
  * Base class for web plugin.
@@ -49,6 +50,12 @@ export abstract class WebPluginBase {
       .bind(ValidateInterceptor)
       .to(ValidateInterceptor)
       .inSingletonScope();
+
+    container
+      .bind(ValidateSendErrorInterceptor)
+      .to(ValidateSendErrorInterceptor)
+      .inSingletonScope();
+
     const webConfiguration = new WebConfiguration();
     container.bind(WebConfiguration).toConstantValue(webConfiguration);
     await toPromise(this.bindApp(container, registry, webConfiguration));
