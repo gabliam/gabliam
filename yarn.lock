@@ -5050,11 +5050,13 @@ jest-serializer-path@^0.1.15:
     lodash.iserror "^3.1.1"
     slash "^2.0.0"
 
-jest-serializer-supertest@^1.3.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/jest-serializer-supertest/-/jest-serializer-supertest-1.5.0.tgz#7256127bfc2aa3180284859e17c4567a4f964814"
+jest-serializer-supertest@^1.6.4:
+  version "1.6.4"
+  resolved "https://registry.yarnpkg.com/jest-serializer-supertest/-/jest-serializer-supertest-1.6.4.tgz#b80628390884b8823453f4990f856bc600bef5bd"
+  integrity sha512-Ehur3QJJK4P4MITP8ewA79QSXiP03f4QS8f0XYsCky/iLgTMf08lKCill1PGFwsOIb9SoYej6hagU3TOyc8nvA==
   dependencies:
     lodash.has "^4.5.2"
+    lodash.unset "^4.5.2"
 
 jest-serializer@^23.0.1:
   version "23.0.1"
@@ -5617,6 +5619,11 @@ lodash.templatesettings@^4.0.0:
 lodash.toarray@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.toarray/-/lodash.toarray-4.4.0.tgz#24c4bfcd6b2fba38bfd0594db1179d8e9b656561"
+
+lodash.unset@^4.5.2:
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/lodash.unset/-/lodash.unset-4.5.2.tgz#370d1d3e85b72a7e1b0cdf2d272121306f23e4ed"
+  integrity sha1-Nw0dPoW3Kn4bDN8tJyEhMG8j5O0=
 
 lodash@4.17.11, lodash@^4.17.11:
   version "4.17.11"

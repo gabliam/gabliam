@@ -101,7 +101,7 @@ test('@ExpressConfig Order', async () => {
   @Controller('/')
   class TestController {
     @Get('/')
-    public getTest(req: e.Request, res: e.Response) {
+    public getTest() {
       return 'GET';
     }
   }
@@ -142,7 +142,7 @@ test('ErrorConfig', async () => {
   @Controller('/')
   class TestController {
     @Get('/')
-    public getTest(req: e.Request, res: e.Response) {
+    public getTest() {
       throw new Error();
     }
   }
@@ -171,7 +171,7 @@ test('ErrorConfig order', async () => {
   @Controller('/')
   class TestController {
     @Get('/')
-    public getTest(req: e.Request, res: e.Response) {
+    public getTest() {
       throw new Error();
     }
   }

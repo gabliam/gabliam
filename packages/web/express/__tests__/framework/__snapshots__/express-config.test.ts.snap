@@ -6,7 +6,6 @@ Object {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/html; charset=utf-8",
-    "etag": "W/\\"3-8DC7vTKWbN5BA3uYqIScRrduS8E\\"",
   },
   "req": Object {
     "data": undefined,
@@ -26,7 +25,6 @@ Object {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/html; charset=utf-8",
-    "etag": "W/\\"3-8DC7vTKWbN5BA3uYqIScRrduS8E\\"",
   },
   "req": Object {
     "data": undefined,
@@ -46,7 +44,6 @@ Object {
     "connection": "close",
     "content-length": "5",
     "content-type": "text/html; charset=utf-8",
-    "etag": "W/\\"5-EflXjQXm97tYo83QAQfp9OOIJnE\\"",
   },
   "req": Object {
     "data": undefined,
@@ -66,7 +63,6 @@ Object {
     "connection": "close",
     "content-length": "5",
     "content-type": "text/html; charset=utf-8",
-    "etag": "W/\\"5-EflXjQXm97tYo83QAQfp9OOIJnE\\"",
   },
   "req": Object {
     "data": undefined,

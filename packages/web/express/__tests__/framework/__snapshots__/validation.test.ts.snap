@@ -6,7 +6,6 @@ Object {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/html; charset=utf-8",
-    "etag": "W/\\"3-QDkmAz0AG1J53zfLvlKHt8fCZ/o\\"",
   },
   "req": Object {
     "data": Object {
@@ -40,7 +39,6 @@ Object {
     "connection": "close",
     "content-length": "1",
     "content-type": "text/html; charset=utf-8",
-    "etag": "W/\\"1-E/vXnD05Dl1lhaIeEf9ewZcM/ww\\"",
   },
   "req": Object {
     "data": undefined,
@@ -60,7 +58,6 @@ Object {
     "connection": "close",
     "content-length": "1",
     "content-type": "text/html; charset=utf-8",
-    "etag": "W/\\"1-E/vXnD05Dl1lhaIeEf9ewZcM/ww\\"",
   },
   "req": Object {
     "data": undefined,
@@ -78,7 +75,6 @@ Object {
     "connection": "close",
     "content-length": "1",
     "content-type": "text/html; charset=utf-8",
-    "etag": "W/\\"1-E/vXnD05Dl1lhaIeEf9ewZcM/ww\\"",
   },
   "req": Object {
     "data": undefined,
@@ -96,7 +92,6 @@ Object {
     "connection": "close",
     "content-length": "156",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"9c-lb73tokNqpEcTzZIECgZmqLKScw\\"",
   },
   "req": Object {
     "data": Object {
@@ -119,7 +114,6 @@ Object {
     "connection": "close",
     "content-length": "228",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"e4-9YBgGPA9onlm1wj0GlR/2HIQaBw\\"",
   },
   "req": Object {
     "data": undefined,
@@ -139,7 +133,6 @@ Object {
     "connection": "close",
     "content-length": "193",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"c1-Ucg8TlfIGVQQWOvNPRCiHk8y61o\\"",
   },
   "req": Object {
     "data": undefined,
@@ -157,7 +150,6 @@ Object {
     "connection": "close",
     "content-length": "122",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"7a-iJ+h5zB08gNswU0QtTTcpNELWzs\\"",
   },
   "req": Object {
     "data": undefined,

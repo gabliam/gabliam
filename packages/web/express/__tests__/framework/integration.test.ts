@@ -1,20 +1,21 @@
+import { Bean, Config } from '@gabliam/core';
 import {
   Controller,
-  RestController,
-  Get,
-  Post,
-  Put,
-  Patch,
-  Head,
   Delete,
+  Get,
+  Head,
   Method,
   Next,
+  nextFn,
+  Patch,
+  Post,
+  Put,
+  RestController,
 } from '@gabliam/web-core';
-import { express as e } from '../../src';
-import { ExpressPluginTest } from '../express-plugin-test';
 import * as supertest from 'supertest';
-import { Config, Bean } from '@gabliam/core';
+import { express as e } from '../../src';
 import { CUSTOM_ROUTER_CREATOR } from '../../src/constants';
+import { ExpressPluginTest } from '../express-plugin-test';
 
 let appTest: ExpressPluginTest;
 
@@ -91,8 +92,8 @@ describe('Integration Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          public getTest(@Next() nextFunc: e.NextFunction) {
-            nextFunc();
+          public getTest(@Next() nextFunc: nextFn) {
+            return nextFunc();
           }
 
           @Get('/')
@@ -113,16 +114,11 @@ describe('Integration Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          public getTest(@Next() nextFunc: e.NextFunction) {
+          public getTest(@Next() nextFunc: nextFn) {
             return new Promise(resolve => {
-              setTimeout(
-                () => {
-                  nextFunc();
-                  resolve();
-                },
-                100,
-                'GET'
-              );
+              setTimeout(() => {
+                resolve(nextFunc());
+              }, 100);
             });
           }
 
@@ -143,14 +139,14 @@ describe('Integration Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          public getTest(@Next() nextFunc: e.NextFunction) {
-            nextFunc();
+          public getTest(@Next() nextFunc: nextFn) {
+            return nextFunc();
           }
 
           @Get('/')
           public getTest2() {
             return new Promise(resolve => {
-              setTimeout(resolve, 100, 'GET');
+              setTimeout(() => resolve('GET'), 100);
             });
           }
         }

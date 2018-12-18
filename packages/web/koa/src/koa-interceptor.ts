@@ -7,6 +7,7 @@ import {
   METADATA_KEY,
   Next,
   UseInterceptors,
+  nextFn,
 } from '@gabliam/web-core';
 import { koaRouter } from './koa';
 
@@ -39,7 +40,7 @@ export const toInterceptor = (
   mid: koaRouter.IMiddleware
 ): InterceptorConstructor => {
   const clazz: InterceptorConstructor = class implements Interceptor {
-    async intercept(context: GabContext, next: () => Promise<any>) {
+    async intercept(context: GabContext, next: nextFn) {
       const ctx: koaRouter.IRouterContext = context.state.context;
       return await mid(ctx, next);
     }

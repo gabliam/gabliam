@@ -12,6 +12,7 @@ import {
   Post,
   Put,
   RestController,
+  nextFn,
 } from '@gabliam/web-core';
 import { CUSTOM_ROUTER_CREATOR } from '../../src/constants';
 import { koaRouter } from '../../src/index';
@@ -94,7 +95,7 @@ describe('Integration Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          public async getTest(@Next() nextFunc: () => Promise<any>) {
+          public async getTest(@Next() nextFunc: nextFn) {
             await nextFunc();
           }
 
@@ -117,7 +118,7 @@ describe('Integration Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          public getTest(@Next() nextFunc: () => Promise<any>) {
+          public getTest(@Next() nextFunc: nextFn) {
             return new Promise(resolve => {
               setTimeout(
                 () => {
@@ -147,7 +148,7 @@ describe('Integration Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          public async getTest(@Next() nextFunc: () => Promise<any>) {
+          public async getTest(@Next() nextFunc: nextFn) {
             await nextFunc();
           }
 

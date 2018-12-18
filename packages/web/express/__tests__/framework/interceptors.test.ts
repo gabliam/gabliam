@@ -14,12 +14,13 @@ import {
   Get,
   Head,
   Interceptor,
+  Next,
+  nextFn,
   Patch,
   Post,
   Put,
   UseInterceptors,
   WebConfig,
-  Call,
 } from '@gabliam/web-core';
 import * as sinon from 'sinon';
 import * as supertest from 'supertest';
@@ -40,9 +41,9 @@ describe('Complex interceptor', () => {
   let result: string;
   @Service()
   class A implements Interceptor {
-    async intercept(@Call() call: Promise<any>) {
+    async intercept(@Next() next: nextFn) {
       result += 'a';
-      await call;
+      await next();
       result += 'b';
     }
   }

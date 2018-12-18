@@ -1,4 +1,3 @@
-import { express as e } from '../../src';
 import { ExpressPluginTest } from '../express-plugin-test';
 import * as supertest from 'supertest';
 import {
@@ -26,7 +25,7 @@ describe('Response entity Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          getTest(req: e.Request, res: e.Response) {
+          getTest() {
             return new ResponseEntity({ get: 'GET' });
           }
         }
@@ -42,7 +41,7 @@ describe('Response entity Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          getTest(req: e.Request, res: e.Response) {
+          getTest() {
             const resp = new ResponseEntity({ get: 'GET' });
             resp.addHeader('X-Test', 'tests');
             return resp;
@@ -60,7 +59,7 @@ describe('Response entity Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          async getTest(req: e.Request, res: e.Response) {
+          async getTest() {
             return new Promise(resolve => {
               setTimeout(resolve, 100, new ResponseEntity({ get: 'GET' }));
             });
@@ -78,7 +77,7 @@ describe('Response entity Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          async getTest(req: e.Request, res: e.Response) {
+          async getTest() {
             return ResponseEntity.ok();
           }
         }
@@ -94,7 +93,7 @@ describe('Response entity Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          async getTest(req: e.Request, res: e.Response) {
+          async getTest() {
             return ResponseEntity.ok({ get: 'get' });
           }
         }
@@ -110,7 +109,7 @@ describe('Response entity Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          async getTest(req: e.Request, res: e.Response) {
+          async getTest() {
             return ResponseEntity.accepted();
           }
         }
@@ -126,7 +125,7 @@ describe('Response entity Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          async getTest(req: e.Request, res: e.Response) {
+          async getTest() {
             return ResponseEntity.badRequest();
           }
         }
@@ -142,7 +141,7 @@ describe('Response entity Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          async getTest(req: e.Request, res: e.Response) {
+          async getTest() {
             return ResponseEntity.noContent();
           }
         }
@@ -158,7 +157,7 @@ describe('Response entity Tests:', () => {
         @decorator('/')
         class TestController {
           @Get('/')
-          async getTest(req: e.Request, res: e.Response) {
+          async getTest() {
             return ResponseEntity.notFound();
           }
         }

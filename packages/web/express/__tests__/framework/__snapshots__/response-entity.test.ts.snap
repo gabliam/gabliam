@@ -4,9 +4,7 @@ exports[`Response entity Tests: decorator Controller responseEntitie accepted() 
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "4",
-    "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"4-K+iMpCQsduglOsYkdIUQZQMtaDM\\"",
+    "content-length": "0",
   },
   "req": Object {
     "data": undefined,
@@ -14,7 +12,7 @@ Object {
     "method": "GET",
   },
   "status": 202,
-  "text": "null",
+  "text": "",
 }
 `;
 
@@ -22,9 +20,7 @@ exports[`Response entity Tests: decorator Controller responseEntitie badRequest(
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "4",
-    "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"4-K+iMpCQsduglOsYkdIUQZQMtaDM\\"",
+    "content-length": "0",
   },
   "req": Object {
     "data": undefined,
@@ -32,7 +28,7 @@ Object {
     "method": "GET",
   },
   "status": 400,
-  "text": "null",
+  "text": "",
 }
 `;
 
@@ -40,7 +36,6 @@ exports[`Response entity Tests: decorator Controller responseEntitie noContent()
 Object {
   "header": Object {
     "connection": "close",
-    "etag": "W/\\"4-K+iMpCQsduglOsYkdIUQZQMtaDM\\"",
   },
   "req": Object {
     "data": undefined,
@@ -56,9 +51,7 @@ exports[`Response entity Tests: decorator Controller responseEntitie notFound() 
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "4",
-    "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"4-K+iMpCQsduglOsYkdIUQZQMtaDM\\"",
+    "content-length": "0",
   },
   "req": Object {
     "data": undefined,
@@ -66,7 +59,7 @@ Object {
     "method": "GET",
   },
   "status": 404,
-  "text": "null",
+  "text": "",
 }
 `;
 
@@ -75,7 +68,6 @@ Object {
   "header": Object {
     "connection": "close",
     "content-length": "0",
-    "content-type": "application/json; charset=utf-8",
   },
   "req": Object {
     "data": undefined,
@@ -93,7 +85,6 @@ Object {
     "connection": "close",
     "content-length": "13",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"d-Lc+tjcJImP8Sf1HWyafiv3+lfrc\\"",
   },
   "req": Object {
     "data": undefined,
@@ -111,7 +102,6 @@ Object {
     "connection": "close",
     "content-length": "13",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"d-navs5TfboJktcSL9TcDVd7fN4Zk\\"",
   },
   "req": Object {
     "data": undefined,
@@ -129,7 +119,6 @@ Object {
     "connection": "close",
     "content-length": "13",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"d-navs5TfboJktcSL9TcDVd7fN4Zk\\"",
     "x-test": "tests",
   },
   "req": Object {
@@ -148,7 +137,6 @@ Object {
     "connection": "close",
     "content-length": "13",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"d-navs5TfboJktcSL9TcDVd7fN4Zk\\"",
   },
   "req": Object {
     "data": undefined,
@@ -164,9 +152,8 @@ exports[`Response entity Tests: decorator RestController responseEntitie accepte
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "4",
+    "content-length": "0",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"4-K+iMpCQsduglOsYkdIUQZQMtaDM\\"",
   },
   "req": Object {
     "data": undefined,
@@ -174,7 +161,7 @@ Object {
     "method": "GET",
   },
   "status": 202,
-  "text": "null",
+  "text": "",
 }
 `;
 
@@ -182,9 +169,8 @@ exports[`Response entity Tests: decorator RestController responseEntitie badRequ
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "4",
+    "content-length": "0",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"4-K+iMpCQsduglOsYkdIUQZQMtaDM\\"",
   },
   "req": Object {
     "data": undefined,
@@ -192,7 +178,7 @@ Object {
     "method": "GET",
   },
   "status": 400,
-  "text": "null",
+  "text": "",
 }
 `;
 
@@ -200,7 +186,6 @@ exports[`Response entity Tests: decorator RestController responseEntitie noConte
 Object {
   "header": Object {
     "connection": "close",
-    "etag": "W/\\"4-K+iMpCQsduglOsYkdIUQZQMtaDM\\"",
   },
   "req": Object {
     "data": undefined,
@@ -216,9 +201,8 @@ exports[`Response entity Tests: decorator RestController responseEntitie notFoun
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "4",
+    "content-length": "0",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"4-K+iMpCQsduglOsYkdIUQZQMtaDM\\"",
   },
   "req": Object {
     "data": undefined,
@@ -226,7 +210,7 @@ Object {
     "method": "GET",
   },
   "status": 404,
-  "text": "null",
+  "text": "",
 }
 `;
 
@@ -253,7 +237,6 @@ Object {
     "connection": "close",
     "content-length": "13",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"d-Lc+tjcJImP8Sf1HWyafiv3+lfrc\\"",
   },
   "req": Object {
     "data": undefined,
@@ -271,7 +254,6 @@ Object {
     "connection": "close",
     "content-length": "13",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"d-navs5TfboJktcSL9TcDVd7fN4Zk\\"",
   },
   "req": Object {
     "data": undefined,
@@ -289,7 +271,6 @@ Object {
     "connection": "close",
     "content-length": "13",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"d-navs5TfboJktcSL9TcDVd7fN4Zk\\"",
     "x-test": "tests",
   },
   "req": Object {
@@ -308,7 +289,6 @@ Object {
     "connection": "close",
     "content-length": "13",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\\"d-navs5TfboJktcSL9TcDVd7fN4Zk\\"",
   },
   "req": Object {
     "data": undefined,

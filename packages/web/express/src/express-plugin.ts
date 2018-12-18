@@ -9,12 +9,11 @@ import {
 import {
   APP,
   cleanPath,
+  compose,
   ExecutionContext,
   extractParameters,
   getContext,
-  Interceptor,
   InterceptorInfo,
-  ResponseEntity,
   RestMetadata,
   SERVER,
   WebConfiguration,
@@ -25,18 +24,11 @@ import {
 import * as d from 'debug';
 import * as http from 'http';
 import { CUSTOM_ROUTER_CREATOR } from './constants';
+import { converterValue, send } from './converter-value';
 import { express } from './express';
-import { isExpressInterceptor } from './express-interceptor';
+import { isValidInterceptor } from './express-interceptor';
 import { ExpressMethods, RouterCreator } from './interfaces';
-import {
-  addContextMiddleware,
-  addMiddlewares,
-  valideErrorMiddleware,
-} from './middleware';
-import {
-  convertExpressInterceptorToMiddleware,
-  validatorInterceptorToMiddleware,
-} from './utils';
+import { addContextMiddleware, addMiddlewares } from './middleware';
 
 const debug = d('Gabliam:Plugin:ExpressPlugin');
 
@@ -56,10 +48,6 @@ export class ExpressPlugin extends WebPluginBase implements GabliamPlugin {
 
     webConfiguration.addwebConfig({
       instance: addContextMiddleware,
-      order: -1,
-    });
-    webConfiguration.addWebConfigAfterCtrl({
-      instance: valideErrorMiddleware,
       order: -1,
     });
   }
@@ -143,53 +131,15 @@ export class ExpressPlugin extends WebPluginBase implements GabliamPlugin {
       for (const methodInfo of methods) {
         const execCtx = new ExecutionContext(controller, methodInfo);
 
-        const allInterceptors = [
-          ...methodInfo.controllerInterceptors,
-          ...methodInfo.methodInterceptors,
-        ];
-        // const requestHandlers: express.RequestHandler[] = [];
-        // const errorRequestHandler: express.ErrorRequestHandler[] = [];
-
-        const expressInterceptors = allInterceptors.filter(({ instance }) =>
-          isExpressInterceptor(instance)
-        );
-
-        const interceptors = allInterceptors.filter(
-          ({ instance }) => !isExpressInterceptor(instance)
-        );
-
-        const {
-          requestHandlers,
-          errorRequestHandler,
-        } = await convertExpressInterceptorToMiddleware(expressInterceptors);
-
-        requestHandlers.unshift(
-          await validatorInterceptorToMiddleware(
-            execCtx,
-            methodInfo.validatorInterceptor
-          )
+        const interceptors = methodInfo.interceptors.filter(i =>
+          isValidInterceptor(i)
         );
 
         // create handler
         const handler = this.handlerFactory(execCtx, interceptors);
 
-        const addJsonHandler = (
-          req: express.Request,
-          res: express.Response,
-          next: express.NextFunction
-        ) => {
-          (req as any).jsonHandler = methodInfo.json;
-          next();
-        };
-
         // register handler in router
-        router[methodInfo.method](
-          methodInfo.methodPath,
-          addJsonHandler,
-          ...requestHandlers,
-          handler,
-          ...errorRequestHandler
-        );
+        router[methodInfo.method](methodInfo.methodPath, handler);
       }
       app.use(routerPath, router);
     }
@@ -197,89 +147,43 @@ export class ExpressPlugin extends WebPluginBase implements GabliamPlugin {
 
   private handlerFactory(
     execCtx: ExecutionContext,
-    interceptors: InterceptorInfo<Interceptor>[]
+    interceptors: InterceptorInfo[]
   ): express.RequestHandler {
     return async (
       req: express.Request,
       res: express.Response,
       next: express.NextFunction
     ) => {
+      const composeInterceptor = compose(
+        interceptors,
+        converterValue
+      );
       const ctx = getContext(req);
       const methodInfo = execCtx.getMethodInfo();
       const controller = execCtx.getClass();
 
-      // extract all args
-      const args = extractParameters(
-        controller,
-        methodInfo.methodName,
-        execCtx,
-        ctx,
-        next,
-        methodInfo.paramList
-      );
+      let expressNextCall = false;
+      const expressNext = () => {
+        expressNextCall = true;
+        next();
+      };
 
-      // response handler if the result is a ResponseEntity
-      function responseEntityHandler(value: ResponseEntity) {
-        if (value.hasHeader()) {
-          Object.keys(value.headers).forEach(k =>
-            res.setHeader(k, value.headers[k])
-          );
-        }
-        res.status(value.status).json(value.body);
-      }
+      const callNext = async () => {
+        const args = extractParameters(
+          controller,
+          methodInfo.methodName,
+          execCtx,
+          ctx,
+          expressNext,
+          methodInfo.paramList
+        );
+        return await toPromise(controller[methodInfo.methodName](...args));
+      };
 
       try {
-        let result: any;
-        if (Array.isArray(interceptors)) {
-          const r = toPromise(controller[methodInfo.methodName](...args));
-          for (const { instance, paramList } of interceptors) {
-            const interceptorArgs = extractParameters(
-              instance,
-              'intercept',
-              execCtx,
-              ctx,
-              next,
-              paramList,
-              r
-            );
-            await toPromise(instance.intercept(...interceptorArgs));
-          }
-          result = await r;
-        } else {
-          result = await toPromise(controller[methodInfo.methodName](...args));
-        }
-
-        if (!res.headersSent) {
-          if (result !== undefined) {
-            if (result instanceof ResponseEntity) {
-              responseEntityHandler(result);
-            } else if (methodInfo.json) {
-              res.json(result);
-            } else {
-              if (typeof result === 'string' || typeof result === 'object') {
-                res.send(result);
-              } else {
-                res.send(result !== undefined ? '' + result : undefined);
-              }
-            }
-          } else if (ctx.body !== undefined) {
-            const { status, message, body, type } = ctx;
-            if (type) {
-              res.type(type);
-            }
-            if (message) {
-              res.statusMessage = message;
-            }
-
-            if (status) {
-              res.status(status);
-            }
-            if (methodInfo.json) {
-              res.json(body);
-            } else {
-              res.send(body);
-            }
-          }
+        await composeInterceptor(ctx, execCtx, callNext);
+        if (!expressNextCall) {
+          send(ctx, res, methodInfo.json);
         }
       } catch (err) {
         next(err);

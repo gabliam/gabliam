@@ -3,8 +3,12 @@ import {
   Interceptor,
   InterceptorConstructor,
   UseInterceptors,
+  METADATA_KEY,
+  GabContext,
+  Context,
+  Next,
+  nextFn,
 } from '@gabliam/web-core';
-import { METADATA_KEY } from './constants';
 import { express } from './express';
 
 export type ExpressInterceptorType = 'RequestHandler' | 'intercept';
@@ -13,43 +17,58 @@ export type ExpressInterceptorType = 'RequestHandler' | 'intercept';
  * Test if target is an express interceptor
  * @param target any
  */
-export const isExpressInterceptor = (target: any) =>
-  Reflect.hasOwnMetadata(
-    METADATA_KEY.expressInterceptor,
+export const isValidInterceptor = (target: any) => {
+  const meta = Reflect.getOwnMetadata(
+    METADATA_KEY.specialInterceptor,
     target.constructor || target
   );
 
-export const getExpressInterceptorType = (
-  target: any
-): ExpressInterceptorType =>
-  Reflect.getOwnMetadata(
-    METADATA_KEY.expressInterceptor,
-    target.constructor || target
-  );
+  return meta === undefined || meta === 'express';
+};
 
 /**
  * ExpressInterceptor decorator
  * class is an express interceptor.
  * Must return express middleware
  */
-const ExpressInterceptor = (type: ExpressInterceptorType) => (target: any) => {
-  Reflect.defineMetadata(METADATA_KEY.expressInterceptor, type, target);
+const ExpressInterceptor = () => (target: any) => {
+  Reflect.defineMetadata(METADATA_KEY.specialInterceptor, 'express', target);
 };
 
 /**
  * Convert a Express middleware to an express interceptor
  */
 export const toInterceptor = (
-  mid: express.RequestHandler | express.ErrorRequestHandler,
-  type: ExpressInterceptorType = 'RequestHandler'
+  mid: express.RequestHandler
 ): InterceptorConstructor => {
   const clazz: InterceptorConstructor = class implements Interceptor {
-    intercept() {
-      return mid;
+    async intercept(context: GabContext, next: nextFn) {
+      const req = context.request.originalRequest;
+      const res = context.response.originalResponse;
+      switch (mid.length) {
+        // with callback
+        case 3:
+          return new Promise((resolve, reject) => {
+            (<express.RequestHandler>mid)(req, res, err => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(next());
+              }
+            });
+          });
+        // with error
+        case 2:
+        default:
+          (<any>mid)(req, res);
+          await next();
+      }
     }
   };
+  Context()(clazz.prototype, 'intercept', 0);
+  Next()(clazz.prototype, 'intercept', 1);
   Service()(clazz);
-  ExpressInterceptor(type)(clazz);
+  ExpressInterceptor()(clazz);
   return clazz;
 };
 
@@ -57,6 +76,5 @@ export const toInterceptor = (
  * Alias for evict to use: UseInterceptors(toInterceptor(expressMid))
  * /!\ Use it for RequestHandler
  */
-export const UseExpressInterceptors = (
-  ...mids: (express.RequestHandler | express.ErrorRequestHandler)[]
-) => UseInterceptors(...mids.map(m => toInterceptor(m)));
+export const UseExpressInterceptors = (...mids: express.RequestHandler[]) =>
+  UseInterceptors(...mids.map(m => toInterceptor(m)));

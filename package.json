@@ -30,7 +30,7 @@
     "husky": "^1.2.0",
     "jest": "^23.6.0",
     "jest-serializer-path": "^0.1.15",
-    "jest-serializer-supertest": "^1.3.0",
+    "jest-serializer-supertest": "^1.6.4",
     "lerna": "^3.5.1",
     "lint-staged": "^8.1.0",
     "nodemon": "^1.18.7",
