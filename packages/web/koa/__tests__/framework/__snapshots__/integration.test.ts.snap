@@ -463,8 +463,8 @@ exports[`Integration Tests: decorator RestController should work for each shortc
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "8",
-    "content-type": "application/json; charset=utf-8",
+    "content-length": "6",
+    "content-type": "text/plain; charset=utf-8",
   },
   "req": Object {
     "data": undefined,
@@ -472,7 +472,7 @@ Object {
     "method": "DELETE",
   },
   "status": 200,
-  "text": "\\"DELETE\\"",
+  "text": "DELETE",
 }
 `;
 
@@ -480,8 +480,8 @@ exports[`Integration Tests: decorator RestController should work for each shortc
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "5",
-    "content-type": "application/json; charset=utf-8",
+    "content-length": "3",
+    "content-type": "text/plain; charset=utf-8",
   },
   "req": Object {
     "data": undefined,
@@ -497,8 +497,8 @@ exports[`Integration Tests: decorator RestController should work for each shortc
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "7",
-    "content-type": "application/json; charset=utf-8",
+    "content-length": "5",
+    "content-type": "text/plain; charset=utf-8",
   },
   "req": Object {
     "data": undefined,
@@ -506,7 +506,7 @@ Object {
     "method": "PATCH",
   },
   "status": 200,
-  "text": "\\"PATCH\\"",
+  "text": "PATCH",
 }
 `;
 
@@ -514,8 +514,8 @@ exports[`Integration Tests: decorator RestController should work for each shortc
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "5",
-    "content-type": "application/json; charset=utf-8",
+    "content-length": "3",
+    "content-type": "text/plain; charset=utf-8",
   },
   "req": Object {
     "data": undefined,
@@ -523,7 +523,7 @@ Object {
     "method": "PUT",
   },
   "status": 200,
-  "text": "\\"PUT\\"",
+  "text": "PUT",
 }
 `;
 
@@ -531,8 +531,8 @@ exports[`Integration Tests: decorator RestController should work for each shortc
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "6",
-    "content-type": "application/json; charset=utf-8",
+    "content-length": "4",
+    "content-type": "text/plain; charset=utf-8",
   },
   "req": Object {
     "data": undefined,
@@ -540,7 +540,7 @@ Object {
     "method": "POST",
   },
   "status": 200,
-  "text": "\\"POST\\"",
+  "text": "POST",
 }
 `;
 
@@ -548,8 +548,8 @@ exports[`Integration Tests: decorator RestController should work for each shortc
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "5",
-    "content-type": "application/json; charset=utf-8",
+    "content-length": "3",
+    "content-type": "text/plain; charset=utf-8",
   },
   "req": Object {
     "data": undefined,
@@ -557,7 +557,7 @@ Object {
     "method": "GET",
   },
   "status": 200,
-  "text": "\\"GET\\"",
+  "text": "GET",
 }
 `;
 
@@ -582,8 +582,8 @@ exports[`Integration Tests: decorator RestController should work for more obscur
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "10",
-    "content-type": "application/json; charset=utf-8",
+    "content-length": "8",
+    "content-type": "text/plain; charset=utf-8",
   },
   "req": Object {
     "data": undefined,
@@ -591,7 +591,7 @@ Object {
     "method": "PROPFIND",
   },
   "status": 200,
-  "text": "\\"PROPFIND\\"",
+  "text": "PROPFIND",
 }
 `;
 

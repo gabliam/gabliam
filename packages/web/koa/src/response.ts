@@ -17,16 +17,19 @@ export class KoaResponse implements GabResponse<koa.Response> {
   /**
    * Get/Set response status code.
    */
+  @alias(['response', 'status'])
   status: number;
 
   /**
    * Get/Set response status message
    */
+  @alias(['response', 'message'])
   message: string;
 
   /**
    * Get/Set response body.
    */
+  @alias(['response', 'body'])
   body: any;
 
   /**
@@ -44,6 +47,7 @@ export class KoaResponse implements GabResponse<koa.Response> {
    *     this.type = 'application/json';
    *     this.type = 'png';
    */
+  @alias(['response', 'type'])
   type: string;
 
   constructor(private context: koa.Context, private response: koa.Response) {}

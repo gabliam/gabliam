@@ -24,7 +24,7 @@ import {
 import * as d from 'debug';
 import * as http from 'http';
 import { CUSTOM_ROUTER_CREATOR } from './constants';
-import { createConverterValue } from './converter-value';
+import { converterValue } from './converter-value';
 import { KoaMethods, RouterCreator } from './interfaces';
 import { koa, koaRouter } from './koa';
 import { isValidInterceptor } from './koa-interceptor';
@@ -177,7 +177,7 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
     ) => {
       const composeInterceptor = compose(
         interceptors,
-        createConverterValue(context)
+        converterValue
       );
       const req = context.req;
       const ctx = getContext(req);
