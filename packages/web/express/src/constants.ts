@@ -17,6 +17,8 @@
  */
 export const CUSTOM_ROUTER_CREATOR = Symbol('GABLIAM/CUSTOM_ROUTER_CREATOR');
 
+export const EXPRESS_PLUGIN_CONFIG = Symbol('GABLIAM/EXPRESS_PLUGIN_CONFIG');
+
 export const METADATA_KEY = {
   expressInterceptor: '_express_interceptor',
 };

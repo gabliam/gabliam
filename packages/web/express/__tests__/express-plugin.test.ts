@@ -77,7 +77,7 @@ describe('test plugin', async () => {
       await gab.build();
       expect(build.calledOnce).toBe(true);
       expect(bind.calledOnce).toBe(true);
-      expect(config.calledOnce).toBe(true);
+      expect(config.calledOnce).toBe(false);
     });
 
     test('gabliam start', async () => {

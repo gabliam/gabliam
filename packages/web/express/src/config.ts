@@ -1,6 +1,6 @@
 import { Bean, Joi, PluginConfig, Value } from '@gabliam/core';
-import { WebPluginConfig, WEB_PLUGIN_CONFIG } from '@gabliam/web-core';
 import * as bodyParser from 'body-parser';
+import { EXPRESS_PLUGIN_CONFIG } from './constants';
 
 const options = Joi.object().keys({
   inflate: Joi.boolean(),
@@ -48,30 +48,18 @@ export interface BodyParserConfig {
   optionsText?: bodyParser.OptionsText;
 }
 
-export interface ExpressConfig extends WebPluginConfig {
+export interface ExpressConfig {
   bodyParser: BodyParserConfig;
 }
 
 @PluginConfig()
 export class ExpressPluginConfig implements ExpressConfig {
-  @Value('application.web.rootPath', Joi.string())
-  rootPath = '/';
-
-  @Value('application.web.port', Joi.number().positive())
-  port: number = process.env.PORT ? parseInt(process.env.PORT!, 10) : 3000;
-
-  @Value('application.web.hostname', Joi.string())
-  hostname: string;
-
   @Value('application.web.bodyParser', configJoi)
   bodyParser: BodyParserConfig;
 
-  @Bean(WEB_PLUGIN_CONFIG)
+  @Bean(EXPRESS_PLUGIN_CONFIG)
   restConfig(): ExpressConfig {
     return {
-      rootPath: this.rootPath,
-      port: this.port,
-      hostname: this.hostname,
       bodyParser: this.bodyParser,
     };
   }

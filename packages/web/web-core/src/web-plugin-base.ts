@@ -1,15 +1,20 @@
-import { Container, gabliamValue, Registry, toPromise } from '@gabliam/core';
+import {
+  Container,
+  gabliamValue,
+  Registry,
+  toPromise,
+  Scan,
+} from '@gabliam/core';
 import { APP, METADATA_KEY, TYPE } from './constants';
 import { WebConfigMetadata } from './decorators';
 import { RestMetadata } from './plugin-config';
 import { extractControllerMetadata } from './utils';
 import { WebConfiguration } from './web-configuration';
-import { ValidateInterceptor } from './validate';
-import { ValidateSendErrorInterceptor } from './validate/validate-senderror-interceptor';
 
 /**
  * Base class for web plugin.
  */
+@Scan()
 export abstract class WebPluginBase {
   /**
    * Bind the app. In this method, you create the application and bind.
@@ -44,16 +49,6 @@ export abstract class WebPluginBase {
         .to(target)
         .inSingletonScope()
     );
-
-    container
-      .bind(ValidateInterceptor)
-      .to(ValidateInterceptor)
-      .inSingletonScope();
-
-    container
-      .bind(ValidateSendErrorInterceptor)
-      .to(ValidateSendErrorInterceptor)
-      .inSingletonScope();
 
     const webConfiguration = new WebConfiguration();
     container.bind(WebConfiguration).toConstantValue(webConfiguration);

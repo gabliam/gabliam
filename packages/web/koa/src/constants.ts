@@ -16,3 +16,5 @@
  * }
  */
 export const CUSTOM_ROUTER_CREATOR = Symbol('GABLIAM/CUSTOM_ROUTER_CREATOR');
+
+export const KOA_PLUGIN_CONFIG = Symbol('GABLIAM/KOA_PLUGIN_CONFIG');

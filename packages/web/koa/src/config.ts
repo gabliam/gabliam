@@ -1,6 +1,6 @@
 import { Bean, Joi, PluginConfig, Value } from '@gabliam/core';
-import { WebPluginConfig, WEB_PLUGIN_CONFIG } from '@gabliam/web-core';
 import * as koaBody from 'koa-body';
+import { KOA_PLUGIN_CONFIG } from './constants';
 
 const koaBodyFormidableOptions = Joi.object()
   .keys({
@@ -131,30 +131,18 @@ const koaBodyOptions = Joi.object().keys({
   strict: Joi.bool(),
 });
 
-export interface KoaConfig extends WebPluginConfig {
+export interface KoaConfig {
   koaBodyOptions: koaBody.IKoaBodyOptions;
 }
 
 @PluginConfig()
 export class KoaPluginConfig implements KoaConfig {
-  @Value('application.web.rootPath', Joi.string())
-  rootPath = '/';
-
-  @Value('application.web.port', Joi.number().positive())
-  port: number = process.env.PORT ? parseInt(process.env.PORT!, 10) : 3000;
-
-  @Value('application.web.hostname', Joi.string())
-  hostname: string;
-
   @Value('application.web.koaBodyOptions', koaBodyOptions)
   koaBodyOptions: koaBody.IKoaBodyOptions;
 
-  @Bean(WEB_PLUGIN_CONFIG)
+  @Bean(KOA_PLUGIN_CONFIG)
   restConfig(): KoaConfig {
     return {
-      rootPath: this.rootPath,
-      port: this.port,
-      hostname: this.hostname,
       koaBodyOptions: this.koaBodyOptions,
     };
   }

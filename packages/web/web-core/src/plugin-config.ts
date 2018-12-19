@@ -1,5 +1,12 @@
-import { inversifyInterfaces } from '@gabliam/core';
+import {
+  inversifyInterfaces,
+  PluginConfig,
+  Value,
+  Joi,
+  Bean,
+} from '@gabliam/core';
 import { ParameterMetadata, InterceptorInfo } from './decorators';
+import { WEB_PLUGIN_CONFIG } from './constants';
 
 export interface WebPluginConfig {
   /**
@@ -39,4 +46,25 @@ export interface MethodInfo<T = string> {
   methodPath: string;
   method: T;
   interceptors: InterceptorInfo[];
+}
+
+@PluginConfig()
+export class WebConfig {
+  @Value('application.web.rootPath', Joi.string())
+  rootPath = '/';
+
+  @Value('application.web.port', Joi.number().positive())
+  port: number = process.env.PORT ? parseInt(process.env.PORT!, 10) : 3000;
+
+  @Value('application.web.hostname', Joi.string())
+  hostname: string;
+
+  @Bean(WEB_PLUGIN_CONFIG)
+  restConfig(): WebPluginConfig {
+    return {
+      rootPath: this.rootPath,
+      port: this.port,
+      hostname: this.hostname,
+    };
+  }
 }
