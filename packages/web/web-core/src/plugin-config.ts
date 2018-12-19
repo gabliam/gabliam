@@ -49,7 +49,7 @@ export interface MethodInfo<T = string> {
 }
 
 @PluginConfig()
-export class WebConfig {
+export class WebPluginBaseConfig {
   @Value('application.web.rootPath', Joi.string())
   rootPath = '/';
 

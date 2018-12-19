@@ -603,6 +603,7 @@ Object {
                                   "matches": Array [
                                     Object {
                                       "schema": Object {
+                                        "_currentJoi": [Circular],
                                         "_description": null,
                                         "_examples": Array [],
                                         "_flags": Object {},
@@ -1009,6 +1010,7 @@ Object {
                                   "matches": Array [
                                     Object {
                                       "schema": Object {
+                                        "_currentJoi": [Circular],
                                         "_description": null,
                                         "_examples": Array [],
                                         "_flags": Object {},
@@ -1966,6 +1968,7 @@ Object {
                                           "matches": Array [
                                             Object {
                                               "schema": Object {
+                                                "_currentJoi": [Circular],
                                                 "_description": null,
                                                 "_examples": Array [],
                                                 "_flags": Object {},
@@ -2372,6 +2375,7 @@ Object {
                                           "matches": Array [
                                             Object {
                                               "schema": Object {
+                                                "_currentJoi": [Circular],
                                                 "_description": null,
                                                 "_examples": Array [],
                                                 "_flags": Object {},
@@ -3384,6 +3388,7 @@ Object {
                                   "matches": Array [
                                     Object {
                                       "schema": Object {
+                                        "_currentJoi": [Circular],
                                         "_description": null,
                                         "_examples": Array [],
                                         "_flags": Object {},
@@ -3790,6 +3795,7 @@ Object {
                                   "matches": Array [
                                     Object {
                                       "schema": Object {
+                                        "_currentJoi": [Circular],
                                         "_description": null,
                                         "_examples": Array [],
                                         "_flags": Object {},
@@ -4747,6 +4753,7 @@ Object {
                                           "matches": Array [
                                             Object {
                                               "schema": Object {
+                                                "_currentJoi": [Circular],
                                                 "_description": null,
                                                 "_examples": Array [],
                                                 "_flags": Object {},
@@ -5153,6 +5160,7 @@ Object {
                                           "matches": Array [
                                             Object {
                                               "schema": Object {
+                                                "_currentJoi": [Circular],
                                                 "_description": null,
                                                 "_examples": Array [],
                                                 "_flags": Object {},
