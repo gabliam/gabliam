@@ -5,6 +5,7 @@ import {
   CACHE_MANAGER,
   CachePut,
   CacheEvict,
+  CacheGroup,
 } from '../../src/index';
 import { Bean, Config, Service } from '@gabliam/core';
 
@@ -27,6 +28,7 @@ beforeEach(async () => {
 
 describe('cache evict', async () => {
   test('simple cache', async () => {
+    @CacheGroup('test')
     @Service()
     class TestService {
       @CachePut('hi')
@@ -43,9 +45,9 @@ describe('cache evict', async () => {
     const s = g.gab.container.get(TestService);
     expect(await s.hi('test', 'test')).toMatchSnapshot();
     expect(await s.hi('test', 'test')).toMatchSnapshot();
-    expect(await cache.getCache('hi')).toMatchSnapshot();
+    expect(await cache.getCache('hi', 'test')).toMatchSnapshot();
     expect(await s.evicthi('test', 'test')).toMatchSnapshot();
-    expect(await cache.getCache('hi')).toMatchSnapshot();
+    expect(await cache.getCache('hi', 'test')).toMatchSnapshot();
   });
 
   test('cache muliple cachenames', async () => {

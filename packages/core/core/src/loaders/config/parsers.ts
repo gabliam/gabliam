@@ -1,5 +1,6 @@
 import * as yaml from 'js-yaml';
 import { ParserNotSupportedError } from '../../errors';
+import { LoaderConfigParserPgkNotInstalledError } from '../../errors/loader-config-parser-pgk-not-installed-error';
 
 export type Parser = (data: string) => Promise<any>;
 
@@ -10,15 +11,53 @@ export const getParser = (parserName: string) => {
       return ymlParser;
     case 'json':
       return jsonParser;
+    case 'toml':
+      return getTomlParser();
+    case 'properties':
+      return getPropertiesParser();
     default:
       throw new ParserNotSupportedError(parserName);
   }
 };
 
-const jsonParser: Parser = (data: string) => {
-  return Promise.resolve(JSON.parse(data));
+const getPropertiesParser = (): Parser => {
+  let properties: any;
+  try {
+    properties = require('properties');
+  } catch {
+    /* istanbul ignore next */
+    throw new LoaderConfigParserPgkNotInstalledError(
+      'properties',
+      'properties'
+    );
+  }
+
+  return (data: string) => {
+    return new Promise((resolve, reject) => {
+      properties.parse(data, (error: any, res: any) => {
+        /* istanbul ignore next */
+        if (error) {
+          reject(error);
+        } else {
+          resolve(res);
+        }
+      });
+    });
+  };
 };
 
-const ymlParser: Parser = (data: string) => {
-  return Promise.resolve(yaml.load(data) || {});
+const getTomlParser = (): Parser => {
+  let toml: any;
+  try {
+    toml = require('toml');
+  } catch {
+    /* istanbul ignore next */
+    throw new LoaderConfigParserPgkNotInstalledError('toml', 'toml');
+  }
+  return (data: string) => Promise.resolve(toml.parse(data));
 };
+
+const jsonParser: Parser = (data: string) => Promise.resolve(JSON.parse(data));
+
+const ymlParser: Parser = (data: string) =>
+  Promise.resolve(yaml.load(data) || {});

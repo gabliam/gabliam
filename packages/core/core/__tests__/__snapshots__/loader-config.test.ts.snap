@@ -94,6 +94,12 @@ exports[`with bad loader 1`] = `[LoaderConfigPgkNotInstalledError: BadLoader pac
 
 exports[`with bad parser 1`] = `[ParserNotSupportedError: The parser "badparser" is not supported by Gabliam]`;
 
+exports[`with bad toml 1`] = `
+[LoaderConfigParseError: Error during parsing of file "<TEMP_DIR>/mock-fs-test/test/config/application.toml".
+    SyntaxError: Expected "#", "'", "[", "/"", "/n", "/r", [ /t], [A-Za-z0-9_/-] or end of input but ";" found.
+    ]
+`;
+
 exports[`with config folder doesn't exist 1`] = `Object {}`;
 
 exports[`with json and yml 1`] = `
@@ -107,6 +113,24 @@ Object {
       },
     },
     "yml": true,
+  },
+}
+`;
+
+exports[`with properties 1`] = `
+Object {
+  "application.db": "test",
+  "application.host": "127.0.0.1",
+  "testPath": "<TEMP_DIR>/mock-fs-test/test/config/test.json",
+}
+`;
+
+exports[`with toml 1`] = `
+Object {
+  "application": Object {
+    "db": "test",
+    "host": "127.0.0.1",
+    "testPath": "<TEMP_DIR>/mock-fs-test/test/config/test.json",
   },
 }
 `;

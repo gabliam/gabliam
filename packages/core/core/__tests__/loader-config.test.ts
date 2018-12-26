@@ -84,9 +84,6 @@ describe('with application.yml', async () => {
   test('load with prod profile', async () => {
     const config = await loader.load(mock.resolve('test/config'), 'prod');
     expect(config).toMatchSnapshot();
-    // expect(config).toMatchSnapshot(<any>{
-    //   testPath: expect.any(String)
-    // });
   });
 
   afterAll(() => mock.restore());
@@ -113,7 +110,7 @@ describe('with application.yml with bad handler', async () => {
 
   test('must throw error', async () => {
     const config = loader.load(mock.resolve('test/config'), 'int');
-    await await expect(config).rejects.toMatchSnapshot();
+    await expect(config).rejects.toMatchSnapshot();
   });
 
   afterAll(() => mock.restore());
@@ -222,7 +219,7 @@ test(`with bad parser`, async () => {
       },
     },
   ]);
-  await await expect(config).rejects.toMatchSnapshot();
+  await expect(config).rejects.toMatchSnapshot();
 });
 
 test(`with bad loader`, async () => {
@@ -231,5 +228,103 @@ test(`with bad loader`, async () => {
       loader: 'BadLoader',
     },
   ]);
-  await await expect(config).rejects.toMatchSnapshot();
+  await expect(config).rejects.toMatchSnapshot();
+});
+
+test(`with toml`, async () => {
+  const mock = new MockFs({
+    'test/config': {
+      // tslint:disable-next-line:no-trailing-whitespace
+      'application.toml': `
+[application]
+host = "127.0.0.1"
+db = "test"
+
+testPath = "path:./test.json"`,
+    },
+  });
+  const config = await loader.load([
+    {
+      loader: FileLoader,
+      options: {
+        folder: mock.resolve('test/config'),
+        types: ['toml'],
+      },
+    },
+  ]);
+  expect(config).toMatchSnapshot();
+  mock.restore();
+});
+
+test(`with bad toml`, async () => {
+  const mock = new MockFs({
+    'test/config': {
+      // tslint:disable-next-line:no-trailing-whitespace
+      'application.toml': `
+;;;;[application]
+host = "127.0.0.1"
+db = "test"
+
+testPath = "path:./test.json"`,
+    },
+  });
+  const config = loader.load([
+    {
+      loader: FileLoader,
+      options: {
+        folder: mock.resolve('test/config'),
+        types: ['toml'],
+      },
+    },
+  ]);
+  await expect(config).rejects.toMatchSnapshot();
+  mock.restore();
+});
+
+test(`with properties`, async () => {
+  const mock = new MockFs({
+    'test/config': {
+      // tslint:disable-next-line:no-trailing-whitespace
+      'application.properties': `
+application.host = 127.0.0.1
+application.db = test
+testPath = path:./test.json`,
+    },
+  });
+  const config = await loader.load([
+    {
+      loader: FileLoader,
+      options: {
+        folder: mock.resolve('test/config'),
+        types: ['properties'],
+      },
+    },
+  ]);
+  expect(config).toMatchSnapshot();
+  mock.restore();
+});
+
+test.skip(`with bad properties`, async () => {
+  const mock = new MockFs({
+    'test/config': {
+      // tslint:disable-next-line:no-trailing-whitespace
+      'application.properties': `
+    ####😁😁$$$[application]
+      host = "127.0.0.1"
+db = "test"
+
+testPath = "path:./test.json"`,
+    },
+  });
+  const config = loader.load([
+    {
+      loader: FileLoader,
+      options: {
+        folder: mock.resolve('test/config'),
+        types: ['properties'],
+      },
+    },
+  ]);
+  await expect(config).rejects.toMatchSnapshot();
+  mock.restore();
 });

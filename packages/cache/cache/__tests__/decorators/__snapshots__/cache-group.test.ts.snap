@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cache group simple cache 1`] = `"hi test test"`;
+
+exports[`cache group simple cache 2`] = `"hi test test"`;
+
+exports[`cache group simple cache 3`] = `
+MemoryCache {
+  "name": "hi",
+  "options": Object {},
+  "store": LRUCache {
+    Symbol(max): Infinity,
+    Symbol(lengthCalculator): [Function],
+    Symbol(allowStale): false,
+    Symbol(maxAge): 0,
+    Symbol(dispose): undefined,
+    Symbol(noDisposeOnSet): false,
+    Symbol(updateAgeOnGet): false,
+    Symbol(cache): Map {
+      "testtest" => Node {
+        "list": Yallist {
+          "head": [Circular],
+          "length": 1,
+          "tail": [Circular],
+        },
+        "next": null,
+        "prev": null,
+        "value": Entry {
+          "key": "testtest",
+          "length": 1,
+          "maxAge": 0,
+          "now": 0,
+          "value": "hi test test",
+        },
+      },
+    },
+    Symbol(lruList): Yallist {
+      "head": Node {
+        "list": [Circular],
+        "next": null,
+        "prev": null,
+        "value": Entry {
+          "key": "testtest",
+          "length": 1,
+          "maxAge": 0,
+          "now": 0,
+          "value": "hi test test",
+        },
+      },
+      "length": 1,
+      "tail": Node {
+        "list": [Circular],
+        "next": null,
+        "prev": null,
+        "value": Entry {
+          "key": "testtest",
+          "length": 1,
+          "maxAge": 0,
+          "now": 0,
+          "value": "hi test test",
+        },
+      },
+    },
+    Symbol(length): 1,
+  },
+}
+`;
+
+exports[`cache group simple cache 4`] = `undefined`;
+
+exports[`cache group simple cache 5`] = `
+MemoryCache {
+  "name": "hi",
+  "options": Object {},
+  "store": LRUCache {
+    Symbol(max): Infinity,
+    Symbol(lengthCalculator): [Function],
+    Symbol(allowStale): false,
+    Symbol(maxAge): 0,
+    Symbol(dispose): undefined,
+    Symbol(noDisposeOnSet): false,
+    Symbol(updateAgeOnGet): false,
+    Symbol(cache): Map {},
+    Symbol(lruList): Yallist {
+      "head": null,
+      "length": 0,
+      "tail": null,
+    },
+    Symbol(length): 0,
+  },
+}
+`;
+
+exports[`should fail when cachename is missing 1`] = `[CacheNameIsMandatoryError:  Cache name is mandatory. . Add it with @Cacheable or @Cache]`;

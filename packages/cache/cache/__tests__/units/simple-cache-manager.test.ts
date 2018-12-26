@@ -6,12 +6,17 @@ describe('SimpleCacheManager without dynamic', async () => {
     new Map().set('default', { caches: new Map().set('test', cache) }),
     false
   );
-  test.only('must return cache', async () => {
+  test('must return cache', async () => {
     expect(await cacheManager.getCache('test')).toMatchSnapshot();
     expect(cacheManager.getCacheNames()).toMatchSnapshot();
   });
   test('must return undefined', async () => {
     expect(await cacheManager.getCache('test2')).toMatchSnapshot();
+    expect(cacheManager.getCacheNames()).toMatchSnapshot();
+  });
+
+  test('must return undefined with group not defined', async () => {
+    expect(await cacheManager.getCache('test', 'notDefined')).toMatchSnapshot();
     expect(cacheManager.getCacheNames()).toMatchSnapshot();
   });
 });

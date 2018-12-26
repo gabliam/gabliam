@@ -72,3 +72,11 @@ Array [
   "test",
 ]
 `;
+
+exports[`SimpleCacheManager without dynamic must return undefined with group not defined 1`] = `undefined`;
+
+exports[`SimpleCacheManager without dynamic must return undefined with group not defined 2`] = `
+Array [
+  "test",
+]
+`;
