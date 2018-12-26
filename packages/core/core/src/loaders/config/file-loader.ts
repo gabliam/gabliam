@@ -2,9 +2,9 @@ import * as d from 'debug';
 import * as fs from 'fs';
 import * as _ from 'lodash';
 import { promisify } from 'util';
-import { LoaderConfigParseError, ParserNotSupportedError } from '../../errors';
+import { LoaderConfigParseError } from '../../errors';
 import { configResolver, Resolver } from './config-resolver';
-import { jsonParser, Parser, ymlParser } from './parsers';
+import { getParser } from './parsers';
 
 // Promisify
 const glob = promisify(require('glob')); // require and no import for typings bug
@@ -79,21 +79,10 @@ async function loadFile(
 ): Promise<Object> {
   const data = await readFile(filePath, 'utf8');
   let config = {};
-  let parser: Parser;
-  switch (parserName) {
-    case 'yml':
-    case 'yaml':
-      parser = ymlParser;
-      break;
-    case 'json':
-      parser = jsonParser;
-      break;
-    default:
-      throw new ParserNotSupportedError(parserName);
-  }
+  const parser = getParser(parserName);
 
   try {
-    config = parser(data);
+    config = await parser(data);
   } catch (e) {
     throw new LoaderConfigParseError(filePath, e);
   }

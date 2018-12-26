@@ -11,7 +11,7 @@ export class LoaderConfigParseError extends Error {
 
     // tslint:disable-next-line:max-line-length
     this.message = `Error during parsing of file "${filePath}".
-    ${e.stack}
+    ${e.name}: ${e.message}
     `;
   }
 }

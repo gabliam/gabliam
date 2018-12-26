@@ -1,10 +1,24 @@
 import * as yaml from 'js-yaml';
-export type Parser = (data: string) => any;
+import { ParserNotSupportedError } from '../../errors';
 
-export const jsonParser: Parser = (data: string) => {
-  return JSON.parse(data);
+export type Parser = (data: string) => Promise<any>;
+
+export const getParser = (parserName: string) => {
+  switch (parserName) {
+    case 'yml':
+    case 'yaml':
+      return ymlParser;
+    case 'json':
+      return jsonParser;
+    default:
+      throw new ParserNotSupportedError(parserName);
+  }
 };
 
-export const ymlParser: Parser = (data: string) => {
-  return yaml.load(data) || {};
+const jsonParser: Parser = (data: string) => {
+  return Promise.resolve(JSON.parse(data));
+};
+
+const ymlParser: Parser = (data: string) => {
+  return Promise.resolve(yaml.load(data) || {});
 };
