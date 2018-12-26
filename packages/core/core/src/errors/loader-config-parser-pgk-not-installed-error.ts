@@ -1,6 +1,7 @@
 /**
  * Exception when loader config pkg has not been found installed
  */
+/* istanbul ignore next */
 export class LoaderConfigParserPgkNotInstalledError extends Error {
   name = 'LoaderConfigParserPgkNotInstalledError';
 
