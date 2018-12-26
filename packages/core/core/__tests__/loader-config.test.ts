@@ -16,10 +16,8 @@ test(`with config folder doesn't exist`, async () => {
 });
 
 test(`with bad application.yml`, async () => {
-  const config = await loader.load(
-    path.resolve(__dirname, './fixtures/badyml')
-  );
-  expect(config).toMatchSnapshot();
+  const config = loader.load(path.resolve(__dirname, './fixtures/badyml'));
+  await expect(config).rejects.toMatchSnapshot();
 });
 
 test(`with application.yml empty`, async () => {
@@ -115,7 +113,7 @@ describe('with application.yml with bad handler', async () => {
 
   test('must throw error', async () => {
     const config = loader.load(mock.resolve('test/config'), 'int');
-    await expect(config).rejects.toMatchSnapshot();
+    await await expect(config).rejects.toMatchSnapshot();
   });
 
   afterAll(() => mock.restore());
@@ -161,7 +159,7 @@ test(`with yml and json`, async () => {
 });
 
 test(`with bad application.json`, async () => {
-  const config = await loader.load([
+  const config = loader.load([
     {
       loader: FileLoader,
       options: {
@@ -170,7 +168,7 @@ test(`with bad application.json`, async () => {
       },
     },
   ]);
-  expect(config).toMatchSnapshot();
+  await expect(config).rejects.toMatchSnapshot();
 });
 
 test(`with application.json empty`, async () => {
@@ -179,7 +177,7 @@ test(`with application.json empty`, async () => {
       'application.json': ``,
     },
   });
-  const config = await loader.load([
+  const config = loader.load([
     {
       loader: FileLoader,
       options: {
@@ -188,7 +186,7 @@ test(`with application.json empty`, async () => {
       },
     },
   ]);
-  expect(config).toMatchSnapshot();
+  await expect(config).rejects.toMatchSnapshot();
   mock.restore();
 });
 
@@ -201,7 +199,7 @@ test(`with application.json with nothing`, async () => {
               `,
     },
   });
-  const config = await loader.load([
+  const config = loader.load([
     {
       loader: FileLoader,
       options: {
@@ -210,7 +208,7 @@ test(`with application.json with nothing`, async () => {
       },
     },
   ]);
-  expect(config).toMatchSnapshot();
+  await expect(config).rejects.toMatchSnapshot();
   mock.restore();
 });
 
@@ -224,7 +222,7 @@ test(`with bad parser`, async () => {
       },
     },
   ]);
-  await expect(config).rejects.toMatchSnapshot();
+  await await expect(config).rejects.toMatchSnapshot();
 });
 
 test(`with bad loader`, async () => {
@@ -233,5 +231,5 @@ test(`with bad loader`, async () => {
       loader: 'BadLoader',
     },
   ]);
-  await expect(config).rejects.toMatchSnapshot();
+  await await expect(config).rejects.toMatchSnapshot();
 });

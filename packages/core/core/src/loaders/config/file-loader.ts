@@ -1,10 +1,10 @@
-import * as yaml from 'js-yaml';
+import * as d from 'debug';
 import * as fs from 'fs';
 import * as _ from 'lodash';
-import * as d from 'debug';
 import { promisify } from 'util';
-import { ParserNotSupportedError } from '../errors';
+import { LoaderConfigParseError, ParserNotSupportedError } from '../../errors';
 import { configResolver, Resolver } from './config-resolver';
+import { jsonParser, Parser, ymlParser } from './parsers';
 
 // Promisify
 const glob = promisify(require('glob')); // require and no import for typings bug
@@ -15,7 +15,7 @@ const debug = d('Gabliam:FileLoader');
 /**
  * FileLoader
  */
-export default async function FileLoader(
+export async function FileLoader(
   { folder, types }: { folder: string; types?: string[] },
   profile?: string
 ) {
@@ -79,33 +79,24 @@ async function loadFile(
 ): Promise<Object> {
   const data = await readFile(filePath, 'utf8');
   let config = {};
+  let parser: Parser;
   switch (parserName) {
     case 'yml':
     case 'yaml':
-      config = ymlParser(data);
+      parser = ymlParser;
       break;
     case 'json':
-      config = jsonParser(data);
+      parser = jsonParser;
       break;
     default:
       throw new ParserNotSupportedError(parserName);
   }
 
+  try {
+    config = parser(data);
+  } catch (e) {
+    throw new LoaderConfigParseError(filePath, e);
+  }
+
   return await resolver(config);
-}
-
-function jsonParser(data: string) {
-  try {
-    return JSON.parse(data);
-  } catch (e) {
-    return {};
-  }
-}
-
-function ymlParser(data: string) {
-  try {
-    return yaml.load(data) || {};
-  } catch (e) {
-    return {};
-  }
 }

@@ -2,10 +2,10 @@ import * as glob from 'glob';
 import * as _ from 'lodash';
 import * as d from 'debug';
 
-import { Registry } from '../registry';
-import { METADATA_KEY, TYPE } from '../constants';
-import { RegistryMetada, GabliamPlugin, ValueRegistry } from '../interfaces';
-import { isObject } from '../utils';
+import { Registry } from '../../registry';
+import { METADATA_KEY, TYPE } from '../../constants';
+import { RegistryMetada, GabliamPlugin, ValueRegistry } from '../../interfaces';
+import { isObject } from '../../utils';
 
 const debug = d('Gabliam:loader');
 const reg = /^.*(git|svn|node_modules|dist|build).*/;

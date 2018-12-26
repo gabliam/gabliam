@@ -14,9 +14,25 @@ Object {
 }
 `;
 
-exports[`with application.json empty 1`] = `Object {}`;
+exports[`with application.json empty 1`] = `
+[LoaderConfigParseError: Error during parsing of file "<TEMP_DIR>/mock-fs-test/test/config/application.json".
+    SyntaxError: Unexpected end of JSON input
+    at JSON.parse (<anonymous>)
+    at Object.<anonymous>.exports.jsonParser (<PROJECT_ROOT>/packages/core/core/src/loaders/config/parsers.ts:5:15)
+    at loadFile (<PROJECT_ROOT>/packages/core/core/src/loaders/config/file-loader.ts:96:14)
+    at <anonymous>
+    ]
+`;
 
-exports[`with application.json with nothing 1`] = `Object {}`;
+exports[`with application.json with nothing 1`] = `
+[LoaderConfigParseError: Error during parsing of file "<TEMP_DIR>/mock-fs-test/test/config/application.json".
+    SyntaxError: Unexpected end of JSON input
+    at JSON.parse (<anonymous>)
+    at Object.<anonymous>.exports.jsonParser (<PROJECT_ROOT>/packages/core/core/src/loaders/config/parsers.ts:5:15)
+    at loadFile (<PROJECT_ROOT>/packages/core/core/src/loaders/config/file-loader.ts:96:14)
+    at <anonymous>
+    ]
+`;
 
 exports[`with application.yml 1`] = `
 Object {
@@ -68,9 +84,33 @@ exports[`with application.yml with bad handler must throw error 1`] = `[Error: E
 
 exports[`with application.yml with nothing 1`] = `Object {}`;
 
-exports[`with bad application.json 1`] = `Object {}`;
+exports[`with bad application.json 1`] = `
+[LoaderConfigParseError: Error during parsing of file "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/badjson/application.json".
+    SyntaxError: Unexpected token } in JSON at position 10
+    at JSON.parse (<anonymous>)
+    at Object.<anonymous>.exports.jsonParser (<PROJECT_ROOT>/packages/core/core/src/loaders/config/parsers.ts:5:15)
+    at loadFile (<PROJECT_ROOT>/packages/core/core/src/loaders/config/file-loader.ts:96:14)
+    at <anonymous>
+    ]
+`;
 
-exports[`with bad application.yml 1`] = `Object {}`;
+exports[`with bad application.yml 1`] = `
+[LoaderConfigParseError: Error during parsing of file "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/badyml/application.yml".
+    YAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 7, column 1:
+    
+    ^
+    at generateError (<PROJECT_ROOT>/node_modules/js-yaml/lib/js-yaml/loader.js:165:10)
+    at throwError (<PROJECT_ROOT>/node_modules/js-yaml/lib/js-yaml/loader.js:171:9)
+    at readBlockMapping (<PROJECT_ROOT>/node_modules/js-yaml/lib/js-yaml/loader.js:1046:9)
+    at composeNode (<PROJECT_ROOT>/node_modules/js-yaml/lib/js-yaml/loader.js:1332:12)
+    at readDocument (<PROJECT_ROOT>/node_modules/js-yaml/lib/js-yaml/loader.js:1492:3)
+    at loadDocuments (<PROJECT_ROOT>/node_modules/js-yaml/lib/js-yaml/loader.js:1548:5)
+    at Object.load (<PROJECT_ROOT>/node_modules/js-yaml/lib/js-yaml/loader.js:1569:19)
+    at Object.<anonymous>.exports.ymlParser (<PROJECT_ROOT>/packages/core/core/src/loaders/config/parsers.ts:9:15)
+    at loadFile (<PROJECT_ROOT>/packages/core/core/src/loaders/config/file-loader.ts:96:14)
+    at <anonymous>
+    ]
+`;
 
 exports[`with bad loader 1`] = `[LoaderConfigPgkNotInstalledError: BadLoader package has not been found installed. Try to install it: npm install BadLoader --save or yarn add BadLoader]`;
 

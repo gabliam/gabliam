@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import * as d from 'debug';
-import FileLoader from './file-loader';
-import { LoaderConfigPgkNotInstalledError } from '../errors';
+import { FileLoader } from './file-loader';
+import { LoaderConfigPgkNotInstalledError } from '../../errors';
 
 const debug = d('Gabliam:loader-config');
 

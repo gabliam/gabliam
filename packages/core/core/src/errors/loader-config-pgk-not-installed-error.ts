@@ -1,5 +1,5 @@
 /**
- * Exception when loader config has not been found installed
+ * Exception when loader config pkg has not been found installed
  */
 export class LoaderConfigPgkNotInstalledError extends Error {
   name = 'LoaderConfigPgkNotInstalledError';
