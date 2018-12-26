@@ -10,13 +10,12 @@
     "test": "jest --runInBand",
     "test:ci": "jest --runInBand --coverage",
     "release": "yarn run build && yarn run lint && yarn run test && lerna publish --exact",
+    "release:canary": "yarn run build && yarn run lint && yarn run test && lerna publish --exact --canary",
     "prettier": "prettier --single-quote --write --parser typescript \"./{packages,examples}/**/src/**/*.ts\"",
     "example:graphql": "lerna run --scope graphql-sample start --stream",
     "example:mongo": "lerna run --scope mongo-sample start --stream",
     "example:typeorm": "lerna run --scope typeorm-sample start --stream",
-    "example:express:passport": "lerna run --scope express-passport-sample start --stream",
-    "publish-please": "publish-please",
-    "prepublishOnly": "publish-please guard"
+    "example:express:passport": "lerna run --scope express-passport-sample start --stream"
   },
   "devDependencies": {
     "@types/jest": "^23.3.10",
@@ -34,7 +33,6 @@
     "lint-staged": "^8.1.0",
     "nodemon": "^1.18.7",
     "prettier": "^1.15.3",
-    "publish-please": "^5.4.3",
     "reflect-metadata": "^0.1.10",
     "rimraf": "^2.6.2",
     "sinon": "^7.1.1",
