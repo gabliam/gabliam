@@ -4,7 +4,6 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "precommit": "lint-staged",
     "changelog": "conventional-changelog -i  CHANGELOG.md -p angular  -s -r 0",
     "lint": "tslint --project tsconfig.json './{packages,examples}/**/{src,__tests__}/**/*.ts' --exclude './{packages,examples}/**/node_modules/**/*.ts' --exclude './{packages,examples}/**/{src,__tests__}/**/*.d.ts'",
     "build": "lerna run build",
@@ -66,5 +65,10 @@
   ],
   "engines": {
     "node": ">=8.9.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
