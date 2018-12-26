@@ -4,6 +4,7 @@ import * as qs from 'qs';
 import * as url from 'url';
 import { express } from './express';
 
+/* istanbul ignore next */
 export class ExpressRequest implements GabRequest<express.Request> {
   /**
    * Return the original request

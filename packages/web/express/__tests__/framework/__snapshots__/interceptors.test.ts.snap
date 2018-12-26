@@ -19,6 +19,12 @@ Object {
 
 exports[`Complex interceptor should call method-level interceptor correctly (GET) 2`] = `"ab"`;
 
+exports[`ExpressConverter errors Bad interceptor 1`] = `[BadInterceptorError: A must implement Interceptor interface]`;
+
+exports[`ExpressConverter errors Interceptor throw exception 1`] = `true`;
+
+exports[`ExpressConverter errors Interceptor throw exception 2`] = `true`;
+
 exports[`Interceptors: should call all middleware in correct order 1`] = `
 Object {
   "header": Object {
@@ -454,3 +460,45 @@ Object {
 exports[`Middleware inject: should call method-level middleware correctly (PUT) 2`] = `"abcd"`;
 
 exports[`Middleware inject: should call method-level middleware correctly (PUT) 3`] = `"cargdeargdearg2"`;
+
+exports[`ToInterceptor express middleware with next function with errors 1`] = `"midError"`;
+
+exports[`ToInterceptor express middleware with next function without errors 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "GET",
+}
+`;
+
+exports[`ToInterceptor express middleware with next function without errors 2`] = `"mid"`;
+
+exports[`ToInterceptor express middleware without next function with errors 1`] = `"midError"`;
+
+exports[`ToInterceptor express middleware without next function without errors 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/html; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "GET",
+}
+`;
+
+exports[`ToInterceptor express middleware without next function without errors 2`] = `"mid"`;

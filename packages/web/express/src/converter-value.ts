@@ -37,9 +37,11 @@ export const converterValue: convertValueFn = (
 
 export const send = (ctx: GabContext, res: express.Response, json: boolean) => {
   const { status, message, body, type } = ctx;
+  /* istanbul ignore next */
   if (type) {
     res.type(type);
   }
+  /* istanbul ignore next */
   if (message) {
     res.statusMessage = message;
   }

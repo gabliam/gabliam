@@ -1,6 +1,7 @@
 export * from './constants';
 export * from './cookies';
 export * from './decorators';
+export * from './errors';
 export * from './execution-context';
 export * from './gab-context';
 export * from './gab-request';

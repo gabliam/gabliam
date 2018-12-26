@@ -3,6 +3,7 @@ import { koa } from './koa';
 import * as send from 'koa-send';
 import { alias } from 'property-tunnel';
 
+/* istanbul ignore next */
 export class KoaResponse implements GabResponse<koa.Response> {
   get originalResponse() {
     return this.response;

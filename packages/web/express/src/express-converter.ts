@@ -6,11 +6,12 @@ import {
   toPromise,
 } from '@gabliam/core';
 import {
+  BadInterceptorError,
   createInterceptorResolver,
   extractParameters,
+  getContext,
   getParameterMetadata,
   isInterceptor,
-  getContext,
 } from '@gabliam/web-core';
 import { express } from './express';
 
@@ -24,7 +25,7 @@ export class ExpressConverter {
     const container = <Container>(this as any)[INJECT_CONTAINER_KEY];
     const instance = createInterceptorResolver(container)(clazz);
     if (!isInterceptor(instance)) {
-      throw new Error();
+      throw new BadInterceptorError(instance);
     }
 
     return async (

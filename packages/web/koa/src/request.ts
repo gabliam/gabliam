@@ -3,6 +3,7 @@ import { merge } from 'lodash';
 import { alias } from 'property-tunnel';
 import { koa } from './koa';
 
+/* istanbul ignore next */
 export class KoaRequest implements GabRequest<koa.Request> {
   /**
    * Return the original request

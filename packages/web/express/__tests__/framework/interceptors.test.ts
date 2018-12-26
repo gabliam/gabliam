@@ -24,7 +24,12 @@ import {
 } from '@gabliam/web-core';
 import * as sinon from 'sinon';
 import * as supertest from 'supertest';
-import { express as e, ExpressConverter, toInterceptor } from '../../src';
+import {
+  express as e,
+  ExpressConverter,
+  toInterceptor,
+  UseExpressInterceptors,
+} from '../../src';
 import { ExpressPluginTest } from '../express-plugin-test';
 
 let appTest: ExpressPluginTest;
@@ -730,5 +735,195 @@ describe('Middleware inject:', () => {
     expect(response).toMatchSnapshot();
     expect(result).toMatchSnapshot();
     expect(args).toMatchSnapshot();
+  });
+});
+
+describe('ToInterceptor', () => {
+  let result: string;
+  beforeEach(() => {
+    result = '';
+  });
+
+  describe('express middleware with next function', () => {
+    test('without errors', async () => {
+      const mid: e.RequestHandler = (req, res, next) => {
+        result += 'mid';
+        next();
+      };
+
+      @UseExpressInterceptors(mid)
+      @Controller({
+        path: '/',
+      })
+      class TestController {
+        @Get('/')
+        public getTest() {
+          return 'GET';
+        }
+      }
+
+      appTest.addClass(TestController);
+      await appTest.build();
+
+      const response = await supertest(appTest.app)
+        .get('/')
+        .expect(200);
+      expect(response).toMatchSnapshot();
+      expect(result).toMatchSnapshot();
+    });
+
+    test('with errors', async () => {
+      const mid: e.RequestHandler = (req, res, next) => {
+        result += 'midError';
+        next(new Error('Error'));
+      };
+
+      @UseExpressInterceptors(mid)
+      @Controller({
+        path: '/',
+      })
+      class TestController {
+        @Get('/')
+        public getTest() {
+          return 'GET';
+        }
+      }
+
+      const spyCtl = sinon.spy(TestController.prototype, 'getTest');
+
+      appTest.addClass(TestController);
+      await appTest.build();
+
+      await supertest(appTest.app)
+        .get('/')
+        .expect(500);
+      expect(result).toMatchSnapshot();
+      expect(spyCtl.notCalled).toBeTruthy();
+    });
+  });
+
+  describe('express middleware without next function', () => {
+    test('without errors', async () => {
+      const mid: e.RequestHandler = (req, res) => {
+        result += 'mid';
+      };
+
+      @UseExpressInterceptors(mid)
+      @Controller({
+        path: '/',
+      })
+      class TestController {
+        @Get('/')
+        public getTest() {
+          return 'GET';
+        }
+      }
+
+      appTest.addClass(TestController);
+      await appTest.build();
+
+      const response = await supertest(appTest.app)
+        .get('/')
+        .expect(200);
+      expect(response).toMatchSnapshot();
+      expect(result).toMatchSnapshot();
+    });
+
+    test('with errors', async () => {
+      const mid: e.RequestHandler = (req, res) => {
+        result += 'midError';
+        throw new Error('Error');
+      };
+
+      @UseExpressInterceptors(mid)
+      @Controller({
+        path: '/',
+      })
+      class TestController {
+        @Get('/')
+        public getTest() {
+          return 'GET';
+        }
+      }
+
+      const spyCtl = sinon.spy(TestController.prototype, 'getTest');
+
+      appTest.addClass(TestController);
+      await appTest.build();
+
+      await supertest(appTest.app)
+        .get('/')
+        .expect(500);
+      expect(result).toMatchSnapshot();
+      expect(spyCtl.notCalled).toBeTruthy();
+    });
+  });
+});
+
+describe('ExpressConverter errors', () => {
+  test('Bad interceptor', async () => {
+    @Service()
+    class A {
+      async interceptLOL() {
+        console.log('bad interceptor');
+      }
+    }
+
+    @Controller('/')
+    class TestController {
+      @Get('/')
+      public getTest() {
+        return 'GET';
+      }
+    }
+
+    @Config()
+    class ServerConfig {
+      @WebConfig()
+      serverConfig(app: e.Application, container: Container) {
+        const converter = container.get(ExpressConverter);
+        app.use(converter.interceptorToMiddleware(A));
+      }
+    }
+
+    appTest.addClass(TestController);
+    appTest.addClass(ServerConfig);
+    await expect(appTest.build()).rejects.toMatchSnapshot();
+  });
+
+  test('Interceptor throw exception', async () => {
+    @Service()
+    class A implements Interceptor {
+      async intercept() {
+        throw new Error();
+      }
+    }
+
+    @Controller('/')
+    class TestController {
+      @Get('/')
+      public getTest() {
+        return 'GET';
+      }
+    }
+
+    @Config()
+    class ServerConfig {
+      @WebConfig()
+      serverConfig(app: e.Application, container: Container) {
+        const converter = container.get(ExpressConverter);
+        app.use(converter.interceptorToMiddleware(A));
+      }
+    }
+
+    const spyA = sinon.spy(A.prototype, 'intercept');
+    const spyCtl = sinon.spy(TestController.prototype, 'getTest');
+
+    appTest.addClass(TestController);
+    appTest.addClass(ServerConfig);
+    await appTest.build();
+    await supertest(appTest.app).get('/');
+    expect(spyA.calledOnce).toMatchSnapshot();
+    expect(spyCtl.notCalled).toMatchSnapshot();
   });
 });

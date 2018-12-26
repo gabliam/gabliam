@@ -300,6 +300,7 @@ describe('Integration Tests:', () => {
 
         appTest.addClass(TestController);
         appTest.addConf('application.web.rootPath', '/api/v1');
+        appTest.addConf('application.web.bodyParser.text', true);
         await appTest.build();
 
         const response = await supertest(appTest.app)
