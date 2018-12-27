@@ -12,7 +12,6 @@
   "rules": {
     "no-duplicate-imports": true,
     "no-duplicate-variable": true,
-    "no-jasmine-focus": true,
     "no-var-keyword": true,
     "variable-name": [true, "ban-keywords"],
     "no-inner-declarations": [true, "function"],
