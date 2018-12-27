@@ -3,21 +3,6 @@ import { Joi } from '../joi';
 import { GabliamPluginConstructor } from './interfaces';
 
 /**
- * Bean metadata
- */
-export interface BeanMetadata {
-  /**
-   * Id of the bean
-   */
-  id: interfaces.ServiceIdentifier<any>;
-
-  /**
-   * Key of method
-   */
-  key: string;
-}
-
-/**
  * Value validator
  *
  * For customize error
