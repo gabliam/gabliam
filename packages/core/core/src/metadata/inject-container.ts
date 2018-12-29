@@ -1,5 +1,5 @@
 import { METADATA_KEY } from '../constants';
-import { makeDecorator, TypeDecorator } from '../decorator';
+import { makeDecorator } from '../decorator';
 
 /**
  * Type of the `InjectContainer` decorator / constructor function.
@@ -22,7 +22,7 @@ export interface InjectContainerDecorator {
    *  }
    * ```
    */
-  (): TypeDecorator;
+  (): ClassDecorator;
 
   /**
    * see the `@Config` decorator.

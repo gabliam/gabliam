@@ -28,7 +28,7 @@ export interface PreDestroyDecorator {
    * }
    * ```
    */
-  (): any;
+  (): MethodDecorator;
 
   /**
    * see the `@PreDestroy` decorator.

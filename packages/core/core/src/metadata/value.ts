@@ -1,5 +1,5 @@
 import { ERRORS_MSGS, METADATA_KEY } from '../constants';
-import { makePropDecorator, TypeDecorator } from '../decorator';
+import { makePropDecorator } from '../decorator';
 import { Joi } from '../joi';
 
 /**
@@ -63,7 +63,7 @@ export interface ValueDecorator {
    *  }
    * ```
    */
-  (value: string | ValueOptions, schema?: Joi.Schema): TypeDecorator;
+  (value: string | ValueOptions, schema?: Joi.Schema): PropertyDecorator;
 
   /**
    * see the `@Bean` decorator.

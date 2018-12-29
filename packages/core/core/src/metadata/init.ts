@@ -33,7 +33,7 @@ export interface InitDecorator {
    * }
    * ```
    */
-  (): any;
+  (): MethodDecorator;
   /**
    * see the `@Init` decorator.
    */

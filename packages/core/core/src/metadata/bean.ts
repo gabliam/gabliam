@@ -39,7 +39,7 @@ export interface BeanDecorator {
    * }
    * ```
    */
-  (id: interfaces.ServiceIdentifier<any>): any;
+  (id: interfaces.ServiceIdentifier<any>): MethodDecorator;
 
   /**
    * see the `@Bean` decorator.
@@ -100,7 +100,7 @@ export interface OnMissingBeanDecorator {
    * }
    * ```
    */
-  (id: interfaces.ServiceIdentifier<any>): any;
+  (id: interfaces.ServiceIdentifier<any>): MethodDecorator;
 
   /**
    * see the `@OnMissingBean` decorator.

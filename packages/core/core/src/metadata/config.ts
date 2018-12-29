@@ -1,6 +1,6 @@
 import { injectable } from 'inversify';
 import { ERRORS_MSGS, METADATA_KEY, ORDER_CONFIG, TYPE } from '../constants';
-import { makeDecorator, TypeDecorator } from '../decorator';
+import { makeDecorator } from '../decorator';
 import { Type } from '../type';
 import { Register } from './register';
 
@@ -38,7 +38,7 @@ export interface ConfigDecorator {
    * }
    * ```
    */
-  (order?: number): TypeDecorator;
+  (order?: number): ClassDecorator;
 
   /**
    * see the `@Config` decorator.

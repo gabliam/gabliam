@@ -1,5 +1,5 @@
 import { injectable, interfaces } from 'inversify';
-import { TYPE, METADATA_KEY } from '../constants';
+import { METADATA_KEY, TYPE } from '../constants';
 import { makeDecorator } from '../decorator';
 import { Register } from './register';
 
@@ -38,7 +38,7 @@ export interface ServiceDecorator {
    * }
    * ```
    */
-  (name?: string): any;
+  (name?: string): ClassDecorator;
 
   /**
    * see the `@Service` decorator.

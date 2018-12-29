@@ -1,34 +1,6 @@
 import { Type } from '../type';
 import { ERRORS_MSGS } from '../constants';
 
-/**
- * An interface implemented by all Gabliam type decorators, which allows them to be used as ES7
- * decorators.
- *
- * ES7 syntax:
- *
- * ```
- * @Bean({...})
- * class MyClass {...}
- * ```
- */
-export interface TypeDecorator {
-  /**
-   * Invoke as ES7 decorator.
-   */
-  <T extends Type<any>>(type: T): T;
-
-  // Make TypeDecorator assignable to built-in ParameterDecorator type.
-  // ParameterDecorator is declared in lib.d.ts as a `declare type`
-  // so we cannot declare this interface as a subtype.
-  // see https://github.com/angular/angular/issues/3379#issuecomment-126169417
-  (
-    target: Object,
-    propertyKey?: string | symbol,
-    parameterIndex?: number
-  ): void;
-}
-
 export const ANNOTATIONS = '__annotations__';
 export const PARAMETERS = '__parameters__';
 export const PROP_METADATA = '__prop__metadata__';

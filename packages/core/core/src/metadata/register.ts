@@ -12,7 +12,7 @@ export interface RegisterDecorator {
    * In binding phase, plugins get classes which are registered.
    * Ex: Express plugin get all `@Controller` decorator
    */
-  (obj: string | Register): any;
+  (obj: string | Register): ClassDecorator;
 
   /**
    * see the `@Config` decorator.

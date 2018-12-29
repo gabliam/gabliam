@@ -1,6 +1,11 @@
 import { METADATA_KEY, ERRORS_MSGS } from '../constants';
 
 /**
+ * Type of the `Bean` decorator / constructor function.
+ */
+export interface CUnitDecorator {}
+
+/**
  * Set the connection of the entitie
  */
 export function CUnit(name: string) {

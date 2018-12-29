@@ -1,5 +1,5 @@
 import { ERRORS_MSGS, METADATA_KEY } from '../constants';
-import { makeDecorator, TypeDecorator } from '../decorator';
+import { makeDecorator } from '../decorator';
 import { GabliamPluginConstructor, PluginDependency } from '../interfaces';
 
 /**
@@ -20,7 +20,7 @@ export interface PluginDecorator {
    *  export class Plugin {}
    * ```
    */
-  (value?: string | PluginOptions): TypeDecorator;
+  (value?: string | PluginOptions): ClassDecorator;
 
   /**
    * see the `@OnMissingBean` decorator.

@@ -19,7 +19,7 @@ export interface ScanDecorator {
    * }
    * ```
    */
-  (p?: string): any;
+  (p?: string): ClassDecorator;
   new (p?: string): any;
 }
 
