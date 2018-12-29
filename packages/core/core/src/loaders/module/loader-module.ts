@@ -29,7 +29,7 @@ export class LoaderModule {
     const folders = plugins.reduce(
       (prev, current) => {
         if (isObject(current) && current.constructor) {
-          const scanMetadatas = reflection.annotationsOfMetadata<Scan>(
+          const scanMetadatas = reflection.annotationsOfDecorator<Scan>(
             current.constructor,
             Scan
           );
@@ -64,15 +64,15 @@ export class LoaderModule {
       for (const k of Object.keys(modules)) {
         const m = modules[k];
 
-        const metadatas = reflection.annotationsOfMetadata<Register>(
+        const metadatas = reflection.annotationsOfDecorator<Register>(
           m,
           Register
         );
-        const scanMetadatas = reflection.annotationsOfMetadata<Scan>(m, Scan);
+        const scanMetadatas = reflection.annotationsOfDecorator<Scan>(m, Scan);
 
         // if the module is an objet and has a register metadata => add in registry
         if (metadatas.length) {
-          // get the metadata
+          // get the last definition of register metada
           const [metadata] = metadatas.slice(-1);
           registry.add(metadata.type, {
             id: metadata.id || m,
@@ -81,7 +81,7 @@ export class LoaderModule {
           });
 
           const preDestroys = Object.keys(
-            reflection.propsOfMetadata(m, PreDestroy)
+            reflection.propMetadataOfDecorator(m, PreDestroy)
           );
 
           // if the module has preDestroy, registry this

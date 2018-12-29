@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import { Gabliam } from '../gabliam';
-import { Register } from '../lol.2';
+import { Register } from '../metadata';
 import { reflection } from '../reflection';
 import { LoaderConfigTest } from './loader';
 
@@ -43,7 +43,7 @@ export class GabliamTest {
   }
 
   addClass(ctrl: any) {
-    const metadatas = reflection.annotationsOfMetadata<Register>(
+    const metadatas = reflection.annotationsOfDecorator<Register>(
       ctrl,
       Register
     );

@@ -15,13 +15,14 @@ export function makeActivationValue(
 
   return (instance: any) => {
     if (instance && instance.constructor) {
-      const valueMetadatas = reflection.propsOfMetadata<Value>(
+      const valueMetadatas = reflection.propMetadataOfDecorator<Value>(
         instance.constructor,
         Value
       );
 
       for (const [key, values] of Object.entries(valueMetadatas)) {
         if (values.length) {
+          // get the last definition of metadata
           const [{ path, validator }] = values.slice(-1);
           const defaultValue = instance[key];
           instance[key] = valueExtractor(path, defaultValue, validator);

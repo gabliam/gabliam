@@ -286,18 +286,23 @@ export class Gabliam {
         const ctor = confInstance.constructor;
 
         // get all bean metadata in config classes
-        const beanMetadatas = reflection.propsOfMetadata<Bean>(ctor, Bean);
+        const beanMetadatas = reflection.propMetadataOfDecorator<Bean>(
+          ctor,
+          Bean
+        );
 
         // get on missing bean metadata
-        const onMissingBeanMetadatas = reflection.propsOfMetadata<
+        const onMissingBeanMetadatas = reflection.propMetadataOfDecorator<
           OnMissingBean
         >(ctor, OnMissingBean);
 
         const beforeCreateMetas = Object.keys(
-          reflection.propsOfMetadata(ctor, BeforeCreate)
+          reflection.propMetadataOfDecorator(ctor, BeforeCreate)
         );
 
-        const initMetadas = Object.keys(reflection.propsOfMetadata(ctor, Init));
+        const initMetadas = Object.keys(
+          reflection.propMetadataOfDecorator(ctor, Init)
+        );
 
         // call all beforeCreate method if exist
         if (Array.isArray(beforeCreateMetas)) {
@@ -331,7 +336,10 @@ export class Gabliam {
                 this.container.bind(id).toConstantValue(bean);
 
                 const preDestroys = Object.keys(
-                  reflection.propsOfMetadata(bean.constructor, PreDestroy)
+                  reflection.propMetadataOfDecorator(
+                    bean.constructor,
+                    PreDestroy
+                  )
                 );
 
                 // bean can return undefined or can be a constant value

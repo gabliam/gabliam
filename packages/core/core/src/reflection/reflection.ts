@@ -191,7 +191,7 @@ export class Reflection {
     return propMetadata;
   }
 
-  propsOfMetadata<T = {}>(
+  propMetadataOfDecorator<T = {}>(
     typeOrFunc: any,
     decoratorOrMetadataName: any
   ): { [key: string]: T[] } {
@@ -221,7 +221,7 @@ export class Reflection {
     return props;
   }
 
-  annotationsOfMetadata<T = {}>(
+  annotationsOfDecorator<T = {}>(
     typeOrFunc: any,
     decoratorOrMetadataName: any,
     includeParent = true

@@ -13,7 +13,7 @@ export function makeActivationInject(
 ): ContainerActivationHook {
   return (instance: any) => {
     if (instance && instance.constructor) {
-      const injectContainer = reflection.annotationsOfMetadata(
+      const injectContainer = reflection.annotationsOfDecorator(
         instance.constructor,
         InjectContainer
       );

@@ -27,7 +27,7 @@ export class PluginList {
    * Add a plugin
    */
   add(ctor: GabliamPluginConstructor): GabliamPluginDefinition {
-    const pluginMetadata = reflection.annotationsOfMetadata<Plugin>(
+    const pluginMetadata = reflection.annotationsOfDecorator<Plugin>(
       ctor,
       Plugin
     );
@@ -37,7 +37,10 @@ export class PluginList {
       throw new Error(ERRORS_MSGS.INVALID_PLUGIN);
     }
 
-    const [{ name: pluginName }] = pluginMetadata.slice(-1);
+    const [{ name: pluginName }] = (
+      reflection.annotationsOfDecorator<Plugin>(ctor, Plugin, false) || []
+    ).slice(-1);
+
     const name = pluginName || ctor.name;
 
     // get all dependencies (inherit)
