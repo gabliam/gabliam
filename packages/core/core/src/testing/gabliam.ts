@@ -52,6 +52,7 @@ export class GabliamTest {
       this.gab.registry.add(metadata.type, {
         id: ctrl,
         target: ctrl,
+        options: metadata.options,
       });
     }
     return this;

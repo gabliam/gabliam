@@ -1,7 +1,0 @@
-{
-  "application": {
-    "host": "prod.app.json",
-    "mongoose": "require:../test.json",
-    "json": true
-  }
-}

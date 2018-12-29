@@ -334,6 +334,9 @@ export class Gabliam {
               for (const { id } of beans) {
                 const bean = await callInstance(confInstance, key);
                 this.container.bind(id).toConstantValue(bean);
+                if (bean === undefined || bean.constructor === undefined) {
+                  continue;
+                }
 
                 const preDestroys = Object.keys(
                   reflection.propMetadataOfDecorator(

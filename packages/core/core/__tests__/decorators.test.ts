@@ -1,24 +1,24 @@
 // tslint:disable:one-line
 // tslint:disable:no-unused-expression
+import * as Joi from 'joi';
 import {
   Bean,
+  BeforeCreate,
   Config,
+  Init,
+  InjectContainer,
+  OnMissingBean,
+  Plugin,
   PluginConfig,
+  PreDestroy,
+  reflection,
   Register,
   Scan,
   Service,
   Value,
-  Plugin,
-  Init,
-  InjectContainer,
-  BeforeCreate,
-  PreDestroy,
-  OnMissingBean,
-  reflection,
 } from '../src';
+import { TYPE } from '../src/constants';
 import { CoreConfig } from '../src/metadata/config';
-import { METADATA_KEY, TYPE } from '../src/constants';
-import * as Joi from 'joi';
 
 describe('@init', () => {
   test('should add init metadata to a class when decorating a method with @init', () => {
@@ -31,7 +31,9 @@ describe('@init', () => {
       test2Method() {}
     }
 
-    expect(reflection.propsOfMetadata(TestBean, Init));
+    expect(
+      reflection.propMetadataOfDecorator(TestBean, Init)
+    ).toMatchSnapshot();
   });
 });
 
@@ -46,12 +48,9 @@ describe('@BeforeCreate', () => {
       test2Method() {}
     }
 
-    const beforeCreateMetadata: string[] = Reflect.getMetadata(
-      METADATA_KEY.beforeCreate,
-      TestBean
-    );
-
-    expect(beforeCreateMetadata).toMatchSnapshot();
+    expect(
+      reflection.propMetadataOfDecorator(TestBean, BeforeCreate)
+    ).toMatchSnapshot();
   });
 });
 
@@ -61,12 +60,9 @@ describe('@InjectContainer', () => {
     @Config()
     class TestBean {}
 
-    const injectMetadata = Reflect.hasMetadata(
-      METADATA_KEY.injectContainer,
-      TestBean
-    );
-
-    expect(injectMetadata).toMatchSnapshot();
+    expect(
+      reflection.annotationsOfDecorator(TestBean, InjectContainer)
+    ).toMatchSnapshot();
   });
 });
 
@@ -79,13 +75,9 @@ describe('@Bean', () => {
       @Bean('test2')
       test2Method() {}
     }
-
-    const beanMetadata: BeanMetadata[] = Reflect.getMetadata(
-      METADATA_KEY.bean,
-      TestBean
-    );
-
-    expect(beanMetadata).toMatchSnapshot();
+    expect(
+      reflection.propMetadataOfDecorator(TestBean, Bean)
+    ).toMatchSnapshot();
   });
 
   test('should add Bean metadata to a class when decorated multiple times with @Bean', () => {
@@ -98,11 +90,9 @@ describe('@Bean', () => {
       test2Method() {}
     }
 
-    const beanMetadata: BeanMetadata[] = Reflect.getMetadata(
-      METADATA_KEY.bean,
-      TestBean
-    );
-    expect(beanMetadata).toMatchSnapshot();
+    expect(
+      reflection.propMetadataOfDecorator(TestBean, Bean)
+    ).toMatchSnapshot();
   });
 }); // end describe @Bean
 
@@ -118,12 +108,9 @@ describe('@OnMissingBean', () => {
       test2Method() {}
     }
 
-    const beanMetadata: BeanMetadata[] = Reflect.getMetadata(
-      METADATA_KEY.bean,
-      TestBean
-    );
-
-    expect(beanMetadata).toMatchSnapshot();
+    expect(
+      reflection.propMetadataOfDecorator(TestBean, OnMissingBean)
+    ).toMatchSnapshot();
   });
 
   test('should add OnMissingBean metadata to a class when decorated multiple times with @OnMissingBean', () => {
@@ -139,11 +126,9 @@ describe('@OnMissingBean', () => {
       test2Method() {}
     }
 
-    const beanMetadata: BeanMetadata[] = Reflect.getMetadata(
-      METADATA_KEY.bean,
-      TestBean
-    );
-    expect(beanMetadata).toMatchSnapshot();
+    expect(
+      reflection.propMetadataOfDecorator(TestBean, OnMissingBean)
+    ).toMatchSnapshot();
   });
 }); // end describe @Bean
 
@@ -152,36 +137,14 @@ describe('@Config', () => {
     @Config()
     class TestBean {}
 
-    const registryMetadata: RegistryMetada = Reflect.getMetadata(
-      METADATA_KEY.register,
-      TestBean
-    );
-
-    const configMetadata: boolean | undefined = Reflect.getMetadata(
-      METADATA_KEY.config,
-      TestBean
-    );
-
-    expect(configMetadata).toMatchSnapshot();
-    expect(registryMetadata).toMatchSnapshot();
+    expect(reflection.annotations(TestBean)).toMatchSnapshot();
   });
 
   test('should add Registry and config metadata to a class when decorated with @Config(100)', () => {
     @Config(100)
     class TestBean {}
 
-    const registryMetadata: RegistryMetada = Reflect.getMetadata(
-      METADATA_KEY.register,
-      TestBean
-    );
-
-    const configMetadata: boolean | undefined = Reflect.getMetadata(
-      METADATA_KEY.config,
-      TestBean
-    );
-
-    expect(configMetadata).toMatchSnapshot();
-    expect(registryMetadata).toMatchSnapshot();
+    expect(reflection.annotations(TestBean)).toMatchSnapshot();
   });
 
   test('should fail when decorated multiple times with @Config', () => {
@@ -200,36 +163,14 @@ describe('@PluginConfig', () => {
     @PluginConfig()
     class TestBean {}
 
-    const registryMetadata: RegistryMetada = Reflect.getMetadata(
-      METADATA_KEY.register,
-      TestBean
-    );
-
-    const configMetadata: boolean | undefined = Reflect.getMetadata(
-      METADATA_KEY.config,
-      TestBean
-    );
-
-    expect(configMetadata).toMatchSnapshot();
-    expect(registryMetadata).toMatchSnapshot();
+    expect(reflection.annotations(TestBean)).toMatchSnapshot();
   });
 
   test('should add Registry and config metadata to a class when decorated with @PluginConfig(100)', () => {
     @PluginConfig(100)
     class TestBean {}
 
-    const registryMetadata: RegistryMetada = Reflect.getMetadata(
-      METADATA_KEY.register,
-      TestBean
-    );
-
-    const configMetadata: boolean | undefined = Reflect.getMetadata(
-      METADATA_KEY.config,
-      TestBean
-    );
-
-    expect(configMetadata).toMatchSnapshot();
-    expect(registryMetadata).toMatchSnapshot();
+    expect(reflection.annotations(TestBean)).toMatchSnapshot();
   });
 
   test('should fail when decorated multiple times with @Config', () => {
@@ -248,36 +189,14 @@ describe('@CoreConfig', () => {
     @CoreConfig()
     class TestBean {}
 
-    const registryMetadata: RegistryMetada = Reflect.getMetadata(
-      METADATA_KEY.register,
-      TestBean
-    );
-
-    const configMetadata: boolean | undefined = Reflect.getMetadata(
-      METADATA_KEY.config,
-      TestBean
-    );
-
-    expect(configMetadata).toMatchSnapshot();
-    expect(registryMetadata).toMatchSnapshot();
+    expect(reflection.annotations(TestBean)).toMatchSnapshot();
   });
 
   test('should add Registry and config metadata to a class when decorated with @CoreConfig(100)', () => {
     @CoreConfig(100)
     class TestBean {}
 
-    const registryMetadata: RegistryMetada = Reflect.getMetadata(
-      METADATA_KEY.register,
-      TestBean
-    );
-
-    const configMetadata: boolean | undefined = Reflect.getMetadata(
-      METADATA_KEY.config,
-      TestBean
-    );
-
-    expect(configMetadata).toMatchSnapshot();
-    expect(registryMetadata).toMatchSnapshot();
+    expect(reflection.annotations(TestBean)).toMatchSnapshot();
   });
 
   test('should fail when decorated multiple times with @CoreConfig', () => {
@@ -293,15 +212,12 @@ describe('@CoreConfig', () => {
 
 describe('@Register', () => {
   test('should add Registry metadata to a class when decorated with @Register', () => {
-    @Register(TYPE.Config, { id: TestBean, target: TestBean })
+    @Register({ type: TYPE.Config, id: TestBean })
     class TestBean {}
 
-    const registryMetadata: RegistryMetada = Reflect.getMetadata(
-      METADATA_KEY.register,
-      TestBean
-    );
-
-    expect(registryMetadata).toMatchSnapshot();
+    expect(
+      reflection.annotationsOfDecorator(TestBean, Register)
+    ).toMatchSnapshot();
   });
 }); // end describe @Register
 
@@ -310,48 +226,28 @@ describe('@Scan', () => {
     @Scan()
     class TestBean {}
 
-    const scanMetadata: RegistryMetada = Reflect.getMetadata(
-      METADATA_KEY.scan,
-      TestBean
-    );
-
-    expect(scanMetadata).toMatchSnapshot();
+    expect(reflection.annotationsOfDecorator(TestBean, Scan)).toMatchSnapshot();
   });
 
   test('should add Scan metadata to a class when decorated with @Scan(relativePath)', () => {
     @Scan('./fixtures/loader')
     class TestBean {}
 
-    const scanMetadata: RegistryMetada = Reflect.getMetadata(
-      METADATA_KEY.scan,
-      TestBean
-    );
-
-    expect(scanMetadata).toMatchSnapshot();
+    expect(reflection.annotationsOfDecorator(TestBean, Scan)).toMatchSnapshot();
   });
 
   test('should add Scan metadata to a class when decorated with @Scan(relativePath) 2', () => {
     @Scan('../src')
     class TestBean {}
 
-    const scanMetadata: RegistryMetada = Reflect.getMetadata(
-      METADATA_KEY.scan,
-      TestBean
-    );
-
-    expect(scanMetadata).toMatchSnapshot();
+    expect(reflection.annotationsOfDecorator(TestBean, Scan)).toMatchSnapshot();
   });
 
   test('should add Scan metadata to a class when decorated with @Scan(__dirname)', () => {
     @Scan(__dirname)
     class TestBean {}
 
-    const scanMetadata: RegistryMetada = Reflect.getMetadata(
-      METADATA_KEY.scan,
-      TestBean
-    );
-
-    expect(scanMetadata).toMatchSnapshot();
+    expect(reflection.annotationsOfDecorator(TestBean, Scan)).toMatchSnapshot();
   });
 
   test('should add Scan metadata to a class when decorated multiple times with @Scan', () => {
@@ -359,11 +255,7 @@ describe('@Scan', () => {
     @Scan(`${__dirname}/otherFolder`)
     class TestBean {}
 
-    const scanMetadata: string[] = Reflect.getMetadata(
-      METADATA_KEY.scan,
-      TestBean
-    );
-    expect(scanMetadata).toMatchSnapshot();
+    expect(reflection.annotationsOfDecorator(TestBean, Scan)).toMatchSnapshot();
   });
 }); // end describe @Scan
 
@@ -372,35 +264,14 @@ describe('@Service', () => {
     @Service()
     class TestBean {}
 
-    const registryMetadata: RegistryMetada = Reflect.getMetadata(
-      METADATA_KEY.register,
-      TestBean
-    );
-
-    const serviceMetadata: boolean | undefined = Reflect.getMetadata(
-      METADATA_KEY.service,
-      TestBean
-    );
-    expect(serviceMetadata).toMatchSnapshot();
-    expect(registryMetadata).toMatchSnapshot();
+    expect(reflection.annotations(TestBean)).toMatchSnapshot();
   });
 
   test(`should add Service metadata to a class when decorated with @Service('Test)`, () => {
     @Service('Test')
     class TestBean {}
 
-    const registryMetadata: RegistryMetada = Reflect.getMetadata(
-      METADATA_KEY.register,
-      TestBean
-    );
-
-    const serviceMetadata: boolean = Reflect.getMetadata(
-      METADATA_KEY.service,
-      TestBean
-    );
-
-    expect(serviceMetadata).toMatchSnapshot();
-    expect(registryMetadata).toMatchSnapshot();
+    expect(reflection.annotations(TestBean)).toMatchSnapshot();
   });
 }); // end describe @Service
 
@@ -432,11 +303,9 @@ describe('@Value', () => {
         address: string;
       }
 
-      const valueMetadata: ValueMetadata[] = Reflect.getMetadata(
-        METADATA_KEY.value,
-        TestBean
-      );
-      expect(valueMetadata).toMatchSnapshot();
+      expect(
+        reflection.propMetadataOfDecorator(TestBean, Value)
+      ).toMatchSnapshot();
     });
   }); // end @Value(options: ValueOptions)
 
@@ -456,51 +325,41 @@ describe('@Plugin', () => {
   test('should add Plugin metadata to a class when decorated with @Plugin()', () => {
     @Plugin()
     class TestBean {}
-    const pluginMetadata: PluginMetadata = Reflect.getMetadata(
-      METADATA_KEY.plugin,
-      TestBean
-    );
-    expect(pluginMetadata).toMatchSnapshot();
+    expect(
+      reflection.annotationsOfDecorator(TestBean, Plugin)
+    ).toMatchSnapshot();
   });
 
   test(`should add Plugin metadata to a class when decorated with @Plugin('TestPlugin')`, () => {
     @Plugin('TestPlugin')
     class TestBean {}
-    const pluginMetadata: PluginMetadata = Reflect.getMetadata(
-      METADATA_KEY.plugin,
-      TestBean
-    );
-    expect(pluginMetadata).toMatchSnapshot();
+    expect(
+      reflection.annotationsOfDecorator(TestBean, Plugin)
+    ).toMatchSnapshot();
   });
 
   test(`should add Plugin metadata to a class when decorated with @Plugin({ dependencies: ['TestPlugin'] })`, () => {
     @Plugin({ dependencies: ['TestPlugin'] })
     class TestBean {}
-    const pluginMetadata: PluginMetadata = Reflect.getMetadata(
-      METADATA_KEY.plugin,
-      TestBean
-    );
-    expect(pluginMetadata).toMatchSnapshot();
+    expect(
+      reflection.annotationsOfDecorator(TestBean, Plugin)
+    ).toMatchSnapshot();
   });
 
   test(`should add Plugin metadata to a class when decorated with @Plugin({ name: 'TestPlugin' })`, () => {
     @Plugin({ name: 'TestPlugin' })
     class TestBean {}
-    const pluginMetadata: PluginMetadata = Reflect.getMetadata(
-      METADATA_KEY.plugin,
-      TestBean
-    );
-    expect(pluginMetadata).toMatchSnapshot();
+    expect(
+      reflection.annotationsOfDecorator(TestBean, Plugin)
+    ).toMatchSnapshot();
   });
 
   test(`should add Plugin metadata to a class when decorated with @Plugin({ name: 'TestPlugin', dependencies: ['TestPlugin2'] })`, () => {
     @Plugin({ name: 'TestPlugin', dependencies: ['TestPlugin2'] })
     class TestBean {}
-    const pluginMetadata: PluginMetadata = Reflect.getMetadata(
-      METADATA_KEY.plugin,
-      TestBean
-    );
-    expect(pluginMetadata).toMatchSnapshot();
+    expect(
+      reflection.annotationsOfDecorator(TestBean, Plugin)
+    ).toMatchSnapshot();
   });
 
   test('should fail when decorated multiple times with @Plugin', () => {
@@ -532,10 +391,8 @@ describe('@preDestroy', () => {
       @PreDestroy()
       preDestroy2() {}
     }
-    const pluginMetadata: PluginMetadata = Reflect.getMetadata(
-      METADATA_KEY.preDestroy,
-      TestBean
-    );
-    expect(pluginMetadata).toMatchSnapshot();
+    expect(
+      reflection.propMetadataOfDecorator(TestBean, PreDestroy)
+    ).toMatchSnapshot();
   });
 });

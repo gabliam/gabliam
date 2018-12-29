@@ -1,6 +1,0 @@
-json:
-- rigid
-	    	 - better for data interchange
-yaml
-  - slim and flexible
-  - better for configuration

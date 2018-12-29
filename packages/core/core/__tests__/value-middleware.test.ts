@@ -2,7 +2,7 @@
 // tslint:disable:no-unused-expression
 import { createContainer } from '../src/container';
 import { APP_CONFIG } from '../src/constants';
-import { Config, Value } from '../src/decorators';
+import { Config, Value } from '../src/metadata';
 import { inject, optional, Container } from '../src/index';
 import * as Joi from 'joi';
 

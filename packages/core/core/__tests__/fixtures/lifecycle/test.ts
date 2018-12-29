@@ -1,7 +1,7 @@
-import { Service, preDestroy } from '../../../src';
+import { Service, PreDestroy } from '../../../src';
 
 @Service()
 export class Test {
-  @preDestroy()
+  @PreDestroy()
   testPreDestroy() {}
 }

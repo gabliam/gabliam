@@ -6,10 +6,12 @@ Registry {
     "ServiceType" => Array [
       Object {
         "id": [Function],
+        "options": undefined,
         "target": [Function],
       },
       Object {
         "id": [Function],
+        "options": undefined,
         "target": [Function],
       },
     ],
@@ -40,22 +42,27 @@ Registry {
     "ServiceType" => Array [
       Object {
         "id": [Function],
+        "options": undefined,
         "target": [Function],
       },
       Object {
         "id": [Function],
+        "options": undefined,
         "target": [Function],
       },
       Object {
         "id": [Function],
+        "options": undefined,
         "target": [Function],
       },
       Object {
         "id": [Function],
+        "options": undefined,
         "target": [Function],
       },
       Object {
         "id": [Function],
+        "options": undefined,
         "target": [Function],
       },
     ],
@@ -95,10 +102,12 @@ Registry {
     "ServiceType" => Array [
       Object {
         "id": [Function],
+        "options": undefined,
         "target": [Function],
       },
       Object {
         "id": [Function],
+        "options": undefined,
         "target": [Function],
       },
     ],
@@ -129,14 +138,17 @@ Registry {
     "ServiceType" => Array [
       Object {
         "id": [Function],
+        "options": undefined,
         "target": [Function],
       },
       Object {
         "id": [Function],
+        "options": undefined,
         "target": [Function],
       },
       Object {
         "id": [Function],
+        "options": undefined,
         "target": [Function],
       },
     ],

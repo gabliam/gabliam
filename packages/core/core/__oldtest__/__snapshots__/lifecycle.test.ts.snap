@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`@preDestroy test 1`] = `0`;
-
-exports[`@preDestroy test 2`] = `0`;
-
-exports[`@preDestroy test 3`] = `1`;
-
-exports[`@preDestroy test 4`] = `1`;

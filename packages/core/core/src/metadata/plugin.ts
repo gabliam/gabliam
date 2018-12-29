@@ -99,5 +99,8 @@ export const Plugin: PluginDecorator = makeDecorator(
     }
 
     return { name, dependencies };
-  }
+  },
+  undefined,
+  true,
+  ERRORS_MSGS.DUPLICATED_PLUGIN_DECORATOR
 );

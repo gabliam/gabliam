@@ -1,6 +1,6 @@
-import { preDestroy } from '../../../src';
+import { PreDestroy } from '../../../src';
 
 export class Test2 {
-  @preDestroy()
+  @PreDestroy()
   testPreDestroy2() {}
 }

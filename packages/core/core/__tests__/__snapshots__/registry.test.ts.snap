@@ -47,6 +47,7 @@ Registry {
     "ServiceType" => Array [
       Object {
         "id": [Function],
+        "options": undefined,
         "target": [Function],
       },
     ],
