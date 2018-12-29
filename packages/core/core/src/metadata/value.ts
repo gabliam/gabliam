@@ -1,6 +1,119 @@
-import { METADATA_KEY, ERRORS_MSGS } from '../constants';
-import { ValueMetadata, ValueValidator } from '../interfaces';
+import { ERRORS_MSGS, METADATA_KEY } from '../constants';
+import { makePropDecorator, TypeDecorator } from '../decorator';
 import { Joi } from '../joi';
+
+/**
+ * Type of the `Value` decorator / constructor function.
+ */
+export interface ValueDecorator {
+  /**
+   * Value decorator
+   *
+   * Inject configuration in your property.
+   * /!\ values are undefined in constructor
+   *
+   * If property has value on init, this is the default value if no configuration
+   *  ## Simple Example
+   * Here is an example of a class that define a value
+   *
+   * ```yml
+   * application:
+   *      name: David
+   *```
+   *
+   * ```typescript
+   *  class Gretter {
+   *      @Value('application.name')
+   *      private name:string;
+   *
+   *      constructor(){}
+   *      greet() {
+   *          return `Hello ${this.name} !`; //display Hello David
+   *      }
+   *  }
+   * ```
+   *
+   * ## Simple Example
+   * Here is an example of a class that define a value without configuration
+   *
+   * ```typescript
+   * class Gretter2 {
+   *      @Value('application.name2')
+   *      private name:string = 'Jean';
+   *
+   *      constructor(){}
+   *      greet() {
+   *          return `Hello ${this.name} !`; //display Hello Jean
+   *      }
+   *  }
+   * ```
+   *
+   * Here is an example of a class that define a value in constructor without configuration
+   * ```typescript
+   * class Gretter2 {
+   *      @Value('application.name2')
+   *      private name:string;
+   *
+   *      constructor(){
+   *        this.name = 'Jean';
+   *      }
+   *      greet() {
+   *          return `Hello ${this.name} !`; //display Hello Jean
+   *      }
+   *  }
+   * ```
+   */
+  (value: string | ValueOptions, schema?: Joi.Schema): TypeDecorator;
+
+  /**
+   * see the `@Bean` decorator.
+   */
+  new (value: string | ValueOptions, schema?: Joi.Schema): Value;
+}
+
+/**
+ * Type of metadata for an `Value` property.
+ */
+export interface Value {
+  /**
+   * Path of configuration
+   */
+  path: string;
+
+  /**
+   * Value validator
+   */
+  validator: ValueValidator | null;
+}
+
+/**
+ * Value validator
+ *
+ * For customize error
+ */
+export interface ValueValidator {
+  /**
+   * Joi Schema
+   */
+  schema: Joi.Schema;
+
+  /**
+   * Indicate if throw an error when validation fail
+   * default: true
+   */
+  throwError?: boolean;
+
+  /**
+   * Error message if you want custom this
+   */
+  customErrorMsg?: string;
+
+  /**
+   * option of Joi
+   * @see Joi.ValidationOptions
+   */
+  options?: Joi.ValidationOptions;
+}
 
 /**
  * Options for value decorator
@@ -43,92 +156,23 @@ function isValueValidator(obj: any): obj is ValueValidator {
   );
 }
 
-export type ValueReturn = (target: any, key: string) => void;
-
-/**
- * @param  {ValueOptions} options options of decorator
- */
-export function Value(options: ValueOptions): ValueReturn;
-/**
- * @param  {string} path path of configuration
- * @param  {Joi.Schema} schema? Joi schema
- */
-export function Value(path: string, schema?: Joi.Schema): ValueReturn;
-
-/**
- * Value decorator
- *
- * Inject configuration in your property.
- * /!\ values are undefined in constructor
- *
- * If property has value on init, this is the default value if no configuration
- *  ## Simple Example
- * Here is an example of a class that define a value
- *
- * ```
- * application:
- *      name: David
- *```
- *
- * ```
- *  class Gretter {
- *      @Value('application.name')
- *      private name:string;
- *
- *      constructor(){}
- *      greet() {
- *          return `Hello ${this.name} !`; //display Hello David
- *      }
- *  }
- *
- * ## Simple Example
- * Here is an example of a class that define a value without configuration
- *
- * class Gretter2 {
- *      @Value('application.name2')
- *      private name:string = 'Jean';
- *
- *      constructor(){}
- *      greet() {
- *          return `Hello ${this.name} !`; //display Hello Jean
- *      }
- *  }
- *
- * Here is an example of a class that define a value in constructor without configuration
- * class Gretter2 {
- *      @Value('application.name2')
- *      private name:string;
- *
- *      constructor(){
- *        this.name = 'Jean';
- *      }
- *      greet() {
- *          return `Hello ${this.name} !`; //display Hello Jean
- *      }
- *  }
- * ```
- *
- * @param  {any} value
- * @param  {Joi.Schema=null} schema
- */
-export function Value(value: any, schema?: Joi.Schema): ValueReturn {
-  return function(target: any, key: string) {
+export const Value: ValueDecorator = makePropDecorator(
+  METADATA_KEY.value,
+  (value: any, schema?: Joi.Schema): Value => {
     if (typeof value === 'string') {
-      valueProperty(value, schema, target, key);
+      return valueProperty(value, schema);
     } else if (isValueOptions(value)) {
-      valueProperty(value.path, value.validator, target, key);
+      return valueProperty(value.path, value.validator);
     } else {
       throw new Error(ERRORS_MSGS.INVALID_VALUE_DECORATOR);
     }
-  };
-}
+  }
+);
 
 function valueProperty(
   path: string,
-  schema: Joi.Schema | ValueValidator | undefined,
-  target: any,
-  key: string
-) {
+  schema: Joi.Schema | ValueValidator | undefined
+): Value {
   let validator: ValueValidator | null = null;
   if (schema) {
     if (isValueValidator(schema)) {
@@ -140,18 +184,6 @@ function valueProperty(
       validator = { throwError: true, schema };
     }
   }
-  const metadata: ValueMetadata = { path, target, key, validator };
-  let metadataList: ValueMetadata[] = [];
 
-  if (!Reflect.hasMetadata(METADATA_KEY.value, target.constructor)) {
-    Reflect.defineMetadata(
-      METADATA_KEY.value,
-      metadataList,
-      target.constructor
-    );
-  } else {
-    metadataList = Reflect.getMetadata(METADATA_KEY.value, target.constructor);
-  }
-
-  metadataList.push(metadata);
+  return { path, validator };
 }

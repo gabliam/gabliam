@@ -1,5 +1,6 @@
 import { interfaces } from 'inversify';
-import { makePropDecorator } from '../decorator/util';
+import { METADATA_KEY } from '../constants';
+import { makePropDecorator } from '../decorator';
 
 /**
  * Type of the `Bean` decorator / constructor function.
@@ -39,6 +40,10 @@ export interface BeanDecorator {
    * ```
    */
   (id: interfaces.ServiceIdentifier<any>): any;
+
+  /**
+   * see the `@Bean` decorator.
+   */
   new (id: interfaces.ServiceIdentifier<any>): any;
 }
 
@@ -46,11 +51,14 @@ export interface BeanDecorator {
  * Type of metadata for an `Bean` property.
  */
 export interface Bean {
+  /**
+   * Id of bean
+   */
   id: interfaces.ServiceIdentifier<any>;
 }
 
 export const Bean: BeanDecorator = makePropDecorator(
-  'Bean',
+  METADATA_KEY.bean,
   (id: interfaces.ServiceIdentifier<any>) => ({ id })
 );
 
@@ -93,6 +101,10 @@ export interface OnMissingBeanDecorator {
    * ```
    */
   (id: interfaces.ServiceIdentifier<any>): any;
+
+  /**
+   * see the `@OnMissingBean` decorator.
+   */
   new (id: interfaces.ServiceIdentifier<any>): any;
 }
 
@@ -100,10 +112,13 @@ export interface OnMissingBeanDecorator {
  * Type of metadata for an `OnMissingBean` property.
  */
 export interface OnMissingBean {
+  /**
+   * id of missing bean
+   */
   id: interfaces.ServiceIdentifier<any>;
 }
 
 export const OnMissingBean: OnMissingBeanDecorator = makePropDecorator(
-  'OnMissingBean',
+  METADATA_KEY.onMissingBean,
   (id: interfaces.ServiceIdentifier<any>) => ({ id })
 );

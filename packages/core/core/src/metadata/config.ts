@@ -1,112 +1,81 @@
-import { TYPE, ORDER_CONFIG, METADATA_KEY, ERRORS_MSGS } from '../constants';
-import { register } from './register';
-import { interfaces, injectable } from 'inversify';
+import { injectable } from 'inversify';
+import { ERRORS_MSGS, METADATA_KEY, ORDER_CONFIG, TYPE } from '../constants';
+import { makeDecorator, TypeDecorator } from '../decorator';
+import { Type } from '../type';
+import { Register } from './register';
 
 /**
- * Config decorator
- *
- * Define a config class.
- * This class is loaded by the framework and all beans are injected in the container
- *
- * ## Simple Example
- * Here is an example of a class that define a bean
- *
- * ```
- *  class Gretter {
- *      constructor(private name:string){};
- *      greet() {
- *          return `Hello ${this.name} !`;
- *      }
- *  }
- *
- * @Config
- * class SampleConfig {
- *      @Bean(Gretter)
- *      createGretter() {
- *          return new Gretter('David');
- *      }
- * }
- * ```
- *
- * @param  {number=ORDER_CONFIG.Config} order order of loading
+ * Type of the `Config` decorator / constructor function.
  */
-export function Config(order: number = ORDER_CONFIG.Config) {
-  return configDecorator(order);
-}
+export interface ConfigDecorator {
+  /**
+   * Decorator that marks a class as an Gabliam config and provides configuration
+   * metadata that determines how the config should be processed,
+   * instantiated.
+   *
+   * This class is loaded by the framework in config phase and all beans are injected in the container
+   *
+   * order of loading: CoreConfig -> PluginConfig -> Config
+   *
+   * @usageNotes
+   *
+   * Here is an example of a class that define a config
+   *
+   * ```typescript
+   *  class Gretter {
+   *      constructor(private name:string){};
+   *      greet() {
+   *          return `Hello ${this.name} !`;
+   *      }
+   *  }
+   *
+   * @Config()
+   * class SampleConfig {
+   *      @Bean(Gretter)
+   *      createGretter() {
+   *          return new Gretter('David');
+   *      }
+   * }
+   * ```
+   */
+  (order?: number): TypeDecorator;
 
-/**
- * CoreConfig decorator
- *
- * Define a core config class.
- * This class is loaded by the framework and all beans are injected in the container
- *
- * ## Simple Example
- * Here is an example of a class that define a bean
- *
- * ```
- *  class Gretter {
- *      constructor(private name:string){};
- *      greet() {
- *          return `Hello ${this.name} !`;
- *      }
- *  }
- *
- * @CoreConfig
- * class SampleConfig {
- *      @Bean(Gretter)
- *      createGretter() {
- *          return new Gretter('David');
- *      }
- * }
- * ```
- *
- * @param  {number=ORDER_CONFIG.Core} order order of loading
- */
-export function CoreConfig(order = ORDER_CONFIG.Core) {
-  return configDecorator(order);
+  /**
+   * see the `@Config` decorator.
+   */
+  new (order?: number): any;
 }
 
 /**
- * PluginConfig decorator
- *
- * Define a plugin config class.
- * This class is loaded by the framework and all beans are injected in the container
- *
- * ## Simple Example
- * Here is an example of a class that define a bean
- *
- * ```
- *  class Gretter {
- *      constructor(private name:string){};
- *      greet() {
- *          return `Hello ${this.name} !`;
- *      }
- *  }
- *
- * @CoreConfig
- * class SampleConfig {
- *      @Bean(Gretter)
- *      createGretter() {
- *          return new Gretter('David');
- *      }
- * }
- * ```
- *
- * @param  {number=ORDER_CONFIG.Core} order order of loading
+ * `Config` decorator and metadata.
  */
-export function PluginConfig(order = ORDER_CONFIG.Plugin) {
-  return configDecorator(order);
+export interface Config {
+  /**
+   * Order of loading
+   */
+  order: number;
 }
 
-function configDecorator(order: number) {
-  return function(target: any) {
-    if (Reflect.hasMetadata(METADATA_KEY.config, target) === true) {
-      throw new Error(ERRORS_MSGS.DUPLICATED_CONFIG_DECORATOR);
-    }
-    Reflect.defineMetadata(METADATA_KEY.config, true, target);
+const configDecorator = (defaultOrder: number): ConfigDecorator => {
+  return makeDecorator(
+    METADATA_KEY.config,
+    (order = defaultOrder) => ({ order }),
+    (cls: Type<any>, annotationInstance: Config) => {
+      injectable()(cls);
+      Register({
+        type: TYPE.Config,
+        options: { order: annotationInstance.order },
+      })(cls);
+    },
+    true,
+    ERRORS_MSGS.DUPLICATED_CONFIG_DECORATOR
+  );
+};
 
-    const id: interfaces.ServiceIdentifier<any> = target;
-    injectable()(target);
-    register(TYPE.Config, { id, target, options: { order } })(target);
-  };
-}
+export const CoreConfig: ConfigDecorator = configDecorator(ORDER_CONFIG.Core);
+
+export const PluginConfig: ConfigDecorator = configDecorator(
+  ORDER_CONFIG.Plugin
+);
+
+export const Config: ConfigDecorator = configDecorator(ORDER_CONFIG.Config);

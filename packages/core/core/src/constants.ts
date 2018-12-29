@@ -32,6 +32,7 @@ export const ORDER_CONFIG = {
 };
 
 export const ERRORS_MSGS = {
+  DUPLICATED_DECORATOR: `Cannot apply decorator multiple times.`,
   DUPLICATED_CONFIG_DECORATOR: `Cannot apply @Config, @PluginConfig or @CorePlugin decorator multiple times.`,
   INVALID_VALUE_DECORATOR: `Value must be a string or a ValueOptions.`,
   INVALID_PLUGIN_DECORATOR: `Value must be a string or a PluginOptions.`,

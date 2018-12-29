@@ -1,4 +1,6 @@
-import { METADATA_KEY, INJECT_CONTAINER_KEY } from '../constants';
+import { INJECT_CONTAINER_KEY } from '../constants';
+import { InjectContainer } from '../metadata';
+import { reflection } from '../reflection';
 import { Container } from './container';
 import { ContainerActivationHook } from './interfaces';
 
@@ -11,12 +13,12 @@ export function makeActivationInject(
 ): ContainerActivationHook {
   return (instance: any) => {
     if (instance && instance.constructor) {
-      const injectContainer = Reflect.hasMetadata(
-        METADATA_KEY.injectContainer,
-        instance.constructor
+      const injectContainer = reflection.annotationsOfMetadata(
+        instance.constructor,
+        InjectContainer
       );
 
-      if (injectContainer) {
+      if (injectContainer.length) {
         Object.defineProperty(instance, INJECT_CONTAINER_KEY, {
           value: container,
         });

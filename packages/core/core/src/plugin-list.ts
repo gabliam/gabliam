@@ -1,19 +1,21 @@
-import {
-  GabliamPluginDefinition,
-  GabliamPluginConstructor,
-  PluginMetadata,
-  GabliamPlugin,
-  GabliamPluginWithBuild,
-  GabliamPluginWithStart,
-  GabliamPluginWithStop,
-  GabliamPluginWithDestroy,
-  GabliamPluginWithBind,
-  GabliamPluginWithConfig,
-} from './interfaces';
-import { METADATA_KEY, ERRORS_MSGS } from './constants';
-import * as _ from 'lodash';
 import { Graph } from 'gert';
 import * as TopoSort from 'gert-topo-sort';
+import * as _ from 'lodash';
+import { ERRORS_MSGS } from './constants';
+import {
+  GabliamPlugin,
+  GabliamPluginConstructor,
+  GabliamPluginDefinition,
+  GabliamPluginWithBind,
+  GabliamPluginWithBuild,
+  GabliamPluginWithConfig,
+  GabliamPluginWithDestroy,
+  GabliamPluginWithStart,
+  GabliamPluginWithStop,
+  PluginDependency,
+} from './interfaces';
+import { Plugin } from './metadata';
+import { reflection } from './reflection';
 
 /**
  * Plugin registry
@@ -25,16 +27,33 @@ export class PluginList {
    * Add a plugin
    */
   add(ctor: GabliamPluginConstructor): GabliamPluginDefinition {
-    const pluginMetadata = <PluginMetadata | undefined>(
-      Reflect.getMetadata(METADATA_KEY.plugin, ctor)
+    const pluginMetadata = reflection.annotationsOfMetadata<Plugin>(
+      ctor,
+      Plugin
     );
 
     // if class doesn't have plugin metadata, so throw error
-    if (!pluginMetadata) {
+    if (pluginMetadata.length === 0) {
       throw new Error(ERRORS_MSGS.INVALID_PLUGIN);
     }
 
-    const def = { ...pluginMetadata, plugin: new ctor() };
+    const [{ name: pluginName }] = pluginMetadata.slice(-1);
+    const name = pluginName || ctor.name;
+
+    // get all dependencies (inherit)
+    const dependencies = pluginMetadata.reduce<PluginDependency[]>(
+      (prev, current) => {
+        prev.push(...current.dependencies);
+        return prev;
+      },
+      []
+    );
+
+    const def: GabliamPluginDefinition = {
+      name,
+      dependencies,
+      plugin: new ctor(),
+    };
     this._plugins.push(def);
     return def;
   }

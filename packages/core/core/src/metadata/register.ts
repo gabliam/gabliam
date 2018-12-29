@@ -1,17 +1,40 @@
+import { interfaces } from 'inversify';
 import { METADATA_KEY } from '../constants';
-import { ValueRegistry } from '../interfaces';
+import { makeDecorator } from '../decorator';
 
 /**
- * Register decorator
- *
- * All values are used on building phase
- *
- * @param  {string} type type in registry
- * @param  {any} value
+ * Type of the `Register` decorator / constructor function.
  */
-export function register(type: string, value: ValueRegistry) {
-  return function(target: any) {
-    Reflect.defineMetadata(METADATA_KEY.register, { type, value }, target);
-    return target;
-  };
+export interface RegisterDecorator {
+  /**
+   * Decorator that marks a class that must be registered in Gabliam.
+   *
+   * In binding phase, plugins get classes which are registered.
+   * Ex: Express plugin get all `@Controller` decorator
+   */
+  (obj: string | Register): any;
+
+  /**
+   * see the `@Config` decorator.
+   */
+  new (order?: number): any;
 }
+
+/**
+ * `Register` decorator and metadata.
+ */
+export interface Register {
+  id?: interfaces.ServiceIdentifier<any>;
+  type: string;
+  options?: any;
+}
+
+export const Register: RegisterDecorator = makeDecorator(
+  METADATA_KEY.register,
+  (obj: string | Register): Register => {
+    if (typeof obj === 'string') {
+      return { type: obj };
+    }
+    return obj;
+  }
+);

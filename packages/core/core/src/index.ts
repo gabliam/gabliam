@@ -19,12 +19,14 @@ export {
   VALUE_EXTRACTOR,
 } from './constants';
 export * from './container';
-export * from './decorators';
+export * from './decorator';
 export * from './errors';
 export * from './gabliam';
 export * from './interfaces';
 export * from './joi';
 export { configResolver, FileLoader, Resolver } from './loaders';
+export * from './metadata';
 export * from './promise-utils';
+export * from './reflection';
 export * from './registry';
 export * from './utils';

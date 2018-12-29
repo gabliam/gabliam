@@ -1,5 +1,5 @@
-import { METADATA_KEY } from '../constants';
-import { ValueMetadata } from '../interfaces';
+import { Value } from '../metadata';
+import { reflection } from '../reflection';
 import { configureValueExtractor } from '../utils';
 import { Container } from './container';
 import { ContainerActivationHook } from './interfaces';
@@ -15,16 +15,17 @@ export function makeActivationValue(
 
   return (instance: any) => {
     if (instance && instance.constructor) {
-      const valueMetadata: ValueMetadata[] = Reflect.getMetadata(
-        METADATA_KEY.value,
-        instance.constructor
+      const valueMetadatas = reflection.propsOfMetadata<Value>(
+        instance.constructor,
+        Value
       );
 
-      if (valueMetadata) {
-        valueMetadata.forEach(({ key, path, validator }) => {
+      for (const [key, values] of Object.entries(valueMetadatas)) {
+        if (values.length) {
+          const [{ path, validator }] = values.slice(-1);
           const defaultValue = instance[key];
           instance[key] = valueExtractor(path, defaultValue, validator);
-        });
+        }
       }
     }
     return instance;

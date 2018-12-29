@@ -4,7 +4,7 @@ import {
   Bean,
   Config,
   PluginConfig,
-  register,
+  Register,
   Scan,
   Service,
   Value,
@@ -12,18 +12,13 @@ import {
   Init,
   InjectContainer,
   BeforeCreate,
-  preDestroy,
-} from '../src/decorators';
-import { CoreConfig } from '../src/decorators/config';
+  PreDestroy,
+  OnMissingBean,
+  reflection,
+} from '../src';
+import { CoreConfig } from '../src/metadata/config';
 import { METADATA_KEY, TYPE } from '../src/constants';
-import {
-  BeanMetadata,
-  RegistryMetada,
-  ValueMetadata,
-  PluginMetadata,
-} from '../src/interfaces';
 import * as Joi from 'joi';
-import { OnMissingBean } from '../src/index';
 
 describe('@init', () => {
   test('should add init metadata to a class when decorating a method with @init', () => {
@@ -36,12 +31,7 @@ describe('@init', () => {
       test2Method() {}
     }
 
-    const initMetadata: string[] = Reflect.getMetadata(
-      METADATA_KEY.init,
-      TestBean
-    );
-
-    expect(initMetadata).toMatchSnapshot();
+    expect(reflection.propsOfMetadata(TestBean, Init));
   });
 });
 
@@ -303,7 +293,7 @@ describe('@CoreConfig', () => {
 
 describe('@Register', () => {
   test('should add Registry metadata to a class when decorated with @Register', () => {
-    @register(TYPE.Config, { id: TestBean, target: TestBean })
+    @Register(TYPE.Config, { id: TestBean, target: TestBean })
     class TestBean {}
 
     const registryMetadata: RegistryMetada = Reflect.getMetadata(
@@ -536,10 +526,10 @@ describe('@Plugin', () => {
 describe('@preDestroy', () => {
   test('should add preDestroy metadata to a class when decorated with @preDestroy', () => {
     class TestBean {
-      @preDestroy()
+      @PreDestroy()
       preDestroy() {}
 
-      @preDestroy()
+      @PreDestroy()
       preDestroy2() {}
     }
     const pluginMetadata: PluginMetadata = Reflect.getMetadata(

@@ -125,18 +125,6 @@ export class Reflection {
     typeOrFunc: Type<any>,
     parentCtor: any
   ): any[] | null {
-    // Prefer the direct API.
-    if (
-      (<any>typeOrFunc).annotations &&
-      (<any>typeOrFunc).annotations !== parentCtor.annotations
-    ) {
-      let annotations = (<any>typeOrFunc).annotations;
-      if (typeof annotations === 'function' && annotations.annotations) {
-        annotations = annotations.annotations;
-      }
-      return annotations;
-    }
-
     // API for metadata created by invoking the decorators.
     if (typeOrFunc.hasOwnProperty(ANNOTATIONS)) {
       return (typeOrFunc as any)[ANNOTATIONS];
@@ -144,33 +132,27 @@ export class Reflection {
     return null;
   }
 
-  annotations(typeOrFunc: Type<any>): any[] {
+  /**
+   * Extract annotations
+   * order: parent => own
+   */
+  annotations(typeOrFunc: Type<any>, includeParent = true): any[] {
     if (!isType(typeOrFunc)) {
       return [];
     }
     const parentCtor = getParentCtor(typeOrFunc);
     const ownAnnotations = this._ownAnnotations(typeOrFunc, parentCtor) || [];
-    const parentAnnotations =
-      parentCtor !== Object ? this.annotations(parentCtor) : [];
-    return parentAnnotations.concat(ownAnnotations);
-  }
 
-  private _ownPropMetadata(
-    typeOrFunc: any,
-    parentCtor: any
-  ): { [key: string]: any[] } | null {
-    // Prefer the direct API.
-    if (
-      (<any>typeOrFunc).propMetadata &&
-      (<any>typeOrFunc).propMetadata !== parentCtor.propMetadata
-    ) {
-      let propMetadata = (<any>typeOrFunc).propMetadata;
-      if (typeof propMetadata === 'function' && propMetadata.propMetadata) {
-        propMetadata = propMetadata.propMetadata;
-      }
-      return propMetadata;
+    if (includeParent) {
+      const parentAnnotations =
+        parentCtor !== Object ? this.annotations(parentCtor) : [];
+      return parentAnnotations.concat(ownAnnotations);
     }
 
+    return ownAnnotations;
+  }
+
+  private _ownPropMetadata(typeOrFunc: any): { [key: string]: any[] } | null {
     // API for metadata created by invoking the decorators.
     if (typeOrFunc.hasOwnProperty(PROP_METADATA)) {
       return (typeOrFunc as any)[PROP_METADATA];
@@ -178,10 +160,15 @@ export class Reflection {
     return null;
   }
 
+  /**
+   * Extract props metadata
+   * order: parent => own
+   */
   propMetadata(typeOrFunc: any): { [key: string]: any[] } {
     if (!isType(typeOrFunc)) {
       return {};
     }
+
     const parentCtor = getParentCtor(typeOrFunc);
     const propMetadata: { [key: string]: any[] } = {};
     if (parentCtor !== Object) {
@@ -190,7 +177,7 @@ export class Reflection {
         propMetadata[propName] = parentPropMetadata[propName];
       });
     }
-    const ownPropMetadata = this._ownPropMetadata(typeOrFunc, parentCtor);
+    const ownPropMetadata = this._ownPropMetadata(typeOrFunc);
     if (ownPropMetadata) {
       Object.keys(ownPropMetadata).forEach(propName => {
         const decorators: any[] = [];
@@ -204,33 +191,52 @@ export class Reflection {
     return propMetadata;
   }
 
-  getPropsOfMetadata(
+  propsOfMetadata<T = {}>(
     typeOrFunc: any,
     decoratorOrMetadataName: any
-  ): { [key: string]: any[] } {
+  ): { [key: string]: T[] } {
+    if (!isType(typeOrFunc)) {
+      return {};
+    }
+
     const gabMetadataName: string = isType(decoratorOrMetadataName)
       ? (decoratorOrMetadataName as any).prototype.gabMetadataName
       : decoratorOrMetadataName;
 
-    if (!isType(typeOrFunc)) {
-      return {};
-    }
-    const metadatas = this.propMetadata(typeOrFunc);
+    const propMetadatas = this.propMetadata(typeOrFunc);
     const props: { [key: string]: any[] } = {};
 
-    for (const [propName, metasOfProp] of Object.entries(metadatas)) {
-      const metas = [];
-      for (const meta of metasOfProp) {
+    for (const [propName, propMetada] of Object.entries(propMetadatas)) {
+      const metadatas = [];
+      for (const meta of propMetada) {
         if (meta.gabMetadataName === gabMetadataName) {
-          metas.push(meta);
+          metadatas.push(meta);
         }
       }
-      if (metas.length) {
-        props[propName] = metas;
+      if (metadatas.length) {
+        props[propName] = metadatas;
       }
     }
 
     return props;
+  }
+
+  annotationsOfMetadata<T = {}>(
+    typeOrFunc: any,
+    decoratorOrMetadataName: any,
+    includeParent = true
+  ): T[] {
+    if (!isType(typeOrFunc)) {
+      return [];
+    }
+
+    const gabMetadataName: string = isType(decoratorOrMetadataName)
+      ? (decoratorOrMetadataName as any).prototype.gabMetadataName
+      : decoratorOrMetadataName;
+
+    const annotations = this.annotations(typeOrFunc, includeParent);
+
+    return annotations.filter(a => a.gabMetadataName === gabMetadataName);
   }
 }
 
@@ -243,3 +249,5 @@ function getParentCtor(ctor: Function): Type<any> {
   // to simplify checking later on.
   return parentCtor || Object;
 }
+
+export const reflection = new Reflection();

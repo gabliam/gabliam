@@ -1,56 +1,63 @@
 import { METADATA_KEY } from '../constants';
+import { makePropDecorator } from '../decorator';
 
 /**
- * Init decorator
- *
- * Add init method in config class
- *
- * This method is called after the creation of all beans of the config class
+ * Type of the `Init` decorator / constructor function.
  */
-export function Init() {
-  return function(target: any, key: string, descriptor: PropertyDescriptor) {
-    const metadata = key;
-    let metadataList: string[] = [];
-
-    if (!Reflect.hasMetadata(METADATA_KEY.init, target.constructor)) {
-      Reflect.defineMetadata(
-        METADATA_KEY.init,
-        metadataList,
-        target.constructor
-      );
-    } else {
-      metadataList = Reflect.getMetadata(METADATA_KEY.init, target.constructor);
-    }
-
-    metadataList.push(metadata);
-  };
+export interface InitDecorator {
+  /**
+   * Decorator that marks a class field as an init property and supplies configuration metadata.
+   * Declare a init property, wich Gabliam automatically call after the creation of
+   * all beans of the config class
+   *
+   * @usageNotes
+   *
+   * Here is an example of a class that define a init
+   *
+   * ```typescript
+   *
+   * @Config()
+   * class SampleConfig {
+   *   db: Connection;
+   *
+   *   @Init()
+   *   async init() {
+   *     await this.db.start();
+   *   }
+   *
+   *   @Bean()
+   *   createGretter() {
+   *     this.db = new Connection();
+   *     return this.db;
+   *   }
+   * }
+   * ```
+   */
+  (): any;
+  /**
+   * see the `@Init` decorator.
+   */
+  new (): any;
 }
+
+export const Init: InitDecorator = makePropDecorator(METADATA_KEY.init);
 
 /**
- * BeforeCreate decorator
- *
- * Add init method in config class
- *
- * This method is called before the creation of all beans of the config class
+ * Type of the `BeforeCreate` decorator / constructor function.
  */
-export function BeforeCreate() {
-  return function(target: any, key: string, descriptor: PropertyDescriptor) {
-    const metadata = key;
-    let metadataList: string[] = [];
-
-    if (!Reflect.hasMetadata(METADATA_KEY.beforeCreate, target.constructor)) {
-      Reflect.defineMetadata(
-        METADATA_KEY.beforeCreate,
-        metadataList,
-        target.constructor
-      );
-    } else {
-      metadataList = Reflect.getMetadata(
-        METADATA_KEY.beforeCreate,
-        target.constructor
-      );
-    }
-
-    metadataList.push(metadata);
-  };
+export interface BeforeCreateDecorator {
+  /**
+   * Decorator that marks a class field as a BeforeCreate property and supplies configuration metadata.
+   * Declare a BeforeCreate property, wich Gabliam automatically call before the creation of
+   * all beans of the config class
+   */
+  (): any;
+  /**
+   * see the `@BeforeCreate` decorator.
+   */
+  new (): any;
 }
+
+export const BeforeCreate: BeforeCreateDecorator = makePropDecorator(
+  METADATA_KEY.beforeCreate
+);

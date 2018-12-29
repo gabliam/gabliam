@@ -1,38 +1,41 @@
 import { METADATA_KEY } from '../constants';
+import { makePropDecorator } from '../decorator';
 
 /**
- * Set method that be called before the class was destroyed
- *
- * sample:
- * @Service()
- * class RedisService {
- *  redis: ioredis;
- *
- *  init() {
- *    this.redis = new Redis();
- *  }
- *
- *  @preDestroy()
- *  destroy() {
- *    this.redis.close();
- *  }
- * }
+ * Type of the `PreDestroy` decorator / constructor function.
  */
-export function preDestroy(): PropertyDecorator {
-  return (target: Object, propertyKey: string | symbol) => {
-    let metadataList: Array<string | symbol> = [];
-    if (!Reflect.hasMetadata(METADATA_KEY.preDestroy, target.constructor)) {
-      Reflect.defineMetadata(
-        METADATA_KEY.preDestroy,
-        metadataList,
-        target.constructor
-      );
-    } else {
-      metadataList = Reflect.getMetadata(
-        METADATA_KEY.preDestroy,
-        target.constructor
-      );
-    }
-    metadataList.push(propertyKey);
-  };
+export interface PreDestroyDecorator {
+  /**
+   * Decorator that marks a class field as an OnMissingBean property and supplies configuration metadata.
+   *
+   * The property was be called before the class was destroyed
+   *
+   * @usageNotes
+   *
+   * ```typescript
+   * @Service()
+   * class RedisService {
+   *  redis: ioredis;
+   *
+   *  init() {
+   *    this.redis = new Redis();
+   *  }
+   *
+   *  @preDestroy()
+   *  destroy() {
+   *    this.redis.close();
+   *  }
+   * }
+   * ```
+   */
+  (): any;
+
+  /**
+   * see the `@PreDestroy` decorator.
+   */
+  new (): any;
 }
+
+export const PreDestroy: PreDestroyDecorator = makePropDecorator(
+  METADATA_KEY.preDestroy
+);

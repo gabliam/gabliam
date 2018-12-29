@@ -1,4 +1,5 @@
 import { Type } from '../type';
+import { ERRORS_MSGS } from '../constants';
 
 /**
  * An interface implemented by all Gabliam type decorators, which allows them to be used as ES7
@@ -35,8 +36,9 @@ export const PROP_METADATA = '__prop__metadata__';
 export function makeDecorator<T>(
   name: string,
   props?: (...args: any[]) => any,
-  parentClass?: any,
-  additionalProcessing?: (type: Type<T>) => void
+  additionalProcessing?: (type: Type<T>, annotationInstance: any) => void,
+  uniq = false,
+  uniqError = ERRORS_MSGS.DUPLICATED_DECORATOR
 ): {
   new (...args: any[]): any;
   (...args: any[]): any;
@@ -55,21 +57,22 @@ export function makeDecorator<T>(
     return function typeDecorator(cls: Type<T>) {
       // Use of Object.defineProperty is important since it creates non-enumerable property which
       // prevents the property is copied during subclassing.
-      const annotations = cls.hasOwnProperty(ANNOTATIONS)
+      const annotations: any[] = cls.hasOwnProperty(ANNOTATIONS)
         ? (cls as any)[ANNOTATIONS]
         : Object.defineProperty(cls, ANNOTATIONS, { value: [] })[ANNOTATIONS];
+
+      if (uniq && annotations.find(a => a.gabMetadataName === name)) {
+        throw new Error(uniqError);
+      }
+
       annotations.push(annotationInstance);
 
       if (additionalProcessing) {
-        additionalProcessing(cls);
+        additionalProcessing(cls, annotationInstance);
       }
 
       return cls;
     };
-  }
-
-  if (parentClass) {
-    DecoratorFactory.prototype = Object.create(parentClass.prototype);
   }
 
   DecoratorFactory.prototype.gabMetadataName = name;
@@ -92,8 +95,7 @@ function makeMetadataCtor(props?: (...args: any[]) => any): any {
 
 export function makeParamDecorator(
   name: string,
-  props?: (...args: any[]) => any,
-  parentClass?: any
+  props?: (...args: any[]) => any
 ): any {
   const metaCtor = makeMetadataCtor(props);
   function ParamDecoratorFactory(this: any, ...args: any[]): any {
@@ -127,9 +129,7 @@ export function makeParamDecorator(
       return cls;
     }
   }
-  if (parentClass) {
-    ParamDecoratorFactory.prototype = Object.create(parentClass.prototype);
-  }
+
   ParamDecoratorFactory.prototype.gabMetadataName = name;
   (<any>ParamDecoratorFactory).annotationCls = ParamDecoratorFactory;
   return ParamDecoratorFactory;
@@ -169,10 +169,6 @@ export function makePropDecorator(
     }
 
     return PropDecorator;
-  }
-
-  if (parentClass) {
-    PropDecoratorFactory.prototype = Object.create(parentClass.prototype);
   }
 
   PropDecoratorFactory.prototype.gabMetadataName = name;

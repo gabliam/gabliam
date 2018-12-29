@@ -1,10 +1,11 @@
+import { ExpressionParser } from '@gabliam/expression';
 import * as _ from 'lodash';
-import { Joi } from './joi';
-import { ValueValidator, ValueExtractor } from './interfaces';
-import { ValueValidationError } from './errors';
 import { APP_CONFIG } from './constants';
 import { Container } from './container';
-import { ExpressionParser } from '@gabliam/expression';
+import { ValueValidationError } from './errors';
+import { ValueExtractor } from './interfaces';
+import { Joi } from './joi';
+import { ValueValidator } from './metadata';
 import { toPromise } from './promise-utils';
 
 /**

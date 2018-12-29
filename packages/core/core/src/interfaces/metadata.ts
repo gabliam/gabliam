@@ -1,44 +1,5 @@
 import { interfaces } from 'inversify';
-import { Joi } from '../joi';
 import { GabliamPluginConstructor } from './interfaces';
-
-/**
- * Value validator
- *
- * For customize error
- */
-export interface ValueValidator {
-  /**
-   * Joi Schema
-   */
-  schema: Joi.Schema;
-
-  /**
-   * Indicate if throw an error when validation fail
-   * default: true
-   */
-  throwError?: boolean;
-
-  /**
-   * Error message if you want custom this
-   */
-  customErrorMsg?: string;
-
-  /**
-   * option of Joi
-   * @see Joi.ValidationOptions
-   */
-  options?: Joi.ValidationOptions;
-}
-
-export interface ValueMetadata {
-  path: string;
-  key: string;
-
-  target: any;
-
-  validator: ValueValidator | null;
-}
 
 /**
  * Represents a value in the registry
@@ -63,28 +24,10 @@ export interface PreDestroyRegistry {
 }
 
 /**
- * Registry metadata
- */
-export interface RegistryMetada<T = any> {
-  type: string | symbol;
-
-  value: ValueRegistry<T>;
-}
-
-/**
  * Plugin dependency
  */
 export interface PluginDependency {
   name: string | GabliamPluginConstructor;
 
   order: 'before' | 'after';
-}
-
-/**
- * Plugin metadata
- */
-export interface PluginMetadata {
-  name: string;
-
-  dependencies: PluginDependency[];
 }

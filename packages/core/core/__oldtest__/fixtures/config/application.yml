@@ -1,0 +1,4 @@
+application:
+  host: prod.app.yml
+  mongoose: require:../test.json
+  yml: true

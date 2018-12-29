@@ -1,14 +1,53 @@
-import { METADATA_KEY, ERRORS_MSGS } from '../constants';
-import {
-  PluginMetadata,
-  PluginDependency,
-  GabliamPluginConstructor,
-} from '../interfaces';
+import { ERRORS_MSGS, METADATA_KEY } from '../constants';
+import { makeDecorator, TypeDecorator } from '../decorator';
+import { GabliamPluginConstructor, PluginDependency } from '../interfaces';
+
+/**
+ * Type of the `Plugin` decorator / constructor function.
+ */
+export interface PluginDecorator {
+  /**
+   * Decorator that marks a class as an Gabliam Plugin and provides configuration
+   * metadata that determines how the config should be processed,
+   * instantiated.
+   *
+   * @usageNotes
+   *
+   * Here is an example of a class that define a Plugin without dependencies
+   *
+   * ```typescript
+   *  @Plugin()
+   *  export class Plugin {}
+   * ```
+   */
+  (value?: string | PluginOptions): TypeDecorator;
+
+  /**
+   * see the `@OnMissingBean` decorator.
+   */
+  new (value?: string | PluginOptions): any;
+}
 
 /**
  * Plugin options for decorator
  */
 export interface PluginOptions {
+  /**
+   * Define the name of the plugin.
+   * default: class.name
+   */
+  name?: string;
+
+  /**
+   * Define the dependencies.
+   */
+  dependencies?: (PluginDependency | string | GabliamPluginConstructor)[];
+}
+
+/**
+ * `Plugin` decorator and metadata.
+ */
+export interface Plugin {
   /**
    * Define the name of the plugin
    * default: class.name
@@ -18,7 +57,7 @@ export interface PluginOptions {
   /**
    * Define the dependencies
    */
-  dependencies?: (PluginDependency | string | GabliamPluginConstructor)[];
+  dependencies: PluginDependency[];
 }
 
 function isPluginDependency(obj: any): obj is PluginDependency {
@@ -35,25 +74,11 @@ function isPluginOptions(obj: any): obj is PluginOptions {
   );
 }
 
-export type PluginReturn = (target: any) => void;
-
-/**
- * Plugin decorator
- *
- * Define a Plugin for gabliam
- *
- *
- * @param  {string | PluginOptions} value
- */
-export function Plugin(value?: string | PluginOptions): PluginReturn {
-  return function(target: any) {
-    if (Reflect.hasOwnMetadata(METADATA_KEY.plugin, target) === true) {
-      throw new Error(ERRORS_MSGS.DUPLICATED_PLUGIN_DECORATOR);
-    }
-
-    let name = target.name;
+export const Plugin: PluginDecorator = makeDecorator(
+  METADATA_KEY.plugin,
+  (value?: string | PluginOptions): Plugin => {
+    let name: string | undefined;
     const dependencies: PluginDependency[] = [];
-
     if (value) {
       if (typeof value === 'string') {
         name = value;
@@ -73,11 +98,6 @@ export function Plugin(value?: string | PluginOptions): PluginReturn {
       }
     }
 
-    Reflect.defineMetadata(
-      METADATA_KEY.plugin,
-      <PluginMetadata>{ name, dependencies },
-      target
-    );
-    return target;
-  };
-}
+    return { name, dependencies };
+  }
+);

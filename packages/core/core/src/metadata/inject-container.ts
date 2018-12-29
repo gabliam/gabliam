@@ -1,12 +1,35 @@
 import { METADATA_KEY } from '../constants';
+import { makeDecorator, TypeDecorator } from '../decorator';
 
 /**
- * InjectContainer decorator
- *
- * Inject container in class
+ * Type of the `InjectContainer` decorator / constructor function.
  */
-export function InjectContainer() {
-  return function(target: any) {
-    Reflect.defineMetadata(METADATA_KEY.injectContainer, true, target);
-  };
+export interface InjectContainerDecorator {
+  /**
+   * Decorator that marks a class as an Gabliam InjectContainer.
+   *
+   * This class is loaded by the framework in config phase and all beans are injected in the container
+   *
+   * @usageNotes
+   *
+   * ```typescript
+   *  @InjectContainer()
+   *  class Gretter {
+   *    @Init()
+   *    init() {
+   *      this[CONTAINER].get();
+   *    }
+   *  }
+   * ```
+   */
+  (): TypeDecorator;
+
+  /**
+   * see the `@Config` decorator.
+   */
+  new (): any;
 }
+
+export const InjectContainer: InjectContainerDecorator = makeDecorator(
+  METADATA_KEY.injectContainer
+);

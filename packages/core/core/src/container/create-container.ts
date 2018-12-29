@@ -1,9 +1,9 @@
 import { makeLoggerMiddleware } from 'inversify-logger-middleware';
-import { makeActivationValue } from './value-activation';
+import * as _ from 'lodash';
 import { Container } from './container';
 import { makeActivationInject } from './inject-container-activation';
-import * as _ from 'lodash';
 import { ContainerActivationHook } from './interfaces';
+import { makeActivationValue } from './value-activation';
 
 /**
  * Create the inversify container

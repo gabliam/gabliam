@@ -1,4 +1,4 @@
-import { register } from '@gabliam/core';
+import { Register } from '@gabliam/core';
 import { TYPE, METADATA_KEY } from '../constants';
 import { DocumentOptions, DocumentMetadata } from '../interfaces';
 import { mongoose } from '../mongoose';
@@ -39,6 +39,6 @@ export function Document(v: string | DocumentOptions) {
     };
 
     Reflect.defineMetadata(METADATA_KEY.document, metadata, target);
-    register(TYPE.Document, { id: target, target })(target);
+    Register({ type: TYPE.Document, id: target })(target);
   };
 }

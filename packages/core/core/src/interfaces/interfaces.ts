@@ -1,8 +1,9 @@
-import { Registry } from '../registry';
-import { ValueValidator, PluginMetadata } from './metadata';
+import { gabliamValue } from '@gabliam/core/src/promise-utils';
 import { Container } from '../container';
 import { LoaderConfigOptions } from '../loaders';
-import { gabliamValue } from '@gabliam/core/src/promise-utils';
+import { ValueValidator } from '../metadata';
+import { Registry } from '../registry';
+import { PluginDependency } from './metadata';
 
 /**
  * Config for gabliam
@@ -26,7 +27,14 @@ export interface GabliamPluginConstructor {
   new (): GabliamPlugin;
 }
 
-export interface GabliamPluginDefinition extends PluginMetadata {
+export interface GabliamPluginDefinition {
+  name: string;
+
+  /**
+   * Define the dependencies
+   */
+  dependencies: PluginDependency[];
+
   plugin: GabliamPlugin;
 }
 

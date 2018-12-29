@@ -3,7 +3,7 @@ import {
   ChildEntity as typeormChildEntity,
   EntityOptions,
 } from 'typeorm';
-import { register } from '@gabliam/core';
+import { Register } from '@gabliam/core';
 import { TYPE, METADATA_KEY, ERRORS_MSGS } from './constant';
 
 /**
@@ -25,7 +25,7 @@ export function CUnit(name: string) {
  */
 export function Entity(name?: string, options?: EntityOptions) {
   return (target: any) => {
-    register(TYPE.Entity, { id: target, target })(target);
+    Register({ type: TYPE.Entity, id: target })(target);
     typeormEntity(name, options)(target);
   };
 }
@@ -35,7 +35,7 @@ export function Entity(name?: string, options?: EntityOptions) {
  */
 export function ChildEntity() {
   return (target: any) => {
-    register(TYPE.Entity, { id: target, target })(target);
+    Register({ type: TYPE.Entity, id: target })(target);
     typeormChildEntity()(target);
   };
 }

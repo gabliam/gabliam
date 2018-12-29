@@ -1,10 +1,11 @@
+import * as d from 'debug';
 import * as glob from 'glob';
 import * as _ from 'lodash';
-import * as d from 'debug';
-
+import { TYPE } from '../../constants';
+import { GabliamPlugin, ValueRegistry } from '../../interfaces';
+import { PreDestroy, Register, Scan } from '../../metadata';
+import { reflection } from '../../reflection';
 import { Registry } from '../../registry';
-import { METADATA_KEY, TYPE } from '../../constants';
-import { RegistryMetada, GabliamPlugin, ValueRegistry } from '../../interfaces';
 import { isObject } from '../../utils';
 
 const debug = d('Gabliam:loader');
@@ -27,15 +28,12 @@ export class LoaderModule {
   load(scan: string | undefined, plugins: GabliamPlugin[]) {
     const folders = plugins.reduce(
       (prev, current) => {
-        if (
-          isObject(current) &&
-          current.constructor &&
-          Reflect.hasMetadata(METADATA_KEY.scan, current.constructor)
-        ) {
-          const paths = <string[]>(
-            Reflect.getMetadata(METADATA_KEY.scan, current.constructor)
+        if (isObject(current) && current.constructor) {
+          const scanMetadatas = reflection.annotationsOfMetadata<Scan>(
+            current.constructor,
+            Scan
           );
-          prev.push(...paths);
+          prev.push(...scanMetadatas.map(s => s.path));
         }
         return prev;
       },
@@ -66,21 +64,31 @@ export class LoaderModule {
       for (const k of Object.keys(modules)) {
         const m = modules[k];
 
+        const metadatas = reflection.annotationsOfMetadata<Register>(
+          m,
+          Register
+        );
+        const scanMetadatas = reflection.annotationsOfMetadata<Scan>(m, Scan);
+
         // if the module is an objet and has a register metadata => add in registry
-        if (isObject(m) && Reflect.hasMetadata(METADATA_KEY.register, m)) {
-          const metadata = <RegistryMetada>(
-            Reflect.getMetadata(METADATA_KEY.register, m)
+        if (metadatas.length) {
+          // get the metadata
+          const [metadata] = metadatas.slice(-1);
+          registry.add(metadata.type, {
+            id: metadata.id || m,
+            target: m,
+            options: metadata.options,
+          });
+
+          const preDestroys = Object.keys(
+            reflection.propsOfMetadata(m, PreDestroy)
           );
-          registry.add(metadata.type, metadata.value);
 
           // if the module has preDestroy, registry this
-          if (Reflect.hasMetadata(METADATA_KEY.preDestroy, m)) {
-            const preDestroys: Array<string | symbol> = Reflect.getMetadata(
-              METADATA_KEY.preDestroy,
-              m
-            );
+          if (preDestroys.length) {
             registry.add(TYPE.PreDestroy, <ValueRegistry>{
-              ...metadata.value,
+              id: m,
+              target: m,
               options: {
                 preDestroys,
               },
@@ -89,9 +97,10 @@ export class LoaderModule {
         }
 
         // if the module is an objet and has a scan metadata => add in registry and load paths
-        if (isObject(m) && Reflect.hasMetadata(METADATA_KEY.scan, m)) {
-          const paths = <string[]>Reflect.getMetadata(METADATA_KEY.scan, m);
-          registry.addRegistry(this.loadFolders(...paths));
+        if (scanMetadatas.length) {
+          registry.addRegistry(
+            this.loadFolders(...scanMetadatas.map(s => s.path))
+          );
         }
       }
     }

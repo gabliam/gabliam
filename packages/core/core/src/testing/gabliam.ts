@@ -1,8 +1,8 @@
-import { Gabliam } from '../gabliam';
-import { LoaderConfigTest } from './loader';
-import { METADATA_KEY } from '../constants';
-import { RegistryMetada } from '../interfaces';
 import * as _ from 'lodash';
+import { Gabliam } from '../gabliam';
+import { Register } from '../lol.2';
+import { reflection } from '../reflection';
+import { LoaderConfigTest } from './loader';
 
 export class GabliamTest {
   public gab: Gabliam;
@@ -43,11 +43,16 @@ export class GabliamTest {
   }
 
   addClass(ctrl: any) {
-    if (Reflect.hasMetadata(METADATA_KEY.register, ctrl)) {
-      const metadata = <RegistryMetada>(
-        Reflect.getMetadata(METADATA_KEY.register, ctrl)
-      );
-      this.gab.registry.add(metadata.type, metadata.value);
+    const metadatas = reflection.annotationsOfMetadata<Register>(
+      ctrl,
+      Register
+    );
+    if (metadatas.length) {
+      const [metadata] = metadatas.slice(-1);
+      this.gab.registry.add(metadata.type, {
+        id: ctrl,
+        target: ctrl,
+      });
     }
     return this;
   }

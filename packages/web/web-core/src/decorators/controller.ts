@@ -1,4 +1,4 @@
-import { injectable, inversifyInterfaces, register } from '@gabliam/core';
+import { injectable, inversifyInterfaces, Register } from '@gabliam/core';
 import { ERRORS_MSGS, METADATA_KEY, TYPE } from '../constants';
 
 /**
@@ -103,5 +103,5 @@ function decorateController(
   const metadata: ControllerMetadata = { path, json };
   Reflect.defineMetadata(METADATA_KEY.controller, metadata, target);
   injectable()(target);
-  register(TYPE.Controller, { id, target })(target);
+  Register({ type: TYPE.Controller, id })(target);
 }

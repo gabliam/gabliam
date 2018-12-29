@@ -1,27 +1,28 @@
-import * as _ from 'lodash';
-import {
-  TYPE,
-  METADATA_KEY,
-  APP_CONFIG,
-  CORE_CONFIG,
-  VALUE_EXTRACTOR,
-} from './constants';
-import { LoaderModule, LoaderConfig } from './loaders';
-import { createContainer, Container } from './container';
-import { Registry } from './registry';
+import { ExpressionParser } from '@gabliam/expression';
 import * as d from 'debug';
-import { configureValueExtractor, callInstance } from './utils';
-import { PluginList } from './plugin-list';
+import * as _ from 'lodash';
+import { APP_CONFIG, CORE_CONFIG, TYPE, VALUE_EXTRACTOR } from './constants';
+import { Container, createContainer } from './container';
 import {
+  ConfigRegistry,
   GabliamConfig,
   GabliamPluginConstructor,
-  ConfigRegistry,
-  BeanMetadata,
-  ValueRegistry,
   PreDestroyRegistry,
+  ValueRegistry,
 } from './interfaces';
-import { ExpressionParser } from '@gabliam/expression';
+import { LoaderConfig, LoaderModule } from './loaders';
+import {
+  Bean,
+  BeforeCreate,
+  Init,
+  OnMissingBean,
+  PreDestroy,
+} from './metadata';
+import { PluginList } from './plugin-list';
 import { toPromise } from './promise-utils';
+import { reflection } from './reflection';
+import { Registry } from './registry';
+import { callInstance, configureValueExtractor } from './utils';
 
 const debug = d('Gabliam:core');
 
@@ -282,29 +283,21 @@ export class Gabliam {
       for (const { id: configId } of configsRegistry) {
         // Get config instance
         const confInstance = this.container.get<object>(configId);
+        const ctor = confInstance.constructor;
 
         // get all bean metadata in config classes
-        const beanMetadatas: BeanMetadata[] = Reflect.getMetadata(
-          METADATA_KEY.bean,
-          confInstance.constructor
-        );
+        const beanMetadatas = reflection.propsOfMetadata<Bean>(ctor, Bean);
 
         // get on missing bean metadata
-        const onMissingBeanMetadatas: BeanMetadata[] =
-          Reflect.getMetadata(
-            METADATA_KEY.onMissingBean,
-            confInstance.constructor
-          ) || [];
+        const onMissingBeanMetadatas = reflection.propsOfMetadata<
+          OnMissingBean
+        >(ctor, OnMissingBean);
 
-        const beforeCreateMetas: string[] = Reflect.getMetadata(
-          METADATA_KEY.beforeCreate,
-          confInstance.constructor
+        const beforeCreateMetas = Object.keys(
+          reflection.propsOfMetadata(ctor, BeforeCreate)
         );
 
-        const initMetadas: string[] = Reflect.getMetadata(
-          METADATA_KEY.init,
-          confInstance.constructor
-        );
+        const initMetadas = Object.keys(reflection.propsOfMetadata(ctor, Init));
 
         // call all beforeCreate method if exist
         if (Array.isArray(beforeCreateMetas)) {
@@ -315,12 +308,10 @@ export class Gabliam {
         }
 
         // If config has bean metadata
-        if (Array.isArray(beanMetadatas)) {
+        if (Object.keys(beanMetadatas).length) {
           // No promise.all and await because order of beans are important
-          for (const { id, key } of beanMetadatas) {
-            const onMissingBeans = onMissingBeanMetadatas.filter(
-              m => m.key === key
-            );
+          for (const [key, beans] of Object.entries(beanMetadatas)) {
+            const onMissingBeans = onMissingBeanMetadatas[key] || [];
 
             // by default all bean are missing
             let allMissing = true;
@@ -333,28 +324,26 @@ export class Gabliam {
               } catch {}
             }
 
-            // if all beans are missing, so we create the bean
+            // if all beans are missing, so we create all beans
             if (allMissing) {
-              const bean = await callInstance(confInstance, key);
-              this.container.bind(id).toConstantValue(bean);
+              for (const { id } of beans) {
+                const bean = await callInstance(confInstance, key);
+                this.container.bind(id).toConstantValue(bean);
 
-              // bean can return undefined or can be a constant value
-              if (
-                bean &&
-                bean.constructor &&
-                Reflect.hasMetadata(METADATA_KEY.preDestroy, bean.constructor)
-              ) {
-                const preDestroys: Array<string | symbol> = Reflect.getMetadata(
-                  METADATA_KEY.preDestroy,
-                  bean.constructor
+                const preDestroys = Object.keys(
+                  reflection.propsOfMetadata(bean.constructor, PreDestroy)
                 );
-                this.registry.add(TYPE.PreDestroy, <ValueRegistry>{
-                  id,
-                  target: bean,
-                  options: {
-                    preDestroys,
-                  },
-                });
+
+                // bean can return undefined or can be a constant value
+                if (preDestroys.length) {
+                  this.registry.add(TYPE.PreDestroy, <ValueRegistry>{
+                    id,
+                    target: bean,
+                    options: {
+                      preDestroys,
+                    },
+                  });
+                }
               }
             }
           }
