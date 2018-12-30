@@ -1,84 +1,80 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`@RabbitConsumer() decorator 1`] = `
-Object {
-  "type": "RabbitControllerType",
-  "value": Object {
-    "id": [Function],
-    "target": [Function],
-  },
-}
-`;
-
-exports[`@RabbitConsumer() decorator 2`] = `true`;
-
-exports[`@RabbitConsumer() decorator 3`] = `
 Array [
-  Object {
-    "key": "consumer",
-    "queue": "consumerTest",
-    "type": "Consumer",
+  DecoratorFactory {},
+  DecoratorFactory {
+    "id": [Function],
+    "type": "RabbitControllerType",
   },
 ]
+`;
+
+exports[`@RabbitConsumer() decorator 2`] = `
+Object {
+  "consumer": Array [
+    PropDecoratorFactory {
+      "queue": "consumerTest",
+      "type": "Consumer",
+    },
+  ],
+}
 `;
 
 exports[`@RabbitController() decorator 1`] = `
-Object {
-  "type": "RabbitControllerType",
-  "value": Object {
-    "id": [Function],
-    "target": [Function],
-  },
-}
-`;
-
-exports[`@RabbitController() decorator 2`] = `true`;
-
-exports[`@RabbitListener() & @RabbitConsumer() decorator 1`] = `
-Object {
-  "type": "RabbitControllerType",
-  "value": Object {
-    "id": [Function],
-    "target": [Function],
-  },
-}
-`;
-
-exports[`@RabbitListener() & @RabbitConsumer() decorator 2`] = `true`;
-
-exports[`@RabbitListener() & @RabbitConsumer() decorator 3`] = `
 Array [
-  Object {
-    "key": "listener",
-    "queue": "listenerTest",
-    "type": "Listener",
-  },
-  Object {
-    "key": "consumer",
-    "queue": "consumerTest",
-    "type": "Consumer",
+  DecoratorFactory {},
+  DecoratorFactory {
+    "id": [Function],
+    "type": "RabbitControllerType",
   },
 ]
+`;
+
+exports[`@RabbitListener() & @RabbitConsumer() decorator 1`] = `
+Array [
+  DecoratorFactory {},
+  DecoratorFactory {
+    "id": [Function],
+    "type": "RabbitControllerType",
+  },
+]
+`;
+
+exports[`@RabbitListener() & @RabbitConsumer() decorator 2`] = `
+Object {
+  "consumer": Array [
+    PropDecoratorFactory {
+      "queue": "consumerTest",
+      "type": "Consumer",
+    },
+  ],
+  "listener": Array [
+    PropDecoratorFactory {
+      "queue": "listenerTest",
+      "type": "Listener",
+    },
+  ],
+}
 `;
 
 exports[`@RabbitListener() decorator 1`] = `
-Object {
-  "type": "RabbitControllerType",
-  "value": Object {
-    "id": [Function],
-    "target": [Function],
-  },
-}
-`;
-
-exports[`@RabbitListener() decorator 2`] = `true`;
-
-exports[`@RabbitListener() decorator 3`] = `
 Array [
-  Object {
-    "key": "listener",
-    "queue": "listenerTest",
-    "type": "Listener",
+  DecoratorFactory {},
+  DecoratorFactory {
+    "id": [Function],
+    "type": "RabbitControllerType",
   },
 ]
+`;
+
+exports[`@RabbitListener() decorator 2`] = `
+Object {
+  "listener": Array [
+    PropDecoratorFactory {
+      "queue": "listenerTest",
+      "type": "Listener",
+    },
+  ],
+}
 `;

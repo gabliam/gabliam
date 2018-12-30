@@ -88,6 +88,7 @@ export class Reflection {
       (type as any)[PARAMETERS][propertyKey]
         ? (type as any)[PARAMETERS][propertyKey]
         : undefined;
+
     const paramTypes = this._reflect.getOwnMetadata(
       'design:paramtypes',
       type.prototype,
@@ -115,7 +116,10 @@ export class Reflection {
 
     const parentCtor = getParentCtor(type);
     let parameters = this._ownParameters(type, property);
-    if (!parameters && parentCtor !== Object) {
+    if (
+      (!Array.isArray(parameters) || parameters.length === 0) &&
+      parentCtor !== Object
+    ) {
       parameters = this.parameters(parentCtor, property);
     }
     return parameters || [];
@@ -193,15 +197,19 @@ export class Reflection {
 
   propMetadataOfDecorator<T = {}>(
     typeOrFunc: any,
-    decoratorOrMetadataName: any
+    ...decoratorOrMetadataNames: any[]
   ): { [key: string]: T[] } {
     if (!isType(typeOrFunc)) {
       return {};
     }
 
-    const gabMetadataName: string = isType(decoratorOrMetadataName)
-      ? (decoratorOrMetadataName as any).prototype.gabMetadataName
-      : decoratorOrMetadataName;
+    const gabMetadataNames: string[] = decoratorOrMetadataNames.map(
+      decoratorOrMetadataName => {
+        return isType(decoratorOrMetadataName)
+          ? (decoratorOrMetadataName as any).prototype.gabMetadataName
+          : decoratorOrMetadataName;
+      }
+    );
 
     const propMetadatas = this.propMetadata(typeOrFunc);
     const props: { [key: string]: any[] } = {};
@@ -209,7 +217,7 @@ export class Reflection {
     for (const [propName, propMetada] of Object.entries(propMetadatas)) {
       const metadatas = [];
       for (const meta of propMetada) {
-        if (meta.gabMetadataName === gabMetadataName) {
+        if (gabMetadataNames.indexOf(meta.gabMetadataName) !== -1) {
           metadatas.push(meta);
         }
       }

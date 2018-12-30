@@ -1,18 +1,20 @@
 import {
-  Scan,
   Container,
-  Registry,
-  Plugin,
   GabliamPlugin,
+  Plugin,
+  reflection,
+  Registry,
+  Scan,
 } from '@gabliam/core';
-import { TYPE, METADATA_KEY } from './constants';
-import {
-  RabbitHandlerMetadata,
-  RabbitHandlerParameterMetadata,
-  ParameterMetadata,
-} from './interfaces';
 import * as d from 'debug';
 import { AmqpConnectionManager } from './amqp-manager';
+import { TYPE } from './constants';
+import {
+  CUnit,
+  RabbitConsumer,
+  RabbitHandler,
+  RabbitListener,
+} from './decorators';
 
 const debug = d('Gabliam:Plugin:AmqpPlugin');
 
@@ -45,36 +47,27 @@ export class AmqpPlugin implements GabliamPlugin {
       const controller = container.get<any>(controllerId);
       debug('controller', controller);
 
-      const handlerMetadatas: RabbitHandlerMetadata[] = Reflect.getOwnMetadata(
-        METADATA_KEY.RabbitHandler,
-        controller.constructor
-      );
+      const handlerMetadatas = reflection.propMetadataOfDecorator<
+        RabbitHandler
+      >(controller.constructor, RabbitConsumer, RabbitListener);
 
-      const parameterMetadata: RabbitHandlerParameterMetadata = Reflect.getOwnMetadata(
-        METADATA_KEY.RabbitcontrollerParameter,
-        controller.constructor
-      );
+      const [cunit] = reflection
+        .annotationsOfDecorator<CUnit>(controller.constructor, CUnit)
+        .slice(-1);
 
-      if (handlerMetadatas) {
-        handlerMetadatas.forEach(handlerMetadata => {
-          const cunit = <string>(
-            Reflect.getMetadata(METADATA_KEY.cunit, controller.constructor)
-          );
-          let paramList: ParameterMetadata[] = [];
-          if (parameterMetadata) {
-            paramList = parameterMetadata.get(handlerMetadata.key) || [];
-          }
-
+      if (Object.keys(handlerMetadatas)) {
+        for (const [key, metas] of Object.entries(handlerMetadatas)) {
+          const [handlerMetadata] = metas.slice(-1);
           if (cunit) {
             connectionManager
-              .getConnection(cunit)
-              .constructAndAddConsume(handlerMetadata, paramList, controller);
+              .getConnection(cunit.name)
+              .constructAndAddConsume(key, handlerMetadata, controller);
           } else {
             connectionManager
               .getDefaultConnection()
-              .constructAndAddConsume(handlerMetadata, paramList, controller);
+              .constructAndAddConsume(key, handlerMetadata, controller);
           }
-        });
+        }
       }
     });
   }

@@ -1,10 +1,7 @@
-import { METADATA_KEY as CORE_METADATA_KEY } from '@gabliam/core/lib/constants';
-import { RegistryMetada } from '@gabliam/core/lib/interfaces';
-import { METADATA_KEY } from '../../src/constants';
+import { reflection } from '@gabliam/core/src';
 import {
   RabbitConsumer,
   RabbitController,
-  RabbitHandlerMetadata,
   RabbitListener,
 } from '../../src/index';
 
@@ -12,18 +9,7 @@ test(`@RabbitController() decorator`, () => {
   @RabbitController()
   class RabbitControllerTest {}
 
-  const entityMetadata: RegistryMetada = Reflect.getMetadata(
-    CORE_METADATA_KEY.register,
-    RabbitControllerTest
-  );
-
-  const documentMetadata: boolean = Reflect.getOwnMetadata(
-    METADATA_KEY.RabbitController,
-    RabbitControllerTest
-  );
-
-  expect(entityMetadata).toMatchSnapshot();
-  expect(documentMetadata).toMatchSnapshot();
+  expect(reflection.annotations(RabbitControllerTest)).toMatchSnapshot();
 });
 
 test('should fail when decorated multiple times the same class with @RabbitController', () => {
@@ -43,24 +29,8 @@ test(`@RabbitListener() decorator`, () => {
     listener() {}
   }
 
-  const entityMetadata: RegistryMetada = Reflect.getMetadata(
-    CORE_METADATA_KEY.register,
-    RabbitControllerTest
-  );
-
-  const documentMetadata: boolean = Reflect.getOwnMetadata(
-    METADATA_KEY.RabbitController,
-    RabbitControllerTest
-  );
-
-  const handlerMetadatas: RabbitHandlerMetadata[] = Reflect.getOwnMetadata(
-    METADATA_KEY.RabbitHandler,
-    RabbitControllerTest
-  );
-
-  expect(entityMetadata).toMatchSnapshot();
-  expect(documentMetadata).toMatchSnapshot();
-  expect(handlerMetadatas).toMatchSnapshot();
+  expect(reflection.annotations(RabbitControllerTest)).toMatchSnapshot();
+  expect(reflection.propMetadata(RabbitControllerTest)).toMatchSnapshot();
 });
 
 test(`@RabbitConsumer() decorator`, () => {
@@ -70,24 +40,8 @@ test(`@RabbitConsumer() decorator`, () => {
     consumer() {}
   }
 
-  const entityMetadata: RegistryMetada = Reflect.getMetadata(
-    CORE_METADATA_KEY.register,
-    RabbitControllerTest
-  );
-
-  const documentMetadata: boolean = Reflect.getOwnMetadata(
-    METADATA_KEY.RabbitController,
-    RabbitControllerTest
-  );
-
-  const handlerMetadatas: RabbitHandlerMetadata[] = Reflect.getOwnMetadata(
-    METADATA_KEY.RabbitHandler,
-    RabbitControllerTest
-  );
-
-  expect(entityMetadata).toMatchSnapshot();
-  expect(documentMetadata).toMatchSnapshot();
-  expect(handlerMetadatas).toMatchSnapshot();
+  expect(reflection.annotations(RabbitControllerTest)).toMatchSnapshot();
+  expect(reflection.propMetadata(RabbitControllerTest)).toMatchSnapshot();
 });
 
 test(`@RabbitListener() & @RabbitConsumer() decorator`, () => {
@@ -100,22 +54,6 @@ test(`@RabbitListener() & @RabbitConsumer() decorator`, () => {
     consumer() {}
   }
 
-  const entityMetadata: RegistryMetada = Reflect.getMetadata(
-    CORE_METADATA_KEY.register,
-    RabbitControllerTest
-  );
-
-  const documentMetadata: boolean = Reflect.getOwnMetadata(
-    METADATA_KEY.RabbitController,
-    RabbitControllerTest
-  );
-
-  const handlerMetadatas: RabbitHandlerMetadata[] = Reflect.getOwnMetadata(
-    METADATA_KEY.RabbitHandler,
-    RabbitControllerTest
-  );
-
-  expect(entityMetadata).toMatchSnapshot();
-  expect(documentMetadata).toMatchSnapshot();
-  expect(handlerMetadatas).toMatchSnapshot();
+  expect(reflection.annotations(RabbitControllerTest)).toMatchSnapshot();
+  expect(reflection.propMetadata(RabbitControllerTest)).toMatchSnapshot();
 });

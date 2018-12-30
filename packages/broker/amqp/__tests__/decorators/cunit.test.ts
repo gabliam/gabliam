@@ -1,5 +1,4 @@
-import { RegistryMetada } from '@gabliam/core/lib/interfaces';
-import { METADATA_KEY } from '../../src/constants';
+import { reflection } from '@gabliam/core/src';
 import { CUnit } from '../../src/index';
 
 describe('Cunit decorators', () => {
@@ -7,12 +6,7 @@ describe('Cunit decorators', () => {
     @CUnit('default')
     class TestEntity {}
 
-    const entityMetadata: RegistryMetada = Reflect.getMetadata(
-      METADATA_KEY.cunit,
-      TestEntity
-    );
-
-    expect(entityMetadata).toMatchSnapshot();
+    expect(reflection.annotations(TestEntity)).toMatchSnapshot();
   });
 
   test('should fail when decorated multiple times with @Cunit', () => {

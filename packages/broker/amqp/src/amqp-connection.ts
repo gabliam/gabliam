@@ -1,22 +1,22 @@
-import { ValueExtractor } from '@gabliam/core';
+import { reflection, ValueExtractor } from '@gabliam/core';
+import { log4js } from '@gabliam/log4js';
 import * as amqp from 'amqp-connection-manager';
 import { ConfirmChannel, ConsumeMessage, Message } from 'amqplib';
 import * as PromiseB from 'bluebird';
 import * as _ from 'lodash';
 import * as uuid from 'uuid';
-import { DEFAULT_PARAM_VALUE, PARAMETER_TYPE } from './constants';
+import { RabbitHandler, RabbitParamDecorator } from './decorators';
 import { AmqpConnectionError, AmqpTimeoutError } from './errors';
 import {
   ConsumeConfig,
   ConsumeOptions,
   ConsumerHandler,
   Controller,
-  ParameterMetadata,
-  RabbitHandlerMetadata,
   SendOptions,
 } from './interfaces';
 import { Queue } from './queue';
-import { log4js } from '@gabliam/log4js';
+
+type ExtractArgsFn = (msg: Message) => any;
 
 enum ConnectionState {
   stopped,
@@ -41,6 +41,8 @@ export class AmqpConnection {
   private channel: amqp.ChannelWrapper;
 
   private consumerList: ConsumeConfig[] = [];
+
+  private extractArgs: { [k: string]: ExtractArgsFn } = {};
 
   constructor(
     public indexConfig: number,
@@ -67,6 +69,7 @@ export class AmqpConnection {
           await channel.assertQueue(queue.queueName, queue.queueOptions);
         }
         for (const { queueName, handler, options } of this.consumerList) {
+          console.log({ queueName, handler, options });
           await channel.consume(queueName, handler, options);
         }
       },
@@ -114,21 +117,17 @@ export class AmqpConnection {
    * contrust consumer with controller instance and HandlerMetadata
    */
   constructAndAddConsume(
-    handlerMetadata: RabbitHandlerMetadata,
-    parameterMetadata: ParameterMetadata[],
+    propKey: string,
+    handlerMetadata: RabbitHandler,
     controller: Controller
   ) {
     let consumeHandler: ConsumerHandler;
     if (handlerMetadata.type === 'Listener') {
-      consumeHandler = this.constructListener(
-        handlerMetadata,
-        parameterMetadata,
-        controller
-      );
+      consumeHandler = this.constructListener(propKey, controller);
     } else {
       consumeHandler = this.constructConsumer(
+        propKey,
         handlerMetadata,
-        parameterMetadata,
         controller
       );
     }
@@ -343,8 +342,7 @@ export class AmqpConnection {
   }
 
   private constructListener(
-    handlerMetadata: RabbitHandlerMetadata,
-    parametersMetadata: ParameterMetadata[],
+    propKey: string,
     controller: Controller
   ): ConsumerHandler {
     return async (msg: ConsumeMessage | null) => {
@@ -353,18 +351,21 @@ export class AmqpConnection {
         return;
       }
 
-      const args = this.extractArgs(parametersMetadata, msg);
-      await Promise.resolve(controller[handlerMetadata.key](...args));
+      const extractArgs = this.getExtractArgs(propKey, controller);
+
+      const args = extractArgs(msg);
+      await Promise.resolve(controller[propKey](...args));
       await this.channel.ack(msg);
     };
   }
 
   private constructConsumer(
-    handlerMetadata: RabbitHandlerMetadata,
-    parametersMetadata: ParameterMetadata[],
+    propKey: string,
+    handlerMetadata: RabbitHandler,
     controller: Controller
   ): ConsumerHandler {
     return async (msg: Message | null) => {
+      console.log('ici');
       if (msg === null) {
         /* istanbul ignore next */
         return;
@@ -375,17 +376,19 @@ export class AmqpConnection {
       if (msg.properties.replyTo === undefined) {
         throw new Error(`replyTo is missing`);
       }
+      const extractArgs = this.getExtractArgs(propKey, controller);
+      const args = extractArgs(msg);
 
-      const args = this.extractArgs(parametersMetadata, msg);
+      console.log('args', args);
 
       let response: any;
       let sendOptions: SendOptions;
       try {
-        response = await Promise.resolve(
-          controller[handlerMetadata.key](...args)
-        );
+        console.log('call', controller, propKey, typeof controller[propKey]);
+        response = await Promise.resolve(controller[propKey](...args));
         sendOptions = handlerMetadata.sendOptions || {};
       } catch (err) {
+        console.log('error', err);
         response = err;
         sendOptions = handlerMetadata.sendOptionsError || {};
       }
@@ -398,59 +401,30 @@ export class AmqpConnection {
     };
   }
 
-  private extractArgs(params: ParameterMetadata[], msg: Message): any[] {
-    const args = [];
-    const content = this.parseContent(msg);
-
-    if (!params || !params.length) {
-      return [content];
+  private getExtractArgs(propKey: string, controller: Controller) {
+    const k = `${controller.constructor.name}#${propKey}`;
+    if (this.extractArgs[k]) {
+      return this.extractArgs[k];
     }
 
-    for (const item of params) {
-      switch (item.type) {
-        case PARAMETER_TYPE.MESSAGE:
-          args[item.index] = msg;
-          break;
-        case PARAMETER_TYPE.CONTENT:
-          args[item.index] = this.getParam(content, null, item);
-          break;
-        case PARAMETER_TYPE.PROPERTIES:
-          args[item.index] = this.getParam(msg, 'properties', item);
-          break;
-        case PARAMETER_TYPE.FIELDS:
-          args[item.index] = this.getParam(msg, 'fields', item);
-          break;
-        /* istanbul ignore next */
-        default:
-          args[item.index] = msg;
-          break; // response
-      }
+    const params = reflection.parameters(<any>controller.constructor, propKey);
+
+    if (
+      params.length === 1 &&
+      Array.isArray(params[0]) &&
+      params[0].length === 0
+    ) {
+      return (this.extractArgs[k] = msg => msg);
     }
 
-    args.push(content);
-    return args;
-  }
+    const parameters: RabbitParamDecorator[] = params.map(
+      meta => meta.slice(-1)[0]
+    );
 
-  private getParam(
-    source: any,
-    paramType: string | null,
-    itemParam: ParameterMetadata
-  ) {
-    const name = itemParam.parameterName;
-
-    // get the param source
-    let param = source;
-    if (paramType !== null && source[paramType]) {
-      param = source[paramType];
-    }
-
-    const res = param[name];
-
-    if (res !== undefined) {
-      return res;
-    } else {
-      return name === DEFAULT_PARAM_VALUE ? param : undefined;
-    }
+    return (this.extractArgs[k] = msg => {
+      const content = this.parseContent(msg);
+      return parameters.map(p => p.handler(p.args, msg, content));
+    });
   }
 
   private getChannel(): ConfirmChannel | null {
