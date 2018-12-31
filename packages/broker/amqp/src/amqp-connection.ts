@@ -1,4 +1,4 @@
-import { reflection, ValueExtractor } from '@gabliam/core';
+import { reflection, ValueExtractor, toPromise } from '@gabliam/core';
 import { log4js } from '@gabliam/log4js';
 import * as amqp from 'amqp-connection-manager';
 import { ConfirmChannel, ConsumeMessage, Message } from 'amqplib';
@@ -359,7 +359,7 @@ export class AmqpConnection {
       const extractArgs = this.getExtractArgs(propKey, controller);
 
       const args = extractArgs(msg);
-      await Promise.resolve(controller[propKey](...args));
+      await toPromise(controller[propKey](...args));
       await this.channel.ack(msg);
     };
   }
@@ -386,7 +386,7 @@ export class AmqpConnection {
       let response: any;
       let sendOptions: SendOptions;
       try {
-        response = await Promise.resolve(controller[propKey](...args));
+        response = await toPromise(controller[propKey](...args));
         sendOptions = handlerMetadata.sendOptions || {};
       } catch (err) {
         response = err;
