@@ -1,5 +1,5 @@
 import { METADATA_KEY, ERRORS_MSGS } from '../constants';
-import { makeDecorator } from '@gabliam/core/src';
+import { makeDecorator } from '@gabliam/core';
 
 /**
  * Type of the `CUnit` decorator / constructor function.

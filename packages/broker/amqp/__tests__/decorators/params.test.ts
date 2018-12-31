@@ -1,4 +1,4 @@
-import { reflection } from '@gabliam/core/src';
+import { reflection } from '@gabliam/core';
 import { ConsumeMessage } from 'amqplib';
 import { Content, Fields, Message, Properties } from '../../src';
 

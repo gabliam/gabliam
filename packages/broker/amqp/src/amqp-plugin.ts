@@ -14,7 +14,7 @@ import {
   RabbitConsumer,
   RabbitHandler,
   RabbitListener,
-} from './decorators';
+} from './metadatas';
 
 const debug = d('Gabliam:Plugin:AmqpPlugin');
 

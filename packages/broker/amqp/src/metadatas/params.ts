@@ -1,4 +1,4 @@
-import { makeParamDecorator } from '@gabliam/core/src';
+import { makeParamDecorator } from '@gabliam/core';
 import { Message as MessageAmqp } from 'amqplib';
 import { get } from 'lodash';
 import { METADATA_KEY } from '../constants';

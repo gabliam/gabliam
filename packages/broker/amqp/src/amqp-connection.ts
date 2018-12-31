@@ -5,7 +5,6 @@ import { ConfirmChannel, ConsumeMessage, Message } from 'amqplib';
 import * as PromiseB from 'bluebird';
 import * as _ from 'lodash';
 import * as uuid from 'uuid';
-import { RabbitHandler, RabbitParamDecorator } from './decorators';
 import { AmqpConnectionError, AmqpTimeoutError } from './errors';
 import {
   ConsumeConfig,
@@ -14,6 +13,7 @@ import {
   Controller,
   SendOptions,
 } from './interfaces';
+import { RabbitHandler, RabbitParamDecorator } from './metadatas';
 import { Queue } from './queue';
 
 type ExtractArgsFn = (msg: Message) => any;
