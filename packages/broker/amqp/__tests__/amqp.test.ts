@@ -184,7 +184,9 @@ test('consumer throw error', async () => {
   await expect(appTest.gab.buildAndStart()).resolves.toBeInstanceOf(Gabliam);
   const connection = appTest.gab.container.get(AmqpConnection);
   const resp = await connection.sendAndReceive('consumerTest', 'test');
-  expect(resp).toMatchSnapshot();
+  expect(resp).toMatchSnapshot<any>({
+    stack: expect.any(String),
+  });
   expect(spy.callCount).toMatchSnapshot();
   expect(spy.args).toMatchSnapshot();
   spy.resetHistory();

@@ -69,7 +69,6 @@ export class AmqpConnection {
           await channel.assertQueue(queue.queueName, queue.queueOptions);
         }
         for (const { queueName, handler, options } of this.consumerList) {
-          console.log({ queueName, handler, options });
           await channel.consume(queueName, handler, options);
         }
       },
@@ -323,6 +322,12 @@ export class AmqpConnection {
       return new Buffer(content);
     }
 
+    if (content instanceof Error) {
+      return new Buffer(
+        JSON.stringify(content, Object.getOwnPropertyNames(content))
+      );
+    }
+
     return new Buffer(JSON.stringify(content));
   }
 
@@ -365,7 +370,6 @@ export class AmqpConnection {
     controller: Controller
   ): ConsumerHandler {
     return async (msg: Message | null) => {
-      console.log('ici');
       if (msg === null) {
         /* istanbul ignore next */
         return;
@@ -379,16 +383,12 @@ export class AmqpConnection {
       const extractArgs = this.getExtractArgs(propKey, controller);
       const args = extractArgs(msg);
 
-      console.log('args', args);
-
       let response: any;
       let sendOptions: SendOptions;
       try {
-        console.log('call', controller, propKey, typeof controller[propKey]);
         response = await Promise.resolve(controller[propKey](...args));
         sendOptions = handlerMetadata.sendOptions || {};
       } catch (err) {
-        console.log('error', err);
         response = err;
         sendOptions = handlerMetadata.sendOptionsError || {};
       }
@@ -414,7 +414,7 @@ export class AmqpConnection {
       Array.isArray(params[0]) &&
       params[0].length === 0
     ) {
-      return (this.extractArgs[k] = msg => msg);
+      return (this.extractArgs[k] = msg => [this.parseContent(msg)]);
     }
 
     const parameters: RabbitParamDecorator[] = params.map(
