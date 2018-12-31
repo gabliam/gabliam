@@ -3,7 +3,7 @@ import * as glob from 'glob';
 import * as _ from 'lodash';
 import { TYPE } from '../../constants';
 import { GabliamPlugin, ValueRegistry } from '../../interfaces';
-import { PreDestroy, Register, Scan } from '../../metadata';
+import { PreDestroy, Register, Scan } from '../../metadatas';
 import { reflection } from '../../reflection';
 import { Registry } from '../../registry';
 import { isObject } from '../../utils';

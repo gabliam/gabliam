@@ -17,7 +17,7 @@ import {
   Init,
   OnMissingBean,
   PreDestroy,
-} from './metadata';
+} from './metadatas';
 import { PluginList } from './plugin-list';
 import { toPromise } from './promise-utils';
 import { reflection } from './reflection';

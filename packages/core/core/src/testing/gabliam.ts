@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import { Gabliam } from '../gabliam';
-import { Register } from '../metadata';
+import { Register } from '../metadatas';
 import { reflection } from '../reflection';
 import { LoaderConfigTest } from './loader';
 

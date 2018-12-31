@@ -5,7 +5,7 @@ import { Container } from './container';
 import { ValueValidationError } from './errors';
 import { ValueExtractor } from './interfaces';
 import { Joi } from './joi';
-import { ValueValidator } from './metadata';
+import { ValueValidator } from './metadatas';
 import { toPromise } from './promise-utils';
 
 /**

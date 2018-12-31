@@ -1,4 +1,4 @@
-import { Value } from '../metadata';
+import { Value } from '../metadatas';
 import { reflection } from '../reflection';
 import { configureValueExtractor } from '../utils';
 import { Container } from './container';

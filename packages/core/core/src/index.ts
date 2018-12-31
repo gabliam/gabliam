@@ -25,7 +25,7 @@ export * from './gabliam';
 export * from './interfaces';
 export * from './joi';
 export { configResolver, FileLoader, Resolver } from './loaders';
-export * from './metadata';
+export * from './metadatas';
 export * from './promise-utils';
 export * from './reflection';
 export * from './registry';

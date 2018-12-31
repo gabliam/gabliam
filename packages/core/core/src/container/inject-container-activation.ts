@@ -1,5 +1,5 @@
 import { INJECT_CONTAINER_KEY } from '../constants';
-import { InjectContainer } from '../metadata';
+import { InjectContainer } from '../metadatas';
 import { reflection } from '../reflection';
 import { Container } from './container';
 import { ContainerActivationHook } from './interfaces';

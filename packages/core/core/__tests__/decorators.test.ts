@@ -18,7 +18,7 @@ import {
   Value,
 } from '../src';
 import { TYPE } from '../src/constants';
-import { CoreConfig } from '../src/metadata/config';
+import { CoreConfig } from '../src/metadatas/config';
 
 describe('@init', () => {
   test('should add init metadata to a class when decorating a method with @init', () => {

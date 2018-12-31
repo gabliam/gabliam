@@ -14,7 +14,7 @@ import {
   GabliamPluginWithStop,
   PluginDependency,
 } from './interfaces';
-import { Plugin } from './metadata';
+import { Plugin } from './metadatas';
 import { reflection } from './reflection';
 
 /**
