@@ -1,16 +1,47 @@
-import { METADATA_KEY, ERRORS_MSGS } from '../constant';
+import { makeDecorator } from '@gabliam/core/src';
+import { ERRORS_MSGS, METADATA_KEY } from '../constant';
 
 /**
- * Add Cache on class
+ * Type of the `CacheGroup` decorator / constructor function.
  */
-export const CacheGroup = (cacheGroupName: string): ClassDecorator => <
-  T extends Function
->(
-  target: T
-) => {
-  if (Reflect.hasOwnMetadata(METADATA_KEY.cacheGroup, target) === true) {
-    throw new Error(ERRORS_MSGS.DUPLICATED_CACHE_DECORATOR);
-  }
+export interface CacheGroupDecorator {
+  /**
+   * Decorator that marks a class to use a specific cache group
+   *
+   * @usageNotes
+   *
+   * ```typescript
+   * @CacheGroup('test')
+   * @Service()
+   * class GretterService {
+   *    constructor(private gretter: Gretter) {
+   *       gretter.greet();
+   *    }
+   * }
+   * ```
+   */
+  (cacheGroupName: string): ClassDecorator;
 
-  Reflect.defineMetadata(METADATA_KEY.cacheGroup, cacheGroupName, target);
-};
+  /**
+   * see the `@Service` decorator.
+   */
+  new (cacheGroupName: string): any;
+}
+
+/**
+ * `CacheGroup` decorator and metadata.
+ */
+export interface CacheGroup {
+  /**
+   * Name of cache group
+   */
+  cacheGroupName: string;
+}
+
+export const CacheGroup: CacheGroupDecorator = makeDecorator(
+  METADATA_KEY.cacheGroup,
+  (cacheGroupName: string): CacheGroup => ({ cacheGroupName }),
+  undefined,
+  true,
+  ERRORS_MSGS.DUPLICATED_CACHE_DECORATOR
+);

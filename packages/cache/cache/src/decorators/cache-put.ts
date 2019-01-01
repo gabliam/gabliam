@@ -2,34 +2,76 @@ import {
   Container,
   InjectContainer,
   INJECT_CONTAINER_KEY,
+  makePropDecorator,
 } from '@gabliam/core';
 import {
   CacheConfig,
+  CacheInternalOptions,
   CacheOptions,
   createCacheConfig,
   extractCacheInternalOptions,
-  CacheInternalOptions,
+  getCacheGroup,
 } from './cache-options';
 
-export function CachePut(
-  value?: string | string[] | CacheOptions
-): MethodDecorator {
-  return function(
+/**
+ * Type of the `CachePut` decorator / constructor function.
+ */
+export interface CachePutDecorator {
+  /**
+   * Decorator that marks a method triggers a cache put operation.
+   *
+   * @usageNotes
+   *
+   * ```typescript
+   * @Service()
+   * class SampleController {
+   *    @CachePut('test')
+   *    saveToDatabase(entity: any) {
+   *    }
+   * }
+   * ```
+   *
+   */
+  (value?: string | string[] | CacheOptions): MethodDecorator;
+
+  /**
+   * see the `@CachePut` decorator.
+   */
+  new (value?: string | string[] | CacheOptions): any;
+}
+
+/**
+ * Type of metadata for an `CachePut` property.
+ */
+// tslint:disable-next-line:no-empty-interface
+interface CachePut extends CacheInternalOptions {}
+
+export const CachePut: CachePutDecorator = makePropDecorator(
+  'CachePut',
+  (value?: string | string[] | CacheOptions): CachePut => {
+    return extractCacheInternalOptions(value);
+  },
+  (
     target: Object,
     propertyKey: string | symbol,
-    descriptor: TypedPropertyDescriptor<any>
-  ) {
+    descriptor: TypedPropertyDescriptor<any>,
+    cacheInternalOptions: CachePut
+  ) => {
     InjectContainer()(target.constructor);
-    let cacheInternalOptions: CacheInternalOptions;
     const method = descriptor.value;
+    let cacheGroup: string;
     let cacheConfig: CacheConfig;
     descriptor.value = async function(...args: any[]) {
-      if (!cacheInternalOptions) {
-        cacheInternalOptions = extractCacheInternalOptions(target, value);
+      if (!cacheGroup) {
+        cacheGroup = getCacheGroup(target.constructor);
       }
       if (!cacheConfig) {
         const container: Container = (<any>this)[INJECT_CONTAINER_KEY];
-        cacheConfig = await createCacheConfig(container, cacheInternalOptions);
+        cacheConfig = await createCacheConfig(
+          cacheGroup,
+          container,
+          cacheInternalOptions
+        );
       }
 
       if (!cacheConfig.passCondition(...args)) {
@@ -63,5 +105,5 @@ export function CachePut(
 
       return result;
     };
-  };
-}
+  }
+);

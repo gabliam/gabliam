@@ -2,6 +2,7 @@ import {
   Container,
   InjectContainer,
   INJECT_CONTAINER_KEY,
+  makePropDecorator,
 } from '@gabliam/core';
 import { Cache } from '../cache';
 import {
@@ -10,18 +11,19 @@ import {
   CacheOptions,
   createCacheConfig,
   extractCacheInternalOptions,
+  getCacheGroup,
 } from './cache-options';
 
 export interface CacheEvictOptions extends CacheOptions {
+  /**
+   * Indicates whether a cache-wide eviction needs to be performed rather then just an entry eviction (based on the key).
+   */
   allEntries?: boolean;
 
+  /**
+   * Indicate whether the eviction should occur before the method executes.
+   */
   beforeInvocation?: boolean;
-}
-
-interface CacheInternalEvictOptions extends CacheInternalOptions {
-  allEntries: boolean;
-
-  beforeInvocation: boolean;
 }
 
 function isCacheEvictOptions(obj: any): obj is CacheEvictOptions {
@@ -29,9 +31,8 @@ function isCacheEvictOptions(obj: any): obj is CacheEvictOptions {
 }
 
 function extractCacheEvictInternalOptions(
-  target: Object,
   value?: string | string[] | CacheEvictOptions
-): CacheInternalEvictOptions {
+): CacheEvict {
   let allEntries = false;
   let beforeInvocation = false;
   if (isCacheEvictOptions(value)) {
@@ -39,35 +40,80 @@ function extractCacheEvictInternalOptions(
   }
 
   return {
-    ...extractCacheInternalOptions(target, value),
+    ...extractCacheInternalOptions(value),
     allEntries,
     beforeInvocation,
   };
 }
 
 /**
- * Annotation indicating that a method triggers a cache evict operation.
- * @param value name of cache or CacheEvictOptions
+ * Type of the `CacheEvict` decorator / constructor function.
  */
-export function CacheEvict(
-  value?: string | string[] | CacheEvictOptions
-): MethodDecorator {
-  return function(
+export interface CacheEvictDecorator {
+  /**
+   * Decorator that marks a method triggers a cache evict operation.
+   *
+   * @usageNotes
+   *
+   * ```typescript
+   * @Service()
+   * class SampleController {
+   *    @CacheEvict('test')
+   *    saveToDatabase(entity: any) {
+   *    }
+   * }
+   * ```
+   *
+   */
+  (value?: string | string[] | CacheEvictOptions): MethodDecorator;
+
+  /**
+   * see the `@CacheEvict` decorator.
+   */
+  new (value?: string | string[] | CacheEvictOptions): any;
+}
+
+/**
+ * Type of metadata for an `CacheEvict` property.
+ */
+interface CacheEvict extends CacheInternalOptions {
+  /**
+   * Indicates whether a cache-wide eviction needs to be performed rather then just an entry eviction (based on the key).
+   */
+  allEntries: boolean;
+
+  /**
+   * Indicate whether the eviction should occur before the method executes.
+   */
+  beforeInvocation: boolean;
+}
+
+export const CacheEvict: CacheEvictDecorator = makePropDecorator(
+  'CacheEvict',
+  (value?: string | string[] | CacheEvictOptions): CacheEvict => {
+    return extractCacheEvictInternalOptions(value);
+  },
+  (
     target: Object,
     propertyKey: string | symbol,
-    descriptor: TypedPropertyDescriptor<any>
-  ) {
+    descriptor: TypedPropertyDescriptor<any>,
+    cacheInternalOptions: CacheEvict
+  ) => {
     InjectContainer()(target.constructor);
-    let cacheInternalOptions: CacheInternalEvictOptions;
     const method = descriptor.value;
+    let cacheGroup: string;
     let cacheConfig: CacheConfig;
     descriptor.value = async function(...args: any[]) {
-      if (!cacheInternalOptions) {
-        cacheInternalOptions = extractCacheEvictInternalOptions(target, value);
+      if (!cacheGroup) {
+        cacheGroup = getCacheGroup(target.constructor);
       }
       if (!cacheConfig) {
         const container: Container = (<any>this)[INJECT_CONTAINER_KEY];
-        cacheConfig = await createCacheConfig(container, cacheInternalOptions);
+        cacheConfig = await createCacheConfig(
+          cacheGroup,
+          container,
+          cacheInternalOptions
+        );
       }
 
       if (!cacheConfig.passCondition(...args)) {
@@ -112,8 +158,8 @@ export function CacheEvict(
 
       return result;
     };
-  };
-}
+  }
+);
 
 async function evict(caches: Cache[], cacheKey: string, allEntries: boolean) {
   for (const cache of caches) {

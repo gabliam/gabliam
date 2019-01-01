@@ -1,10 +1,11 @@
-import { Container } from '@gabliam/core';
+import { Container, reflection } from '@gabliam/core';
 import { Expression, ExpressionParser } from '@gabliam/expression';
 import * as d from 'debug';
 import { Cache } from '../cache';
 import { CacheManager } from '../cache-manager';
-import { CACHE_MANAGER, METADATA_KEY } from '../constant';
+import { CACHE_MANAGER } from '../constant';
 import { CacheNameIsMandatoryError } from '../error';
+import { CacheGroup } from './cache-group';
 const debug = d('Gabliam:Plugin:CachePlugin:CacheOptions');
 
 export type KeyGenerator = (...args: any[]) => string | undefined;
@@ -62,9 +63,10 @@ export function isCacheOptions(obj: any): obj is CacheOptions {
   return typeof obj === 'object' && obj.hasOwnProperty('cacheNames');
 }
 
+/**
+ * Cache internal options
+ */
 export interface CacheInternalOptions {
-  cacheGroup: string;
-
   cacheNames: string | string[];
 
   /**
@@ -100,18 +102,16 @@ export interface CacheInternalOptions {
   unless?: string;
 }
 
-const getCacheGroup = (target: Object) => {
-  return (
-    <string>Reflect.getMetadata(METADATA_KEY.cacheGroup, target.constructor) ||
-    'default'
-  );
+export const getCacheGroup = (target: Object) => {
+  const [cacheGroup] = reflection
+    .annotationsOfDecorator<CacheGroup>(target, CacheGroup)
+    .slice(-1);
+  return cacheGroup ? cacheGroup.cacheGroupName || 'default' : 'default';
 };
 
 export function extractCacheInternalOptions(
-  target: Object,
   value?: string | string[] | CacheOptions
 ): CacheInternalOptions {
-  const cacheGroup = getCacheGroup(target);
   const cacheNames: string[] = [];
   let keyGenerator = defaultKeyGenerator;
   let key: string | undefined;
@@ -141,7 +141,6 @@ export function extractCacheInternalOptions(
 
   return {
     cacheNames,
-    cacheGroup,
     key,
     keyGenerator,
     condition,
@@ -150,16 +149,11 @@ export function extractCacheInternalOptions(
 }
 
 export async function createCacheConfig(
+  cacheGroup: string,
   container: Container,
   cacheInternalOptions: CacheInternalOptions
 ): Promise<CacheConfig> {
-  const {
-    cacheGroup,
-    cacheNames,
-    condition,
-    key,
-    unless,
-  } = cacheInternalOptions;
+  const { cacheNames, condition, key, unless } = cacheInternalOptions;
 
   let passCondition = (...vals: any[]) => true;
 

@@ -90,5 +90,3 @@ MemoryCache {
   },
 }
 `;
-
-exports[`should fail when cachename is missing 1`] = `[CacheNameIsMandatoryError:  Cache name is mandatory. . Add it with @Cacheable or @Cache]`;

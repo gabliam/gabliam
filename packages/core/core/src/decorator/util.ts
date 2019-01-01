@@ -110,8 +110,12 @@ export function makeParamDecorator(
 export function makePropDecorator(
   name: string,
   props?: (...args: any[]) => any,
-  parentClass?: any,
-  additionalProcessing?: (target: any, name: string, ...args: any[]) => void
+  additionalProcessing?: (
+    target: any,
+    name: string,
+    descriptor: TypedPropertyDescriptor<any>,
+    annotationInstance: any
+  ) => void
 ): any {
   const metaCtor = makeMetadataCtor(props);
 
@@ -123,7 +127,11 @@ export function makePropDecorator(
 
     const decoratorInstance = new (<any>PropDecoratorFactory)(...args);
 
-    function PropDecorator(target: any, key: string) {
+    function PropDecorator(
+      target: any,
+      key: string,
+      descriptor: TypedPropertyDescriptor<any>
+    ) {
       const constructor = target.constructor;
       // Use of Object.defineProperty is important since it creates non-enumerable property which
       // prevents the property is copied during subclassing.
@@ -136,7 +144,7 @@ export function makePropDecorator(
       meta[key].unshift(decoratorInstance);
 
       if (additionalProcessing) {
-        additionalProcessing(target, key, ...args);
+        additionalProcessing(target, key, descriptor, decoratorInstance);
       }
     }
 

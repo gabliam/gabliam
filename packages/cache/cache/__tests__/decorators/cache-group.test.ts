@@ -63,20 +63,15 @@ test('should fail when decorated multiple times with @CacheGroup', () => {
 });
 
 test('should fail when cachename is missing', async () => {
-  @CacheGroup('test')
-  @Service()
-  class TestService {
-    @CachePut()
-    async hi(surname: string, name: string) {
-      return `hi ${surname} ${name}`;
+  expect(function() {
+    @CacheGroup('test')
+    class TestBean {
+      @CachePut()
+      async hi(surname: string, name: string) {
+        return `hi ${surname} ${name}`;
+      }
     }
 
-    @CacheEvict('hi')
-    async evicthi(surname: string, name: string) {}
-  }
-  g.addClass(TestService);
-  await g.build();
-
-  const s = g.gab.container.get(TestService);
-  expect(s.hi('test', 'test')).rejects.toMatchSnapshot();
+    new TestBean();
+  }).toThrowError();
 });
