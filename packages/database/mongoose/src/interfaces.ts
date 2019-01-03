@@ -1,10 +1,4 @@
-import { mongoose } from '../mongoose';
-
-export interface DocumentOptions {
-  name: string;
-  collectionName?: string;
-  schema?: mongoose.Schema;
-}
+import { mongoose } from './mongoose';
 
 export interface IRead<T extends mongoose.Document> {
   findAll(): Promise<T[]>;

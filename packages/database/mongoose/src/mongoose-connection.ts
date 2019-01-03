@@ -1,7 +1,9 @@
-import { Repository } from './repository';
-import { METADATA_KEY } from './constants';
-import { DocumentMetadata, MongooseConfiguration } from './interfaces';
+import { reflection } from '@gabliam/core/src';
+import { Document as MongoDocument } from './decorators';
+import { ClassIsNotAMongoDocument } from './errors';
+import { MongooseConfiguration } from './interfaces';
 import { mongoose } from './mongoose';
+import { Repository } from './repository';
 const { Mongoose } = mongoose;
 const uriFormat = require('mongodb-uri');
 
@@ -56,8 +58,8 @@ export class MongooseConnection {
     );
 
     for (const document of listDocument) {
-      const { collectionName, name, schema } = <DocumentMetadata>(
-        Reflect.getOwnMetadata(METADATA_KEY.document, document)
+      const { collectionName, name, schema } = this.getDocumentMetadata(
+        document
       );
       const documentName = name.toLowerCase();
       const clazzSchema = this.conn.model<mongoose.Document>(
@@ -74,9 +76,7 @@ export class MongooseConnection {
       return this.getRepositoryByName<T>(clazz);
     }
 
-    const { collectionName, name, schema } = <DocumentMetadata>(
-      Reflect.getOwnMetadata(METADATA_KEY.document, clazz)
-    );
+    const { collectionName, name, schema } = this.getDocumentMetadata(clazz);
     const documentName = name.toLowerCase();
     if (this.repositories.has(documentName)) {
       return this.repositories.get(documentName)!;
@@ -90,6 +90,17 @@ export class MongooseConnection {
     const repository = new Repository<T>(clazzSchema);
     this.repositories.set(documentName, repository);
     return repository;
+  }
+
+  private getDocumentMetadata(clazz: any): MongoDocument {
+    const [metadata] = reflection
+      .annotationsOfDecorator<MongoDocument>(clazz, MongoDocument)
+      .slice(-1);
+    if (metadata === undefined) {
+      throw new ClassIsNotAMongoDocument(clazz);
+    }
+
+    return metadata;
   }
 
   private getRepositoryByName<T>(documentName: string) {

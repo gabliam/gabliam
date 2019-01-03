@@ -1,9 +1,6 @@
-import { RegistryMetada } from '@gabliam/core/lib/interfaces';
-import { Document, MUnit } from '../src';
-import { METADATA_KEY as CORE_METADATA_KEY } from '@gabliam/core/lib/constants';
-import { DocumentMetadata } from '../src/interfaces/index';
-import { METADATA_KEY } from '../src/constants';
+import { reflection } from '@gabliam/core';
 import * as mongoose from 'mongoose';
+import { Document, MUnit } from '../src';
 
 test(`@Document('Hero') decorator`, () => {
   @Document('Hero')
@@ -18,18 +15,7 @@ test(`@Document('Hero') decorator`, () => {
     }
   }
 
-  const entityMetadata: RegistryMetada = Reflect.getMetadata(
-    CORE_METADATA_KEY.register,
-    Hero
-  );
-
-  const documentMetadata: DocumentMetadata = Reflect.getOwnMetadata(
-    METADATA_KEY.document,
-    Hero
-  );
-
-  expect(entityMetadata).toMatchSnapshot();
-  expect(documentMetadata).toMatchSnapshot();
+  expect(reflection.annotations(Hero)).toMatchSnapshot();
 });
 
 test(`@Document(DocumentOptions without collectionName)  decorator`, () => {
@@ -44,18 +30,7 @@ test(`@Document(DocumentOptions without collectionName)  decorator`, () => {
   })
   class Hero {}
 
-  const entityMetadata: RegistryMetada = Reflect.getMetadata(
-    CORE_METADATA_KEY.register,
-    Hero
-  );
-
-  const documentMetadata: DocumentMetadata = Reflect.getOwnMetadata(
-    METADATA_KEY.document,
-    Hero
-  );
-
-  expect(entityMetadata).toMatchSnapshot();
-  expect(documentMetadata).toMatchSnapshot();
+  expect(reflection.annotations(Hero)).toMatchSnapshot();
 });
 
 test(`@Document(DocumentOptions)  decorator`, () => {
@@ -71,18 +46,7 @@ test(`@Document(DocumentOptions)  decorator`, () => {
   })
   class Hero {}
 
-  const entityMetadata: RegistryMetada = Reflect.getMetadata(
-    CORE_METADATA_KEY.register,
-    Hero
-  );
-
-  const documentMetadata: DocumentMetadata = Reflect.getOwnMetadata(
-    METADATA_KEY.document,
-    Hero
-  );
-
-  expect(entityMetadata).toMatchSnapshot();
-  expect(documentMetadata).toMatchSnapshot();
+  expect(reflection.annotations(Hero)).toMatchSnapshot();
 });
 
 describe('errors', () => {
@@ -114,12 +78,7 @@ describe('MUnit decorators', () => {
     @MUnit('default')
     class TestEntity {}
 
-    const entityMetadata: RegistryMetada = Reflect.getMetadata(
-      METADATA_KEY.munit,
-      TestEntity
-    );
-
-    expect(entityMetadata).toMatchSnapshot();
+    expect(reflection.annotations(TestEntity)).toMatchSnapshot();
   });
 
   test('should fail when decorated multiple times with @MUnit', () => {

@@ -1,44 +1,126 @@
-import { Register } from '@gabliam/core';
-import { TYPE, METADATA_KEY } from '../constants';
-import { DocumentOptions, DocumentMetadata } from '../interfaces';
+import { makeDecorator, Register } from '@gabliam/core';
+import { METADATA_KEY, TYPE } from '../constants';
 import { mongoose } from '../mongoose';
 
+export interface DocumentOptions {
+  name: string;
+  collectionName?: string;
+  schema?: mongoose.Schema;
+}
+
 /**
- * Document decorator
+ * Type of the `Document` decorator / constructor function.
  */
-export function Document(v: string | DocumentOptions) {
-  return function(target: any) {
+export interface DocumentDecorator {
+  /**
+   * Decorator that marks a class to be a Mongo Document.
+   *
+   * The schema can be a static method or in decorator options
+   *
+   * @usageNotes
+   *
+   * Example with static method
+   *
+   * ```typescript
+   * @Document('Hero')
+   * export class Hero {
+   *   static getSchema() {
+   *     const schema = new mongoose.Schema({
+   *       name: {
+   *         type: String,
+   *         required: true,
+   *       },
+   *       power: {
+   *         type: String,
+   *         required: true,
+   *       },
+   *       amountPeopleSaved: {
+   *         type: Number,
+   *         required: false,
+   *       },
+   *       createdAt: {
+   *         type: Date,
+   *         required: false,
+   *       },
+   *       modifiedAt: {
+   *         type: Date,
+   *         required: false,
+   *       },
+   *     });
+   *
+   *     schema.pre('save', <any>function(this: HeroModel, next: any) {
+   *       if (this) {
+   *         const now = new Date();
+   *         if (!this.createdAt) {
+   *           this.createdAt = now;
+   *         }
+   *         this.modifiedAt = now;
+   *       }
+   *       next();
+   *     });
+   *
+   *     return schema;
+   *   }
+   * }
+   * ```
+   *
+   */
+  (value: string | DocumentOptions): ClassDecorator;
+
+  /**
+   * see the `@Document` decorator.
+   */
+  new (value: string | DocumentOptions): any;
+}
+
+/**
+ * Type of metadata for an `Document` property.
+ */
+export interface Document {
+  name: string;
+  collectionName?: string;
+  schema: mongoose.Schema;
+}
+
+type OptionnalOne<T, Keys extends keyof T = keyof T> = Pick<
+  T,
+  Exclude<keyof T, Keys>
+> &
+  { [K in Keys]+?: Partial<Pick<T, K>> }[Keys];
+
+export const Document: DocumentDecorator = makeDecorator(
+  METADATA_KEY.document,
+  (value: string | DocumentOptions): OptionnalOne<Document, 'schema'> => {
     let opts: DocumentOptions;
-    if (typeof v === 'string') {
+    if (typeof value === 'string') {
       opts = {
-        name: v,
+        name: value,
       };
     } else {
-      opts = v;
+      opts = value;
     }
 
-    let schema: mongoose.Schema;
-    if (!opts.schema) {
-      if (typeof target.getSchema !== 'function') {
+    const schema = opts.schema;
+
+    return {
+      ...opts,
+      schema,
+    };
+  },
+  (cls: any, annotationInstance: Document) => {
+    let schema = annotationInstance.schema;
+    if (!annotationInstance.schema) {
+      if (typeof cls.getSchema !== 'function') {
         throw new Error(
           `Schema is mandory. Add it with decorator or with static method`
         );
       }
-      schema = target.getSchema();
-    } else {
-      schema = opts.schema;
+      schema = annotationInstance.schema = cls.getSchema();
     }
 
     if (!(schema instanceof mongoose.Schema)) {
       throw new Error(`Schema must be an instance of mongoose.Schema`);
     }
-
-    const metadata: DocumentMetadata = {
-      ...opts,
-      schema,
-    };
-
-    Reflect.defineMetadata(METADATA_KEY.document, metadata, target);
-    Register({ type: TYPE.Document, id: target })(target);
-  };
-}
+    Register({ type: TYPE.Document, id: cls })(cls);
+  }
+);

@@ -1,6 +1,7 @@
-import { METADATA_KEY } from './constants';
-import { MongooseConnection } from './mongoose-connection';
+import { reflection } from '@gabliam/core/src';
+import { MUnit } from './decorators';
 import { MongooseConfiguration } from './interfaces';
+import { MongooseConnection } from './mongoose-connection';
 
 export class MongooseConnectionManager {
   private connections: MongooseConnection[] = [];
@@ -22,8 +23,7 @@ export class MongooseConnectionManager {
 
     // add entity to the correct connection
     for (const entity of this.models) {
-      let munit =
-        <string>Reflect.getMetadata(METADATA_KEY.munit, entity) || 'default';
+      let munit = getMunit(entity);
       let index = connectionOptions.findIndex(c => c.name === munit);
 
       if (index === -1 && munit === 'default') {
@@ -73,3 +73,10 @@ export class MongooseConnectionManager {
     }
   }
 }
+
+const getMunit = (cls: any) => {
+  const [munit] = reflection
+    .annotationsOfDecorator<MUnit>(cls, MUnit)
+    .slice(-1);
+  return munit ? munit.name || 'default' : 'default';
+};
