@@ -1,6 +1,10 @@
 import { makeDecorator, Register } from '@gabliam/core';
 import { METADATA_KEY, TYPE } from '../constants';
 import { mongoose } from '../mongoose';
+import {
+  MongoSchemaIsMandatoryError,
+  MongoSchemaInstanceError,
+} from '../errors';
 
 export interface DocumentOptions {
   name: string;
@@ -111,15 +115,13 @@ export const Document: DocumentDecorator = makeDecorator(
     let schema = annotationInstance.schema;
     if (!annotationInstance.schema) {
       if (typeof cls.getSchema !== 'function') {
-        throw new Error(
-          `Schema is mandory. Add it with decorator or with static method`
-        );
+        throw new MongoSchemaIsMandatoryError();
       }
       schema = annotationInstance.schema = cls.getSchema();
     }
 
     if (!(schema instanceof mongoose.Schema)) {
-      throw new Error(`Schema must be an instance of mongoose.Schema`);
+      throw new MongoSchemaInstanceError();
     }
     Register({ type: TYPE.Document, id: cls })(cls);
   }

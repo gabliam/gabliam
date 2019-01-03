@@ -1,10 +1,10 @@
-export class ClassIsNotAMongoDocument extends Error {
-  name = 'ClassIsNotAMongoDocument';
+export class MongoClassIsNotAMongoDocumentError extends Error {
+  name = 'MongoClassIsNotAMongoDocumentError';
 
   constructor(cls: any) {
     super();
     // Set the prototype explicitly.
-    Object.setPrototypeOf(this, ClassIsNotAMongoDocument.prototype);
+    Object.setPrototypeOf(this, MongoClassIsNotAMongoDocumentError.prototype);
 
     // tslint:disable-next-line:max-line-length
     this.message = `${

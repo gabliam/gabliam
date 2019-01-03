@@ -2,9 +2,9 @@
 
 exports[`Errors with bad config 1`] = `[Error: Error for 'application.mongoose' value{"isJoi":true,"name":"ValidationError","details":[{"message":"/"value/" must be an object","path":[],"type":"object.base","context":{"value":"bad","label":"value"}},{"message":"/"value/" must be an array","path":[],"type":"array.base","context":{"label":"value"}}],"_object":"bad"}]`;
 
-exports[`Errors without config folder 1`] = `[Error: PluginMongooseConfig mongooseConfiguration is mandatory]`;
+exports[`Errors without config folder 1`] = `[MongoConfigIsMandatoryError: mongooseConfiguration is mandatory.]`;
 
-exports[`must fail when MUnit not found 1`] = `[Error: MUnit bad not found]`;
+exports[`must fail when MUnit not found 1`] = `[MongoMUnitNotFoundError: MUnit bad not found]`;
 
 exports[`must fail when getConnection not found 1`] = `"Connection notfound not found"`;
 

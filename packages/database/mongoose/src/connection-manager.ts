@@ -1,6 +1,10 @@
 import { reflection } from '@gabliam/core/src';
-import { MUnit } from './metadatas';
+import {
+  MongoConnectionNotFoundError,
+  MongoMUnitNotFoundError,
+} from './errors';
 import { MongooseConfiguration } from './interfaces';
+import { MUnit } from './metadatas';
 import { MongooseConnection } from './mongoose-connection';
 
 export class MongooseConnectionManager {
@@ -31,7 +35,7 @@ export class MongooseConnectionManager {
         munit = connectionOptions[0].name;
       }
       if (index === -1) {
-        throw new Error(`MUnit ${munit} not found`);
+        throw new MongoMUnitNotFoundError(munit);
       }
 
       if (!modelsByConnection.has(munit)) {
@@ -59,7 +63,7 @@ export class MongooseConnectionManager {
   getConnection(name: string) {
     const connection = this.connections.find(c => c.name === name);
     if (!connection) {
-      throw new Error(`Connection ${name} not found`);
+      throw new MongoConnectionNotFoundError(name);
     }
     return connection;
   }

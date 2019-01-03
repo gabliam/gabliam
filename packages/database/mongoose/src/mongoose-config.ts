@@ -1,19 +1,20 @@
 import {
+  Bean,
+  Container,
+  Init,
+  inject,
+  InjectContainer,
+  INJECT_CONTAINER_KEY,
   PluginConfig,
   Value,
-  Bean,
-  inject,
-  Init,
-  InjectContainer,
-  Container,
-  INJECT_CONTAINER_KEY,
 } from '@gabliam/core';
-import { LIST_DOCUMENT } from './constants';
+import * as d from 'debug';
 import { configurationValidator } from './configuration-validator';
+import { MongooseConnectionManager } from './connection-manager';
+import { LIST_DOCUMENT } from './constants';
+import { MongoConfigIsMandatoryError } from './errors';
 import { MongooseConfiguration } from './interfaces';
 import { MongooseConnection } from './mongoose-connection';
-import * as d from 'debug';
-import { MongooseConnectionManager } from './connection-manager';
 
 const debug = d('Gabliam:Plugin:mongoose');
 
@@ -47,9 +48,7 @@ export class PluginMongooseConfig {
   createManager() {
     debug('mongooseConfiguration', this.mongooseConfiguration);
     if (!this.mongooseConfiguration) {
-      throw new Error(
-        `PluginMongooseConfig mongooseConfiguration is mandatory`
-      );
+      throw new MongoConfigIsMandatoryError();
     }
     let mongooseConfiguration: MongooseConfiguration[];
     if (Array.isArray(this.mongooseConfiguration)) {

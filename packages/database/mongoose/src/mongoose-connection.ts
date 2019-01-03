@@ -1,6 +1,9 @@
 import { reflection } from '@gabliam/core/src';
 import { Document as MongoDocument } from './metadatas';
-import { ClassIsNotAMongoDocument } from './errors';
+import {
+  MongoClassIsNotAMongoDocumentError,
+  MongoUnknownRepositoryError,
+} from './errors';
 import { MongooseConfiguration } from './interfaces';
 import { mongoose } from './mongoose';
 import { Repository } from './repository';
@@ -97,7 +100,7 @@ export class MongooseConnection {
       .annotationsOfDecorator<MongoDocument>(clazz, MongoDocument)
       .slice(-1);
     if (metadata === undefined) {
-      throw new ClassIsNotAMongoDocument(clazz);
+      throw new MongoClassIsNotAMongoDocumentError(clazz);
     }
 
     return metadata;
@@ -113,7 +116,7 @@ export class MongooseConnection {
         this.repositories.set(name, repository);
         return repository;
       }
-      throw new Error(`Unknown repository ${name}`);
+      throw new MongoUnknownRepositoryError(name);
     }
   }
 }
