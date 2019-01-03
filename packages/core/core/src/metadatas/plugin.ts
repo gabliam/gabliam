@@ -1,6 +1,7 @@
 import { ERRORS_MSGS, METADATA_KEY } from '../constants';
 import { makeDecorator } from '../decorator';
 import { GabliamPluginConstructor, PluginDependency } from '../interfaces';
+import { InvalidPluginDecoratorError } from '../errors';
 
 /**
  * Type of the `Plugin` decorator / constructor function.
@@ -94,7 +95,7 @@ export const Plugin: PluginDecorator = makeDecorator(
           });
         }
       } else {
-        throw new Error(ERRORS_MSGS.INVALID_PLUGIN_DECORATOR);
+        throw new InvalidPluginDecoratorError();
       }
     }
 

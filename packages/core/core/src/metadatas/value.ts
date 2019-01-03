@@ -1,5 +1,6 @@
-import { ERRORS_MSGS, METADATA_KEY } from '../constants';
+import { METADATA_KEY } from '../constants';
 import { makePropDecorator } from '../decorator';
+import { InvalidValueDecoratorError } from '../errors';
 import { Joi } from '../joi';
 
 /**
@@ -164,7 +165,7 @@ export const Value: ValueDecorator = makePropDecorator(
     } else if (isValueOptions(value)) {
       return valueProperty(value.path, value.validator);
     } else {
-      throw new Error(ERRORS_MSGS.INVALID_VALUE_DECORATOR);
+      throw new InvalidValueDecoratorError();
     }
   }
 );

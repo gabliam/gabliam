@@ -84,7 +84,7 @@ Object {
 }
 `;
 
-exports[`should fail with Plugin with bad deps 1`] = `[Error: The plugin BadPlugin need the plugin BadDeps}]`;
+exports[`should fail with Plugin with bad deps 1`] = `[PluginDependencyIsMissingError: The plugin BadPlugin need the plugin BadDeps. Try to install it: npm install BadDeps --save or yarn add BadDeps]`;
 
 exports[`test BeforeCreate & init 1`] = `"|Conf2|BeforeCreateConf2|create2|InitCreateConf2|Conf|BeforeCreateConf|create|InitCreateConf"`;
 

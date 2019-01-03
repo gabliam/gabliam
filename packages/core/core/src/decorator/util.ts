@@ -1,5 +1,6 @@
-import { Type } from '../type';
 import { ERRORS_MSGS } from '../constants';
+import { DecoratorUniqError } from '../errors';
+import { Type } from '../type';
 
 export const ANNOTATIONS = '__annotations__';
 export const PARAMETERS = '__parameters__';
@@ -34,7 +35,7 @@ export function makeDecorator<T>(
         : Object.defineProperty(cls, ANNOTATIONS, { value: [] })[ANNOTATIONS];
 
       if (uniq && annotations.find(a => a.gabMetadataName === name)) {
-        throw new Error(uniqError);
+        throw new DecoratorUniqError(uniqError);
       }
 
       annotations.push(annotationInstance);

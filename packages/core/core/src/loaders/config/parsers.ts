@@ -1,6 +1,8 @@
 import * as yaml from 'js-yaml';
-import { ParserNotSupportedError } from '../../errors';
-import { LoaderConfigParserPgkNotInstalledError } from '../../errors/loader-config-parser-pgk-not-installed-error';
+import {
+  LoaderConfigParserPgkNotInstalledError,
+  ParserNotSupportedError,
+} from '../../errors';
 
 export type Parser = (data: string) => Promise<any>;
 

@@ -1,7 +1,7 @@
 import { Graph } from 'gert';
 import * as TopoSort from 'gert-topo-sort';
 import * as _ from 'lodash';
-import { ERRORS_MSGS } from './constants';
+import { InvalidPluginError, PluginDependencyIsMissingError } from './errors';
 import {
   GabliamPlugin,
   GabliamPluginConstructor,
@@ -34,7 +34,7 @@ export class PluginList {
 
     // if class doesn't have plugin metadata, so throw error
     if (pluginMetadata.length === 0) {
-      throw new Error(ERRORS_MSGS.INVALID_PLUGIN);
+      throw new InvalidPluginError();
     }
 
     const [{ name: pluginName }] = (
@@ -82,9 +82,7 @@ export class PluginList {
             }
           } else {
             if (!this.has(deps.name)) {
-              throw new Error(
-                `The plugin ${plugin.name} need the plugin ${deps.name}}`
-              );
+              throw new PluginDependencyIsMissingError(plugin.name, deps.name);
             }
             switch (deps.order) {
               case 'after':
