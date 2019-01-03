@@ -1,5 +1,5 @@
 import { reflection } from '@gabliam/core/src';
-import { Document as MongoDocument } from './decorators';
+import { Document as MongoDocument } from './metadatas';
 import { ClassIsNotAMongoDocument } from './errors';
 import { MongooseConfiguration } from './interfaces';
 import { mongoose } from './mongoose';

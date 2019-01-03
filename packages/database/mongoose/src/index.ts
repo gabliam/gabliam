@@ -1,7 +1,7 @@
 import { MongoosePlugin } from './mongoose-plugin';
 
 export * from './connection-manager';
-export * from './decorators';
+export * from './metadatas';
 export * from './interfaces';
 export * from './mongoose';
 export * from './mongoose-connection';

@@ -1,5 +1,5 @@
 import { reflection } from '@gabliam/core/src';
-import { MUnit } from './decorators';
+import { MUnit } from './metadatas';
 import { MongooseConfiguration } from './interfaces';
 import { MongooseConnection } from './mongoose-connection';
 
