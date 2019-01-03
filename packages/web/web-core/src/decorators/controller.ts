@@ -1,23 +1,10 @@
-import { injectable, inversifyInterfaces, Register } from '@gabliam/core';
+import {
+  injectable,
+  inversifyInterfaces,
+  Register,
+  makeDecorator,
+} from '@gabliam/core';
 import { ERRORS_MSGS, METADATA_KEY, TYPE } from '../constants';
-
-/**
- * Controller metadata
- */
-export interface ControllerMetadata {
-  /**
-   * path for the controller
-   * this path is concatenated with path of each method
-   */
-  path: string;
-
-  /**
-   * If a method return a value :
-   *  - if true : res.json
-   *  - if false: res.send
-   */
-  json: boolean;
-}
 
 /**
  * Controller options
@@ -34,74 +21,164 @@ export interface ControllerOptions {
   path: string;
 }
 
-/**
- * Controller decorator
- *
- * Define a controller class
- * if a method return a result, pass to res.send
- *
- * ## Simple example
- * @Controller('/')
- * class SampleController {
- *    @get('/')
- *    hello() {
- *      return 'Hello';
- *    }
- * }
- *
- * @param {ControllerOptions | string} options if options is a string, it's define the path
- */
-export function Controller(options: ControllerOptions | string) {
-  return function(target: any) {
-    decorateController(options, target, false);
-  };
+export interface ControllerMetadata {
+  /**
+   * Name of Controller
+   */
+  name?: string;
+
+  /**
+   * path for the controller
+   * this path is concatenated with path of each method
+   */
+  path: string;
+
+  /**
+   * If a method return a value :
+   *  - if true : res.json
+   *  - if false: res.send
+   */
+  json: boolean;
 }
 
 /**
- * Rest controller
- *
- * Define a rest controller
- *
- * if a method return a result, pass to res.json
- *
- * ## Simple example
- * @Controller('/')
- * class SampleController {
- *    @get('/')
- *    hello() {
- *      return { hi: 'Hello' };
- *    }
- * }
- * @param options
+ * Type of the `Controller` decorator / constructor function.
  */
-export function RestController(options: ControllerOptions | string) {
-  return function(target: any) {
-    decorateController(options, target, true);
-  };
+export interface ControllerDecorator {
+  /**
+   * Decorator that marks a class as an Gabliam Controller and provides configuration
+   * metadata that determines how the config should be processed,
+   * instantiated.
+   *
+   * @usageNotes
+   *
+   * A string must be passed to set the base path of the controller.
+   *
+   * A controller can return a gabliamValue (@see promise-utils gabliamValue).
+   * A controller can return a ResponseEntity
+   *
+   * ```typescript
+   * @Controller('/')
+   * class SampleController {
+   *    @get('/')
+   *    hello() {
+   *      return 'Hello';
+   *    }
+   * }
+   * ```
+   */
+  (options: ControllerOptions | string): ClassDecorator;
+
+  /**
+   * see the `@Controller` decorator.
+   */
+  new (options: ControllerOptions | string): any;
 }
 
-function decorateController(
-  options: ControllerOptions | string,
-  target: any,
-  json: boolean
-) {
-  if (Reflect.hasOwnMetadata(METADATA_KEY.controller, target) === true) {
-    throw new Error(ERRORS_MSGS.DUPLICATED_CONTROLLER_DECORATOR);
-  }
+/**
+ * `Controller` decorator and metadata.
+ */
+export interface Controller extends ControllerMetadata {
+  json: false;
+}
 
-  let path: string;
-  let id: inversifyInterfaces.ServiceIdentifier<any> = target;
-  if (typeof options === 'string') {
-    path = options;
-  } else {
-    path = options.path;
-    if (options.name) {
-      id = options.name;
+export const Controller: ControllerDecorator = makeDecorator(
+  METADATA_KEY.controller,
+  (options: ControllerOptions | string): Controller => {
+    let path: string;
+    let name: string | undefined;
+    if (typeof options === 'string') {
+      path = options;
+    } else {
+      path = options.path;
+      if (options.name) {
+        name = options.name;
+      }
     }
-  }
 
-  const metadata: ControllerMetadata = { path, json };
-  Reflect.defineMetadata(METADATA_KEY.controller, metadata, target);
-  injectable()(target);
-  Register({ type: TYPE.Controller, id })(target);
+    return { path, name, json: false };
+  },
+  (cls, annotationInstance: Controller) => {
+    let id: inversifyInterfaces.ServiceIdentifier<any> = cls;
+    if (annotationInstance.name) {
+      id = annotationInstance.name;
+    }
+    injectable()(cls);
+    Register({ type: TYPE.Controller, id })(cls);
+  },
+  true,
+  ERRORS_MSGS.DUPLICATED_CONTROLLER_DECORATOR
+);
+/**
+ * Type of the `RestController` decorator / constructor function.
+ */
+export interface RestControllerDecorator {
+  /**
+   * Decorator that marks a class as an Gabliam RestController and provides configuration
+   * metadata that determines how the config should be processed,
+   * instantiated.
+   *
+   * @usageNotes
+   *
+   * A string must be passed to set the base path of the RestController.
+   *
+   * A RestController can return a gabliamValue (@see promise-utils gabliamValue).
+   * A RestController can return a ResponseEntity
+   *
+   * ```typescript
+   * @RestController('/')
+   * class SampleRestController {
+   *    @get('/')
+   *    hello() {
+   *      return 'Hello';
+   *    }
+   * }
+   * ```
+   */
+  (options: ControllerOptions | string): ClassDecorator;
+
+  /**
+   * see the `@RestController` decorator.
+   */
+  new (options: ControllerOptions | string): any;
 }
+
+/**
+ * `RestController` decorator and metadata.
+ */
+export interface RestController extends ControllerMetadata {
+  /**
+   * If a method return a value :
+   *  - if true : res.json
+   *  - if false: res.send
+   */
+  json: true;
+}
+
+export const RestController: RestControllerDecorator = makeDecorator(
+  METADATA_KEY.controller,
+  (options: ControllerOptions | string): RestController => {
+    let path: string;
+    let name: string | undefined;
+    if (typeof options === 'string') {
+      path = options;
+    } else {
+      path = options.path;
+      if (options.name) {
+        name = options.name;
+      }
+    }
+
+    return { path, name, json: true };
+  },
+  (cls, annotationInstance: RestController) => {
+    let id: inversifyInterfaces.ServiceIdentifier<any> = cls;
+    if (annotationInstance.name) {
+      id = annotationInstance.name;
+    }
+    injectable()(cls);
+    Register({ type: TYPE.Controller, id })(cls);
+  },
+  true,
+  ERRORS_MSGS.DUPLICATED_CONTROLLER_DECORATOR
+);

@@ -1,114 +1,125 @@
-import { inversifyInterfaces } from '@gabliam/core';
 import { ERRORS_MSGS, METADATA_KEY } from '../constants';
+import { makePropDecorator } from '@gabliam/core/src';
 
 /**
- * Web Config Metadata
+ * Type of the `WebConfig` decorator / constructor function.
  */
-export interface WebConfigMetadata {
+export interface WebConfigDecorator {
   /**
-   * id of class config
+   * Decorator that marks a class field as an WebConfig property
+   * and supplies configuration metadata.
+   *
+   * A webconfig must be in config class
+   *
+   * The method take on parameter an Application and container
+   *
+   * @usageNotes
+   *
+   * You can supply an optional order for prioritize the configuration.
+   * By default, order is 1
+   *
+   * The following example configure helmet. `@gabliam/express` is installed
+   *
+   * ```typescript
+   * @Config(200)
+   * export class ServerConfig {
+   *  @WebConfig()
+   *  addExpressConfig(app: express.Application, container: container) {
+   *    app.use(helmet());
+   *  }
+   * }
+   * ```
+   *
+   *  The following example configure helmet. `@gabliam/koa` is installed
+   *
+   * ```typescript
+   * @Config(200)
+   * export class ServerConfig {
+   *  @WebConfig()
+   *  addExpressConfig(app: koa.Application, container: container) {
+   *    app.use(helmet());
+   *  }
+   * }
+   * ```
    */
-  id: inversifyInterfaces.ServiceIdentifier<any>;
+  (order?: number): MethodDecorator;
 
   /**
-   * key of the method that has an web config
+   * see the `@WebConfig` decorator.
    */
-  key: string;
+  new (order?: number): any;
+}
 
+/**
+ * `WebConfig` decorator and metadata.
+ */
+export interface WebConfig {
   /**
-   * order of execute of the config
+   * Order of config
    */
   order: number;
 }
 
+export const WebConfig: WebConfigDecorator = makePropDecorator(
+  METADATA_KEY.webConfig,
+  (order: number = 1): WebConfig => ({ order }),
+  undefined,
+  true,
+  ERRORS_MSGS.DUPLICATED_CONFIG_DECORATOR
+);
+
 /**
- * WebConfig decorator
- *
- * Add config
- * The method take on parameter an Application and container
- *
- * ## Simple Example with express
- * @Config(200)
- * export class ServerConfig {
- *  @WebConfig()
- *  addExpressConfig(app: express.Application) {
- *    app.use(
- *      bodyParser.urlencoded({
- *        extended: true
- *      })
- *    );
- *    app.use(bodyParser.json());
- *    app.use(helmet());
- *  }
- * }
- * @param {number=1} order order of express config
+ * Type of the `WebConfigAfterControllers` decorator / constructor function.
  */
-export function WebConfig(order: number = 1) {
-  return createWebConfigDecorator(
-    METADATA_KEY.webConfig,
-    order,
-    ERRORS_MSGS.DUPLICATED_CONFIG_DECORATOR
-  );
+export interface WebConfigAfterControllersDecorator {
+  /**
+   * Decorator that marks a class field as an WebConfigAfterControllers property
+   * and supplies configuration metadata.
+   *
+   * A WebConfigAfterControllers must be in config class
+   *
+   * The method take on parameter an Application and container
+   *
+   * @usageNotes
+   *
+   * You can supply an optional order for prioritize the configuration.
+   * By default, order is 1
+   *
+   * The following example configure celebrate errors. `@gabliam/express` is installed
+   *
+   * ```typescript
+   * @Config()
+   * export class ServerConfig {
+   *  @WebConfigAfterControllers()
+   *  addErrorConfig(app: express.Application) {
+   *    // user errors celebrate
+   *    app.use(Celebrate.errors());
+   *  }
+   * }
+   * ```
+   */
+  (order?: number): MethodDecorator;
+
+  /**
+   * see the `@WebConfigAfterControllers` decorator.
+   */
+  new (order?: number): any;
 }
 
 /**
- * WebConfigAfterControllers decorator
- *
- * Add config after controllers
- * The method take on parameter an application and container
- *
- * ## Simple Example (with express)
- * @Config()
- * export class ServerConfig {
- *  @WebConfigAfterControllers()
- *  addErrorConfig(app: express.Application) {
- *    // user errors celebrate
- *    app.use(Celebrate.errors());
- *  }
- * }
- * @param {number=1} order order of express config
+ * `WebConfigAfterControllers` decorator and metadata.
  */
-export function WebConfigAfterControllers(order: number = 1) {
-  return createWebConfigDecorator(
-    METADATA_KEY.webConfigAfterControllers,
-    order,
-    ERRORS_MSGS.DUPLICATED_CONFIG_DECORATOR
-  );
+export interface WebConfigAfterControllers {
+  /**
+   * Order of config
+   */
+  order: number;
 }
 
-/**
- * @alias WebConfigAfterControllers
- */
-export const WebConfigAfterCtl = WebConfigAfterControllers;
-
-/**
- * Create a web config decorator
- * @param type type of decorator
- * @param order order of the config
- * @param errorMsg Error message when duplicated config decorator
- */
-function createWebConfigDecorator(
-  type: string,
-  order: number,
-  errorMsg: string
-) {
-  return function(target: any, key: string, descriptor: PropertyDescriptor) {
-    const id = target.constructor.name;
-    const metadata: WebConfigMetadata = { id, key, order };
-    let metadataList: WebConfigMetadata[] = [];
-
-    if (!Reflect.hasOwnMetadata(type, target.constructor)) {
-      Reflect.defineMetadata(type, metadataList, target.constructor);
-    } else {
-      metadataList = Reflect.getOwnMetadata(type, target.constructor);
-    }
-
-    const find = metadataList.find(m => m.key === key && m.id === id);
-
-    if (find) {
-      throw new Error(errorMsg);
-    }
-
-    metadataList.push(metadata);
-  };
-}
+export const WebConfigAfterControllers: WebConfigAfterControllersDecorator = makePropDecorator(
+  METADATA_KEY.webConfigAfterControllers,
+  (order: number = 1): WebConfigAfterControllers => ({ order }),
+  undefined,
+  true,
+  ERRORS_MSGS.DUPLICATED_CONFIG_DECORATOR
+);

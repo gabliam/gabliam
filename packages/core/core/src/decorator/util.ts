@@ -116,7 +116,9 @@ export function makePropDecorator(
     name: string,
     descriptor: TypedPropertyDescriptor<any>,
     annotationInstance: any
-  ) => void
+  ) => void,
+  uniq = false,
+  uniqError = ERRORS_MSGS.DUPLICATED_DECORATOR
 ): any {
   const metaCtor = makeMetadataCtor(props);
 
@@ -136,12 +138,18 @@ export function makePropDecorator(
       const constructor = target.constructor;
       // Use of Object.defineProperty is important since it creates non-enumerable property which
       // prevents the property is copied during subclassing.
-      const meta = constructor.hasOwnProperty(PROP_METADATA)
+      const meta: { [k: string]: any[] } = constructor.hasOwnProperty(
+        PROP_METADATA
+      )
         ? (constructor as any)[PROP_METADATA]
         : Object.defineProperty(constructor, PROP_METADATA, { value: {} })[
             PROP_METADATA
           ];
       meta[key] = (meta.hasOwnProperty(key) && meta[key]) || [];
+
+      if (uniq && meta[key].find(a => a.gabMetadataName === name)) {
+        throw new DecoratorUniqError(uniqError);
+      }
       meta[key].unshift(decoratorInstance);
 
       if (additionalProcessing) {
