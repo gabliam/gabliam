@@ -2,6 +2,10 @@ import { ConnectionConfig, QueueDictionnary } from './interfaces';
 import { AmqpConnection } from './amqp-connection';
 import { Queue } from './queue';
 import { ValueExtractor } from '@gabliam/core';
+import {
+  AmqpDuplicateConnectionError,
+  AmqpConnectionNotFoundError,
+} from './errors';
 
 export class AmqpConnectionManager {
   private connections: AmqpConnection[] = [];
@@ -15,7 +19,7 @@ export class AmqpConnectionManager {
       { name, url, queues, undefinedValue },
     ] of connectionConfigs.entries()) {
       if (this.connections.find(c => c.name === name) !== undefined) {
-        throw new Error(`Duplicate connection ${name}`);
+        throw new AmqpDuplicateConnectionError(name);
       }
 
       this.connections.push(
@@ -42,7 +46,7 @@ export class AmqpConnectionManager {
   getConnection(name: string) {
     const connection = this.connections.find(c => c.name === name);
     if (!connection) {
-      throw new Error(`Connection ${name} not found`);
+      throw new AmqpConnectionNotFoundError(name);
     }
     return connection;
   }

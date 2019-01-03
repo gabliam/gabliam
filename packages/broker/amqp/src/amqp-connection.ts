@@ -5,7 +5,13 @@ import { ConfirmChannel, ConsumeMessage, Message } from 'amqplib';
 import * as PromiseB from 'bluebird';
 import * as _ from 'lodash';
 import * as uuid from 'uuid';
-import { AmqpConnectionError, AmqpTimeoutError } from './errors';
+import {
+  AmqpConnectionError,
+  AmqpTimeoutError,
+  AmqpQueueDoesntExistError,
+  AmqpMessageIsNullError,
+  AmqpReplytoIsMissingError,
+} from './errors';
 import {
   ConsumeConfig,
   ConsumeOptions,
@@ -107,7 +113,7 @@ export class AmqpConnection {
   ) {
     const queueName = this.getQueueName(queue);
     if (!this.queueExist(queueName)) {
-      throw new Error(`queue "${queueName}" doesn't exist`);
+      throw new AmqpQueueDoesntExistError(queueName);
     }
     this.consumerList.push({ queueName, handler, options });
   }
@@ -147,7 +153,7 @@ export class AmqpConnection {
     const channel = this.getChannel();
     if (channel === null) {
       /* istanbul ignore next */
-      throw new AmqpConnectionError('Connection error');
+      throw new AmqpConnectionError();
     }
     await channel.sendToQueue(
       queueName,
@@ -170,7 +176,7 @@ export class AmqpConnection {
     const channel = this.getChannel();
     if (channel === null) {
       /* istanbul ignore next */
-      throw new AmqpConnectionError('Connection error');
+      throw new AmqpConnectionError();
     }
     await channel.sendToQueue(
       queueName,
@@ -211,7 +217,7 @@ export class AmqpConnection {
       const chan = this.getChannel();
       if (chan === null) {
         /* istanbul ignore next */
-        return reject(new AmqpConnectionError('Connection error'));
+        return reject(new AmqpConnectionError());
       }
       // create new Queue for get the response
       chan
@@ -220,7 +226,7 @@ export class AmqpConnection {
           return chan.consume(replyTo, (msg: ConsumeMessage | null) => {
             if (msg === null) {
               /* istanbul ignore next */
-              return reject(new Error('Message is null'));
+              return reject(new AmqpMessageIsNullError());
             }
             if (!onTimeout && msg.properties.correlationId === correlationId) {
               resolve(this.parseContent(msg));
@@ -378,7 +384,7 @@ export class AmqpConnection {
       // catch when error amqp (untestable)
       /* istanbul ignore next */
       if (msg.properties.replyTo === undefined) {
-        throw new Error(`replyTo is missing`);
+        throw new AmqpReplytoIsMissingError();
       }
       const extractArgs = this.getExtractArgs(propKey, controller);
       const args = extractArgs(msg);

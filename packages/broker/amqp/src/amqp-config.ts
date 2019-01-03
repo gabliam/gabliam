@@ -14,6 +14,7 @@ import { ConnectionConfig } from './interfaces';
 import { configurationValidator } from './schema';
 import { AmqpConnection } from './amqp-connection';
 import { AmqpConnectionManager } from './amqp-manager';
+import { AmqpConfigIsMandatoryError } from './errors';
 
 @InjectContainer()
 @PluginConfig()
@@ -38,7 +39,7 @@ export class AmqpConfig {
   @Bean(AmqpConnectionManager)
   async createManager() {
     if (!this.connectionConfig) {
-      throw new Error(`AmqpPluginConfig AmqpConfig is mandatory`);
+      throw new AmqpConfigIsMandatoryError();
     }
     let connectionConfig: ConnectionConfig[];
     if (Array.isArray(this.connectionConfig)) {
