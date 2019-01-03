@@ -1,10 +1,10 @@
-import { reflection } from '@gabliam/core/src';
-import { Document as MongoDocument } from './metadatas';
+import { reflection } from '@gabliam/core';
 import {
   MongoClassIsNotAMongoDocumentError,
   MongoUnknownRepositoryError,
 } from './errors';
 import { MongooseConfiguration } from './interfaces';
+import { Document as MongoDocument } from './metadatas';
 import { mongoose } from './mongoose';
 import { Repository } from './repository';
 const { Mongoose } = mongoose;

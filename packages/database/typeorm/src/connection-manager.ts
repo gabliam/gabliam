@@ -1,6 +1,11 @@
-import { ConnectionOptions, Connection } from './typeorm';
+import { reflection } from '@gabliam/core';
 import { createConnections } from 'typeorm';
-import { METADATA_KEY } from './constant';
+import { CUnit } from './metadatas';
+import { Connection, ConnectionOptions } from './typeorm';
+import {
+  TypeormCUnitNotFoundError,
+  TypeormConnectionNotFoundError,
+} from './errors';
 
 export class ConnectionManager {
   private connections!: Connection[];
@@ -21,8 +26,7 @@ export class ConnectionManager {
 
     // add entity to the correct connection
     for (const entity of this.entities) {
-      const cunit =
-        <string>Reflect.getMetadata(METADATA_KEY.cunit, entity) || 'default';
+      const cunit = getCunit(entity);
 
       let index = connectionOptions.findIndex(c => c.name === cunit);
 
@@ -31,7 +35,7 @@ export class ConnectionManager {
       }
 
       if (index === -1) {
-        throw new Error(`CUnit ${cunit} not found`);
+        throw new TypeormCUnitNotFoundError(cunit);
       }
       (<any>connectionOptions)[index].entities.push(entity);
     }
@@ -46,7 +50,7 @@ export class ConnectionManager {
   getConnection(name: string) {
     const connection = this.connections.find(c => c.name === name);
     if (!connection) {
-      throw new Error(`Connection ${name} not found`);
+      throw new TypeormConnectionNotFoundError(name);
     }
     return connection;
   }
@@ -60,3 +64,10 @@ export class ConnectionManager {
     }
   }
 }
+
+const getCunit = (cls: any) => {
+  const [cunit] = reflection
+    .annotationsOfDecorator<CUnit>(cls, CUnit)
+    .slice(-1);
+  return cunit ? cunit.name || 'default' : 'default';
+};

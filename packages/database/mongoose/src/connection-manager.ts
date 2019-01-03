@@ -1,4 +1,4 @@
-import { reflection } from '@gabliam/core/src';
+import { reflection } from '@gabliam/core';
 import {
   MongoConnectionNotFoundError,
   MongoMUnitNotFoundError,

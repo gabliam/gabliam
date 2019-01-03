@@ -1,19 +1,12 @@
-import { RegistryMetada } from '@gabliam/core/lib/interfaces';
-import { Entity, ChildEntity, CUnit } from '../src/decorators';
-import { METADATA_KEY as CORE_METADATA_KEY } from '@gabliam/core/lib/constants';
-import { METADATA_KEY } from '../src/constant';
+import { reflection } from '@gabliam/core';
+import { ChildEntity, CUnit, Entity } from '../src';
 
 [Entity, ChildEntity].forEach(deco => {
   test(`${deco.name} decorators`, () => {
     @deco()
     class TestEntity {}
 
-    const entityMetadata: RegistryMetada = Reflect.getMetadata(
-      CORE_METADATA_KEY.register,
-      TestEntity
-    );
-
-    expect(entityMetadata).toMatchSnapshot();
+    expect(reflection.annotations(TestEntity)).toMatchSnapshot();
   });
 });
 
@@ -22,12 +15,7 @@ describe('CUnit decorators', () => {
     @CUnit('default')
     class TestEntity {}
 
-    const entityMetadata: RegistryMetada = Reflect.getMetadata(
-      METADATA_KEY.cunit,
-      TestEntity
-    );
-
-    expect(entityMetadata).toMatchSnapshot();
+    expect(reflection.annotations(TestEntity)).toMatchSnapshot();
   });
 
   test('should fail when decorated multiple times with @CUnit', () => {

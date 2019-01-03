@@ -1,4 +1,4 @@
-import { makeDecorator } from '@gabliam/core/src';
+import { makeDecorator } from '@gabliam/core';
 import { ERRORS_MSGS, METADATA_KEY } from '../constant';
 
 /**

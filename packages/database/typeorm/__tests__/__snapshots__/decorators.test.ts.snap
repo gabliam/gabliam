@@ -1,23 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CUnit decorators should add CUnit metadata to a class when decorating a method with @CUnit 1`] = `"default"`;
-
-exports[`ChildEntity decorators 1`] = `
-Object {
-  "type": "EntityTypeOrm",
-  "value": Object {
-    "id": [Function],
-    "target": [Function],
+exports[`CUnit decorators should add CUnit metadata to a class when decorating a method with @CUnit 1`] = `
+Array [
+  DecoratorFactory {
+    "name": "default",
   },
-}
+]
 `;
 
-exports[`Entity decorators 1`] = `
-Object {
-  "type": "EntityTypeOrm",
-  "value": Object {
-    "id": [Function],
-    "target": [Function],
+exports[`DecoratorFactory decorators 1`] = `
+Array [
+  DecoratorFactory {
+    "name": undefined,
+    "options": undefined,
   },
-}
+  DecoratorFactory {
+    "id": [Function],
+    "type": "EntityTypeOrm",
+  },
+]
+`;
+
+exports[`DecoratorFactory decorators 2`] = `
+Array [
+  DecoratorFactory {},
+  DecoratorFactory {
+    "id": [Function],
+    "type": "EntityTypeOrm",
+  },
+]
 `;

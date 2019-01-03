@@ -13,6 +13,7 @@ import { ConnectionOptions, Connection } from './typeorm';
 import { ConnectionOptionsBeanId, ENTITIES_TYPEORM } from './constant';
 import * as d from 'debug';
 import { ConnectionManager } from './connection-manager';
+import { TypeormConfigIsMandatoryError } from './errors';
 
 const debug = d('Gabliam:Plugin:Typeorm');
 
@@ -52,7 +53,7 @@ export class PluginTypeormConfig {
   createManager() {
     debug('connectionOptions', this.connectionOptions);
     if (!this.connectionOptions) {
-      throw new Error(`PluginTypeormConfig connectionOptions is mandatory`);
+      throw new TypeormConfigIsMandatoryError();
     }
     let connectionOptions: ConnectionOptions[];
     if (Array.isArray(this.connectionOptions)) {

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`must fail when CUnit not found 1`] = `[Error: CUnit bad not found]`;
+exports[`must fail when CUnit not found 1`] = `[TypeormCUnitNotFoundError: CUnit bad not found]`;
 
 exports[`must fail when getConnection not found 1`] = `"Connection notfound not found"`;
 
@@ -69,4 +69,4 @@ Array [
 ]
 `;
 
-exports[`without config folder 1`] = `[Error: PluginTypeormConfig connectionOptions is mandatory]`;
+exports[`without config folder 1`] = `[TypeormConfigIsMandatoryError: connectionOptions is mandatory.]`;
