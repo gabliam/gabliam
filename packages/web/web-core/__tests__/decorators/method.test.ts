@@ -1,19 +1,15 @@
+import { reflection } from '@gabliam/core/src';
 import {
-  ControllerMetadata,
-  ControllerMethodMetadata,
-  Controller,
-  METADATA_KEY,
   All,
+  Controller,
+  CustomMethod,
+  Delete,
   Get,
+  Head,
+  Patch,
   Post,
   Put,
-  Patch,
-  Head,
-  Delete,
-  Method,
 } from '@gabliam/web-core';
-import { RegistryMetada } from '@gabliam/core';
-import { METADATA_KEY as CORE_METADATA_KEY } from '@gabliam/core/lib/constants';
 
 describe('Methods decorators', () => {
   [
@@ -62,26 +58,8 @@ describe('Methods decorators', () => {
         }
       }
 
-      const controllerMetadata: ControllerMetadata = Reflect.getMetadata(
-        METADATA_KEY.controller,
-        TestController
-      );
-
-      expect(controllerMetadata).toMatchSnapshot();
-
-      const registryMetadata: RegistryMetada = Reflect.getMetadata(
-        CORE_METADATA_KEY.register,
-        TestController
-      );
-
-      expect(registryMetadata).toMatchSnapshot();
-
-      const controllerMethodMetadata: ControllerMethodMetadata[] = Reflect.getMetadata(
-        METADATA_KEY.controllerMethod,
-        TestController
-      );
-
-      expect(controllerMethodMetadata).toMatchSnapshot();
+      expect(reflection.annotations(TestController)).toMatchSnapshot();
+      expect(reflection.propMetadata(TestController)).toMatchSnapshot();
     });
   });
 
@@ -91,40 +69,23 @@ describe('Methods decorators', () => {
 
     @Controller('/test')
     class TestController {
-      @Method(method, path)
+      @CustomMethod(method, path)
       public test() {
         return;
       }
 
-      @Method('foo', 'bar')
+      @CustomMethod('foo', 'bar')
       public test2() {
         return;
       }
 
-      @Method('bar', 'foo')
+      @CustomMethod('bar', 'foo')
       public test3() {
         return;
       }
     }
 
-    const controllerMetadata: ControllerMetadata = Reflect.getMetadata(
-      METADATA_KEY.controller,
-      TestController
-    );
-
-    expect(controllerMetadata).toMatchSnapshot();
-
-    const registryMetadata: RegistryMetada = Reflect.getMetadata(
-      CORE_METADATA_KEY.register,
-      TestController
-    );
-
-    expect(registryMetadata).toMatchSnapshot();
-
-    const controllerMethodMetadata: ControllerMethodMetadata[] = Reflect.getMetadata(
-      METADATA_KEY.controllerMethod,
-      TestController
-    );
-    expect(controllerMethodMetadata).toMatchSnapshot();
+    expect(reflection.annotations(TestController)).toMatchSnapshot();
+    expect(reflection.propMetadata(TestController)).toMatchSnapshot();
   });
 });

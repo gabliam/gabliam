@@ -1,29 +1,12 @@
-import {
-  Controller,
-  RestController,
-  ControllerMetadata,
-  METADATA_KEY,
-} from '@gabliam/web-core';
-import { RegistryMetada } from '@gabliam/core';
-import { METADATA_KEY as CORE_METADATA_KEY } from '@gabliam/core/lib/constants';
+import { reflection } from '@gabliam/core';
+import { Controller, RestController } from '@gabliam/web-core';
 
 describe('Controller decorator', () => {
   test('should add Controller metadata to a class when decorated with @Controller(string)', async () => {
     @Controller('/test')
     class TestController {}
 
-    const controllerMetadata: ControllerMetadata = Reflect.getMetadata(
-      METADATA_KEY.controller,
-      TestController
-    );
-    expect(controllerMetadata).toMatchSnapshot();
-
-    const registryMetadata: RegistryMetada = Reflect.getMetadata(
-      CORE_METADATA_KEY.register,
-      TestController
-    );
-
-    expect(registryMetadata).toMatchSnapshot();
+    expect(reflection.annotations(TestController)).toMatchSnapshot();
   });
 
   test('should add Controller metadata to a class when decorated with @Controller(ControllerOptions)', async () => {
@@ -33,19 +16,7 @@ describe('Controller decorator', () => {
     })
     class TestController {}
 
-    const controllerMetadata: ControllerMetadata = Reflect.getMetadata(
-      METADATA_KEY.controller,
-      TestController
-    );
-
-    expect(controllerMetadata).toMatchSnapshot();
-
-    const registryMetadata: RegistryMetada = Reflect.getMetadata(
-      CORE_METADATA_KEY.register,
-      TestController
-    );
-
-    expect(registryMetadata).toMatchSnapshot();
+    expect(reflection.annotations(TestController)).toMatchSnapshot();
   });
 
   test('should fail when decorated multiple times the same class with @Controller', () => {
@@ -67,18 +38,7 @@ describe('RestController decorator', () => {
     @RestController('/test')
     class TestController {}
 
-    const controllerMetadata: ControllerMetadata = Reflect.getMetadata(
-      METADATA_KEY.controller,
-      TestController
-    );
-    expect(controllerMetadata).toMatchSnapshot();
-
-    const registryMetadata: RegistryMetada = Reflect.getMetadata(
-      CORE_METADATA_KEY.register,
-      TestController
-    );
-
-    expect(registryMetadata).toMatchSnapshot();
+    expect(reflection.annotations(TestController)).toMatchSnapshot();
   });
 
   test('should add Controller metadata to a class when decorated with @RestController(ControllerOptions)', async () => {
@@ -88,19 +48,7 @@ describe('RestController decorator', () => {
     })
     class TestController {}
 
-    const controllerMetadata: ControllerMetadata = Reflect.getMetadata(
-      METADATA_KEY.controller,
-      TestController
-    );
-
-    expect(controllerMetadata).toMatchSnapshot();
-
-    const registryMetadata: RegistryMetada = Reflect.getMetadata(
-      CORE_METADATA_KEY.register,
-      TestController
-    );
-
-    expect(registryMetadata).toMatchSnapshot();
+    expect(reflection.annotations(TestController)).toMatchSnapshot();
   });
 
   test('should fail when decorated multiple times the same class with @RestController', () => {

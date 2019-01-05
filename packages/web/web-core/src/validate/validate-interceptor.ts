@@ -1,14 +1,13 @@
-import { Service } from '@gabliam/core';
-import { METADATA_KEY } from '../constants';
+import { reflection, Service } from '@gabliam/core';
 import {
   ExecContext,
-  Interceptor,
   listParamToValidate,
   Request,
-  ValidateMetadata,
+  Validate,
 } from '../decorators';
 import { ExecutionContext } from '../execution-context';
 import { GabRequest } from '../gab-request';
+import { Interceptor } from '../interceptor';
 import { createValidateRequest, NO_VALIDATION } from './validate-request';
 
 @Service()
@@ -19,15 +18,17 @@ export class ValidateInterceptor implements Interceptor {
   ) {
     const target = execCtx.getConstructor();
     const key = execCtx.getHandlerName();
-    if (target && !Reflect.hasOwnMetadata(METADATA_KEY.validate, target, key)) {
+
+    const [metadata] = (
+      reflection.propMetadataOfDecorator<Validate>(target, Validate)[
+        <any>key
+      ] || []
+    ).slice(-1);
+
+    if (!metadata) {
       return;
     }
 
-    const metadata: ValidateMetadata = Reflect.getOwnMetadata(
-      METADATA_KEY.validate,
-      target,
-      key
-    );
     const validateRequest = createValidateRequest(
       metadata.rules,
       metadata.validationOptions

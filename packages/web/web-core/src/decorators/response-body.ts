@@ -1,22 +1,34 @@
 import { METADATA_KEY } from '../constants';
+import { makePropDecorator } from '@gabliam/core/src';
 
-export function ResponseBody(): MethodDecorator {
-  return function(target: Object, propertyKey: string | symbol) {
-    if (
-      Reflect.hasOwnMetadata(
-        METADATA_KEY.responseBody,
-        target.constructor,
-        propertyKey
-      ) === true
-    ) {
-      return;
-    }
+/**
+ * Type of the `ResponseBody` decorator / constructor function.
+ */
+export interface ResponseBodyDecorator {
+  /**
+   * Decorator that marks a method that return a json.
+   *
+   * @usageNotes
+   *
+   * ```typescript
+   * @Controller('/')
+   * class SampleController {
+   *    @ResponseBody()
+   *    @Get('/')
+   *    hello() {
+   *      return 'Hello';
+   *    }
+   * }
+   * ```
+   */
+  (): MethodDecorator;
 
-    Reflect.defineMetadata(
-      METADATA_KEY.responseBody,
-      true,
-      target.constructor,
-      propertyKey
-    );
-  };
+  /**
+   * see the `@ResponseBody` decorator.
+   */
+  new (): any;
 }
+
+export const ResponseBody: ResponseBodyDecorator = makePropDecorator(
+  METADATA_KEY.responseBody
+);

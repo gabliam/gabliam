@@ -1,5 +1,6 @@
 import { Container } from '@gabliam/core';
-import { getParameterMetadata, InterceptorInfo } from '../decorators';
+import { InterceptorInfo } from '../interceptor';
+import { getExtractArgs } from '../utils';
 import { ValidateInterceptor } from './validate-interceptor';
 import { ValidateSendErrorInterceptor } from './validate-senderror-interceptor';
 
@@ -13,14 +14,11 @@ export const getValidateInterceptor = (
   return [
     {
       instance: validateSendErrorInterceptor,
-      paramList: getParameterMetadata(
-        validateSendErrorInterceptor,
-        'intercept'
-      ),
+      extractArgs: getExtractArgs(validateSendErrorInterceptor, 'intercept'),
     },
     {
       instance: validateInterceptor,
-      paramList: getParameterMetadata(validateInterceptor, 'intercept'),
+      extractArgs: getExtractArgs(validateInterceptor, 'intercept'),
     },
   ];
 };

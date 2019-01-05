@@ -60,7 +60,7 @@ export interface ControllerDecorator {
    * ```typescript
    * @Controller('/')
    * class SampleController {
-   *    @get('/')
+   *    @Get('/')
    *    hello() {
    *      return 'Hello';
    *    }

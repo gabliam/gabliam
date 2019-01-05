@@ -24,16 +24,16 @@ export const METADATA_KEY = {
 };
 
 export enum PARAMETER_TYPE {
-  EXEC_CONTEXT,
-  CONTEXT,
-  REQUEST,
-  RESPONSE,
-  PARAMS,
-  QUERY,
-  BODY,
-  HEADERS,
-  COOKIES,
-  NEXT,
+  EXEC_CONTEXT = 'ExecContext',
+  CONTEXT = 'context',
+  REQUEST = 'request',
+  RESPONSE = 'response',
+  PARAMS = 'params',
+  QUERY = 'query',
+  BODY = 'body',
+  HEADERS = 'headers',
+  COOKIES = 'cookies',
+  NEXT = 'next',
 }
 
 export const DEFAULT_PARAM_VALUE = '**$$DEFAULT_PARAM_VALUE$$**';

@@ -18,10 +18,11 @@ export class Reflection {
     for (let i = 0; i < result.length; i++) {
       if (typeof paramTypes === 'undefined') {
         result[i] = [];
-      } else if (paramTypes[i] !== Object) {
-        result[i] = [paramTypes[i]];
+        // } else if (paramTypes[i] !== Object) {
+        // result[i] = [paramTypes[i]];
       } else {
-        result[i] = [];
+        result[i] = [paramTypes[i]];
+        // result[i] = [];
       }
       if (paramAnnotations && paramAnnotations[i] != null) {
         result[i] = result[i].concat(paramAnnotations[i]);

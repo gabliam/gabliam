@@ -1,61 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`WebConfig decorator should add WebConfig metadata to a class when decorated with @WebConfig 1`] = `
-Array [
-  Object {
-    "id": "TestConfig",
-    "key": "testMethod",
-    "order": 1,
-  },
-  Object {
-    "id": "TestConfig",
-    "key": "test2Method",
-    "order": 1,
-  },
-]
+Object {
+  "test2Method": Array [
+    PropDecoratorFactory {
+      "order": 1,
+    },
+  ],
+  "testMethod": Array [
+    PropDecoratorFactory {
+      "order": 1,
+    },
+  ],
+}
 `;
 
 exports[`WebConfig decorator should add WebConfig metadata to a class when decorated with @WebConfig(order) 1`] = `
-Array [
-  Object {
-    "id": "TestConfig",
-    "key": "testMethod",
-    "order": 50,
-  },
-  Object {
-    "id": "TestConfig",
-    "key": "test2Method",
-    "order": 100,
-  },
-]
+Object {
+  "test2Method": Array [
+    PropDecoratorFactory {
+      "order": 100,
+    },
+  ],
+  "testMethod": Array [
+    PropDecoratorFactory {
+      "order": 50,
+    },
+  ],
+}
 `;
 
 exports[`WebConfigAfterControllers decorator should add WebConfigAfterControllers metadata to a class when decorated with @WebConfigAfterControllers 1`] = `
-Array [
-  Object {
-    "id": "TestConfig",
-    "key": "testMethod",
-    "order": 1,
-  },
-  Object {
-    "id": "TestConfig",
-    "key": "test2Method",
-    "order": 1,
-  },
-]
+Object {
+  "test2Method": Array [
+    PropDecoratorFactory {
+      "order": 1,
+    },
+  ],
+  "testMethod": Array [
+    PropDecoratorFactory {
+      "order": 1,
+    },
+  ],
+}
 `;
 
 exports[`WebConfigAfterControllers decorator should add WebConfigAfterControllers metadata to a class when decorated with @WebConfigAfterControllers(order) 1`] = `
-Array [
-  Object {
-    "id": "TestConfig",
-    "key": "testMethod",
-    "order": 50,
-  },
-  Object {
-    "id": "TestConfig",
-    "key": "test2Method",
-    "order": 100,
-  },
-]
+Object {
+  "test2Method": Array [
+    PropDecoratorFactory {
+      "order": 100,
+    },
+  ],
+  "testMethod": Array [
+    PropDecoratorFactory {
+      "order": 50,
+    },
+  ],
+}
 `;

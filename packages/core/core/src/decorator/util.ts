@@ -6,6 +6,100 @@ export const ANNOTATIONS = '__annotations__';
 export const PARAMETERS = '__parameters__';
 export const PROP_METADATA = '__prop__metadata__';
 
+/**
+ * Create a decorator for class and Prop
+ */
+export function makePropAndAnnotationDecorator<T>(
+  name: string,
+  props?: (...args: any[]) => any,
+  additionalProcessingAnnotation?: (
+    type: Type<T>,
+    annotationInstance: any
+  ) => void,
+  additionalProcessing?: (
+    target: any,
+    name: string,
+    descriptor: TypedPropertyDescriptor<any>,
+    annotationInstance: any
+  ) => void,
+  uniq = false,
+  uniqError = ERRORS_MSGS.DUPLICATED_DECORATOR
+) {
+  const metaCtor = makeMetadataCtor(props);
+  function DecoratorFactory(this: any, ...args: any[]): any {
+    if (this instanceof DecoratorFactory) {
+      metaCtor.call(this, ...args);
+      // @ts-ignore
+      return this;
+    }
+
+    const annotationInstance = new (DecoratorFactory as any)(...args);
+
+    return function(
+      target: any,
+      key?: string,
+      descriptor?: TypedPropertyDescriptor<any>
+    ) {
+      if (key && descriptor) {
+        return PropDecorator(target, key, descriptor);
+      } else {
+        return typeDecorator(target);
+      }
+    };
+
+    function typeDecorator(cls: Type<T>) {
+      // Use of Object.defineProperty is important since it creates non-enumerable property which
+      // prevents the property is copied during subclassing.
+      const annotations: any[] = cls.hasOwnProperty(ANNOTATIONS)
+        ? (cls as any)[ANNOTATIONS]
+        : Object.defineProperty(cls, ANNOTATIONS, { value: [] })[ANNOTATIONS];
+
+      if (uniq && annotations.find(a => a.gabMetadataName === name)) {
+        throw new DecoratorUniqError(uniqError);
+      }
+
+      annotations.push(annotationInstance);
+
+      if (additionalProcessingAnnotation) {
+        additionalProcessingAnnotation(cls, annotationInstance);
+      }
+
+      return cls;
+    }
+
+    function PropDecorator(
+      target: any,
+      key: string,
+      descriptor: TypedPropertyDescriptor<any>
+    ) {
+      const constructor = target.constructor;
+      // Use of Object.defineProperty is important since it creates non-enumerable property which
+      // prevents the property is copied during subclassing.
+      const meta: { [k: string]: any[] } = constructor.hasOwnProperty(
+        PROP_METADATA
+      )
+        ? (constructor as any)[PROP_METADATA]
+        : Object.defineProperty(constructor, PROP_METADATA, { value: {} })[
+            PROP_METADATA
+          ];
+      meta[key] = (meta.hasOwnProperty(key) && meta[key]) || [];
+
+      if (uniq && meta[key].find(a => a.gabMetadataName === name)) {
+        throw new DecoratorUniqError(uniqError);
+      }
+      meta[key].unshift(annotationInstance);
+
+      if (additionalProcessing) {
+        additionalProcessing(target, key, descriptor, annotationInstance);
+      }
+    }
+  }
+
+  DecoratorFactory.prototype.gabMetadataName = name;
+  (DecoratorFactory as any).annotationCls = DecoratorFactory;
+  return DecoratorFactory as any;
+}
+
 export function makeDecorator<T>(
   name: string,
   props?: (...args: any[]) => any,

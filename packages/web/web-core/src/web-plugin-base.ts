@@ -1,12 +1,13 @@
 import {
   Container,
   gabliamValue,
+  reflection,
   Registry,
-  toPromise,
   Scan,
+  toPromise,
 } from '@gabliam/core';
-import { APP, METADATA_KEY, TYPE } from './constants';
-import { WebConfigMetadata } from './decorators';
+import { APP, TYPE } from './constants';
+import { WebConfig, WebConfigAfterControllers } from './decorators';
 import { RestMetadata } from './plugin-config';
 import { extractControllerMetadata } from './utils';
 import { WebConfiguration } from './web-configuration';
@@ -82,38 +83,26 @@ export abstract class WebPluginBase {
   config(container: Container, registry: Registry, confInstance: any) {
     const webConfig = container.get(WebConfiguration);
 
-    // if config class has a @middleware decorator, add in this.middlewares for add it in building phase
-    if (Reflect.hasMetadata(METADATA_KEY.webConfig, confInstance.constructor)) {
-      const metadataList: WebConfigMetadata[] = Reflect.getOwnMetadata(
-        METADATA_KEY.webConfig,
-        confInstance.constructor
-      );
-
-      metadataList.forEach(({ key, order }) => {
-        webConfig.addwebConfig({
-          order,
-          instance: confInstance[key].bind(confInstance[key]),
-        });
+    const webConfigList = reflection.propMetadataOfDecorator<WebConfig>(
+      confInstance.constructor,
+      WebConfig
+    );
+    for (const [key, webConfigs] of Object.entries(webConfigList)) {
+      const [{ order }] = webConfigs.slice(-1);
+      webConfig.addwebConfig({
+        order,
+        instance: confInstance[key].bind(confInstance[key]),
       });
     }
 
-    // if config class has a @middleware decorator, add in this.errorMiddlewares for add it in building phase
-    if (
-      Reflect.hasMetadata(
-        METADATA_KEY.webConfigAfterControllers,
-        confInstance.constructor
-      )
-    ) {
-      const metadataList: WebConfigMetadata[] = Reflect.getOwnMetadata(
-        METADATA_KEY.webConfigAfterControllers,
-        confInstance.constructor
-      );
-
-      metadataList.forEach(({ key, order }) => {
-        webConfig.addWebConfigAfterCtrl({
-          order,
-          instance: confInstance[key].bind(confInstance[key]),
-        });
+    const webConfigAfterCtlsList = reflection.propMetadataOfDecorator<
+      WebConfigAfterControllers
+    >(confInstance.constructor, WebConfigAfterControllers);
+    for (const [key, webConfigs] of Object.entries(webConfigAfterCtlsList)) {
+      const [{ order }] = webConfigs.slice(-1);
+      webConfig.addWebConfigAfterCtrl({
+        order,
+        instance: confInstance[key].bind(confInstance[key]),
       });
     }
   }

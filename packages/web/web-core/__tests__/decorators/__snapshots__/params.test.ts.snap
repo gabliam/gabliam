@@ -1,52 +1,88 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`params decorators should add parameter metadata to a class when decorated with @params 1`] = `
-Map {
-  "test" => Array [
-    Object {
-      "index": 0,
-      "parameterName": "id",
-      "type": 4,
-    },
-    Object {
-      "index": 1,
-      "parameterName": "cat",
-      "type": 5,
-    },
-    Object {
-      "index": 2,
-      "parameterName": "**$$DEFAULT_PARAM_VALUE$$**",
-      "type": 2,
-    },
-    Object {
-      "index": 3,
-      "parameterName": "**$$DEFAULT_PARAM_VALUE$$**",
-      "type": 3,
+Array [
+  Array [
+    [Function],
+    ParamDecoratorFactory {
+      "args": Array [
+        "id",
+      ],
+      "handler": [Function],
+      "type": "params",
     },
   ],
-  "test2" => Array [
-    Object {
-      "index": 0,
-      "parameterName": "dog",
-      "type": 6,
+  Array [
+    [Function],
+    ParamDecoratorFactory {
+      "args": Array [
+        "cat",
+      ],
+      "handler": [Function],
+      "type": "query",
     },
   ],
-  "test3" => Array [
-    Object {
-      "index": 0,
-      "parameterName": "Auth",
-      "type": 7,
-    },
-    Object {
-      "index": 1,
-      "parameterName": "**$$DEFAULT_PARAM_VALUE$$**",
-      "type": 8,
-    },
-    Object {
-      "index": 2,
-      "parameterName": "**$$DEFAULT_PARAM_VALUE$$**",
-      "type": 9,
+  Array [
+    [Function],
+    ParamDecoratorFactory {
+      "args": Array [],
+      "handler": [Function],
+      "type": "request",
     },
   ],
-}
+  Array [
+    [Function],
+    ParamDecoratorFactory {
+      "args": Array [],
+      "handler": [Function],
+      "type": "response",
+    },
+  ],
+]
+`;
+
+exports[`params decorators should add parameter metadata to a class when decorated with @params 2`] = `
+Array [
+  Array [
+    [Function],
+    ParamDecoratorFactory {
+      "args": Array [
+        "dog",
+      ],
+      "handler": [Function],
+      "type": "body",
+    },
+  ],
+]
+`;
+
+exports[`params decorators should add parameter metadata to a class when decorated with @params 3`] = `
+Array [
+  Array [
+    [Function],
+    ParamDecoratorFactory {
+      "args": Array [
+        "Auth",
+      ],
+      "handler": [Function],
+      "type": "headers",
+    },
+  ],
+  Array [
+    [Function],
+    ParamDecoratorFactory {
+      "args": Array [],
+      "handler": [Function],
+      "type": "cookies",
+    },
+  ],
+  Array [
+    [Function],
+    ParamDecoratorFactory {
+      "args": Array [],
+      "handler": [Function],
+      "type": "next",
+    },
+  ],
+]
 `;

@@ -1,4 +1,4 @@
-import { Joi } from '@gabliam/core';
+import { Joi, makePropDecorator } from '@gabliam/core';
 import { ERRORS_MSGS, METADATA_KEY } from '../constants';
 
 export function isValidatorOptions(value: any): value is ValidatorOptions {
@@ -18,12 +18,6 @@ export interface ValidatorOptions {
   options?: ValidationOptions;
 }
 
-export interface ValidateMetadata {
-  rules: Map<ValidatorType, Joi.Schema>;
-
-  validationOptions: ValidationOptions;
-}
-
 export type ValidatorType = keyof Validator;
 
 export interface ValidationOptions extends Joi.ValidationOptions {
@@ -41,21 +35,60 @@ export const listParamToValidate: ValidatorType[] = [
   'body',
 ];
 
-export function Validate(
-  validator: Validator | ValidatorOptions,
-  options: ValidationOptions = {}
-): MethodDecorator {
-  return (target: Object, propertyKey: string | symbol) => {
-    if (
-      Reflect.hasOwnMetadata(
-        METADATA_KEY.validate,
-        target.constructor,
-        propertyKey
-      ) === true
-    ) {
-      throw new Error(ERRORS_MSGS.DUPLICATED_VALIDATE_DECORATOR);
-    }
+/**
+ * Type of the `Validate` decorator / constructor function.
+ */
+export interface ValidateDecorator {
+  /**
+   * Decorator that marks a property to use a validator
+   *
+   * @usageNotes
+   *
+   *
+   * ```typescript
+   * @Controller('/')
+   * class SampleController {
+   *    @Validate({
+   *      query: {
+   *        name: Joi.string().required()
+   *      }
+   *    })
+   *    @Get('/')
+   *    hello(@QueryParam('name') name: string) {
+   *      return 'Hello';
+   *    }
+   * }
+   * ```
+   */
+  (
+    validator: Validator | ValidatorOptions,
+    options?: ValidationOptions
+  ): MethodDecorator;
 
+  /**
+   * see the `@Validate` decorator.
+   */
+  new (
+    validator: Validator | ValidatorOptions,
+    options?: ValidationOptions
+  ): any;
+}
+
+/**
+ * `Validate` decorator and metadata.
+ */
+export interface Validate {
+  rules: Map<ValidatorType, Joi.Schema>;
+
+  validationOptions: ValidationOptions;
+}
+
+export const Validate: ValidateDecorator = makePropDecorator(
+  METADATA_KEY.validate,
+  (
+    validator: Validator | ValidatorOptions,
+    options: ValidationOptions = {}
+  ): Validate => {
     let realValidator: Validator;
     if (isValidatorOptions(validator)) {
       realValidator = validator.validator;
@@ -80,12 +113,9 @@ export function Validate(
       }
     }
 
-    const metadata: ValidateMetadata = { rules, validationOptions };
-    Reflect.defineMetadata(
-      METADATA_KEY.validate,
-      metadata,
-      target.constructor,
-      propertyKey
-    );
-  };
-}
+    return { rules, validationOptions };
+  },
+  undefined,
+  true,
+  ERRORS_MSGS.DUPLICATED_VALIDATE_DECORATOR
+);

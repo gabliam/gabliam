@@ -1,12 +1,13 @@
 import {
+  Bean,
   inversifyInterfaces,
+  Joi,
   PluginConfig,
   Value,
-  Joi,
-  Bean,
 } from '@gabliam/core';
-import { ParameterMetadata, InterceptorInfo } from './decorators';
 import { WEB_PLUGIN_CONFIG } from './constants';
+import { InterceptorInfo } from './interceptor';
+import { extractArgsFn } from './interface';
 
 export interface WebPluginConfig {
   /**
@@ -42,7 +43,7 @@ export interface MethodInfo<T = string> {
   controllerId: inversifyInterfaces.ServiceIdentifier<any>;
   methodName: string;
   json: boolean;
-  paramList: ParameterMetadata[];
+  extractArgs: extractArgsFn;
   methodPath: string;
   method: T;
   interceptors: InterceptorInfo[];

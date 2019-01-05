@@ -8,3 +8,9 @@ export type convertValueFn = (
   execCtx: ExecutionContext,
   result: any
 ) => void;
+
+export type extractArgsFn = <V>(
+  ctx: GabContext,
+  execCtx: ExecutionContext | null | undefined,
+  next: V
+) => any;

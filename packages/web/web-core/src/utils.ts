@@ -1,134 +1,65 @@
 import {
   Container,
+  reflection,
   Registry,
   toPromise,
   ValueExtractor,
   VALUE_EXTRACTOR,
 } from '@gabliam/core';
-import { find, get } from 'lodash';
-import {
-  CONTEXT,
-  DEFAULT_PARAM_VALUE,
-  METADATA_KEY,
-  PARAMETER_TYPE,
-  TYPE,
-  WEB_PLUGIN_CONFIG,
-} from './constants';
+import { CONTEXT, METADATA_KEY, TYPE, WEB_PLUGIN_CONFIG } from './constants';
 import {
   ControllerMetadata,
-  ControllerMethodMetadata,
-  ControllerParameterMetadata,
-  getInterceptors,
-  InterceptorInfo,
-  ParameterMetadata,
+  ControllerMethod,
+  ResponseBody,
+  WebParamDecorator,
 } from './decorators';
 import { ExecutionContext } from './execution-context';
 import { GabContext } from './gab-context';
+import { getInterceptors, InterceptorInfo } from './interceptor';
+import { convertValueFn, extractArgsFn } from './interface';
 import { MethodInfo, RestMetadata, WebPluginConfig } from './plugin-config';
 import { getValidateInterceptor } from './validate';
-import { convertValueFn } from './interface';
 
 export const cleanPath = (path: string) => {
   return path.replace(/\/+/gi, '/');
 };
 
-export const extractParameters = <T extends Object, U extends keyof T, V>(
-  target: T,
-  key: U,
-  execCtx: ExecutionContext | null | undefined,
-  ctx: GabContext,
-  next: V,
-  params: ParameterMetadata[]
-): any[] => {
-  const args = [];
-  if (!params || !params.length) {
-    return [ctx.request, ctx.response, next];
+export const getExtractArgs = (
+  controller: any,
+  propKey: string
+): extractArgsFn => {
+  const params = reflection.parameters(<any>controller.constructor, propKey);
+
+  if (
+    params.length === 1 &&
+    Array.isArray(params[0]) &&
+    params[0].length === 0
+  ) {
+    return (
+      ctx: GabContext,
+      execCtx: ExecutionContext | null | undefined,
+      next: any
+    ) => [ctx.request, ctx.response, next];
   }
 
-  // create de param getter
-  const getParam = getFuncParam(target, key);
-  for (const item of params) {
-    switch (item.type) {
-      case PARAMETER_TYPE.CONTEXT:
-      default:
-        args[item.index] = ctx;
-        break; // response
-      case PARAMETER_TYPE.RESPONSE:
-        args[item.index] = getParam(ctx.response, null, item);
-        break;
-      case PARAMETER_TYPE.REQUEST:
-        args[item.index] = getParam(ctx.request, null, item);
-        break;
-      case PARAMETER_TYPE.NEXT:
-        args[item.index] = next;
-        break;
-      case PARAMETER_TYPE.PARAMS:
-        args[item.index] = getParam(ctx.request, 'params', item);
-        break;
-      case PARAMETER_TYPE.QUERY:
-        args[item.index] = getParam(ctx.request, 'query', item);
-        break;
-      case PARAMETER_TYPE.BODY:
-        args[item.index] = getParam(ctx.request, 'body', item);
-        break;
-      case PARAMETER_TYPE.HEADERS:
-        args[item.index] = getParam(ctx.request, 'headers', item);
-        break;
-      case PARAMETER_TYPE.COOKIES:
-        args[item.index] = getParam(ctx, 'cookies', item, true);
-        break;
-      case PARAMETER_TYPE.EXEC_CONTEXT:
-        args[item.index] = execCtx;
-        break;
-    }
-  }
-
-  return args;
-};
-
-const getFuncParam = <T extends Object, U extends keyof T>(
-  target: T,
-  key: U
-) => {
-  return (
-    source: any,
-    paramType: string | null,
-    itemParam: ParameterMetadata,
-    getter = false
-  ) => {
-    const name = itemParam.parameterName;
-
-    // get the param source
-    let param = source;
-    if (paramType !== null && source[paramType]) {
-      param = source[paramType];
-    }
-
-    let res = getter ? param.get(name) : get(param, name, undefined);
-    if (res !== undefined) {
-      /**
-       * For query, all value sare considered to string value.
-       * If the query waits for a Number, we try to convert the value
-       */
-      if (paramType === 'query' || paramType === 'params') {
-        const type: Function[] = Reflect.getMetadata(
-          'design:paramtypes',
-          target,
-          <any>key
-        );
-        if (Array.isArray(type) && type[itemParam.index]) {
-          try {
-            if (type[itemParam.index].name === 'Number') {
-              // parseFloat for compatibility with integer and float
-              res = Number.parseFloat(res);
-            }
-          } catch (e) {}
-        }
+  const parameters = <[string | undefined, WebParamDecorator][]>params.map(
+    meta => {
+      let type: string | undefined;
+      if (meta.length === 2) {
+        type = meta[0].name;
       }
-      return res;
-    } else {
-      return name === DEFAULT_PARAM_VALUE ? param : undefined;
+      return [type, meta.slice(-1)[0] as WebParamDecorator];
     }
+  );
+
+  return (
+    ctx: GabContext,
+    execCtx: ExecutionContext | null | undefined,
+    next: any
+  ) => {
+    return parameters.map(([type, p]) =>
+      p.handler(p.args, ctx, type, execCtx, next)
+    );
   };
 };
 
@@ -154,25 +85,22 @@ export const extractControllerMetadata = (
   controllerIds.forEach(({ id: controllerId }) => {
     const controller = container.get<object>(controllerId);
 
-    const controllerMetadata: ControllerMetadata = Reflect.getOwnMetadata(
-      METADATA_KEY.controller,
-      controller.constructor
-    );
+    const [controllerMetadata] = reflection
+      .annotationsOfDecorator<ControllerMetadata>(
+        controller.constructor,
+        METADATA_KEY.controller
+      )
+      .slice(-1);
 
     const controllerInterceptors = getInterceptors(
       container,
       controller.constructor
     );
 
-    const methodMetadatas: ControllerMethodMetadata[] = Reflect.getOwnMetadata(
-      METADATA_KEY.controllerMethod,
-      controller.constructor
-    );
+    const methodMetadatas = reflection.propMetadataOfDecorator<
+      ControllerMethod
+    >(controller.constructor, METADATA_KEY.controllerMethod);
 
-    const parameterMetadata: ControllerParameterMetadata = Reflect.getOwnMetadata(
-      METADATA_KEY.controllerParameter,
-      controller.constructor
-    );
     // if the controller has controllerMetadata and methodMetadatas
     if (controllerMetadata && methodMetadatas) {
       const controllerPath = valueExtractor(
@@ -187,11 +115,8 @@ export const extractControllerMetadata = (
         methods,
       });
 
-      methodMetadatas.forEach((methodMetadata: ControllerMethodMetadata) => {
-        let paramList: ParameterMetadata[] = [];
-        if (parameterMetadata) {
-          paramList = parameterMetadata.get(methodMetadata.key) || [];
-        }
+      for (const [methodName, metas] of Object.entries(methodMetadatas)) {
+        const [methodMetadata] = metas.slice(-1);
         let methodPath = cleanPath(
           valueExtractor(methodMetadata.path, methodMetadata.path)
         );
@@ -203,16 +128,18 @@ export const extractControllerMetadata = (
         const methodInterceptors = getInterceptors(
           container,
           controller.constructor,
-          methodMetadata.key
+          methodName
         );
 
         const validatorInterceptors = getValidateInterceptor(container);
 
-        const methodJson = Reflect.getMetadata(
-          METADATA_KEY.responseBody,
-          controller.constructor,
-          methodMetadata.key
-        );
+        const methodJson =
+          reflection.propMetadataOfDecorator<{}>(
+            controller.constructor,
+            ResponseBody
+          )[methodName] !== undefined
+            ? true
+            : undefined;
 
         const interceptors = [
           ...validatorInterceptors,
@@ -226,14 +153,14 @@ export const extractControllerMetadata = (
 
         methods.push({
           controllerId,
-          methodName: methodMetadata.key,
+          methodName,
           json,
-          paramList,
+          extractArgs: getExtractArgs(controller, methodName),
           methodPath,
           method: methodMetadata.method,
           interceptors,
         });
-      });
+      }
     }
   });
 
@@ -274,21 +201,21 @@ export function compose(
         return Promise.resolve();
       }
 
-      const { instance, paramList } = interceptor;
+      const { instance, extractArgs } = interceptor;
 
       const callNext = dispatch.bind(null, i + 1);
-      const interceptorArgs = extractParameters(
-        instance,
-        'intercept',
-        execCtx,
-        ctx,
-        callNext,
-        paramList
-      );
+      let wasCalled = false;
+      const nextFn = async () => {
+        wasCalled = true;
+        await callNext();
+      };
+
+      const interceptorArgs = extractArgs(ctx, execCtx, nextFn);
+
       const res = await toPromise(instance.intercept(...interceptorArgs));
       converterValue(ctx, execCtx, res);
       // call next if interceptor not use next
-      if (find(paramList, { type: PARAMETER_TYPE.NEXT }) === undefined) {
+      if (!wasCalled) {
         await callNext();
       }
     }

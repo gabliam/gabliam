@@ -1,262 +1,255 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Methods decorators should add Methods metadata to a class when decorated with @All 1`] = `
-Object {
-  "json": false,
-  "path": "/test",
-}
+Array [
+  DecoratorFactory {
+    "json": false,
+    "name": undefined,
+    "path": "/test",
+  },
+  DecoratorFactory {
+    "id": [Function],
+    "type": "ControllerType",
+  },
+]
 `;
 
 exports[`Methods decorators should add Methods metadata to a class when decorated with @All 2`] = `
 Object {
-  "type": "ControllerType",
-  "value": Object {
-    "id": [Function],
-    "target": [Function],
-  },
+  "test": Array [
+    PropDecoratorFactory {
+      "method": "all",
+      "path": "/All",
+    },
+  ],
+  "test2": Array [
+    PropDecoratorFactory {
+      "method": "all",
+      "path": "/All2",
+    },
+  ],
 }
-`;
-
-exports[`Methods decorators should add Methods metadata to a class when decorated with @All 3`] = `
-Array [
-  Object {
-    "key": "test",
-    "method": "all",
-    "path": "/All",
-  },
-  Object {
-    "key": "test2",
-    "method": "all",
-    "path": "/All2",
-  },
-]
 `;
 
 exports[`Methods decorators should add Methods metadata to a class when decorated with @Delete 1`] = `
-Object {
-  "json": false,
-  "path": "/test",
-}
+Array [
+  DecoratorFactory {
+    "json": false,
+    "name": undefined,
+    "path": "/test",
+  },
+  DecoratorFactory {
+    "id": [Function],
+    "type": "ControllerType",
+  },
+]
 `;
 
 exports[`Methods decorators should add Methods metadata to a class when decorated with @Delete 2`] = `
 Object {
-  "type": "ControllerType",
-  "value": Object {
-    "id": [Function],
-    "target": [Function],
-  },
+  "test": Array [
+    PropDecoratorFactory {
+      "method": "delete",
+      "path": "/Delete",
+    },
+  ],
+  "test2": Array [
+    PropDecoratorFactory {
+      "method": "delete",
+      "path": "/Delete2",
+    },
+  ],
 }
-`;
-
-exports[`Methods decorators should add Methods metadata to a class when decorated with @Delete 3`] = `
-Array [
-  Object {
-    "key": "test",
-    "method": "delete",
-    "path": "/Delete",
-  },
-  Object {
-    "key": "test2",
-    "method": "delete",
-    "path": "/Delete2",
-  },
-]
 `;
 
 exports[`Methods decorators should add Methods metadata to a class when decorated with @Get 1`] = `
-Object {
-  "json": false,
-  "path": "/test",
-}
+Array [
+  DecoratorFactory {
+    "json": false,
+    "name": undefined,
+    "path": "/test",
+  },
+  DecoratorFactory {
+    "id": [Function],
+    "type": "ControllerType",
+  },
+]
 `;
 
 exports[`Methods decorators should add Methods metadata to a class when decorated with @Get 2`] = `
 Object {
-  "type": "ControllerType",
-  "value": Object {
-    "id": [Function],
-    "target": [Function],
-  },
+  "test": Array [
+    PropDecoratorFactory {
+      "method": "get",
+      "path": "/Get",
+    },
+  ],
+  "test2": Array [
+    PropDecoratorFactory {
+      "method": "get",
+      "path": "/Get2",
+    },
+  ],
 }
-`;
-
-exports[`Methods decorators should add Methods metadata to a class when decorated with @Get 3`] = `
-Array [
-  Object {
-    "key": "test",
-    "method": "get",
-    "path": "/Get",
-  },
-  Object {
-    "key": "test2",
-    "method": "get",
-    "path": "/Get2",
-  },
-]
 `;
 
 exports[`Methods decorators should add Methods metadata to a class when decorated with @Head 1`] = `
-Object {
-  "json": false,
-  "path": "/test",
-}
+Array [
+  DecoratorFactory {
+    "json": false,
+    "name": undefined,
+    "path": "/test",
+  },
+  DecoratorFactory {
+    "id": [Function],
+    "type": "ControllerType",
+  },
+]
 `;
 
 exports[`Methods decorators should add Methods metadata to a class when decorated with @Head 2`] = `
 Object {
-  "type": "ControllerType",
-  "value": Object {
-    "id": [Function],
-    "target": [Function],
-  },
+  "test": Array [
+    PropDecoratorFactory {
+      "method": "head",
+      "path": "/Head",
+    },
+  ],
+  "test2": Array [
+    PropDecoratorFactory {
+      "method": "head",
+      "path": "/Head2",
+    },
+  ],
 }
-`;
-
-exports[`Methods decorators should add Methods metadata to a class when decorated with @Head 3`] = `
-Array [
-  Object {
-    "key": "test",
-    "method": "head",
-    "path": "/Head",
-  },
-  Object {
-    "key": "test2",
-    "method": "head",
-    "path": "/Head2",
-  },
-]
 `;
 
 exports[`Methods decorators should add Methods metadata to a class when decorated with @Patch 1`] = `
-Object {
-  "json": false,
-  "path": "/test",
-}
+Array [
+  DecoratorFactory {
+    "json": false,
+    "name": undefined,
+    "path": "/test",
+  },
+  DecoratorFactory {
+    "id": [Function],
+    "type": "ControllerType",
+  },
+]
 `;
 
 exports[`Methods decorators should add Methods metadata to a class when decorated with @Patch 2`] = `
 Object {
-  "type": "ControllerType",
-  "value": Object {
-    "id": [Function],
-    "target": [Function],
-  },
+  "test": Array [
+    PropDecoratorFactory {
+      "method": "patch",
+      "path": "/Patch",
+    },
+  ],
+  "test2": Array [
+    PropDecoratorFactory {
+      "method": "patch",
+      "path": "/Patch2",
+    },
+  ],
 }
-`;
-
-exports[`Methods decorators should add Methods metadata to a class when decorated with @Patch 3`] = `
-Array [
-  Object {
-    "key": "test",
-    "method": "patch",
-    "path": "/Patch",
-  },
-  Object {
-    "key": "test2",
-    "method": "patch",
-    "path": "/Patch2",
-  },
-]
 `;
 
 exports[`Methods decorators should add Methods metadata to a class when decorated with @Post 1`] = `
-Object {
-  "json": false,
-  "path": "/test",
-}
+Array [
+  DecoratorFactory {
+    "json": false,
+    "name": undefined,
+    "path": "/test",
+  },
+  DecoratorFactory {
+    "id": [Function],
+    "type": "ControllerType",
+  },
+]
 `;
 
 exports[`Methods decorators should add Methods metadata to a class when decorated with @Post 2`] = `
 Object {
-  "type": "ControllerType",
-  "value": Object {
-    "id": [Function],
-    "target": [Function],
-  },
+  "test": Array [
+    PropDecoratorFactory {
+      "method": "post",
+      "path": "/Post",
+    },
+  ],
+  "test2": Array [
+    PropDecoratorFactory {
+      "method": "post",
+      "path": "/Post2",
+    },
+  ],
 }
-`;
-
-exports[`Methods decorators should add Methods metadata to a class when decorated with @Post 3`] = `
-Array [
-  Object {
-    "key": "test",
-    "method": "post",
-    "path": "/Post",
-  },
-  Object {
-    "key": "test2",
-    "method": "post",
-    "path": "/Post2",
-  },
-]
 `;
 
 exports[`Methods decorators should add Methods metadata to a class when decorated with @Put 1`] = `
-Object {
-  "json": false,
-  "path": "/test",
-}
+Array [
+  DecoratorFactory {
+    "json": false,
+    "name": undefined,
+    "path": "/test",
+  },
+  DecoratorFactory {
+    "id": [Function],
+    "type": "ControllerType",
+  },
+]
 `;
 
 exports[`Methods decorators should add Methods metadata to a class when decorated with @Put 2`] = `
 Object {
-  "type": "ControllerType",
-  "value": Object {
-    "id": [Function],
-    "target": [Function],
-  },
+  "test": Array [
+    PropDecoratorFactory {
+      "method": "put",
+      "path": "/Put",
+    },
+  ],
+  "test2": Array [
+    PropDecoratorFactory {
+      "method": "put",
+      "path": "/Put2",
+    },
+  ],
 }
-`;
-
-exports[`Methods decorators should add Methods metadata to a class when decorated with @Put 3`] = `
-Array [
-  Object {
-    "key": "test",
-    "method": "put",
-    "path": "/Put",
-  },
-  Object {
-    "key": "test2",
-    "method": "put",
-    "path": "/Put2",
-  },
-]
 `;
 
 exports[`Methods decorators should add method metadata to a class when decorated with @httpMethod 1`] = `
-Object {
-  "json": false,
-  "path": "/test",
-}
+Array [
+  DecoratorFactory {
+    "json": false,
+    "name": undefined,
+    "path": "/test",
+  },
+  DecoratorFactory {
+    "id": [Function],
+    "type": "ControllerType",
+  },
+]
 `;
 
 exports[`Methods decorators should add method metadata to a class when decorated with @httpMethod 2`] = `
 Object {
-  "type": "ControllerType",
-  "value": Object {
-    "id": [Function],
-    "target": [Function],
-  },
+  "test": Array [
+    PropDecoratorFactory {
+      "method": "get",
+      "path": "foo",
+    },
+  ],
+  "test2": Array [
+    PropDecoratorFactory {
+      "method": "foo",
+      "path": "bar",
+    },
+  ],
+  "test3": Array [
+    PropDecoratorFactory {
+      "method": "bar",
+      "path": "foo",
+    },
+  ],
 }
-`;
-
-exports[`Methods decorators should add method metadata to a class when decorated with @httpMethod 3`] = `
-Array [
-  Object {
-    "key": "test",
-    "method": "get",
-    "path": "foo",
-  },
-  Object {
-    "key": "test2",
-    "method": "foo",
-    "path": "bar",
-  },
-  Object {
-    "key": "test3",
-    "method": "bar",
-    "path": "foo",
-  },
-]
 `;

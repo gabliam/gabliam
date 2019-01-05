@@ -1,197 +1,534 @@
-import {
-  DEFAULT_PARAM_VALUE,
-  METADATA_KEY,
-  PARAMETER_TYPE,
-} from '../constants';
+import { makeParamDecorator } from '@gabliam/core';
+import { get } from 'lodash';
+import { METADATA_KEY, PARAMETER_TYPE } from '../constants';
+import { ExecutionContext } from '../execution-context';
+import { GabContext } from '../gab-context';
 
-/**
- * Represent all parameters metadata for a controller
- */
-export type ControllerParameterMetadata = Map<
-  string | symbol | number,
-  ParameterMetadata[]
->;
+export type HandlerFn = <V>(
+  args: any,
+  ctx: GabContext,
+  type: string | undefined,
+  execCtx: ExecutionContext | null | undefined,
+  next: V
+) => any;
 
-/**
- * Parameter metadata
- */
-export interface ParameterMetadata {
-  /**
-   * Parameter name
-   */
-  parameterName: string;
+export interface WebParamDecorator<T = any> {
+  handler: HandlerFn;
 
-  /**
-   * Index of the parameter
-   */
-  index: number;
+  args: T[];
 
-  /**
-   * Type of parameter
-   */
-  type: PARAMETER_TYPE;
+  type: string;
 }
 
-/**
- * Exec context decorator
- *
- * Binds a method parameter to the execution context.
- */
-export const ExecContext = paramDecoratorFactory(PARAMETER_TYPE.EXEC_CONTEXT);
+export const makeWebParamDecorator = (type: string, handler: HandlerFn) => {
+  return makeParamDecorator(
+    METADATA_KEY.controllerParameter,
+    (...args: any[]): WebParamDecorator => ({ args, handler, type })
+  );
+};
 
 /**
- * Context decorator
- *
- * Binds a method parameter to the context.
+ * Type of the `ExecContext` decorator / constructor function.
  */
-export const Context = paramDecoratorFactory(PARAMETER_TYPE.CONTEXT);
+export interface ExecContextDecorator {
+  /**
+   * Decorator that marks a parameter to inject ExecContext
+   *
+   * @usageNotes
+   *
+   * ```typescript
+   * @Controller('/')
+   * class SampleController {
+   *    @Get('/')
+   *    hello(@ExecContext() execCtx: ExecContext) {
+   *      return 'Hello';
+   *    }
+   * }
+   * ```
+   */
+  (): ParameterDecorator;
 
-/**
- * Request decorator
- * Binds a method parameter to the request object.
- *
- * @param  {string} name name of specific request
- */
-export const Request = paramDecoratorFactory(PARAMETER_TYPE.REQUEST);
-
-/**
- * Response decorator
- * Binds a method parameter to the response object.
- *
- * @param  {string} name name of specific response
- */
-export const Response = paramDecoratorFactory(PARAMETER_TYPE.RESPONSE);
-
-/**
- * RequestParam decorator
- * Binds a method parameter to request.params object or to a specific parameter if a name is passed.
- *
- * @param  {string} name name of specific request.params
- */
-export const RequestParam = paramDecoratorFactory(PARAMETER_TYPE.PARAMS);
-
-/**
- * QueryParam decorator
- * Binds a method parameter to request.query or to a specific query parameter if a name is passed.
- *
- * @param  {string} name name of specific request.query
- */
-export const QueryParam = paramDecoratorFactory(PARAMETER_TYPE.QUERY);
-
-/**
- * RequestBody decorator
- *
- * Binds a method parameter to request.body or to a specific body property if a name is passed.
- * If the bodyParser middleware is not used on the express app,
- * this will bind the method parameter to the express request object.
- *
- * @param  {string} name name of specific body
- */
-export const RequestBody = paramDecoratorFactory(PARAMETER_TYPE.BODY);
-
-/**
- * RequestHeaders decorator
- *
- * Binds a method parameter to the request headers.
- *
- * @param  {string} name name of specific header
- */
-export const RequestHeaders = paramDecoratorFactory(PARAMETER_TYPE.HEADERS);
-
-/**
- * Cookies decorator
- *
- * Binds a method parameter to the request cookies.
- *
- * @param  {string} name name of specific cookie
- */
-export const Cookies = paramDecoratorFactory(PARAMETER_TYPE.COOKIES);
-
-/**
- * Next decorator
- *
- * Binds a method parameter to the next() function.
- */
-export const Next = paramDecoratorFactory(PARAMETER_TYPE.NEXT);
-
-function paramDecoratorFactory(
-  parameterType: PARAMETER_TYPE
-): (name?: string) => ParameterDecorator {
-  return function(name: string = DEFAULT_PARAM_VALUE): ParameterDecorator {
-    return Params(parameterType, name);
-  };
+  /**
+   * see the `@ExecContext` decorator.
+   */
+  new (): any;
 }
 
-/**
- * Params decorator
- *
- * generic decorator for params
- *
- * @param {PARAMETER_TYPE} type type of param
- * @param {string} parameterName name of param
- */
-export function Params(
-  type: PARAMETER_TYPE,
-  parameterName: string
-): ParameterDecorator {
-  return function(
-    target: Object,
-    propertyKey: string | symbol,
-    parameterIndex: number
-  ) {
-    let metadataList: ControllerParameterMetadata;
-    let parameterMetadataList: ParameterMetadata[] = [];
-    const parameterMetadata: ParameterMetadata = {
-      index: parameterIndex,
-      parameterName: parameterName,
-      type: type,
-    };
+export const ExecContext: ExecContextDecorator = makeWebParamDecorator(
+  PARAMETER_TYPE.EXEC_CONTEXT,
+  (_, __, ___, execCtx) => execCtx
+);
 
-    if (
-      !Reflect.hasOwnMetadata(
-        METADATA_KEY.controllerParameter,
-        target.constructor
-      )
-    ) {
-      metadataList = new Map();
-    } else {
-      metadataList = Reflect.getOwnMetadata(
-        METADATA_KEY.controllerParameter,
-        target.constructor
-      );
-      if (metadataList.has(propertyKey)) {
-        parameterMetadataList = metadataList.get(propertyKey)!;
-      }
+/**
+ * Type of the `Context` decorator / constructor function.
+ */
+export interface ContextDecorator {
+  /**
+   * Decorator that marks a parameter to inject Context
+   *
+   * @usageNotes
+   * You can supply an optional path to extract a part of Context.
+   * Under the hood, use lodash.get
+   *
+   * Example with full Context
+   *
+   * ```typescript
+   * @Controller('/')
+   * class SampleController {
+   *    @Get('/')
+   *    hello(@Context() ctx: GabContext) {
+   *      return 'Hello';
+   *    }
+   * }
+   * ```
+   *
+   * Example with part of Context
+   *
+   * ```typescript
+   * @Controller('/')
+   * class SampleController {
+   *    @Get('/')
+   *    hello(@Context('protocol') protocol: string) {
+   *      return 'Hello';
+   *    }
+   * }
+   * ```
+   */
+  (path?: string): ParameterDecorator;
+
+  /**
+   * see the `@Context` decorator.
+   */
+  new (path?: string): any;
+}
+
+export const Context: ContextDecorator = makeWebParamDecorator(
+  PARAMETER_TYPE.CONTEXT,
+  ([path]: [string | undefined], ctx) => {
+    if (path) {
+      return get(ctx, path);
     }
-
-    parameterMetadataList.unshift(parameterMetadata);
-    metadataList.set(propertyKey, parameterMetadataList);
-    Reflect.defineMetadata(
-      METADATA_KEY.controllerParameter,
-      metadataList,
-      target.constructor
-    );
-  };
-}
-
-/**
- * Get parameter metadata of method
- */
-export function getParameterMetadata<T extends Object, U extends keyof T>(
-  target: T,
-  method: U
-) {
-  let paramList: ParameterMetadata[] = [];
-  if (target.constructor) {
-    const parameterMetadata: ControllerParameterMetadata = Reflect.getOwnMetadata(
-      METADATA_KEY.controllerParameter,
-      target.constructor
-    );
-
-    if (parameterMetadata) {
-      paramList = parameterMetadata.get(method) || [];
-    }
+    return ctx;
   }
+);
 
-  return paramList;
+/**
+ * Type of the `Request` decorator / constructor function.
+ */
+export interface RequestDecorator {
+  /**
+   * Decorator that marks a parameter to inject Request
+   *
+   * @usageNotes
+   * You can supply an optional path to extract a part of Request.
+   * Under the hood, use lodash.get
+   *
+   * Example with full Request
+   *
+   * ```typescript
+   * @Controller('/')
+   * class SampleController {
+   *    @Get('/')
+   *    hello(@Request() request: GabRequest) {
+   *      return 'Hello';
+   *    }
+   * }
+   * ```
+   *
+   * Example with part of Request
+   *
+   * ```typescript
+   * @Controller('/')
+   * class SampleController {
+   *    @Get('/')
+   *    hello(@Request('fresh') fresh: boolean) {
+   *      return 'Hello';
+   *    }
+   * }
+   * ```
+   */
+  (path?: string): ParameterDecorator;
+
+  /**
+   * see the `@Request` decorator.
+   */
+  new (path?: string): any;
 }
+
+export const Request: RequestDecorator = makeWebParamDecorator(
+  PARAMETER_TYPE.REQUEST,
+  ([path]: [string | undefined], ctx) => {
+    if (path) {
+      return get(ctx.request, path);
+    }
+    return ctx.request;
+  }
+);
+
+/**
+ * Type of the `Response` decorator / constructor function.
+ */
+export interface ResponseDecorator {
+  /**
+   * Decorator that marks a parameter to inject Response
+   *
+   * @usageNotes
+   * You can supply an optional path to extract a part of Response.
+   * Under the hood, use lodash.get
+   *
+   * Example with full Response
+   *
+   * ```typescript
+   * @Controller('/')
+   * class SampleController {
+   *    @Get('/')
+   *    hello(@Response() response: GabResponse) {
+   *      return 'Hello';
+   *    }
+   * }
+   * ```
+   *
+   * Example with part of Response
+   *
+   * ```typescript
+   * @Controller('/')
+   * class SampleController {
+   *    @Get('/')
+   *    hello(@Response('headersSent') headersSent: boolean) {
+   *      return 'Hello';
+   *    }
+   * }
+   * ```
+   */
+  (path?: string): ParameterDecorator;
+
+  /**
+   * see the `@Response` decorator.
+   */
+  new (path?: string): any;
+}
+
+export const Response: ResponseDecorator = makeWebParamDecorator(
+  PARAMETER_TYPE.RESPONSE,
+  ([path]: [string | undefined], ctx) => {
+    if (path) {
+      return get(ctx.response, path);
+    }
+    return ctx.response;
+  }
+);
+
+/**
+ * Type of the `RequestParam` decorator / constructor function.
+ */
+export interface RequestParamDecorator {
+  /**
+   * Decorator that marks a parameter to inject RequestParam (context.request.params object)
+   *
+   * @usageNotes
+   * You can supply an optional path to extract a part of RequestParam.
+   * Under the hood, use lodash.get
+   *
+   * Example with full RequestParam
+   *
+   * ```typescript
+   * @Controller('/')
+   * class SampleController {
+   *    @Get('/:id')
+   *    get(@RequestParam() params: any) {
+   *      return 'Hello';
+   *    }
+   * }
+   * ```
+   *
+   * Example with part of RequestParam
+   *
+   * ```typescript
+   * @Controller('/')
+   * class SampleController {
+   *    @Get('/:id')
+   *    get(@RequestParam('id') id: string) {
+   *      return 'Hello';
+   *    }
+   * }
+   * ```
+   */
+  (path?: string): ParameterDecorator;
+
+  /**
+   * see the `@RequestParam` decorator.
+   */
+  new (path?: string): any;
+}
+
+export const RequestParam: RequestParamDecorator = makeWebParamDecorator(
+  PARAMETER_TYPE.PARAMS,
+  ([path]: [string | undefined], ctx, type) => {
+    let res = ctx.request.params;
+    if (path) {
+      res = get(ctx.request.params, path);
+    }
+
+    if (type === 'Number') {
+      try {
+        // parseFloat for compatibility with integer and float
+        res = Number.parseFloat(res);
+      } catch {}
+    }
+
+    return res;
+  }
+);
+
+/**
+ * Type of the `QueryParam` decorator / constructor function.
+ */
+export interface QueryParamDecorator {
+  /**
+   * Decorator that marks a parameter to inject QueryParam (context.request.query object)
+   *
+   * @usageNotes
+   * You can supply an optional path to extract a part of QueryParam.
+   * Under the hood, use lodash.get
+   *
+   * Example with full QueryParam
+   *
+   * ```typescript
+   * @Controller('/')
+   * class SampleController {
+   *    @Get('/:id')
+   *    get(@QueryParam() query: any) {
+   *      return 'Hello';
+   *    }
+   * }
+   * ```
+   *
+   * Example with part of QueryParam
+   *
+   * ```typescript
+   * @Controller('/')
+   * class SampleController {
+   *    @Get('/:id')
+   *    get(@QueryParam('test') test: string) {
+   *      return 'Hello';
+   *    }
+   * }
+   * ```
+   */
+  (path?: string): ParameterDecorator;
+
+  /**
+   * see the `@QueryParam` decorator.
+   */
+  new (path?: string): any;
+}
+
+export const QueryParam: QueryParamDecorator = makeWebParamDecorator(
+  PARAMETER_TYPE.QUERY,
+  ([path]: [string | undefined], ctx, type) => {
+    let res = ctx.request.query;
+    if (path) {
+      res = get(ctx.request.query, path);
+    }
+
+    if (type === 'Number') {
+      try {
+        // parseFloat for compatibility with integer and float
+        res = Number.parseFloat(res);
+      } catch {}
+    }
+
+    return res;
+  }
+);
+
+/**
+ * Type of the `RequestBody` decorator / constructor function.
+ */
+export interface RequestBodyDecorator {
+  /**
+   * Decorator that marks a parameter to inject RequestBody (context.request.body object)
+   *
+   * @usageNotes
+   * You can supply an optional path to extract a part of RequestBody.
+   * Under the hood, use lodash.get
+   *
+   * Example with full RequestBody
+   *
+   * ```typescript
+   * @Controller('/')
+   * class SampleController {
+   *    @Get('/:id')
+   *    get(@RequestBody() body: any) {
+   *      return 'Hello';
+   *    }
+   * }
+   * ```
+   *
+   * Example with part of RequestBody
+   *
+   * ```typescript
+   * @Controller('/')
+   * class SampleController {
+   *    @Get('/:id')
+   *    get(@RequestBody('test') test: string) {
+   *      return 'Hello';
+   *    }
+   * }
+   * ```
+   */
+  (path?: string): ParameterDecorator;
+
+  /**
+   * see the `@RequestBody` decorator.
+   */
+  new (path?: string): any;
+}
+
+export const RequestBody: RequestBodyDecorator = makeWebParamDecorator(
+  PARAMETER_TYPE.BODY,
+  ([path]: [string | undefined], ctx) => {
+    if (path) {
+      return get(ctx.request.body, path);
+    }
+    return ctx.request.body;
+  }
+);
+
+/**
+ * Type of the `RequestHeaders` decorator / constructor function.
+ */
+export interface RequestHeadersDecorator {
+  /**
+   * Decorator that marks a parameter to inject RequestHeaders (context.request.headers object)
+   *
+   * @usageNotes
+   * You can supply an optional path to extract a part of RequestHeaders.
+   * Under the hood, use lodash.get
+   *
+   * Example with full RequestHeaders
+   *
+   * ```typescript
+   * @Controller('/')
+   * class SampleController {
+   *    @Get('/:id')
+   *    get(@RequestHeaders() headers: any) {
+   *      return 'Hello';
+   *    }
+   * }
+   * ```
+   *
+   * Example with part of RequestHeaders
+   *
+   * ```typescript
+   * @Controller('/')
+   * class SampleController {
+   *    @Get('/:id')
+   *    get(@RequestHeaders('test') test: string) {
+   *      return 'Hello';
+   *    }
+   * }
+   * ```
+   */
+  (path?: string): ParameterDecorator;
+
+  /**
+   * see the `@RequestHeaders` decorator.
+   */
+  new (path?: string): any;
+}
+
+export const RequestHeaders: RequestHeadersDecorator = makeWebParamDecorator(
+  PARAMETER_TYPE.HEADERS,
+  ([path]: [string | undefined], ctx) => {
+    if (path) {
+      return get(ctx.request.headers, path);
+    }
+    return ctx.request.headers;
+  }
+);
+
+/**
+ * Type of the `Cookies` decorator / constructor function.
+ */
+export interface CookiesDecorator {
+  /**
+   * Decorator that marks a parameter to inject Cookies (context.request.headers object)
+   *
+   * @usageNotes
+   * You can supply an optional path to extract a part of Cookies.
+   * Under the hood, use lodash.get
+   *
+   * Example with full Cookies
+   *
+   * ```typescript
+   * @Controller('/')
+   * class SampleController {
+   *    @Get('/:id')
+   *    get(@Cookies() headers: any) {
+   *      return 'Hello';
+   *    }
+   * }
+   * ```
+   *
+   * Example with part of Cookies
+   *
+   * ```typescript
+   * @Controller('/')
+   * class SampleController {
+   *    @Get('/:id')
+   *    get(@Cookies('test') test: string) {
+   *      return 'Hello';
+   *    }
+   * }
+   * ```
+   */
+  (path?: string): ParameterDecorator;
+
+  /**
+   * see the `@Cookies` decorator.
+   */
+  new (path?: string): any;
+}
+
+export const Cookies: CookiesDecorator = makeWebParamDecorator(
+  PARAMETER_TYPE.COOKIES,
+  ([path]: [string | undefined], ctx) => {
+    if (path) {
+      return ctx.cookies.get(path);
+    }
+    return ctx.cookies;
+  }
+);
+
+/**
+ * Type of the `Next` decorator / constructor function.
+ */
+export interface NextDecorator {
+  /**
+   * Decorator that marks a parameter to inject Next function
+   *
+   * @usageNotes
+   *
+   * ```typescript
+   * @Controller('/')
+   * class SampleController {
+   *    @Get('/')
+   *    hello(@Next() next: any) {
+   *      next();
+   *    }
+   * }
+   * ```
+   */
+  (): ParameterDecorator;
+
+  /**
+   * see the `@Next` decorator.
+   */
+  new (): any;
+}
+
+export const Next: NextDecorator = makeWebParamDecorator(
+  PARAMETER_TYPE.NEXT,
+  (_, __, ___, ____, next) => next
+);

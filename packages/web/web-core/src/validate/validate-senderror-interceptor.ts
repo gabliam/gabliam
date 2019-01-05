@@ -1,5 +1,6 @@
 import { Service } from '@gabliam/core';
-import { Interceptor, Next } from '../decorators';
+import { Next } from '../decorators';
+import { Interceptor } from '../interceptor';
 import { nextFn } from '../interface';
 import { HttpStatus, ResponseEntity } from '../response-entity';
 import { getValidateError, isValidateError } from './validate-request';

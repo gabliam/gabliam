@@ -1,16 +1,15 @@
+import { reflection } from '@gabliam/core/src';
 import {
+  Cookies,
   Get,
+  Next,
   Post,
-  Request,
-  Response,
-  RequestParam,
   QueryParam,
+  Request,
   RequestBody,
   RequestHeaders,
-  Cookies,
-  Next,
-  ControllerParameterMetadata,
-  METADATA_KEY,
+  RequestParam,
+  Response,
 } from '@gabliam/web-core';
 
 describe('params decorators', () => {
@@ -40,10 +39,9 @@ describe('params decorators', () => {
         return;
       }
     }
-    const methodMetadataList: ControllerParameterMetadata = Reflect.getMetadata(
-      METADATA_KEY.controllerParameter,
-      TestController
-    );
-    expect(methodMetadataList).toMatchSnapshot();
+
+    expect(reflection.parameters(TestController, 'test')).toMatchSnapshot();
+    expect(reflection.parameters(TestController, 'test2')).toMatchSnapshot();
+    expect(reflection.parameters(TestController, 'test3')).toMatchSnapshot();
   });
 });

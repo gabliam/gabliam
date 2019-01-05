@@ -1,3 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`interceptors decorators should add Bean metadata to a class when decorated with @UseInterceptors 1`] = `undefined`;
+exports[`interceptors decorators should add Bean metadata to a class when decorated with @UseInterceptors 1`] = `
+Object {
+  "test2Method": Array [
+    DecoratorFactory {
+      "ids": Array [
+        "test2",
+      ],
+    },
+  ],
+  "testMethod": Array [
+    DecoratorFactory {
+      "ids": Array [
+        "test",
+      ],
+    },
+  ],
+}
+`;

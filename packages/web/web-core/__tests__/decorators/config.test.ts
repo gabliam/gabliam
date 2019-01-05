@@ -1,9 +1,5 @@
-import {
-  WebConfig,
-  WebConfigAfterControllers,
-  WebConfigMetadata,
-  METADATA_KEY,
-} from '@gabliam/web-core';
+import { reflection } from '@gabliam/core';
+import { WebConfig, WebConfigAfterControllers } from '@gabliam/web-core';
 
 describe('WebConfig decorator', () => {
   test('should add WebConfig metadata to a class when decorated with @WebConfig', () => {
@@ -15,12 +11,7 @@ describe('WebConfig decorator', () => {
       test2Method() {}
     }
 
-    const webConfigMetadata: WebConfigMetadata[] = Reflect.getMetadata(
-      METADATA_KEY.webConfig,
-      TestConfig
-    );
-
-    expect(webConfigMetadata).toMatchSnapshot();
+    expect(reflection.propMetadata(TestConfig)).toMatchSnapshot();
   });
 
   test('should add WebConfig metadata to a class when decorated with @WebConfig(order)', () => {
@@ -32,12 +23,7 @@ describe('WebConfig decorator', () => {
       test2Method() {}
     }
 
-    const webConfigMetadata: WebConfigMetadata[] = Reflect.getMetadata(
-      METADATA_KEY.webConfig,
-      TestConfig
-    );
-
-    expect(webConfigMetadata).toMatchSnapshot();
+    expect(reflection.propMetadata(TestConfig)).toMatchSnapshot();
   });
 
   test('should fail when decorated multiple times the same method with @WebConfig', () => {
@@ -66,12 +52,7 @@ describe('WebConfigAfterControllers decorator', () => {
       test2Method() {}
     }
 
-    const webConfigAfterControllersMetadata: WebConfigMetadata[] = Reflect.getMetadata(
-      METADATA_KEY.webConfigAfterControllers,
-      TestConfig
-    );
-
-    expect(webConfigAfterControllersMetadata).toMatchSnapshot();
+    expect(reflection.propMetadata(TestConfig)).toMatchSnapshot();
   });
 
   test('should add WebConfigAfterControllers metadata to a class when decorated with @WebConfigAfterControllers(order)', () => {
@@ -83,12 +64,7 @@ describe('WebConfigAfterControllers decorator', () => {
       test2Method() {}
     }
 
-    const webConfigAfterControllersMetadata: WebConfigMetadata[] = Reflect.getMetadata(
-      METADATA_KEY.webConfigAfterControllers,
-      TestConfig
-    );
-
-    expect(webConfigAfterControllersMetadata).toMatchSnapshot();
+    expect(reflection.propMetadata(TestConfig)).toMatchSnapshot();
   });
 
   test('should fail when decorated multiple times the same method with @WebConfigAfterControllers', () => {
