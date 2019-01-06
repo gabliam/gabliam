@@ -8,9 +8,8 @@ import {
 import {
   BadInterceptorError,
   createInterceptorResolver,
-  extractParameters,
   getContext,
-  getParameterMetadata,
+  getExtractArgs,
   isInterceptor,
 } from '@gabliam/web-core';
 import { express } from './express';
@@ -28,19 +27,14 @@ export class ExpressConverter {
       throw new BadInterceptorError(instance);
     }
 
+    const extractArgs = getExtractArgs(instance, 'intercept');
+
     return async (
       req: express.Request,
       res: express.Response,
       next: express.NextFunction
     ) => {
-      const args = extractParameters(
-        instance,
-        'intercept',
-        null,
-        getContext(req),
-        next,
-        getParameterMetadata(instance, 'intercept')
-      );
+      const args = extractArgs(getContext(req), null, next);
 
       try {
         await toPromise((instance['intercept'] as any)(...args));

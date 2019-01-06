@@ -11,7 +11,6 @@ import {
   cleanPath,
   compose,
   ExecutionContext,
-  extractParameters,
   getContext,
   InterceptorInfo,
   RestMetadata,
@@ -169,14 +168,7 @@ export class ExpressPlugin extends WebPluginBase implements GabliamPlugin {
       };
 
       const callNext = async () => {
-        const args = extractParameters(
-          controller,
-          methodInfo.methodName,
-          execCtx,
-          ctx,
-          expressNext,
-          methodInfo.paramList
-        );
+        const args = methodInfo.extractArgs(ctx, execCtx, expressNext);
         return await toPromise(controller[methodInfo.methodName](...args));
       };
 
