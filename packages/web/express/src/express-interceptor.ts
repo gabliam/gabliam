@@ -69,6 +69,21 @@ export const toInterceptor = (
   Next()(clazz.prototype, 'intercept', 1);
   Service()(clazz);
   ExpressInterceptor()(clazz);
+
+  // metadata
+  Reflect.defineMetadata('design:type', Function, clazz.prototype, 'intercept');
+  Reflect.defineMetadata(
+    'design:paramtypes',
+    [Function, Function],
+    clazz.prototype,
+    'intercept'
+  );
+  Reflect.defineMetadata(
+    'design:returntype',
+    Promise,
+    clazz.prototype,
+    'intercept'
+  );
   return clazz;
 };
 

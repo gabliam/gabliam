@@ -2,17 +2,17 @@ import { Bean, Config } from '@gabliam/core';
 import {
   Context,
   Controller,
+  CustomMethod,
   Delete,
   GabContext,
   Get,
   Head,
-  Method,
   Next,
+  nextFn,
   Patch,
   Post,
   Put,
   RestController,
-  nextFn,
 } from '@gabliam/web-core';
 import { CUSTOM_ROUTER_CREATOR } from '../../src/constants';
 import { koaRouter } from '../../src/index';
@@ -29,8 +29,14 @@ afterEach(async () => {
 });
 
 describe('Integration Tests:', () => {
-  [Controller, RestController].forEach(decorator => {
-    describe(`decorator ${decorator.name}`, () => {
+  [
+    { decorator: Controller, name: 'Controller' },
+    {
+      decorator: RestController,
+      name: 'RestController',
+    },
+  ].forEach(({ decorator, name }) => {
+    describe(`decorator ${name}`, () => {
       test('should work with config', async () => {
         @decorator('rest.test.base')
         class TestController {
@@ -222,7 +228,7 @@ describe('Integration Tests:', () => {
       test('should work for more obscure HTTP methods using the httpMethod decorator', async () => {
         @decorator('/')
         class TestController {
-          @Method('propfind', '/')
+          @CustomMethod('propfind', '/')
           public getTest(@Context() ctx: GabContext) {
             ctx.body = 'PROPFIND';
           }

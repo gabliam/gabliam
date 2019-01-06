@@ -415,11 +415,7 @@ export class AmqpConnection {
 
     const params = reflection.parameters(<any>controller.constructor, propKey);
 
-    if (
-      params.length === 1 &&
-      Array.isArray(params[0]) &&
-      params[0].length === 0
-    ) {
+    if (params.length === 0) {
       return (this.extractArgs[k] = msg => [this.parseContent(msg)]);
     }
 

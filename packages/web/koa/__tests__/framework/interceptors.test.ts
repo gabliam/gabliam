@@ -162,7 +162,7 @@ describe('Interceptor:', () => {
     expect(result).toMatchSnapshot();
   });
 
-  test('should call method-level interceptor correctly (PUT)', async () => {
+  test.only('should call method-level interceptor correctly (PUT)', async () => {
     @Controller('/')
     class TestController {
       @UseInterceptors(A, B, C)

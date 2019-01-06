@@ -11,7 +11,6 @@ import {
   cleanPath,
   compose,
   ExecutionContext,
-  extractParameters,
   getContext,
   InterceptorInfo,
   RestMetadata,
@@ -185,14 +184,7 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
       const controller = execCtx.getClass();
 
       const callNext = async () => {
-        const args = extractParameters(
-          controller,
-          methodInfo.methodName,
-          execCtx,
-          ctx,
-          next,
-          methodInfo.paramList
-        );
+        const args = methodInfo.extractArgs(ctx, execCtx, next);
         return await toPromise(controller[methodInfo.methodName](...args));
       };
 

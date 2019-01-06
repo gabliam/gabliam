@@ -1,11 +1,11 @@
 import {
   Controller,
-  RestController,
   Get,
   ResponseEntity,
+  RestController,
 } from '@gabliam/web-core';
-import { KoaPluginTest } from '../koa-plugin-test';
 import * as HttpStatus from 'http-status-codes';
+import { KoaPluginTest } from '../koa-plugin-test';
 
 let appTest: KoaPluginTest;
 
@@ -18,8 +18,14 @@ afterEach(async () => {
 });
 
 describe('Response entity Tests:', () => {
-  [Controller, RestController].forEach(decorator => {
-    describe(`decorator ${decorator.name}`, () => {
+  [
+    { decorator: Controller, name: 'Controller' },
+    {
+      decorator: RestController,
+      name: 'RestController',
+    },
+  ].forEach(({ decorator, name }) => {
+    describe(`decorator ${name}`, () => {
       test('should work for responseEntitie controller methods', async () => {
         @decorator('/')
         class TestController {

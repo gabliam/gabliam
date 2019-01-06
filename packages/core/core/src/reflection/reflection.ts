@@ -32,56 +32,6 @@ export class Reflection {
   }
 
   private _ownParameters(type: Type<any>, propertyKey: string): any[][] | null {
-    // console.log(
-    //   'after constructor',
-    //   {
-    //     'type.hasOwnProperty(PARAMETERS)': type.hasOwnProperty(PARAMETERS),
-    //     '(type as any)[PARAMETERS]': (type as any)[PARAMETERS],
-    //     paramTypes: this._reflect.getOwnMetadata(
-    //       'design:paramtypes',
-    //       type,
-    //       propertyKey
-    //     ),
-    //     paramTypes2: this._reflect.getOwnMetadata(
-    //       'design:paramtypes',
-    //       type.constructor,
-    //       propertyKey
-    //     ),
-    //     paramTypes3: this._reflect.getMetadata(
-    //       'design:paramtypes',
-    //       type,
-    //       propertyKey
-    //     ),
-    //     paramTypes4: this._reflect.getMetadata(
-    //       'design:paramtypes',
-    //       type.constructor,
-    //       propertyKey
-    //     ),
-    //   },
-    //   {
-    //     paramTypes: this._reflect.getOwnMetadata(
-    //       'design:paramtypes',
-    //       type,
-    //       propertyKey
-    //     ),
-    //     paramTypes2: this._reflect.getOwnMetadata(
-    //       'design:paramtypes',
-    //       type.prototype,
-    //       propertyKey
-    //     ),
-    //     paramTypes3: this._reflect.getMetadata(
-    //       'design:paramtypes',
-    //       type,
-    //       propertyKey
-    //     ),
-    //     paramTypes4: this._reflect.getMetadata(
-    //       'design:paramtypes',
-    //       type.prototype,
-    //       propertyKey
-    //     ),
-    //   }
-    // );
-
     // API for metadata created by invoking the decorators.
     const paramAnnotations =
       type.hasOwnProperty(PARAMETERS) &&
@@ -96,8 +46,7 @@ export class Reflection {
       propertyKey
     );
 
-    // console.log('final', paramAnnotations, paramTypes);
-    if (paramTypes || paramAnnotations) {
+    if (paramTypes && paramAnnotations) {
       return this._zipTypesAndAnnotations(paramTypes, paramAnnotations);
     }
 

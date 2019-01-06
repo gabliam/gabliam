@@ -3,7 +3,7 @@ import { ConsumeMessage } from 'amqplib';
 import { Content, Fields, Message, Properties } from '../../src';
 
 describe('params decorators', () => {
-  test.only('should add parameter metadata to a class when decorated with @params', () => {
+  test('should add parameter metadata to a class when decorated with @params', () => {
     class TestController {
       public test(
         @Message() msg: ConsumeMessage,
