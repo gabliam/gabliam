@@ -6,6 +6,7 @@ export * from './execution-context';
 export * from './gab-context';
 export * from './gab-request';
 export * from './gab-response';
+export * from './interceptor';
 export * from './interface';
 export * from './plugin-config';
 export * from './response-entity';
