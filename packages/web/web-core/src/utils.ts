@@ -13,6 +13,7 @@ import {
   ResponseBody,
   WebParamDecorator,
 } from './decorators';
+import { NextCalledMulipleError } from './errors';
 import { ExecutionContext } from './execution-context';
 import { GabContext } from './gab-context';
 import { getInterceptors, InterceptorInfo } from './interceptor';
@@ -187,7 +188,7 @@ export function compose(
     let index = -1;
     async function dispatch(i: number) {
       if (i <= index) {
-        throw new Error('next() called multiple times');
+        throw new NextCalledMulipleError();
       }
       index = i;
       const interceptor = interceptors[i];
