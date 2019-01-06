@@ -10,6 +10,7 @@ import {
   getContext,
   getExtractArgs,
   isInterceptor,
+  BadInterceptorError,
 } from '@gabliam/web-core';
 import { koa } from './koa';
 
@@ -23,7 +24,7 @@ export class KoaConverter {
     const container = <Container>(this as any)[INJECT_CONTAINER_KEY];
     const instance = createInterceptorResolver(container)(clazz);
     if (!isInterceptor(instance)) {
-      throw new Error();
+      throw new BadInterceptorError(instance);
     }
 
     const extractArgs = getExtractArgs(instance, 'intercept');
