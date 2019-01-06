@@ -1,7 +1,7 @@
 import { Service } from '@gabliam/core';
-import { Next } from '../decorators';
 import { Interceptor } from '../interceptor';
 import { nextFn } from '../interface';
+import { Next } from '../metadatas';
 import { HttpStatus, ResponseEntity } from '../response-entity';
 import { getValidateError, isValidateError } from './validate-request';
 

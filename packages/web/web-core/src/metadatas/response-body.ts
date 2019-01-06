@@ -1,5 +1,5 @@
+import { makePropDecorator } from '@gabliam/core';
 import { METADATA_KEY } from '../constants';
-import { makePropDecorator } from '@gabliam/core/src';
 
 /**
  * Type of the `ResponseBody` decorator / constructor function.

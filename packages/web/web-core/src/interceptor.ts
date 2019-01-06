@@ -1,11 +1,11 @@
 import {
-  gabliamValue,
   Container,
+  gabliamValue,
   inversifyInterfaces,
   reflection,
 } from '@gabliam/core';
-import { UseInterceptors } from './decorators';
 import { extractArgsFn } from './interface';
+import { UseInterceptors } from './metadatas';
 import { getExtractArgs } from './utils';
 
 /**

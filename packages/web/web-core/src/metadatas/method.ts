@@ -1,5 +1,5 @@
+import { makePropDecorator } from '@gabliam/core';
 import { METADATA_KEY } from '../constants';
-import { makePropDecorator } from '@gabliam/core/src';
 
 export type defaultMethods =
   | 'all'

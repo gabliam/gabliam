@@ -1,4 +1,4 @@
-import { reflection } from '@gabliam/core/src';
+import { reflection } from '@gabliam/core';
 import { Controller, Get, Validate } from '@gabliam/web-core';
 
 describe('Validate decorator', () => {

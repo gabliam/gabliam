@@ -1,5 +1,5 @@
+import { makePropDecorator } from '@gabliam/core';
 import { ERRORS_MSGS, METADATA_KEY } from '../constants';
-import { makePropDecorator } from '@gabliam/core/src';
 
 /**
  * Type of the `WebConfig` decorator / constructor function.

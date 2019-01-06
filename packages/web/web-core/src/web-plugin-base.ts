@@ -7,7 +7,7 @@ import {
   toPromise,
 } from '@gabliam/core';
 import { APP, TYPE } from './constants';
-import { WebConfig, WebConfigAfterControllers } from './decorators';
+import { WebConfig, WebConfigAfterControllers } from './metadatas';
 import { RestMetadata } from './plugin-config';
 import { extractControllerMetadata } from './utils';
 import { WebConfiguration } from './web-configuration';
