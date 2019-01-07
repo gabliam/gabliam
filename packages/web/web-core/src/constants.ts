@@ -36,8 +36,6 @@ export enum PARAMETER_TYPE {
   NEXT = 'next',
 }
 
-export const DEFAULT_PARAM_VALUE = '**$$DEFAULT_PARAM_VALUE$$**';
-
 export const ERRORS_MSGS = {
   DUPLICATED_CONTROLLER_DECORATOR: `Cannot apply @Controller and @RestController decorator multiple times.`,
   DUPLICATED_VALIDATE_DECORATOR: `Cannot apply @Validate decorator multiple times.`,

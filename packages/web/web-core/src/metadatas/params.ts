@@ -4,6 +4,15 @@ import { METADATA_KEY, PARAMETER_TYPE } from '../constants';
 import { ExecutionContext } from '../execution-context';
 import { GabContext } from '../gab-context';
 
+/**
+ * Represent the handler for extract the parameter
+ *
+ * args : Arguments passed to decorator
+ * ctx: GabContext
+ * type: type of parameters (ex @Query('nb) nb: number, type = Number)
+ * execCtx: ExecutionContext
+ * next: next function
+ */
 export type HandlerFn = <V>(
   args: any,
   ctx: GabContext,
@@ -13,13 +22,43 @@ export type HandlerFn = <V>(
 ) => any;
 
 export interface WebParamDecorator<T = any> {
+  /**
+   * Hander for extract the param
+   */
   handler: HandlerFn;
 
+  /**
+   * Arguments passed to decorator
+   */
   args: T[];
 
+  /**
+   * Type of decorator for introspection of parameters (swagger by ex)
+   */
   type: string;
 }
 
+/**
+ * Function for create you own param decorator
+ * @usageNotes
+ *
+ * You must passed a type and the handler
+ * Type is mandatory, this param is used for introspection of parameters (swagger by ex)
+ *
+ * Sample to extract the user in query
+ *
+ * ```typescript
+ *  const User = makeWebParamDecorator('user', (args, ctx) => ctx.request.user)
+ *
+ * @Controller('/')
+ * class SampleController {
+ *    @Get('/')
+ *    hello(@User() user: UserModel) {
+ *      return 'Hello';
+ *    }
+ * }
+ * ```
+ */
 export const makeWebParamDecorator = (type: string, handler: HandlerFn) => {
   return makeParamDecorator(
     METADATA_KEY.controllerParameter,

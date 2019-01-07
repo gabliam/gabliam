@@ -1,21 +1,15 @@
 // tslint:disable:one-line
 // tslint:disable:no-unused-expression
-import { GraphqlController } from '../../src/decorator';
-import { METADATA_KEY } from '../../src/constants';
-import { ControllerMetadata } from '../../src/interfaces';
-import { PhotoSchema, HeroSchema } from '../fixtures/schemas/schema';
+import { reflection } from '@gabliam/core';
 import * as path from 'path';
+import { GraphqlController } from '../../src';
+import { HeroSchema, PhotoSchema } from '../fixtures/schemas/schema';
 
 test('should add GraphqlController metadata to a class when decorated with @GraphqlController()', () => {
   @GraphqlController()
   class TestBean {}
 
-  const controllerMetadata: ControllerMetadata = Reflect.getMetadata(
-    METADATA_KEY.controller,
-    TestBean
-  );
-
-  expect(controllerMetadata).toMatchSnapshot();
+  expect(reflection.annotations(TestBean)).toMatchSnapshot();
 });
 
 test('should add GraphqlController metadata to a class when decorated with @GraphqlController({graphqlFiles: absolute})', () => {
@@ -27,12 +21,7 @@ test('should add GraphqlController metadata to a class when decorated with @Grap
   })
   class TestBean {}
 
-  const controllerMetadata: ControllerMetadata = Reflect.getMetadata(
-    METADATA_KEY.controller,
-    TestBean
-  );
-
-  expect(controllerMetadata).toMatchSnapshot();
+  expect(reflection.annotations(TestBean)).toMatchSnapshot();
 });
 
 test('should add GraphqlController metadata to a class when decorated with @GraphqlController({graphqlFiles: relative})', () => {
@@ -41,12 +30,7 @@ test('should add GraphqlController metadata to a class when decorated with @Grap
   })
   class TestBean {}
 
-  const controllerMetadata: ControllerMetadata = Reflect.getMetadata(
-    METADATA_KEY.controller,
-    TestBean
-  );
-
-  expect(controllerMetadata).toMatchSnapshot();
+  expect(reflection.annotations(TestBean)).toMatchSnapshot();
 });
 
 test('should add GraphqlController metadata to a class when decorated with @GraphqlController({graphqlFiles: relative, pwd})', () => {
@@ -56,12 +40,7 @@ test('should add GraphqlController metadata to a class when decorated with @Grap
   })
   class TestBean {}
 
-  const controllerMetadata: ControllerMetadata = Reflect.getMetadata(
-    METADATA_KEY.controller,
-    TestBean
-  );
-
-  expect(controllerMetadata).toMatchSnapshot();
+  expect(reflection.annotations(TestBean)).toMatchSnapshot();
 });
 
 test('should add GraphqlController metadata to a class when decorated with @GraphqlController({schema})', () => {
@@ -70,12 +49,7 @@ test('should add GraphqlController metadata to a class when decorated with @Grap
   })
   class TestBean {}
 
-  const controllerMetadata: ControllerMetadata = Reflect.getMetadata(
-    METADATA_KEY.controller,
-    TestBean
-  );
-
-  expect(controllerMetadata).toMatchSnapshot();
+  expect(reflection.annotations(TestBean)).toMatchSnapshot();
 });
 
 test('should add GraphqlController metadata to a class when decorated with @GraphqlController({graphqlFiles, schema})', () => {
@@ -85,10 +59,5 @@ test('should add GraphqlController metadata to a class when decorated with @Grap
   })
   class TestBean {}
 
-  const controllerMetadata: ControllerMetadata = Reflect.getMetadata(
-    METADATA_KEY.controller,
-    TestBean
-  );
-
-  expect(controllerMetadata).toMatchSnapshot();
+  expect(reflection.annotations(TestBean)).toMatchSnapshot();
 });

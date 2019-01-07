@@ -1,49 +1,36 @@
-import { ParameterMetadata } from './decorator/params';
-import { DEFAULT_PARAM_VALUE, PARAMETER_TYPE } from './constants';
+import { reflection } from '@gabliam/core';
 import { GraphQLResolveInfo } from 'graphql';
-import * as _ from 'lodash';
+import { extractArgsFn } from './interfaces';
+import { GqlParamDecorator } from './metadatas';
 
-export const extractParameters = (
-  source: any,
-  args: any,
-  context: any,
-  info: GraphQLResolveInfo,
-  params: ParameterMetadata[]
-): any[] => {
-  const extractedParams = [];
-  if (!params || !params.length) {
-    return [source, args, context, info];
+export const getExtractArgs = (
+  controller: any,
+  propKey: string
+): extractArgsFn => {
+  const params = reflection.parameters(<any>controller.constructor, propKey);
+
+  if (params.length === 0) {
+    return (source: any, args: any, context: any, info: GraphQLResolveInfo) => [
+      source,
+      args,
+      context,
+      info,
+    ];
   }
-  for (const item of params) {
-    switch (item.type) {
-      case PARAMETER_TYPE.SOURCE:
-      default:
-        extractedParams[item.index] = getParam(source, item);
-        break; // response
-      case PARAMETER_TYPE.ARGS:
-        extractedParams[item.index] = getParam(args, item);
-        break;
-      case PARAMETER_TYPE.CONTEXT:
-        extractedParams[item.index] = getParam(context, item);
-        break;
-      case PARAMETER_TYPE.INFO:
-        extractedParams[item.index] = getParam(info, item);
-        break;
+
+  const parameters = <[string | undefined, GqlParamDecorator][]>params.map(
+    meta => {
+      let type: string | undefined;
+      if (meta.length === 2) {
+        type = meta[0].name;
+      }
+      return [type, meta.slice(-1)[0] as GqlParamDecorator];
     }
-  }
+  );
 
-  return extractedParams;
-};
-
-const getParam = (source: any, itemParam: ParameterMetadata) => {
-  const name = itemParam.parameterName;
-
-  // get the param source
-
-  const res = _.get(source, itemParam.parameterName);
-
-  if (res) {
-    return res;
-  }
-  return name === DEFAULT_PARAM_VALUE ? source : undefined;
+  return (source: any, args: any, context: any, info: GraphQLResolveInfo) => {
+    return parameters.map(([type, p]) =>
+      p.handler(p.args, type, source, args, context, info)
+    );
+  };
 };

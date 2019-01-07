@@ -1,31 +1,24 @@
 import {
   Container,
   GabliamPlugin,
+  reflection,
   Registry,
   Scan,
   toPromise,
 } from '@gabliam/core';
 import * as d from 'debug';
 import * as fs from 'fs';
-import { GraphQLSchema, GraphQLResolveInfo } from 'graphql';
+import { GraphQLResolveInfo, GraphQLSchema } from 'graphql';
 import { IResolvers, makeExecutableSchema } from 'graphql-tools';
 import * as _ from 'lodash';
 import { DEBUG_PATH, GRAPHQL_CONFIG, METADATA_KEY, TYPE } from './constants';
-import {
-  ResolverType,
-  ParameterMetadata,
-  ControllerParameterMetadata,
-} from './decorator';
-import {
-  ControllerMetadata,
-  GraphqlConfig,
-  ResolverMetadata,
-} from './interfaces';
-import { extractParameters } from './utils';
+import { GraphqlController, Resolver, ResolverType } from './metadatas';
+import { GraphqlConfig } from './interfaces';
+import { getExtractArgs } from './utils';
 
 const debug = d(DEBUG_PATH);
 
-@Scan(__dirname)
+@Scan()
 export abstract class GraphqlCorePlugin implements GabliamPlugin {
   bind(container: Container, registry: Registry) {
     registry.get(TYPE.Controller).map(({ id, target }) => {
@@ -52,29 +45,27 @@ export abstract class GraphqlCorePlugin implements GabliamPlugin {
 
     for (const { id: controllerId } of controllerIds) {
       const controller = container.get<object>(controllerId);
-      const paramList: ControllerParameterMetadata =
-        Reflect.getOwnMetadata(
-          METADATA_KEY.controllerParameter,
-          controller.constructor
-        ) || new Map();
 
-      const controllerMetadata: ControllerMetadata = Reflect.getOwnMetadata(
-        METADATA_KEY.controller,
-        controller.constructor
-      );
+      const [controllerMetadata] = reflection
+        .annotationsOfDecorator<GraphqlController>(
+          controller.constructor,
+          GraphqlController
+        )
+        .slice(-1);
 
       listdefinitions.push(...controllerMetadata.schema);
       listdefinitions.push(
         ...this.loadGraphqlFiles(...controllerMetadata.graphqlFiles)
       );
 
-      const resolverMetadatas: ResolverMetadata[] = Reflect.getOwnMetadata(
-        METADATA_KEY.resolver,
-        controller.constructor
+      const resolverMetadatas = reflection.propMetadataOfDecorator<Resolver>(
+        controller.constructor,
+        METADATA_KEY.resolver
       );
 
       if (resolverMetadatas && controllerMetadata) {
-        for (const resolverMetadata of resolverMetadatas) {
+        for (const [methodName, metas] of Object.entries(resolverMetadatas)) {
+          const [resolverMetadata] = metas.slice(-1);
           if (resolverMetadata.schema) {
             listdefinitions.push(resolverMetadata.schema);
           }
@@ -83,9 +74,9 @@ export abstract class GraphqlCorePlugin implements GabliamPlugin {
               ...this.loadGraphqlFiles(resolverMetadata.graphqlFile)
             );
           }
-          const params = paramList.get(resolverMetadata.key) || [];
+
           resolverList.push(
-            this.getResolver(controller, resolverMetadata, params)
+            this.getResolver(controller, methodName, resolverMetadata)
           );
         }
       }
@@ -163,28 +154,29 @@ export abstract class GraphqlCorePlugin implements GabliamPlugin {
 
   private getResolver(
     instance: any,
-    resolverMetadata: ResolverMetadata,
-    params: ParameterMetadata[]
+    methodName: string,
+    resolverMetadata: Resolver
   ): IResolvers {
     let resolver: any;
 
     switch (resolverMetadata.type) {
       case ResolverType.Query:
       case ResolverType.Mutation:
-      case ResolverType.Subscription:
+        const extractParameters = getExtractArgs(instance, methodName);
         resolver = (
           source: any,
           args: any,
           context: any,
           info: GraphQLResolveInfo
         ) =>
-          instance[resolverMetadata.key](
-            ...extractParameters(source, args, context, info, params)
+          instance[methodName](
+            ...extractParameters(source, args, context, info)
           );
         break;
+      case ResolverType.Subscription:
       case ResolverType.Map:
       case ResolverType.ResolveType:
-        resolver = toPromise(instance[resolverMetadata.key]());
+        resolver = toPromise(instance[methodName]());
         break;
     }
 

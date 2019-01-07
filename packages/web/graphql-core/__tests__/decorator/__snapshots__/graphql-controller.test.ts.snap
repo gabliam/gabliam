@@ -1,19 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should add GraphqlController metadata to a class when decorated with @GraphqlController() 1`] = `
-Object {
-  "graphqlFiles": Array [],
-  "schema": Array [],
-}
+Array [
+  DecoratorFactory {
+    "graphqlFiles": Array [],
+    "schema": Array [],
+  },
+  DecoratorFactory {
+    "id": [Function],
+    "type": "GraphqlController",
+  },
+]
 `;
 
 exports[`should add GraphqlController metadata to a class when decorated with @GraphqlController({graphqlFiles, schema}) 1`] = `
-Object {
-  "graphqlFiles": Array [
-    "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/decorator/photo/photo.gql",
-  ],
-  "schema": Array [
-    "
+Array [
+  DecoratorFactory {
+    "graphqlFiles": Array [
+      "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/decorator/photo/photo.gql",
+    ],
+    "schema": Array [
+      "
 type Hero {
   id: Int!
 
@@ -46,45 +53,69 @@ type Mutation {
   submitHero(heroInput: HeroInput!): Hero
 }
 ",
-  ],
-}
+    ],
+  },
+  DecoratorFactory {
+    "id": [Function],
+    "type": "GraphqlController",
+  },
+]
 `;
 
 exports[`should add GraphqlController metadata to a class when decorated with @GraphqlController({graphqlFiles: absolute}) 1`] = `
-Object {
-  "graphqlFiles": Array [
-    "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/decorator/photo/hero.gql",
-    "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/decorator/photo/photo.gql",
-  ],
-  "schema": Array [],
-}
+Array [
+  DecoratorFactory {
+    "graphqlFiles": Array [
+      "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/decorator/photo/hero.gql",
+      "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/decorator/photo/photo.gql",
+    ],
+    "schema": Array [],
+  },
+  DecoratorFactory {
+    "id": [Function],
+    "type": "GraphqlController",
+  },
+]
 `;
 
 exports[`should add GraphqlController metadata to a class when decorated with @GraphqlController({graphqlFiles: relative, pwd}) 1`] = `
-Object {
-  "graphqlFiles": Array [
-    "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/photo/hero.gql",
-    "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/photo/photo.gql",
-  ],
-  "schema": Array [],
-}
+Array [
+  DecoratorFactory {
+    "graphqlFiles": Array [
+      "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/photo/hero.gql",
+      "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/photo/photo.gql",
+    ],
+    "schema": Array [],
+  },
+  DecoratorFactory {
+    "id": [Function],
+    "type": "GraphqlController",
+  },
+]
 `;
 
 exports[`should add GraphqlController metadata to a class when decorated with @GraphqlController({graphqlFiles: relative}) 1`] = `
-Object {
-  "graphqlFiles": Array [
-    "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/decorator/photo/hero.gql",
-    "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/decorator/photo/photo.gql",
-  ],
-  "schema": Array [],
-}
+Array [
+  DecoratorFactory {
+    "graphqlFiles": Array [
+      "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/decorator/photo/hero.gql",
+      "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/decorator/photo/photo.gql",
+    ],
+    "schema": Array [],
+  },
+  DecoratorFactory {
+    "id": [Function],
+    "type": "GraphqlController",
+  },
+]
 `;
 
 exports[`should add GraphqlController metadata to a class when decorated with @GraphqlController({schema}) 1`] = `
-Object {
-  "graphqlFiles": Array [],
-  "schema": Array [
-    "
+Array [
+  DecoratorFactory {
+    "graphqlFiles": Array [],
+    "schema": Array [
+      "
 type Photo {
   id: Int!
 
@@ -125,7 +156,7 @@ type Mutation {
   submitPhoto(photoInput: PhotoInput!): Photo
 }
 ",
-    "
+      "
 type Hero {
   id: Int!
 
@@ -158,6 +189,11 @@ type Mutation {
   submitHero(heroInput: HeroInput!): Hero
 }
 ",
-  ],
-}
+    ],
+  },
+  DecoratorFactory {
+    "id": [Function],
+    "type": "GraphqlController",
+  },
+]
 `;

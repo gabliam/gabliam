@@ -1,6 +1,6 @@
-export * from './interfaces';
+export * from 'graphql';
+export * from 'graphql-tools';
 export { TYPE } from './constants';
 export * from './graphql-core-plugin';
-export * from './decorator';
-export * from 'graphql-tools';
-export * from 'graphql';
+export * from './interfaces';
+export * from './metadatas';
