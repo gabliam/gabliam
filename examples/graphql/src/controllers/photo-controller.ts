@@ -1,9 +1,9 @@
 import {
   Args,
   GraphqlController,
-  MapResolver,
-  MutationResolver,
-  QueryResolver,
+  ResolveMap,
+  Mutation,
+  Query,
 } from '@gabliam/graphql-core';
 import { Connection, Repository } from '@gabliam/typeorm';
 import * as _ from 'lodash';
@@ -19,7 +19,7 @@ export class PhotoController {
     this.photoRepository = connection.getRepository<Photo>('Photo');
   }
 
-  @MapResolver({
+  @ResolveMap({
     path: 'Photo',
   })
   photoResolver() {
@@ -35,13 +35,13 @@ export class PhotoController {
     };
   }
 
-  @MutationResolver()
+  @Mutation()
   async submitPhoto(@Args('photoInput') photoInput: Photo) {
     console.log('photoInput');
     return await this.photoRepository.save(photoInput);
   }
 
-  @QueryResolver()
+  @Query()
   async photos() {
     const photos = await this.photoRepository.find();
     if (photos.length > 0) {
@@ -50,7 +50,7 @@ export class PhotoController {
     return [];
   }
 
-  @QueryResolver()
+  @Query()
   async getPageOfPhotos(
     @Args('sortField') sortField: keyof Photo | undefined,
     @Args('sortOrder') sortOrder: 'ASC' | 'DESC' | undefined,

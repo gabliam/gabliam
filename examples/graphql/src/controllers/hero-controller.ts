@@ -1,8 +1,8 @@
 import {
   Args,
   GraphqlController,
-  MutationResolver,
-  QueryResolver,
+  Mutation,
+  Query,
 } from '@gabliam/graphql-core';
 import { Connection, Repository } from '@gabliam/typeorm';
 import { Hero } from '../entities/hero';
@@ -17,13 +17,13 @@ export class HeroController {
     this.heroRepository = connection.getRepository<Hero>('Hero');
   }
 
-  @MutationResolver()
+  @Mutation()
   async submitHero(@Args('heroInput') heroInput: Hero) {
     console.log('submitHero', heroInput);
     return await this.heroRepository.save(heroInput);
   }
 
-  @QueryResolver()
+  @Query()
   async heroes() {
     const photos = await this.heroRepository.find();
     if (photos.length > 0) {
@@ -32,7 +32,7 @@ export class HeroController {
     return [];
   }
 
-  @QueryResolver()
+  @Query()
   async getPageOfHeroes(
     @Args('sortField') sortField: keyof Hero | undefined,
     @Args('sortOrder') sortOrder: 'ASC' | 'DESC' | undefined,
