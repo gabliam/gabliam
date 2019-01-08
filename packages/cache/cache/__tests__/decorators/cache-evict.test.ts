@@ -27,7 +27,7 @@ beforeEach(async () => {
 });
 
 describe('cache evict', async () => {
-  test.only('simple cache', async () => {
+  test('simple cache', async () => {
     @CacheGroup('test')
     @Service()
     class TestService {

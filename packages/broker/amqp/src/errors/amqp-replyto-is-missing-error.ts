@@ -1,3 +1,4 @@
+/* istanbul ignore next */
 export class AmqpReplytoIsMissingError extends Error {
   name = 'AmqpReplytoIsMissingError';
 

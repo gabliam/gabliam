@@ -3,6 +3,7 @@
 import { reflection } from '@gabliam/core/src';
 import * as path from 'path';
 import {
+  GqlResolveType,
   GraphqlController,
   Mutation,
   Query,
@@ -16,6 +17,7 @@ import { PhotoSchema } from '../fixtures/schemas/schema';
   { decorator: Mutation, decoratorName: 'MutationResolver' },
   { decorator: Subscription, decoratorName: 'SubscriptionResolver' },
   { decorator: ResolveMap, decoratorName: 'MapResolver' },
+  { decorator: GqlResolveType, decoratorName: 'GqlResolveType' },
 ].forEach(({ decorator, decoratorName }) => {
   describe(`${decoratorName} TU`, () => {
     test(`should add ${decoratorName} metadata to a class when decorated with @${decoratorName}()`, () => {

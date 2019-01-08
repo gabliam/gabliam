@@ -76,9 +76,6 @@ export function configureValueExtractor(container: Container): ValueExtractor {
  * Test if val is an object
  */
 export function isObject(val: any): val is Object {
-  if (val === null || val === undefined) {
-    return false;
-  }
   return typeof val === 'function' || typeof val === 'object';
 }
 

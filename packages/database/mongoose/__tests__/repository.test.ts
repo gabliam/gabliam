@@ -41,6 +41,17 @@ afterEach(async () => {
   } catch (e) {}
 });
 
+describe('error', () => {
+  test('must throw error when bad getRepository(string)', () => {
+    expect(() => connection.getRepository('BadClazz')).toThrowError();
+  });
+
+  test('must throw error when bad getRepository(clazz)', () => {
+    class Clazz {}
+    expect(() => connection.getRepository(Clazz)).toThrowError();
+  });
+});
+
 describe('connection get Repo', () => {
   test('getRespository(string)', async () => {
     let repo = connection.getRepository<HeroModel>('Hero');

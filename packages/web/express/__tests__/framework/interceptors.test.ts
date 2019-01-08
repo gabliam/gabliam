@@ -21,6 +21,7 @@ import {
   Put,
   UseInterceptors,
   WebConfig,
+  RequestParam,
 } from '@gabliam/web-core';
 import * as sinon from 'sinon';
 import * as supertest from 'supertest';
@@ -857,6 +858,31 @@ describe('ToInterceptor', () => {
       expect(result).toMatchSnapshot();
       expect(spyCtl.notCalled).toBeTruthy();
     });
+  });
+});
+
+describe('error next', () => {
+  test('error next called multiple time', async () => {
+    @Service()
+    class A implements Interceptor {
+      async intercept(@Next() next: nextFn) {
+        await next();
+        await next();
+      }
+    }
+    @Controller('/')
+    class TestController {
+      @UseInterceptors(A)
+      @Get(':id')
+      public getTest2(@RequestParam('id') id: number) {
+        return id;
+      }
+    }
+    appTest.addClass(TestController);
+    await appTest.build();
+    await supertest(appTest.app)
+      .get('/0')
+      .expect(500);
   });
 });
 

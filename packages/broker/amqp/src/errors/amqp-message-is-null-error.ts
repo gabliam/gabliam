@@ -1,3 +1,4 @@
+/* istanbul ignore next */
 export class AmqpMessageIsNullError extends Error {
   name = 'AmqpMessageIsNullError';
 

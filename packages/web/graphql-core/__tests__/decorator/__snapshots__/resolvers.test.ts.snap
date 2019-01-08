@@ -1,5 +1,392 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`GqlResolveType TU should add  GqlResolveType metadata to a class when decorated with @GqlResolveType({graphqlFiles, schema}) 1`] = `
+Object {
+  "test1": Array [
+    PropDecoratorFactory {
+      "graphqlFile": "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/decorator/photo/photo.gql",
+      "path": "test1.__resolveType",
+      "schema": "
+type Photo {
+  id: Int!
+
+  name: String!
+
+  description: String!
+
+  fileName: String!
+
+  views: Int!
+
+  isPublished: Boolean!
+}
+
+input PhotoInput {
+  name: String!
+
+  description: String!
+
+  fileName: String!
+
+  views: Int!
+
+  isPublished: Boolean!
+}
+
+type PhotoPage {
+  items: [Photo]
+  totalCount: Int
+}
+
+type Query {
+  photos: [Photo]
+  getPageOfPhotos(page: Int, perPage: Int, sortField: String, sortOrder: String, filter: String): PhotoPage
+}
+
+type Mutation {
+  submitPhoto(photoInput: PhotoInput!): Photo
+}
+",
+      "type": "ResolveType",
+    },
+  ],
+  "test2": Array [
+    PropDecoratorFactory {
+      "graphqlFile": "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/decorator/photo/photo.gql",
+      "path": "test2.__resolveType",
+      "schema": "
+type Photo {
+  id: Int!
+
+  name: String!
+
+  description: String!
+
+  fileName: String!
+
+  views: Int!
+
+  isPublished: Boolean!
+}
+
+input PhotoInput {
+  name: String!
+
+  description: String!
+
+  fileName: String!
+
+  views: Int!
+
+  isPublished: Boolean!
+}
+
+type PhotoPage {
+  items: [Photo]
+  totalCount: Int
+}
+
+type Query {
+  photos: [Photo]
+  getPageOfPhotos(page: Int, perPage: Int, sortField: String, sortOrder: String, filter: String): PhotoPage
+}
+
+type Mutation {
+  submitPhoto(photoInput: PhotoInput!): Photo
+}
+",
+      "type": "ResolveType",
+    },
+  ],
+}
+`;
+
+exports[`GqlResolveType TU should add GqlResolveType metadata to a class when decorated with @ GqlResolveType({schema}) 1`] = `
+Object {
+  "test1": Array [
+    PropDecoratorFactory {
+      "graphqlFile": undefined,
+      "path": "test1.__resolveType",
+      "schema": "
+type Photo {
+  id: Int!
+
+  name: String!
+
+  description: String!
+
+  fileName: String!
+
+  views: Int!
+
+  isPublished: Boolean!
+}
+
+input PhotoInput {
+  name: String!
+
+  description: String!
+
+  fileName: String!
+
+  views: Int!
+
+  isPublished: Boolean!
+}
+
+type PhotoPage {
+  items: [Photo]
+  totalCount: Int
+}
+
+type Query {
+  photos: [Photo]
+  getPageOfPhotos(page: Int, perPage: Int, sortField: String, sortOrder: String, filter: String): PhotoPage
+}
+
+type Mutation {
+  submitPhoto(photoInput: PhotoInput!): Photo
+}
+",
+      "type": "ResolveType",
+    },
+  ],
+  "test2": Array [
+    PropDecoratorFactory {
+      "graphqlFile": undefined,
+      "path": "test2.__resolveType",
+      "schema": "
+type Photo {
+  id: Int!
+
+  name: String!
+
+  description: String!
+
+  fileName: String!
+
+  views: Int!
+
+  isPublished: Boolean!
+}
+
+input PhotoInput {
+  name: String!
+
+  description: String!
+
+  fileName: String!
+
+  views: Int!
+
+  isPublished: Boolean!
+}
+
+type PhotoPage {
+  items: [Photo]
+  totalCount: Int
+}
+
+type Query {
+  photos: [Photo]
+  getPageOfPhotos(page: Int, perPage: Int, sortField: String, sortOrder: String, filter: String): PhotoPage
+}
+
+type Mutation {
+  submitPhoto(photoInput: PhotoInput!): Photo
+}
+",
+      "type": "ResolveType",
+    },
+  ],
+}
+`;
+
+exports[`GqlResolveType TU should add GqlResolveType metadata to a class when decorated with @GqlResolveType() 1`] = `
+Object {
+  "test1": Array [
+    PropDecoratorFactory {
+      "graphqlFile": undefined,
+      "path": "test1.__resolveType",
+      "schema": undefined,
+      "type": "ResolveType",
+    },
+  ],
+  "test2": Array [
+    PropDecoratorFactory {
+      "graphqlFile": undefined,
+      "path": "test2.__resolveType",
+      "schema": undefined,
+      "type": "ResolveType",
+    },
+  ],
+}
+`;
+
+exports[`GqlResolveType TU should add GqlResolveType metadata to a class when decorated with @GqlResolveType({graphqlFiles, schema, path}) 1`] = `
+Object {
+  "test1": Array [
+    PropDecoratorFactory {
+      "graphqlFile": "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/decorator/photo/photo.gql",
+      "path": "lol.__resolveType",
+      "schema": "
+type Photo {
+  id: Int!
+
+  name: String!
+
+  description: String!
+
+  fileName: String!
+
+  views: Int!
+
+  isPublished: Boolean!
+}
+
+input PhotoInput {
+  name: String!
+
+  description: String!
+
+  fileName: String!
+
+  views: Int!
+
+  isPublished: Boolean!
+}
+
+type PhotoPage {
+  items: [Photo]
+  totalCount: Int
+}
+
+type Query {
+  photos: [Photo]
+  getPageOfPhotos(page: Int, perPage: Int, sortField: String, sortOrder: String, filter: String): PhotoPage
+}
+
+type Mutation {
+  submitPhoto(photoInput: PhotoInput!): Photo
+}
+",
+      "type": "ResolveType",
+    },
+  ],
+  "test2": Array [
+    PropDecoratorFactory {
+      "graphqlFile": "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/decorator/photo/photo.gql",
+      "path": "lol2.__resolveType",
+      "schema": "
+type Photo {
+  id: Int!
+
+  name: String!
+
+  description: String!
+
+  fileName: String!
+
+  views: Int!
+
+  isPublished: Boolean!
+}
+
+input PhotoInput {
+  name: String!
+
+  description: String!
+
+  fileName: String!
+
+  views: Int!
+
+  isPublished: Boolean!
+}
+
+type PhotoPage {
+  items: [Photo]
+  totalCount: Int
+}
+
+type Query {
+  photos: [Photo]
+  getPageOfPhotos(page: Int, perPage: Int, sortField: String, sortOrder: String, filter: String): PhotoPage
+}
+
+type Mutation {
+  submitPhoto(photoInput: PhotoInput!): Photo
+}
+",
+      "type": "ResolveType",
+    },
+  ],
+}
+`;
+
+exports[`GqlResolveType TU should add GqlResolveType metadata to a class when decorated with @GqlResolveType({graphqlFiles: absolute}) 1`] = `
+Object {
+  "test1": Array [
+    PropDecoratorFactory {
+      "graphqlFile": "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/decorator/photo/photo.gql",
+      "path": "test1.__resolveType",
+      "schema": undefined,
+      "type": "ResolveType",
+    },
+  ],
+  "test2": Array [
+    PropDecoratorFactory {
+      "graphqlFile": "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/decorator/photo/photo.gql",
+      "path": "test2.__resolveType",
+      "schema": undefined,
+      "type": "ResolveType",
+    },
+  ],
+}
+`;
+
+exports[`GqlResolveType TU should add GqlResolveType metadata to a class when decorated with @GqlResolveType({graphqlFiles: relative, pwd}) 1`] = `
+Object {
+  "test1": Array [
+    PropDecoratorFactory {
+      "graphqlFile": "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/photo/photo.gql",
+      "path": "test1.__resolveType",
+      "schema": undefined,
+      "type": "ResolveType",
+    },
+  ],
+  "test2": Array [
+    PropDecoratorFactory {
+      "graphqlFile": "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/photo/photo.gql",
+      "path": "test2.__resolveType",
+      "schema": undefined,
+      "type": "ResolveType",
+    },
+  ],
+}
+`;
+
+exports[`GqlResolveType TU should add GqlResolveType metadata to a class when decorated with @GqlResolveType({graphqlFiles: relative}) 1`] = `
+Object {
+  "test1": Array [
+    PropDecoratorFactory {
+      "graphqlFile": "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/decorator/photo/photo.gql",
+      "path": "test1.__resolveType",
+      "schema": undefined,
+      "type": "ResolveType",
+    },
+  ],
+  "test2": Array [
+    PropDecoratorFactory {
+      "graphqlFile": "<PROJECT_ROOT>/packages/web/graphql-core/__tests__/decorator/photo/photo.gql",
+      "path": "test2.__resolveType",
+      "schema": undefined,
+      "type": "ResolveType",
+    },
+  ],
+}
+`;
+
 exports[`MapResolver TU should add  MapResolver metadata to a class when decorated with @MapResolver({graphqlFiles, schema}) 1`] = `
 Object {
   "test1": Array [

@@ -12,7 +12,7 @@ export interface RegisterDecorator {
    * In binding phase, plugins get classes which are registered.
    * Ex: Express plugin get all `@Controller` decorator
    */
-  (obj: string | Register): ClassDecorator;
+  (obj: Register): ClassDecorator;
 
   /**
    * see the `@Config` decorator.
@@ -31,10 +31,5 @@ export interface Register {
 
 export const Register: RegisterDecorator = makeDecorator(
   METADATA_KEY.register,
-  (obj: string | Register): Register => {
-    if (typeof obj === 'string') {
-      return { type: obj };
-    }
-    return obj;
-  }
+  (obj: Register): Register => obj
 );
