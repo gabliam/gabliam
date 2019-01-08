@@ -1,9 +1,9 @@
 import {
   Args,
   GraphqlController,
-  MapResolver,
-  MutationResolver,
-  QueryResolver,
+  ResolveMap,
+  Mutation,
+  Query,
 } from '@gabliam/graphql-core';
 import * as _ from 'lodash';
 import { Paginate } from './array-util';
@@ -42,7 +42,7 @@ export class PhotoController {
 
   private nextId = this.photoRepository.length + 2;
 
-  @MapResolver({
+  @ResolveMap({
     path: 'Photo',
   })
   photoResolver() {
@@ -59,7 +59,7 @@ export class PhotoController {
     };
   }
 
-  @MutationResolver()
+  @Mutation()
   async submitPhoto(@Args('photoInput') photoInput: Photo) {
     const photo: Photo = {
       ...photoInput,
@@ -68,12 +68,12 @@ export class PhotoController {
     this.photoRepository.push(photo);
   }
 
-  @QueryResolver()
+  @Query()
   async photos() {
     return this.photoRepository;
   }
 
-  @QueryResolver()
+  @Query()
   getPageOfPhotos(
     @Args('sortField') sortField: keyof Photo | undefined,
     @Args('sortOrder') sortOrder: 'ASC' | 'DESC' | undefined,

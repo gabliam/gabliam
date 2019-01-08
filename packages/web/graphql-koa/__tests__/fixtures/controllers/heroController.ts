@@ -1,8 +1,8 @@
 import {
   Args,
   GraphqlController,
-  MutationResolver,
-  QueryResolver,
+  Mutation,
+  Query,
 } from '@gabliam/graphql-core';
 import { Paginate } from './array-util';
 import { Hero } from './interfaces';
@@ -24,7 +24,7 @@ export class HeroController {
 
   private nextId = this.heroRepository.length + 2;
 
-  @MutationResolver()
+  @Mutation()
   async submitHero(@Args('heroInput') heroInput: Hero) {
     const hero = {
       id: this.nextId++,
@@ -35,7 +35,7 @@ export class HeroController {
     return hero;
   }
 
-  @QueryResolver({
+  @Query({
     schema: `type Query {
       heroes: [Hero]
     }`,
@@ -44,7 +44,7 @@ export class HeroController {
     return this.heroRepository;
   }
 
-  @QueryResolver({
+  @Query({
     graphqlFile: './schemas/getPageOfHeroes.gql',
   })
   async getPageOfHeroes(
