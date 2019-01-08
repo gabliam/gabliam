@@ -50,11 +50,7 @@ export class Reflection {
       return this._zipTypesAndAnnotations(paramTypes, paramAnnotations);
     }
 
-    // If a class has no decorators, at least create metadata
-    // based on function.length.
-    // Note: We know that this is a real constructor as we checked
-    // the content of the constructor above.
-    return new Array(<any>type.length).fill(undefined);
+    return [];
   }
 
   parameters(type: Type<any>, property: string): any[][] {

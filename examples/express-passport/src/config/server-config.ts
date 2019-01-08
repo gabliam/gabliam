@@ -2,7 +2,7 @@ import { Config } from '@gabliam/core';
 import { express } from '@gabliam/express';
 import * as helmet from 'helmet';
 import * as passport from 'passport';
-import { WebConfig, WebConfigAfterCtl } from '@gabliam/web-core';
+import { WebConfig, WebConfigAfterControllers } from '@gabliam/web-core';
 import * as Boom from 'boom';
 const AuthenticationError = require('passport/lib/errors/authenticationerror');
 
@@ -31,7 +31,7 @@ export class ServerConfig {
     app.use(passport.session());
   }
 
-  @WebConfigAfterCtl()
+  @WebConfigAfterControllers()
   addExpressConfigError(app: express.Application) {
     app.use(function(
       err: any,
