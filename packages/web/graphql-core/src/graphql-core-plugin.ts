@@ -12,24 +12,14 @@ import { GraphQLResolveInfo, GraphQLSchema } from 'graphql';
 import { IResolvers, makeExecutableSchema } from 'graphql-tools';
 import * as _ from 'lodash';
 import { DEBUG_PATH, GRAPHQL_CONFIG, METADATA_KEY, TYPE } from './constants';
-import { GraphqlController, Resolver, ResolverType } from './metadatas';
 import { GraphqlConfig } from './interfaces';
+import { GraphqlController, Resolver, ResolverType } from './metadatas';
 import { getExtractArgs } from './utils';
 
 const debug = d(DEBUG_PATH);
 
 @Scan()
 export abstract class GraphqlCorePlugin implements GabliamPlugin {
-  bind(container: Container, registry: Registry) {
-    registry.get(TYPE.Controller).map(({ id, target }) => {
-      container
-        .bind(id)
-        .to(target)
-        .inSingletonScope();
-      return id;
-    });
-  }
-
   build(container: Container, registry: Registry) {
     const graphqlPluginConfig = container.get<GraphqlConfig>(GRAPHQL_CONFIG);
     const listdefinitions: string[] = [];

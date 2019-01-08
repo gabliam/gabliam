@@ -8,6 +8,7 @@ Array [
     "path": "/test",
   },
   DecoratorFactory {
+    "autobind": true,
     "id": "TestControllerName",
     "type": "ControllerType",
   },
@@ -22,6 +23,7 @@ Array [
     "path": "/test",
   },
   DecoratorFactory {
+    "autobind": true,
     "id": [Function],
     "type": "ControllerType",
   },
@@ -36,6 +38,7 @@ Array [
     "path": "/test",
   },
   DecoratorFactory {
+    "autobind": true,
     "id": "TestControllerName",
     "type": "ControllerType",
   },
@@ -50,6 +53,7 @@ Array [
     "path": "/test",
   },
   DecoratorFactory {
+    "autobind": true,
     "id": [Function],
     "type": "ControllerType",
   },

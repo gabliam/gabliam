@@ -10,6 +10,8 @@ export interface ValueRegistry<T = any> {
   target: any;
 
   options?: T;
+
+  autoBind: boolean;
 }
 
 /**

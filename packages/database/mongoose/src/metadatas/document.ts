@@ -123,6 +123,6 @@ export const Document: DocumentDecorator = makeDecorator(
     if (!(schema instanceof mongoose.Schema)) {
       throw new MongoSchemaInstanceError();
     }
-    Register({ type: TYPE.Document, id: cls })(cls);
+    Register({ type: TYPE.Document, id: cls, autobind: false })(cls);
   }
 );

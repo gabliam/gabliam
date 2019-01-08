@@ -37,6 +37,7 @@ Registry {
   "registry": Map {
     "ConfigType" => Array [
       Object {
+        "autoBind": true,
         "id": [Function],
         "options": Object {
           "order": 150,
@@ -46,6 +47,7 @@ Registry {
     ],
     "ServiceType" => Array [
       Object {
+        "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
@@ -60,6 +62,7 @@ Registry {
   "registry": Map {
     "ConfigType" => Array [
       Object {
+        "autoBind": true,
         "id": [Function],
         "options": Object {
           "order": 150,

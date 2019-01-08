@@ -4,6 +4,7 @@ exports[`@RabbitConsumer() decorator 1`] = `
 Array [
   DecoratorFactory {},
   DecoratorFactory {
+    "autobind": true,
     "id": [Function],
     "type": "RabbitControllerType",
   },
@@ -25,6 +26,7 @@ exports[`@RabbitController() decorator 1`] = `
 Array [
   DecoratorFactory {},
   DecoratorFactory {
+    "autobind": true,
     "id": [Function],
     "type": "RabbitControllerType",
   },
@@ -35,6 +37,7 @@ exports[`@RabbitListener() & @RabbitConsumer() decorator 1`] = `
 Array [
   DecoratorFactory {},
   DecoratorFactory {
+    "autobind": true,
     "id": [Function],
     "type": "RabbitControllerType",
   },
@@ -62,6 +65,7 @@ exports[`@RabbitListener() decorator 1`] = `
 Array [
   DecoratorFactory {},
   DecoratorFactory {
+    "autobind": true,
     "id": [Function],
     "type": "RabbitControllerType",
   },

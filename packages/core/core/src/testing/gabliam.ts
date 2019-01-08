@@ -53,6 +53,7 @@ export class GabliamTest {
         id: ctrl,
         target: ctrl,
         options: metadata.options,
+        autoBind: true,
       });
     }
     return this;

@@ -21,23 +21,6 @@ const debug = d('Gabliam:Plugin:AmqpPlugin');
 @Plugin()
 @Scan()
 export class AmqpPlugin implements GabliamPlugin {
-  /**
-   * binding phase
-   *
-   * Bind all controller and bind express app
-   * @param  {Container} container
-   * @param  {Registry} registry
-   */
-  bind(container: Container, registry: Registry) {
-    debug('bind AmqpPlugin');
-    registry.get(TYPE.RabbitController).forEach(({ id, target }) =>
-      container
-        .bind(id)
-        .to(target)
-        .inSingletonScope()
-    );
-  }
-
   build(container: Container, registry: Registry) {
     debug('build AmqpPlugin');
     const controllerIds = registry.get(TYPE.RabbitController);

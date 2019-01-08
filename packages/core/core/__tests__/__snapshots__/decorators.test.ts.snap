@@ -50,6 +50,7 @@ Array [
     "order": 150,
   },
   DecoratorFactory {
+    "autobind": true,
     "options": Object {
       "order": 150,
     },
@@ -64,6 +65,7 @@ Array [
     "order": 100,
   },
   DecoratorFactory {
+    "autobind": true,
     "options": Object {
       "order": 100,
     },
@@ -78,6 +80,7 @@ Array [
     "order": 50,
   },
   DecoratorFactory {
+    "autobind": true,
     "options": Object {
       "order": 50,
     },
@@ -92,6 +95,7 @@ Array [
     "order": 100,
   },
   DecoratorFactory {
+    "autobind": true,
     "options": Object {
       "order": 100,
     },
@@ -200,6 +204,7 @@ Array [
     "order": 100,
   },
   DecoratorFactory {
+    "autobind": true,
     "options": Object {
       "order": 100,
     },
@@ -214,6 +219,7 @@ Array [
     "order": 100,
   },
   DecoratorFactory {
+    "autobind": true,
     "options": Object {
       "order": 100,
     },
@@ -225,6 +231,7 @@ Array [
 exports[`@Register should add Registry metadata to a class when decorated with @Register 1`] = `
 Array [
   DecoratorFactory {
+    "autobind": true,
     "id": [Function],
     "type": "ConfigType",
   },
@@ -280,6 +287,7 @@ Array [
     "name": undefined,
   },
   DecoratorFactory {
+    "autobind": true,
     "id": [Function],
     "type": "ServiceType",
   },
@@ -292,6 +300,7 @@ Array [
     "name": "Test",
   },
   DecoratorFactory {
+    "autobind": true,
     "id": "Test",
     "type": "ServiceType",
   },

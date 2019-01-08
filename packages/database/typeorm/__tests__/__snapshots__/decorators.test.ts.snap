@@ -15,6 +15,7 @@ Array [
     "options": undefined,
   },
   DecoratorFactory {
+    "autobind": false,
     "id": [Function],
     "type": "EntityTypeOrm",
   },
@@ -25,6 +26,7 @@ exports[`DecoratorFactory decorators 2`] = `
 Array [
   DecoratorFactory {},
   DecoratorFactory {
+    "autobind": false,
     "id": [Function],
     "type": "EntityTypeOrm",
   },

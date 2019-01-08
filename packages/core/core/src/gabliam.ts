@@ -246,16 +246,8 @@ export class Gabliam {
    */
   private async _bind() {
     debug('_bind');
-    // register all config files
-    this.registry.get(TYPE.Config).forEach(({ id, target }) =>
-      this.container
-        .bind(id)
-        .to(target)
-        .inSingletonScope()
-    );
 
-    // register all service files
-    this.registry.get(TYPE.Service).forEach(({ id, target }) =>
+    this.registry.getAllAutoBind().forEach(({ id, target }) =>
       this.container
         .bind(id)
         .to(target)

@@ -6,7 +6,7 @@ import {
   Scan,
   toPromise,
 } from '@gabliam/core';
-import { APP, TYPE } from './constants';
+import { APP } from './constants';
 import { WebConfig, WebConfigAfterControllers } from './metadatas';
 import { RestMetadata } from './plugin-config';
 import { extractControllerMetadata } from './utils';
@@ -43,14 +43,6 @@ export abstract class WebPluginBase {
    * @param  {Registry} registry - The registry.
    */
   async bind(container: Container, registry: Registry) {
-    // Bind all controller
-    registry.get(TYPE.Controller).forEach(({ id, target }) =>
-      container
-        .bind<any>(id)
-        .to(target)
-        .inSingletonScope()
-    );
-
     const webConfiguration = new WebConfiguration();
     container.bind(WebConfiguration).toConstantValue(webConfiguration);
     await toPromise(this.bindApp(container, registry, webConfiguration));

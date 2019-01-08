@@ -78,6 +78,7 @@ export class LoaderModule {
             id: metadata.id || m,
             target: m,
             options: metadata.options,
+            autoBind: metadata.autobind,
           });
 
           const preDestroys = Object.keys(

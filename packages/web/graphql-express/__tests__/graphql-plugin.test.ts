@@ -6,7 +6,6 @@ import ExpressPlugin from '@gabliam/express';
 import * as path from 'path';
 
 const build = sinon.spy(GraphqlPlugin.prototype, 'build');
-const bind = sinon.spy(GraphqlPlugin.prototype, 'bind');
 let gab: Gabliam;
 
 describe('with config', () => {
@@ -23,13 +22,11 @@ describe('with config', () => {
 
   afterAll(() => {
     build.resetHistory();
-    bind.resetHistory();
   });
 
   test('gabliam build', async () => {
     await gab.build();
     expect(build.calledOnce).toBe(true);
-    expect(bind.calledOnce).toBe(true);
   });
 });
 
@@ -44,12 +41,10 @@ describe('without config', () => {
 
   afterAll(() => {
     build.resetHistory();
-    bind.resetHistory();
   });
 
   test('gabliam build', async () => {
     await gab.build();
     expect(build.calledOnce).toBe(true);
-    expect(bind.calledOnce).toBe(true);
   });
 });

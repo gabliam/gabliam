@@ -8,6 +8,7 @@ Array [
     "path": "/test",
   },
   DecoratorFactory {
+    "autobind": true,
     "id": [Function],
     "type": "ControllerType",
   },
@@ -39,6 +40,7 @@ Array [
     "path": "/test",
   },
   DecoratorFactory {
+    "autobind": true,
     "id": [Function],
     "type": "ControllerType",
   },
@@ -70,6 +72,7 @@ Array [
     "path": "/test",
   },
   DecoratorFactory {
+    "autobind": true,
     "id": [Function],
     "type": "ControllerType",
   },
@@ -101,6 +104,7 @@ Array [
     "path": "/test",
   },
   DecoratorFactory {
+    "autobind": true,
     "id": [Function],
     "type": "ControllerType",
   },
@@ -132,6 +136,7 @@ Array [
     "path": "/test",
   },
   DecoratorFactory {
+    "autobind": true,
     "id": [Function],
     "type": "ControllerType",
   },
@@ -163,6 +168,7 @@ Array [
     "path": "/test",
   },
   DecoratorFactory {
+    "autobind": true,
     "id": [Function],
     "type": "ControllerType",
   },
@@ -194,6 +200,7 @@ Array [
     "path": "/test",
   },
   DecoratorFactory {
+    "autobind": true,
     "id": [Function],
     "type": "ControllerType",
   },
@@ -225,6 +232,7 @@ Array [
     "path": "/test",
   },
   DecoratorFactory {
+    "autobind": true,
     "id": [Function],
     "type": "ControllerType",
   },

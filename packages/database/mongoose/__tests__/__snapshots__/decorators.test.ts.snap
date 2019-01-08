@@ -103,6 +103,7 @@ Array [
     },
   },
   DecoratorFactory {
+    "autobind": false,
     "id": [Function],
     "type": "Document",
   },
@@ -212,6 +213,7 @@ Array [
     },
   },
   DecoratorFactory {
+    "autobind": false,
     "id": [Function],
     "type": "Document",
   },
@@ -322,6 +324,7 @@ Array [
     },
   },
   DecoratorFactory {
+    "autobind": false,
     "id": [Function],
     "type": "Document",
   },

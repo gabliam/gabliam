@@ -115,7 +115,7 @@ export const Entity: EntityDecorator = makeDecorator(
   'Entity',
   (name?: string, options?: EntityOptions): Entity => ({ name, options }),
   (cls, annotationInstance: Entity) => {
-    Register({ type: TYPE.Entity, id: cls })(cls);
+    Register({ type: TYPE.Entity, id: cls, autobind: false })(cls);
     typeormEntity(annotationInstance.name, annotationInstance.options)(cls);
   }
 );
@@ -166,7 +166,7 @@ export const ChildEntity: ChildEntityDecorator = makeDecorator(
   'ChildEntity',
   undefined,
   cls => {
-    Register({ type: TYPE.Entity, id: cls })(cls);
+    Register({ type: TYPE.Entity, id: cls, autobind: false })(cls);
     typeormChildEntity()(cls);
   }
 );

@@ -43,6 +43,15 @@ export class Registry {
     }
   }
 
+  getAllAutoBind() {
+    const autobinds: ValueRegistry[] = [];
+    for (const [, values] of this.registry) {
+      autobinds.push(...values.filter(v => v.autoBind));
+    }
+
+    return autobinds;
+  }
+
   /**
    * Remove all values for a type
    * @param  {symbol} type

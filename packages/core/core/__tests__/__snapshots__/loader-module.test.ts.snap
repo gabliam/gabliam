@@ -5,11 +5,13 @@ Registry {
   "registry": Map {
     "ServiceType" => Array [
       Object {
+        "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
       },
       Object {
+        "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
@@ -17,6 +19,7 @@ Registry {
     ],
     "ConfigType" => Array [
       Object {
+        "autoBind": true,
         "id": [Function],
         "options": Object {
           "order": 150,
@@ -41,26 +44,31 @@ Registry {
   "registry": Map {
     "ServiceType" => Array [
       Object {
+        "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
       },
       Object {
+        "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
       },
       Object {
+        "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
       },
       Object {
+        "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
       },
       Object {
+        "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
@@ -68,6 +76,7 @@ Registry {
     ],
     "ConfigType" => Array [
       Object {
+        "autoBind": true,
         "id": [Function],
         "options": Object {
           "order": 150,
@@ -75,6 +84,7 @@ Registry {
         "target": [Function],
       },
       Object {
+        "autoBind": true,
         "id": [Function],
         "options": Object {
           "order": 50,
@@ -101,11 +111,13 @@ Registry {
   "registry": Map {
     "ServiceType" => Array [
       Object {
+        "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
       },
       Object {
+        "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
@@ -113,6 +125,7 @@ Registry {
     ],
     "ConfigType" => Array [
       Object {
+        "autoBind": true,
         "id": [Function],
         "options": Object {
           "order": 150,
@@ -137,16 +150,19 @@ Registry {
   "registry": Map {
     "ServiceType" => Array [
       Object {
+        "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
       },
       Object {
+        "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
       },
       Object {
+        "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
@@ -154,6 +170,7 @@ Registry {
     ],
     "ConfigType" => Array [
       Object {
+        "autoBind": true,
         "id": [Function],
         "options": Object {
           "order": 50,
