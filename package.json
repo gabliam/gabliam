@@ -54,6 +54,7 @@
   },
   "workspaces": [
     "packages/core/*",
+    "packages/conf-loader/*",
     "packages/broker/*",
     "packages/cache/*",
     "packages/database/*",
