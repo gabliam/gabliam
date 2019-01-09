@@ -1,0 +1,17 @@
+---
+projectName: test
+testBDD: &testBDD !config config.testBDD
+logger: &logger !config config.logger
+application:
+  profile: dev
+  << : *logger
+  << : *testBDD
+
+---
+projectName: test2
+testBDD: &testBDD !config config.testBDD
+logger: &logger !config config.logger
+application:
+  profile: dev
+  << : *logger
+  << : *testBDD

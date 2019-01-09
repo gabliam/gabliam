@@ -1,0 +1,30 @@
+config:
+  synchronize: &synchronize false
+  pgHost: &pgHost localhost
+
+  logger:
+    loggerConfig: require:./log4js.json
+
+  testBDD:
+    typeorm:
+      connectionOptions:
+        - type: postgres
+          host: *pgHost
+          name: test-default
+          username: test-default
+          password: test-default
+          database: test-default
+          schema: test-default
+          synchronize: *synchronize
+
+  testBDD2:
+    typeorm:
+      connectionOptions:
+        - type: postgres
+          host: *pgHost
+          name: test2-default
+          username: test2-default
+          password: test2-default
+          database: test2-default
+          schema: test2-default
+          synchronize: *synchronize

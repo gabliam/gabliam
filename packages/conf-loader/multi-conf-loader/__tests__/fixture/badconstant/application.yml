@@ -1,0 +1,15 @@
+---
+projectName: test
+testBDD: &testBDD !config config.testBDD
+logger: &logger !config config.logger
+application:
+  << : *logger
+  << : *testBDD
+
+---
+projectName: test2
+testBDD: &testBDD !config config.testBDD
+logger: &logger !config config.logger
+application:
+  << : *logger
+  << : *testBDD

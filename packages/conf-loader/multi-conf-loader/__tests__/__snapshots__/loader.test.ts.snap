@@ -1,0 +1,285 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`error bad path 1`] = `Object {}`;
+
+exports[`must load the good project with profile load test 1`] = `
+Object {
+  "application": Object {
+    "loggerConfig": Object {
+      "appenders": Object {
+        "out": Object {
+          "type": "stdout",
+        },
+      },
+      "categories": Object {
+        "default": Object {
+          "appenders": Array [
+            "out",
+          ],
+          "level": "debug",
+        },
+      },
+    },
+    "profile": "dev",
+    "typeorm": Object {
+      "connectionOptions": Array [
+        Object {
+          "database": "test-dev",
+          "host": "localhost",
+          "name": "test-dev",
+          "password": "test-dev",
+          "schema": "test-dev",
+          "synchronize": false,
+          "type": "postgres",
+          "username": "test-dev",
+        },
+      ],
+    },
+  },
+  "logger": Object {
+    "loggerConfig": Object {
+      "appenders": Object {
+        "out": Object {
+          "type": "stdout",
+        },
+      },
+      "categories": Object {
+        "default": Object {
+          "appenders": Array [
+            "out",
+          ],
+          "level": "debug",
+        },
+      },
+    },
+  },
+  "projectName": "test",
+  "testBDD": Object {
+    "typeorm": Object {
+      "connectionOptions": Array [
+        Object {
+          "database": "test-dev",
+          "host": "localhost",
+          "name": "test-dev",
+          "password": "test-dev",
+          "schema": "test-dev",
+          "synchronize": false,
+          "type": "postgres",
+          "username": "test-dev",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`must load the good project with profile load test2 1`] = `
+Object {
+  "application": Object {
+    "loggerConfig": Object {
+      "appenders": Object {
+        "out": Object {
+          "type": "stdout",
+        },
+      },
+      "categories": Object {
+        "default": Object {
+          "appenders": Array [
+            "out",
+          ],
+          "level": "debug",
+        },
+      },
+    },
+    "profile": "dev",
+    "typeorm": Object {
+      "connectionOptions": Array [
+        Object {
+          "database": "test-dev",
+          "host": "localhost",
+          "name": "test-dev",
+          "password": "test-dev",
+          "schema": "test-dev",
+          "synchronize": false,
+          "type": "postgres",
+          "username": "test-dev",
+        },
+      ],
+    },
+  },
+  "logger": Object {
+    "loggerConfig": Object {
+      "appenders": Object {
+        "out": Object {
+          "type": "stdout",
+        },
+      },
+      "categories": Object {
+        "default": Object {
+          "appenders": Array [
+            "out",
+          ],
+          "level": "debug",
+        },
+      },
+    },
+  },
+  "projectName": "test2",
+  "testBDD": Object {
+    "typeorm": Object {
+      "connectionOptions": Array [
+        Object {
+          "database": "test-dev",
+          "host": "localhost",
+          "name": "test-dev",
+          "password": "test-dev",
+          "schema": "test-dev",
+          "synchronize": false,
+          "type": "postgres",
+          "username": "test-dev",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`must load the good project without profile load test 1`] = `
+Object {
+  "application": Object {
+    "loggerConfig": Object {
+      "appenders": Object {
+        "out": Object {
+          "type": "stdout",
+        },
+      },
+      "categories": Object {
+        "default": Object {
+          "appenders": Array [
+            "out",
+          ],
+          "level": "debug",
+        },
+      },
+    },
+    "typeorm": Object {
+      "connectionOptions": Array [
+        Object {
+          "database": "test-default",
+          "host": "localhost",
+          "name": "test-default",
+          "password": "test-default",
+          "schema": "test-default",
+          "synchronize": false,
+          "type": "postgres",
+          "username": "test-default",
+        },
+      ],
+    },
+  },
+  "logger": Object {
+    "loggerConfig": Object {
+      "appenders": Object {
+        "out": Object {
+          "type": "stdout",
+        },
+      },
+      "categories": Object {
+        "default": Object {
+          "appenders": Array [
+            "out",
+          ],
+          "level": "debug",
+        },
+      },
+    },
+  },
+  "projectName": "test",
+  "testBDD": Object {
+    "typeorm": Object {
+      "connectionOptions": Array [
+        Object {
+          "database": "test-default",
+          "host": "localhost",
+          "name": "test-default",
+          "password": "test-default",
+          "schema": "test-default",
+          "synchronize": false,
+          "type": "postgres",
+          "username": "test-default",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`must load the good project without profile load test2 1`] = `
+Object {
+  "application": Object {
+    "loggerConfig": Object {
+      "appenders": Object {
+        "out": Object {
+          "type": "stdout",
+        },
+      },
+      "categories": Object {
+        "default": Object {
+          "appenders": Array [
+            "out",
+          ],
+          "level": "debug",
+        },
+      },
+    },
+    "typeorm": Object {
+      "connectionOptions": Array [
+        Object {
+          "database": "test-default",
+          "host": "localhost",
+          "name": "test-default",
+          "password": "test-default",
+          "schema": "test-default",
+          "synchronize": false,
+          "type": "postgres",
+          "username": "test-default",
+        },
+      ],
+    },
+  },
+  "logger": Object {
+    "loggerConfig": Object {
+      "appenders": Object {
+        "out": Object {
+          "type": "stdout",
+        },
+      },
+      "categories": Object {
+        "default": Object {
+          "appenders": Array [
+            "out",
+          ],
+          "level": "debug",
+        },
+      },
+    },
+  },
+  "projectName": "test2",
+  "testBDD": Object {
+    "typeorm": Object {
+      "connectionOptions": Array [
+        Object {
+          "database": "test-default",
+          "host": "localhost",
+          "name": "test-default",
+          "password": "test-default",
+          "schema": "test-default",
+          "synchronize": false,
+          "type": "postgres",
+          "username": "test-default",
+        },
+      ],
+    },
+  },
+}
+`;
