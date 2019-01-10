@@ -8,9 +8,9 @@ config:
   testBDD:
     typeorm:
       connectionOptions:
-        - type: postgres
-          host: *pgHost
-          name: test-default
+      - type: postgres
+              host: *pgHost
+    name: test-default
           username: test-default
           password: test-default
           database: test-default

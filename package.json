@@ -10,7 +10,7 @@
     "test": "jest --runInBand",
     "test:ci": "jest --runInBand --coverage",
     "release": "yarn run build && yarn run lint && yarn run test && lerna publish --exact",
-    "release:canary": "yarn run build && yarn run lint && yarn run test && lerna publish --exact --canary --npm-client npm",
+    "release:canary": "yarn run build && yarn run lint && yarn run test && lerna publish --force-publish --exact --canary premajor --npm-client npm",
     "prettier": "prettier --single-quote --write --parser typescript \"./{packages,examples}/**/src/**/*.ts\"",
     "example:graphql": "lerna run --scope graphql-sample start --stream",
     "example:mongo": "lerna run --scope mongo-sample start --stream",

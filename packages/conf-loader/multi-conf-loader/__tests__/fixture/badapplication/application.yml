@@ -2,8 +2,8 @@
 projectName: test
 testBDD: &testBDD !config config.testBDD
 logger: &logger !config config.logger
-application:
-        << : *logger
+      application:
+  << : *logger
   << : *testBDD
 
 ---

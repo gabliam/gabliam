@@ -61,7 +61,7 @@ describe('error', () => {
   });
 
   test('with bad constant', async () => {
-    expect(
+    await expect(
       multiConfLoader(
         {
           folder: resolve(__dirname, './fixture/badconstant'),
@@ -73,7 +73,7 @@ describe('error', () => {
   });
 
   test('with bad application', async () => {
-    expect(
+    await expect(
       multiConfLoader(
         {
           folder: resolve(__dirname, './fixture/badapplication'),

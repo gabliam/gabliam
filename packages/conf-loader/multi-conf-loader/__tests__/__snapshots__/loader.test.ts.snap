@@ -2,6 +2,22 @@
 
 exports[`error bad path 1`] = `Object {}`;
 
+exports[`error with bad application 1`] = `
+[LoaderConfigParseError: Error during parsing of file "<PROJECT_ROOT>/packages/conf-loader/multi-conf-loader/__tests__/fixture/badapplication/application.yml".
+    YAMLException: bad indentation of a mapping entry at line 5, column 18:
+          application:
+                     ^
+    ]
+`;
+
+exports[`error with bad constant 1`] = `
+[LoaderConfigParseError: Error during parsing of file "<PROJECT_ROOT>/packages/conf-loader/multi-conf-loader/__tests__/fixture/badconstant/constants.yml".
+    YAMLException: bad indentation of a mapping entry at line 12, column 19:
+                  host: *pgHost
+                      ^
+    ]
+`;
+
 exports[`must load the good project with profile load test 1`] = `
 Object {
   "application": Object {
