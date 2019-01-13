@@ -6,12 +6,15 @@ import {
   Scan,
   toPromise,
 } from '@gabliam/core';
+import { SERVER_STARTER } from '@gabliam/web-core';
+import { ApolloServerBase } from 'apollo-server-core';
 import * as d from 'debug';
 import * as fs from 'fs';
 import { GraphQLResolveInfo, GraphQLSchema } from 'graphql';
 import { IResolvers, makeExecutableSchema } from 'graphql-tools';
 import * as _ from 'lodash';
 import { DEBUG_PATH, GRAPHQL_CONFIG, METADATA_KEY, TYPE } from './constants';
+import { GraphqlServerStarter } from './graphql-server-starter';
 import { GraphqlConfig } from './interfaces';
 import { GraphqlController, Resolver, ResolverType } from './metadatas';
 import { getExtractArgs } from './utils';
@@ -22,6 +25,9 @@ const debug = d(DEBUG_PATH);
 export abstract class GraphqlCorePlugin implements GabliamPlugin {
   build(container: Container, registry: Registry) {
     const graphqlPluginConfig = container.get<GraphqlConfig>(GRAPHQL_CONFIG);
+    const graphqlServerStarter = container.get<GraphqlServerStarter>(
+      SERVER_STARTER
+    );
     const listdefinitions: string[] = [];
 
     if (graphqlPluginConfig.graphqlFiles) {
@@ -128,15 +134,21 @@ export abstract class GraphqlCorePlugin implements GabliamPlugin {
       resolvers,
     }));
 
-    this.registerMiddleware(container, registry, graphqlPluginConfig, schema);
+    const apolloServer = this.getApolloServer(
+      container,
+      registry,
+      graphqlPluginConfig,
+      schema
+    );
+    graphqlServerStarter.apolloServer = apolloServer;
   }
 
-  abstract registerMiddleware(
+  abstract getApolloServer(
     container: Container,
     registry: Registry,
     graphqlPluginConfig: GraphqlConfig,
     schema: GraphQLSchema
-  ): void;
+  ): ApolloServerBase;
 
   private loadGraphqlFiles(...files: string[]) {
     return files.map(file => fs.readFileSync(file, 'UTF-8'));

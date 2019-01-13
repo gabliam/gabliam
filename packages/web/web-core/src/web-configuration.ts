@@ -1,4 +1,6 @@
-import { Container } from '@gabliam/core';
+import { Container, PluginConfig, OnMissingBean, Bean } from '@gabliam/core';
+import { SERVER_STARTER } from './constants';
+import { HttpServerStarter } from './server-starter';
 
 /**
  * Config function
@@ -46,5 +48,14 @@ export class WebConfiguration<T = any> {
 
   get WebConfigAfterCtrls() {
     return this._webconfigAfterCtrl.slice();
+  }
+}
+
+@PluginConfig()
+export class BaseConfig {
+  @OnMissingBean(SERVER_STARTER)
+  @Bean(SERVER_STARTER)
+  createServerStarter() {
+    return new HttpServerStarter();
   }
 }

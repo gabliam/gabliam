@@ -10,6 +10,7 @@ export * from './interface';
 export * from './metadatas';
 export * from './plugin-config';
 export * from './response-entity';
+export * from './server-starter';
 export * from './utils';
 export * from './validate';
 export * from './web-configuration';

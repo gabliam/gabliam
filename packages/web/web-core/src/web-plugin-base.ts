@@ -6,11 +6,12 @@ import {
   Scan,
   toPromise,
 } from '@gabliam/core';
-import { APP } from './constants';
+import { APP, SERVER_STARTER } from './constants';
 import { WebConfig, WebConfigAfterControllers } from './metadatas';
 import { RestMetadata } from './plugin-config';
 import { extractControllerMetadata } from './utils';
 import { WebConfiguration } from './web-configuration';
+import { ServerStarter } from './server-starter';
 
 /**
  * Base class for web plugin.
@@ -103,6 +104,11 @@ export abstract class WebPluginBase {
     container: Container,
     registry: Registry
   ): gabliamValue<void>;
+
+  async start(container: Container, registry: Registry) {
+    const serverStarter = container.get<ServerStarter>(SERVER_STARTER);
+    await toPromise(serverStarter.start(container, registry));
+  }
 
   abstract stop(container: Container, registry: Registry): gabliamValue<void>;
 

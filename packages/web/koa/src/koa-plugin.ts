@@ -17,8 +17,6 @@ import {
   SERVER,
   WebConfiguration,
   WebPluginBase,
-  WebPluginConfig,
-  WEB_PLUGIN_CONFIG,
 } from '@gabliam/web-core';
 import * as d from 'debug';
 import * as http from 'http';
@@ -64,45 +62,6 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
         server.close(() => resolve());
       });
     } catch (e) {}
-  }
-
-  async start(container: Container, registry: Registry) {
-    const restConfig = container.get<WebPluginConfig>(WEB_PLUGIN_CONFIG);
-    const app = container.get<koa>(APP);
-    const port = restConfig.port;
-
-    const server = http.createServer(app.callback());
-    server.listen(port, restConfig.hostname);
-    server.on('error', onError);
-    server.on('listening', onListening);
-    container.bind(SERVER).toConstantValue(server);
-
-    /* istanbul ignore next */
-    function onError(error: NodeJS.ErrnoException): void {
-      // tslint:disable-next-line:curly
-      if (error.syscall !== 'listen') throw error;
-      const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
-      switch (error.code) {
-        case 'EACCES':
-          console.error(`${bind} requires elevated privileges`);
-          process.exit(1);
-          break;
-        case 'EADDRINUSE':
-          console.error(`${bind} is already in use`);
-          process.exit(1);
-          break;
-        default:
-          throw error;
-      }
-    }
-
-    /* istanbul ignore next */
-    function onListening(): void {
-      const addr = server.address();
-      const bind =
-        typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
-      console.log(`Listening on ${bind}`);
-    }
   }
 
   async buildControllers(

@@ -17,7 +17,7 @@ const debug = d('Gabliam:Plugin:GraphqlPluginExpress');
 @Plugin({ dependencies: [{ name: 'ExpressPlugin', order: 'before' }] })
 @Scan()
 export class GraphqlPlugin extends GraphqlCorePlugin implements GabliamPlugin {
-  registerMiddleware(
+  getApolloServer(
     container: Container,
     registry: Registry,
     graphqlPluginConfig: GraphqlConfig,
@@ -28,12 +28,13 @@ export class GraphqlPlugin extends GraphqlCorePlugin implements GabliamPlugin {
       WebConfiguration<express.Application>
     >(WebConfiguration);
 
+    const apolloServer = new ApolloServer({
+      schema,
+      playground: graphqlPluginConfig.playground,
+    });
+
     const instance: ConfigFunction<express.Application> = (app, _container) => {
-      const server = new ApolloServer({
-        schema,
-        playground: graphqlPluginConfig.playground,
-      });
-      server.applyMiddleware({
+      apolloServer.applyMiddleware({
         path: graphqlPluginConfig.endpointUrl,
         app,
       });
@@ -43,5 +44,7 @@ export class GraphqlPlugin extends GraphqlCorePlugin implements GabliamPlugin {
       order: 50,
       instance,
     });
+
+    return apolloServer;
   }
 }
