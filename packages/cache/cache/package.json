@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/cache",
-  "version": "7.10.0",
+  "version": "8.0.0-alpha.97+ec328fa",
   "description": "cache plugin for gabliam",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -30,7 +30,7 @@
     "@gabliam/core": "^7.2.0"
   },
   "devDependencies": {
-    "@gabliam/core": "^7.10.0",
+    "@gabliam/core": "8.0.0-alpha.97+ec328fa",
     "@types/debug": "^0.0.31",
     "@types/lru-cache": "^4.1.1",
     "@types/node": "^10.12.18"
@@ -42,5 +42,6 @@
   },
   "engines": {
     "node": ">=8.9.0"
-  }
+  },
+  "gitHead": "ec328fa0b62f474d470f74a2fc9637838f54091e"
 }

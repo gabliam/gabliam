@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/amqp",
-  "version": "7.11.2",
+  "version": "8.0.0-alpha.97+ec328fa",
   "description": "amqp plugin for gabliam",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -52,5 +52,6 @@
   },
   "engines": {
     "node": ">=8.9.0"
-  }
+  },
+  "gitHead": "ec328fa0b62f474d470f74a2fc9637838f54091e"
 }

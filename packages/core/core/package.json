@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/core",
-  "version": "7.10.0",
+  "version": "8.0.0-alpha.97+ec328fa",
   "description": "Gabliam is on top of inversify",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -13,7 +13,7 @@
     "src"
   ],
   "dependencies": {
-    "@gabliam/expression": "^7.10.0",
+    "@gabliam/expression": "8.0.0-alpha.97+ec328fa",
     "@types/joi": "^14.0.1",
     "caller": "^1.0.1",
     "co": "^4.6.0",
@@ -53,5 +53,6 @@
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/core#readme",
   "engines": {
     "node": ">=8.9.0"
-  }
+  },
+  "gitHead": "ec328fa0b62f474d470f74a2fc9637838f54091e"
 }
