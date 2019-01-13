@@ -1,13 +1,17 @@
 import {
   Args,
   GraphqlController,
-  ResolveMap,
   Mutation,
   Query,
+  ResolveMap,
+  Subscription,
 } from '@gabliam/graphql-core';
 import { Connection, Repository } from '@gabliam/typeorm';
+import { PubSub } from 'graphql-subscriptions';
 import * as _ from 'lodash';
 import { Photo } from '../entities/photo';
+
+const pubSub = new PubSub();
 
 @GraphqlController({
   graphqlFiles: [`./photo/schema.gql`, `./photo/photo.gql`],
@@ -37,8 +41,14 @@ export class PhotoController {
 
   @Mutation()
   async submitPhoto(@Args('photoInput') photoInput: Photo) {
-    console.log('photoInput');
-    return await this.photoRepository.save(photoInput);
+    const photo = await this.photoRepository.save(photoInput);
+    pubSub.publish('photoAdded', { photoAdded: { ...photo } });
+    return photo;
+  }
+
+  @Subscription()
+  photoAdded() {
+    return () => pubSub.asyncIterator('photoAdded');
   }
 
   @Query()

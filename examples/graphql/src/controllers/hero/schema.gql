@@ -7,6 +7,10 @@ type Mutation {
   submitHero(heroInput: HeroInput!): Hero
 }
 
+type Subscription {
+  heroAdded: Hero
+}
+
 # schema {
 #   query: Query
 #   mutation: Mutation

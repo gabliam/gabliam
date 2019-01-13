@@ -7,6 +7,10 @@ type Mutation {
   submitPhoto(photoInput: PhotoInput!): Photo
 }
 
+type Subscription {
+  photoAdded: Photo
+}
+
 # schema {
 #   query: Query
 #   mutation: Mutation

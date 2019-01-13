@@ -3,9 +3,13 @@ import {
   GraphqlController,
   Mutation,
   Query,
+  Subscription,
 } from '@gabliam/graphql-core';
 import { Connection, Repository } from '@gabliam/typeorm';
+import { PubSub } from 'graphql-subscriptions';
 import { Hero } from '../entities/hero';
+
+const pubSub = new PubSub();
 
 @GraphqlController({
   graphqlFiles: [`./hero/schema.gql`, `./hero/hero.gql`],
@@ -19,8 +23,14 @@ export class HeroController {
 
   @Mutation()
   async submitHero(@Args('heroInput') heroInput: Hero) {
-    console.log('submitHero', heroInput);
-    return await this.heroRepository.save(heroInput);
+    const hero = await this.heroRepository.save(heroInput);
+    pubSub.publish('heroAdded', { heroAdded: { ...hero } });
+    return hero;
+  }
+
+  @Subscription()
+  heroAdded() {
+    return () => pubSub.asyncIterator('heroAdded');
   }
 
   @Query()

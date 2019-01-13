@@ -23,7 +23,7 @@ const debug = d(DEBUG_PATH);
 
 @Scan()
 export abstract class GraphqlCorePlugin implements GabliamPlugin {
-  build(container: Container, registry: Registry) {
+  async build(container: Container, registry: Registry) {
     const graphqlPluginConfig = container.get<GraphqlConfig>(GRAPHQL_CONFIG);
     const graphqlServerStarter = container.get<GraphqlServerStarter>(
       SERVER_STARTER
@@ -72,7 +72,7 @@ export abstract class GraphqlCorePlugin implements GabliamPlugin {
           }
 
           resolverList.push(
-            this.getResolver(controller, methodName, resolverMetadata)
+            await this.getResolver(controller, methodName, resolverMetadata)
           );
         }
       }
@@ -81,6 +81,7 @@ export abstract class GraphqlCorePlugin implements GabliamPlugin {
     const queries = [];
     const mutations = [];
     const others = [];
+    const subscriptions = [];
 
     for (const definitions of listdefinitions) {
       const types = definitions
@@ -102,6 +103,11 @@ export abstract class GraphqlCorePlugin implements GabliamPlugin {
             type = `extend ${type}`;
           }
           mutations.push(type);
+        } else if (/\s*type\s*Subscription\s*{\s*/g.test(type)) {
+          if (type.slice(0, 6) !== 'extend') {
+            type = `extend ${type}`;
+          }
+          subscriptions.push(type);
         } else {
           others.push(type);
         }
@@ -118,6 +124,11 @@ export abstract class GraphqlCorePlugin implements GabliamPlugin {
     if (mutations.length) {
       mutations[0] = mutations[0].slice(7);
       typeDefs.push(...mutations);
+    }
+
+    if (subscriptions.length) {
+      subscriptions[0] = subscriptions[0].slice(7);
+      typeDefs.push(...subscriptions);
     }
 
     typeDefs.push(...others);
@@ -154,11 +165,11 @@ export abstract class GraphqlCorePlugin implements GabliamPlugin {
     return files.map(file => fs.readFileSync(file, 'UTF-8'));
   }
 
-  private getResolver(
+  private async getResolver(
     instance: any,
     methodName: string,
     resolverMetadata: Resolver
-  ): IResolvers {
+  ): Promise<IResolvers> {
     let resolver: any;
 
     switch (resolverMetadata.type) {
@@ -178,7 +189,7 @@ export abstract class GraphqlCorePlugin implements GabliamPlugin {
       case ResolverType.Subscription:
       case ResolverType.Map:
       case ResolverType.ResolveType:
-        resolver = toPromise(instance[methodName]());
+        resolver = await toPromise(instance[methodName]());
         break;
     }
 

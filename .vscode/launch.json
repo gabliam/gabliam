@@ -152,6 +152,32 @@
             "src/index.ts"
         ],
         "port": 4189
+      },
+      {
+        "name": "Debug graphql express",
+        "type": "node",
+        "request": "launch",
+        "address": "localhost",
+        "protocol": "inspector",
+        "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/lerna",
+        "env": {
+          "SERVER_TYPE": "express"
+        },
+        "runtimeArgs": [
+            "exec",
+            "--scope",
+            "graphql-sample",
+            "--",
+            "node",
+            "--nolazy",
+            "-r",
+            "ts-node/register",
+            "-r",
+            "tsconfig-paths/register",
+            "--inspect-brk=4189",
+            "src/index.ts"
+        ],
+        "port": 4189
       }
     ]
 }
