@@ -28,11 +28,11 @@
     "@gabliam/web-core": "^7.10.0",
     "lodash": "^4.17.11",
     "reflect-metadata": "^0.1.9",
-    "sqlite3": "^4.0.4",
+    "sqlite3": "^4.0.6",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.119",
-    "nodemon": "^1.18.7"
+    "nodemon": "^1.18.9"
   }
 }

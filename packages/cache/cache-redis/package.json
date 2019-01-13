@@ -35,11 +35,11 @@
     "@gabliam/core": "^7.10.0",
     "@types/debug": "^0.0.31",
     "@types/ioredis": "^4.0.4",
-    "@types/node": "^10.12.12"
+    "@types/node": "^10.12.18"
   },
   "dependencies": {
-    "debug": "^4.1.0",
-    "ioredis": "^4.2.0",
+    "debug": "^4.1.1",
+    "ioredis": "^4.3.0",
     "tslib": "^1.9.3"
   },
   "engines": {
