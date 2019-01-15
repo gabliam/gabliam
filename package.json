@@ -18,6 +18,7 @@
     "example:express:passport": "lerna run --scope express-passport-sample start --stream"
   },
   "devDependencies": {
+    "@gabliam/tslint": "^1.0.2",
     "@types/jest": "^23.3.12",
     "@types/reflect-metadata": "^0.1.0",
     "@types/sinon": "^7.0.3",
@@ -41,9 +42,7 @@
     "ts-node": "^7.0.1",
     "tsconfig-paths": "^3.7.0",
     "tslint": "^5.12.1",
-    "tslint-eslint-rules": "^5.4.0",
-    "typescript": "3.2.2",
-    "vrsource-tslint-rules": "^6.0.0"
+    "typescript": "3.2.2"
   },
   "lint-staged": {
     "*.ts": [
