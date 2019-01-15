@@ -1,6 +1,4 @@
-export interface ConstructableCache {
-  new (name: string, options?: object): Cache;
-}
+export type ConstructableCache = new (name: string, options?: object) => Cache;
 
 /**
  * Interface that defines common cache operations.

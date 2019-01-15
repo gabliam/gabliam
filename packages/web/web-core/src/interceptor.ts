@@ -11,9 +11,7 @@ import { getExtractArgs } from './utils';
 /**
  * InterceptorConstructor
  */
-export interface InterceptorConstructor {
-  new (): Interceptor;
-}
+export type InterceptorConstructor = new () => Interceptor;
 
 /**
  * Interceptor

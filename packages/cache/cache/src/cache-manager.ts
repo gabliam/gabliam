@@ -28,11 +28,9 @@ export interface CacheManager {
   getCacheNames(): string[];
 }
 
-export interface ConstructableCacheManager {
-  new (
-    groups: Map<string, ICacheGroup>,
-    dynamic: boolean,
-    defaultCache: ConstructableCache,
-    defaultOptionsCache?: object
-  ): CacheManager;
-}
+export type ConstructableCacheManager = new (
+  groups: Map<string, ICacheGroup>,
+  dynamic: boolean,
+  defaultCache: ConstructableCache,
+  defaultOptionsCache?: object
+) => CacheManager;
