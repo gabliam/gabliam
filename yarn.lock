@@ -28,7 +28,7 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-"@gabliam/core@7.11.0", "@gabliam/core@^7.10.0":
+"@gabliam/core@^7.10.0":
   version "7.11.0"
   resolved "https://registry.yarnpkg.com/@gabliam/core/-/core-7.11.0.tgz#9ab18bf2f0c55dc170dc9f312114dbf225b187e3"
   integrity sha512-yaO0KqghOqFl+XFSeUp9C822pjkqeFmF5I0jx7oRg8dcP7A/BnZX/HBT5on6xYNNmc+QVzP8Or856rEFeDPXSA==
@@ -111,14 +111,6 @@
     http-status-codes "^1.2.0"
     koa "^2.6.2"
     koa-router "^7.2.1"
-    tslib "^1.9.3"
-
-"@gabliam/log4js@7.11.0":
-  version "7.11.0"
-  resolved "https://registry.yarnpkg.com/@gabliam/log4js/-/log4js-7.11.0.tgz#4835011ba161c87175329c5be7b3bf22bad21664"
-  integrity sha512-qB/BCra6S/859vehIt4t283/44vJ6epKuwqiLvqL8S35sMA2QrMabmZiOLt1p2QlU9pP/LoE5s2E0ObhJi/yRQ==
-  dependencies:
-    log4js "^3.0.6"
     tslib "^1.9.3"
 
 "@gabliam/mongoose@^7.10.0":

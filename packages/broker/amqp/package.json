@@ -28,11 +28,11 @@
   },
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/amqp#readme",
   "peerDependencies": {
-    "@gabliam/core": "^7.2.0"
+    "@gabliam/core": "8.0.0-alpha.97+ec328fa"
   },
   "devDependencies": {
-    "@gabliam/core": "7.11.0",
-    "@gabliam/log4js": "7.11.0",
+    "@gabliam/core": "8.0.0-alpha.97+ec328fa",
+    "@gabliam/log4js": "8.0.0-alpha.97+ec328fa",
     "@types/amqp-connection-manager": "^2.0.2",
     "@types/amqplib": "^0.5.9",
     "@types/bluebird": "^3.5.25",

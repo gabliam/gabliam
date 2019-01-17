@@ -27,8 +27,8 @@
   },
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/cache-redis#readme",
   "peerDependencies": {
-    "@gabliam/cache": "^7.2.0",
-    "@gabliam/core": "^7.2.0"
+    "@gabliam/cache": "8.0.0-alpha.97+ec328fa",
+    "@gabliam/core": "8.0.0-alpha.97+ec328fa"
   },
   "devDependencies": {
     "@gabliam/cache": "8.0.0-alpha.97+ec328fa",

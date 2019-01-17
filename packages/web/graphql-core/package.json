@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/graphql-core#readme",
   "peerDependencies": {
-    "@gabliam/core": "^7.2.0"
+    "@gabliam/core": "8.0.0-alpha.97+ec328fa"
   },
   "devDependencies": {
     "@gabliam/core": "8.0.0-alpha.97+ec328fa",
