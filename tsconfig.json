@@ -10,6 +10,7 @@
         "./packages/core/*/src",
         "./packages/database/*/src",
         "./packages/web/*/src",
+        "./packages/tools/*/src",
       ]
     }
   }
