@@ -1,5 +1,4 @@
-import { Graph } from 'gert';
-import * as TopoSort from 'gert-topo-sort';
+import * as Graph from 'graph-data-structure';
 import * as _ from 'lodash';
 import { InvalidPluginError, PluginDependencyIsMissingError } from './errors';
 import {
@@ -65,19 +64,20 @@ export class PluginList {
    * Sort plugin with the good order
    */
   sort() {
-    const vertices: { [k: string]: string[] } = {};
+    const graph = Graph();
     for (const plugin of this._plugins) {
-      const orderedPlugin = [plugin.name];
+      graph.addNode(plugin.name);
+      // const orderedPlugin = [plugin.name];
       if (plugin.dependencies) {
         for (const deps of plugin.dependencies) {
           if (typeof deps.name !== 'string') {
             const def = this.add(deps.name);
             switch (deps.order) {
               case 'after':
-                orderedPlugin.unshift(def.name);
+                graph.addEdge(def.name, plugin.name);
                 break;
               case 'before':
-                orderedPlugin.push(def.name);
+                graph.addEdge(plugin.name, def.name);
                 break;
             }
           } else {
@@ -86,51 +86,20 @@ export class PluginList {
             }
             switch (deps.order) {
               case 'after':
-                orderedPlugin.unshift(deps.name);
+                graph.addEdge(deps.name, plugin.name);
                 break;
               case 'before':
-                orderedPlugin.push(deps.name);
+                graph.addEdge(plugin.name, deps.name);
                 break;
             }
           }
         }
       }
-
-      while (orderedPlugin.length && orderedPlugin[0] !== plugin.name) {
-        const name = orderedPlugin.shift()!;
-        /* istanbul ignore next */
-        const index =
-          orderedPlugin.indexOf(plugin.name) === orderedPlugin.length
-            ? orderedPlugin.length
-            : orderedPlugin.indexOf(plugin.name) + 1;
-        const toAdd = _.without(orderedPlugin.slice(0, index), name);
-        if (!vertices[name]) {
-          vertices[name] = [];
-        }
-
-        vertices[name].push(...toAdd);
-        vertices[name] = _.uniq(vertices[name]);
-      }
-
-      if (!vertices[plugin.name]) {
-        vertices[plugin.name] = [];
-      }
-
-      vertices[plugin.name].push(
-        ..._.without(orderedPlugin.slice(1), plugin.name)
-      );
-      vertices[plugin.name] = _.uniq(vertices[plugin.name]);
     }
 
-    const graph = new Graph({
-      directed: true,
-      vertices,
-    });
-
-    // Rewrite listPlugin
-    const listPlugin = TopoSort(graph).map<GabliamPluginDefinition>(
-      p => this.findByName(p)!
-    );
+    const listPlugin = graph
+      .topologicalSort()
+      .map<GabliamPluginDefinition>(p => this.findByName(p)!);
 
     this._plugins = listPlugin;
   }
