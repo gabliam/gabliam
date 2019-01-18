@@ -42,7 +42,7 @@
     "apollo-server-core": "^2.3.1",
     "caller": "^1.0.1",
     "debug": "^4.1.1",
-    "graphql": "^14.0.2",
+    "graphql": "^14.1.1",
     "lodash": "^4.17.11",
     "tslib": "^1.9.3"
   },
