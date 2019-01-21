@@ -26,6 +26,8 @@ import {
 
 const FAIL = Symbol('FAIL');
 
+export const IS_STRING = Symbol('IS_STRING');
+
 export class Parser {
   constructor(private ast: Expression) {}
 
@@ -105,6 +107,15 @@ export class Parser {
     if (l === FAIL) {
       return FAIL;
     }
+    if (
+      null === l &&
+      undefined === r &&
+      (<any>node.left).raw &&
+      node.right.type === 'Identifier'
+    ) {
+      return IS_STRING;
+    }
+
     switch (node.operator) {
       case '==':
         // tslint:disable-next-line:triple-equals

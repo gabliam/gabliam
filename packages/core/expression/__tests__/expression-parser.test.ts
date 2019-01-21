@@ -430,4 +430,11 @@ describe('expression evaluator', () => {
     //   expect(map).toEqual({ name: 'Nikola', dob: '10-July-1856' });
     // });
   });
+
+  describe('path', () => {
+    it('should be a string', () => {
+      const str = ExpressionParser.eval('/photo/lol/lol');
+      expect(str).toEqual('/photo/lol/lol');
+    });
+  });
 });
