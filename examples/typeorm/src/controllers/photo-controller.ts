@@ -16,7 +16,7 @@ import * as Boom from 'boom';
 import { Photo } from '../entities/photo';
 import { expressMulter, koaMulter } from '../multer';
 
-@RestController('/photos')
+@RestController('/photos/lol/lol')
 export class PhotoController {
   private photoRepository: Repository<Photo>;
 

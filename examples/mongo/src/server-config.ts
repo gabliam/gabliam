@@ -1,7 +1,7 @@
 import { Config } from '@gabliam/core';
 import { express } from '@gabliam/express';
 import { koa } from '@gabliam/koa';
-import { WebConfigAfterControllers, WebConfig } from '@gabliam/web-core/src';
+import { WebConfigAfterControllers, WebConfig } from '@gabliam/web-core';
 import * as Boom from 'boom';
 
 function isBoom(val: any): val is Boom<any> {
