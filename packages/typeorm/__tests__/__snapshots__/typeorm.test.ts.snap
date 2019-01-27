@@ -69,4 +69,19 @@ Array [
 ]
 `;
 
+exports[`withcunit in config 1`] = `Array []`;
+
+exports[`withcunit in config 2`] = `
+Array [
+  Photo {
+    "description": "test desc",
+    "fileName": "testfile",
+    "id": 1,
+    "isPublished": false,
+    "name": "test",
+    "views": 0,
+  },
+]
+`;
+
 exports[`without config folder 1`] = `[Error: PluginTypeormConfig connectionOptions is mandatory]`;

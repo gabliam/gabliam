@@ -5,7 +5,7 @@ import {
   PrimaryGeneratedColumn,
   Connection,
   ConnectionManager,
-  CUnit
+  CUnit,
 } from '../src';
 import { Gabliam } from '@gabliam/core';
 
@@ -36,7 +36,7 @@ test('with no driver', async () => {
     username: 'test',
     password: 'test',
     database: 'test',
-    synchronize: true
+    synchronize: true,
   });
   await expect(appTest.gab.buildAndStart()).rejects.toMatchSnapshot();
 });
@@ -45,7 +45,7 @@ test('with config', async () => {
   appTest.addConf('application.typeorm.connectionOptions', {
     type: 'sqlite',
     database: 'test.sqlite',
-    synchronize: true
+    synchronize: true,
   });
 
   @Entity()
@@ -53,7 +53,7 @@ test('with config', async () => {
     @PrimaryGeneratedColumn() id?: number;
 
     @Column({
-      length: 500
+      length: 500,
     })
     name: string;
 
@@ -78,7 +78,7 @@ test('with config', async () => {
     description: 'test desc',
     fileName: 'testfile',
     views: 0,
-    isPublished: false
+    isPublished: false,
   });
   res = await repo.find();
   expect(res).toMatchSnapshot();
@@ -90,7 +90,7 @@ test('with one connection with name and entity without cunit', async () => {
     type: 'sqlite',
     name: 'testoneconnection',
     database: 'testoneconnection.sqlite',
-    synchronize: true
+    synchronize: true,
   });
 
   @Entity()
@@ -98,7 +98,7 @@ test('with one connection with name and entity without cunit', async () => {
     @PrimaryGeneratedColumn() id?: number;
 
     @Column({
-      length: 500
+      length: 500,
     })
     name: string;
 
@@ -123,11 +123,63 @@ test('with one connection with name and entity without cunit', async () => {
     description: 'test desc',
     fileName: 'testfile',
     views: 0,
-    isPublished: false
+    isPublished: false,
   });
   res = await repo.find();
   expect(res).toMatchSnapshot();
   await connection.dropDatabase();
+});
+
+test('withcunit in config', async () => {
+  appTest.addConf('application.typeorm.connectionOptions', {
+    type: 'sqlite',
+    name: 'withcunit',
+    database: 'withcunit.sqlite',
+    synchronize: true,
+  });
+
+  appTest.addConf('application.photo', 'withcunit');
+
+  @CUnit('application.photo')
+  @Entity()
+  class Photo {
+    @PrimaryGeneratedColumn() id?: number;
+
+    @Column({
+      length: 500,
+    })
+    name: string;
+
+    @Column('text') description: string;
+
+    @Column() fileName: string;
+
+    @Column('int') views: number;
+
+    @Column() isPublished: boolean;
+  }
+  appTest.addClass(Photo);
+
+  await expect(appTest.gab.buildAndStart()).resolves.toBeInstanceOf(Gabliam);
+
+  const connection = appTest.gab.container.get(ConnectionManager);
+
+  const repo = connection
+    .getConnection('withcunit')
+    .getRepository<Photo>('Photo');
+
+  let res = await repo.find();
+  expect(res).toMatchSnapshot();
+  await repo.save({
+    name: 'test',
+    description: 'test desc',
+    fileName: 'testfile',
+    views: 0,
+    isPublished: false,
+  });
+  res = await repo.find();
+  expect(res).toMatchSnapshot();
+  await connection.getConnection('withcunit').dropDatabase();
 });
 
 test('with config 2 database', async () => {
@@ -136,14 +188,14 @@ test('with config 2 database', async () => {
       type: 'sqlite',
       name: 'connection1',
       database: 'test2.sqlite',
-      synchronize: true
+      synchronize: true,
     },
     {
       type: 'sqlite',
       name: 'connection2',
       database: 'test3.sqlite',
-      synchronize: true
-    }
+      synchronize: true,
+    },
   ]);
 
   @CUnit('connection1')
@@ -152,7 +204,7 @@ test('with config 2 database', async () => {
     @PrimaryGeneratedColumn() id?: number;
 
     @Column({
-      length: 500
+      length: 500,
     })
     name: string;
 
@@ -172,7 +224,7 @@ test('with config 2 database', async () => {
     @PrimaryGeneratedColumn() id?: number;
 
     @Column({
-      length: 500
+      length: 500,
     })
     name: string;
 
@@ -195,7 +247,7 @@ test('with config 2 database', async () => {
     description: 'test desc',
     fileName: 'testfile',
     views: 0,
-    isPublished: false
+    isPublished: false,
   });
   res = await repo.find();
   expect(res).toMatchSnapshot();
@@ -207,7 +259,7 @@ test('with config 2 database', async () => {
   expect(res2).toMatchSnapshot();
   await repo2.save({
     name: 'test',
-    power: 'test power'
+    power: 'test power',
   });
   res2 = await repo2.find();
   expect(res2).toMatchSnapshot();
@@ -220,7 +272,7 @@ test('must fail when CUnit not found', async () => {
   appTest.addConf('application.typeorm.connectionOptions', {
     type: 'sqlite',
     database: 'cunitnotfound.sqlite',
-    synchronize: true
+    synchronize: true,
   });
 
   @CUnit('bad')
@@ -229,7 +281,7 @@ test('must fail when CUnit not found', async () => {
     @PrimaryGeneratedColumn() id?: number;
 
     @Column({
-      length: 500
+      length: 500,
     })
     name: string;
   }
@@ -242,7 +294,7 @@ test('must fail when getConnection not found', async () => {
     name: 'getConnection',
     type: 'sqlite',
     database: 'getConnection.sqlite',
-    synchronize: true
+    synchronize: true,
   });
 
   @CUnit('getConnection')
@@ -251,7 +303,7 @@ test('must fail when getConnection not found', async () => {
     @PrimaryGeneratedColumn() id?: number;
 
     @Column({
-      length: 500
+      length: 500,
     })
     name: string;
   }

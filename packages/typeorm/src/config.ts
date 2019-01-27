@@ -1,18 +1,20 @@
 import {
-  PluginConfig,
-  Value,
-  optional,
   Bean,
+  Container,
+  Init,
   inject,
   InjectContainer,
-  Init,
-  Container,
-  INJECT_CONTAINER_KEY
+  INJECT_CONTAINER_KEY,
+  optional,
+  PluginConfig,
+  Value,
+  ValueExtractor,
+  VALUE_EXTRACTOR,
 } from '@gabliam/core';
-import { ConnectionOptions, Connection } from './typeorm';
-import { ConnectionOptionsBeanId, ENTITIES_TYPEORM } from './constant';
 import * as d from 'debug';
 import { ConnectionManager } from './connection-manager';
+import { ConnectionOptionsBeanId, ENTITIES_TYPEORM } from './constant';
+import { Connection, ConnectionOptions } from './typeorm';
 
 const debug = d('Gabliam:Plugin:Typeorm');
 
@@ -61,6 +63,13 @@ export class PluginTypeormConfig {
       connectionOptions = [this.connectionOptions];
     }
 
-    return new ConnectionManager(connectionOptions, this.entities);
+    const container: Container = (<any>this)[INJECT_CONTAINER_KEY];
+    const valueExtractor = container.get<ValueExtractor>(VALUE_EXTRACTOR);
+
+    return new ConnectionManager(
+      connectionOptions,
+      this.entities,
+      valueExtractor
+    );
   }
 }

@@ -1,13 +1,15 @@
-import { ConnectionOptions, Connection } from './typeorm';
+import { ValueExtractor } from '@gabliam/core';
 import { createConnections } from 'typeorm';
 import { METADATA_KEY } from './constant';
+import { Connection, ConnectionOptions } from './typeorm';
 
 export class ConnectionManager {
   private connections!: Connection[];
 
   constructor(
     private connectionOptions: ConnectionOptions[],
-    private entities: Function[]
+    private entities: Function[],
+    private valueExtractor: ValueExtractor
   ) {}
 
   async open() {
@@ -15,14 +17,16 @@ export class ConnectionManager {
       return {
         ...c,
         entities: Array.isArray(c.entities) ? c.entities : [],
-        name: c.name ? c.name : 'default'
+        name: c.name ? c.name : 'default',
       };
     });
 
     // add entity to the correct connection
     for (const entity of this.entities) {
-      const cunit =
+      let cunit =
         <string>Reflect.getMetadata(METADATA_KEY.cunit, entity) || 'default';
+
+      cunit = this.valueExtractor(cunit, cunit);
 
       let index = connectionOptions.findIndex(c => c.name === cunit);
 
