@@ -8,6 +8,17 @@ Array [
 ]
 `;
 
+exports[`CUnit decorators should add CUnit metadata to a class when decorating multiple times with @CUnit 1`] = `
+Array [
+  DecoratorFactory {
+    "name": "default2",
+  },
+  DecoratorFactory {
+    "name": "default",
+  },
+]
+`;
+
 exports[`DecoratorFactory decorators 1`] = `
 Array [
   DecoratorFactory {

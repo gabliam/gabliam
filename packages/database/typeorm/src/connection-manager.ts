@@ -1,18 +1,19 @@
-import { reflection } from '@gabliam/core';
+import { reflection, ValueExtractor } from '@gabliam/core';
 import { createConnections } from 'typeorm';
+import {
+  TypeormConnectionNotFoundError,
+  TypeormCUnitNotFoundError,
+} from './errors';
 import { CUnit } from './metadatas';
 import { Connection, ConnectionOptions } from './typeorm';
-import {
-  TypeormCUnitNotFoundError,
-  TypeormConnectionNotFoundError,
-} from './errors';
 
 export class ConnectionManager {
   private connections!: Connection[];
 
   constructor(
     private connectionOptions: ConnectionOptions[],
-    private entities: Function[]
+    private entities: Function[],
+    private valueExtractor: ValueExtractor
   ) {}
 
   async open() {
@@ -26,18 +27,21 @@ export class ConnectionManager {
 
     // add entity to the correct connection
     for (const entity of this.entities) {
-      const cunit = getCunit(entity);
+      const cunits = getCunits(entity);
 
-      let index = connectionOptions.findIndex(c => c.name === cunit);
+      for (let cunit of cunits) {
+        cunit = this.valueExtractor(cunit, cunit);
+        let index = connectionOptions.findIndex(c => c.name === cunit);
 
-      if (index === -1 && cunit === 'default') {
-        index = 0;
+        if (index === -1 && cunit === 'default') {
+          index = 0;
+        }
+
+        if (index === -1) {
+          throw new TypeormCUnitNotFoundError(cunit);
+        }
+        (<any>connectionOptions)[index].entities.push(entity);
       }
-
-      if (index === -1) {
-        throw new TypeormCUnitNotFoundError(cunit);
-      }
-      (<any>connectionOptions)[index].entities.push(entity);
     }
 
     this.connections = await createConnections(connectionOptions);
@@ -65,9 +69,12 @@ export class ConnectionManager {
   }
 }
 
-const getCunit = (cls: any) => {
-  const [cunit] = reflection
-    .annotationsOfDecorator<CUnit>(cls, CUnit)
-    .slice(-1);
-  return cunit ? cunit.name || 'default' : 'default';
+const getCunits = (cls: any) => {
+  const cunits = reflection.annotationsOfDecorator<CUnit>(cls, CUnit);
+
+  if (cunits.length) {
+    return cunits.map(c => c.name || 'default');
+  }
+
+  return ['default'];
 };

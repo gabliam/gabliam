@@ -18,14 +18,11 @@ describe('CUnit decorators', () => {
     expect(reflection.annotations(TestEntity)).toMatchSnapshot();
   });
 
-  test('should fail when decorated multiple times with @CUnit', () => {
-    expect(function() {
-      @CUnit('default')
-      @CUnit('default2')
-      class TestBean {}
+  test('should add CUnit metadata to a class when decorating multiple times with @CUnit', () => {
+    @CUnit('default')
+    @CUnit('default2')
+    class TestEntity {}
 
-      // tslint:disable-next-line:no-unused-expression
-      new TestBean();
-    }).toThrowError();
+    expect(reflection.annotations(TestEntity)).toMatchSnapshot();
   });
 });

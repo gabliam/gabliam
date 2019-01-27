@@ -1,10 +1,10 @@
+import { makeDecorator, Register } from '@gabliam/core';
 import {
-  Entity as typeormEntity,
   ChildEntity as typeormChildEntity,
+  Entity as typeormEntity,
   EntityOptions,
 } from 'typeorm';
-import { Register, makeDecorator } from '@gabliam/core';
-import { TYPE, METADATA_KEY, ERRORS_MSGS } from './constant';
+import { METADATA_KEY, TYPE } from './constant';
 
 /**
  * Type of the `CUnit` decorator / constructor function.
@@ -57,9 +57,7 @@ export interface CUnit {
 export const CUnit: CUnitDecorator = makeDecorator(
   METADATA_KEY.cunit,
   (name: string): CUnit => ({ name }),
-  undefined,
-  true,
-  ERRORS_MSGS.DUPLICATED_CUNIT_DECORATOR
+  undefined
 );
 
 /**
