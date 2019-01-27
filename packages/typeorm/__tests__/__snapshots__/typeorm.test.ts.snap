@@ -37,6 +37,48 @@ Array [
 ]
 `;
 
+exports[`with config 2 database and one entity on 2 connection 1`] = `Array []`;
+
+exports[`with config 2 database and one entity on 2 connection 2`] = `
+Array [
+  Photo {
+    "description": "test desc",
+    "fileName": "testfile",
+    "id": 1,
+    "isPublished": false,
+    "name": "test",
+    "views": 0,
+  },
+]
+`;
+
+exports[`with config 2 database and one entity on 2 connection 3`] = `Array []`;
+
+exports[`with config 2 database and one entity on 2 connection 4`] = `
+Array [
+  Heroes {
+    "id": 1,
+    "name": "test",
+    "power": "test power",
+  },
+]
+`;
+
+exports[`with config 2 database and one entity on 2 connection 5`] = `Array []`;
+
+exports[`with config 2 database and one entity on 2 connection 6`] = `
+Array [
+  Photo {
+    "description": "test desc",
+    "fileName": "testfile",
+    "id": 1,
+    "isPublished": false,
+    "name": "test",
+    "views": 0,
+  },
+]
+`;
+
 exports[`with config 3`] = `
 Array [
   Photo {

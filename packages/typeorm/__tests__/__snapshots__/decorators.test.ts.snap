@@ -1,6 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CUnit decorators should add CUnit metadata to a class when decorating a method with @CUnit 1`] = `"default"`;
+exports[`CUnit decorators should add CUnit metadata to a class when decorating a method with @CUnit 1`] = `
+Array [
+  "default",
+]
+`;
+
+exports[`CUnit decorators should add CUnit metadata to a class when decorating multiple times with @CUnit 1`] = `
+Array [
+  "default2",
+  "default",
+]
+`;
 
 exports[`ChildEntity decorators 1`] = `
 Object {

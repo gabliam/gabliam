@@ -23,21 +23,25 @@ export class ConnectionManager {
 
     // add entity to the correct connection
     for (const entity of this.entities) {
-      let cunit =
-        <string>Reflect.getMetadata(METADATA_KEY.cunit, entity) || 'default';
+      const cunits: string[] = Reflect.getMetadata(
+        METADATA_KEY.cunit,
+        entity
+      ) || ['default'];
 
-      cunit = this.valueExtractor(cunit, cunit);
+      for (let cunit of cunits) {
+        cunit = this.valueExtractor(cunit, cunit);
 
-      let index = connectionOptions.findIndex(c => c.name === cunit);
+        let index = connectionOptions.findIndex(c => c.name === cunit);
 
-      if (index === -1 && cunit === 'default') {
-        index = 0;
+        if (index === -1 && cunit === 'default') {
+          index = 0;
+        }
+
+        if (index === -1) {
+          throw new Error(`CUnit ${cunit} not found`);
+        }
+        (<any>connectionOptions)[index].entities.push(entity);
       }
-
-      if (index === -1) {
-        throw new Error(`CUnit ${cunit} not found`);
-      }
-      (<any>connectionOptions)[index].entities.push(entity);
     }
 
     this.connections = await createConnections(connectionOptions);

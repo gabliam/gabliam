@@ -1,20 +1,23 @@
+import { register } from '@gabliam/core';
 import {
-  Entity as typeormEntity,
   ChildEntity as typeormChildEntity,
+  Entity as typeormEntity,
   EntityOptions,
 } from 'typeorm';
-import { register } from '@gabliam/core';
-import { TYPE, METADATA_KEY, ERRORS_MSGS } from './constant';
+import { METADATA_KEY, TYPE } from './constant';
 
 /**
  * Set the connection of the entitie
  */
 export function CUnit(name: string) {
   return (target: any) => {
+    let metadata: string[] = [];
     if (Reflect.hasMetadata(METADATA_KEY.cunit, target) === true) {
-      throw new Error(ERRORS_MSGS.DUPLICATED_CUNIT_DECORATOR);
+      metadata = Reflect.getMetadata(METADATA_KEY.cunit, target);
     }
-    Reflect.defineMetadata(METADATA_KEY.cunit, name, target);
+    metadata.push(name);
+
+    Reflect.defineMetadata(METADATA_KEY.cunit, metadata, target);
     return target;
   };
 }
