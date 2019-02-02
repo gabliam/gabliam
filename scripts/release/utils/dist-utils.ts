@@ -7,10 +7,11 @@ import * as rimraf from 'rimraf';
 import { promisify } from 'util';
 import { APP_DIR, DIST_DIR, monoRepo } from '../constant';
 import { updatePkg, updateRootPkg } from './pkg-utils';
+import * as ora from 'ora';
 
 const rimrafAsync = promisify(rimraf);
 
-export const build = async (newVersion: string) => {
+export const build = async (spinner: ora.Ora, newVersion: string) => {
   const graph = Graph();
 
   for (const [pkgName, config] of Object.entries(monoRepo)) {
@@ -29,9 +30,9 @@ export const build = async (newVersion: string) => {
 
   const pkgs = graph.topologicalSort();
   for (const pkgName of pkgs) {
+    spinner.text = `Build ${pkgName}`;
     await execa('lerna', `run build --scope ${pkgName}`.split(' '), {
       cwd: APP_DIR,
-      stdio: 'inherit',
     });
     const { pkg, folder } = monoRepo[pkgName];
     const pkgDist = path.resolve(

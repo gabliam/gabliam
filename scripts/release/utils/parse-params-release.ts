@@ -1,6 +1,13 @@
 import * as commandLineArgs from 'command-line-args';
+import * as commandLineUsage from 'command-line-usage';
 
 const paramDefinitions = [
+  {
+    name: 'help',
+    type: Boolean,
+    description: 'Show help',
+    defaultValue: false,
+  },
   {
     name: 'canany',
     type: Boolean,
@@ -17,13 +24,50 @@ const paramDefinitions = [
   },
 ];
 
-export interface Params {
+export interface ReleaseParams {
   canary: boolean;
 
   preid: string;
+
+  help: boolean;
 }
 
-export const parseParams = (): Params => {
-  const params = <Params>commandLineArgs(paramDefinitions);
-  return params;
+export const parseParams = (): ReleaseParams => {
+  let showHelp = false;
+  let params: ReleaseParams;
+  try {
+    params = <ReleaseParams>commandLineArgs(paramDefinitions);
+  } catch {
+    showHelp = true;
+  }
+
+  if (showHelp || params!.help) {
+    const usage = commandLineUsage([
+      {
+        content: 'Publishes the current contents of "dist" to NPM.',
+      },
+      {
+        header: 'Options',
+        optionList: paramDefinitions,
+      },
+      {
+        header: 'Examples',
+        content: [
+          {
+            desc: 'Publish a canary beta',
+            example: '$ scripts/release/publish.js --canary --preid beta',
+          },
+          {
+            desc: 'Publish a new stable:',
+            example: '$ scripts/release/publish.js',
+          },
+        ],
+      },
+    ]);
+
+    console.log(usage);
+    process.exit(1);
+  }
+
+  return params!;
 };
