@@ -1,6 +1,6 @@
 {
   "name": "gabliam-sources",
-  "version": "",
+  "version": "7.13.0",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -15,7 +15,8 @@
     "example:graphql": "lerna run --scope graphql-sample start --stream",
     "example:mongo": "lerna run --scope mongo-sample start --stream",
     "example:typeorm": "lerna run --scope typeorm-sample start --stream",
-    "example:express:passport": "lerna run --scope express-passport-sample start --stream"
+    "example:express:passport": "lerna run --scope express-passport-sample start --stream",
+    "newRelease": "ts-node ./scripts/release/release.ts"
   },
   "devDependencies": {
     "@gabliam/tslint": "^1.0.2",

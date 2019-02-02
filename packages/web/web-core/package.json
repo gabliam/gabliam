@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/web-core",
-  "version": "8.0.0-alpha.97+ec328fa",
+  "version": "0.0.0-PLACEHOLDER",
   "description": "Gabliam plugin for add web-core",
   "keywords": [
     "gabliam",
@@ -9,9 +9,9 @@
     "web-core",
     "rest"
   ],
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
-  "module": "lib/index.js",
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "module": "index.js",
   "scripts": {
     "build": "rimraf lib && tsc -p tsconfig.build.json"
   },
@@ -30,10 +30,10 @@
   },
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/web-core#readme",
   "peerDependencies": {
-    "@gabliam/core": "8.0.0-alpha.97+ec328fa"
+    "@gabliam/core": "0.0.0-PLACEHOLDER"
   },
   "devDependencies": {
-    "@gabliam/core": "8.0.0-alpha.97+ec328fa",
+    "@gabliam/core": "0.0.0-PLACEHOLDER",
     "@types/cookies": "^0.7.1",
     "@types/escape-html": "^0.0.20"
   },

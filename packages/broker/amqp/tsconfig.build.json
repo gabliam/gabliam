@@ -2,9 +2,16 @@
   "extends": "../../../tsconfig.base",
   "compilerOptions": {
     "sourceMap": false,
-    "outDir": "lib"
+    "outDir": "../../../dist/packages/broker/amqp",
+    "baseUrl": ".",
+    "rootDir": ".",
+    "paths": {
+      "@gabliam/core": ["../../../dist/packages/core/core"],
+      "@gabliam/log4js": ["../../../dist/packages/tools/log4js"]
+    }
   },
   "include":[
+    "index.ts",
     "src/**/*.ts",
   ]
 }

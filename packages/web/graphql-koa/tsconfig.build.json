@@ -2,9 +2,17 @@
   "extends": "../../../tsconfig.base",
   "compilerOptions": {
     "sourceMap": false,
-    "outDir": "lib"
+    "outDir": "../../../dist/packages/web/graphql-koa",
+    "baseUrl": ".",
+    "rootDir": ".",
+    "paths": {
+      "@gabliam/core": ["../../../dist/packages/core/core"],
+      "@gabliam/graphql-core": ["../../../dist/packages/web/graphql-core"],
+      "@gabliam/koa": ["../../../dist/packages/web/koa"]
+    }
   },
   "include":[
+    "index.ts",
     "src/**/*.ts"
   ]
 }

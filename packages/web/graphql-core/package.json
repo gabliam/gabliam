@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/graphql-core",
-  "version": "8.0.0-alpha.97+ec328fa",
+  "version": "0.0.0-PLACEHOLDER",
   "description": "Graphql core for gabliam",
   "keywords": [
     "gabliam",
@@ -8,9 +8,9 @@
     "deocrators",
     "graphql"
   ],
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
-  "module": "lib/index.js",
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "module": "index.js",
   "scripts": {
     "build": "rimraf lib && tsc -p tsconfig.build.json"
   },
@@ -29,10 +29,10 @@
   },
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/graphql-core#readme",
   "peerDependencies": {
-    "@gabliam/core": "8.0.0-alpha.97+ec328fa"
+    "@gabliam/core": "0.0.0-PLACEHOLDER"
   },
   "devDependencies": {
-    "@gabliam/core": "8.0.0-alpha.97+ec328fa",
+    "@gabliam/core": "0.0.0-PLACEHOLDER",
     "@types/debug": "^0.0.31",
     "@types/graphql": "^14.0.4",
     "@types/lodash": "^4.14.119",

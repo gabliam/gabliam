@@ -2,9 +2,15 @@
   "extends": "../../../tsconfig.base",
   "compilerOptions": {
     "sourceMap": false,
-    "outDir": "lib"
+    "outDir": "../../../dist/packages/core/core",
+    "baseUrl": ".",
+    "rootDir": ".",
+    "paths": {
+      "@gabliam/expression": ["../../../dist/packages/core/expression"]
+    }
   },
   "include":[
+    "index.ts",
     "src/**/*.ts"
   ]
 }

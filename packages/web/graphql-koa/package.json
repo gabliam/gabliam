@@ -1,6 +1,6 @@
 {
   "name": "@gabliam/graphql-koa",
-  "version": "8.0.0-alpha.97+ec328fa",
+  "version": "0.0.0-PLACEHOLDER",
   "description": "Graphql plugin for gabliam",
   "keywords": [
     "gabliam",
@@ -9,9 +9,9 @@
     "koa",
     "graphql"
   ],
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
-  "module": "lib/index.js",
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "module": "index.js",
   "scripts": {
     "build": "rimraf lib && tsc -p tsconfig.build.json"
   },
@@ -30,14 +30,14 @@
   },
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/graphql-koa#readme",
   "peerDependencies": {
-    "@gabliam/core": "8.0.0-alpha.97+ec328fa",
-    "@gabliam/graphql-core": "8.0.0-alpha.97+ec328fa",
-    "@gabliam/koa": "8.0.0-alpha.97+ec328fa"
+    "@gabliam/core": "0.0.0-PLACEHOLDER",
+    "@gabliam/graphql-core": "0.0.0-PLACEHOLDER",
+    "@gabliam/koa": "0.0.0-PLACEHOLDER"
   },
   "devDependencies": {
-    "@gabliam/core": "8.0.0-alpha.97+ec328fa",
-    "@gabliam/graphql-core": "8.0.0-alpha.97+ec328fa",
-    "@gabliam/koa": "8.0.0-alpha.97+ec328fa",
+    "@gabliam/core": "0.0.0-PLACEHOLDER",
+    "@gabliam/graphql-core": "0.0.0-PLACEHOLDER",
+    "@gabliam/koa": "0.0.0-PLACEHOLDER",
     "@types/debug": "^0.0.31",
     "@types/node": "^10.12.18"
   },

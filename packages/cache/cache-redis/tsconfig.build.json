@@ -2,9 +2,16 @@
   "extends": "../../../tsconfig.base",
   "compilerOptions": {
     "sourceMap": false,
-    "outDir": "lib"
+    "outDir": "../../../dist/packages/cache/cache-redis",
+    "baseUrl": ".",
+    "rootDir": ".",
+    "paths": {
+      "@gabliam/cache": ["../../../dist/packages/cache/cache"],
+      "@gabliam/core": ["../../../dist/packages/core/core"]
+    }
   },
   "include":[
+    "index.ts",
     "src/**/*.ts"
   ]
 }

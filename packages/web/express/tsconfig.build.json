@@ -2,9 +2,16 @@
   "extends": "../../../tsconfig.base",
   "compilerOptions": {
     "sourceMap": false,
-    "outDir": "lib"
+    "outDir": "../../../dist/packages/web/express",
+    "baseUrl": ".",
+    "rootDir": ".",
+    "paths": {
+      "@gabliam/core": ["../../../dist/packages/core/core"],
+      "@gabliam/web-core": ["../../../dist/packages/web/web-core"]
+    }
   },
   "include":[
+    "index.ts",
     "src/**/*.ts"
   ]
 }

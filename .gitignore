@@ -9,3 +9,4 @@ coverage_jest_raw
 lol/
 uploads/
 examples/express-passport/config/test.json
+dist/

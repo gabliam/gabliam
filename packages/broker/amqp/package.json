@@ -1,10 +1,10 @@
 {
   "name": "@gabliam/amqp",
-  "version": "8.0.0-alpha.97+ec328fa",
+  "version": "0.0.0-PLACEHOLDER",
   "description": "amqp plugin for gabliam",
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
-  "module": "lib/index.js",
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "module": "index.js",
   "scripts": {
     "build": "rimraf lib && tsc -p tsconfig.build.json"
   },
@@ -28,11 +28,12 @@
   },
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/amqp#readme",
   "peerDependencies": {
-    "@gabliam/core": "8.0.0-alpha.97+ec328fa"
+    "@gabliam/core": "0.0.0-PLACEHOLDER",
+    "@gabliam/log4js": "0.0.0-PLACEHOLDER"
   },
   "devDependencies": {
-    "@gabliam/core": "8.0.0-alpha.97+ec328fa",
-    "@gabliam/log4js": "8.0.0-alpha.97+ec328fa",
+    "@gabliam/core": "0.0.0-PLACEHOLDER",
+    "@gabliam/log4js": "0.0.0-PLACEHOLDER",
     "@types/amqp-connection-manager": "^2.0.2",
     "@types/amqplib": "^0.5.9",
     "@types/bluebird": "^3.5.25",

@@ -1,10 +1,10 @@
 {
   "name": "@gabliam/expression",
-  "version": "8.0.0-alpha.97+ec328fa",
+  "version": "0.0.0-PLACEHOLDER",
   "description": "expression parser",
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
-  "module": "lib/index.js",
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "module": "index.js",
   "scripts": {
     "build": "rimraf lib && tsc -p tsconfig.build.json"
   },

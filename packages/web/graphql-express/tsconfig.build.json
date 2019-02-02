@@ -2,9 +2,17 @@
   "extends": "../../../tsconfig.base",
   "compilerOptions": {
     "sourceMap": false,
-    "outDir": "lib"
+    "outDir": "../../../dist/packages/web/graphql-express",
+    "baseUrl": ".",
+    "rootDir": ".",
+    "paths": {
+      "@gabliam/core": ["../../../dist/packages/core/core"],
+      "@gabliam/express": ["../../../dist/packages/web/express"],
+      "@gabliam/graphql-core": ["../../../dist/packages/web/graphql-core"],
+    }
   },
   "include":[
+    "index.ts",
     "src/**/*.ts"
   ]
 }
