@@ -29,5 +29,7 @@ export const publish = async (
     cwd: APP_DIR,
   });
   spinner.text = `Git tag`;
-  await execa(`git`, `tag -s "v${version}"`.split(' '), { cwd: APP_DIR });
+  await execa(`git`, `tag -s "v${version}" -m "v${version}"`.split(' '), {
+    cwd: APP_DIR,
+  });
 };
