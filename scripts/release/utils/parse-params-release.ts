@@ -9,7 +9,7 @@ const paramDefinitions = [
     defaultValue: false,
   },
   {
-    name: 'canany',
+    name: 'canary',
     type: Boolean,
     description:
       'Publish packages after every successful merge using the sha as part of the tag.',
@@ -30,6 +30,8 @@ export interface ReleaseParams {
   preid: string;
 
   help: boolean;
+
+  tag: string;
 }
 
 export const parseParams = (): ReleaseParams => {
@@ -37,6 +39,12 @@ export const parseParams = (): ReleaseParams => {
   let params: ReleaseParams;
   try {
     params = <ReleaseParams>commandLineArgs(paramDefinitions);
+
+    if (params.canary) {
+      params.tag = 'canary';
+    } else {
+      params.tag = 'latest';
+    }
   } catch {
     showHelp = true;
   }

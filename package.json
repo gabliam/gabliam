@@ -15,7 +15,7 @@
     "example:typeorm": "lerna run --scope typeorm-sample start --stream",
     "example:express:passport": "lerna run --scope express-passport-sample start --stream",
     "release": "ts-node ./scripts/release/release.ts",
-    "release:canary": "ts-node ./scripts/release/release.ts --canany"
+    "release:canary": "ts-node ./scripts/release/release.ts --canary"
   },
   "devDependencies": {
     "@gabliam/tslint": "^1.0.2",

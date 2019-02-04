@@ -1,17 +1,16 @@
 import * as semver from 'semver';
+import { ReleaseParams } from './parse-params-release';
+import { getCurrentVersion } from './pkg-utils';
 import * as promptUtilities from './prompt-utils';
-import { getRootPkgPath } from './pkg-utils';
 
-export const promptVersion = async (prereleaseId: string) => {
-  const rootPkgPath = getRootPkgPath();
-  const rootPkg = require(rootPkgPath);
-  const currentVersion = rootPkg.version;
+export const promptVersion = async ({ preid, tag }: ReleaseParams) => {
+  const currentVersion = await getCurrentVersion(tag);
   const patch = semver.inc(currentVersion, 'patch');
   const minor = semver.inc(currentVersion, 'minor');
   const major = semver.inc(currentVersion, 'major');
-  const prepatch = (<any>semver.inc)(currentVersion, 'prepatch', prereleaseId);
-  const preminor = (<any>semver.inc)(currentVersion, 'preminor', prereleaseId);
-  const premajor = (<any>semver.inc)(currentVersion, 'premajor', prereleaseId);
+  const prepatch = (<any>semver.inc)(currentVersion, 'prepatch', preid);
+  const preminor = (<any>semver.inc)(currentVersion, 'preminor', preid);
+  const premajor = (<any>semver.inc)(currentVersion, 'premajor', preid);
 
   const choice = await promptUtilities.select<string>(
     `Select a new version (currently ${currentVersion})`,
@@ -40,13 +39,12 @@ export const promptVersion = async (prereleaseId: string) => {
     const defaultVersion = (<any>semver.inc)(
       currentVersion,
       'prerelease',
-      prereleaseId
+      preid
     );
-    const prompt = `(default: "${prereleaseId}", yielding ${defaultVersion})`;
+    const prompt = `(default: "${preid}", yielding ${defaultVersion})`;
 
     return promptUtilities.input(`Enter a prerelease identifier ${prompt}`, {
-      filter: v =>
-        (<any>semver.inc)(currentVersion, 'prerelease', v || prereleaseId),
+      filter: v => (<any>semver.inc)(currentVersion, 'prerelease', v || preid),
     });
   }
 
