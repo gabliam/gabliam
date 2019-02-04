@@ -40,7 +40,7 @@ export const build = async (spinner: ora.Ora, newVersion: string) => {
       path.relative(APP_DIR, folder),
       'package.json'
     );
-
+    pkg.version = newVersion;
     updatePkg(pkg, 'peerDependencies', newVersion);
     updatePkg(pkg, 'dependencies', newVersion);
     updatePkg(pkg, 'devDependencies', newVersion);

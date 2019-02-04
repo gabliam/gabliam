@@ -14,7 +14,10 @@ export const publish = async (
     publishArgs.push(`--tag=canary`);
   }
 
-  for (const [pkgName, { folder }] of Object.entries(monoRepo)) {
+  for (const [pkgName, { pkg, folder }] of Object.entries(monoRepo)) {
+    if (pkg.private) {
+      continue;
+    }
     spinner.text = `Publish ${pkgName}`;
     const pkgDist = path.resolve(DIST_DIR, path.relative(APP_DIR, folder));
     await execa('npm', publishArgs, { cwd: pkgDist });
