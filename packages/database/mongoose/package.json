@@ -16,7 +16,9 @@
   },
   "files": [
     "lib",
-    "src"
+    "src",
+    "index.js",
+    "index.d.ts"
   ],
   "repository": {
     "type": "git",

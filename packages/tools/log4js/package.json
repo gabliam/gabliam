@@ -15,7 +15,8 @@
   "files": [
     "lib",
     "src",
-    "custom-typings.d.ts"
+    "index.js",
+    "index.d.ts"
   ],
   "repository": {
     "type": "git",
