@@ -36,6 +36,9 @@ module.exports = {
     "jest-serializer-path",
     "jest-serializer-supertest"
   ],
+  "modulePathIgnorePatterns": [
+    "<rootDir>/dist/"
+  ],
   "moduleFileExtensions": [
     "ts",
     "tsx",

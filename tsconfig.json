@@ -13,5 +13,8 @@
         "./packages/tools/*/src",
       ]
     }
-  }
+  },
+  "exclude": [
+    "dist"
+  ]
 }
