@@ -97,9 +97,9 @@ test('get & put with timeout', async () => {
 
   const client = new Redis();
   client.debug('sleep', 2);
-  await new Promise(resolve => setTimeout(resolve, 500));
+  await sleep(0.5);
   expect(await cache3.get('test')).toMatchSnapshot();
-  await new Promise(resolve => setTimeout(resolve, 1700));
+  await sleep(1.7);
   expect(await cache3.get('test')).toMatchSnapshot();
 
   await cache3.put('test', undefined);
