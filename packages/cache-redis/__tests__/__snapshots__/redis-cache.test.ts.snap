@@ -50,6 +50,20 @@ exports[`evict 4`] = `"test3"`;
 
 exports[`evict 5`] = `undefined`;
 
+exports[`get & put with timeout 1`] = `undefined`;
+
+exports[`get & put with timeout 2`] = `"test"`;
+
+exports[`get & put with timeout 3`] = `"test"`;
+
+exports[`get & put with timeout 4`] = `undefined`;
+
+exports[`get & put with timeout 5`] = `"test"`;
+
+exports[`get & put with timeout 6`] = `undefined`;
+
+exports[`get & put with timeout 7`] = `null`;
+
 exports[`put with duration 1`] = `"test"`;
 
 exports[`put with duration 2`] = `undefined`;

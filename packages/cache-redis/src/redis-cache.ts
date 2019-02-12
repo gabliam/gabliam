@@ -6,13 +6,30 @@ export interface RedisCacheOptions {
 
   duration?: number;
 
+  timeout?: number;
+
   redisOptions?: Redis.RedisOptions;
 }
 
 export class RedisCache implements Cache {
   private client!: Redis.Redis;
+  private addTimeout: (promiseFn: Promise<any>) => Promise<any>;
 
-  constructor(private name: string, private options: RedisCacheOptions = {}) {}
+  constructor(private name: string, private options: RedisCacheOptions = {}) {
+    if (options.timeout) {
+      this.addTimeout = (promiseFn: Promise<any>) =>
+        Promise.race([
+          promiseFn,
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              reject('timeout');
+            }, this.options.timeout);
+          }),
+        ]);
+    } else {
+      this.addTimeout = (promiseFn: Promise<any>) => promiseFn;
+    }
+  }
 
   async start() {
     this.client = new Redis(this.options.redisOptions);
@@ -30,12 +47,12 @@ export class RedisCache implements Cache {
   }
 
   async get<T>(key: string): Promise<T | undefined | null> {
-    if (!await this.hasKey(key)) {
+    if (!(await this.hasKey(key))) {
       return undefined;
     }
     const realKey = this.getKey(key);
     try {
-      return this.deserialize(await this.client.get(realKey));
+      return this.deserialize(await this.addTimeout(this.client.get(realKey)));
     } catch {
       /* istanbul ignore next */ {
         return Promise.resolve(undefined);
@@ -53,14 +70,16 @@ export class RedisCache implements Cache {
         this.options.mode !== undefined &&
         this.options.duration !== undefined
       ) {
-        await this.client.set(
-          realKey,
-          JSON.stringify(value),
-          this.options.mode,
-          this.options.duration
+        await this.addTimeout(
+          this.client.set(
+            realKey,
+            JSON.stringify(value),
+            this.options.mode,
+            this.options.duration
+          )
         );
       } else {
-        await this.client.set(realKey, JSON.stringify(value));
+        await this.addTimeout(this.client.set(realKey, JSON.stringify(value)));
       }
     } catch {}
   }
@@ -69,7 +88,7 @@ export class RedisCache implements Cache {
     key: string,
     value: T | null | undefined
   ): Promise<T | undefined | null> {
-    if (!await this.hasKey(key)) {
+    if (!(await this.hasKey(key))) {
       await this.put(key, value);
       return null;
     }
@@ -78,23 +97,27 @@ export class RedisCache implements Cache {
   }
   async evict(key: string): Promise<void> {
     try {
-      await this.client.del(this.getKey(key));
+      await this.addTimeout(this.client.del(this.getKey(key)));
     } catch {}
   }
 
   async clear(): Promise<void> {
     try {
-      await this.client.eval(
-        `return redis.call('del', unpack(redis.call('keys', ARGV[1])))`,
-        0,
-        `${this.name}:*`
+      await this.addTimeout(
+        this.client.eval(
+          `return redis.call('del', unpack(redis.call('keys', ARGV[1])))`,
+          0,
+          `${this.name}:*`
+        )
       );
     } catch {}
   }
 
   private async hasKey(key: string) {
     try {
-      return (await this.client.exists(this.getKey(key))) === 1;
+      return (
+        (await this.addTimeout(this.client.exists(this.getKey(key)))) === 1
+      );
     } catch {
       /* istanbul ignore next */ {
         return false;
