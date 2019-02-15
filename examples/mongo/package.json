@@ -18,11 +18,11 @@
   },
   "homepage": "https://github.com/gabliam/sample#readme",
   "dependencies": {
-    "@gabliam/core": "^7.10.0",
-    "@gabliam/express": "^7.10.0",
-    "@gabliam/koa": "^7.10.0",
-    "@gabliam/mongoose": "^7.10.0",
-    "@gabliam/web-core": "^7.10.0",
+    "@gabliam/core": "0.0.0-PLACEHOLDER",
+    "@gabliam/express": "0.0.0-PLACEHOLDER",
+    "@gabliam/koa": "0.0.0-PLACEHOLDER",
+    "@gabliam/mongoose": "0.0.0-PLACEHOLDER",
+    "@gabliam/web-core": "0.0.0-PLACEHOLDER",
     "boom": "^7.3.0",
     "reflect-metadata": "^0.1.9",
     "tslib": "^1.9.3"
