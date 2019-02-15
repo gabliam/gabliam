@@ -86,7 +86,7 @@ describe('Interceptor:', () => {
     }
   }
 
-  async function b(ctx: koa.Context, nextFunc: () => Promise<any>) {
+  async function b(ctx: any, nextFunc: () => Promise<any>) {
     result += 'b';
     await nextFunc();
   }

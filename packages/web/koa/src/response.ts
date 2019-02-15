@@ -116,6 +116,7 @@ export class KoaResponse implements GabResponse<koa.Response> {
    * @api public
    */
   async sendFile(path: string, options?: any): Promise<void> {
+    // @ts-ignore koa-router bad definition
     await send(this.context, path, options);
   }
 

@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "changelog": "conventional-changelog -i  CHANGELOG.md -p angular  -s -r 0",
-    "lint": "tslint --project tsconfig.json './{packages,examples}/**/{src,__tests__}/**/*.ts' --exclude './{packages,examples}/**/node_modules/**/*.ts' --exclude './{packages,examples}/**/{src,__tests__}/**/*.d.ts'",
+    "lint": "tslint --project tsconfig.json './packages/**/**/{src,__tests__}/**/*.ts' --exclude './packages/**/**/node_modules/**/*.ts' --exclude './packages,examples/**/**/{src,__tests__}/**/*.d.ts'",
     "build": "lerna run build --scope @gabliam/expression && lerna run build --scope @gabliam/core && lerna run build --scope @gabliam/web-core && lerna run build",
     "test": "jest --runInBand",
     "test:ci": "jest --runInBand --coverage",

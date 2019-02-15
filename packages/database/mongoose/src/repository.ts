@@ -22,7 +22,9 @@ export class Repository<T>
   }
 
   delete(_id: string | mongoose.Types.ObjectId): Promise<void> {
-    return this.model.deleteOne({ _id: this.toObjectId(_id) }).exec();
+    return (this.model
+      .deleteOne({ _id: this.toObjectId(_id) })
+      .exec() as unknown) as Promise<void>;
   }
 
   findById(_id: string): Promise<T & mongoose.Document | null> {

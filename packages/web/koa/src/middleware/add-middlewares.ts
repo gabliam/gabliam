@@ -6,5 +6,6 @@ import { koa } from '../koa';
 
 export const addMiddlewares: ConfigFunction<koa> = (app, container) => {
   const config = container.get<KoaConfig>(KOA_PLUGIN_CONFIG);
+  // @ts-ignore bad definition
   app.use(bodyParser(config.koaBodyOptions));
 };

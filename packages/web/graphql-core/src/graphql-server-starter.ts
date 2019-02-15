@@ -64,8 +64,12 @@ export class GraphqlServerStarter implements ServerStarter {
     /* istanbul ignore next */
     function onListening(): void {
       const addr = server.address();
-      const bind =
-        typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
+      let bind = '';
+      if (typeof addr === 'string') {
+        bind = `pipe ${addr}`;
+      } else if (addr && addr.port) {
+        bind = `port ${addr.port}`;
+      }
       console.log(`Listening on ${bind}`);
     }
   }

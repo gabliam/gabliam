@@ -121,6 +121,7 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
       }
       const app = container.get<koa>(APP);
 
+      // @ts-ignore koa-router bad definition
       app.use(router.routes()).use(router.allowedMethods());
     }
   }
