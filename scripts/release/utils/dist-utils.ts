@@ -29,6 +29,8 @@ export const build = async (spinner: ora.Ora, newVersion: string) => {
   }
 
   const pkgs = graph.topologicalSort();
+  const licensePath = path.resolve(APP_DIR, 'LICENSE');
+
   for (const pkgName of pkgs) {
     spinner.text = `Build ${pkgName}`;
     await execa('lerna', `run build --scope ${pkgName}`.split(' '), {
@@ -40,12 +42,18 @@ export const build = async (spinner: ora.Ora, newVersion: string) => {
       path.relative(APP_DIR, folder),
       'package.json'
     );
+    const licenseDist = path.resolve(
+      DIST_DIR,
+      path.relative(APP_DIR, folder),
+      'LICENSE'
+    );
     pkg.version = newVersion;
     updatePkg(pkg, 'peerDependencies', newVersion);
     updatePkg(pkg, 'dependencies', newVersion);
     updatePkg(pkg, 'devDependencies', newVersion);
 
     await fs.writeJSON(pkgDist, pkg, { spaces: 2 });
+    await fs.copy(licensePath, licenseDist);
   }
 
   await updateRootPkg(newVersion);
