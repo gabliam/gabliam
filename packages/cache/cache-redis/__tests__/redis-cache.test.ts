@@ -11,6 +11,7 @@ beforeAll(async () => {
   cache2 = new RedisCache('test2', {
     duration: 2,
     mode: 'EX',
+    gzipEnabled: true,
   });
   cache3 = new RedisCache('test2', {
     timeout: 1000,

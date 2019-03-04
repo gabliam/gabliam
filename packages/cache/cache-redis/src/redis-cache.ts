@@ -1,5 +1,10 @@
 import { Cache } from '@gabliam/cache';
 import * as Redis from 'ioredis';
+import { gzip, gunzip } from 'zlib';
+import { promisify } from 'util';
+
+const gzipAsync = promisify(gzip);
+const gunzipAsync = promisify(gunzip);
 
 export interface RedisCacheOptions {
   mode?: string;
@@ -7,6 +12,8 @@ export interface RedisCacheOptions {
   duration?: number;
 
   timeout?: number;
+
+  gzipEnabled?: boolean;
 
   redisOptions?: Redis.RedisOptions;
 }
@@ -53,7 +60,7 @@ export class RedisCache implements Cache {
       }
       const realKey = this.getKey(key);
       try {
-        return this.deserialize(await this.client.get(realKey));
+        return this.deserialize(await this.client.getBuffer(realKey));
       } catch {
         /* istanbul ignore next */ {
           return Promise.resolve(undefined);
@@ -80,12 +87,12 @@ export class RedisCache implements Cache {
         ) {
           await this.client.set(
             realKey,
-            JSON.stringify(value),
+            await this.serialize(value),
             this.options.mode,
             this.options.duration
           );
         } else {
-          await this.client.set(realKey, JSON.stringify(value));
+          await this.client.set(realKey, await this.serialize(value));
         }
       } catch {}
     })();
@@ -170,13 +177,27 @@ export class RedisCache implements Cache {
     return `${this.name}:${key}:${this.name}`;
   }
 
-  private deserialize(value: any) {
+  private async serialize(value: any) {
     try {
-      return JSON.parse(value);
-    } catch {
-      /* istanbul ignore next */ {
-        return undefined;
+      if (this.options.gzipEnabled === true) {
+        return await gzipAsync(JSON.stringify(value));
+      } else {
+        return JSON.stringify(value);
       }
+    } catch {
+      return undefined;
+    }
+  }
+
+  private async deserialize(value: any) {
+    try {
+      if (this.options.gzipEnabled === true) {
+        return JSON.parse(<string>await gunzipAsync(value));
+      } else {
+        return JSON.parse(value.toString());
+      }
+    } catch {
+      return undefined;
     }
   }
 }
