@@ -1,7 +1,10 @@
 import RedisCache from '../src/index';
+import * as Redis from 'ioredis';
 
 let cache: RedisCache;
 let cache2: RedisCache;
+let cache3: RedisCache;
+let client: Redis.Redis;
 
 beforeAll(async () => {
   cache = new RedisCache('test');
@@ -9,18 +12,26 @@ beforeAll(async () => {
     duration: 2,
     mode: 'EX',
   });
+  cache3 = new RedisCache('test2', {
+    timeout: 1000,
+  });
   await cache.start();
   await cache2.start();
+  await cache3.start();
+  client = new Redis();
 });
 
 afterEach(async () => {
   await cache.clear();
   await cache2.clear();
+  await cache3.clear();
 });
 
 afterAll(async () => {
   await cache.stop();
   await cache2.stop();
+  await cache3.stop();
+  client.disconnect();
 });
 
 test('cache', () => {
@@ -79,4 +90,33 @@ test('put with duration', async () => {
   expect(await cache2.get('test')).toMatchSnapshot();
   await sleep(3);
   expect(await cache2.get('test')).toMatchSnapshot();
+});
+
+test('get & put with timeout', async () => {
+  expect(await cache3.get('test')).toMatchSnapshot();
+  await cache3.put('test', 'test');
+  expect(await cache3.get('test')).toMatchSnapshot();
+  expect(await cache3.get('test')).toMatchSnapshot();
+
+  client.debug('sleep', 0.5);
+  expect(await cache3.get('test')).toMatchSnapshot();
+  expect(await cache3.get('test')).toMatchSnapshot();
+
+  await cache3.put('test', undefined);
+  expect(await cache3.get('test')).toMatchSnapshot();
+  await cache3.put('test2', null);
+  expect(await cache3.get('test2')).toMatchSnapshot();
+});
+
+test('errors get timeout', async () => {
+  await cache3.put('test', 'test');
+  client.debug('sleep', 3);
+  await expect(cache3.get('test')).rejects.toMatchSnapshot();
+  await sleep(3);
+});
+
+test('put timeout', async () => {
+  client.debug('sleep', 3);
+  await expect(cache3.put('test', 'test')).rejects.toMatchSnapshot();
+  await sleep(3);
 });
