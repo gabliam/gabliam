@@ -16,7 +16,7 @@ export class AmqpConnectionManager {
   ) {
     for (const [
       index,
-      { name, url, queues, undefinedValue },
+      { name, url, queues, undefinedValue, gzipEnabled },
     ] of connectionConfigs.entries()) {
       if (this.connections.find(c => c.name === name) !== undefined) {
         throw new AmqpDuplicateConnectionError(name);
@@ -29,7 +29,8 @@ export class AmqpConnectionManager {
           url,
           undefinedValue,
           this.createQueue(queues),
-          valueExtractor
+          valueExtractor,
+          gzipEnabled
         )
       );
     }

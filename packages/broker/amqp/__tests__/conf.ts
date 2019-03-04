@@ -14,6 +14,26 @@ export const config = {
       },
     },
   },
+  gzipEnabled: false,
+};
+
+export const configWithGzip = {
+  url: 'amqp://localhost',
+  queues: {
+    listener: {
+      queueName: 'listenerTest',
+      options: {
+        durable: false,
+      },
+    },
+    consummer: {
+      queueName: 'consumerTest',
+      options: {
+        durable: false,
+      },
+    },
+  },
+  gzipEnabled: true,
 };
 
 export const configWithName = {

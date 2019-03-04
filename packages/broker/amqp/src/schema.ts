@@ -29,6 +29,7 @@ const connectionValidator = Joi.object().keys({
     .trim()
     .default(UNDEFINED_VALUE),
   queues: queuesValidor,
+  gzipEnabled: Joi.boolean().default(false),
 });
 
 export const configurationValidator = Joi.alternatives(
