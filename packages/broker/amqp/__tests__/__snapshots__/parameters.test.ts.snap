@@ -2,35 +2,7 @@
 
 exports[`Parameters gzip: should bind a method parameter to message 1`] = `
 Object {
-  "content": Object {
-    "data": Array [
-      31,
-      139,
-      8,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      19,
-      11,
-      113,
-      13,
-      14,
-      1,
-      0,
-      184,
-      147,
-      234,
-      238,
-      4,
-      0,
-      0,
-      0,
-    ],
-    "type": "Buffer",
-  },
+  "content": Any<Object>,
   "fields": Object {
     "consumerTag": Any<String>,
     "deliveryTag": 1,
@@ -53,35 +25,7 @@ exports[`Parameters gzip: should bind a method parameter to message 2`] = `1`;
 
 exports[`Parameters gzip: should bind a method parameter to message 3`] = `
 Object {
-  "content": Object {
-    "data": Array [
-      31,
-      139,
-      8,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      19,
-      11,
-      113,
-      13,
-      14,
-      1,
-      0,
-      184,
-      147,
-      234,
-      238,
-      4,
-      0,
-      0,
-      0,
-    ],
-    "type": "Buffer",
-  },
+  "content": Any<Object>,
   "fields": Object {
     "consumerTag": Any<String>,
     "deliveryTag": 3,
@@ -282,15 +226,7 @@ exports[`Parameters gzip: should bind a method to Properties object 4`] = `1`;
 
 exports[`Parameters: should bind a method parameter to message 1`] = `
 Object {
-  "content": Object {
-    "data": Array [
-      84,
-      69,
-      83,
-      84,
-    ],
-    "type": "Buffer",
-  },
+  "content": Any<Object>,
   "fields": Object {
     "consumerTag": Any<String>,
     "deliveryTag": 1,
@@ -312,15 +248,7 @@ exports[`Parameters: should bind a method parameter to message 2`] = `1`;
 
 exports[`Parameters: should bind a method parameter to message 3`] = `
 Object {
-  "content": Object {
-    "data": Array [
-      84,
-      69,
-      83,
-      84,
-    ],
-    "type": "Buffer",
-  },
+  "content": Any<Object>,
   "fields": Object {
     "consumerTag": Any<String>,
     "deliveryTag": 3,

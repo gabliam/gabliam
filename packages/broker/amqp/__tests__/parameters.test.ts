@@ -61,7 +61,9 @@ afterEach(async () => {
         'consumerTest',
         'TEST'
       );
+
       expect(respConsumer).toMatchSnapshot<any>({
+        content: expect.any(Object),
         properties: {
           correlationId: expect.any(String),
           replyTo: expect.any(String),
@@ -76,6 +78,7 @@ afterEach(async () => {
       connection.sendToQueue('listenerTest', 'TEST');
       const resp = await d.promise;
       expect(resp).toMatchSnapshot<any>({
+        content: expect.any(Object),
         fields: {
           consumerTag: expect.any(String),
         },
