@@ -40,6 +40,8 @@ exports[`clear 8`] = `undefined`;
 
 exports[`clear 9`] = `undefined`;
 
+exports[`errors get timeout 1`] = `"timeout"`;
+
 exports[`evict 1`] = `null`;
 
 exports[`evict 2`] = `null`;
@@ -56,13 +58,15 @@ exports[`get & put with timeout 2`] = `"test"`;
 
 exports[`get & put with timeout 3`] = `"test"`;
 
-exports[`get & put with timeout 4`] = `undefined`;
+exports[`get & put with timeout 4`] = `"test"`;
 
 exports[`get & put with timeout 5`] = `"test"`;
 
 exports[`get & put with timeout 6`] = `undefined`;
 
 exports[`get & put with timeout 7`] = `null`;
+
+exports[`put timeout 1`] = `"timeout"`;
 
 exports[`put with duration 1`] = `"test"`;
 
