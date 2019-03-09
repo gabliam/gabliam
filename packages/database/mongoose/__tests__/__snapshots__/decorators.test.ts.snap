@@ -53,6 +53,7 @@ Array [
             [Function],
           ],
           "validators": Array [],
+          Symbol(mongoose#schemaType): true,
         },
         "name": SchemaString {
           "_index": null,
@@ -76,6 +77,7 @@ Array [
               "validator": [Function],
             },
           ],
+          Symbol(mongoose#schemaType): true,
         },
       },
       "plugins": Array [],
@@ -163,6 +165,7 @@ Array [
             [Function],
           ],
           "validators": Array [],
+          Symbol(mongoose#schemaType): true,
         },
         "name": SchemaString {
           "_index": null,
@@ -186,6 +189,7 @@ Array [
               "validator": [Function],
             },
           ],
+          Symbol(mongoose#schemaType): true,
         },
       },
       "plugins": Array [],
@@ -274,6 +278,7 @@ Array [
             [Function],
           ],
           "validators": Array [],
+          Symbol(mongoose#schemaType): true,
         },
         "name": SchemaString {
           "_index": null,
@@ -297,6 +302,7 @@ Array [
               "validator": [Function],
             },
           ],
+          Symbol(mongoose#schemaType): true,
         },
       },
       "plugins": Array [],
