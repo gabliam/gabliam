@@ -87,4 +87,6 @@ export interface ConnectionConfig {
   undefinedValue: string;
 
   queues: QueueDictionnary;
+
+  gzipEnabled: boolean;
 }

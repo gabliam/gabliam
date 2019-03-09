@@ -4,14 +4,14 @@ import { UNDEFINED_VALUE } from './constants';
 const queueOptionsValidator = Joi.object().keys({
   exclusive: Joi.boolean(),
   durable: Joi.boolean(),
-  autoDelete: Joi.boolean()
+  autoDelete: Joi.boolean(),
 });
 
 const queueConfigurationValidator = Joi.object().keys({
   queueName: Joi.string()
     .trim()
     .required(),
-  options: queueOptionsValidator.default()
+  options: queueOptionsValidator.default(),
 });
 
 const queuesValidor = Joi.object()
@@ -28,7 +28,8 @@ const connectionValidator = Joi.object().keys({
   undefinedValue: Joi.string()
     .trim()
     .default(UNDEFINED_VALUE),
-  queues: queuesValidor
+  queues: queuesValidor,
+  gzipEnabled: Joi.boolean().default(false),
 });
 
 export const configurationValidator = Joi.alternatives(

@@ -4,13 +4,13 @@ import {
   RabbitListener,
   RabbitConsumer,
   AmqpConnectionManager,
-  CUnit
+  CUnit,
 } from '../src/index';
 import {
   config,
   configWithName,
   configWith2Connection,
-  configWithDuplicateConnection
+  configWithDuplicateConnection,
 } from './conf';
 import { AmqpConnection } from '../src/amqp-connection';
 import { Gabliam } from '@gabliam/core';
@@ -48,10 +48,10 @@ describe('Errors', () => {
         listener: {
           queueName: 'listenerTest',
           options: {
-            durable: false
-          }
-        }
-      }
+            durable: false,
+          },
+        },
+      },
     });
     await expect(appTest.gab.buildAndStart()).rejects.toMatchSnapshot();
   });
@@ -61,9 +61,9 @@ describe('Errors', () => {
       url: 'amqp://bad',
       queues: {
         queueTest: {
-          name: 'lol'
-        }
-      }
+          name: 'lol',
+        },
+      },
     });
     await expect(appTest.gab.buildAndStart()).rejects.toMatchSnapshot();
   });
@@ -73,24 +73,24 @@ describe('Listener test', () => {
   [
     {
       name: 'with buffer string',
-      content: new Buffer('buffertest')
+      content: new Buffer('buffertest'),
     },
     {
       name: 'with buffer object',
-      content: new Buffer(JSON.stringify({ test: 'buffertest' }))
+      content: new Buffer(JSON.stringify({ test: 'buffertest' })),
     },
     {
       name: 'with string',
-      content: 'test'
+      content: 'test',
     },
     {
       name: 'with object',
-      content: { test: 'cool' }
+      content: { test: 'cool' },
     },
     {
       name: 'with undefined',
-      content: undefined
-    }
+      content: undefined,
+    },
   ].forEach(testCase => {
     test(testCase.name, async () => {
       const d = new Deferred();
@@ -124,20 +124,20 @@ describe('Consumer test', () => {
   [
     {
       name: 'with buffer string',
-      content: new Buffer('buffertest')
+      content: new Buffer('buffertest'),
     },
     {
       name: 'with buffer object',
-      content: new Buffer(JSON.stringify({ test: 'buffertest' }))
+      content: new Buffer(JSON.stringify({ test: 'buffertest' })),
     },
     {
       name: 'with string',
-      content: 'test'
+      content: 'test',
     },
     {
       name: 'with object',
-      content: { test: 'cool' }
-    }
+      content: { test: 'cool' },
+    },
   ].forEach(testCase => {
     test(testCase.name, async () => {
       @RabbitController()
@@ -184,7 +184,9 @@ test('consumer throw error', async () => {
   await expect(appTest.gab.buildAndStart()).resolves.toBeInstanceOf(Gabliam);
   const connection = appTest.gab.container.get(AmqpConnection);
   const resp = await connection.sendAndReceive('consumerTest', 'test');
-  expect(resp).toMatchSnapshot();
+  expect(resp).toMatchSnapshot<any>({
+    stack: expect.any(String),
+  });
   expect(spy.callCount).toMatchSnapshot();
   expect(spy.args).toMatchSnapshot();
   spy.resetHistory();

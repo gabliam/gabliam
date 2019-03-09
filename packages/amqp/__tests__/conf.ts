@@ -4,16 +4,36 @@ export const config = {
     listener: {
       queueName: 'listenerTest',
       options: {
-        durable: false
-      }
+        durable: false,
+      },
     },
     consummer: {
       queueName: 'consumerTest',
       options: {
-        durable: false
-      }
-    }
-  }
+        durable: false,
+      },
+    },
+  },
+  gzipEnabled: false,
+};
+
+export const configWithGzip = {
+  url: 'amqp://localhost',
+  queues: {
+    listener: {
+      queueName: 'listenerTest',
+      options: {
+        durable: false,
+      },
+    },
+    consummer: {
+      queueName: 'consumerTest',
+      options: {
+        durable: false,
+      },
+    },
+  },
+  gzipEnabled: true,
 };
 
 export const configWithName = {
@@ -23,16 +43,16 @@ export const configWithName = {
     listener: {
       queueName: 'listenerTest',
       options: {
-        durable: false
-      }
+        durable: false,
+      },
     },
     consummer: {
       queueName: 'consumerTest',
       options: {
-        durable: false
-      }
-    }
-  }
+        durable: false,
+      },
+    },
+  },
 };
 
 export const configWith2Connection = [
@@ -43,16 +63,16 @@ export const configWith2Connection = [
       listener: {
         queueName: 'listenerTestConnection1',
         options: {
-          durable: false
-        }
+          durable: false,
+        },
       },
       consummer: {
         queueName: 'consumerTestConnection1',
         options: {
-          durable: false
-        }
-      }
-    }
+          durable: false,
+        },
+      },
+    },
   },
   {
     url: 'amqp://localhost',
@@ -61,17 +81,17 @@ export const configWith2Connection = [
       listener: {
         queueName: 'listenerTestConnection2',
         options: {
-          durable: false
-        }
+          durable: false,
+        },
       },
       consummer: {
         queueName: 'listenerTestConnection2',
         options: {
-          durable: false
-        }
-      }
-    }
-  }
+          durable: false,
+        },
+      },
+    },
+  },
 ];
 
 export const configWithDuplicateConnection = [
@@ -82,16 +102,16 @@ export const configWithDuplicateConnection = [
       listener: {
         queueName: 'listenerTestConnection1',
         options: {
-          durable: false
-        }
+          durable: false,
+        },
       },
       consummer: {
         queueName: 'consumerTestConnection1',
         options: {
-          durable: false
-        }
-      }
-    }
+          durable: false,
+        },
+      },
+    },
   },
   {
     url: 'amqp://localhost',
@@ -100,15 +120,15 @@ export const configWithDuplicateConnection = [
       listener: {
         queueName: 'listenerTestConnection2',
         options: {
-          durable: false
-        }
+          durable: false,
+        },
       },
       consummer: {
         queueName: 'listenerTestConnection2',
         options: {
-          durable: false
-        }
-      }
-    }
-  }
+          durable: false,
+        },
+      },
+    },
+  },
 ];

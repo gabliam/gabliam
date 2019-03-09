@@ -1,16 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Parameters: should bind a method parameter to message 1`] = `
+exports[`Parameters gzip: should bind a method parameter to message 1`] = `
 Object {
-  "content": Object {
-    "data": Array [
-      84,
-      69,
-      83,
-      84,
-    ],
-    "type": "Buffer",
-  },
+  "content": Any<Object>,
   "fields": Object {
     "consumerTag": Any<String>,
     "deliveryTag": 1,
@@ -19,6 +11,229 @@ Object {
     "routingKey": "consumerTest",
   },
   "properties": Object {
+    "contentType": "application/json",
+    "correlationId": Any<String>,
+    "expiration": "5000",
+    "headers": Object {},
+    "replyTo": Any<String>,
+  },
+}
+`;
+
+exports[`Parameters gzip: should bind a method parameter to message 2`] = `1`;
+
+exports[`Parameters gzip: should bind a method parameter to message 3`] = `
+Object {
+  "content": Any<Object>,
+  "fields": Object {
+    "consumerTag": Any<String>,
+    "deliveryTag": 3,
+    "exchange": "",
+    "redelivered": false,
+    "routingKey": "listenerTest",
+  },
+  "properties": Object {
+    "appId": undefined,
+    "clusterId": undefined,
+    "contentEncoding": undefined,
+    "contentType": "application/json",
+    "correlationId": undefined,
+    "deliveryMode": undefined,
+    "expiration": undefined,
+    "headers": Object {},
+    "messageId": undefined,
+    "priority": undefined,
+    "replyTo": undefined,
+    "timestamp": undefined,
+    "type": undefined,
+    "userId": undefined,
+  },
+}
+`;
+
+exports[`Parameters gzip: should bind a method parameter to message 4`] = `1`;
+
+exports[`Parameters gzip: should bind a method parameter to the content and with object 1`] = `"cool"`;
+
+exports[`Parameters gzip: should bind a method parameter to the content and with object 2`] = `1`;
+
+exports[`Parameters gzip: should bind a method parameter to the content and with object 3`] = `"cool"`;
+
+exports[`Parameters gzip: should bind a method parameter to the content and with object 4`] = `1`;
+
+exports[`Parameters gzip: should bind a method parameter to the content key not exist and call with buffer string 1`] = `undefined`;
+
+exports[`Parameters gzip: should bind a method parameter to the content key not exist and call with buffer string 2`] = `1`;
+
+exports[`Parameters gzip: should bind a method parameter to the content key not exist and call with buffer string 3`] = `undefined`;
+
+exports[`Parameters gzip: should bind a method parameter to the content key not exist and call with buffer string 4`] = `1`;
+
+exports[`Parameters gzip: should bind a method parameter to the content key not exist and with buffer object 1`] = `undefined`;
+
+exports[`Parameters gzip: should bind a method parameter to the content key not exist and with buffer object 2`] = `1`;
+
+exports[`Parameters gzip: should bind a method parameter to the content key not exist and with buffer object 3`] = `undefined`;
+
+exports[`Parameters gzip: should bind a method parameter to the content key not exist and with buffer object 4`] = `1`;
+
+exports[`Parameters gzip: should bind a method parameter to the content key not exist and with object 1`] = `undefined`;
+
+exports[`Parameters gzip: should bind a method parameter to the content key not exist and with object 2`] = `1`;
+
+exports[`Parameters gzip: should bind a method parameter to the content key not exist and with object 3`] = `undefined`;
+
+exports[`Parameters gzip: should bind a method parameter to the content key not exist and with object 4`] = `1`;
+
+exports[`Parameters gzip: should bind a method parameter to the content key not exist and with string 1`] = `undefined`;
+
+exports[`Parameters gzip: should bind a method parameter to the content key not exist and with string 2`] = `1`;
+
+exports[`Parameters gzip: should bind a method parameter to the content key not exist and with string 3`] = `undefined`;
+
+exports[`Parameters gzip: should bind a method parameter to the content key not exist and with string 4`] = `1`;
+
+exports[`Parameters gzip: should bind a method parameter to the content object and call with buffer string 1`] = `"buffertest"`;
+
+exports[`Parameters gzip: should bind a method parameter to the content object and call with buffer string 2`] = `1`;
+
+exports[`Parameters gzip: should bind a method parameter to the content object and call with buffer string 3`] = `"buffertest"`;
+
+exports[`Parameters gzip: should bind a method parameter to the content object and call with buffer string 4`] = `1`;
+
+exports[`Parameters gzip: should bind a method parameter to the content object and with buffer object 1`] = `
+Object {
+  "test": "buffertest",
+}
+`;
+
+exports[`Parameters gzip: should bind a method parameter to the content object and with buffer object 2`] = `1`;
+
+exports[`Parameters gzip: should bind a method parameter to the content object and with buffer object 3`] = `
+Object {
+  "test": "buffertest",
+}
+`;
+
+exports[`Parameters gzip: should bind a method parameter to the content object and with buffer object 4`] = `1`;
+
+exports[`Parameters gzip: should bind a method parameter to the content object and with object 1`] = `
+Object {
+  "test": "cool",
+}
+`;
+
+exports[`Parameters gzip: should bind a method parameter to the content object and with object 2`] = `1`;
+
+exports[`Parameters gzip: should bind a method parameter to the content object and with object 3`] = `
+Object {
+  "test": "cool",
+}
+`;
+
+exports[`Parameters gzip: should bind a method parameter to the content object and with object 4`] = `1`;
+
+exports[`Parameters gzip: should bind a method parameter to the content object and with string 1`] = `"test"`;
+
+exports[`Parameters gzip: should bind a method parameter to the content object and with string 2`] = `1`;
+
+exports[`Parameters gzip: should bind a method parameter to the content object and with string 3`] = `"test"`;
+
+exports[`Parameters gzip: should bind a method parameter to the content object and with string 4`] = `1`;
+
+exports[`Parameters gzip: should bind a method to Fields object 1`] = `
+Object {
+  "consumerTag": Any<String>,
+  "deliveryTag": Any<Number>,
+  "exchange": Any<String>,
+  "redelivered": Any<Boolean>,
+  "routingKey": "consumerTest",
+}
+`;
+
+exports[`Parameters gzip: should bind a method to Fields object 2`] = `1`;
+
+exports[`Parameters gzip: should bind a method to Fields object 3`] = `
+Object {
+  "consumerTag": Any<String>,
+  "deliveryTag": Any<Number>,
+  "exchange": Any<String>,
+  "redelivered": Any<Boolean>,
+  "routingKey": "listenerTest",
+}
+`;
+
+exports[`Parameters gzip: should bind a method to Fields object 4`] = `1`;
+
+exports[`Parameters gzip: should bind a method to Fields routingKey  1`] = `"consumerTest"`;
+
+exports[`Parameters gzip: should bind a method to Fields routingKey  2`] = `1`;
+
+exports[`Parameters gzip: should bind a method to Fields routingKey  3`] = `"listenerTest"`;
+
+exports[`Parameters gzip: should bind a method to Fields routingKey  4`] = `1`;
+
+exports[`Parameters gzip: should bind a method to Properties headers  1`] = `
+Object {
+  "api-auth": "aze&ée(((\\"a&é\\"&é\\"",
+}
+`;
+
+exports[`Parameters gzip: should bind a method to Properties headers  2`] = `1`;
+
+exports[`Parameters gzip: should bind a method to Properties headers  3`] = `
+Object {
+  "api-auth": "aze&ée(((\\"a&é\\"&é\\"",
+}
+`;
+
+exports[`Parameters gzip: should bind a method to Properties headers  4`] = `1`;
+
+exports[`Parameters gzip: should bind a method to Properties object 1`] = `
+Object {
+  "contentType": "application/json",
+  "correlationId": Any<String>,
+  "expiration": "5000",
+  "headers": Object {},
+  "replyTo": Any<String>,
+}
+`;
+
+exports[`Parameters gzip: should bind a method to Properties object 2`] = `1`;
+
+exports[`Parameters gzip: should bind a method to Properties object 3`] = `
+Object {
+  "appId": undefined,
+  "clusterId": undefined,
+  "contentEncoding": undefined,
+  "contentType": "application/json",
+  "correlationId": undefined,
+  "deliveryMode": undefined,
+  "expiration": undefined,
+  "headers": Object {},
+  "messageId": undefined,
+  "priority": undefined,
+  "replyTo": undefined,
+  "timestamp": undefined,
+  "type": undefined,
+  "userId": undefined,
+}
+`;
+
+exports[`Parameters gzip: should bind a method to Properties object 4`] = `1`;
+
+exports[`Parameters: should bind a method parameter to message 1`] = `
+Object {
+  "content": Any<Object>,
+  "fields": Object {
+    "consumerTag": Any<String>,
+    "deliveryTag": 1,
+    "exchange": "",
+    "redelivered": false,
+    "routingKey": "consumerTest",
+  },
+  "properties": Object {
+    "contentType": "application/json",
     "correlationId": Any<String>,
     "expiration": "5000",
     "headers": Object {},
@@ -31,15 +246,7 @@ exports[`Parameters: should bind a method parameter to message 2`] = `1`;
 
 exports[`Parameters: should bind a method parameter to message 3`] = `
 Object {
-  "content": Object {
-    "data": Array [
-      84,
-      69,
-      83,
-      84,
-    ],
-    "type": "Buffer",
-  },
+  "content": Any<Object>,
   "fields": Object {
     "consumerTag": Any<String>,
     "deliveryTag": 3,
@@ -51,7 +258,7 @@ Object {
     "appId": undefined,
     "clusterId": undefined,
     "contentEncoding": undefined,
-    "contentType": undefined,
+    "contentType": "application/json",
     "correlationId": undefined,
     "deliveryMode": undefined,
     "expiration": undefined,
@@ -206,6 +413,7 @@ exports[`Parameters: should bind a method to Properties headers  4`] = `1`;
 
 exports[`Parameters: should bind a method to Properties object 1`] = `
 Object {
+  "contentType": "application/json",
   "correlationId": Any<String>,
   "expiration": "5000",
   "headers": Object {},
@@ -220,7 +428,7 @@ Object {
   "appId": undefined,
   "clusterId": undefined,
   "contentEncoding": undefined,
-  "contentType": undefined,
+  "contentType": "application/json",
   "correlationId": undefined,
   "deliveryMode": undefined,
   "expiration": undefined,

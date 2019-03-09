@@ -17,6 +17,7 @@ import {
 } from './interfaces';
 import { Queue } from './queue';
 import { log4js } from '@gabliam/log4js';
+import { gzip, gunzip } from 'zlib';
 
 enum ConnectionState {
   stopped,
@@ -48,7 +49,8 @@ export class AmqpConnection {
     private url: string,
     private undefinedValue: string,
     private queues: Queue[],
-    private valueExtractor: ValueExtractor
+    private valueExtractor: ValueExtractor,
+    private gzipEnabled: boolean
   ) {}
 
   /**
@@ -149,11 +151,11 @@ export class AmqpConnection {
     if (channel === null) {
       throw new AmqpConnectionError('Connection error');
     }
-    await channel.sendToQueue(
-      queueName,
-      this.contentToBuffer(content),
-      options
-    );
+    await channel.sendToQueue(queueName, await this.contentToBuffer(content), {
+      contentEncoding: this.gzipEnabled ? 'gzip' : undefined,
+      contentType: 'application/json',
+      ...options,
+    });
   }
 
   /**
@@ -171,11 +173,11 @@ export class AmqpConnection {
     if (channel === null) {
       throw new AmqpConnectionError('Connection error');
     }
-    await channel.sendToQueue(
-      queueName,
-      this.contentToBuffer(content),
-      options
-    );
+    await channel.sendToQueue(queueName, await this.contentToBuffer(content), {
+      contentEncoding: this.gzipEnabled ? 'gzip' : undefined,
+      contentType: 'application/json',
+      ...options,
+    });
     await this.channel.ack(msg);
   }
 
@@ -225,8 +227,12 @@ export class AmqpConnection {
             chan.ack(msg);
           });
         })
-        .then(() => {
-          chan.sendToQueue(queueName, this.contentToBuffer(content), options);
+        .then(async () => {
+          chan.sendToQueue(queueName, await this.contentToBuffer(content), {
+            contentEncoding: this.gzipEnabled ? 'gzip' : undefined,
+            contentType: 'application/json',
+            ...options,
+          });
         })
         // catch when error amqp (untestable)
         .catch(
@@ -306,35 +312,64 @@ export class AmqpConnection {
   /**
    * Convert content to buffer for send in queue
    */
-  contentToBuffer(content: any) {
+  async contentToBuffer(content: any) {
+    let data: any;
+
     if (content === undefined) {
-      return new Buffer(this.undefinedValue);
+      data = this.undefinedValue;
+    } else if (content instanceof Buffer) {
+      data = content;
+    } else if (typeof content === 'string') {
+      data = content;
+    } else if (content instanceof Error) {
+      data = JSON.stringify(content, Object.getOwnPropertyNames(content));
+    } else {
+      data = JSON.stringify(content);
     }
 
-    if (content instanceof Buffer) {
-      return content;
+    if (this.gzipEnabled) {
+      return new Promise<Buffer>(resolve => {
+        gzip(new Buffer(data), (err, res) => {
+          if (err) {
+            resolve(undefined);
+          } else {
+            resolve(res);
+          }
+        });
+      });
     }
 
-    if (typeof content === 'string') {
-      return new Buffer(content);
-    }
-
-    return new Buffer(JSON.stringify(content));
+    return Promise.resolve(new Buffer(data));
   }
 
   /**
    * Parse content in message
    */
-  parseContent(msg: Message) {
-    if (msg.content.toString() === this.undefinedValue) {
-      return undefined;
+  async parseContent(msg: Message) {
+    let data: any;
+    if (this.gzipEnabled) {
+      data = await new Promise<any>(resolve => {
+        gunzip(msg.content, (err, res) => {
+          if (err) {
+            resolve(msg.content.toString());
+          } else {
+            resolve(res.toString());
+          }
+        });
+      });
+    } else {
+      data = msg.content.toString();
     }
 
     try {
-      return JSON.parse(msg.content.toString());
-    } catch (e) {
-      return msg.content.toString();
+      data = JSON.parse(data);
+    } catch {}
+
+    if (data === this.undefinedValue) {
+      return undefined;
     }
+
+    return data;
   }
 
   private constructListener(
@@ -347,7 +382,7 @@ export class AmqpConnection {
         return;
       }
 
-      const args = this.extractArgs(parametersMetadata, msg);
+      const args = await this.extractArgs(parametersMetadata, msg);
       await Promise.resolve(controller[handlerMetadata.key](...args));
       await this.channel.ack(msg);
     };
@@ -369,7 +404,7 @@ export class AmqpConnection {
         throw new Error(`replyTo is missing`);
       }
 
-      const args = this.extractArgs(parametersMetadata, msg);
+      const args = await this.extractArgs(parametersMetadata, msg);
 
       let response: any;
       let sendOptions: SendOptions;
@@ -391,9 +426,12 @@ export class AmqpConnection {
     };
   }
 
-  private extractArgs(params: ParameterMetadata[], msg: Message): any[] {
+  private async extractArgs(
+    params: ParameterMetadata[],
+    msg: Message
+  ): Promise<any[]> {
     const args = [];
-    const content = this.parseContent(msg);
+    const content = await this.parseContent(msg);
 
     if (!params || !params.length) {
       return [content];
