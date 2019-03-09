@@ -25,7 +25,7 @@ export const publish = async (
   spinner.text = `Git add`;
   await execa(`git`, `add -u`.split(' '), { cwd: APP_DIR });
   spinner.text = `Git commit`;
-  await execa(`git`, ['commit', '-m', '"release v${version}"'], {
+  await execa(`git`, ['commit', '-m', `"release v${version}"`], {
     cwd: APP_DIR,
   });
   spinner.text = `Git tag`;
