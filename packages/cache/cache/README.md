@@ -2,7 +2,7 @@
 [![NPM version][npm-image]][npm-url]
 
 
-# Gabliam amqp
+# Gabliam cache
 
 Gabliam plugin for add cache.
 
