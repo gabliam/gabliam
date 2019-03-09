@@ -338,7 +338,7 @@ export class AmqpConnection {
 
     if (this.gzipEnabled) {
       return new Promise<Buffer>(resolve => {
-        gzip(new Buffer(data), (err, res) => {
+        gzip(Buffer.from(data), (err, res) => {
           if (err) {
             resolve(undefined);
           } else {
@@ -348,7 +348,7 @@ export class AmqpConnection {
       });
     }
 
-    return Promise.resolve(new Buffer(data));
+    return Promise.resolve(Buffer.from(data));
   }
 
   /**

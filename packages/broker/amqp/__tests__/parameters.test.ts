@@ -90,22 +90,22 @@ afterEach(async () => {
     [
       {
         name: 'to the content object and call with buffer string',
-        content: new Buffer('buffertest'),
+        content: Buffer.from('buffertest'),
         args: undefined,
       },
       {
         name: 'to the content key not exist and call with buffer string',
-        content: new Buffer('buffertest'),
+        content: Buffer.from('buffertest'),
         args: 'test',
       },
       {
         name: 'to the content object and with buffer object',
-        content: new Buffer(JSON.stringify({ test: 'buffertest' })),
+        content: Buffer.from(JSON.stringify({ test: 'buffertest' })),
         args: undefined,
       },
       {
         name: 'to the content key not exist and with buffer object',
-        content: new Buffer(JSON.stringify({ test: 'buffertest' })),
+        content: Buffer.from(JSON.stringify({ test: 'buffertest' })),
         args: 'testlol',
       },
       {

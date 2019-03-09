@@ -73,11 +73,11 @@ describe('Listener test', () => {
   [
     {
       name: 'with buffer string',
-      content: new Buffer('buffertest'),
+      content: Buffer.from('buffertest'),
     },
     {
       name: 'with buffer object',
-      content: new Buffer(JSON.stringify({ test: 'buffertest' })),
+      content: Buffer.from(JSON.stringify({ test: 'buffertest' })),
     },
     {
       name: 'with string',
@@ -124,11 +124,11 @@ describe('Consumer test', () => {
   [
     {
       name: 'with buffer string',
-      content: new Buffer('buffertest'),
+      content: Buffer.from('buffertest'),
     },
     {
       name: 'with buffer object',
-      content: new Buffer(JSON.stringify({ test: 'buffertest' })),
+      content: Buffer.from(JSON.stringify({ test: 'buffertest' })),
     },
     {
       name: 'with string',
