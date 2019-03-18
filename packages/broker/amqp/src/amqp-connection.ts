@@ -223,7 +223,11 @@ export class AmqpConnection {
       }
       // create new Queue for get the response
       chan
-        .assertQueue(replyTo, { exclusive: true, autoDelete: true })
+        .assertQueue(replyTo, {
+          exclusive: false,
+          autoDelete: true,
+          durable: false,
+        })
         .then(() => {
           return chan.consume(replyTo, async (msg: ConsumeMessage | null) => {
             if (msg === null) {
@@ -234,6 +238,10 @@ export class AmqpConnection {
               resolve(await this.parseContent(msg));
             }
             chan.ack(msg);
+
+            try {
+              await chan.deleteQueue(replyTo);
+            } catch {}
           });
         })
         .then(async () => {
