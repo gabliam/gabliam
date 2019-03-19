@@ -21,7 +21,7 @@ export class Expression {
       if (validPath(this.input)) {
         return <any>this.input;
       }
-      return null;
+      return undefined;
     }
 
     const context = Object.keys(vars).reduce(
