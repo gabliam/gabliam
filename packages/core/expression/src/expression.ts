@@ -1,19 +1,29 @@
 import { Expression as AstExpression } from 'estree';
 import { Parser, IS_STRING } from './parser';
 import * as _ from 'lodash';
+const validPath = require('is-valid-path');
 
 export class Expression {
-  private parser: Parser;
+  private parser: Parser | undefined;
 
   constructor(
-    ast: AstExpression,
+    ast: AstExpression | null,
     private context: object = {},
     private input: string
   ) {
-    this.parser = new Parser(ast);
+    if (ast) {
+      this.parser = new Parser(ast);
+    }
   }
 
   getValue<T>(vars: object = {}): T | undefined | null {
+    if (!this.parser) {
+      if (validPath(this.input)) {
+        return <any>this.input;
+      }
+      return null;
+    }
+
     const context = Object.keys(vars).reduce(
       (prev, current) => {
         (<any>prev)[`$${current}`] = _.cloneDeep((<any>vars)[current]);
@@ -24,14 +34,27 @@ export class Expression {
       }
     );
 
-    const res = this.parser.parse({
-      ...this.context,
-      ...context,
-    });
+    try {
+      const res = this.parser.parse({
+        ...this.context,
+        ...context,
+      });
 
-    if (res === IS_STRING) {
-      return <any>this.input;
+      if (res === null && validPath(this.input)) {
+        return <any>this.input;
+      }
+
+      if (res === IS_STRING) {
+        return <any>this.input;
+      }
+
+      return res;
+    } catch (e) {
+      // case of multiple subpath
+      if (validPath(this.input)) {
+        return <any>this.input;
+      }
+      throw e;
     }
-    return res;
   }
 }

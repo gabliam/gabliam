@@ -432,9 +432,44 @@ describe('expression evaluator', () => {
   });
 
   describe('path', () => {
-    it('should be a string', () => {
+    it('with no subpath', () => {
+      const str = ExpressionParser.eval('/photo');
+      expect(str).toEqual('/photo');
+    });
+
+    it('with no subpath and end slash', () => {
+      const str = ExpressionParser.eval('/photo/');
+      expect(str).toEqual(/photo/);
+    });
+
+    it('with 1 subpath', () => {
+      const str = ExpressionParser.eval('/photo/lol');
+      expect(str).toEqual('/photo/lol');
+    });
+
+    it('with 1 subpath and end slash', () => {
+      const str = ExpressionParser.eval('/photo/lol/');
+      expect(str).toEqual('/photo/lol/');
+    });
+
+    it('with 2 subpath', () => {
       const str = ExpressionParser.eval('/photo/lol/lol');
       expect(str).toEqual('/photo/lol/lol');
+    });
+
+    it('with 2 subpath and end slash', () => {
+      const str = ExpressionParser.eval('/photo/lol/lol/');
+      expect(str).toEqual('/photo/lol/lol/');
+    });
+
+    it('with 3 subpath', () => {
+      const str = ExpressionParser.eval('/photo/lol/lol/lol');
+      expect(str).toEqual('/photo/lol/lol/lol');
+    });
+
+    it('with 3 subpath and end slash', () => {
+      const str = ExpressionParser.eval('/photo/lol/lol/lol/');
+      expect(str).toEqual('/photo/lol/lol/lol/');
     });
   });
 });

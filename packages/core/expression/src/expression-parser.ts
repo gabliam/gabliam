@@ -16,8 +16,12 @@ export class ExpressionParser {
   }
 
   parseExpression(input: string) {
-    const program = esprima.parseScript(input);
-    const ast = (<ExpressionStatement>program.body[0]).expression;
-    return new Expression(ast, this.context, input);
+    try {
+      const program = esprima.parseScript(input);
+      const ast = (<ExpressionStatement>program.body[0]).expression;
+      return new Expression(ast, this.context, input);
+    } catch {
+      return new Expression(null, this.context, input);
+    }
   }
 }
