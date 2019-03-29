@@ -48,9 +48,9 @@
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.4",
-    "http-status-codes": "^1.2.0",
+    "http-status-codes": "^1.3.2",
     "property-tunnel": "^1.2.2",
-    "qs": "^6.6.0",
+    "qs": "^6.7.0",
     "tslib": "^1.9.3"
   },
   "engines": {

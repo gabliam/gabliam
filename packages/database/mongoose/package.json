@@ -41,7 +41,7 @@
     "@types/mongoose": "^5.3.24",
     "debug": "^4.1.1",
     "mongodb-uri": "^0.9.7",
-    "mongoose": "^5.4.5",
+    "mongoose": "^5.4.20",
     "tslib": "^1.9.3"
   },
   "engines": {

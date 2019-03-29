@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "debug": "^4.1.1",
-    "js-yaml": "^3.10.0",
+    "js-yaml": "^3.13.0",
     "lodash": "^4.17.11",
     "tslib": "^1.8.0"
   },
