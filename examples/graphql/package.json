@@ -32,7 +32,7 @@
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.119",
+    "@types/lodash": "^4.14.123",
     "nodemon": "^1.18.9"
   }
 }

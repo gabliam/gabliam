@@ -6,7 +6,7 @@ export class MemoryCache implements Cache {
 
   private store: any;
 
-  constructor(name: string, private options?: LRU.Options) {
+  constructor(name: string, private options?: LRU.Options<any, any>) {
     this.name = name;
   }
 

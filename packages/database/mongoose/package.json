@@ -35,10 +35,10 @@
   },
   "devDependencies": {
     "@gabliam/core": "0.0.0-PLACEHOLDER",
-    "@types/debug": "^0.0.31"
+    "@types/debug": "^4.1.3"
   },
   "dependencies": {
-    "@types/mongoose": "^5.3.8",
+    "@types/mongoose": "^5.3.24",
     "debug": "^4.1.1",
     "mongodb-uri": "^0.9.7",
     "mongoose": "^5.4.5",
