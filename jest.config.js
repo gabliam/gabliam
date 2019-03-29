@@ -29,7 +29,7 @@ module.exports = {
     "@gabliam/koa": "<rootDir>/packages/web/koa/src/index.ts",
     "@gabliam/web-core": "<rootDir>/packages/web/web-core/src/index.ts",
   },
-  "setupTestFrameworkScriptFile": "<rootDir>/tests/setup.ts",
+  "setupFilesAfterEnv": ["<rootDir>/tests/setup.ts"],
   "testEnvironment": "node",
   "testRegex": "(/__tests__/.*)\\.test\\.(ts|tsx|js)$",
   "snapshotSerializers": [

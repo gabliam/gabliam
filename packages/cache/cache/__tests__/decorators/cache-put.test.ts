@@ -24,7 +24,7 @@ beforeEach(async () => {
   g.addClass(CacheConfig);
 });
 
-describe('cache put', async () => {
+describe('cache put', () => {
   test('simple cache', async () => {
     @Service()
     class TestService {

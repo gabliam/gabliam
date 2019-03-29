@@ -26,7 +26,7 @@ beforeEach(async () => {
   g.addClass(CacheConfig);
 });
 
-describe('cache evict', async () => {
+describe('cache evict', () => {
   test('simple cache', async () => {
     @CacheGroup('test')
     @Service()

@@ -22,7 +22,7 @@ beforeEach(async () => {
   g.addClass(CacheConfig);
 });
 
-describe('cacheable', async () => {
+describe('cacheable', () => {
   test('simple cache', async () => {
     let call = 0;
 

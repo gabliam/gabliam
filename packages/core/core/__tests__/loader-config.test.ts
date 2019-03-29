@@ -52,7 +52,7 @@ test(`with application.yml`, async () => {
   expect(config).toMatchSnapshot();
 });
 
-describe('with application.yml', async () => {
+describe('with application.yml', () => {
   let mock: MockFs;
   beforeAll(async () => {
     mock = new MockFs({
@@ -89,7 +89,7 @@ describe('with application.yml', async () => {
   afterAll(() => mock.restore());
 });
 
-describe('with application.yml with bad handler', async () => {
+describe('with application.yml with bad handler', () => {
   let mock: MockFs;
   beforeAll(async () => {
     mock = new MockFs({

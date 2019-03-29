@@ -62,7 +62,7 @@ test('gabliam instance with path', async () => {
   await gab.destroy();
 });
 
-describe('test plugin', async () => {
+describe('test plugin', () => {
   @Plugin()
   class PluginTest implements GabliamPlugin {
     build(container: Container, registry: Registry): void {}

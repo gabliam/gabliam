@@ -4,7 +4,7 @@ import { KoaPlugin } from '../src/koa-plugin';
 import { GabliamTest } from '@gabliam/core/lib/testing';
 import * as path from 'path';
 
-describe('test plugin', async () => {
+describe('test plugin', () => {
   const build = sinon.spy(KoaPlugin.prototype, 'build');
   const bind = sinon.spy(KoaPlugin.prototype, 'bind');
   const config = sinon.spy(KoaPlugin.prototype, 'config');

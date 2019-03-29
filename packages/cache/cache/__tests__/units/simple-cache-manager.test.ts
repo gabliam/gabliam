@@ -1,6 +1,6 @@
 import { SimpleCacheManager, NoOpCache } from '../../src/index';
 
-describe('SimpleCacheManager without dynamic', async () => {
+describe('SimpleCacheManager without dynamic', () => {
   const cache = new NoOpCache('test');
   const cacheManager = new SimpleCacheManager(
     new Map().set('default', { caches: new Map().set('test', cache) }),
@@ -21,7 +21,7 @@ describe('SimpleCacheManager without dynamic', async () => {
   });
 });
 
-describe('SimpleCacheManager with dynamic and whitout defaultCache', async () => {
+describe('SimpleCacheManager with dynamic and whitout defaultCache', () => {
   const cache = new NoOpCache('test');
   const cacheManager = new SimpleCacheManager(
     new Map().set('default', { caches: new Map().set('test', cache) }),
@@ -37,7 +37,7 @@ describe('SimpleCacheManager with dynamic and whitout defaultCache', async () =>
   });
 });
 
-describe('SimpleCacheManager with dynamic and defaultCache', async () => {
+describe('SimpleCacheManager with dynamic and defaultCache', () => {
   class NoOpCache2 extends NoOpCache {
     // @ts-ignore
     constructor(name: string, private options?: object) {
