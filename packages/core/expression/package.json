@@ -31,7 +31,7 @@
   "devDependencies": {
     "@types/escodegen": "^0.0.6",
     "@types/esprima": "^4.0.2",
-    "@types/node": "^11.12.1"
+    "@types/node": "^11.13.0"
   },
   "dependencies": {
     "escodegen": "^1.11.0",
