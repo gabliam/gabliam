@@ -2,11 +2,9 @@
 [![NPM version][npm-image]][npm-url]
 
 
-# Gabliam validate
+# Gabliam cache redis
 
-Gabliam plugin for validation with joi on web.
-
-## How to use
+Add redis cache
 
 # License
 
@@ -14,5 +12,5 @@ Gabliam plugin for validation with joi on web.
 
 [build-image]: https://img.shields.io/travis/gabliam/gabliam/master.svg?style=flat-square
 [build-url]: https://travis-ci.org/gabliam/gabliam
-[npm-image]: https://img.shields.io/npm/v/@gabliam/validate-joi.svg?style=flat-square
-[npm-url]: https://www.npmjs.com/package/@gabliam/validate-joi
+[npm-image]: https://img.shields.io/npm/v/@gabliam/cache-redis.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/@gabliam/cache-redis

@@ -17,4 +17,4 @@ Auto create the connection.
 [build-image]: https://img.shields.io/travis/gabliam/gabliam/master.svg?style=flat-square
 [build-url]: https://travis-ci.org/gabliam/gabliam
 [npm-image]: https://img.shields.io/npm/v/@gabliam/typeorm.svg?style=flat-square
-[npm-url]: https://github.com/gabliam/typeorm
+[npm-url]: https://www.npmjs.com/package/@gabliam/typeorm

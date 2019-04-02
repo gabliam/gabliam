@@ -13,4 +13,4 @@ Gabliam plugin for add expression.
 [build-image]: https://img.shields.io/travis/gabliam/gabliam/master.svg?style=flat-square
 [build-url]: https://travis-ci.org/gabliam/gabliam
 [npm-image]: https://img.shields.io/npm/v/@gabliam/expression.svg?style=flat-square
-[npm-url]: https://github.com/gabliam/expression
+[npm-url]: https://www.npmjs.com/package/@gabliam/expression

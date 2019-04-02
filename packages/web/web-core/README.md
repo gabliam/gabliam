@@ -14,4 +14,4 @@ All decorators and utils for web
 [build-image]: https://img.shields.io/travis/gabliam/gabliam/master.svg?style=flat-square
 [build-url]: https://travis-ci.org/gabliam/gabliam
 [npm-image]: https://img.shields.io/npm/v/@gabliam/web-core.svg?style=flat-square
-[npm-url]: https://github.com/gabliam/web-core
+[npm-url]: https://www.npmjs.com/package/@gabliam/web-core

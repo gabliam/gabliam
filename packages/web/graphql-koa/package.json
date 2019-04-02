@@ -30,7 +30,7 @@
   "bugs": {
     "url": "https://github.com/gabliam/gabliam/issues"
   },
-  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/graphql-koa#readme",
+  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/web/graphql-koa#readme",
   "peerDependencies": {
     "@gabliam/core": "0.0.0-PLACEHOLDER",
     "@gabliam/graphql-core": "0.0.0-PLACEHOLDER",

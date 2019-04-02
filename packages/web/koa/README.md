@@ -13,4 +13,4 @@ Gabliam plugin for add koa.
 [build-image]: https://img.shields.io/travis/gabliam/gabliam/master.svg?style=flat-square
 [build-url]: https://travis-ci.org/gabliam/gabliam
 [npm-image]: https://img.shields.io/npm/v/@gabliam/koa.svg?style=flat-square
-[npm-url]: https://github.com/gabliam/koa
+[npm-url]: https://www.npmjs.com/package/@gabliam/koa

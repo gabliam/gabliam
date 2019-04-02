@@ -18,4 +18,4 @@ yarn add @gabliam/multi-conf-loader
 [build-image]: https://img.shields.io/travis/gabliam/gabliam/master.svg?style=flat-square
 [build-url]: https://travis-ci.org/gabliam/gabliam
 [npm-image]: https://img.shields.io/npm/v/@gabliam/multi-conf-loader.svg?style=flat-square
-[npm-url]: https://github.com/gabliam/multi-conf-loader
+[npm-url]: https://www.npmjs.com/package/@gabliam/multi-conf-loader

@@ -31,7 +31,7 @@
   "bugs": {
     "url": "https://github.com/gabliam/gabliam/issues"
   },
-  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/web-core#readme",
+  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/web/validate-joi#readme",
   "peerDependencies": {
     "@gabliam/core": "0.0.0-PLACEHOLDER",
     "@gabliam/web-core": "0.0.0-PLACEHOLDER"

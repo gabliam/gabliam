@@ -16,4 +16,4 @@ Thanks to [Cody Simms](https://github.com/codyjs)
 [build-image]: https://img.shields.io/travis/gabliam/gabliam/master.svg?style=flat-square
 [build-url]: https://travis-ci.org/gabliam/gabliam
 [npm-image]: https://img.shields.io/npm/v/@gabliam/express.svg?style=flat-square
-[npm-url]: https://github.com/gabliam/express
+[npm-url]: https://www.npmjs.com/package/@gabliam/express

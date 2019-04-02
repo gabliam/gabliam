@@ -27,7 +27,7 @@
   "bugs": {
     "url": "https://github.com/gabliam/gabliam/issues"
   },
-  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/cache-redis#readme",
+  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/cache/cache-redis#readme",
   "peerDependencies": {
     "@gabliam/cache": "0.0.0-PLACEHOLDER",
     "@gabliam/core": "0.0.0-PLACEHOLDER"

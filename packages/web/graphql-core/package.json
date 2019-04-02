@@ -29,7 +29,7 @@
   "bugs": {
     "url": "https://github.com/gabliam/gabliam/issues"
   },
-  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/graphql-core#readme",
+  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/web/graphql-core#readme",
   "peerDependencies": {
     "@gabliam/core": "0.0.0-PLACEHOLDER"
   },

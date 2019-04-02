@@ -27,7 +27,7 @@
   "bugs": {
     "url": "https://github.com/gabliam/gabliam/issues"
   },
-  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/amqp#readme",
+  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/core/expression#readme",
   "devDependencies": {
     "@types/escodegen": "^0.0.6",
     "@types/esprima": "^4.0.2",

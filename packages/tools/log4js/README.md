@@ -59,4 +59,4 @@ export class SampleService {
 [build-image]: https://img.shields.io/travis/gabliam/gabliam/master.svg?style=flat-square
 [build-url]: https://travis-ci.org/gabliam/gabliam
 [npm-image]: https://img.shields.io/npm/v/@gabliam/log4js.svg?style=flat-square
-[npm-url]: https://github.com/gabliam/log4js
+[npm-url]: https://www.npmjs.com/package/@gabliam/log4js

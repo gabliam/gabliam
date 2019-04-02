@@ -6,6 +6,51 @@
 
 Gabliam plugin for add amqp.
 
+# How to use
+
+## Installation
+
+```sh
+$ yarn add @gabliam/amqp
+```
+
+## Register plugin
+In your main, add amqp plugin
+
+```ts
+import 'reflect-metadata';
+import * as path from 'path';
+import { Gabliam } from '@gabliam/core';
+import amqpPlugin from '@gabliam/amqp';
+
+new Gabliam({
+  scanPath: __dirname,
+  config: path.resolve(__dirname, '../config'),
+})
+  .addPlugins(amqpPlugin)
+  .buildAndStart();
+```
+## Create a controller
+
+```ts
+import { RabbitController, RabbitListener, RabbitConsumer } from '@gabliam/amqp';
+@RabbitController()
+export class HelloRabbitMq {
+  
+
+  @RabbitListener('logHi')
+  async logHi() {
+    console.log('hi');
+  }
+
+  @RabbitConsumer('hello')
+  async hello(@Content('name') name: string ) {
+    return `hello ${$name}`
+  }
+}
+```
+
+
 # Configuration
 
 Configuration for this plugin is in `application.amqp`
@@ -39,4 +84,4 @@ You can add just one [connection configuration](#connection-configuration) or an
 [build-image]: https://img.shields.io/travis/gabliam/gabliam/master.svg?style=flat-square
 [build-url]: https://travis-ci.org/gabliam/gabliam
 [npm-image]: https://img.shields.io/npm/v/@gabliam/amqp.svg?style=flat-square
-[npm-url]: https://github.com/gabliam/amqp
+[npm-url]: https://www.npmjs.com/package/@gabliam/amqp
