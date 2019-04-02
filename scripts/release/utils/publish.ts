@@ -9,7 +9,7 @@ export const publish = async (
   params: ReleaseParams,
   version: string
 ) => {
-  const publishArgs = ['publish'];
+  const publishArgs = ['publish', '--access=public'];
   if (params.canary) {
     publishArgs.push(`--tag=canary`);
   }
