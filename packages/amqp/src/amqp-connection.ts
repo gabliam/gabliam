@@ -193,6 +193,8 @@ export class AmqpConnection {
     timeout: number = 5000
   ): Promise<T> {
     let onTimeout = false;
+    let replyTo: string;
+    let chan: ConfirmChannel | null;
     let promise = new PromiseB<T>((resolve, reject) => {
       const queueName = this.getQueueName(queue);
       if (!options.correlationId) {
@@ -208,8 +210,8 @@ export class AmqpConnection {
         options.expiration = '' + timeout;
       }
 
-      const replyTo = options.replyTo;
-      const chan = this.getChannel();
+      replyTo = options.replyTo;
+      chan = this.getChannel();
       if (chan === null) {
         return reject(new AmqpConnectionError('Connection error'));
       }
@@ -221,21 +223,21 @@ export class AmqpConnection {
           durable: false,
         })
         .then(() => {
-          return chan.consume(replyTo, async (msg: ConsumeMessage | null) => {
+          return chan!.consume(replyTo, async (msg: ConsumeMessage | null) => {
             if (msg === null) {
               return reject(new Error('Message is null'));
             }
             if (!onTimeout && msg.properties.correlationId === correlationId) {
               resolve(this.parseContent(msg));
             }
-            chan.ack(msg);
+            chan!.ack(msg);
             try {
-              await chan.deleteQueue(replyTo);
+              await chan!.deleteQueue(replyTo);
             } catch {}
           });
         })
         .then(async () => {
-          chan.sendToQueue(queueName, await this.contentToBuffer(content), {
+          chan!.sendToQueue(queueName, await this.contentToBuffer(content), {
             contentEncoding: this.gzipEnabled ? 'gzip' : undefined,
             contentType: 'application/json',
             ...options,
@@ -245,17 +247,29 @@ export class AmqpConnection {
         .catch(
           // prettier-ignore
           /* istanbul ignore next */
-          (err: any) => {
+          async (err: any) => {
             reject(err);
+            if (chan) {
+              try {
+                await chan.deleteQueue(replyTo);
+              } catch {}
+            }
           }
         );
     });
 
     if (timeout) {
-      promise = promise.timeout(timeout).catch(PromiseB.TimeoutError, e => {
-        onTimeout = true;
-        throw new AmqpTimeoutError((<any>e).message);
-      });
+      promise = promise
+        .timeout(timeout)
+        .catch(PromiseB.TimeoutError, async e => {
+          onTimeout = true;
+          if (chan) {
+            try {
+              await chan.deleteQueue(replyTo);
+            } catch {}
+          }
+          throw new AmqpTimeoutError((<any>e).message);
+        });
     }
 
     return promise;
