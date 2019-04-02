@@ -40,7 +40,7 @@
     "fs-extra": "^7.0.1",
     "properties": "^1.2.1",
     "rxjs": "^6.3.3",
-    "toml": "^2.3.3"
+    "toml": "2.3.3"
   },
   "repository": {
     "type": "git",
