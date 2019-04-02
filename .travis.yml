@@ -34,3 +34,4 @@ cache:
 branches:
   only:
     - master
+    - v7.x
