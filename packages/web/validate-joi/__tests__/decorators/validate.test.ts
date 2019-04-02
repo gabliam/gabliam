@@ -1,5 +1,6 @@
 import { reflection } from '@gabliam/core';
-import { Controller, Get, Validate } from '@gabliam/web-core';
+import { Controller, Get } from '@gabliam/web-core';
+import { Validate } from '../../src';
 
 describe('Validate decorator', () => {
   test('should add Validate metadata to a method when decorated with @Validate', () => {

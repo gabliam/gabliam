@@ -7,10 +7,10 @@ import {
   RequestBody,
   RequestHeaders,
   RequestParam,
-  Validate,
 } from '@gabliam/web-core';
 import * as supertest from 'supertest';
-import { ExpressPluginTest } from '../express-plugin-test';
+import { Validate } from '../src';
+import { ExpressPluginTest } from './express-plugin-test';
 
 let appTest: ExpressPluginTest;
 

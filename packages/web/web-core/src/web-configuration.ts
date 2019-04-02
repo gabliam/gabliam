@@ -1,4 +1,10 @@
-import { Container, PluginConfig, OnMissingBean, Bean } from '@gabliam/core';
+import {
+  Container,
+  PluginConfig,
+  OnMissingBean,
+  Bean,
+  inversifyInterfaces,
+} from '@gabliam/core';
 import { SERVER_STARTER } from './constants';
 import { HttpServerStarter } from './server-starter';
 
@@ -34,6 +40,10 @@ export class WebConfiguration<T = any> {
 
   private _webconfigAfterCtrl: Configuration<T>[] = [];
 
+  private _globalInterceptors: inversifyInterfaces.ServiceIdentifier<
+    any
+  >[] = [];
+
   addwebConfig(webConfig: Configuration<T>) {
     this._webconfig.push(webConfig);
   }
@@ -42,12 +52,20 @@ export class WebConfiguration<T = any> {
     this._webconfigAfterCtrl.push(webConfig);
   }
 
+  useGlobalInterceptor(...ids: inversifyInterfaces.ServiceIdentifier<any>[]) {
+    this._globalInterceptors.push(...ids);
+  }
+
   get webConfigs() {
     return this._webconfig.slice();
   }
 
   get WebConfigAfterCtrls() {
     return this._webconfigAfterCtrl.slice();
+  }
+
+  get globalInterceptors() {
+    return this._globalInterceptors;
   }
 }
 

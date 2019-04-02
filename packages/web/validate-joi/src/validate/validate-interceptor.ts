@@ -1,16 +1,14 @@
-import { reflection, Service } from '@gabliam/core';
-import { ExecutionContext } from '../execution-context';
-import { GabRequest } from '../gab-request';
-import { Interceptor } from '../interceptor';
+import { reflection } from '@gabliam/core';
 import {
   ExecContext,
-  listParamToValidate,
+  ExecutionContext,
+  GabRequest,
+  Interceptor,
   Request,
-  Validate,
-} from '../metadatas';
+} from '@gabliam/web-core';
+import { listParamToValidate, Validate } from '../metadatas';
 import { createValidateRequest, NO_VALIDATION } from './validate-request';
 
-@Service()
 export class ValidateInterceptor implements Interceptor {
   async intercept(
     @ExecContext() execCtx: ExecutionContext,

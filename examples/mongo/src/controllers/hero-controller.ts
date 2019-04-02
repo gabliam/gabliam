@@ -1,4 +1,6 @@
+import { Joi } from '@gabliam/core/src';
 import { mongoose, MongooseConnection, Repository } from '@gabliam/mongoose';
+import { Validate } from '@gabliam/validate-joi';
 import {
   Delete,
   Get,
@@ -7,11 +9,9 @@ import {
   RequestParam,
   ResponseEntity,
   RestController,
-  Validate,
 } from '@gabliam/web-core';
 import * as Boom from 'boom';
 import { Hero } from '../entities/hero';
-import { Joi } from '@gabliam/core/src';
 
 @RestController('/heroes')
 export class HeroController {

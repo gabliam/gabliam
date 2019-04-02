@@ -7,9 +7,9 @@ import {
   RequestBody,
   RequestHeaders,
   RequestParam,
-  Validate,
 } from '@gabliam/web-core';
-import { KoaPluginTest } from '../koa-plugin-test';
+import { Validate } from '../';
+import { KoaPluginTest } from './koa-plugin-test';
 
 let appTest: KoaPluginTest;
 

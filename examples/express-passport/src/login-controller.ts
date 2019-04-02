@@ -1,12 +1,8 @@
-import {
-  RestController,
-  Post,
-  Validate,
-  ResponseEntity,
-} from '@gabliam/web-core';
 import { Joi } from '@gabliam/core';
-import * as passport from 'passport';
 import { UseExpressInterceptors } from '@gabliam/express';
+import { Validate } from '@gabliam/validate-joi';
+import { Post, ResponseEntity, RestController } from '@gabliam/web-core';
+import * as passport from 'passport';
 
 @RestController('/')
 export class LoginController {

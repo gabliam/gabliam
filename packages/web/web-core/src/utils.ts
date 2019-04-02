@@ -10,7 +10,11 @@ import { CONTEXT, METADATA_KEY, TYPE, WEB_PLUGIN_CONFIG } from './constants';
 import { NextCalledMulipleError } from './errors';
 import { ExecutionContext } from './execution-context';
 import { GabContext } from './gab-context';
-import { getInterceptors, InterceptorInfo } from './interceptor';
+import {
+  extractInterceptors,
+  InterceptorInfo,
+  getGlobalInterceptors,
+} from './interceptor';
 import { convertValueFn, extractArgsFn } from './interface';
 import {
   ControllerMetadata,
@@ -19,7 +23,6 @@ import {
   WebParamDecorator,
 } from './metadatas';
 import { MethodInfo, RestMetadata, WebPluginConfig } from './plugin-config';
-import { getValidateInterceptor } from './validate';
 
 export const cleanPath = (path: string) => {
   return path.replace(/\/+/gi, '/');
@@ -89,7 +92,7 @@ export const extractControllerMetadata = (
       )
       .slice(-1);
 
-    const controllerInterceptors = getInterceptors(
+    const controllerInterceptors = extractInterceptors(
       container,
       controller.constructor
     );
@@ -122,13 +125,13 @@ export const extractControllerMetadata = (
           methodPath = '/' + methodPath;
         }
 
-        const methodInterceptors = getInterceptors(
+        const methodInterceptors = extractInterceptors(
           container,
           controller.constructor,
           methodName
         );
 
-        const validatorInterceptors = getValidateInterceptor(container);
+        const globalInterceptors = getGlobalInterceptors(container);
 
         const methodJson =
           reflection.propMetadataOfDecorator<{}>(
@@ -139,7 +142,7 @@ export const extractControllerMetadata = (
             : undefined;
 
         const interceptors = [
-          ...validatorInterceptors,
+          ...globalInterceptors,
           ...controllerInterceptors,
           ...methodInterceptors,
         ];

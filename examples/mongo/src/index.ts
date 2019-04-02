@@ -1,10 +1,11 @@
 import 'reflect-metadata';
 import { Gabliam } from '@gabliam/core';
 import dbPlugin from '@gabliam/mongoose';
+import ValidatePlugin from '@gabliam/validate-joi';
 import * as path from 'path';
 
 const bootstrap = async () => {
-  const plugins = [dbPlugin];
+  const plugins = [dbPlugin, ValidatePlugin];
   if (process.env.SERVER_TYPE === 'koa') {
     console.log('start with koa');
     plugins.push(require('@gabliam/koa').default);

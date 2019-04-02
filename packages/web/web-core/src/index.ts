@@ -12,6 +12,5 @@ export * from './plugin-config';
 export * from './response-entity';
 export * from './server-starter';
 export * from './utils';
-export * from './validate';
 export * from './web-configuration';
 export * from './web-plugin-base';

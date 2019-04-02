@@ -1,11 +1,12 @@
-import { Service } from '@gabliam/core';
-import { Interceptor } from '../interceptor';
-import { nextFn } from '../interface';
-import { Next } from '../metadatas';
-import { HttpStatus, ResponseEntity } from '../response-entity';
+import {
+  HttpStatus,
+  Interceptor,
+  Next,
+  nextFn,
+  ResponseEntity,
+} from '@gabliam/web-core';
 import { getValidateError, isValidateError } from './validate-request';
 
-@Service()
 export class ValidateSendErrorInterceptor implements Interceptor {
   async intercept(@Next() next: nextFn) {
     try {

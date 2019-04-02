@@ -7,6 +7,7 @@ import {
 import { extractArgsFn } from './interface';
 import { UseInterceptors } from './metadatas';
 import { getExtractArgs } from './utils';
+import { WebConfiguration } from './web-configuration';
 
 /**
  * InterceptorConstructor
@@ -45,7 +46,7 @@ export const createInterceptorResolver = (container: Container) =>
  * @param  {string} key?
  * @returns express.RequestHandler[]
  */
-export function getInterceptors(
+export function extractInterceptors(
   container: Container,
   target: any,
   key?: string
@@ -88,6 +89,25 @@ export function getInterceptors(
 
   return interceptors;
 }
+
+export const getGlobalInterceptors = (container: Container) => {
+  const webConfiguration = container.get(WebConfiguration);
+  const interceptors: InterceptorInfo[] = [];
+  const interceptorResolver = createInterceptorResolver(container);
+
+  for (const interceptorId of webConfiguration.globalInterceptors) {
+    const interceptor = interceptorResolver(interceptorId);
+
+    if (isInterceptor(interceptor)) {
+      interceptors.push({
+        instance: interceptor,
+        extractArgs: getExtractArgs(interceptor, 'intercept'),
+      });
+    }
+  }
+
+  return interceptors;
+};
 
 export interface InterceptorInfo {
   instance: Interceptor;
