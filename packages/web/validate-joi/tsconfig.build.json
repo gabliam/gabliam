@@ -2,11 +2,12 @@
   "extends": "../../../tsconfig.base",
   "compilerOptions": {
     "sourceMap": false,
-    "outDir": "../../../dist/packages/web/web-core",
+    "outDir": "../../../dist/packages/web/validate-joi",
     "baseUrl": ".",
     "rootDir": ".",
     "paths": {
-      "@gabliam/core": ["../../../dist/packages/core/core"]
+      "@gabliam/core": ["../../../dist/packages/core/core"],
+      "@gabliam/web-core": ["../../../dist/packages/web/web-core"],
     }
   },
   "include":[

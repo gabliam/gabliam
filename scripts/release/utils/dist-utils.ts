@@ -28,6 +28,8 @@ export const build = async (spinner: ora.Ora, newVersion: string) => {
     }
   }
 
+  console.log(monoRepo);
+
   const pkgs = graph.topologicalSort();
   const licensePath = path.resolve(APP_DIR, 'LICENSE');
 
@@ -54,6 +56,14 @@ export const build = async (spinner: ora.Ora, newVersion: string) => {
 
     await fs.writeJSON(pkgDist, pkg, { spaces: 2 });
     await fs.copy(licensePath, licenseDist);
+    await fs.copy(
+      path.resolve(monoRepo[pkgName].folder, 'README.md'),
+      path.resolve(
+        DIST_DIR,
+        path.relative(APP_DIR, monoRepo[pkgName].folder),
+        'README.md'
+      )
+    );
   }
 
   await updateRootPkg(newVersion);
