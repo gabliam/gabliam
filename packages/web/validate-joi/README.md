@@ -6,8 +6,6 @@
 
 Gabliam plugin for validation with joi on web.
 
-## How to use
-
 # License
 
   MIT

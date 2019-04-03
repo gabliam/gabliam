@@ -4,13 +4,12 @@ import KoaPlugin, { koa } from '@gabliam/koa';
 import { APP } from '@gabliam/web-core';
 import * as http from 'http';
 import * as supertest from 'supertest';
-import ValidatePlugin from '../';
 
 export class KoaPluginTest extends GabliamTest {
   public app: koa;
 
   constructor() {
-    const gab = new Gabliam().addPlugins(KoaPlugin, ValidatePlugin);
+    const gab = new Gabliam().addPlugins(KoaPlugin);
     super(gab);
   }
 

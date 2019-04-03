@@ -7,6 +7,12 @@ Object {
       "method": "get",
       "path": "/",
     },
+    DecoratorFactory {
+      "ids": Array [
+        [Function],
+        [Function],
+      ],
+    },
     PropDecoratorFactory {
       "rules": Map {
         "body" => Object {
@@ -2829,6 +2835,12 @@ Object {
     PropDecoratorFactory {
       "method": "get",
       "path": "/",
+    },
+    DecoratorFactory {
+      "ids": Array [
+        [Function],
+        [Function],
+      ],
     },
     PropDecoratorFactory {
       "rules": Map {
