@@ -28,6 +28,10 @@ export function isInterceptor(value: any): value is Interceptor {
 
 export const createInterceptorResolver = (container: Container) =>
   function interceptorResolver(interceptor: any): Interceptor {
+    if (isInterceptor(interceptor)) {
+      return interceptor;
+    }
+
     try {
       // test if the interceptor is a ServiceIdentifier
       return container.get(interceptor);
@@ -35,15 +39,23 @@ export const createInterceptorResolver = (container: Container) =>
       try {
         // test if interceptor is constructable
         // tslint:disable-next-line:no-unused-expression
-        new (<any>interceptor)();
+        const t = new (<any>interceptor)();
+
+        if (!isInterceptor(t)) {
+          throw new BadInterceptorError(t);
+        }
 
         container
           .bind(interceptor)
           .to(interceptor)
           .inSingletonScope();
         return container.get(interceptor);
-      } catch {
-        throw new BadInterceptorError(interceptor);
+      } catch (e) {
+        if (e instanceof BadInterceptorError) {
+          throw e;
+        } else {
+          throw new BadInterceptorError(interceptor);
+        }
       }
     }
   };
