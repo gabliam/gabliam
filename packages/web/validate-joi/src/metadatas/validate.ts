@@ -1,7 +1,7 @@
 import { Joi, makePropDecorator } from '@gabliam/core';
-import { ERRORS_MSGS, METADATA_KEY } from '../constants';
 import { UseInterceptors } from '@gabliam/web-core';
-import { ValidateSendErrorInterceptor, ValidateInterceptor } from '../validate';
+import { ERRORS_MSGS, METADATA_KEY } from '../constants';
+import { ValidateInterceptor, ValidateSendErrorInterceptor } from '../validate';
 
 export function isValidatorOptions(value: any): value is ValidatorOptions {
   return typeof value === 'object' && value.hasOwnProperty('validator');
@@ -18,6 +18,12 @@ export interface ValidatorOptions {
   validator: Validator;
 
   options?: ValidationOptions;
+
+  /**
+   * If true, add ValidateSendErrorInterceptor and ValidateInterceptor to method
+   * default: true
+   */
+  useInterceptors?: boolean;
 }
 
 export type ValidatorType = keyof Validator;
@@ -64,7 +70,8 @@ export interface ValidateDecorator {
    */
   (
     validator: Validator | ValidatorOptions,
-    options?: ValidationOptions
+    options?: ValidationOptions,
+    useInterceptors?: boolean
   ): MethodDecorator;
 
   /**
@@ -72,7 +79,8 @@ export interface ValidateDecorator {
    */
   new (
     validator: Validator | ValidatorOptions,
-    options?: ValidationOptions
+    options?: ValidationOptions,
+    useInterceptors?: boolean
   ): any;
 }
 
@@ -83,13 +91,16 @@ export interface Validate {
   rules: Map<ValidatorType, Joi.Schema>;
 
   validationOptions: ValidationOptions;
+
+  useInterceptors?: boolean;
 }
 
 export const Validate: ValidateDecorator = makePropDecorator(
   METADATA_KEY.validate,
   (
     validator: Validator | ValidatorOptions,
-    options: ValidationOptions = {}
+    options: ValidationOptions = {},
+    useInterceptors = true
   ): Validate => {
     let realValidator: Validator;
     if (isValidatorOptions(validator)) {
@@ -115,7 +126,7 @@ export const Validate: ValidateDecorator = makePropDecorator(
       }
     }
 
-    return { rules, validationOptions };
+    return { rules, validationOptions, useInterceptors };
   },
   (
     target: Object,
@@ -123,11 +134,13 @@ export const Validate: ValidateDecorator = makePropDecorator(
     descriptor: TypedPropertyDescriptor<any>,
     instance: Validate
   ) => {
-    UseInterceptors(ValidateSendErrorInterceptor, ValidateInterceptor)(
-      target,
-      propertyKey,
-      descriptor
-    );
+    if (instance.useInterceptors) {
+      UseInterceptors(ValidateSendErrorInterceptor, ValidateInterceptor)(
+        target,
+        propertyKey,
+        descriptor
+      );
+    }
   },
   true,
   ERRORS_MSGS.DUPLICATED_VALIDATE_DECORATOR

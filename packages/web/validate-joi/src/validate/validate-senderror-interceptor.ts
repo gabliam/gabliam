@@ -6,7 +6,7 @@ import {
   nextFn,
   ResponseEntity,
 } from '@gabliam/web-core';
-import { getValidateError, isValidateError } from './validate-request';
+import { ValidationError } from '../errors';
 
 @Service()
 export class ValidateSendErrorInterceptor implements Interceptor {
@@ -14,11 +14,8 @@ export class ValidateSendErrorInterceptor implements Interceptor {
     try {
       await next();
     } catch (err) {
-      if (isValidateError(err)) {
-        return new ResponseEntity(
-          getValidateError(err),
-          HttpStatus.BAD_REQUEST
-        );
+      if (err instanceof ValidationError) {
+        return new ResponseEntity(err.toJSON(), HttpStatus.BAD_REQUEST);
       } else {
         throw err;
       }

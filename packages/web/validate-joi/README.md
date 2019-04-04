@@ -6,6 +6,11 @@
 
 Gabliam plugin for validation with joi on web.
 
+## How to use
+
+Add @Validate on method.
+By default, insert ValidateSendErrorInterceptor and ValidateInterceptor has interceptor of the method.
+
 # License
 
   MIT

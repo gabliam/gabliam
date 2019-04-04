@@ -2821,6 +2821,7 @@ Object {
           "isJoi": true,
         },
       },
+      "useInterceptors": true,
       "validationOptions": Object {
         "escapeHtml": true,
       },
@@ -5650,6 +5651,7 @@ Object {
           "isJoi": true,
         },
       },
+      "useInterceptors": true,
       "validationOptions": Object {
         "escapeHtml": true,
       },
