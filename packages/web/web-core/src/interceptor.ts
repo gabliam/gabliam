@@ -8,6 +8,7 @@ import { extractArgsFn } from './interface';
 import { UseInterceptors } from './metadatas';
 import { getExtractArgs } from './utils';
 import { WebConfiguration } from './web-configuration';
+import { BadInterceptorError } from './errors';
 
 /**
  * InterceptorConstructor
@@ -29,11 +30,21 @@ export const createInterceptorResolver = (container: Container) =>
   function interceptorResolver(interceptor: any): Interceptor {
     try {
       // test if the interceptor is a ServiceIdentifier
-      return container.get(<inversifyInterfaces.ServiceIdentifier<any>>(
-        interceptor
-      ));
-    } catch (e) {
-      return new (<any>interceptor)();
+      return container.get(interceptor);
+    } catch {
+      try {
+        // test if interceptor is constructable
+        // tslint:disable-next-line:no-unused-expression
+        new (<any>interceptor)();
+
+        container
+          .bind(interceptor)
+          .to(interceptor)
+          .inSingletonScope();
+        return container.get(interceptor);
+      } catch {
+        throw new BadInterceptorError(interceptor);
+      }
     }
   };
 

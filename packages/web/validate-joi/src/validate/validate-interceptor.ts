@@ -1,4 +1,4 @@
-import { reflection } from '@gabliam/core';
+import { reflection, Service } from '@gabliam/core';
 import {
   ExecContext,
   ExecutionContext,
@@ -9,6 +9,7 @@ import {
 import { listParamToValidate, Validate } from '../metadatas';
 import { createValidateRequest, NO_VALIDATION } from './validate-request';
 
+@Service()
 export class ValidateInterceptor implements Interceptor {
   async intercept(
     @ExecContext() execCtx: ExecutionContext,

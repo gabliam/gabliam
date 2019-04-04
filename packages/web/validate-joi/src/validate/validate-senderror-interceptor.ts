@@ -1,3 +1,4 @@
+import { Service } from '@gabliam/core';
 import {
   HttpStatus,
   Interceptor,
@@ -7,6 +8,7 @@ import {
 } from '@gabliam/web-core';
 import { getValidateError, isValidateError } from './validate-request';
 
+@Service()
 export class ValidateSendErrorInterceptor implements Interceptor {
   async intercept(@Next() next: nextFn) {
     try {
