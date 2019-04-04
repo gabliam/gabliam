@@ -28,8 +28,6 @@ export const build = async (spinner: ora.Ora, newVersion: string) => {
     }
   }
 
-  console.log(monoRepo);
-
   const pkgs = graph.topologicalSort();
   const licensePath = path.resolve(APP_DIR, 'LICENSE');
 
