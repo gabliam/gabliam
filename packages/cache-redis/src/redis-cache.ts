@@ -27,9 +27,9 @@ export class RedisCache implements Cache {
       this.addTimeout = (promiseFn: Promise<any>) =>
         Promise.race([
           promiseFn,
-          new Promise((resolve, reject) => {
+          new Promise(resolve => {
             setTimeout(() => {
-              reject('timeout');
+              resolve(undefined);
             }, options.timeout);
           }),
         ]);

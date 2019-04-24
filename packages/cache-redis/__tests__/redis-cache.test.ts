@@ -112,12 +112,12 @@ test('get & put with timeout', async () => {
 test('errors get timeout', async () => {
   await cache3.put('test', 'test');
   client.debug('sleep', 3);
-  await expect(cache3.get('test')).rejects.toMatchSnapshot();
+  await expect(cache3.get('test')).resolves.toMatchSnapshot();
   await sleep(3);
 });
 
 test('put timeout', async () => {
   client.debug('sleep', 3);
-  await expect(cache3.put('test', 'test')).rejects.toMatchSnapshot();
+  await expect(cache3.put('test', 'test')).resolves.toMatchSnapshot();
   await sleep(3);
 });
