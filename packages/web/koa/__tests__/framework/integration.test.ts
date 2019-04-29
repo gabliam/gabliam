@@ -14,14 +14,14 @@ import {
   Put,
   RestController,
 } from '@gabliam/web-core';
+import { WebPluginTest } from '@gabliam/web-core/lib/testing';
 import { CUSTOM_ROUTER_CREATOR } from '../../src/constants';
-import { koaRouter } from '../../src/index';
-import { KoaPluginTest } from '../koa-plugin-test';
+import KoaPlugin, { koaRouter } from '../../src/index';
 
-let appTest: KoaPluginTest;
+let appTest: WebPluginTest;
 
 beforeEach(async () => {
-  appTest = new KoaPluginTest();
+  appTest = new WebPluginTest([KoaPlugin]);
 });
 
 afterEach(async () => {
@@ -51,7 +51,7 @@ describe('Integration Tests:', () => {
           base: '/test',
           get: '/',
         });
-        await appTest.build();
+        await appTest.buildAndStart();
         const response = await appTest
           .supertest()
           .get('/test')
@@ -70,7 +70,7 @@ describe('Integration Tests:', () => {
           }
         }
         appTest.addClass(TestController);
-        await appTest.build();
+        await appTest.buildAndStart();
         const response = await appTest
           .supertest()
           .get('/')
@@ -89,7 +89,7 @@ describe('Integration Tests:', () => {
           }
         }
         appTest.addClass(TestController);
-        await appTest.build();
+        await appTest.buildAndStart();
         const response = await appTest
           .supertest()
           .get('/')
@@ -112,7 +112,7 @@ describe('Integration Tests:', () => {
         }
 
         appTest.addClass(TestController);
-        await appTest.build();
+        await appTest.buildAndStart();
         const response = await appTest
           .supertest()
           .get('/')
@@ -142,7 +142,7 @@ describe('Integration Tests:', () => {
           }
         }
         appTest.addClass(TestController);
-        await appTest.build();
+        await appTest.buildAndStart();
         const response = await appTest
           .supertest()
           .get('/')
@@ -166,7 +166,7 @@ describe('Integration Tests:', () => {
           }
         }
         appTest.addClass(TestController);
-        await appTest.build();
+        await appTest.buildAndStart();
         const response = await appTest
           .supertest()
           .get('/')
@@ -203,7 +203,7 @@ describe('Integration Tests:', () => {
           }
         }
         appTest.addClass(TestController);
-        await appTest.build();
+        await appTest.buildAndStart();
         const agent = appTest.supertest();
 
         const rd = await agent.delete('/').expect(200);
@@ -235,7 +235,7 @@ describe('Integration Tests:', () => {
         }
 
         appTest.addClass(TestController);
-        await appTest.build();
+        await appTest.buildAndStart();
 
         const response = await appTest
           .supertest()
@@ -254,7 +254,7 @@ describe('Integration Tests:', () => {
         }
 
         appTest.addClass(TestController);
-        await appTest.build();
+        await appTest.buildAndStart();
 
         const response = await appTest
           .supertest()
@@ -285,7 +285,7 @@ describe('Integration Tests:', () => {
         }
         appTest.addClass(Conf);
         appTest.addClass(TestController);
-        await appTest.build();
+        await appTest.buildAndStart();
 
         const agent = appTest.supertest();
 
@@ -319,7 +319,7 @@ describe('Integration Tests:', () => {
 
         appTest.addClass(TestController);
         appTest.addConf('application.web.rootPath', '/api/v1');
-        await appTest.build();
+        await appTest.buildAndStart();
 
         const response = await appTest
           .supertest()

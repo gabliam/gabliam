@@ -10,7 +10,6 @@ Object {
     DecoratorFactory {
       "ids": Array [
         [Function],
-        [Function],
       ],
     },
     PropDecoratorFactory {
@@ -2839,7 +2838,6 @@ Object {
     },
     DecoratorFactory {
       "ids": Array [
-        [Function],
         [Function],
       ],
     },

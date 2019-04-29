@@ -1,51 +1,38 @@
 import { Joi } from '@gabliam/core';
-import { ValidationOptions } from '../metadatas';
+import { BadRequestException } from '@gabliam/web-core';
 import * as EscapeHtml from 'escape-html';
+import { ValidationOptions } from '../metadatas';
 
-/**
- * Exception when validation error
- */
-export class ValidationError extends Error {
-  name = 'ValidationError';
+const getKeys = (error: Joi.ValidationError, options: ValidationOptions) => {
+  const keys: string[] = [];
+  if (error.details) {
+    for (let i = 0; i < error.details.length; i += 1) {
+      /* istanbul ignore next */
+      const path: string = Array.isArray(error.details[i].path)
+        ? error.details[i].path.join('.')
+        : (error.details[i].path as any);
 
-  constructor(
-    public error: Joi.ValidationError,
-    public source: string,
-    public options: ValidationOptions
-  ) {
-    super();
-    // Set the prototype explicitly.
-    Object.setPrototypeOf(this, ValidationError.prototype);
-  }
-
-  toJSON() {
-    const error: any = {
-      statusCode: 400,
-      error: 'Bad Request',
-      message: this.error.message,
-      validation: {
-        source: this.source,
-        keys: [],
-      },
-    };
-
-    if (this.error.details) {
-      for (let i = 0; i < this.error.details.length; i += 1) {
-        /* istanbul ignore next */
-        const path: string = Array.isArray(this.error.details[i].path)
-          ? this.error.details[i].path.join('.')
-          : (this.error.details[i].path as any);
-
-        let keys: string;
-        if (this.options.escapeHtml) {
-          keys = EscapeHtml(path);
-        } else {
-          keys = path;
-        }
-        error.validation.keys.push(keys);
+      let k: string;
+      if (options.escapeHtml) {
+        k = EscapeHtml(path);
+      } else {
+        k = path;
       }
+      keys.push(k);
     }
-
-    return error;
   }
-}
+
+  return keys;
+};
+
+export const createValidationException = (
+  error: Joi.ValidationError,
+  source: string,
+  options: ValidationOptions
+) =>
+  new BadRequestException(error.message, undefined, {
+    validation: {
+      source: source,
+      keys: getKeys(error, options),
+    },
+  });

@@ -24,6 +24,12 @@ export interface WebPluginConfig {
    * Hostname
    */
   hostname: string;
+
+  /**
+   * Verbose start server
+   * default: true
+   */
+  verbose: boolean;
 }
 
 export interface RestMetadata<T = string> extends WebPluginConfig {
@@ -60,12 +66,16 @@ export class WebPluginBaseConfig {
   @Value('application.web.hostname', Joi.string())
   hostname: string;
 
+  @Value('application.web.verbose', Joi.bool())
+  verbose = true;
+
   @Bean(WEB_PLUGIN_CONFIG)
   restConfig(): WebPluginConfig {
     return {
       rootPath: this.rootPath,
       port: this.port,
       hostname: this.hostname,
+      verbose: this.verbose,
     };
   }
 }

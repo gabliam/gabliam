@@ -34,7 +34,7 @@ const KoaInterceptor = () => (target: any) => {
 };
 
 /**
- * Convert a Koa router middleware to an express interceptor
+ * Convert a Koa router middleware to a gabliam interceptor
  */
 export const toInterceptor = (
   mid: koaRouter.IMiddleware

@@ -1,16 +1,15 @@
+import { Config } from '@gabliam/core';
 import {
   Controller,
   Get,
   WebConfig,
   WebConfigAfterControllers,
 } from '@gabliam/web-core';
-import { express as e } from '../../src';
-import { ExpressPluginTest } from '../express-plugin-test';
-import * as supertest from 'supertest';
-import { Config } from '@gabliam/core';
+import { WebPluginTest } from '@gabliam/web-core/lib/testing';
 import * as sinon from 'sinon';
+import ExpressConfig, { express as e } from '../../src';
 
-let appTest: ExpressPluginTest;
+let appTest: WebPluginTest;
 let result: string;
 const middleware: any = {
   a: function(req: e.Request, res: e.Response, nextFunc: e.NextFunction) {
@@ -57,7 +56,7 @@ beforeEach(async () => {
   spyC.resetHistory();
   spyE.resetHistory();
   spyD.resetHistory();
-  appTest = new ExpressPluginTest();
+  appTest = new WebPluginTest([ExpressConfig]);
 });
 
 afterEach(async () => {
@@ -85,9 +84,10 @@ test('@ExpressConfig', async () => {
 
   appTest.addClass(TestController);
   appTest.addClass(ServerConfig);
-  await appTest.build();
+  await appTest.buildAndStart();
 
-  const response = await supertest(appTest.app)
+  const response = await appTest
+    .supertest()
     .get('/')
     .expect(200);
   expect(spyA.calledOnce).toBe(true);
@@ -126,9 +126,10 @@ test('@ExpressConfig Order', async () => {
 
   appTest.addClass(TestController);
   appTest.addClass(ServerConfig);
-  await appTest.build();
+  await appTest.buildAndStart();
 
-  const response = await supertest(appTest.app)
+  const response = await appTest
+    .supertest()
     .get('/')
     .expect(200);
   expect(spyA.calledOnce).toBe(true);
@@ -157,9 +158,10 @@ test('ErrorConfig', async () => {
 
   appTest.addClass(TestController);
   appTest.addClass(ServerConfig);
-  await appTest.build();
+  await appTest.buildAndStart();
 
-  const response = await supertest(appTest.app)
+  const response = await appTest
+    .supertest()
     .get('/')
     .expect(500);
   expect(spyE.calledOnce).toBe(true);
@@ -191,9 +193,10 @@ test('ErrorConfig order', async () => {
 
   appTest.addClass(TestController);
   appTest.addClass(ServerConfig);
-  await appTest.build();
+  await appTest.buildAndStart();
 
-  const response = await supertest(appTest.app)
+  const response = await appTest
+    .supertest()
     .get('/')
     .expect(500);
   expect(spyE.calledOnce).toBe(true);

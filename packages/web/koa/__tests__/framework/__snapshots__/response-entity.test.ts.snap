@@ -4,8 +4,8 @@ exports[`Response entity Tests: decorator Controller responseEntitie accepted() 
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "4",
-    "content-type": "application/json; charset=utf-8",
+    "content-length": "8",
+    "content-type": "text/plain; charset=utf-8",
   },
   "req": Object {
     "data": undefined,
@@ -13,7 +13,7 @@ Object {
     "method": "GET",
   },
   "status": 202,
-  "text": "null",
+  "text": "Accepted",
 }
 `;
 
@@ -21,8 +21,8 @@ exports[`Response entity Tests: decorator Controller responseEntitie badRequest(
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "4",
-    "content-type": "application/json; charset=utf-8",
+    "content-length": "11",
+    "content-type": "text/plain; charset=utf-8",
   },
   "req": Object {
     "data": undefined,
@@ -30,7 +30,7 @@ Object {
     "method": "GET",
   },
   "status": 400,
-  "text": "null",
+  "text": "Bad Request",
 }
 `;
 
@@ -53,8 +53,8 @@ exports[`Response entity Tests: decorator Controller responseEntitie notFound() 
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "4",
-    "content-type": "application/json; charset=utf-8",
+    "content-length": "9",
+    "content-type": "text/plain; charset=utf-8",
   },
   "req": Object {
     "data": undefined,
@@ -62,7 +62,7 @@ Object {
     "method": "GET",
   },
   "status": 404,
-  "text": "null",
+  "text": "Not Found",
 }
 `;
 
@@ -71,7 +71,7 @@ Object {
   "header": Object {
     "connection": "close",
     "content-length": "2",
-    "content-type": "application/json; charset=utf-8",
+    "content-type": "text/plain; charset=utf-8",
   },
   "req": Object {
     "data": undefined,
@@ -79,7 +79,7 @@ Object {
     "method": "GET",
   },
   "status": 200,
-  "text": "\\"\\"",
+  "text": "OK",
 }
 `;
 

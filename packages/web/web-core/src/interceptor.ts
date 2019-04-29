@@ -105,7 +105,7 @@ export function extractInterceptors(
     if (isInterceptor(interceptor)) {
       interceptors.push({
         instance: interceptor,
-        extractArgs: getExtractArgs(interceptor, 'intercept'),
+        extractArgs: getExtractArgs(container, interceptor, 'intercept', true),
       });
     }
   }
@@ -113,6 +113,9 @@ export function extractInterceptors(
   return interceptors;
 }
 
+/**
+ * Get globals interceptors
+ */
 export const getGlobalInterceptors = (container: Container) => {
   const webConfiguration = container.get(WebConfiguration);
   const interceptors: InterceptorInfo[] = [];
@@ -124,7 +127,7 @@ export const getGlobalInterceptors = (container: Container) => {
     if (isInterceptor(interceptor)) {
       interceptors.push({
         instance: interceptor,
-        extractArgs: getExtractArgs(interceptor, 'intercept'),
+        extractArgs: getExtractArgs(container, interceptor, 'intercept', true),
       });
     }
   }

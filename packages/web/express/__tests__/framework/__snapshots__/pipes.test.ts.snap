@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pipes \`should call server-level pipe correctly\` 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "6",
+    "content-type": "text/html; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "lolabc",
+}
+`;
+
+exports[`pipes should call all pipe in correct order 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "6",
+    "content-type": "text/html; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "lolabc",
+}
+`;
+
+exports[`pipes should call controller-level Pipe correctly 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "6",
+    "content-type": "text/html; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "lolabc",
+}
+`;
+
+exports[`pipes should call method-level Pipe correctly 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "6",
+    "content-type": "text/html; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "lolabc",
+}
+`;
+
+exports[`pipes should compose controller- and method-level pipe 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "5",
+    "content-type": "text/html; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "lolab",
+}
+`;
+
+exports[`pipes should compose controller- and method-level pipe and can use an instance 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "9",
+    "content-type": "text/html; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "lolabc||c",
+}
+`;
+
+exports[`pipes should resolve controller-level pipe 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "5",
+    "content-type": "text/html; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "lolab",
+}
+`;
+
+exports[`pipes should resolve method-level pipe 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "5",
+    "content-type": "text/html; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "lolab",
+}
+`;

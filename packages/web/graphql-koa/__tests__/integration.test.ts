@@ -11,7 +11,7 @@ beforeEach(async () => {
   appTest.addConf('application.graphql.graphqlFiles', [
     path.resolve(__dirname, './fixtures/controllers/schemas/photoinput.gql'),
   ]);
-  await appTest.build();
+  await appTest.buildAndStart();
 });
 
 afterEach(async () => {

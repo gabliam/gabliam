@@ -5,6 +5,10 @@ export const TYPE = {
 
 export const APP = Symbol('GABLIAM/WEB_APP');
 
+export const REQUEST_LISTENER_CREATOR = Symbol(
+  'GABLIAM/REQUEST_LISTENER_CREATOR'
+);
+
 export const SERVER = Symbol('GABLIAM/WEB_APP_SERVER');
 
 export const SERVER_STARTER = Symbol('GABLIAM/WEB_APP_SERVER_STARTER');
@@ -20,6 +24,7 @@ export const METADATA_KEY = {
   webConfig: '_web-config',
   webConfigAfterControllers: '_web-config-after-controllers',
   interceptor: '_interceptor',
+  pipe: '_pipe',
   validate: '_validate',
   responseBody: '_responseBody',
   specialInterceptor: '_specialInterceptor',

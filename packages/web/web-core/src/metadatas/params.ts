@@ -1,4 +1,4 @@
-import { makeParamDecorator } from '@gabliam/core';
+import { makeParamDecorator, Type } from '@gabliam/core';
 import { get } from 'lodash';
 import { METADATA_KEY, PARAMETER_TYPE } from '../constants';
 import { ExecutionContext } from '../execution-context';
@@ -16,7 +16,7 @@ import { GabContext } from '../gab-context';
 export type HandlerFn = <V>(
   args: any,
   ctx: GabContext,
-  type: string | undefined,
+  type: Type<any> | undefined,
   execCtx: ExecutionContext | null | undefined,
   next: V
 ) => any;
@@ -308,7 +308,7 @@ export const RequestParam: RequestParamDecorator = makeWebParamDecorator(
       res = get(ctx.request.params, path);
     }
 
-    if (type === 'Number') {
+    if (type && type.name === 'Number') {
       try {
         // parseFloat for compatibility with integer and float
         res = Number.parseFloat(res);
@@ -370,7 +370,7 @@ export const QueryParam: QueryParamDecorator = makeWebParamDecorator(
       res = get(ctx.request.query, path);
     }
 
-    if (type === 'Number') {
+    if (type && type.name === 'Number') {
       try {
         // parseFloat for compatibility with integer and float
         res = Number.parseFloat(res);

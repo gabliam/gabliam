@@ -13,6 +13,7 @@ import {
   ExecutionContext,
   getContext,
   InterceptorInfo,
+  REQUEST_LISTENER_CREATOR,
   RestMetadata,
   SERVER,
   WebConfiguration,
@@ -40,6 +41,10 @@ export class ExpressPlugin extends WebPluginBase implements GabliamPlugin {
     webConfiguration: WebConfiguration
   ): void {
     container.bind(APP).toConstantValue(express());
+    container.bind(REQUEST_LISTENER_CREATOR).toConstantValue(() => {
+      const app = container.get<express.Application>(APP);
+      return app;
+    });
     webConfiguration.addwebConfig({
       instance: addMiddlewares,
       order: -2,
@@ -135,7 +140,9 @@ export class ExpressPlugin extends WebPluginBase implements GabliamPlugin {
       };
 
       const callNext = async () => {
-        const args = methodInfo.extractArgs(ctx, execCtx, expressNext);
+        const args = await toPromise(
+          methodInfo.extractArgs(ctx, execCtx, expressNext)
+        );
         return await toPromise(controller[methodInfo.methodName](...args));
       };
 

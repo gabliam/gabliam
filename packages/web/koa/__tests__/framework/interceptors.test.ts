@@ -5,7 +5,7 @@ import {
   ReflectMetadata,
   Service,
 } from '@gabliam/core';
-import { koa, KoaConverter, toInterceptor } from '@gabliam/koa';
+import KoaPlugin, { koa, KoaConverter, toInterceptor } from '@gabliam/koa';
 import {
   All,
   Controller,
@@ -15,20 +15,20 @@ import {
   Get,
   Head,
   Interceptor,
+  Next,
   Patch,
   Post,
   Put,
   UseInterceptors,
   WebConfig,
-  Next,
 } from '@gabliam/web-core';
+import { WebPluginTest } from '@gabliam/web-core/lib/testing';
 import * as sinon from 'sinon';
-import { KoaPluginTest } from '../koa-plugin-test';
 
-let appTest: KoaPluginTest;
+let appTest: WebPluginTest;
 
 beforeEach(async () => {
-  appTest = new KoaPluginTest();
+  appTest = new WebPluginTest([KoaPlugin]);
 });
 
 afterEach(async () => {
@@ -62,7 +62,7 @@ describe('Complex interceptor', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
 
     const response = await appTest
       .supertest()
@@ -124,7 +124,7 @@ describe('Interceptor:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
 
     const response = await appTest
       .supertest()
@@ -149,7 +149,7 @@ describe('Interceptor:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
 
     const response = await appTest
       .supertest()
@@ -162,7 +162,7 @@ describe('Interceptor:', () => {
     expect(result).toMatchSnapshot();
   });
 
-  test.only('should call method-level interceptor correctly (PUT)', async () => {
+  test('should call method-level interceptor correctly (PUT)', async () => {
     @Controller('/')
     class TestController {
       @UseInterceptors(A, B, C)
@@ -172,7 +172,7 @@ describe('Interceptor:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
 
     const response = await appTest
       .supertest()
@@ -196,7 +196,7 @@ describe('Interceptor:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
 
     const response = await appTest
       .supertest()
@@ -219,7 +219,7 @@ describe('Interceptor:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
 
     const response = await appTest
       .supertest()
@@ -242,7 +242,7 @@ describe('Interceptor:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
 
     const response = await appTest
       .supertest()
@@ -265,7 +265,7 @@ describe('Interceptor:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
 
     const response = await appTest
       .supertest()
@@ -291,7 +291,7 @@ describe('Interceptor:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
 
     const response = await appTest
       .supertest()
@@ -326,7 +326,7 @@ describe('Interceptor:', () => {
 
     appTest.addClass(TestController);
     appTest.addClass(ServerConfig);
-    await appTest.build();
+    await appTest.buildAndStart();
 
     const response = await appTest
       .supertest()
@@ -362,7 +362,7 @@ describe('Interceptor:', () => {
 
     appTest.addClass(TestController);
     appTest.addClass(ServerConfig);
-    await appTest.build();
+    await appTest.buildAndStart();
 
     const response = await appTest
       .supertest()
@@ -399,7 +399,7 @@ describe('Interceptor:', () => {
       .bind(strId)
       .to(B)
       .inSingletonScope();
-    await appTest.build();
+    await appTest.buildAndStart();
 
     const response = await appTest
       .supertest()
@@ -433,7 +433,7 @@ describe('Interceptor:', () => {
       .bind(strId)
       .to(B)
       .inSingletonScope();
-    await appTest.build();
+    await appTest.buildAndStart();
 
     const response = await appTest
       .supertest()
@@ -470,7 +470,7 @@ describe('Interceptor:', () => {
       .bind(strId)
       .to(B)
       .inSingletonScope();
-    await appTest.build();
+    await appTest.buildAndStart();
 
     const response = await appTest
       .supertest()
@@ -548,7 +548,7 @@ describe('Interceptor inject:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
 
     const response = await appTest
       .supertest()
@@ -572,7 +572,7 @@ describe('Interceptor inject:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
 
     const response = await appTest
       .supertest()
@@ -596,7 +596,7 @@ describe('Interceptor inject:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
 
     const response = await appTest
       .supertest()
@@ -620,7 +620,7 @@ describe('Interceptor inject:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
 
     const response = await appTest
       .supertest()
@@ -643,7 +643,7 @@ describe('Interceptor inject:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
 
     const response = await appTest
       .supertest()
@@ -667,7 +667,7 @@ describe('Interceptor inject:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
 
     const response = await appTest
       .supertest()
@@ -691,7 +691,7 @@ describe('Interceptor inject:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
 
     const response = await appTest
       .supertest()
@@ -717,7 +717,7 @@ describe('Interceptor inject:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
 
     const response = await appTest
       .supertest()
@@ -744,7 +744,7 @@ describe('Interceptor inject:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
 
     const response = await appTest
       .supertest()

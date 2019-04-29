@@ -1,5 +1,5 @@
 import { Joi } from '@gabliam/core';
-import { ValidationError } from '../errors';
+import { createValidationException } from '../errors';
 import { ValidationOptions, ValidatorType } from '../metadatas';
 
 export const NO_VALIDATION = Symbol('@gabliam/web-core/NO_VALIDATION');
@@ -15,7 +15,7 @@ export const createValidateRequest = (
 
   const { value, error } = spec.validate(val, options);
   if (error) {
-    throw new ValidationError(error, source, options);
+    throw createValidationException(error, source, options);
   }
 
   return value;

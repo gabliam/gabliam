@@ -27,14 +27,14 @@ export class ExpressConverter {
       throw new BadInterceptorError(instance);
     }
 
-    const extractArgs = getExtractArgs(instance, 'intercept');
+    const extractArgs = getExtractArgs(container, instance, 'intercept', true);
 
     return async (
       req: express.Request,
       res: express.Response,
       next: express.NextFunction
     ) => {
-      const args = extractArgs(getContext(req), null, next);
+      const args = await extractArgs(getContext(req), null, next);
 
       try {
         await toPromise((instance['intercept'] as any)(...args));

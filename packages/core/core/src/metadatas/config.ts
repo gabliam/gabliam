@@ -1,7 +1,7 @@
 import { injectable } from 'inversify';
+import { Type } from '../common';
 import { ERRORS_MSGS, METADATA_KEY, ORDER_CONFIG, TYPE } from '../constants';
 import { makeDecorator } from '../decorator';
-import { Type } from '../type';
 import { Register } from './register';
 
 /**

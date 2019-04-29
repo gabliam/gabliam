@@ -1,7 +1,7 @@
 import { Joi, makePropDecorator } from '@gabliam/core';
 import { UseInterceptors } from '@gabliam/web-core';
 import { ERRORS_MSGS, METADATA_KEY } from '../constants';
-import { ValidateInterceptor, ValidateSendErrorInterceptor } from '../validate';
+import { ValidateInterceptor } from '../validate';
 
 export function isValidatorOptions(value: any): value is ValidatorOptions {
   return typeof value === 'object' && value.hasOwnProperty('validator');
@@ -135,11 +135,7 @@ export const Validate: ValidateDecorator = makePropDecorator(
     instance: Validate
   ) => {
     if (instance.useInterceptors) {
-      UseInterceptors(ValidateSendErrorInterceptor, ValidateInterceptor)(
-        target,
-        propertyKey,
-        descriptor
-      );
+      UseInterceptors(ValidateInterceptor)(target, propertyKey, descriptor);
     }
   },
   true,

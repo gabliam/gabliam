@@ -21,6 +21,27 @@ exports[`Complex interceptor should call method-level interceptor correctly (GET
 
 exports[`ExpressConverter errors Bad interceptor 1`] = `[BadInterceptorError: A must implement Interceptor interface]`;
 
+exports[`ExpressConverter errors Interceptor intercept error before SendErrorInterceptor 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "17",
+    "content-type": "text/html; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "Error interceptor",
+}
+`;
+
+exports[`ExpressConverter errors Interceptor intercept error before SendErrorInterceptor 2`] = `true`;
+
+exports[`ExpressConverter errors Interceptor intercept error before SendErrorInterceptor 3`] = `false`;
+
 exports[`ExpressConverter errors Interceptor throw exception 1`] = `true`;
 
 exports[`ExpressConverter errors Interceptor throw exception 2`] = `true`;

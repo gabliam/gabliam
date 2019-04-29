@@ -14,6 +14,7 @@ module.exports = {
   ],
   "moduleNameMapper": {
     "@gabliam/core/lib/(.*)": "<rootDir>/packages/core/core/src/$1",
+    "@gabliam/web-core/lib/(.*)": "<rootDir>/packages/web/web-core/src/$1",
     "@gabliam/amqp": "<rootDir>/packages/broker/amqp/src/index.ts",
     "@gabliam/cache": "<rootDir>/packages/cache/cache/src/index.ts",
     "@gabliam/cache-redis": "<rootDir>/packages/cache/cache-redis/src/index.ts",
@@ -44,5 +45,8 @@ module.exports = {
     "tsx",
     "js",
     "json"
+  ],
+  "testPathIgnorePatterns": [
+    "/node_modules/"
   ]
 };

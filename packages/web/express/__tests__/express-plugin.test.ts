@@ -1,8 +1,8 @@
 import { Config, Gabliam } from '@gabliam/core';
-import * as sinon from 'sinon';
-import { ExpressPlugin } from '../src/express-plugin';
 import { GabliamTest } from '@gabliam/core/lib/testing';
 import * as path from 'path';
+import * as sinon from 'sinon';
+import { ExpressPlugin } from '../src/express-plugin';
 
 describe('test plugin', () => {
   const build = sinon.spy(ExpressPlugin.prototype, 'build');

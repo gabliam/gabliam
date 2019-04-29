@@ -4,13 +4,14 @@ import {
   ResponseEntity,
   RestController,
 } from '@gabliam/web-core';
+import { WebPluginTest } from '@gabliam/web-core/lib/testing';
 import * as HttpStatus from 'http-status-codes';
-import { KoaPluginTest } from '../koa-plugin-test';
+import KoaPlugin from '../../src';
 
-let appTest: KoaPluginTest;
+let appTest: WebPluginTest;
 
 beforeEach(async () => {
-  appTest = new KoaPluginTest();
+  appTest = new WebPluginTest([KoaPlugin]);
 });
 
 afterEach(async () => {
@@ -35,7 +36,7 @@ describe('Response entity Tests:', () => {
           }
         }
         appTest.addClass(TestController);
-        await appTest.build();
+        await appTest.buildAndStart();
         const response = await appTest
           .supertest()
           .get('/')
@@ -54,7 +55,7 @@ describe('Response entity Tests:', () => {
           }
         }
         appTest.addClass(TestController);
-        await appTest.build();
+        await appTest.buildAndStart();
         const response = await appTest
           .supertest()
           .get('/')
@@ -74,7 +75,7 @@ describe('Response entity Tests:', () => {
           }
         }
         appTest.addClass(TestController);
-        await appTest.build();
+        await appTest.buildAndStart();
         const response = await appTest
           .supertest()
           .get('/')
@@ -92,7 +93,7 @@ describe('Response entity Tests:', () => {
           }
         }
         appTest.addClass(TestController);
-        await appTest.build();
+        await appTest.buildAndStart();
         const response = await appTest
           .supertest()
           .get('/')
@@ -109,7 +110,7 @@ describe('Response entity Tests:', () => {
           }
         }
         appTest.addClass(TestController);
-        await appTest.build();
+        await appTest.buildAndStart();
         const response = await appTest
           .supertest()
           .get('/')
@@ -126,7 +127,7 @@ describe('Response entity Tests:', () => {
           }
         }
         appTest.addClass(TestController);
-        await appTest.build();
+        await appTest.buildAndStart();
         const response = await appTest
           .supertest()
           .get('/')
@@ -143,7 +144,7 @@ describe('Response entity Tests:', () => {
           }
         }
         appTest.addClass(TestController);
-        await appTest.build();
+        await appTest.buildAndStart();
         const response = await appTest
           .supertest()
           .get('/')
@@ -160,7 +161,7 @@ describe('Response entity Tests:', () => {
           }
         }
         appTest.addClass(TestController);
-        await appTest.build();
+        await appTest.buildAndStart();
         const response = await appTest
           .supertest()
           .get('/')
@@ -177,7 +178,7 @@ describe('Response entity Tests:', () => {
           }
         }
         appTest.addClass(TestController);
-        await appTest.build();
+        await appTest.buildAndStart();
         const response = await appTest
           .supertest()
           .get('/')

@@ -1,7 +1,7 @@
+import { gabliamValue } from '../common';
 import { Container } from '../container';
 import { LoaderConfigOptions } from '../loaders';
 import { ValueValidator } from '../metadatas';
-import { gabliamValue } from '../promise-utils';
 import { Registry } from '../registry';
 import { PluginDependency } from './metadata';
 

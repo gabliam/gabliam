@@ -1,0 +1,54 @@
+{
+  "name": "@gabliam/validate-class",
+  "version": "0.0.0-PLACEHOLDER",
+  "description": "Gabliam plugin for add validation with joi on web",
+  "keywords": [
+    "gabliam",
+    "gabliam-plugin",
+    "plugin",
+    "web-core",
+    "rest",
+    "validation"
+  ],
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "module": "index.js",
+  "scripts": {
+    "build": "rimraf lib && tsc -p tsconfig.build.json"
+  },
+  "files": [
+    "lib",
+    "src",
+    "index.js",
+    "index.d.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabliam/gabliam.git"
+  },
+  "author": "David Touzet <dtouzet@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gabliam/gabliam/issues"
+  },
+  "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/web/validate-joi#readme",
+  "peerDependencies": {
+    "@gabliam/core": "0.0.0-PLACEHOLDER",
+    "@gabliam/web-core": "0.0.0-PLACEHOLDER"
+  },
+  "devDependencies": {
+    "@gabliam/core": "0.0.0-PLACEHOLDER",
+    "@gabliam/express": "0.0.0-PLACEHOLDER",
+    "@gabliam/koa": "0.0.0-PLACEHOLDER",
+    "@gabliam/web-core": "0.0.0-PLACEHOLDER"
+  },
+  "dependencies": {
+    "class-transformer": "^0.2.0",
+    "class-validator": "^0.9.1",
+    "tslib": "^1.9.3"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  },
+  "gitHead": "ec328fa0b62f474d470f74a2fc9637838f54091e"
+}

@@ -5,6 +5,7 @@ import {
   toPromise,
   ValueExtractor,
   VALUE_EXTRACTOR,
+  Type,
 } from '@gabliam/core';
 import { CONTEXT, METADATA_KEY, TYPE, WEB_PLUGIN_CONFIG } from './constants';
 import { NextCalledMulipleError } from './errors';
@@ -23,14 +24,17 @@ import {
   WebParamDecorator,
 } from './metadatas';
 import { MethodInfo, RestMetadata, WebPluginConfig } from './plugin-config';
+import { extractPipes, PipeFn } from './pipe';
 
 export const cleanPath = (path: string) => {
   return path.replace(/\/+/gi, '/');
 };
 
 export const getExtractArgs = (
+  container: Container,
   controller: any,
-  propKey: string
+  propKey: string,
+  isInterceptor: boolean
 ): extractArgsFn => {
   const params = reflection.parameters(<any>controller.constructor, propKey);
 
@@ -39,27 +43,49 @@ export const getExtractArgs = (
       ctx: GabContext,
       execCtx: ExecutionContext | null | undefined,
       next: any
-    ) => [ctx.request, ctx.response, next];
+    ) => Promise.resolve([ctx.request, ctx.response, next]);
   }
 
-  const parameters = <[string | undefined, WebParamDecorator][]>params.map(
-    meta => {
-      let type: string | undefined;
-      if (meta.length === 2) {
-        type = meta[0].name;
+  const parameters = <[Type<any> | undefined, WebParamDecorator, PipeFn][]>(
+    params.map((meta, index) => {
+      let type: Type<any> | undefined;
+      if (meta.length >= 2) {
+        type = meta[0];
       }
-      return [type, meta.slice(-1)[0] as WebParamDecorator];
-    }
+      const pipe = extractPipes(
+        container,
+        controller,
+        propKey,
+        index,
+        !isInterceptor
+      );
+      const webParamDecorator: WebParamDecorator = meta
+        .slice(-1)
+        .filter(m => typeof m.handler === 'function' && m.args)[0];
+
+      // if there is no webParamDecorator => error
+      if (webParamDecorator === undefined) {
+        throw new Error('No webParamDecorator exist');
+      }
+      return [type, webParamDecorator, pipe];
+    })
   );
 
-  return (
+  return async (
     ctx: GabContext,
     execCtx: ExecutionContext | null | undefined,
     next: any
   ) => {
-    return parameters.map(([type, p]) =>
-      p.handler(p.args, ctx, type, execCtx, next)
+    const extractedParams = await Promise.all(
+      parameters.map(([type, decorator, pipe]) =>
+        pipe(
+          decorator.handler(decorator.args, ctx, type, execCtx, next),
+          type
+        )
+      )
     );
+
+    return extractedParams;
   };
 };
 
@@ -155,7 +181,7 @@ export const extractControllerMetadata = (
           controllerId,
           methodName,
           json,
-          extractArgs: getExtractArgs(controller, methodName),
+          extractArgs: getExtractArgs(container, controller, methodName, false),
           methodPath,
           method: methodMetadata.method,
           interceptors,
@@ -210,7 +236,9 @@ export function compose(
         await callNext();
       };
 
-      const interceptorArgs = extractArgs(ctx, execCtx, nextFn);
+      const interceptorArgs = await toPromise(
+        extractArgs(ctx, execCtx, nextFn)
+      );
 
       const res = await toPromise(instance.intercept(...interceptorArgs));
       converterValue(ctx, execCtx, res);

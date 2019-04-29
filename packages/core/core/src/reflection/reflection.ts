@@ -1,5 +1,5 @@
 // tslint:disable:no-shadowed-variable member-ordering
-import { Type, isType } from '../type';
+import { isType, Type } from '../common';
 import { ANNOTATIONS, PARAMETERS, PROP_METADATA } from '../decorator/util';
 
 export class Reflection {
@@ -53,6 +53,21 @@ export class Reflection {
     return [];
   }
 
+  /**
+   * return an array by param.
+   * For one param, the array contains the type of param on first and all decorators
+   *
+   * example :
+   * class TestController {
+   *    getTest(@Validate() header: Header) {
+   *    }
+   * }
+   *
+   * parameters return :
+   * [
+   *  [Header, ParamDecorator]
+   * ]
+   */
   parameters(type: Type<any>, property: string): any[][] {
     // Note: only report metadata if we have at least one class decorator
     // to stay in sync with the static reflector.
@@ -184,15 +199,39 @@ export class Reflection {
       return [];
     }
 
-    const gabMetadataName: string = isType(decoratorOrMetadataName)
-      ? (decoratorOrMetadataName as any).prototype.gabMetadataName
-      : decoratorOrMetadataName;
+    const gabMetadataName: string = getGabMetadataName(decoratorOrMetadataName);
 
     const annotations = this.annotations(typeOrFunc, includeParent);
 
     return annotations.filter(a => a.gabMetadataName === gabMetadataName);
   }
+
+  parametersOfDecorator(
+    type: Type<any>,
+    property: string,
+    decoratorOrMetadataName: any
+  ): any[][] {
+    if (!isType(type)) {
+      return [];
+    }
+
+    const gabMetadataName: string = getGabMetadataName(decoratorOrMetadataName);
+
+    const parameters = this.parameters(type, property);
+
+    const res = parameters.map(([type, ...metas]) => [
+      type,
+      metas.filter(a => a.gabMetadataName === gabMetadataName),
+    ]);
+
+    return res;
+  }
 }
+
+const getGabMetadataName = (decoratorOrMetadataName: any): string =>
+  isType(decoratorOrMetadataName)
+    ? (decoratorOrMetadataName as any).prototype.gabMetadataName
+    : decoratorOrMetadataName;
 
 function getParentCtor(ctor: Function): Type<any> {
   const parentProto = ctor.prototype

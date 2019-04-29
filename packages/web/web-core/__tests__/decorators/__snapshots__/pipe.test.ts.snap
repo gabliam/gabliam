@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`transformer decorators should add Bean metadata to a class when decorated with @UseTransformers 1`] = `
+Array [
+  DecoratorFactory {
+    "ids": Array [
+      "test",
+    ],
+  },
+]
+`;
+
+exports[`transformer decorators should add Bean metadata to a param when decorated with @UseTransformers 1`] = `
+Array [
+  Array [
+    [Function],
+  ],
+  Array [
+    [Function],
+    DecoratorFactory {
+      "ids": Array [
+        "test",
+      ],
+    },
+  ],
+  Array [
+    [Function],
+  ],
+]
+`;
+
+exports[`transformer decorators should add Bean metadata to a prop when decorated with @UseTransformers 1`] = `
+Object {
+  "test2Method": Array [
+    DecoratorFactory {
+      "ids": Array [
+        "test2",
+      ],
+    },
+  ],
+  "testMethod": Array [
+    DecoratorFactory {
+      "ids": Array [
+        "test",
+      ],
+    },
+  ],
+}
+`;
+
+exports[`transformer decorators should add Bean metadata to class, prop and param when decorated with @UseTransformers 1`] = `
+Array [
+  DecoratorFactory {
+    "ids": Array [
+      "testClass",
+    ],
+  },
+]
+`;
+
+exports[`transformer decorators should add Bean metadata to class, prop and param when decorated with @UseTransformers 2`] = `
+Object {
+  "testMethod": Array [
+    DecoratorFactory {
+      "ids": Array [
+        "testMethod",
+      ],
+    },
+  ],
+}
+`;
+
+exports[`transformer decorators should add Bean metadata to class, prop and param when decorated with @UseTransformers 3`] = `
+Array [
+  Array [
+    [Function],
+    DecoratorFactory {
+      "ids": Array [
+        "testParam",
+      ],
+    },
+  ],
+]
+`;

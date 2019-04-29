@@ -1,7 +1,6 @@
 import { GraphqlPluginTest } from './graphql-plugin-test';
 import { HeroController } from './fixtures/controllers/heroController';
 import { PhotoController } from './fixtures/controllers/photoController';
-import * as supertest from 'supertest';
 import * as path from 'path';
 
 let appTest: GraphqlPluginTest;
@@ -12,7 +11,7 @@ beforeEach(async () => {
   appTest.addConf('application.graphql.graphqlFiles', [
     path.resolve(__dirname, './fixtures/controllers/schemas/photoinput.gql'),
   ]);
-  await appTest.build();
+  await appTest.buildAndStart();
 });
 
 afterEach(async () => {
@@ -20,7 +19,8 @@ afterEach(async () => {
 });
 
 test('Query test', async () => {
-  const res = await supertest(appTest.app)
+  const res = await appTest
+    .supertest()
     .post('/graphql')
     .send({
       query: `query {heroes {
@@ -36,7 +36,8 @@ test('Query test', async () => {
 });
 
 test('Mutation test', async () => {
-  const res = await supertest(appTest.app)
+  const res = await appTest
+    .supertest()
     .post('/graphql')
     .send({
       query: `mutation submitHero($heroInput: HeroInput!) {

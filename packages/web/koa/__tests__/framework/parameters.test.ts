@@ -11,13 +11,14 @@ import {
   RequestParam,
   Response,
 } from '@gabliam/web-core';
+import { WebPluginTest } from '@gabliam/web-core/lib/testing';
 import * as sinon from 'sinon';
-import { koa, koaRouter } from '../../src/index';
-import { KoaPluginTest } from '../koa-plugin-test';
-let appTest: KoaPluginTest;
+import KoaPlugin, { koa, koaRouter } from '../../src/index';
+
+let appTest: WebPluginTest;
 
 beforeEach(async () => {
-  appTest = new KoaPluginTest();
+  appTest = new WebPluginTest([KoaPlugin]);
 });
 
 afterEach(async () => {
@@ -34,7 +35,7 @@ describe('Parameters:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
     const response = await appTest
       .supertest()
       .get('/0')
@@ -52,7 +53,7 @@ describe('Parameters:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
     const response = await appTest
       .supertest()
       .get('/foo')
@@ -69,7 +70,7 @@ describe('Parameters:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
     const response = await appTest
       .supertest()
       .get('/42')
@@ -86,7 +87,7 @@ describe('Parameters:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
     const response = await appTest
       .supertest()
       .get('/GET')
@@ -103,7 +104,7 @@ describe('Parameters:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
     const response = await appTest
       .supertest()
       .get('/GET')
@@ -121,7 +122,7 @@ describe('Parameters:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
     const response = await appTest
       .supertest()
       .get('/')
@@ -139,7 +140,7 @@ describe('Parameters:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
     const response = await appTest
       .supertest()
       .get('/')
@@ -158,7 +159,7 @@ describe('Parameters:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
     const response = await appTest
       .supertest()
       .get('/')
@@ -177,7 +178,7 @@ describe('Parameters:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
     const response = await appTest
       .supertest()
       .post('/')
@@ -196,7 +197,7 @@ describe('Parameters:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
     const response = await appTest
       .supertest()
       .get('/')
@@ -220,7 +221,7 @@ describe('Parameters:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
     const response = await appTest
       .supertest()
       .get('/')
@@ -247,7 +248,7 @@ describe('Parameters:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
+    await appTest.buildAndStart();
     const response = await appTest
       .supertest()
       .get('/')

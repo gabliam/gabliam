@@ -12,6 +12,7 @@ export {
   targetName,
   unmanaged,
 } from 'inversify';
+export * from './common';
 export {
   APP_CONFIG,
   CORE_CONFIG,
@@ -26,7 +27,6 @@ export * from './interfaces';
 export * from './joi';
 export { configResolver, FileLoader, Loader, Resolver } from './loaders';
 export * from './metadatas';
-export * from './promise-utils';
 export * from './reflection';
 export * from './registry';
-export * from './utils';
+export * from './value-extractor';

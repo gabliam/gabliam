@@ -1,0 +1,162 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`express integration update req values req.body 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "5",
+    "content-type": "application/json; charset=utf-8",
+  },
+  "req": Object {
+    "data": Object {
+      "first": "john",
+      "role": "admin",
+    },
+    "headers": Object {
+      "content-type": "application/json",
+    },
+    "method": "POST",
+  },
+  "status": 200,
+  "text": "\\"lol\\"",
+}
+`;
+
+exports[`express integration update req values req.headers 1`] = `
+Object {
+  "accept": "application/json",
+  "accept-encoding": "gzip, deflate",
+  "connection": "close",
+  "id": 12,
+  "secret-header": "@@@@@@",
+  "user-agent": "node-superagent/3.8.3",
+}
+`;
+
+exports[`express integration update req values req.headers 2`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "application/json; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "accept": "application/json",
+    },
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "\\"k\\"",
+}
+`;
+
+exports[`express integration update req values req.params 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "application/json; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "\\"k\\"",
+}
+`;
+
+exports[`express integration update req values req.query 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "application/json; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "\\"k\\"",
+}
+`;
+
+exports[`express integration validations req.body 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "243",
+    "content-type": "application/json; charset=utf-8",
+  },
+  "req": Object {
+    "data": Object {
+      "first": "john",
+      "last": 123,
+    },
+    "headers": Object {
+      "content-type": "application/json",
+    },
+    "method": "POST",
+  },
+  "status": 400,
+  "text": "{\\"statusCode\\":400,\\"error\\":\\"Bad Request\\",\\"validation\\":[{\\"value\\":123,\\"property\\":\\"last\\",\\"children\\":[],\\"constraints\\":{\\"isString\\":\\"last must be a string\\"}},{\\"property\\":\\"role\\",\\"children\\":[],\\"constraints\\":{\\"isInt\\":\\"role must be an integer number\\"}}]}",
+}
+`;
+
+exports[`express integration validations req.headers 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "180",
+    "content-type": "application/json; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "accept": "application/json",
+    },
+    "method": "GET",
+  },
+  "status": 400,
+  "text": "{\\"statusCode\\":400,\\"error\\":\\"Bad Request\\",\\"validation\\":[{\\"value\\":\\"application/json\\",\\"property\\":\\"accept\\",\\"children\\":[],\\"constraints\\":{\\"contains\\":\\"accept must contain a xml string\\"}}]}",
+}
+`;
+
+exports[`express integration validations req.params 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "149",
+    "content-type": "application/json; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 400,
+  "text": "{\\"statusCode\\":400,\\"error\\":\\"Bad Request\\",\\"validation\\":[{\\"value\\":\\"@@\\",\\"property\\":\\"id\\",\\"children\\":[],\\"constraints\\":{\\"isNumber\\":\\"id must be a number\\"}}]}",
+}
+`;
+
+exports[`express integration validations req.query 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "147",
+    "content-type": "application/json; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 400,
+  "text": "{\\"statusCode\\":400,\\"error\\":\\"Bad Request\\",\\"validation\\":[{\\"property\\":\\"start\\",\\"children\\":[],\\"constraints\\":{\\"isDate\\":\\"start must be a Date instance\\"}}]}",
+}
+`;

@@ -1,12 +1,12 @@
 import * as d from 'debug';
 import * as glob from 'glob';
 import * as _ from 'lodash';
+import { isObject } from '../../common';
 import { TYPE } from '../../constants';
 import { GabliamPlugin, ValueRegistry } from '../../interfaces';
 import { PreDestroy, Register, Scan } from '../../metadatas';
 import { reflection } from '../../reflection';
 import { Registry } from '../../registry';
-import { isObject } from '../../utils';
 
 const debug = d('Gabliam:loader');
 const reg = /^.*(git|svn|node_modules|dist|build).*/;

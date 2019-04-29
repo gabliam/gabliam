@@ -31,19 +31,23 @@
     "url": "https://github.com/gabliam/gabliam/issues"
   },
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/web/web-core#readme",
+  "optionalDependencies": {
+    "supertest": "^4.0.2"
+  },
   "peerDependencies": {
     "@gabliam/core": "0.0.0-PLACEHOLDER"
   },
   "devDependencies": {
     "@gabliam/core": "0.0.0-PLACEHOLDER",
     "@types/cookies": "^0.7.1",
-    "@types/escape-html": "^0.0.20"
+    "@types/escape-html": "^0.0.20",
+    "@types/statuses": "^1.5.0"
   },
   "dependencies": {
     "cookies": "^0.7.3",
-    "escape-html": "^1.0.3",
     "http-status-codes": "^1.3.2",
     "property-tunnel": "^1.2.2",
+    "statuses": "^1.5.0",
     "tslib": "^1.9.3"
   },
   "engines": {

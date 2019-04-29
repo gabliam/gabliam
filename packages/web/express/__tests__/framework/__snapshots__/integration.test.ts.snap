@@ -472,9 +472,9 @@ exports[`Integration Tests: decorator RestController should work for async contr
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "130",
-    "content-security-policy": "default-src 'self'",
-    "content-type": "text/html; charset=utf-8",
+    "content-length": "28",
+    "content-security-policy": "default-src 'none'",
+    "content-type": "application/json; charset=utf-8",
     "x-content-type-options": "nosniff",
   },
   "req": Object {
@@ -483,17 +483,7 @@ Object {
     "method": "GET",
   },
   "status": 500,
-  "text": "<!DOCTYPE html>
-<html lang=\\"en\\">
-<head>
-<meta charset=\\"utf-8\\">
-<title>Error</title>
-</head>
-<body>
-<pre>GET</pre>
-</body>
-</html>
-",
+  "text": "{\\"status\\":500,\\"error\\":\\"GET\\"}",
 }
 `;
 

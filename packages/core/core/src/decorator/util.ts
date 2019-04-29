@@ -1,6 +1,6 @@
+import { Type } from '../common';
 import { ERRORS_MSGS } from '../constants';
 import { DecoratorUniqError } from '../errors';
-import { Type } from '../type';
 
 export const ANNOTATIONS = '__annotations__';
 export const PARAMETERS = '__parameters__';
@@ -11,10 +11,17 @@ export type AdditionalProcessingAnnotation<T> = (
   annotationInstance: any
 ) => void;
 
-export type AdditionalProcessing = (
+export type AdditionalPropProcessing = (
   target: any,
   name: string,
   descriptor: TypedPropertyDescriptor<any>,
+  annotationInstance: any
+) => void;
+
+export type AdditionalParamProcessing = (
+  target: any,
+  name: string,
+  index: number,
   annotationInstance: any
 ) => void;
 
@@ -51,7 +58,7 @@ function createPropDecorator(
   uniq: boolean,
   uniqError: string,
   decoratorInstance: any,
-  additionalProcessing?: AdditionalProcessing
+  additionalPropProcessing?: AdditionalPropProcessing
 ) {
   return function PropDecorator(
     target: any,
@@ -75,13 +82,16 @@ function createPropDecorator(
     }
     meta[key].unshift(decoratorInstance);
 
-    if (additionalProcessing) {
-      additionalProcessing(target, key, descriptor, decoratorInstance);
+    if (additionalPropProcessing) {
+      additionalPropProcessing(target, key, descriptor, decoratorInstance);
     }
   };
 }
 
-function createParamDecorator(annotationInstance: any) {
+function createParamDecorator(
+  annotationInstance: any,
+  additionalParamProcessing?: AdditionalParamProcessing
+) {
   function ParamDecorator(target: any, propertyKey: any, index: number): any {
     const cls = target.constructor;
     // Use of Object.defineProperty is important since it creates non-enumerable property which
@@ -100,6 +110,11 @@ function createParamDecorator(annotationInstance: any) {
     }
 
     (parameters[index] = parameters[index] || []).push(annotationInstance);
+
+    if (additionalParamProcessing) {
+      additionalParamProcessing(target, propertyKey, index, annotationInstance);
+    }
+
     return cls;
   }
   (<any>ParamDecorator).annotation = annotationInstance;
@@ -113,7 +128,7 @@ export function makePropAndAnnotationDecorator<T>(
   name: string,
   props?: (...args: any[]) => any,
   additionalProcessingAnnotation?: AdditionalProcessingAnnotation<T>,
-  additionalProcessing?: AdditionalProcessing,
+  additionalPropProcessing?: AdditionalPropProcessing,
   uniq = false,
   uniqError = ERRORS_MSGS.DUPLICATED_DECORATOR
 ) {
@@ -138,7 +153,7 @@ export function makePropAndAnnotationDecorator<T>(
           uniq,
           uniqError,
           annotationInstance,
-          additionalProcessing
+          additionalPropProcessing
         )(target, key, descriptor);
       } else {
         return createTypeDecorator(
@@ -207,7 +222,8 @@ function makeMetadataCtor(props?: (...args: any[]) => any): any {
 
 export function makeParamDecorator(
   name: string,
-  props?: (...args: any[]) => any
+  props?: (...args: any[]) => any,
+  additionalParamProcessing?: AdditionalParamProcessing
 ): any {
   const metaCtor = makeMetadataCtor(props);
   function ParamDecoratorFactory(this: any, ...args: any[]): any {
@@ -216,7 +232,7 @@ export function makeParamDecorator(
       return this;
     }
     const annotationInstance = new (<any>ParamDecoratorFactory)(...args);
-    return createParamDecorator(annotationInstance);
+    return createParamDecorator(annotationInstance, additionalParamProcessing);
   }
 
   ParamDecoratorFactory.prototype.gabMetadataName = name;
@@ -227,7 +243,7 @@ export function makeParamDecorator(
 export function makePropDecorator(
   name: string,
   props?: (...args: any[]) => any,
-  additionalProcessing?: AdditionalProcessing,
+  additionalPropProcessing?: AdditionalPropProcessing,
   uniq = false,
   uniqError = ERRORS_MSGS.DUPLICATED_DECORATOR
 ): any {
@@ -246,11 +262,68 @@ export function makePropDecorator(
       uniq,
       uniqError,
       decoratorInstance,
-      additionalProcessing
+      additionalPropProcessing
     );
   }
 
   PropDecoratorFactory.prototype.gabMetadataName = name;
   (<any>PropDecoratorFactory).annotationCls = PropDecoratorFactory;
   return PropDecoratorFactory;
+}
+
+/**
+ * Create a decorator for class and Prop
+ */
+export function makePropAndAnnotationAndParamDecorator<T>(
+  name: string,
+  props?: (...args: any[]) => any,
+  additionalProcessingAnnotation?: AdditionalProcessingAnnotation<T>,
+  additionalPropProcessing?: AdditionalPropProcessing,
+  additionalParamProcessing?: AdditionalParamProcessing,
+  uniq = false,
+  uniqError = ERRORS_MSGS.DUPLICATED_DECORATOR
+) {
+  const metaCtor = makeMetadataCtor(props);
+  function DecoratorFactory(this: any, ...args: any[]): any {
+    if (this instanceof DecoratorFactory) {
+      metaCtor.call(this, ...args);
+      // @ts-ignore
+      return this;
+    }
+
+    const annotationInstance = new (DecoratorFactory as any)(...args);
+    return function(
+      target: any,
+      propertyKey?: string,
+      descriptorOrIndex?: TypedPropertyDescriptor<any> | number
+    ) {
+      if (propertyKey && descriptorOrIndex !== undefined) {
+        if (typeof descriptorOrIndex === 'number') {
+          return createParamDecorator(
+            annotationInstance,
+            additionalParamProcessing
+          )(target, propertyKey, descriptorOrIndex);
+        }
+        return createPropDecorator(
+          name,
+          uniq,
+          uniqError,
+          annotationInstance,
+          additionalPropProcessing
+        )(target, propertyKey, descriptorOrIndex);
+      } else {
+        return createTypeDecorator(
+          name,
+          uniq,
+          uniqError,
+          annotationInstance,
+          additionalProcessingAnnotation
+        )(target);
+      }
+    };
+  }
+
+  DecoratorFactory.prototype.gabMetadataName = name;
+  (DecoratorFactory as any).annotationCls = DecoratorFactory;
+  return DecoratorFactory as any;
 }

@@ -56,14 +56,14 @@ export abstract class WebPluginBase {
    * @param  {Registry} registry - The registry
    */
   async build(container: Container, registry: Registry) {
-    this.buildWebConfig(container, registry);
-    await toPromise(
-      this.buildControllers(
-        extractControllerMetadata(container, registry),
-        container
-      )
-    );
-    this.buildWebConfigAfterCtrl(container, registry);
+    // this.buildWebConfig(container, registry);
+    // await toPromise(
+    //   this.buildControllers(
+    //     extractControllerMetadata(container, registry),
+    //     container
+    //   )
+    // );
+    // this.buildWebConfigAfterCtrl(container, registry);
   }
 
   /**
@@ -106,6 +106,14 @@ export abstract class WebPluginBase {
   ): gabliamValue<void>;
 
   async start(container: Container, registry: Registry) {
+    this.buildWebConfig(container, registry);
+    await toPromise(
+      this.buildControllers(
+        extractControllerMetadata(container, registry),
+        container
+      )
+    );
+    this.buildWebConfigAfterCtrl(container, registry);
     const serverStarter = container.get<ServerStarter>(SERVER_STARTER);
     await toPromise(serverStarter.start(container, registry));
   }

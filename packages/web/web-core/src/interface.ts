@@ -1,3 +1,4 @@
+import { RequestListener } from 'http';
 import { ExecutionContext } from './execution-context';
 import { GabContext } from './gab-context';
 
@@ -13,4 +14,6 @@ export type extractArgsFn = <V>(
   ctx: GabContext,
   execCtx: ExecutionContext | null | undefined,
   next: V
-) => any;
+) => Promise<any>;
+
+export type requestListenerCreator = () => RequestListener;

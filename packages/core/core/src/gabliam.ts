@@ -1,6 +1,7 @@
 import { ExpressionParser } from '@gabliam/expression';
 import * as d from 'debug';
 import * as _ from 'lodash';
+import { callInstance, toPromise } from './common';
 import { APP_CONFIG, CORE_CONFIG, TYPE, VALUE_EXTRACTOR } from './constants';
 import { Container, createContainer } from './container';
 import {
@@ -19,10 +20,9 @@ import {
   PreDestroy,
 } from './metadatas';
 import { PluginList } from './plugin-list';
-import { toPromise } from './promise-utils';
 import { reflection } from './reflection';
 import { Registry } from './registry';
-import { callInstance, configureValueExtractor } from './utils';
+import { configureValueExtractor } from './value-extractor';
 
 const debug = d('Gabliam:core');
 

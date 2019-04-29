@@ -1,10 +1,10 @@
-import { Controller, Get, WebConfig } from '@gabliam/web-core';
-import { koa, koaRouter } from '../../src';
-import { KoaPluginTest } from '../koa-plugin-test';
 import { Config } from '@gabliam/core';
+import { Controller, Get, WebConfig } from '@gabliam/web-core';
+import { WebPluginTest } from '@gabliam/web-core/lib/testing';
 import * as sinon from 'sinon';
+import KoaPlugin, { koa, koaRouter } from '../../src';
 
-let appTest: KoaPluginTest;
+let appTest: WebPluginTest;
 let result: string;
 const middleware: any = {
   a: async function(
@@ -56,7 +56,7 @@ beforeEach(async () => {
   spyC.resetHistory();
   spyE.resetHistory();
   spyD.resetHistory();
-  appTest = new KoaPluginTest();
+  appTest = new WebPluginTest([KoaPlugin]);
 });
 
 afterEach(async () => {
@@ -84,7 +84,7 @@ test('@KoaConfig', async () => {
 
   appTest.addClass(TestController);
   appTest.addClass(ServerConfig);
-  await appTest.build();
+  await appTest.buildAndStart();
 
   const response = await appTest
     .supertest()
@@ -126,7 +126,7 @@ test('@KoaConfig Order', async () => {
 
   appTest.addClass(TestController);
   appTest.addClass(ServerConfig);
-  await appTest.build();
+  await appTest.buildAndStart();
 
   const response = await appTest
     .supertest()
@@ -158,7 +158,7 @@ test('ErrorConfig', async () => {
 
   appTest.addClass(TestController);
   appTest.addClass(ServerConfig);
-  await appTest.build();
+  await appTest.buildAndStart();
 
   const response = await appTest
     .supertest()
@@ -193,7 +193,7 @@ test('ErrorConfig order', async () => {
 
   appTest.addClass(TestController);
   appTest.addClass(ServerConfig);
-  await appTest.build();
+  await appTest.buildAndStart();
 
   const response = await appTest
     .supertest()

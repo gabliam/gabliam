@@ -29,8 +29,13 @@ export const converterValue: convertValueFn = (
         ctx.set(k, '' + value.headers[k])
       );
     }
+
+    if (methodInfo.json) {
+      sendJsonValue(value.body);
+    } else {
+      ctx.body = value.body;
+    }
     ctx.status = value.status;
-    sendJsonValue(value.body);
   }
   if (!ctx.headersSent) {
     if (result !== undefined) {
@@ -40,6 +45,10 @@ export const converterValue: convertValueFn = (
         sendJsonValue(result);
       } else {
         ctx.body = result;
+      }
+
+      if (methodInfo.json) {
+        ctx.type = 'application/json';
       }
     }
   }

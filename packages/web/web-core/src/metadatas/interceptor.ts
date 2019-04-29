@@ -22,7 +22,7 @@ export interface UseInterceptorsDecorator {
    * ```typescript
    * @RestController()
    * class Sample {
-   *    @Interceptor('log')
+   *    @UseInterceptors(LogInterceptor)
    *    @Get('/hello')
    *    hello() {
    *      return 'hello world';

@@ -1,17 +1,17 @@
-import { ExpressPluginTest } from '../express-plugin-test';
-import * as supertest from 'supertest';
 import {
-  ResponseEntity,
   Controller,
-  RestController,
   Get,
+  ResponseEntity,
+  RestController,
 } from '@gabliam/web-core';
+import { WebPluginTest } from '@gabliam/web-core/lib/testing';
 import * as HttpStatus from 'http-status-codes';
+import ExpressPlugin from '../../src';
 
-let appTest: ExpressPluginTest;
+let appTest: WebPluginTest;
 
 beforeEach(async () => {
-  appTest = new ExpressPluginTest();
+  appTest = new WebPluginTest([ExpressPlugin]);
 });
 
 afterEach(async () => {
@@ -36,8 +36,9 @@ describe('Response entity Tests:', () => {
           }
         }
         appTest.addClass(TestController);
-        await appTest.build();
-        const response = await supertest(appTest.app)
+        await appTest.buildAndStart();
+        const response = await appTest
+          .supertest()
           .get('/')
           .expect(HttpStatus.OK);
         expect(response).toMatchSnapshot();
@@ -54,8 +55,9 @@ describe('Response entity Tests:', () => {
           }
         }
         appTest.addClass(TestController);
-        await appTest.build();
-        const response = await supertest(appTest.app)
+        await appTest.buildAndStart();
+        const response = await appTest
+          .supertest()
           .get('/')
           .expect(HttpStatus.OK);
         expect(response).toMatchSnapshot();
@@ -72,8 +74,9 @@ describe('Response entity Tests:', () => {
           }
         }
         appTest.addClass(TestController);
-        await appTest.build();
-        const response = await supertest(appTest.app)
+        await appTest.buildAndStart();
+        const response = await appTest
+          .supertest()
           .get('/')
           .expect(HttpStatus.OK);
         expect(response).toMatchSnapshot();
@@ -88,8 +91,9 @@ describe('Response entity Tests:', () => {
           }
         }
         appTest.addClass(TestController);
-        await appTest.build();
-        const response = await supertest(appTest.app)
+        await appTest.buildAndStart();
+        const response = await appTest
+          .supertest()
           .get('/')
           .expect(HttpStatus.OK);
         expect(response).toMatchSnapshot();
@@ -104,8 +108,9 @@ describe('Response entity Tests:', () => {
           }
         }
         appTest.addClass(TestController);
-        await appTest.build();
-        const response = await supertest(appTest.app)
+        await appTest.buildAndStart();
+        const response = await appTest
+          .supertest()
           .get('/')
           .expect(HttpStatus.OK);
         expect(response).toMatchSnapshot();
@@ -120,8 +125,9 @@ describe('Response entity Tests:', () => {
           }
         }
         appTest.addClass(TestController);
-        await appTest.build();
-        const response = await supertest(appTest.app)
+        await appTest.buildAndStart();
+        const response = await appTest
+          .supertest()
           .get('/')
           .expect(HttpStatus.ACCEPTED);
         expect(response).toMatchSnapshot();
@@ -136,8 +142,9 @@ describe('Response entity Tests:', () => {
           }
         }
         appTest.addClass(TestController);
-        await appTest.build();
-        const response = await supertest(appTest.app)
+        await appTest.buildAndStart();
+        const response = await appTest
+          .supertest()
           .get('/')
           .expect(HttpStatus.BAD_REQUEST);
         expect(response).toMatchSnapshot();
@@ -152,8 +159,9 @@ describe('Response entity Tests:', () => {
           }
         }
         appTest.addClass(TestController);
-        await appTest.build();
-        const response = await supertest(appTest.app)
+        await appTest.buildAndStart();
+        const response = await appTest
+          .supertest()
           .get('/')
           .expect(HttpStatus.NO_CONTENT);
         expect(response).toMatchSnapshot();
@@ -168,8 +176,9 @@ describe('Response entity Tests:', () => {
           }
         }
         appTest.addClass(TestController);
-        await appTest.build();
-        const response = await supertest(appTest.app)
+        await appTest.buildAndStart();
+        const response = await appTest
+          .supertest()
           .get('/')
           .expect(HttpStatus.NOT_FOUND);
         expect(response).toMatchSnapshot();

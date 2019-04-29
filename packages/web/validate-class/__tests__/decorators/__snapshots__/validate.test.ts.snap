@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Validate decorator should add Validate metadata to a method when decorated with @Validate 1`] = `
+Object {
+  "test": Array [
+    PropDecoratorFactory {
+      "method": "get",
+      "path": "/",
+    },
+    DecoratorFactory {
+      "ids": Array [
+        ValidatePipe {
+          "options": DecoratorFactory {
+            "disableErrorMessages": false,
+            "exceptionFactory": [Function],
+            "transform": false,
+            "transformOptions": Object {},
+            "validatorOptions": Object {
+              "validationError": Object {
+                "target": false,
+              },
+            },
+          },
+        },
+      ],
+    },
+    DecoratorFactory {
+      "disableErrorMessages": false,
+      "exceptionFactory": [Function],
+      "transform": false,
+      "transformOptions": Object {},
+      "validatorOptions": Object {
+        "validationError": Object {
+          "target": false,
+        },
+      },
+    },
+  ],
+}
+`;
+
+exports[`Validate decorator should add Validate metadata to a method when decorated with @Validate(validatorOptions) 1`] = `
+Object {
+  "test": Array [
+    PropDecoratorFactory {
+      "method": "get",
+      "path": "/",
+    },
+    DecoratorFactory {
+      "ids": Array [
+        ValidatePipe {
+          "options": DecoratorFactory {
+            "disableErrorMessages": false,
+            "exceptionFactory": [Function],
+            "transform": true,
+            "transformOptions": Object {},
+            "validatorOptions": Object {
+              "validationError": Object {
+                "target": false,
+              },
+            },
+          },
+        },
+      ],
+    },
+    DecoratorFactory {
+      "disableErrorMessages": false,
+      "exceptionFactory": [Function],
+      "transform": true,
+      "transformOptions": Object {},
+      "validatorOptions": Object {
+        "validationError": Object {
+          "target": false,
+        },
+      },
+    },
+  ],
+}
+`;

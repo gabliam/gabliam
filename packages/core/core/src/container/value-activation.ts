@@ -1,6 +1,6 @@
 import { Value } from '../metadatas';
 import { reflection } from '../reflection';
-import { configureValueExtractor } from '../utils';
+import { configureValueExtractor } from '../value-extractor';
 import { Container } from './container';
 import { ContainerActivationHook } from './interfaces';
 

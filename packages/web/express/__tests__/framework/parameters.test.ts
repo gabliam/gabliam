@@ -1,29 +1,28 @@
+import { Config } from '@gabliam/core';
 import {
   Controller,
-  Get,
-  RequestParam,
-  Request,
-  Response,
-  QueryParam,
-  Post,
-  RequestBody,
-  RequestHeaders,
   Cookies,
-  Next,
   GabRequest,
   GabResponse,
+  Get,
+  Next,
+  Post,
+  QueryParam,
+  Request,
+  RequestBody,
+  RequestHeaders,
+  RequestParam,
+  Response,
   WebConfig,
 } from '@gabliam/web-core';
-import { ExpressPluginTest } from '../express-plugin-test';
-import { express as e } from '../../src';
-import * as supertest from 'supertest';
+import { WebPluginTest } from '@gabliam/web-core/lib/testing';
 import * as sinon from 'sinon';
-import { Config } from '@gabliam/core';
+import ExpressPlugin, { express as e } from '../../src';
 
-let appTest: ExpressPluginTest;
+let appTest: WebPluginTest;
 
 beforeEach(async () => {
-  appTest = new ExpressPluginTest();
+  appTest = new WebPluginTest([ExpressPlugin]);
 });
 
 afterEach(async () => {
@@ -32,16 +31,26 @@ afterEach(async () => {
 
 describe('Parameters:', () => {
   test('bug parameter when value is number and passed 0', async () => {
+    // @Controller('/')
+    // class TestControllerAbs {
+    //   @Get(':id')
+    //   public getTest(@RequestParam('lol') id: number) {
+    //     return id;
+    //   }
+    // }
+
     @Controller('/')
     class TestController {
+      // extends TestControllerAbs {
       @Get(':id')
       public getTest(@RequestParam('id') id: number) {
         return id;
       }
     }
     appTest.addClass(TestController);
-    await appTest.build();
-    const response = await supertest(appTest.app)
+    await appTest.buildAndStart();
+    const response = await appTest
+      .supertest()
       .get('/0')
       .expect(200);
 
@@ -57,8 +66,9 @@ describe('Parameters:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.build();
-    const response = await supertest(appTest.app)
+    await appTest.buildAndStart();
+    const response = await appTest
+      .supertest()
       .get('/foo')
       .expect(200);
     expect(response).toMatchSnapshot();
@@ -73,8 +83,9 @@ describe('Parameters:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.build();
-    const response = await supertest(appTest.app)
+    await appTest.buildAndStart();
+    const response = await appTest
+      .supertest()
       .get('/42')
       .expect(200);
     expect(response).toMatchSnapshot();
@@ -89,8 +100,9 @@ describe('Parameters:', () => {
       }
     }
     appTest.addClass(TestController);
-    await appTest.build();
-    const response = await supertest(appTest.app)
+    await appTest.buildAndStart();
+    const response = await appTest
+      .supertest()
       .get('/GET')
       .expect(200);
     expect(response).toMatchSnapshot();
@@ -106,8 +118,9 @@ describe('Parameters:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
-    const response = await supertest(appTest.app)
+    await appTest.buildAndStart();
+    const response = await appTest
+      .supertest()
       .get('/')
       .expect(200);
     expect(response).toMatchSnapshot();
@@ -123,8 +136,9 @@ describe('Parameters:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
-    const response = await supertest(appTest.app)
+    await appTest.buildAndStart();
+    const response = await appTest
+      .supertest()
       .get('/')
       .query('id=lolilol')
       .expect(200);
@@ -141,8 +155,9 @@ describe('Parameters:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
-    const response = await supertest(appTest.app)
+    await appTest.buildAndStart();
+    const response = await appTest
+      .supertest()
       .get('/')
       .query('id=12')
       .expect(200);
@@ -159,8 +174,9 @@ describe('Parameters:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
-    const response = await supertest(appTest.app)
+    await appTest.buildAndStart();
+    const response = await appTest
+      .supertest()
       .post('/')
       .send({ foo: 'bar' })
       .expect(200);
@@ -177,8 +193,9 @@ describe('Parameters:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
-    const response = await supertest(appTest.app)
+    await appTest.buildAndStart();
+    const response = await appTest
+      .supertest()
       .get('/')
       .set('TestHead', 'fooTestHead')
       .expect(200);
@@ -211,8 +228,9 @@ describe('Parameters:', () => {
 
     appTest.addClass(ServiceConfig);
     appTest.addClass(TestController);
-    await appTest.build();
-    const response = await supertest(appTest.app)
+    await appTest.buildAndStart();
+    const response = await appTest
+      .supertest()
       .get('/')
       .expect(200);
     expect(response).toMatchSnapshot();
@@ -236,8 +254,9 @@ describe('Parameters:', () => {
     }
 
     appTest.addClass(TestController);
-    await appTest.build();
-    const response = await supertest(appTest.app)
+    await appTest.buildAndStart();
+    const response = await appTest
+      .supertest()
       .get('/')
       .expect(200);
     expect(spy.calledOnce).toBe(true);

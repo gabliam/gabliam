@@ -7,6 +7,18 @@
 Gabliam plugin for add web-core.
 All decorators and utils for web
 
+# Concepts
+
+## ServerStarter
+
+This class is used for start the server. By default, use [HttpServerStarter](./src/server-starter.ts)
+
+## REQUEST_LISTENER_CREATOR
+
+Must return an function that create a [RequestListener](./src/interface.ts#L19)
+Use by the serverstarter.
+
+
 # License
 
   MIT

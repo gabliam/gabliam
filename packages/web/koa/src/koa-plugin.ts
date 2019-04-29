@@ -13,6 +13,7 @@ import {
   ExecutionContext,
   getContext,
   InterceptorInfo,
+  REQUEST_LISTENER_CREATOR,
   RestMetadata,
   SERVER,
   WebConfiguration,
@@ -38,6 +39,11 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
     webConfiguration: WebConfiguration
   ): void {
     container.bind(APP).toConstantValue(new koa());
+    container.bind(REQUEST_LISTENER_CREATOR).toConstantValue(() => {
+      const app = container.get<koa>(APP);
+      app.silent = true;
+      return app.callback();
+    });
 
     webConfiguration.addwebConfig({
       instance: addMiddlewares,
@@ -144,7 +150,7 @@ export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
       const controller = execCtx.getClass();
 
       const callNext = async () => {
-        const args = methodInfo.extractArgs(ctx, execCtx, next);
+        const args = await methodInfo.extractArgs(ctx, execCtx, next);
         return await toPromise(controller[methodInfo.methodName](...args));
       };
 

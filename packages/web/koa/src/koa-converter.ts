@@ -27,7 +27,7 @@ export class KoaConverter {
       throw new BadInterceptorError(instance);
     }
 
-    const extractArgs = getExtractArgs(instance, 'intercept');
+    const extractArgs = getExtractArgs(container, instance, 'intercept', true);
 
     return async (context: koa.Context, next: () => Promise<any>) => {
       let wasCalled = false;
@@ -36,7 +36,7 @@ export class KoaConverter {
         await next();
       };
 
-      const args = extractArgs(getContext(context.req), null, nextWrap);
+      const args = await extractArgs(getContext(context.req), null, nextWrap);
       await toPromise((instance['intercept'] as any)(...args));
 
       if (!wasCalled) {

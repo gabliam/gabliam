@@ -1,11 +1,13 @@
 import {
-  Container,
-  PluginConfig,
-  OnMissingBean,
   Bean,
+  Container,
   inversifyInterfaces,
+  OnMissingBean,
+  PluginConfig,
 } from '@gabliam/core';
 import { SERVER_STARTER } from './constants';
+import { PipeId } from './metadatas';
+import { SendErrorInterceptor } from './send-error-interceptor';
 import { HttpServerStarter } from './server-starter';
 
 /**
@@ -40,9 +42,10 @@ export class WebConfiguration<T = any> {
 
   private _webconfigAfterCtrl: Configuration<T>[] = [];
 
-  private _globalInterceptors: inversifyInterfaces.ServiceIdentifier<
-    any
-  >[] = [];
+  private _globalInterceptors: inversifyInterfaces.ServiceIdentifier<any>[] = [
+    SendErrorInterceptor,
+  ];
+  private _globalPipes: PipeId[] = [];
 
   addwebConfig(webConfig: Configuration<T>) {
     this._webconfig.push(webConfig);
@@ -56,6 +59,10 @@ export class WebConfiguration<T = any> {
     this._globalInterceptors.push(...ids);
   }
 
+  useGlobalPipes(...ids: inversifyInterfaces.ServiceIdentifier<any>[]) {
+    this._globalPipes.push(...ids);
+  }
+
   get webConfigs() {
     return this._webconfig.slice();
   }
@@ -66,6 +73,10 @@ export class WebConfiguration<T = any> {
 
   get globalInterceptors() {
     return this._globalInterceptors;
+  }
+
+  get globalPipes() {
+    return this._globalPipes;
   }
 }
 
