@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`koa integration Controller update req values req.body 1`] = `
+exports[`express integration Controller update req values req.body 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -22,7 +22,7 @@ Object {
 }
 `;
 
-exports[`koa integration Controller update req values req.headers 1`] = `
+exports[`express integration Controller update req values req.headers 1`] = `
 Object {
   "accept": "application/json",
   "accept-encoding": "gzip, deflate",
@@ -33,7 +33,7 @@ Object {
 }
 `;
 
-exports[`koa integration Controller update req values req.headers 2`] = `
+exports[`express integration Controller update req values req.headers 2`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -52,7 +52,7 @@ Object {
 }
 `;
 
-exports[`koa integration Controller update req values req.params 1`] = `
+exports[`express integration Controller update req values req.params 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -69,7 +69,7 @@ Object {
 }
 `;
 
-exports[`koa integration Controller update req values req.query 1`] = `
+exports[`express integration Controller update req values req.query 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -86,130 +86,7 @@ Object {
 }
 `;
 
-exports[`koa integration Controller validations req.body 1`] = `
-Object {
-  "header": Object {
-    "connection": "close",
-    "content-length": "915",
-    "content-security-policy": "default-src 'none'",
-    "content-type": "text/html; charset=utf-8",
-    "x-content-type-options": "nosniff",
-  },
-  "req": Object {
-    "data": Object {
-      "first": "john",
-      "last": 123,
-    },
-    "headers": Object {
-      "content-type": "application/json",
-    },
-    "method": "POST",
-  },
-  "status": 400,
-  "text": "<!DOCTYPE html>
-<html lang=\\"en\\">
-<head>
-<meta charset=\\"utf-8\\">
-<title>Error</title>
-</head>
-<body>
-<pre>Error: child &quot;last&quot; fails because [&quot;last&quot; must be a string]<br> &nbsp; &nbsp;at Object.&lt;anonymous&gt;.exports.createValidationException (<PROJECT_ROOT>/packages/web/validate-joi/src/errors/validation-error.ts:33:3)<br> &nbsp; &nbsp;at <PROJECT_ROOT>/packages/web/validate-joi/src/validate/validate-request.ts:18:11<br> &nbsp; &nbsp;at ValidateInterceptor.intercept (<PROJECT_ROOT>/packages/web/validate-joi/src/validate/validate-interceptor.ts:37:19)<br> &nbsp; &nbsp;at dispatch (<PROJECT_ROOT>/packages/web/web-core/src/utils.ts:243:44)<br> &nbsp; &nbsp;at process._tickCallback (internal/process/next_tick.js:68:7)</pre>
-</body>
-</html>
-",
-}
-`;
-
-exports[`koa integration Controller validations req.headers 1`] = `
-Object {
-  "header": Object {
-    "connection": "close",
-    "content-length": "994",
-    "content-security-policy": "default-src 'none'",
-    "content-type": "text/html; charset=utf-8",
-    "x-content-type-options": "nosniff",
-  },
-  "req": Object {
-    "data": undefined,
-    "headers": Object {
-      "accept": "application/json",
-    },
-    "method": "GET",
-  },
-  "status": 400,
-  "text": "<!DOCTYPE html>
-<html lang=\\"en\\">
-<head>
-<meta charset=\\"utf-8\\">
-<title>Error</title>
-</head>
-<body>
-<pre>Error: child &quot;accept&quot; fails because [&quot;accept&quot; with value &quot;application&amp;#x2f;json&quot; fails to match the required pattern: /xml/]<br> &nbsp; &nbsp;at Object.&lt;anonymous&gt;.exports.createValidationException (<PROJECT_ROOT>/packages/web/validate-joi/src/errors/validation-error.ts:33:3)<br> &nbsp; &nbsp;at <PROJECT_ROOT>/packages/web/validate-joi/src/validate/validate-request.ts:18:11<br> &nbsp; &nbsp;at ValidateInterceptor.intercept (<PROJECT_ROOT>/packages/web/validate-joi/src/validate/validate-interceptor.ts:37:19)<br> &nbsp; &nbsp;at dispatch (<PROJECT_ROOT>/packages/web/web-core/src/utils.ts:243:44)<br> &nbsp; &nbsp;at process._tickCallback (internal/process/next_tick.js:68:7)</pre>
-</body>
-</html>
-",
-}
-`;
-
-exports[`koa integration Controller validations req.params 1`] = `
-Object {
-  "header": Object {
-    "connection": "close",
-    "content-length": "952",
-    "content-security-policy": "default-src 'none'",
-    "content-type": "text/html; charset=utf-8",
-    "x-content-type-options": "nosniff",
-  },
-  "req": Object {
-    "data": undefined,
-    "headers": Object {},
-    "method": "GET",
-  },
-  "status": 400,
-  "text": "<!DOCTYPE html>
-<html lang=\\"en\\">
-<head>
-<meta charset=\\"utf-8\\">
-<title>Error</title>
-</head>
-<body>
-<pre>Error: child &quot;id&quot; fails because [&quot;id&quot; must only contain alpha-numeric and underscore characters]<br> &nbsp; &nbsp;at Object.&lt;anonymous&gt;.exports.createValidationException (<PROJECT_ROOT>/packages/web/validate-joi/src/errors/validation-error.ts:33:3)<br> &nbsp; &nbsp;at <PROJECT_ROOT>/packages/web/validate-joi/src/validate/validate-request.ts:18:11<br> &nbsp; &nbsp;at ValidateInterceptor.intercept (<PROJECT_ROOT>/packages/web/validate-joi/src/validate/validate-interceptor.ts:37:19)<br> &nbsp; &nbsp;at dispatch (<PROJECT_ROOT>/packages/web/web-core/src/utils.ts:243:44)<br> &nbsp; &nbsp;at process._tickCallback (internal/process/next_tick.js:68:7)</pre>
-</body>
-</html>
-",
-}
-`;
-
-exports[`koa integration Controller validations req.query 1`] = `
-Object {
-  "header": Object {
-    "connection": "close",
-    "content-length": "873",
-    "content-security-policy": "default-src 'none'",
-    "content-type": "text/html; charset=utf-8",
-    "x-content-type-options": "nosniff",
-  },
-  "req": Object {
-    "data": undefined,
-    "headers": Object {},
-    "method": "GET",
-  },
-  "status": 400,
-  "text": "<!DOCTYPE html>
-<html lang=\\"en\\">
-<head>
-<meta charset=\\"utf-8\\">
-<title>Error</title>
-</head>
-<body>
-<pre>Error: &quot;end&quot; is not allowed<br> &nbsp; &nbsp;at Object.&lt;anonymous&gt;.exports.createValidationException (<PROJECT_ROOT>/packages/web/validate-joi/src/errors/validation-error.ts:33:3)<br> &nbsp; &nbsp;at <PROJECT_ROOT>/packages/web/validate-joi/src/validate/validate-request.ts:18:11<br> &nbsp; &nbsp;at ValidateInterceptor.intercept (<PROJECT_ROOT>/packages/web/validate-joi/src/validate/validate-interceptor.ts:37:19)<br> &nbsp; &nbsp;at dispatch (<PROJECT_ROOT>/packages/web/web-core/src/utils.ts:243:44)<br> &nbsp; &nbsp;at process._tickCallback (internal/process/next_tick.js:68:7)</pre>
-</body>
-</html>
-",
-}
-`;
-
-exports[`koa integration RestController update req values req.body 1`] = `
+exports[`express integration RestController update req values req.body 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -231,7 +108,7 @@ Object {
 }
 `;
 
-exports[`koa integration RestController update req values req.headers 1`] = `
+exports[`express integration RestController update req values req.headers 1`] = `
 Object {
   "accept": "application/json",
   "accept-encoding": "gzip, deflate",
@@ -242,7 +119,7 @@ Object {
 }
 `;
 
-exports[`koa integration RestController update req values req.headers 2`] = `
+exports[`express integration RestController update req values req.headers 2`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -261,7 +138,7 @@ Object {
 }
 `;
 
-exports[`koa integration RestController update req values req.params 1`] = `
+exports[`express integration RestController update req values req.params 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -278,7 +155,7 @@ Object {
 }
 `;
 
-exports[`koa integration RestController update req values req.query 1`] = `
+exports[`express integration RestController update req values req.query 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -295,7 +172,7 @@ Object {
 }
 `;
 
-exports[`koa integration RestController validations req.body 1`] = `
+exports[`express integration RestController validations req.body 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -317,7 +194,7 @@ Object {
 }
 `;
 
-exports[`koa integration RestController validations req.headers 1`] = `
+exports[`express integration RestController validations req.headers 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -336,7 +213,7 @@ Object {
 }
 `;
 
-exports[`koa integration RestController validations req.params 1`] = `
+exports[`express integration RestController validations req.params 1`] = `
 Object {
   "header": Object {
     "connection": "close",
@@ -353,7 +230,7 @@ Object {
 }
 `;
 
-exports[`koa integration RestController validations req.query 1`] = `
+exports[`express integration RestController validations req.query 1`] = `
 Object {
   "header": Object {
     "connection": "close",

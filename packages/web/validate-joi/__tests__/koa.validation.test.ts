@@ -11,7 +11,7 @@ import {
   RestController,
 } from '@gabliam/web-core';
 import { WebPluginTest } from '@gabliam/web-core/lib/testing';
-import { Validate } from '../';
+import { Validate } from '../src';
 
 let appTest: WebPluginTest;
 
@@ -23,7 +23,7 @@ afterEach(async () => {
   await appTest.destroy();
 });
 
-describe('koa integration', () => {
+describe('express integration', () => {
   [
     {
       name: 'RestController',
@@ -59,7 +59,12 @@ describe('koa integration', () => {
           .get('/')
           .set('Accept', 'application/json')
           .expect(400);
-        expect(response).toMatchSnapshot();
+        if (decorator.name === 'Controller') {
+          expect(response.status).toBe(400);
+          expect(response.text).toBeDefined();
+        } else {
+          expect(response).toMatchSnapshot();
+        }
       });
 
       it('req.params', async () => {
@@ -82,7 +87,13 @@ describe('koa integration', () => {
           .supertest()
           .get('/user/@@')
           .expect(400);
-        expect(response).toMatchSnapshot();
+
+        if (decorator.name === 'Controller') {
+          expect(response.status).toBe(400);
+          expect(response.text).toBeDefined();
+        } else {
+          expect(response).toMatchSnapshot();
+        }
       });
 
       it('req.query', async () => {
@@ -105,7 +116,12 @@ describe('koa integration', () => {
           .supertest()
           .get('/?end=lol')
           .expect(400);
-        expect(response).toMatchSnapshot();
+        if (decorator.name === 'Controller') {
+          expect(response.status).toBe(400);
+          expect(response.text).toBeDefined();
+        } else {
+          expect(response).toMatchSnapshot();
+        }
       });
 
       it('req.body', async () => {
@@ -135,7 +151,12 @@ describe('koa integration', () => {
             last: 123,
           })
           .expect(400);
-        expect(response).toMatchSnapshot();
+        if (decorator.name === 'Controller') {
+          expect(response.status).toBe(400);
+          expect(response.text).toBeDefined();
+        } else {
+          expect(response).toMatchSnapshot();
+        }
       });
     });
 

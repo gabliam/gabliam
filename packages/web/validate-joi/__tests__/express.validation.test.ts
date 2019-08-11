@@ -59,7 +59,12 @@ describe('express integration', () => {
           .get('/')
           .set('Accept', 'application/json')
           .expect(400);
-        expect(response).toMatchSnapshot();
+        if (decorator.name === 'Controller') {
+          expect(response.status).toBe(400);
+          expect(response.text).toBeDefined();
+        } else {
+          expect(response).toMatchSnapshot();
+        }
       });
 
       it('req.params', async () => {
@@ -82,7 +87,13 @@ describe('express integration', () => {
           .supertest()
           .get('/user/@@')
           .expect(400);
-        expect(response).toMatchSnapshot();
+
+        if (decorator.name === 'Controller') {
+          expect(response.status).toBe(400);
+          expect(response.text).toBeDefined();
+        } else {
+          expect(response).toMatchSnapshot();
+        }
       });
 
       it('req.query', async () => {
@@ -105,7 +116,12 @@ describe('express integration', () => {
           .supertest()
           .get('/?end=lol')
           .expect(400);
-        expect(response).toMatchSnapshot();
+        if (decorator.name === 'Controller') {
+          expect(response.status).toBe(400);
+          expect(response.text).toBeDefined();
+        } else {
+          expect(response).toMatchSnapshot();
+        }
       });
 
       it('req.body', async () => {
@@ -135,7 +151,12 @@ describe('express integration', () => {
             last: 123,
           })
           .expect(400);
-        expect(response).toMatchSnapshot();
+        if (decorator.name === 'Controller') {
+          expect(response.status).toBe(400);
+          expect(response.text).toBeDefined();
+        } else {
+          expect(response).toMatchSnapshot();
+        }
       });
     });
 

@@ -5633,10 +5633,10 @@ jest-serializer-path@^0.1.15:
     lodash.iserror "^3.1.1"
     slash "^2.0.0"
 
-jest-serializer-supertest@^1.6.4:
-  version "1.6.4"
-  resolved "https://registry.yarnpkg.com/jest-serializer-supertest/-/jest-serializer-supertest-1.6.4.tgz#b80628390884b8823453f4990f856bc600bef5bd"
-  integrity sha512-Ehur3QJJK4P4MITP8ewA79QSXiP03f4QS8f0XYsCky/iLgTMf08lKCill1PGFwsOIb9SoYej6hagU3TOyc8nvA==
+jest-serializer-supertest@^1.6.5:
+  version "1.6.5"
+  resolved "https://registry.yarnpkg.com/jest-serializer-supertest/-/jest-serializer-supertest-1.6.5.tgz#2ed954e013dca9cac1f2425d47b3937a64cbc7e1"
+  integrity sha512-vOxB/3rrkdHFM+d9Gj15Dck9ZPZf/EECWckdT1P5Bh2n8gFPTOYgRwkdeRjfoZJeT6rK2AM/z3bhav+9ru4zfA==
   dependencies:
     lodash.has "^4.5.2"
     lodash.unset "^4.5.2"
