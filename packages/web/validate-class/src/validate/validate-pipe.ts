@@ -12,7 +12,7 @@ export class ValidatePipe implements Pipe {
     if (!type || !this.toValidate(type)) {
       return value;
     }
-    const entity = classTransformer.plainToClass(
+    const entity = classTransformer.plainToClass<any, any>(
       type,
       this.toEmptyIfNil(value),
       this.options.transformOptions

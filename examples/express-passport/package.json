@@ -22,20 +22,20 @@
     "@gabliam/web-core": "0.0.0-PLACEHOLDER",
     "boom": "^7.3.0",
     "cerialize": "^0.1.18",
-    "express-session": "^1.15.6",
-    "helmet": "^3.16.0",
-    "lokijs": "^1.5.6",
+    "express-session": "^1.16.2",
+    "helmet": "^3.20.0",
+    "lokijs": "^1.5.7",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "reflect-metadata": "^0.1.9",
-    "tslib": "^1.9.3"
+    "tslib": "^1.10.0"
   },
   "devDependencies": {
-    "@types/boom": "^7.2.1",
+    "@types/boom": "^7.3.0",
     "@types/helmet": "^0.0.43",
     "@types/lokijs": "^1.2.30",
     "@types/passport": "^1.0.0",
     "@types/passport-local": "^1.0.33",
-    "nodemon": "^1.18.9"
+    "nodemon": "^1.19.1"
   }
 }

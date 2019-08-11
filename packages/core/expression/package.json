@@ -31,13 +31,13 @@
   "devDependencies": {
     "@types/escodegen": "^0.0.6",
     "@types/esprima": "^4.0.2",
-    "@types/node": "^11.13.0"
+    "@types/node": "^12.7.1"
   },
   "dependencies": {
     "escodegen": "^1.11.0",
     "esprima": "^4.0.1",
     "is-valid-path": "^0.1.1",
-    "tslib": "^1.9.3"
+    "tslib": "^1.10.0"
   },
   "engines": {
     "node": ">=8.9.0"

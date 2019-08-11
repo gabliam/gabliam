@@ -43,9 +43,9 @@
     "@gabliam/web-core": "0.0.0-PLACEHOLDER"
   },
   "dependencies": {
-    "class-transformer": "^0.2.0",
-    "class-validator": "^0.9.1",
-    "tslib": "^1.9.3"
+    "class-transformer": "^0.2.3",
+    "class-validator": "^0.10.0",
+    "tslib": "^1.10.0"
   },
   "engines": {
     "node": ">=8.9.0"
