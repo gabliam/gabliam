@@ -53,7 +53,7 @@ describe('Errors', () => {
         },
       },
     });
-    await expect(appTest.gab.buildAndStart()).rejects.toMatchSnapshot();
+    await expect(appTest.gab.buildAndStart()).rejects.toThrow();
   });
 
   test('without queueName', async () => {
