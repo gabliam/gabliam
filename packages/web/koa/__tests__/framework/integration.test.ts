@@ -14,7 +14,7 @@ import {
   Put,
   RestController,
 } from '@gabliam/web-core';
-import { WebPluginTest } from '@gabliam/web-core/lib/testing';
+import { WebPluginTest } from '@gabliam/web-core/src/testing';
 import { CUSTOM_ROUTER_CREATOR } from '../../src/constants';
 import KoaPlugin, { koaRouter } from '../../src/index';
 

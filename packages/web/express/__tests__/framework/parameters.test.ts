@@ -15,7 +15,7 @@ import {
   Response,
   WebConfig,
 } from '@gabliam/web-core';
-import { WebPluginTest } from '@gabliam/web-core/lib/testing';
+import { WebPluginTest } from '@gabliam/web-core/src/testing';
 import * as sinon from 'sinon';
 import ExpressPlugin, { express as e } from '../../src';
 

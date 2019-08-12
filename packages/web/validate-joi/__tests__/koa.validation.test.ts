@@ -10,7 +10,7 @@ import {
   RequestParam,
   RestController,
 } from '@gabliam/web-core';
-import { WebPluginTest } from '@gabliam/web-core/lib/testing';
+import { WebPluginTest } from '@gabliam/web-core/src/testing';
 import { Validate } from '../src';
 
 let appTest: WebPluginTest;

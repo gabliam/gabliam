@@ -12,7 +12,7 @@ import {
   Put,
   RestController,
 } from '@gabliam/web-core';
-import { WebPluginTest } from '@gabliam/web-core/lib/testing';
+import { WebPluginTest } from '@gabliam/web-core/src/testing';
 import ExpressPlugin, { express as e } from '../../src';
 import { CUSTOM_ROUTER_CREATOR } from '../../src/constants';
 

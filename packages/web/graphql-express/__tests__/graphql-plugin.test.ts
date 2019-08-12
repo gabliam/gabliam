@@ -1,7 +1,7 @@
 import { Config, Gabliam } from '@gabliam/core';
 import * as sinon from 'sinon';
 import { GraphqlPlugin } from '../src/graphql-plugin';
-import { GabliamTest } from '@gabliam/core/lib/testing';
+import { GabliamTest } from '@gabliam/core/src/testing';
 import ExpressPlugin from '@gabliam/express';
 import * as path from 'path';
 

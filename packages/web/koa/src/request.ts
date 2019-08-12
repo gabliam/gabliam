@@ -144,7 +144,7 @@ export class KoaRequest implements GabRequest<koa.Request> {
    * In koa, when you set value to query, koa update querystring with qs.stringify.
    * When validate interceptor is used, if you set Joi.number, validate cast query to number.
    *
-   * @see {@link https://github.com/koajs/koa/blob/master/lib/request.js#L186}
+   * @see {@link https://github.com/koajs/koa/blob/master/src/request.js#L186}
    */
   private _query: any = {};
 

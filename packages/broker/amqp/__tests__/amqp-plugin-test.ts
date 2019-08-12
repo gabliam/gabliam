@@ -1,5 +1,5 @@
 import { Gabliam } from '@gabliam/core';
-import { GabliamTest } from '@gabliam/core/lib/testing';
+import { GabliamTest } from '@gabliam/core/src/testing';
 import AmqpPlugin from '../src/index';
 
 export class AmqpPluginTest extends GabliamTest {

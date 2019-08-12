@@ -13,8 +13,8 @@ module.exports = {
     "!**/vendor/**"
   ],
   "moduleNameMapper": {
-    "@gabliam/core/lib/(.*)": "<rootDir>/packages/core/core/src/$1",
-    "@gabliam/web-core/lib/(.*)": "<rootDir>/packages/web/web-core/src/$1",
+    "@gabliam/core/src/(.*)": "<rootDir>/packages/core/core/src/$1",
+    "@gabliam/web-core/src/(.*)": "<rootDir>/packages/web/web-core/src/$1",
     "@gabliam/amqp": "<rootDir>/packages/broker/amqp/src/index.ts",
     "@gabliam/cache": "<rootDir>/packages/cache/cache/src/index.ts",
     "@gabliam/cache-redis": "<rootDir>/packages/cache/cache-redis/src/index.ts",

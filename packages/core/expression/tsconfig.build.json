@@ -4,7 +4,17 @@
     "sourceMap": false,
     "outDir": "../../../dist/packages/core/expression",
     "baseUrl": ".",
-    "rootDir": "."
+    "rootDir": ".",
+    "paths": {
+      "@gabliam/*": [
+        "../../../dist/packages/broker/*",
+        "../../../dist/packages/cache/*",
+        "../../../dist/packages/core/*",
+        "../../../dist/packages/database/*",
+        "../../../dist/packages/web/*",
+        "../../../dist/packages/tools/*"
+      ]
+    }
   },
   "include":[
     "index.ts",

@@ -4,7 +4,7 @@ import {
   ResponseEntity,
   RestController,
 } from '@gabliam/web-core';
-import { WebPluginTest } from '@gabliam/web-core/lib/testing';
+import { WebPluginTest } from '@gabliam/web-core/src/testing';
 import * as HttpStatus from 'http-status-codes';
 import KoaPlugin from '../../src';
 

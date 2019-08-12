@@ -8,7 +8,7 @@ import {
   RequestBody,
   Post,
 } from '@gabliam/web-core';
-import { WebPluginTest } from '@gabliam/web-core/lib/testing';
+import { WebPluginTest } from '@gabliam/web-core/src/testing';
 import { Validate } from '../src';
 import { Header, Header2 } from './fixtures/header';
 import { Params, Params2 } from './fixtures/params';

@@ -6,8 +6,14 @@
     "baseUrl": ".",
     "rootDir": ".",
     "paths": {
-      "@gabliam/core": ["../../../dist/packages/core/core"],
-      "@gabliam/log4js": ["../../../dist/packages/tools/log4js"]
+      "@gabliam/*": [
+        "../../../dist/packages/broker/*",
+        "../../../dist/packages/cache/*",
+        "../../../dist/packages/core/*",
+        "../../../dist/packages/database/*",
+        "../../../dist/packages/web/*",
+        "../../../dist/packages/tools/*"
+      ]
     }
   },
   "include":[

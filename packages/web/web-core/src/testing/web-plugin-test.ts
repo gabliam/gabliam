@@ -1,5 +1,5 @@
 import { Gabliam, GabliamPluginConstructor } from '@gabliam/core';
-import { GabliamTest } from '@gabliam/core/lib/testing';
+import { GabliamTest } from '@gabliam/core/src/testing';
 import {
   requestListenerCreator,
   REQUEST_LISTENER_CREATOR,

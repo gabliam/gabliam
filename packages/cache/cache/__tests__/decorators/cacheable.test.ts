@@ -1,4 +1,4 @@
-import { GabliamTest } from '@gabliam/core/lib/testing';
+import { GabliamTest } from '@gabliam/core/src/testing';
 import {
   SimpleCacheManager,
   MemoryCache,

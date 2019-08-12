@@ -1,5 +1,5 @@
 import { Gabliam } from '@gabliam/core';
-import { GabliamTest } from '@gabliam/core/lib/testing';
+import { GabliamTest } from '@gabliam/core/src/testing';
 import Log4jsPlugin from '../src/index';
 
 export class Log4jsPluginTest extends GabliamTest {
