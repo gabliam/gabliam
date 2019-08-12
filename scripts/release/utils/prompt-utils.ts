@@ -13,7 +13,7 @@ export const select = async <T = any>(
     validate,
     filter,
   }: RequireOnlyOne<
-    Pick<inquirer.Question, 'choices' | 'validate' | 'filter'>,
+    Pick<inquirer.CheckboxQuestion, 'choices' | 'validate' | 'filter'>,
     'choices'
   >
 ): Promise<T> => {
@@ -23,7 +23,7 @@ export const select = async <T = any>(
       name: 'prompt',
       message,
       choices,
-      pageSize: choices.length,
+      pageSize: (<any>choices).length,
       filter,
       validate,
     },
