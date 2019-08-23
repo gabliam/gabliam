@@ -4,11 +4,11 @@ import {
   inversifyInterfaces,
   reflection,
 } from '@gabliam/core';
-import { extractArgsFn } from './interface';
-import { UseInterceptors } from './metadatas';
-import { getExtractArgs } from './utils';
-import { WebConfiguration } from './web-configuration';
-import { BadInterceptorError } from './errors';
+import { BadInterceptorError } from '../errors';
+import { extractArgsFn } from '../interface';
+import { UseInterceptors } from '../metadatas';
+import { getExtractArgs } from '../utils';
+import { WebConfiguration } from '../web-configuration';
 
 /**
  * InterceptorConstructor

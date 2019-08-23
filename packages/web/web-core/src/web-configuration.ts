@@ -6,8 +6,8 @@ import {
   PluginConfig,
 } from '@gabliam/core';
 import { SERVER_STARTER } from './constants';
+import { SendErrorInterceptor } from './interceptors';
 import { PipeId } from './metadatas';
-import { SendErrorInterceptor } from './send-error-interceptor';
 import { HttpServerStarter } from './server-starter';
 
 /**

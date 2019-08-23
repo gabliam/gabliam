@@ -6,7 +6,7 @@ import {
   Value,
 } from '@gabliam/core';
 import { WEB_PLUGIN_CONFIG } from './constants';
-import { InterceptorInfo } from './interceptor';
+import { InterceptorInfo } from './interceptors';
 import { extractArgsFn } from './interface';
 
 export interface WebPluginConfig {

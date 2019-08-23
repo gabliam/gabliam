@@ -1,13 +1,13 @@
 import { Service } from '@gabliam/core';
 import * as escapeHtml from 'escape-html';
 import * as statuses from 'statuses';
-import { HttpException } from './exceptions';
-import { ExecutionContext } from './execution-context';
-import { GabResponse } from './gab-response';
-import { Interceptor } from './interceptor';
-import { nextFn } from './interface';
-import { ExecContext, Next, Response } from './metadatas';
-import { ResponseEntity } from './response-entity';
+import { HttpException } from '../exceptions';
+import { ExecutionContext } from '../execution-context';
+import { GabResponse } from '../gab-response';
+import { nextFn } from '../interface';
+import { ExecContext, Next, Response } from '../metadatas';
+import { ResponseEntity } from '../response-entity';
+import { Interceptor } from './utils';
 
 @Service()
 export class SendErrorInterceptor implements Interceptor {

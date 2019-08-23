@@ -15,7 +15,7 @@ import {
   extractInterceptors,
   InterceptorInfo,
   getGlobalInterceptors,
-} from './interceptor';
+} from './interceptors';
 import { convertValueFn, extractArgsFn } from './interface';
 import {
   ControllerMetadata,

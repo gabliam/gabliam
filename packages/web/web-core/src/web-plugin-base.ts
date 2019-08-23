@@ -50,23 +50,6 @@ export abstract class WebPluginBase {
   }
 
   /**
-   * Building phase
-   *
-   * @param  {Container} container - The container
-   * @param  {Registry} registry - The registry
-   */
-  async build(container: Container, registry: Registry) {
-    // this.buildWebConfig(container, registry);
-    // await toPromise(
-    //   this.buildControllers(
-    //     extractControllerMetadata(container, registry),
-    //     container
-    //   )
-    // );
-    // this.buildWebConfigAfterCtrl(container, registry);
-  }
-
-  /**
    * Management of @WebConfig and @WebConfigAfterControllers decorator in config class
    *
    * @param  {Container} container - The container

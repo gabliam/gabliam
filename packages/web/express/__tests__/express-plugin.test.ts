@@ -5,7 +5,6 @@ import * as sinon from 'sinon';
 import { ExpressPlugin } from '../src/express-plugin';
 
 describe('test plugin', () => {
-  const build = sinon.spy(ExpressPlugin.prototype, 'build');
   const bind = sinon.spy(ExpressPlugin.prototype, 'bind');
   const config = sinon.spy(ExpressPlugin.prototype, 'config');
   const start = sinon.spy(ExpressPlugin.prototype, 'start');
@@ -24,7 +23,6 @@ describe('test plugin', () => {
     });
 
     afterAll(() => {
-      build.resetHistory();
       bind.resetHistory();
       config.resetHistory();
       start.resetHistory();
@@ -34,7 +32,6 @@ describe('test plugin', () => {
 
     test('gabliam build', async () => {
       await gab.build();
-      expect(build.calledOnce).toBe(true);
       expect(bind.calledOnce).toBe(true);
       expect(config.callCount).toMatchSnapshot();
     });
@@ -65,7 +62,6 @@ describe('test plugin', () => {
     });
 
     afterAll(() => {
-      build.resetHistory();
       bind.resetHistory();
       config.resetHistory();
       start.resetHistory();
@@ -75,7 +71,6 @@ describe('test plugin', () => {
 
     test('gabliam build', async () => {
       await gab.build();
-      expect(build.calledOnce).toBe(true);
       expect(bind.calledOnce).toBe(true);
       expect(config.calledOnce).toBe(false);
     });

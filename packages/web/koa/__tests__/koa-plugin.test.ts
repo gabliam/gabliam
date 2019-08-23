@@ -5,7 +5,6 @@ import { GabliamTest } from '@gabliam/core/src/testing';
 import * as path from 'path';
 
 describe('test plugin', () => {
-  const build = sinon.spy(KoaPlugin.prototype, 'build');
   const bind = sinon.spy(KoaPlugin.prototype, 'bind');
   const config = sinon.spy(KoaPlugin.prototype, 'config');
   const start = sinon.spy(KoaPlugin.prototype, 'start');
@@ -24,7 +23,6 @@ describe('test plugin', () => {
     });
 
     afterAll(() => {
-      build.resetHistory();
       bind.resetHistory();
       config.resetHistory();
       start.resetHistory();
@@ -34,7 +32,6 @@ describe('test plugin', () => {
 
     test('gabliam build', async () => {
       await gab.build();
-      expect(build.calledOnce).toBe(true);
       expect(bind.calledOnce).toBe(true);
       expect(config.callCount).toMatchSnapshot();
     });
@@ -65,7 +62,6 @@ describe('test plugin', () => {
     });
 
     afterAll(() => {
-      build.resetHistory();
       bind.resetHistory();
       config.resetHistory();
       start.resetHistory();
@@ -75,7 +71,6 @@ describe('test plugin', () => {
 
     test('gabliam build', async () => {
       await gab.build();
-      expect(build.calledOnce).toBe(true);
       expect(bind.calledOnce).toBe(true);
       expect(config.calledOnce).toBe(false);
     });

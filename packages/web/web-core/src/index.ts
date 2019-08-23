@@ -6,7 +6,7 @@ export * from './execution-context';
 export * from './gab-context';
 export * from './gab-request';
 export * from './gab-response';
-export * from './interceptor';
+export * from './interceptors';
 export * from './interface';
 export * from './metadatas';
 export * from './pipe';
