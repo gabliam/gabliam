@@ -1,7 +1,7 @@
 import { Gabliam, GabliamPluginConstructor } from '@gabliam/core';
 import { GabliamTest } from '@gabliam/core/src/testing';
 import {
-  requestListenerCreator,
+  RequestListenerCreator,
   REQUEST_LISTENER_CREATOR,
 } from '@gabliam/web-core';
 import * as supertest from 'supertest';
@@ -21,7 +21,7 @@ export class WebPluginTest extends GabliamTest {
     this.addConf('application.web.verbose', false);
     await super.build();
     const container = this.gab.container;
-    const listener = container.get<requestListenerCreator>(
+    const listener = container.get<RequestListenerCreator>(
       REQUEST_LISTENER_CREATOR
     );
     container.rebind(REQUEST_LISTENER_CREATOR).toConstantValue(() => {

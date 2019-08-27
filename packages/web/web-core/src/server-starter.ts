@@ -1,15 +1,15 @@
-import { Container, gabliamValue, Registry } from '@gabliam/core';
-import { createServer } from 'http';
-import {
-  REQUEST_LISTENER_CREATOR,
-  SERVER,
-  WEB_PLUGIN_CONFIG,
-} from './constants';
-import { requestListenerCreator } from './interface';
+import { gabliamValue } from '@gabliam/core';
+import { createServer, Server } from 'http';
+import { RequestListenerCreator } from './interface';
 import { WebPluginConfig } from './plugin-config';
+import { WebConfiguration } from './web-configuration';
 
 export interface ServerStarter {
-  start(container: Container, registry: Registry): gabliamValue<void>;
+  start(
+    restConfig: WebPluginConfig,
+    webConfiguration: WebConfiguration,
+    listenerCreator: RequestListenerCreator
+  ): gabliamValue<Server>;
 }
 
 /**
@@ -19,19 +19,21 @@ export interface ServerStarter {
  * Graphql override this class
  */
 export class HttpServerStarter implements ServerStarter {
-  start(container: Container, registry: Registry) {
-    const restConfig = container.get<WebPluginConfig>(WEB_PLUGIN_CONFIG);
+  start(
+    restConfig: WebPluginConfig,
+    webConfiguration: WebConfiguration,
+    listenerCreator: RequestListenerCreator
+  ) {
     const { port, verbose } = restConfig;
 
-    const listenerCreator = container.get<requestListenerCreator>(
-      REQUEST_LISTENER_CREATOR
-    );
-
-    const server = createServer(listenerCreator());
+    let server = createServer(listenerCreator());
     server.listen(port, restConfig.hostname);
     server.on('error', onError);
     server.on('listening', onListening);
-    container.bind(SERVER).toConstantValue(server);
+
+    for (const serverConfig of webConfiguration.serverConfigs) {
+      server = serverConfig(server);
+    }
 
     /* istanbul ignore next */
     function onError(error: NodeJS.ErrnoException): void {
@@ -69,5 +71,7 @@ export class HttpServerStarter implements ServerStarter {
         console.log(`Listening on ${bind}`);
       }
     }
+
+    return server;
   }
 }

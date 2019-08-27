@@ -1,16 +1,12 @@
 import { GraphqlPluginTest } from './graphql-plugin-test';
-import { HeroController } from './fixtures/controllers/heroController';
-import { PhotoController } from './fixtures/controllers/photoController';
-import * as path from 'path';
+import { HeroResolver } from './fixtures/resolvers/hero-resolver';
+import { PhotoResolver } from './fixtures/resolvers/photo-resolver';
 
 let appTest: GraphqlPluginTest;
 beforeEach(async () => {
   appTest = new GraphqlPluginTest();
-  appTest.addClass(HeroController);
-  appTest.addClass(PhotoController);
-  appTest.addConf('application.graphql.graphqlFiles', [
-    path.resolve(__dirname, './fixtures/controllers/schemas/photoinput.gql'),
-  ]);
+  appTest.addClass(HeroResolver);
+  appTest.addClass(PhotoResolver);
   await appTest.buildAndStart();
 });
 
@@ -59,6 +55,6 @@ test('Mutation test', async () => {
     .expect(200);
 
   expect(res).toMatchSnapshot();
-  const ctrl = appTest.gab.container.get(HeroController);
+  const ctrl = appTest.gab.container.get(HeroResolver);
   expect(ctrl.heroRepository).toMatchSnapshot();
 });

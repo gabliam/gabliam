@@ -11,7 +11,9 @@ let gab: Gabliam;
 describe('with config', () => {
   beforeAll(() => {
     const g = new GabliamTest(
-      new Gabliam().addPlugin(ExpressPlugin).addPlugin(GraphqlPlugin)
+      new Gabliam({ scanPath: path.resolve(__dirname, './fixtures') })
+        .addPlugin(ExpressPlugin)
+        .addPlugin(GraphqlPlugin)
     );
     gab = g.gab;
 
@@ -32,10 +34,7 @@ describe('with config', () => {
 
 describe('without config', () => {
   beforeAll(() => {
-    gab = new Gabliam({
-      scanPath: path.resolve(__dirname, './fixtures/gabliam'),
-      config: path.resolve(__dirname, './fixtures/gabliam/config'),
-    });
+    gab = new Gabliam();
     gab.addPlugin(ExpressPlugin).addPlugin(GraphqlPlugin);
   });
 
@@ -44,7 +43,6 @@ describe('without config', () => {
   });
 
   test('gabliam build', async () => {
-    await gab.build();
-    expect(build.calledOnce).toBe(true);
+    expect(gab.build()).rejects.toMatchSnapshot();
   });
 });

@@ -24,14 +24,10 @@ export class GraphqlPluginConfig {
   @Value('application.graphql.playground.config', GraphiqlOptionsValidator)
   private playground: PlaygroundConfig;
 
-  @Value('application.graphql.graphqlFiles', Joi.array().items(Joi.string()))
-  private graphqlFiles: string[] | undefined;
-
   @Bean(GRAPHQL_CONFIG)
   creatreConfig(): GraphqlConfig {
     const graphqlConfig: GraphqlConfig = {
       endpointUrl: this.endpointUrl,
-      graphqlFiles: this.graphqlFiles,
       playground: this.playground,
     };
     debug('GraphqlConfig', graphqlConfig);
