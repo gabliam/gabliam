@@ -308,7 +308,7 @@ export const RequestParam: RequestParamDecorator = makeWebParamDecorator(
       res = get(ctx.request.params, path);
     }
 
-    if (type && type.name === 'Number') {
+    if (res && type && type.name === 'Number') {
       try {
         // parseFloat for compatibility with integer and float
         res = Number.parseFloat(res);
@@ -370,7 +370,7 @@ export const QueryParam: QueryParamDecorator = makeWebParamDecorator(
       res = get(ctx.request.query, path);
     }
 
-    if (type && type.name === 'Number') {
+    if (res && type && type.name === 'Number') {
       try {
         // parseFloat for compatibility with integer and float
         res = Number.parseFloat(res);

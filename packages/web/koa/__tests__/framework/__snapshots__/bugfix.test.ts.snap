@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Bugfix #3 Can't use number as default parameter value in rest controller QueryParam 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "13",
+    "content-type": "application/json; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "[\\"number\\",10]",
+}
+`;

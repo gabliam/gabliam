@@ -31,17 +31,8 @@ afterEach(async () => {
 
 describe('Parameters:', () => {
   test('bug parameter when value is number and passed 0', async () => {
-    // @Controller('/')
-    // class TestControllerAbs {
-    //   @Get(':id')
-    //   public getTest(@RequestParam('lol') id: number) {
-    //     return id;
-    //   }
-    // }
-
     @Controller('/')
     class TestController {
-      // extends TestControllerAbs {
       @Get(':id')
       public getTest(@RequestParam('id') id: number) {
         return id;
