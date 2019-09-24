@@ -6,12 +6,19 @@ import {
   Scan,
   toPromise,
 } from '@gabliam/core';
-import { APP, SERVER_STARTER } from './constants';
+import {
+  APP,
+  REQUEST_LISTENER_CREATOR,
+  SERVER,
+  SERVER_STARTER,
+  WEB_PLUGIN_CONFIG,
+} from './constants';
+import { RequestListenerCreator } from './interface';
 import { WebConfig, WebConfigAfterControllers } from './metadatas';
-import { RestMetadata } from './plugin-config';
+import { RestMetadata, WebPluginConfig } from './plugin-config';
+import { ServerStarter } from './server-starter';
 import { extractControllerMetadata } from './utils';
 import { WebConfiguration } from './web-configuration';
-import { ServerStarter } from './server-starter';
 
 /**
  * Base class for web plugin.
@@ -98,7 +105,17 @@ export abstract class WebPluginBase {
     );
     this.buildWebConfigAfterCtrl(container, registry);
     const serverStarter = container.get<ServerStarter>(SERVER_STARTER);
-    await toPromise(serverStarter.start(container, registry));
+
+    const restConfig = container.get<WebPluginConfig>(WEB_PLUGIN_CONFIG);
+    const webConfiguration = container.get(WebConfiguration);
+    const listenerCreator = container.get<RequestListenerCreator>(
+      REQUEST_LISTENER_CREATOR
+    );
+
+    const server = await toPromise(
+      serverStarter.start(restConfig, webConfiguration, listenerCreator)
+    );
+    container.bind(SERVER).toConstantValue(server);
   }
 
   abstract stop(container: Container, registry: Registry): gabliamValue<void>;

@@ -4,6 +4,7 @@ import { GraphqlPlugin } from '../src/graphql-plugin';
 import { GabliamTest } from '@gabliam/core/src/testing';
 import KoaPlugin from '@gabliam/koa';
 import * as path from 'path';
+import { HeroResolver } from './fixtures/resolvers/hero-resolver';
 
 const build = sinon.spy(GraphqlPlugin.prototype, 'build');
 let gab: Gabliam;
@@ -18,6 +19,7 @@ describe('with config', () => {
     @Config()
     class Conf {}
     g.addClass(Conf);
+    g.addClass(HeroResolver);
   });
 
   afterAll(() => {
@@ -32,11 +34,16 @@ describe('with config', () => {
 
 describe('without config', () => {
   beforeAll(() => {
-    gab = new Gabliam({
-      scanPath: path.resolve(__dirname, './fixtures/gabliam'),
-      config: path.resolve(__dirname, './fixtures/gabliam/config'),
-    });
-    gab.addPlugin(KoaPlugin).addPlugin(GraphqlPlugin);
+    const g = new GabliamTest(
+      new Gabliam({
+        scanPath: path.resolve(__dirname, './fixtures/gabliam'),
+        config: path.resolve(__dirname, './fixtures/gabliam/config'),
+      })
+        .addPlugin(KoaPlugin)
+        .addPlugin(GraphqlPlugin)
+    );
+    gab = g.gab;
+    g.addClass(HeroResolver);
   });
 
   afterAll(() => {

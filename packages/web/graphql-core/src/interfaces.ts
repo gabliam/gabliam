@@ -11,6 +11,4 @@ export type extractArgsFn = (
 export interface GraphqlConfig {
   endpointUrl: string;
   playground: PlaygroundConfig;
-
-  graphqlFiles: string[] | undefined;
 }

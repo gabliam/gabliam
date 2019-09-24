@@ -1,6 +1,6 @@
 application:
-    typeorm:
-        connectionOptions:
-            type: sqlite
-            database: photo.sqlite
-            synchronize: true
+  typeorm:
+    connectionOptions:
+      type: sqlite
+      database: photo.sqlite
+      synchronize: true

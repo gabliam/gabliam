@@ -9,6 +9,7 @@ import { SERVER_STARTER } from './constants';
 import { SendErrorInterceptor } from './interceptors';
 import { PipeId } from './metadatas';
 import { HttpServerStarter } from './server-starter';
+import { ServerConfig } from './interface';
 
 /**
  * Config function
@@ -47,6 +48,8 @@ export class WebConfiguration<T = any> {
   ];
   private _globalPipes: PipeId[] = [];
 
+  private _serverConfigs: ServerConfig[] = [];
+
   addwebConfig(webConfig: Configuration<T>) {
     this._webconfig.push(webConfig);
   }
@@ -63,6 +66,10 @@ export class WebConfiguration<T = any> {
     this._globalPipes.push(...ids);
   }
 
+  addServerConfigs(...configs: ServerConfig[]) {
+    this._serverConfigs.push(...configs);
+  }
+
   get webConfigs() {
     return this._webconfig.slice();
   }
@@ -77,6 +84,10 @@ export class WebConfiguration<T = any> {
 
   get globalPipes() {
     return this._globalPipes;
+  }
+
+  get serverConfigs() {
+    return this._serverConfigs;
   }
 }
 

@@ -1,16 +1,24 @@
-import { Entity, Column, PrimaryGeneratedColumn } from '@gabliam/typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from '@gabliam/typeorm';
+import { Field, ID, Int, ObjectType } from 'type-graphql';
 
+@ObjectType()
 @Entity()
 export class Hero {
-  @PrimaryGeneratedColumn() id: number;
+  @Field(type => ID)
+  @PrimaryGeneratedColumn()
+  readonly id: number;
 
+  @Field()
   @Column({
-    length: 500
+    length: 500,
   })
   name: string;
 
-  @Column() power: string;
+  @Field()
+  @Column()
+  power: string;
 
+  @Field(type => Int, { defaultValue: 0 })
   @Column('int', { default: 0 })
   amountPeopleSaved = 0;
 }

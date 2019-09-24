@@ -27,7 +27,6 @@ export class GraphqlPlugin extends GraphqlCorePlugin implements GabliamPlugin {
     const webConfiguration = container.get<
       WebConfiguration<express.Application>
     >(WebConfiguration);
-
     const apolloServer = new ApolloServer({
       schema,
       playground: graphqlPluginConfig.playground,

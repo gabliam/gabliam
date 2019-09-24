@@ -1,19 +1,32 @@
-import { Entity, Column, PrimaryGeneratedColumn } from '@gabliam/typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from '@gabliam/typeorm';
+import { Field, ID, Int, ObjectType } from 'type-graphql';
 
+@ObjectType()
 @Entity()
 export class Photo {
-  @PrimaryGeneratedColumn() id: number;
+  @Field(type => ID)
+  @PrimaryGeneratedColumn()
+  readonly id: number;
 
+  @Field()
   @Column({
-    length: 500
+    length: 500,
   })
   name: string;
 
-  @Column('text') description: string;
+  @Field()
+  @Column('text')
+  description: string;
 
-  @Column() fileName: string;
+  @Field()
+  @Column()
+  fileName: string;
 
-  @Column('int') views: number;
+  @Field(type => Int)
+  @Column('int')
+  views: number;
 
-  @Column() isPublished: boolean;
+  @Field()
+  @Column()
+  isPublished: boolean;
 }
