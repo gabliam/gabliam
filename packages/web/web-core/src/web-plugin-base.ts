@@ -10,13 +10,11 @@ import {
   APP,
   REQUEST_LISTENER_CREATOR,
   SERVER,
-  SERVER_STARTER,
   WEB_PLUGIN_CONFIG,
 } from './constants';
 import { RequestListenerCreator } from './interface';
 import { WebConfig, WebConfigAfterControllers } from './metadatas';
 import { RestMetadata, WebPluginConfig } from './plugin-config';
-import { ServerStarter } from './server-starter';
 import { extractControllerMetadata } from './utils';
 import {
   WebConfiguration,
@@ -113,10 +111,11 @@ export abstract class WebPluginBase<T> {
       )
     );
     this.buildWebConfigAfterCtrl(container, registry);
-    const serverStarter = container.get<ServerStarter>(SERVER_STARTER);
 
     const restConfig = container.get<WebPluginConfig>(WEB_PLUGIN_CONFIG);
     const webConfiguration = container.get(WebConfiguration);
+    const serverStarter = webConfiguration.serverStarter;
+
     const listenerCreator = container.get<RequestListenerCreator>(
       REQUEST_LISTENER_CREATOR
     );

@@ -1,15 +1,8 @@
-import {
-  Bean,
-  Container,
-  inversifyInterfaces,
-  OnMissingBean,
-  PluginConfig,
-} from '@gabliam/core';
-import { SERVER_STARTER } from './constants';
+import { Container, inversifyInterfaces } from '@gabliam/core';
 import { SendErrorInterceptor } from './interceptors';
 import { ServerConfig } from './interface';
 import { PipeId } from './metadatas';
-import { HttpServerStarter } from './server-starter';
+import { HttpServerStarter, ServerStarter } from './server-starter';
 
 /**
  * Config function
@@ -69,6 +62,19 @@ export interface WebConfigurationContructor<T = any> {
    * Call on all methods
    */
   serverConfigs: ServerConfig[];
+
+  /**
+   * Inlude Error Interceptor
+   * By default true
+   */
+  includeErrorInterceptor: boolean;
+
+  /**
+   * Server starter
+   *
+   * By default HttpServerStarter
+   */
+  serverStarter: ServerStarter;
 }
 
 /**
@@ -81,33 +87,39 @@ export class WebConfiguration<T = any> {
 
   private _webconfigAfterCtrl: Configuration<T>[] = [];
 
-  private _globalInterceptors: inversifyInterfaces.ServiceIdentifier<any>[] = [
-    SendErrorInterceptor,
-  ];
+  private _globalInterceptors: inversifyInterfaces.ServiceIdentifier<
+    any
+  >[] = [];
   private _globalPipes: PipeId[] = [];
 
   private _serverConfigs: ServerConfig[] = [];
 
+  private _serverStarter: ServerStarter;
+
   constructor(config?: Partial<WebConfigurationContructor<T>>) {
-    if (config) {
-      if (config.webconfig) {
-        this._webconfig.push(...config.webconfig);
-      }
-      if (config.webconfigAfterCtrl) {
-        this._webconfigAfterCtrl.push(...config.webconfigAfterCtrl);
-      }
+    this._serverStarter = config?.serverStarter ?? new HttpServerStarter();
 
-      if (config.globalInterceptors) {
-        this._globalInterceptors.push(...config.globalInterceptors);
-      }
+    if (config?.includeErrorInterceptor ?? true) {
+      this._globalInterceptors.push(SendErrorInterceptor);
+    }
 
-      if (config.globalPipes) {
-        this._globalPipes.push(...config.globalPipes);
-      }
+    if (config?.webconfig) {
+      this._webconfig.push(...config.webconfig);
+    }
+    if (config?.webconfigAfterCtrl) {
+      this._webconfigAfterCtrl.push(...config.webconfigAfterCtrl);
+    }
 
-      if (config.serverConfigs) {
-        this._serverConfigs.push(...config.serverConfigs);
-      }
+    if (config?.globalInterceptors) {
+      this._globalInterceptors.push(...config.globalInterceptors);
+    }
+
+    if (config?.globalPipes) {
+      this._globalPipes.push(...config.globalPipes);
+    }
+
+    if (config?.serverConfigs) {
+      this._serverConfigs.push(...config.serverConfigs);
     }
   }
 
@@ -150,13 +162,8 @@ export class WebConfiguration<T = any> {
   get serverConfigs() {
     return this._serverConfigs;
   }
-}
 
-@PluginConfig()
-export class BaseConfig {
-  @OnMissingBean(SERVER_STARTER)
-  @Bean(SERVER_STARTER)
-  createServerStarter() {
-    return new HttpServerStarter();
+  get serverStarter() {
+    return this._serverStarter;
   }
 }
