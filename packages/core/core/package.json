@@ -16,12 +16,12 @@
   ],
   "dependencies": {
     "@gabliam/expression": "0.0.0-PLACEHOLDER",
-    "@types/joi": "^14.3.3",
+    "@types/joi": "^14.3.4",
     "caller": "^1.0.1",
     "co": "^4.6.0",
     "debug": "^4.1.1",
-    "glob": "^7.1.4",
-    "graph-data-structure": "^1.8.0",
+    "glob": "^7.1.6",
+    "graph-data-structure": "^1.9.0",
     "inversify": "^5.0.1",
     "inversify-logger-middleware": "^3.0.0",
     "joi": "^14.3.1",
@@ -33,13 +33,13 @@
   },
   "devDependencies": {
     "@types/debug": "^4.1.5",
-    "@types/fs-extra": "^8.0.0",
+    "@types/fs-extra": "^8.0.1",
     "@types/glob": "^7.1.1",
     "@types/js-yaml": "^3.12.1",
-    "@types/lodash": "^4.14.136",
+    "@types/lodash": "^4.14.149",
     "fs-extra": "^8.1.0",
     "properties": "^1.2.1",
-    "rxjs": "^6.5.2",
+    "rxjs": "^6.5.3",
     "toml": "2.3.3"
   },
   "repository": {

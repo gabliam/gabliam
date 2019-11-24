@@ -44,7 +44,7 @@ Array [
           "defaultValue": [Function],
           "getters": Array [],
           "instance": "ObjectID",
-          "options": Object {
+          "options": SchemaObjectIdOptions {
             "auto": true,
             "type": [Function],
           },
@@ -61,7 +61,7 @@ Array [
           "getters": Array [],
           "instance": "String",
           "isRequired": true,
-          "options": Object {
+          "options": SchemaStringOptions {
             "required": true,
             "type": [Function],
           },
@@ -156,7 +156,7 @@ Array [
           "defaultValue": [Function],
           "getters": Array [],
           "instance": "ObjectID",
-          "options": Object {
+          "options": SchemaObjectIdOptions {
             "auto": true,
             "type": [Function],
           },
@@ -173,7 +173,7 @@ Array [
           "getters": Array [],
           "instance": "String",
           "isRequired": true,
-          "options": Object {
+          "options": SchemaStringOptions {
             "required": true,
             "type": [Function],
           },
@@ -269,7 +269,7 @@ Array [
           "defaultValue": [Function],
           "getters": Array [],
           "instance": "ObjectID",
-          "options": Object {
+          "options": SchemaObjectIdOptions {
             "auto": true,
             "type": [Function],
           },
@@ -286,7 +286,7 @@ Array [
           "getters": Array [],
           "instance": "String",
           "isRequired": true,
-          "options": Object {
+          "options": SchemaStringOptions {
             "required": true,
             "type": [Function],
           },

@@ -131,7 +131,7 @@ exports[`express integration validations req.params 1`] = `
 Object {
   "header": Object {
     "connection": "close",
-    "content-length": "149",
+    "content-length": "189",
     "content-type": "application/json; charset=utf-8",
   },
   "req": Object {
@@ -140,7 +140,7 @@ Object {
     "method": "GET",
   },
   "status": 400,
-  "text": "{\\"statusCode\\":400,\\"error\\":\\"Bad Request\\",\\"validation\\":[{\\"value\\":\\"@@\\",\\"property\\":\\"id\\",\\"children\\":[],\\"constraints\\":{\\"isNumber\\":\\"id must be a number\\"}}]}",
+  "text": "{\\"statusCode\\":400,\\"error\\":\\"Bad Request\\",\\"validation\\":[{\\"value\\":\\"@@\\",\\"property\\":\\"id\\",\\"children\\":[],\\"constraints\\":{\\"isNumber\\":\\"id must be a number conforming to the specified constraints\\"}}]}",
 }
 `;
 

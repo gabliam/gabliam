@@ -37,20 +37,20 @@
     "@gabliam/log4js": "0.0.0-PLACEHOLDER",
     "@types/amqp-connection-manager": "^2.0.4",
     "@types/amqplib": "^0.5.13",
-    "@types/bluebird": "^3.5.27",
+    "@types/bluebird": "^3.5.29",
     "@types/debug": "^4.1.5",
-    "@types/lodash": "^4.14.136",
-    "@types/node": "^12.7.1",
-    "@types/uuid": "^3.4.5"
+    "@types/lodash": "^4.14.149",
+    "@types/node": "^12.12.12",
+    "@types/uuid": "^3.4.6"
   },
   "dependencies": {
     "amqp-connection-manager": "^3.0.0",
     "amqplib": "^0.5.5",
-    "bluebird": "^3.5.5",
+    "bluebird": "^3.7.1",
     "debug": "^4.1.1",
     "lodash": "^4.17.15",
     "tslib": "^1.10.0",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.3"
   },
   "engines": {
     "node": ">=8.9.0"
