@@ -7,9 +7,9 @@ import {
 } from '@gabliam/core';
 import { SERVER_STARTER } from './constants';
 import { SendErrorInterceptor } from './interceptors';
+import { ServerConfig } from './interface';
 import { PipeId } from './metadatas';
 import { HttpServerStarter } from './server-starter';
-import { ServerConfig } from './interface';
 
 /**
  * Config function
@@ -33,6 +33,44 @@ export interface Configuration<T = any> {
   instance: ConfigFunction<T>;
 }
 
+export interface WebConfigurationContructor<T = any> {
+  /**
+   * All web config
+   *
+   * Function call before build controller
+   *
+   * For add configuration of you server (express or koa middleware)
+   */
+  webconfig: Configuration<T>[];
+
+  /**
+   * All web config
+   *
+   * Function call after build controller
+   *
+   * For add configuration of you server (express middleware of error)
+   */
+  webconfigAfterCtrl: Configuration<T>[];
+
+  /**
+   * All interceptors.
+   * Call on all methods
+   */
+  globalInterceptors: inversifyInterfaces.ServiceIdentifier<any>[];
+
+  /**
+   * All pipes.
+   * Call on all methods
+   */
+  globalPipes: PipeId[];
+
+  /**
+   * All pipes.
+   * Call on all methods
+   */
+  serverConfigs: ServerConfig[];
+}
+
 /**
  * Web Config
  *
@@ -49,6 +87,29 @@ export class WebConfiguration<T = any> {
   private _globalPipes: PipeId[] = [];
 
   private _serverConfigs: ServerConfig[] = [];
+
+  constructor(config?: Partial<WebConfigurationContructor<T>>) {
+    if (config) {
+      if (config.webconfig) {
+        this._webconfig.push(...config.webconfig);
+      }
+      if (config.webconfigAfterCtrl) {
+        this._webconfigAfterCtrl.push(...config.webconfigAfterCtrl);
+      }
+
+      if (config.globalInterceptors) {
+        this._globalInterceptors.push(...config.globalInterceptors);
+      }
+
+      if (config.globalPipes) {
+        this._globalPipes.push(...config.globalPipes);
+      }
+
+      if (config.serverConfigs) {
+        this._serverConfigs.push(...config.serverConfigs);
+      }
+    }
+  }
 
   addwebConfig(webConfig: Configuration<T>) {
     this._webconfig.push(webConfig);

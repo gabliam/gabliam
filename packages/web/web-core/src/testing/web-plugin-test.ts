@@ -1,4 +1,4 @@
-import { Gabliam, GabliamPluginConstructor } from '@gabliam/core';
+import { Gabliam, GabliamAddPlugin } from '@gabliam/core';
 import { GabliamTest } from '@gabliam/core/src/testing';
 import {
   RequestListenerCreator,
@@ -9,7 +9,7 @@ import * as supertest from 'supertest';
 const SUPERTEST = Symbol('SUPERTEST');
 
 export class WebPluginTest extends GabliamTest {
-  constructor(plugins: GabliamPluginConstructor[] = []) {
+  constructor(plugins: GabliamAddPlugin[] = []) {
     const gab = new Gabliam();
     if (Array.isArray(plugins) && plugins.length) {
       gab.addPlugins(...plugins);

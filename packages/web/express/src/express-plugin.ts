@@ -17,6 +17,7 @@ import {
   RestMetadata,
   SERVER,
   WebConfiguration,
+  WebConfigurationContructor,
   WebPluginBase,
   WebPluginConfig,
   WEB_PLUGIN_CONFIG,
@@ -34,7 +35,14 @@ const debug = d('Gabliam:Plugin:ExpressPlugin');
 
 @Plugin('ExpressPlugin')
 @Scan()
-export class ExpressPlugin extends WebPluginBase implements GabliamPlugin {
+export class ExpressPlugin extends WebPluginBase<express.Application>
+  implements GabliamPlugin {
+  constructor(
+    config?: Partial<WebConfigurationContructor<express.Application>>
+  ) {
+    super(config);
+  }
+
   bindApp(
     container: Container,
     registry: Registry,

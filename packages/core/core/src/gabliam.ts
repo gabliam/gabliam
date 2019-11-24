@@ -6,8 +6,8 @@ import { APP_CONFIG, CORE_CONFIG, TYPE, VALUE_EXTRACTOR } from './constants';
 import { Container, createContainer } from './container';
 import {
   ConfigRegistry,
+  GabliamAddPlugin,
   GabliamConfig,
-  GabliamPluginConstructor,
   PreDestroyRegistry,
   ValueRegistry,
 } from './interfaces';
@@ -90,7 +90,7 @@ export class Gabliam {
    * @param  {GabliamPluginConstructor} plugin
    * @returns Gabliam
    */
-  public addPlugin(plugin: GabliamPluginConstructor): Gabliam {
+  public addPlugin(plugin: GabliamAddPlugin): Gabliam {
     this.pluginList.add(plugin);
     return this;
   }
@@ -99,7 +99,7 @@ export class Gabliam {
    * @param  {GabliamPluginConstructor[]} ...plugins
    * @returns Gabliam
    */
-  public addPlugins(...plugins: GabliamPluginConstructor[]): Gabliam {
+  public addPlugins(...plugins: Array<GabliamAddPlugin>): Gabliam {
     for (const plugin of plugins) {
       this.addPlugin(plugin);
     }

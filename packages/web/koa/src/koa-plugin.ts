@@ -18,6 +18,7 @@ import {
   SERVER,
   WebConfiguration,
   WebPluginBase,
+  WebConfigurationContructor,
 } from '@gabliam/web-core';
 import * as d from 'debug';
 import * as http from 'http';
@@ -32,7 +33,11 @@ const debug = d('Gabliam:Plugin:ExpressPlugin');
 
 @Plugin('KoaPlugin')
 @Scan()
-export class KoaPlugin extends WebPluginBase implements GabliamPlugin {
+export class KoaPlugin extends WebPluginBase<koa> implements GabliamPlugin {
+  constructor(config?: Partial<WebConfigurationContructor<koa>>) {
+    super(config);
+  }
+
   bindApp(
     container: Container,
     registry: Registry,

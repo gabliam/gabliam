@@ -2,6 +2,7 @@ import * as Graph from 'graph-data-structure';
 import * as _ from 'lodash';
 import { InvalidPluginError, PluginDependencyIsMissingError } from './errors';
 import {
+  GabliamAddPlugin,
   GabliamPlugin,
   GabliamPluginConstructor,
   GabliamPluginDefinition,
@@ -16,6 +17,52 @@ import {
 import { Plugin } from './metadatas';
 import { reflection } from './reflection';
 
+const getPluginDefinition = (
+  definition: GabliamAddPlugin
+): GabliamPluginDefinition => {
+  let pluginMetadata = reflection.annotationsOfDecorator<Plugin>(
+    definition,
+    Plugin
+  );
+
+  let ctor: GabliamPluginConstructor | undefined;
+  let plugin: GabliamPlugin | undefined;
+  // if class doesn't have plugin metadata, so throw error
+  if (pluginMetadata.length === 0 && definition.constructor) {
+    pluginMetadata = reflection.annotationsOfDecorator<Plugin>(
+      definition.constructor,
+      Plugin
+    );
+    if (pluginMetadata.length !== 0) {
+      plugin = <GabliamPlugin>definition;
+      ctor = <GabliamPluginConstructor>definition.constructor;
+    }
+  } else {
+    ctor = <GabliamPluginConstructor>definition;
+    plugin = new ctor();
+  }
+
+  if (ctor === undefined) {
+    throw new InvalidPluginError();
+  }
+
+  const [{ name: pluginName }] = (
+    reflection.annotationsOfDecorator<Plugin>(ctor, Plugin, false) || []
+  ).slice(-1);
+
+  const name = pluginName || ctor.name;
+
+  const dependencies = pluginMetadata.reduce<PluginDependency[]>(
+    (prev, current) => {
+      prev.push(...current.dependencies);
+      return prev;
+    },
+    []
+  );
+
+  return { plugin: plugin!, name, dependencies };
+};
+
 /**
  * Plugin registry
  */
@@ -25,37 +72,8 @@ export class PluginList {
   /**
    * Add a plugin
    */
-  add(ctor: GabliamPluginConstructor): GabliamPluginDefinition {
-    const pluginMetadata = reflection.annotationsOfDecorator<Plugin>(
-      ctor,
-      Plugin
-    );
-
-    // if class doesn't have plugin metadata, so throw error
-    if (pluginMetadata.length === 0) {
-      throw new InvalidPluginError();
-    }
-
-    const [{ name: pluginName }] = (
-      reflection.annotationsOfDecorator<Plugin>(ctor, Plugin, false) || []
-    ).slice(-1);
-
-    const name = pluginName || ctor.name;
-
-    // get all dependencies (inherit)
-    const dependencies = pluginMetadata.reduce<PluginDependency[]>(
-      (prev, current) => {
-        prev.push(...current.dependencies);
-        return prev;
-      },
-      []
-    );
-
-    const def: GabliamPluginDefinition = {
-      name,
-      dependencies,
-      plugin: new ctor(),
-    };
+  add(definition: GabliamAddPlugin): GabliamPluginDefinition {
+    const def = getPluginDefinition(definition);
     this._plugins.push(def);
     return def;
   }

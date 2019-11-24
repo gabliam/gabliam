@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GlobalInterceptor should call global-level interceptor correctly 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "3",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "GET",
+}
+`;
+
+exports[`GlobalInterceptor should call global-level interceptor correctly 2`] = `"abc"`;
+
+exports[`globalPipes should call global-level pipe correctly 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "5",
+    "content-type": "text/plain; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {},
+    "method": "GET",
+  },
+  "status": 200,
+  "text": "lolab",
+}
+`;

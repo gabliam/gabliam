@@ -20,6 +20,8 @@ export interface GabliamConfig {
   config?: string | LoaderConfigOptions[];
 }
 
+export type GabliamAddPlugin = GabliamPluginConstructor | GabliamPlugin;
+
 /**
  * Interface of plugin constructor
  */
@@ -63,7 +65,7 @@ type RequireOnlyOne<T, Keys extends keyof T = keyof T> = Pick<
 > &
   {
     [K in Keys]-?: Required<Pick<T, K>> &
-      Partial<Record<Exclude<Keys, K>, undefined>>
+      Partial<Record<Exclude<Keys, K>, undefined>>;
   }[Keys];
 
 export type GabliamPluginWithBuild = RequireOnlyOne<GabliamPlugin, 'build'>;

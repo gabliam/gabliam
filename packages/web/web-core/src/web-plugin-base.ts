@@ -18,13 +18,22 @@ import { WebConfig, WebConfigAfterControllers } from './metadatas';
 import { RestMetadata, WebPluginConfig } from './plugin-config';
 import { ServerStarter } from './server-starter';
 import { extractControllerMetadata } from './utils';
-import { WebConfiguration } from './web-configuration';
+import {
+  WebConfiguration,
+  WebConfigurationContructor,
+} from './web-configuration';
 
 /**
  * Base class for web plugin.
  */
 @Scan()
-export abstract class WebPluginBase {
+export abstract class WebPluginBase<T> {
+  private webConfiguration: WebConfiguration<T>;
+
+  constructor(config?: Partial<WebConfigurationContructor<T>>) {
+    this.webConfiguration = new WebConfiguration(config);
+  }
+
   /**
    * Bind the app. In this method, you create the application and bind.
    *
@@ -51,7 +60,7 @@ export abstract class WebPluginBase {
    * @param  {Registry} registry - The registry.
    */
   async bind(container: Container, registry: Registry) {
-    const webConfiguration = new WebConfiguration();
+    const webConfiguration = this.webConfiguration;
     container.bind(WebConfiguration).toConstantValue(webConfiguration);
     await toPromise(this.bindApp(container, registry, webConfiguration));
   }

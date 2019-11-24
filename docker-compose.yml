@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  rabbitmq:
+    image: rabbitmq:alpine
+    ports:
+      - "5672:5672"
+
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+
+
+  redis-server:
+    image: redis
+    ports:
+      - "6379:6379"
