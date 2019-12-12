@@ -28,14 +28,14 @@ export class SendErrorInterceptor implements Interceptor {
         const status = getErrorStatusCode(err) || getResponseStatusCode(res);
 
         // get error message
-        const msg = getErrorMessage(err, status, env);
+        const msg = getErrorMessage(err, status, env, true);
 
         return createResponse({ status, error: msg }, status);
       }
 
       if (err instanceof HttpException) {
         const status = err.getStatus();
-        const msg = getErrorMessage(err, status, env);
+        const msg = getErrorMessage(err, status, env, false);
         const body = createHtmlDocument(msg);
 
         return createResponse(body, status);
@@ -90,7 +90,7 @@ function createResponse(body: string | object, status: number) {
   return res;
 }
 
-function getErrorMessage(err: any, status: number, env: string) {
+function getErrorMessage(err: any, status: number, env: string, json: boolean) {
   if (status === 204) {
     return '';
   }
@@ -101,9 +101,12 @@ function getErrorMessage(err: any, status: number, env: string) {
     // use err.stack, which typically includes err.message
     msg = err.stack;
 
-    // fallback to err.toString() when possible
-    if (!msg && typeof err.toString === 'function') {
-      msg = err.toString();
+    if (!msg) {
+      if (json) {
+        msg = err;
+      } else if (typeof err.toString === 'function') {
+        msg = err.toString();
+      }
     }
   }
 
