@@ -32,6 +32,7 @@
     "tslib": "^1.10.0"
   },
   "devDependencies": {
+    "@iarna/toml": "^2.2.3",
     "@types/debug": "^4.1.5",
     "@types/fs-extra": "^8.0.1",
     "@types/glob": "^7.1.1",
@@ -39,8 +40,7 @@
     "@types/lodash": "^4.14.149",
     "fs-extra": "^8.1.0",
     "properties": "^1.2.1",
-    "rxjs": "^6.5.3",
-    "toml": "2.3.3"
+    "rxjs": "^6.5.3"
   },
   "repository": {
     "type": "git",

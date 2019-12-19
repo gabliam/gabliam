@@ -96,7 +96,13 @@ exports[`with bad parser 1`] = `[ParserNotSupportedError: The parser "badparser"
 
 exports[`with bad toml 1`] = `
 [LoaderConfigParseError: Error during parsing of file "<TEMP_DIR>/mock-fs-test/test/config/application.toml".
-    SyntaxError: Expected "#", "'", "[", "/"", "/n", "/r", [ /t], [A-Za-z0-9_/-] or end of input but ";" found.
+    TomlError: Unknown character "59" at row 2, col 1, pos 2:
+1: 
+2> ;;;;[application]
+   ^
+3: host = "127.0.0.1"
+
+
     ]
 `;
 

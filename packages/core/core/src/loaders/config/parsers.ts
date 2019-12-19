@@ -51,10 +51,13 @@ const getPropertiesParser = (): Parser => {
 const getTomlParser = (): Parser => {
   let toml: any;
   try {
-    toml = require('toml');
+    toml = require('@iarna/toml');
   } catch {
     /* istanbul ignore next */
-    throw new LoaderConfigParserPgkNotInstalledError('toml', 'toml');
+    throw new LoaderConfigParserPgkNotInstalledError(
+      '@iarna/toml',
+      '@iarna/toml'
+    );
   }
   return (data: string) => Promise.resolve(toml.parse(data));
 };
