@@ -35,6 +35,7 @@ Array [
         "shardKey": null,
         "strict": true,
         "typeKey": "type",
+        "typePojoToMixed": true,
         "validateBeforeSave": true,
         "versionKey": "__v",
       },
@@ -46,7 +47,7 @@ Array [
           "instance": "ObjectID",
           "options": SchemaObjectIdOptions {
             "auto": true,
-            "type": [Function],
+            "type": "ObjectId",
           },
           "path": "_id",
           "setters": Array [
@@ -94,7 +95,7 @@ Array [
       "tree": Object {
         "_id": Object {
           "auto": true,
-          "type": [Function],
+          "type": "ObjectId",
         },
         "name": Object {
           "required": true,
@@ -147,6 +148,7 @@ Array [
         "shardKey": null,
         "strict": true,
         "typeKey": "type",
+        "typePojoToMixed": true,
         "validateBeforeSave": true,
         "versionKey": "__v",
       },
@@ -158,7 +160,7 @@ Array [
           "instance": "ObjectID",
           "options": SchemaObjectIdOptions {
             "auto": true,
-            "type": [Function],
+            "type": "ObjectId",
           },
           "path": "_id",
           "setters": Array [
@@ -206,7 +208,7 @@ Array [
       "tree": Object {
         "_id": Object {
           "auto": true,
-          "type": [Function],
+          "type": "ObjectId",
         },
         "name": Object {
           "required": true,
@@ -260,6 +262,7 @@ Array [
         "shardKey": null,
         "strict": true,
         "typeKey": "type",
+        "typePojoToMixed": true,
         "validateBeforeSave": true,
         "versionKey": "__v",
       },
@@ -271,7 +274,7 @@ Array [
           "instance": "ObjectID",
           "options": SchemaObjectIdOptions {
             "auto": true,
-            "type": [Function],
+            "type": "ObjectId",
           },
           "path": "_id",
           "setters": Array [
@@ -319,7 +322,7 @@ Array [
       "tree": Object {
         "_id": Object {
           "auto": true,
-          "type": [Function],
+          "type": "ObjectId",
         },
         "name": Object {
           "required": true,

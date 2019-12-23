@@ -38,10 +38,10 @@
     "@types/debug": "^4.1.5"
   },
   "dependencies": {
-    "@types/mongoose": "^5.5.32",
+    "@types/mongoose": "^5.5.35",
     "debug": "^4.1.1",
     "mongodb-uri": "^0.9.7",
-    "mongoose": "^5.7.12",
+    "mongoose": "^5.8.3",
     "tslib": "^1.10.0"
   },
   "engines": {

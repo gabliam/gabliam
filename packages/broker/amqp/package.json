@@ -40,13 +40,13 @@
     "@types/bluebird": "^3.5.29",
     "@types/debug": "^4.1.5",
     "@types/lodash": "^4.14.149",
-    "@types/node": "^12.12.12",
+    "@types/node": "^13.1.0",
     "@types/uuid": "^3.4.6"
   },
   "dependencies": {
-    "amqp-connection-manager": "^3.0.0",
+    "amqp-connection-manager": "^3.1.0",
     "amqplib": "^0.5.5",
-    "bluebird": "^3.7.1",
+    "bluebird": "^3.7.2",
     "debug": "^4.1.1",
     "lodash": "^4.17.15",
     "tslib": "^1.10.0",

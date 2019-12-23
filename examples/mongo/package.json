@@ -29,6 +29,6 @@
   },
   "devDependencies": {
     "@types/boom": "^7.3.0",
-    "nodemon": "^2.0.1"
+    "nodemon": "^2.0.2"
   }
 }

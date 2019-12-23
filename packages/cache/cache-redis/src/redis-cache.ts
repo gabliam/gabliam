@@ -180,7 +180,7 @@ export class RedisCache implements Cache {
   private async serialize(value: any) {
     try {
       if (this.options.gzipEnabled === true) {
-        return await gzipAsync(JSON.stringify(value));
+        return <any>await gzipAsync(JSON.stringify(value));
       } else {
         return JSON.stringify(value);
       }

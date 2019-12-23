@@ -38,16 +38,16 @@
     "@types/debug": "^4.1.5",
     "@types/graphql": "^14.5.0",
     "@types/lodash": "^4.14.149",
-    "@types/node": "^12.12.12"
+    "@types/node": "^13.1.0"
   },
   "dependencies": {
-    "apollo-server-core": "^2.9.12",
+    "apollo-server-core": "^2.9.14",
     "caller": "^1.0.1",
     "debug": "^4.1.1",
     "graphql": "^14.5.8",
     "lodash": "^4.17.15",
     "tslib": "^1.10.0",
-    "type-graphql": "^0.17.5"
+    "type-graphql": "^0.17.6"
   },
   "engines": {
     "node": ">=8.9.0"
