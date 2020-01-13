@@ -36,6 +36,8 @@ export interface GabliamPluginDefinition {
   dependencies: PluginDependency[];
 
   plugin: GabliamPlugin;
+
+  beforeAll: boolean;
 }
 
 /**

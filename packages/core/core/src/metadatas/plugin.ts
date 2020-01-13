@@ -21,12 +21,9 @@ export interface PluginDecorator {
    *  export class Plugin {}
    * ```
    */
-  (value?: string | PluginOptions): ClassDecorator;
+  (value?: string | PluginOptions, beforeAll?: boolean): ClassDecorator;
 
-  /**
-   * see the `@OnMissingBean` decorator.
-   */
-  new (value?: string | PluginOptions): any;
+  new (value?: string | PluginOptions, beforeAll?: boolean): any;
 }
 
 /**
@@ -59,6 +56,8 @@ export interface Plugin {
    * Define the dependencies
    */
   dependencies: PluginDependency[];
+
+  beforeAll: boolean;
 }
 
 function isPluginDependency(obj: any): obj is PluginDependency {
@@ -77,7 +76,7 @@ function isPluginOptions(obj: any): obj is PluginOptions {
 
 export const Plugin: PluginDecorator = makeDecorator(
   METADATA_KEY.plugin,
-  (value?: string | PluginOptions): Plugin => {
+  (value?: string | PluginOptions, beforeAll = false): Plugin => {
     let name: string | undefined;
     const dependencies: PluginDependency[] = [];
     if (value) {
@@ -99,7 +98,7 @@ export const Plugin: PluginDecorator = makeDecorator(
       }
     }
 
-    return { name, dependencies };
+    return { name, dependencies, beforeAll };
   },
   undefined,
   true,

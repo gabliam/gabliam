@@ -46,7 +46,7 @@ const getPluginDefinition = (
     throw new InvalidPluginError();
   }
 
-  const [{ name: pluginName }] = (
+  const [{ name: pluginName, beforeAll }] = (
     reflection.annotationsOfDecorator<Plugin>(ctor, Plugin, false) || []
   ).slice(-1);
 
@@ -60,7 +60,7 @@ const getPluginDefinition = (
     []
   );
 
-  return { plugin: plugin!, name, dependencies };
+  return { plugin: plugin!, name, dependencies, beforeAll };
 };
 
 /**
@@ -83,8 +83,18 @@ export class PluginList {
    */
   sort() {
     const graph = Graph();
+    const beforeAll = [];
+    for (const plugin of this._plugins) {
+      if (plugin.beforeAll) {
+        beforeAll.push(plugin.name);
+      }
+    }
+
     for (const plugin of this._plugins) {
       graph.addNode(plugin.name);
+
+      beforeAll.forEach(def => graph.addEdge(def, plugin.name));
+
       // const orderedPlugin = [plugin.name];
       if (plugin.dependencies) {
         for (const deps of plugin.dependencies) {
