@@ -78,6 +78,7 @@ DbConfig {
 
 exports[`plugin findByName 1`] = `
 Object {
+  "beforeAll": false,
   "dependencies": Array [],
   "name": "BadPlugin",
   "plugin": BadPlugin {},

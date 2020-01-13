@@ -7,7 +7,12 @@ import {
   ValueRegistry,
 } from '@gabliam/core';
 import { ConnectionManager } from './connection-manager';
-import { ENTITIES_TYPEORM, TYPE } from './constant';
+import {
+  ENTITIES_TYPEORM,
+  TYPE,
+  MIGRATIONS_TYPEORM,
+  SUBSCRIBERS_TYPEORM,
+} from './constant';
 import { ContainedType, ContainerInterface, useContainer } from './typeorm';
 
 /**
@@ -45,6 +50,20 @@ export class TypeOrmPlugin implements GabliamPlugin {
         return target;
       });
     container.bind<any>(ENTITIES_TYPEORM).toConstantValue(entities);
+
+    const migrations = registry
+      .get<ValueRegistry>(TYPE.Migration)
+      .map(({ target }) => {
+        return target;
+      });
+    container.bind<any>(MIGRATIONS_TYPEORM).toConstantValue(migrations);
+
+    const subscribers = registry
+      .get<ValueRegistry>(TYPE.EventSubscriber)
+      .map(({ target }) => {
+        return target;
+      });
+    container.bind<any>(SUBSCRIBERS_TYPEORM).toConstantValue(subscribers);
   }
 
   async destroy(container: Container) {

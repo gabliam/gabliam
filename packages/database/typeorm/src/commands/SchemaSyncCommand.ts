@@ -1,10 +1,10 @@
-import { Connection } from 'typeorm';
-import * as yargs from 'yargs';
 import { createConnection } from '../index';
+import { Connection } from 'typeorm';
 import { CommandUtils } from './CommandUtils';
+import * as yargs from 'yargs';
 const chalk = require('chalk');
 
-interface CacheClearCommandArgs {
+export interface SchemaSyncCommandArgs {
   app?: string;
 
   connection: string;
@@ -13,12 +13,14 @@ interface CacheClearCommandArgs {
 }
 
 /**
- * Clear cache command.
+ * Synchronizes database schema with entities.
  */
-export class CacheClearCommand
-  implements yargs.CommandModule<{}, CacheClearCommandArgs> {
-  command = 'cache:clear';
-  describe = 'Clears all data stored in query runner cache.';
+export class SchemaSyncCommand
+  implements yargs.CommandModule<{}, SchemaSyncCommandArgs> {
+  command = 'schema:sync';
+  describe =
+    'Synchronizes your entities with database schema. It runs schema update queries on all connections you have. ' +
+    'To run update queries on a concrete connection use -c option.';
 
   builder(args: yargs.Argv) {
     return args
@@ -30,7 +32,8 @@ export class CacheClearCommand
       .option('connection', {
         alias: 'c',
         default: 'default',
-        describe: 'Name of the connection on which run a query.',
+        describe:
+          'Name of the connection on which schema synchronization needs to to run.',
       })
       .option('config', {
         alias: 'f',
@@ -39,7 +42,7 @@ export class CacheClearCommand
       });
   }
 
-  async handler(args: yargs.Arguments<CacheClearCommandArgs>) {
+  async handler(args: yargs.Arguments<SchemaSyncCommandArgs>) {
     let connection: Connection | undefined = undefined;
     try {
       const connectionOptionsReader = await CommandUtils.getGabliamConnectionOptionsReader(
@@ -49,41 +52,26 @@ export class CacheClearCommand
         },
         args.app
       );
-
       const connectionOptions = await connectionOptionsReader.get(
         args.connection
       );
-
       Object.assign(connectionOptions, {
-        subscribers: [],
         synchronize: false,
         migrationsRun: false,
         dropSchema: false,
-        logging: ['schema'],
+        logging: ['query', 'schema'],
       });
       connection = await createConnection(connectionOptions);
+      await connection.synchronize();
+      await connection.close();
 
-      if (!connection.queryResultCache) {
-        console.log(
-          chalk.black.bgRed(
-            'Cache is not enabled. To use cache enable it in connection configuration.'
-          )
-        );
-        return;
-      }
-
-      await connection.queryResultCache.clear();
-      console.log(chalk.green('Cache was successfully cleared'));
-
-      if (connection) {
-        await connection.close();
-      }
+      console.log(chalk.green('Schema syncronization finished successfully.'));
     } catch (err) {
       if (connection) {
         await connection.close();
       }
 
-      console.log(chalk.black.bgRed('Error during cache clear:'));
+      console.log(chalk.black.bgRed('Error during schema synchronization:'));
       console.error(err);
       process.exit(1);
     }

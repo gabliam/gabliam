@@ -1,5 +1,11 @@
 export * from 'typeorm';
 
-import { Entity, ChildEntity, CUnit } from './metadatas';
+import {
+  ChildEntity,
+  CUnit,
+  Entity,
+  EventSubscriber,
+  MigrationEntity,
+} from './metadatas';
 
-export { Entity, ChildEntity, CUnit };
+export { Entity, ChildEntity, CUnit, MigrationEntity, EventSubscriber };

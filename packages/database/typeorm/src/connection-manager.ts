@@ -2,6 +2,9 @@ import { createConnections } from 'typeorm';
 import { GabliamConnectionOptionsReader } from './connection-options-reader';
 import { TypeormConnectionNotFoundError } from './errors';
 import { Connection } from './typeorm';
+import * as d from 'debug';
+
+const debug = d('Gabliam:Plugin:Typeorm:ConnectionManager');
 
 export class ConnectionManager {
   private connections!: Connection[];
@@ -9,9 +12,9 @@ export class ConnectionManager {
   constructor(public connectionOptionsReader: GabliamConnectionOptionsReader) {}
 
   async open() {
-    this.connections = await createConnections(
-      await this.connectionOptionsReader.all()
-    );
+    const options = await this.connectionOptionsReader.all();
+    debug(options);
+    this.connections = await createConnections(options);
   }
 
   async close() {

@@ -1,24 +1,25 @@
-import { Connection } from 'typeorm';
-import * as yargs from 'yargs';
-import { createConnection } from '../index';
+import { createConnection, Connection } from '../index';
 import { CommandUtils } from './CommandUtils';
+import * as yargs from 'yargs';
 const chalk = require('chalk');
 
-interface CacheClearCommandArgs {
+export interface MigrationRevertCommandArgs {
   app?: string;
 
   connection: string;
 
   config: string;
+
+  transaction?: string;
 }
 
 /**
- * Clear cache command.
+ * Reverts last migration command.
  */
-export class CacheClearCommand
-  implements yargs.CommandModule<{}, CacheClearCommandArgs> {
-  command = 'cache:clear';
-  describe = 'Clears all data stored in query runner cache.';
+export class MigrationRevertCommand
+  implements yargs.CommandModule<{}, MigrationRevertCommandArgs> {
+  command = 'migration:revert';
+  describe = 'Reverts last executed migration.';
 
   builder(args: yargs.Argv) {
     return args
@@ -32,6 +33,12 @@ export class CacheClearCommand
         default: 'default',
         describe: 'Name of the connection on which run a query.',
       })
+      .option('transaction', {
+        alias: 't',
+        default: 'default',
+        describe:
+          'Indicates if transaction should be used or not for migration revert. Enabled by default.',
+      })
       .option('config', {
         alias: 'f',
         default: 'ormconfig',
@@ -39,7 +46,7 @@ export class CacheClearCommand
       });
   }
 
-  async handler(args: yargs.Arguments<CacheClearCommandArgs>) {
+  async handler(args: yargs.Arguments<MigrationRevertCommandArgs>) {
     let connection: Connection | undefined = undefined;
     try {
       const connectionOptionsReader = await CommandUtils.getGabliamConnectionOptionsReader(
@@ -49,41 +56,45 @@ export class CacheClearCommand
         },
         args.app
       );
-
       const connectionOptions = await connectionOptionsReader.get(
         args.connection
       );
-
       Object.assign(connectionOptions, {
         subscribers: [],
         synchronize: false,
         migrationsRun: false,
         dropSchema: false,
-        logging: ['schema'],
+        logging: ['query', 'error', 'schema'],
       });
       connection = await createConnection(connectionOptions);
 
-      if (!connection.queryResultCache) {
-        console.log(
-          chalk.black.bgRed(
-            'Cache is not enabled. To use cache enable it in connection configuration.'
-          )
-        );
-        return;
+      const options = {
+        transaction: 'all' as 'all' | 'none' | 'each',
+      };
+
+      switch (args.t) {
+        case 'all':
+          options.transaction = 'all';
+          break;
+        case 'none':
+        case 'false':
+          options.transaction = 'none';
+          break;
+        case 'each':
+          options.transaction = 'each';
+          break;
+        default:
+        // noop
       }
 
-      await connection.queryResultCache.clear();
-      console.log(chalk.green('Cache was successfully cleared'));
-
-      if (connection) {
-        await connection.close();
-      }
+      await connection.undoLastMigration(options);
+      await connection.close();
     } catch (err) {
       if (connection) {
         await connection.close();
       }
 
-      console.log(chalk.black.bgRed('Error during cache clear:'));
+      console.log(chalk.black.bgRed('Error during migration revert:'));
       console.error(err);
       process.exit(1);
     }

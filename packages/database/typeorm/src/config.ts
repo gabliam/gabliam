@@ -14,7 +14,12 @@ import {
 import * as d from 'debug';
 import { ConnectionManager } from './connection-manager';
 import { GabliamConnectionOptionsReader } from './connection-options-reader';
-import { ConnectionOptionsBeanId, ENTITIES_TYPEORM } from './constant';
+import {
+  ConnectionOptionsBeanId,
+  ENTITIES_TYPEORM,
+  MIGRATIONS_TYPEORM,
+  SUBSCRIBERS_TYPEORM,
+} from './constant';
 import { Connection, ConnectionOptions } from './typeorm';
 
 const debug = d('Gabliam:Plugin:Typeorm');
@@ -25,17 +30,25 @@ export class PluginTypeormConfig {
   @Value('application.typeorm.connectionOptions')
   connectionOptions: ConnectionOptions | ConnectionOptions[] | undefined;
 
-  entities: Function[];
+  entities: {
+    entities: Function[];
+    migrations: Function[];
+    subscribers: Function[];
+  };
+
+  migrations: Function[];
 
   constructor(
     @inject(ConnectionOptionsBeanId)
     @optional()
     connectionOptions: ConnectionOptions | ConnectionOptions[],
-    @inject(ENTITIES_TYPEORM) entities: Function[]
+    @inject(ENTITIES_TYPEORM) entities: Function[],
+    @inject(MIGRATIONS_TYPEORM) migrations: Function[],
+    @inject(SUBSCRIBERS_TYPEORM) subscribers: Function[]
   ) {
     debug('constructor PluginTypeormConfig', connectionOptions);
     this.connectionOptions = connectionOptions;
-    this.entities = entities;
+    this.entities = { entities, migrations, subscribers };
   }
 
   // when all bean are created, we create bean Connection for back compat
@@ -43,7 +56,6 @@ export class PluginTypeormConfig {
   async init() {
     const container: Container = (<any>this)[INJECT_CONTAINER_KEY];
     const connectionManager = container.get(ConnectionManager);
-    // await connectionManager.open();
 
     // for back compat
     container
