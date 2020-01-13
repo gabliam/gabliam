@@ -23,12 +23,9 @@ import { PluginList } from './plugin-list';
 import { reflection } from './reflection';
 import { Registry } from './registry';
 import { configureValueExtractor } from './value-extractor';
+import { getGabliamConfig } from './gabliam-options';
 
 const debug = d('Gabliam:core');
-
-const DEFAULT_CONFIG: GabliamConfig = {
-  config: process.env.GABLIAM_CONFIG_PATH,
-};
 
 /**
  * Gabliam
@@ -65,21 +62,7 @@ export class Gabliam {
    * @param  {GabliamConfig|string} options?
    */
   constructor(options?: Partial<GabliamConfig> | string) {
-    if (options === undefined) {
-      this.options = DEFAULT_CONFIG;
-    } else {
-      if (_.isString(options)) {
-        this.options = {
-          ...DEFAULT_CONFIG,
-          config: options,
-        };
-      } else {
-        this.options = {
-          ...DEFAULT_CONFIG,
-          ...options,
-        };
-      }
-    }
+    this.options = getGabliamConfig(options);
     /**
      * @TODO move in building phase
      */

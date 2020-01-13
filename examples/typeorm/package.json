@@ -4,8 +4,8 @@
   "private": true,
   "description": "sample with decorator",
   "scripts": {
-    "watch": "TS_NODE_FILES=true nodemon --watch 'src/**/*.ts' --exec 'ts-node' --type-check -r tsconfig-paths/register src/index.ts",
-    "start": "TS_NODE_FILES=true ts-node --type-check -r tsconfig-paths/register src/index.ts"
+    "watch": "TS_NODE_FILES=true nodemon --watch 'src/**/*.ts' --exec 'ts-node' -r tsconfig-paths/register src/index.ts",
+    "start": "TS_NODE_FILES=true ts-node -r tsconfig-paths/register src/index.ts"
   },
   "repository": {
     "type": "git",

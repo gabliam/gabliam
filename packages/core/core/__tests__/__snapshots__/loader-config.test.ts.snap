@@ -40,6 +40,20 @@ Object {
 }
 `;
 
+exports[`with application.yml 2`] = `
+Object {
+  "application": Object {
+    "host": "prod.app.yml",
+    "mongoose": Object {
+      "mongoose": Object {
+        "url": "mongo://localhost",
+      },
+    },
+    "yml": true,
+  },
+}
+`;
+
 exports[`with application.yml empty 1`] = `Object {}`;
 
 exports[`with application.yml load application.yml 1`] = `
@@ -75,6 +89,16 @@ Object {
 exports[`with application.yml with bad handler must throw error 1`] = `[Error: ENOENT: no such file or directory, open '<TEMP_DIR>/mock-fs-test/test/config/test.json']`;
 
 exports[`with application.yml with nothing 1`] = `Object {}`;
+
+exports[`with application.yml with nothing 2`] = `
+[LoaderConfigParseError: Error during parsing of file "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/badyml/application.yml".
+    YAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 7, column 1:
+    
+    ^
+    ]
+`;
+
+exports[`with application.yml with nothing 3`] = `Object {}`;
 
 exports[`with bad application.json 1`] = `
 [LoaderConfigParseError: Error during parsing of file "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/badjson/application.json".

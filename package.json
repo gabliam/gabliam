@@ -1,12 +1,12 @@
 {
   "name": "gabliam-sources",
-  "version": "8.5.1",
+  "version": "0.0.0-BUILD-VERSION",
   "private": true,
   "license": "MIT",
   "scripts": {
     "changelog": "conventional-changelog -i  CHANGELOG.md -p angular  -s -r 0",
     "lint": "tslint --project tsconfig.json './packages/**/**/{src,__tests__}/**/*.ts' --exclude './packages/**/**/node_modules/**/*.ts' --exclude './packages,examples/**/**/{src,__tests__}/**/*.d.ts'",
-    "build": "lerna run build --scope @gabliam/expression && lerna run build --scope @gabliam/core && lerna run build --scope @gabliam/web-core && lerna run build",
+    "build": "ts-node ./scripts/build/build.ts",
     "test": "jest --runInBand",
     "test:ci": "jest --runInBand --coverage",
     "prettier": "prettier --single-quote --write --parser typescript \"./{packages,examples}/**/src/**/*.ts\"",

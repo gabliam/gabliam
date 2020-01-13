@@ -1,7 +1,8 @@
 import * as caller from 'caller';
-import * as path from 'path';
+import { dirname } from 'path';
 import { METADATA_KEY } from '../constants';
 import { makeDecorator } from '../decorator';
+import { resolvePath } from './path-utils';
 
 /**
  * Type of the `Scan` decorator / constructor function.
@@ -34,15 +35,11 @@ export const Scan: ScanDecorator = makeDecorator(
   METADATA_KEY.scan,
   (p?: string): Scan => {
     let pathToAdd: string;
-    const fileDir = path.dirname(caller(4));
+    const fileDir = dirname(caller(4));
     if (!p) {
       pathToAdd = fileDir;
     } else {
-      if (path.isAbsolute(p)) {
-        pathToAdd = p;
-      } else {
-        pathToAdd = path.resolve(fileDir, p);
-      }
+      pathToAdd = resolvePath(p, fileDir);
     }
     return { path: pathToAdd };
   }

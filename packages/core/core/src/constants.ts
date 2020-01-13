@@ -3,9 +3,11 @@ export const TYPE = {
   Service: 'ServiceType',
   Config: 'ConfigType',
   PreDestroy: 'PreDestroy',
+  Application: 'ApplicationType',
 };
 
 export const METADATA_KEY = {
+  application: '_application',
   bean: '_bean',
   onMissingBean: '_onMissingBean',
   init: '_init',
@@ -35,6 +37,7 @@ export const ERRORS_MSGS = {
   DUPLICATED_DECORATOR: `Cannot apply decorator multiple times.`,
   DUPLICATED_CONFIG_DECORATOR: `Cannot apply @Config, @PluginConfig or @CorePlugin decorator multiple times.`,
   DUPLICATED_PLUGIN_DECORATOR: `Cannot apply @Plugin decorator multiple times.`,
+  DUPLICATED_APPLICATION_DECORATOR: `Cannot apply @Application decorator multiple times.`,
 };
 
 export const APP_CONFIG = Symbol('APP_CONFIG');

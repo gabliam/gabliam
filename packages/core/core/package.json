@@ -12,11 +12,17 @@
     "lib",
     "src",
     "index.js",
-    "index.d.ts"
+    "index.d.ts",
+    "cli.js",
+    "cli.d.ts"
   ],
+  "bin": {
+    "gabliam": "./cli.js"
+  },
   "dependencies": {
     "@gabliam/expression": "0.0.0-PLACEHOLDER",
     "@types/joi": "^14.3.4",
+    "bluebird": "^3.7.2",
     "caller": "^1.0.1",
     "co": "^4.6.0",
     "debug": "^4.1.1",
@@ -29,7 +35,9 @@
     "lodash": "^4.17.15",
     "shortstop": "^1.0.3",
     "shortstop-handlers": "^1.0.1",
-    "tslib": "^1.10.0"
+    "tslib": "^1.10.0",
+    "yargonaut": "^1.1.4",
+    "yargs": "^15.1.0"
   },
   "devDependencies": {
     "@iarna/toml": "^2.2.3",
@@ -55,5 +63,10 @@
   "engines": {
     "node": ">=8.9.0"
   },
-  "gitHead": "ec328fa0b62f474d470f74a2fc9637838f54091e"
+  "gitHead": "ec328fa0b62f474d470f74a2fc9637838f54091e",
+  "optionalDependencies": {
+    "ts-node": "^8.5.4",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^3.7.4"
+  }
 }

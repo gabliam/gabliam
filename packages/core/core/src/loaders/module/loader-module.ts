@@ -53,7 +53,9 @@ export class LoaderModule {
     const registry = new Registry();
 
     const files = glob
-      .sync('**/*.@(js|ts)', { cwd: folder })
+      .sync('{*.@(js|ts),!(git|svn|node_modules|dist|build)/**/*.@(js|ts)}', {
+        cwd: folder,
+      })
       .filter(file => !_.endsWith(file, '.d.ts') && !reg.test(file))
       .map(file => `${folder}/${file}`);
 

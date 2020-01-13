@@ -1,0 +1,542 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`gabliamFindApp with appName 2 applications app 1`] = `[Function]`;
+
+exports[`gabliamFindApp with appName 2 applications app 2`] = `"Application2"`;
+
+exports[`gabliamFindApp with appName one application app with config 1`] = `[Function]`;
+
+exports[`gabliamFindApp with appName one application app with config 2`] = `
+Gabliam {
+  "container": Container {
+    "_bindingDictionary": Lookup {
+      "_map": Map {
+        Symbol(CORE_CONFIG) => Array [
+          Binding {
+            "activated": false,
+            "cache": Object {
+              "config": "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/applications/one/withconfig/config",
+              "name": "MyApp",
+              "plugins": Array [
+                [Function],
+              ],
+              "scanPath": "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/applications/one/withconfig",
+            },
+            "constraint": [Function],
+            "dynamicValue": null,
+            "factory": null,
+            "id": 15,
+            "implementationType": null,
+            "onActivation": [Function],
+            "provider": null,
+            "scope": "Transient",
+            "serviceIdentifier": Symbol(CORE_CONFIG),
+            "type": "ConstantValue",
+          },
+        ],
+      },
+    },
+    "_metadataReader": MetadataReader {},
+    "_middleware": [Function],
+    "_snapshots": Array [],
+    "bind": [Function],
+    "id": 14,
+    "options": Object {
+      "autoBindInjectable": false,
+      "defaultScope": "Transient",
+      "skipBaseClassChecks": false,
+    },
+    "parent": null,
+  },
+  "loaderConfig": LoaderConfig {},
+  "loaderModule": LoaderModule {
+    "loadedFolder": Array [],
+  },
+  "options": Object {
+    "config": "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/applications/one/withconfig/config",
+    "name": "MyApp",
+    "plugins": Array [
+      [Function],
+    ],
+    "scanPath": "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/applications/one/withconfig",
+  },
+  "pluginList": PluginList {
+    "_plugins": Array [
+      Object {
+        "dependencies": Array [],
+        "name": "TypeOrmPlugin",
+        "plugin": TypeOrmPlugin {},
+      },
+    ],
+  },
+  "registry": Registry {
+    "registry": Map {},
+  },
+}
+`;
+
+exports[`gabliamFindApp with appName one application app without config 1`] = `[Function]`;
+
+exports[`gabliamFindApp with appName one application app without config 2`] = `
+Gabliam {
+  "container": Container {
+    "_bindingDictionary": Lookup {
+      "_map": Map {
+        Symbol(CORE_CONFIG) => Array [
+          Binding {
+            "activated": false,
+            "cache": Object {
+              "config": undefined,
+              "name": "MyApp",
+            },
+            "constraint": [Function],
+            "dynamicValue": null,
+            "factory": null,
+            "id": 13,
+            "implementationType": null,
+            "onActivation": [Function],
+            "provider": null,
+            "scope": "Transient",
+            "serviceIdentifier": Symbol(CORE_CONFIG),
+            "type": "ConstantValue",
+          },
+        ],
+      },
+    },
+    "_metadataReader": MetadataReader {},
+    "_middleware": [Function],
+    "_snapshots": Array [],
+    "bind": [Function],
+    "id": 12,
+    "options": Object {
+      "autoBindInjectable": false,
+      "defaultScope": "Transient",
+      "skipBaseClassChecks": false,
+    },
+    "parent": null,
+  },
+  "loaderConfig": LoaderConfig {},
+  "loaderModule": LoaderModule {
+    "loadedFolder": Array [],
+  },
+  "options": Object {
+    "config": undefined,
+    "name": "MyApp",
+  },
+  "pluginList": PluginList {
+    "_plugins": Array [],
+  },
+  "registry": Registry {
+    "registry": Map {},
+  },
+}
+`;
+
+exports[`gabliamFindApp with appName one application no app found 1`] = `[Error: lolApp is not a gabliam application]`;
+
+exports[`gabliamFindApp without appName 2 applications too many 1`] = `[Error: Too many app (2) found. You must select an application.]`;
+
+exports[`gabliamFindApp without appName one application app with config 1`] = `[Function]`;
+
+exports[`gabliamFindApp without appName one application app with config 2`] = `
+Gabliam {
+  "container": Container {
+    "_bindingDictionary": Lookup {
+      "_map": Map {
+        Symbol(CORE_CONFIG) => Array [
+          Binding {
+            "activated": false,
+            "cache": Object {
+              "config": "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/applications/one/withconfig/config",
+              "name": "MyApp",
+              "plugins": Array [
+                [Function],
+              ],
+              "scanPath": "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/applications/one/withconfig",
+            },
+            "constraint": [Function],
+            "dynamicValue": null,
+            "factory": null,
+            "id": 11,
+            "implementationType": null,
+            "onActivation": [Function],
+            "provider": null,
+            "scope": "Transient",
+            "serviceIdentifier": Symbol(CORE_CONFIG),
+            "type": "ConstantValue",
+          },
+        ],
+      },
+    },
+    "_metadataReader": MetadataReader {},
+    "_middleware": [Function],
+    "_snapshots": Array [],
+    "bind": [Function],
+    "id": 10,
+    "options": Object {
+      "autoBindInjectable": false,
+      "defaultScope": "Transient",
+      "skipBaseClassChecks": false,
+    },
+    "parent": null,
+  },
+  "loaderConfig": LoaderConfig {},
+  "loaderModule": LoaderModule {
+    "loadedFolder": Array [],
+  },
+  "options": Object {
+    "config": "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/applications/one/withconfig/config",
+    "name": "MyApp",
+    "plugins": Array [
+      [Function],
+    ],
+    "scanPath": "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/applications/one/withconfig",
+  },
+  "pluginList": PluginList {
+    "_plugins": Array [
+      Object {
+        "dependencies": Array [],
+        "name": "TypeOrmPlugin",
+        "plugin": TypeOrmPlugin {},
+      },
+    ],
+  },
+  "registry": Registry {
+    "registry": Map {},
+  },
+}
+`;
+
+exports[`gabliamFindApp without appName one application app without config 1`] = `[Function]`;
+
+exports[`gabliamFindApp without appName one application app without config 2`] = `
+Gabliam {
+  "container": Container {
+    "_bindingDictionary": Lookup {
+      "_map": Map {
+        Symbol(CORE_CONFIG) => Array [
+          Binding {
+            "activated": false,
+            "cache": Object {
+              "config": undefined,
+            },
+            "constraint": [Function],
+            "dynamicValue": null,
+            "factory": null,
+            "id": 5,
+            "implementationType": null,
+            "onActivation": [Function],
+            "provider": null,
+            "scope": "Transient",
+            "serviceIdentifier": Symbol(CORE_CONFIG),
+            "type": "ConstantValue",
+          },
+        ],
+      },
+    },
+    "_metadataReader": MetadataReader {},
+    "_middleware": [Function],
+    "_snapshots": Array [],
+    "bind": [Function],
+    "id": 4,
+    "options": Object {
+      "autoBindInjectable": false,
+      "defaultScope": "Transient",
+      "skipBaseClassChecks": false,
+    },
+    "parent": null,
+  },
+  "loaderConfig": LoaderConfig {},
+  "loaderModule": LoaderModule {
+    "loadedFolder": Array [],
+  },
+  "options": Object {
+    "config": undefined,
+  },
+  "pluginList": PluginList {
+    "_plugins": Array [],
+  },
+  "registry": Registry {
+    "registry": Map {},
+  },
+}
+`;
+
+exports[`gabliamFindApp without appName one application app without config 3`] = `
+Gabliam {
+  "container": Container {
+    "_bindingDictionary": Lookup {
+      "_map": Map {
+        Symbol(CORE_CONFIG) => Array [
+          Binding {
+            "activated": false,
+            "cache": Object {
+              "config": undefined,
+              "name": "MyApp",
+            },
+            "constraint": [Function],
+            "dynamicValue": null,
+            "factory": null,
+            "id": 7,
+            "implementationType": null,
+            "onActivation": [Function],
+            "provider": null,
+            "scope": "Transient",
+            "serviceIdentifier": Symbol(CORE_CONFIG),
+            "type": "ConstantValue",
+          },
+        ],
+      },
+    },
+    "_metadataReader": MetadataReader {},
+    "_middleware": [Function],
+    "_snapshots": Array [],
+    "bind": [Function],
+    "id": 6,
+    "options": Object {
+      "autoBindInjectable": false,
+      "defaultScope": "Transient",
+      "skipBaseClassChecks": false,
+    },
+    "parent": null,
+  },
+  "loaderConfig": LoaderConfig {},
+  "loaderModule": LoaderModule {
+    "loadedFolder": Array [],
+  },
+  "options": Object {
+    "config": undefined,
+    "name": "MyApp",
+  },
+  "pluginList": PluginList {
+    "_plugins": Array [],
+  },
+  "registry": Registry {
+    "registry": Map {},
+  },
+}
+`;
+
+exports[`gabliamFindApp without appName one application app without config 4`] = `
+Gabliam {
+  "container": Container {
+    "_bindingDictionary": Lookup {
+      "_map": Map {
+        Symbol(CORE_CONFIG) => Array [
+          Binding {
+            "activated": false,
+            "cache": Object {
+              "config": undefined,
+              "name": "MyApp",
+            },
+            "constraint": [Function],
+            "dynamicValue": null,
+            "factory": null,
+            "id": 9,
+            "implementationType": null,
+            "onActivation": [Function],
+            "provider": null,
+            "scope": "Transient",
+            "serviceIdentifier": Symbol(CORE_CONFIG),
+            "type": "ConstantValue",
+          },
+        ],
+      },
+    },
+    "_metadataReader": MetadataReader {},
+    "_middleware": [Function],
+    "_snapshots": Array [],
+    "bind": [Function],
+    "id": 8,
+    "options": Object {
+      "autoBindInjectable": false,
+      "defaultScope": "Transient",
+      "skipBaseClassChecks": false,
+    },
+    "parent": null,
+  },
+  "loaderConfig": LoaderConfig {},
+  "loaderModule": LoaderModule {
+    "loadedFolder": Array [],
+  },
+  "options": Object {
+    "config": undefined,
+    "name": "MyApp",
+  },
+  "pluginList": PluginList {
+    "_plugins": Array [],
+  },
+  "registry": Registry {
+    "registry": Map {},
+  },
+}
+`;
+
+exports[`gabliamFindApp without appName one application no app found 1`] = `[Error: no application found]`;
+
+exports[`gabliamFinder 2 applications app 1`] = `
+Array [
+  Object {
+    "autoBind": false,
+    "id": [Function],
+    "options": undefined,
+    "target": [Function],
+  },
+  Object {
+    "autoBind": false,
+    "id": [Function],
+    "options": undefined,
+    "target": [Function],
+  },
+]
+`;
+
+exports[`gabliamFinder one application app with config 1`] = `
+Array [
+  Object {
+    "autoBind": false,
+    "id": [Function],
+    "options": undefined,
+    "target": [Function],
+  },
+]
+`;
+
+exports[`gabliamFinder one application app with config 2`] = `
+Gabliam {
+  "container": Container {
+    "_bindingDictionary": Lookup {
+      "_map": Map {
+        Symbol(CORE_CONFIG) => Array [
+          Binding {
+            "activated": false,
+            "cache": Object {
+              "config": "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/applications/one/withconfig/config",
+              "name": "MyApp",
+              "plugins": Array [
+                [Function],
+              ],
+              "scanPath": "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/applications/one/withconfig",
+            },
+            "constraint": [Function],
+            "dynamicValue": null,
+            "factory": null,
+            "id": 3,
+            "implementationType": null,
+            "onActivation": [Function],
+            "provider": null,
+            "scope": "Transient",
+            "serviceIdentifier": Symbol(CORE_CONFIG),
+            "type": "ConstantValue",
+          },
+        ],
+      },
+    },
+    "_metadataReader": MetadataReader {},
+    "_middleware": [Function],
+    "_snapshots": Array [],
+    "bind": [Function],
+    "id": 2,
+    "options": Object {
+      "autoBindInjectable": false,
+      "defaultScope": "Transient",
+      "skipBaseClassChecks": false,
+    },
+    "parent": null,
+  },
+  "loaderConfig": LoaderConfig {},
+  "loaderModule": LoaderModule {
+    "loadedFolder": Array [],
+  },
+  "options": Object {
+    "config": "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/applications/one/withconfig/config",
+    "name": "MyApp",
+    "plugins": Array [
+      [Function],
+    ],
+    "scanPath": "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/applications/one/withconfig",
+  },
+  "pluginList": PluginList {
+    "_plugins": Array [
+      Object {
+        "dependencies": Array [],
+        "name": "TypeOrmPlugin",
+        "plugin": TypeOrmPlugin {},
+      },
+    ],
+  },
+  "registry": Registry {
+    "registry": Map {},
+  },
+}
+`;
+
+exports[`gabliamFinder one application app without config 1`] = `
+Array [
+  Object {
+    "autoBind": false,
+    "id": [Function],
+    "options": undefined,
+    "target": [Function],
+  },
+]
+`;
+
+exports[`gabliamFinder one application app without config 2`] = `
+Gabliam {
+  "container": Container {
+    "_bindingDictionary": Lookup {
+      "_map": Map {
+        Symbol(CORE_CONFIG) => Array [
+          Binding {
+            "activated": false,
+            "cache": Object {
+              "config": undefined,
+              "name": "MyApp",
+            },
+            "constraint": [Function],
+            "dynamicValue": null,
+            "factory": null,
+            "id": 1,
+            "implementationType": null,
+            "onActivation": [Function],
+            "provider": null,
+            "scope": "Transient",
+            "serviceIdentifier": Symbol(CORE_CONFIG),
+            "type": "ConstantValue",
+          },
+        ],
+      },
+    },
+    "_metadataReader": MetadataReader {},
+    "_middleware": [Function],
+    "_snapshots": Array [],
+    "bind": [Function],
+    "id": 0,
+    "options": Object {
+      "autoBindInjectable": false,
+      "defaultScope": "Transient",
+      "skipBaseClassChecks": false,
+    },
+    "parent": null,
+  },
+  "loaderConfig": LoaderConfig {},
+  "loaderModule": LoaderModule {
+    "loadedFolder": Array [],
+  },
+  "options": Object {
+    "config": undefined,
+    "name": "MyApp",
+  },
+  "pluginList": PluginList {
+    "_plugins": Array [],
+  },
+  "registry": Registry {
+    "registry": Map {},
+  },
+}
+`;
+
+exports[`gabliamFinder one application no app found 1`] = `Array []`;
+
+exports[`gabliamFinder one application no app found 2`] = `[Error: undefined is not a gabliam application]`;
