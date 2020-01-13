@@ -1,10 +1,12 @@
 import * as yargs from 'yargs';
-import { gabliamBuilder, gabliamFindApp } from '../gabliam-utils';
+import {
+  gabliamBuilder,
+  gabliamFindApp,
+  setupTsProject,
+} from '../gabliam-utils';
 
 interface StartCommandArgs {
   app?: string;
-
-  ts?: boolean;
 }
 
 export class StartCommand implements yargs.CommandModule<{}, StartCommandArgs> {
@@ -12,28 +14,16 @@ export class StartCommand implements yargs.CommandModule<{}, StartCommandArgs> {
   describe = 'Start a gabliam application';
 
   builder(args: yargs.Argv) {
-    return args
-      .options('app', {
-        alias: 'a',
-        describe: 'Name of application to select if many',
-        type: 'string',
-      })
-      .options('ts', {
-        alias: 't',
-        describe: 'Add typescript interpretor',
-        type: 'boolean',
-      });
+    return args.options('app', {
+      alias: 'a',
+      describe: 'Name of application to select if many',
+      type: 'string',
+    });
   }
 
   async handler(args: StartCommandArgs) {
     const appName = args.app;
-    if (args.ts === true) {
-      const tsnode = require('ts-node');
-      tsnode.register({
-        dir: process.cwd(),
-      });
-      module.require('tsconfig-paths/register');
-    }
+    await setupTsProject(process.cwd());
 
     const application = await gabliamFindApp(process.cwd(), appName);
     const gabliam = await gabliamBuilder(application);

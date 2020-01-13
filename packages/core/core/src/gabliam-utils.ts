@@ -1,15 +1,21 @@
-import { TYPE } from './constants';
-import { LoaderModule } from './loaders';
-import { Registry } from './registry';
-import { ValueRegistry } from './interfaces';
-import { reflection } from './reflection';
-import { Application } from './metadatas';
-import { Gabliam } from './gabliam';
-import { Type, toPromise } from './common';
 import * as bluebird from 'bluebird';
+import * as g from 'glob';
+import { toPromise, Type } from './common';
+import { TYPE } from './constants';
+import { Gabliam } from './gabliam';
+import { ValueRegistry } from './interfaces';
+import { LoaderModule } from './loaders';
+import { Application } from './metadatas';
+import { reflection } from './reflection';
+import { Registry } from './registry';
+import { promisify } from 'util';
+import * as _ from 'lodash';
+const glob = promisify(g);
+
+const reg = /^.*(git|svn|node_modules|dist|build).*/;
 
 /**
- * Class for build a gabliam application
+ * Search gabliam app and return array of valueregistry
  */
 export const gabliamFinder = async (scanPath: string) => {
   const loaderModule = new LoaderModule();
@@ -18,6 +24,11 @@ export const gabliamFinder = async (scanPath: string) => {
   return registry.get(TYPE.Application);
 };
 
+/**
+ * Find gabliam application and return the class
+ * @param scanPath path to scan
+ * @param appName name of the application (if many)
+ */
 export const gabliamFindApp = async (scanPath: string, appName?: string) => {
   const list = await gabliamFinder(scanPath);
   let app: Type<any> | undefined;
@@ -68,6 +79,10 @@ const isValueRegistry = (val: any): val is ValueRegistry<any> => {
   );
 };
 
+/**
+ * Build a gabliam app
+ * @param clazzOrValue  ValueRegistry or class of application
+ */
 export const gabliamBuilder = async <T = any>(
   clazzOrValue: ValueRegistry<T> | Type<any>
 ) => {
@@ -93,4 +108,21 @@ export const gabliamBuilder = async <T = any>(
   }
 
   throw new Error(`${clazzOrValue} is not a gabliam application`);
+};
+
+export const setupTsProject = async (folder: string) => {
+  const files = await bluebird.filter(
+    glob('{*.@(|ts),!(git|svn|node_modules|dist|build)/**/*.@(ts)}', {
+      cwd: folder,
+    }),
+    file => !_.endsWith(file, '.d.ts') && !reg.test(file)
+  );
+  if (files.length > 0) {
+    console.log('Typescript project detected. Add ts-node');
+    const tsnode = require('ts-node');
+    tsnode.register({
+      dir: process.cwd(),
+    });
+    module.require('tsconfig-paths/register');
+  }
 };
