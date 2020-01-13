@@ -1,5 +1,6 @@
-export * from './typeorm';
-export * from './constant';
 export { ConnectionManager } from './connection-manager';
-import { TypeOrmPlugin } from './typeorm-plugin';
+export * from './connection-options-reader';
+export * from './constant';
+export * from './typeorm';
 export { TypeOrmPlugin as default };
+import { TypeOrmPlugin } from './typeorm-plugin';

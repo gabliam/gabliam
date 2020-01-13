@@ -12,8 +12,13 @@
     "lib",
     "src",
     "index.js",
-    "index.d.ts"
+    "index.d.ts",
+    "cli.js",
+    "cli.d.ts"
   ],
+  "bin": {
+    "gabtypeorm": "./cli.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gabliam/gabliam.git"
@@ -30,7 +35,9 @@
   "dependencies": {
     "debug": "^4.1.1",
     "tslib": "^1.10.0",
-    "typeorm": "^0.2.22"
+    "typeorm": "^0.2.22",
+    "yargonaut": "^1.1.4",
+    "yargs": "^15.1.0"
   },
   "devDependencies": {
     "@gabliam/core": "0.0.0-PLACEHOLDER",

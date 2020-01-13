@@ -13,8 +13,8 @@ import {
 } from '@gabliam/core';
 import * as d from 'debug';
 import { ConnectionManager } from './connection-manager';
+import { GabliamConnectionOptionsReader } from './connection-options-reader';
 import { ConnectionOptionsBeanId, ENTITIES_TYPEORM } from './constant';
-import { TypeormConfigIsMandatoryError } from './errors';
 import { Connection, ConnectionOptions } from './typeorm';
 
 const debug = d('Gabliam:Plugin:Typeorm');
@@ -23,7 +23,7 @@ const debug = d('Gabliam:Plugin:Typeorm');
 @PluginConfig()
 export class PluginTypeormConfig {
   @Value('application.typeorm.connectionOptions')
-  connectionOptions: ConnectionOptions | ConnectionOptions[];
+  connectionOptions: ConnectionOptions | ConnectionOptions[] | undefined;
 
   entities: Function[];
 
@@ -43,34 +43,37 @@ export class PluginTypeormConfig {
   async init() {
     const container: Container = (<any>this)[INJECT_CONTAINER_KEY];
     const connectionManager = container.get(ConnectionManager);
-    await connectionManager.open();
+    // await connectionManager.open();
 
     // for back compat
     container
       .bind(Connection)
-      .toConstantValue(connectionManager.getDefaultConnection());
+      .toDynamicValue(() => connectionManager.getDefaultConnection());
   }
 
-  @Bean(ConnectionManager)
-  createManager() {
+  @Bean(GabliamConnectionOptionsReader)
+  createGabliamConnectionOptionsReader() {
     debug('connectionOptions', this.connectionOptions);
-    if (!this.connectionOptions) {
-      throw new TypeormConfigIsMandatoryError();
-    }
-    let connectionOptions: ConnectionOptions[];
+
+    let connectionOptions: ConnectionOptions[] | undefined = undefined;
     if (Array.isArray(this.connectionOptions)) {
       connectionOptions = this.connectionOptions;
-    } else {
+    } else if (this.connectionOptions) {
       connectionOptions = [this.connectionOptions];
     }
 
     const container: Container = (<any>this)[INJECT_CONTAINER_KEY];
     const valueExtractor = container.get<ValueExtractor>(VALUE_EXTRACTOR);
 
-    return new ConnectionManager(
+    return new GabliamConnectionOptionsReader(
       connectionOptions,
       this.entities,
       valueExtractor
     );
+  }
+
+  @Bean(ConnectionManager)
+  createManager() {
+    return new ConnectionManager(this.createGabliamConnectionOptionsReader());
   }
 }

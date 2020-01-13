@@ -1,20 +1,20 @@
 import {
-  Scan,
-  Registry,
-  Plugin,
-  GabliamPlugin,
-  ValueRegistry,
   Container,
+  GabliamPlugin,
+  Plugin,
+  Registry,
+  Scan,
+  ValueRegistry,
 } from '@gabliam/core';
-import { TYPE, ENTITIES_TYPEORM } from './constant';
 import { ConnectionManager } from './connection-manager';
-import { ContainerInterface, ContainedType, useContainer } from './typeorm';
+import { ENTITIES_TYPEORM, TYPE } from './constant';
+import { ContainedType, ContainerInterface, useContainer } from './typeorm';
 
 /**
  * Container to be used by this library for inversion control. If container was not implicitly set then by default
  * container simply creates a new instance of the given class.
  */
-const defaultContainer: ContainerInterface = new class
+const defaultContainer: ContainerInterface = new (class
   implements ContainerInterface {
   public instances: { type: Function; object: any }[] = [];
 
@@ -27,13 +27,17 @@ const defaultContainer: ContainerInterface = new class
 
     return instance.object;
   }
-}();
+})();
 
 useContainer(defaultContainer);
 
-@Plugin()
+@Plugin(undefined, true)
 @Scan()
 export class TypeOrmPlugin implements GabliamPlugin {
+  async start(container: Container) {
+    const connection = container.get(ConnectionManager);
+    await connection.open();
+  }
   bind(container: Container, registry: Registry) {
     const entities = registry
       .get<ValueRegistry>(TYPE.Entity)
@@ -43,7 +47,7 @@ export class TypeOrmPlugin implements GabliamPlugin {
     container.bind<any>(ENTITIES_TYPEORM).toConstantValue(entities);
   }
 
-  async destroy(container: Container, registry: Registry) {
+  async destroy(container: Container) {
     const connection = container.get(ConnectionManager);
     await connection.close();
     (<any>defaultContainer).instances = [];
