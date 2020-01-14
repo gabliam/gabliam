@@ -146,6 +146,7 @@ Object {
 exports[`@Plugin should add Plugin metadata to a class when decorated with @Plugin('TestPlugin') 1`] = `
 Array [
   DecoratorFactory {
+    "beforeAll": false,
     "dependencies": Array [],
     "name": "TestPlugin",
   },
@@ -155,6 +156,7 @@ Array [
 exports[`@Plugin should add Plugin metadata to a class when decorated with @Plugin() 1`] = `
 Array [
   DecoratorFactory {
+    "beforeAll": false,
     "dependencies": Array [],
     "name": undefined,
   },
@@ -164,6 +166,7 @@ Array [
 exports[`@Plugin should add Plugin metadata to a class when decorated with @Plugin({ dependencies: ['TestPlugin'] }) 1`] = `
 Array [
   DecoratorFactory {
+    "beforeAll": false,
     "dependencies": Array [
       Object {
         "name": "TestPlugin",
@@ -178,6 +181,7 @@ Array [
 exports[`@Plugin should add Plugin metadata to a class when decorated with @Plugin({ name: 'TestPlugin' }) 1`] = `
 Array [
   DecoratorFactory {
+    "beforeAll": false,
     "dependencies": Array [],
     "name": "TestPlugin",
   },
@@ -187,6 +191,7 @@ Array [
 exports[`@Plugin should add Plugin metadata to a class when decorated with @Plugin({ name: 'TestPlugin', dependencies: ['TestPlugin2'] }) 1`] = `
 Array [
   DecoratorFactory {
+    "beforeAll": false,
     "dependencies": Array [
       Object {
         "name": "TestPlugin2",
