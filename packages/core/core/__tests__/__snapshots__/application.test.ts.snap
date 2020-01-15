@@ -63,6 +63,7 @@ Gabliam {
   "pluginList": PluginList {
     "_plugins": Array [
       Object {
+        "beforeAll": true,
         "dependencies": Array [],
         "name": "TypeOrmPlugin",
         "plugin": TypeOrmPlugin {},
@@ -195,6 +196,7 @@ Gabliam {
   "pluginList": PluginList {
     "_plugins": Array [
       Object {
+        "beforeAll": true,
         "dependencies": Array [],
         "name": "TypeOrmPlugin",
         "plugin": TypeOrmPlugin {},
@@ -459,6 +461,7 @@ Gabliam {
   "pluginList": PluginList {
     "_plugins": Array [
       Object {
+        "beforeAll": true,
         "dependencies": Array [],
         "name": "TypeOrmPlugin",
         "plugin": TypeOrmPlugin {},

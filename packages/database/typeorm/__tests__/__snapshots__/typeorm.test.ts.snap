@@ -126,4 +126,4 @@ Array [
 ]
 `;
 
-exports[`without config folder 1`] = `[TypeormConfigIsMandatoryError: connectionOptions is mandatory.]`;
+exports[`without config folder 1`] = `[Error: No connection options were found in any of configurations file.]`;
