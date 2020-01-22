@@ -33,7 +33,7 @@ export interface ApplicationOptions extends Partial<GabliamConfig> {
   plugins?: (GabliamAddPlugin | GabliamAddPluginCondition)[];
 }
 
-export type ConfitionFn = () => boolean | Promise<boolean>;
+export type ConfitionFn = () => boolean;
 
 export interface GabliamAddPluginCondition {
   plugin: GabliamAddPlugin | string;

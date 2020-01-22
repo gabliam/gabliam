@@ -1,6 +1,8 @@
 import * as bluebird from 'bluebird';
 import * as g from 'glob';
-import { toPromise, Type } from './common';
+import * as _ from 'lodash';
+import { promisify } from 'util';
+import { Type } from './common';
 import { TYPE } from './constants';
 import { Gabliam } from './gabliam';
 import { ValueRegistry } from './interfaces';
@@ -8,8 +10,6 @@ import { LoaderModule } from './loaders';
 import { Application } from './metadatas';
 import { reflection } from './reflection';
 import { Registry } from './registry';
-import { promisify } from 'util';
-import * as _ from 'lodash';
 const glob = promisify(g);
 
 const reg = /^.*(git|svn|node_modules|dist|build).*/;
@@ -79,13 +79,18 @@ const isValueRegistry = (val: any): val is ValueRegistry<any> => {
   );
 };
 
+export type GabliamBuilder = ReturnType<typeof gabliamBuilder>;
+
+export const isGabliamBuilder = (val: any): val is GabliamBuilder =>
+  val && !val.build;
+
 /**
  * Build a gabliam app
  * @param clazzOrValue  ValueRegistry or class of application
  */
-export const gabliamBuilder = async <T = any>(
+export const gabliamBuilder = <T = any>(
   clazzOrValue: ValueRegistry<T> | Type<any>
-) => {
+) => () => {
   let clazz: any = clazzOrValue;
   if (isValueRegistry(clazzOrValue)) {
     clazz = clazzOrValue.target;
@@ -96,13 +101,13 @@ export const gabliamBuilder = async <T = any>(
     Application
   )[0];
   if (application) {
-    const plugins = await bluebird
-      .filter(application.plugins, async item => toPromise(item.condition()))
-      .map(item => {
-        if (typeof item.plugin === 'string') {
-          return require(item.plugin).default;
+    const plugins = application.plugins
+      .filter(app => app.condition())
+      .map(app => {
+        if (typeof app.plugin === 'string') {
+          return require(app.plugin).default;
         }
-        return item.plugin;
+        return app.plugin;
       });
     return new Gabliam(application.gabliamConfig).addPlugins(...plugins);
   }

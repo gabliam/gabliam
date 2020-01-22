@@ -66,7 +66,7 @@ export class CommandUtils {
   ) {
     await setupTsProject(process.cwd());
     const application = await gabliamFindApp(process.cwd(), appName);
-    const gabliam = await (await gabliamBuilder(application)).build();
+    const gabliam = await gabliamBuilder(application)().build();
     const connectionOptions = gabliam.container.get(
       GabliamConnectionOptionsReader
     );

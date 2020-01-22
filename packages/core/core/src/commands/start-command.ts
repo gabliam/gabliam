@@ -40,7 +40,7 @@ export class StartCommand implements yargs.CommandModule<{}, StartCommandArgs> {
     await setupTsProject(dirToScan);
 
     const application = await gabliamFindApp(dirToScan, appName);
-    const gabliam = await gabliamBuilder(application);
+    const gabliam = gabliamBuilder(application)();
     ['SIGINT', 'SIGTERM'].forEach((sig: any) => {
       process.on(sig, async () => {
         try {

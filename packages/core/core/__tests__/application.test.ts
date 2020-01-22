@@ -10,7 +10,7 @@ describe('gabliamFinder', () => {
         resolve(__dirname, './fixtures/applications/one/withoutconfig')
       );
       expect(apps).toMatchSnapshot();
-      const gab = await gabliamBuilder(apps[0]);
+      const gab = gabliamBuilder(apps[0])();
       expect(gab).toMatchSnapshot();
     });
 
@@ -19,7 +19,7 @@ describe('gabliamFinder', () => {
         resolve(__dirname, './fixtures/applications/one/withconfig')
       );
       expect(apps).toMatchSnapshot();
-      const gab = await gabliamBuilder(apps[0]);
+      const gab = gabliamBuilder(apps[0])();
       expect(gab).toMatchSnapshot();
     });
 
@@ -28,7 +28,7 @@ describe('gabliamFinder', () => {
         resolve(__dirname, './fixtures/applications/one/gabliam')
       );
       expect(apps).toMatchSnapshot();
-      expect(gabliamBuilder(apps[0])).rejects.toMatchSnapshot();
+      expect(gabliamBuilder(apps[0])).toThrowErrorMatchingSnapshot();
     });
   });
 
@@ -38,8 +38,8 @@ describe('gabliamFinder', () => {
         resolve(__dirname, './fixtures/applications/two')
       );
       expect(apps).toMatchSnapshot();
-      expect(gabliamBuilder(apps[0])).resolves.toMatchSnapshot();
-      expect(gabliamBuilder(apps[1])).resolves.toMatchSnapshot();
+      expect(gabliamBuilder(apps[0])()).toMatchSnapshot();
+      expect(gabliamBuilder(apps[1])()).toMatchSnapshot();
     });
   });
 });
@@ -52,7 +52,7 @@ describe('gabliamFindApp', () => {
           resolve(__dirname, './fixtures/applications/one/withoutconfig')
         );
         expect(apps).toMatchSnapshot();
-        const gab = await gabliamBuilder(apps);
+        const gab = gabliamBuilder(apps)();
         expect(gab).toMatchSnapshot();
       });
 
@@ -61,7 +61,7 @@ describe('gabliamFindApp', () => {
           resolve(__dirname, './fixtures/applications/one/withconfig')
         );
         expect(apps).toMatchSnapshot();
-        const gab = await gabliamBuilder(apps);
+        const gab = gabliamBuilder(apps)();
         expect(gab).toMatchSnapshot();
       });
 
@@ -91,7 +91,7 @@ describe('gabliamFindApp', () => {
           'MyApp'
         );
         expect(apps).toMatchSnapshot();
-        const gab = await gabliamBuilder(apps);
+        const gab = gabliamBuilder(apps)();
         expect(gab).toMatchSnapshot();
       });
 
@@ -101,7 +101,7 @@ describe('gabliamFindApp', () => {
           'MyApp'
         );
         expect(apps).toMatchSnapshot();
-        const gab = await gabliamBuilder(apps);
+        const gab = gabliamBuilder(apps)();
         expect(gab).toMatchSnapshot();
       });
 
@@ -123,7 +123,7 @@ describe('gabliamFindApp', () => {
         );
         expect(apps).toMatchSnapshot();
         expect(apps.name).toMatchSnapshot();
-        expect(gabliamBuilder(apps)).resolves.toMatchSnapshot();
+        expect(gabliamBuilder(apps)()).toMatchSnapshot();
       });
     });
   });
