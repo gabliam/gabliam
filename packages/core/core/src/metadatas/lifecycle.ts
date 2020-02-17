@@ -6,7 +6,7 @@ import { makePropDecorator } from '../decorator';
  */
 export interface PreDestroyDecorator {
   /**
-   * Decorator that marks a class field as an OnMissingBean property and supplies configuration metadata.
+   * Decorator that marks a class field as an PreDestroy property and supplies configuration metadata.
    *
    * The property was be called before the class was destroyed
    *
