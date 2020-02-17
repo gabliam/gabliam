@@ -1,9 +1,12 @@
 <h3 align="center">
   Gabliam
 </h3>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/gabliam/gabliam/master/logo/gabliam_small.png" width="120" alt="Gabliam Logo" /></a>
+</p>
 
 <p align="center">
-  Nodejs Framework
+  Nodejs Framework for building server-side applications.
 </p>
 
 <p align="center">
@@ -12,6 +15,11 @@
   <a href="https://travis-ci.org/gabliam/gabliam"><img src="https://img.shields.io/travis/gabliam/gabliam/master.svg?style=flat-square"></a>
   <a href="https://coveralls.io/github/gabliam/gabliam?branch=master"><img src="https://img.shields.io/coveralls/github/gabliam/gabliam.svg?style=flat-square"></a>
 </p>
+
+## Description
+Gabliam is a framework for building Node.js server-side applications. It use TypeScript.
+
+Under the hood, gabliam makes use of Inversify. All plugin use a great Node.js package. For example, for server, gabliam use express or koa. For dabase, gabliam use typeorm
 
 
 ## Packages
@@ -63,3 +71,12 @@ This repository is a monorepo that we manage using [Lerna](https://github.com/le
 | [`koa`](/packages/web/koa) | [![npm](https://img.shields.io/npm/v/@gabliam/koa.svg?style=flat-square)](https://www.npmjs.com/package/@gabliam/koa) | [![](https://img.shields.io/badge/API%20Docs-readme-orange.svg?style=flat-square)](/packages/web/koa/#readme) | The koa plugin for Gabliam |
 | [`web-core`](/packages/web/web-core) | [![npm](https://img.shields.io/npm/v/@gabliam/web-core.svg?style=flat-square)](https://www.npmjs.com/package/@gabliam/web-core) | [![](https://img.shields.io/badge/API%20Docs-readme-orange.svg?style=flat-square)](/packages/web/web-core/#readme) | The web core for Gabliam (contains all decorator and tools) |
 | [`validate-joi`](/packages/web/validate-joi) | [![npm](https://img.shields.io/npm/v/@gabliam/validate-joi.svg?style=flat-square)](https://www.npmjs.com/package/@gabliam/validate-joi) | [![](https://img.shields.io/badge/API%20Docs-readme-orange.svg?style=flat-square)](/packages/web/validate-joi/#readme) | Add validation with joi of params |
+
+
+## Stay in touch
+
+* Author - [David Touzet](https://twitter.com/eyolas)
+
+## License
+
+Nest is [MIT licensed](LICENSE).
