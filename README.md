@@ -1,9 +1,9 @@
-<h3 align="center">
-  Gabliam
-</h3>
 <p align="center">
   <img src="https://raw.githubusercontent.com/gabliam/gabliam/master/logo/gabliam_small.png" width="120" alt="Gabliam Logo" /></a>
 </p>
+<h3 align="center">
+  Gabliam
+</h3>
 
 <p align="center">
   Nodejs Framework for building server-side applications.
