@@ -9,6 +9,7 @@ module.exports = {
     "!packages/**/src/testing/**",
     "!packages/**/src/typings/**",
     "!packages/core/expression/src/**/*.ts",
+    "!packages/database/typeorm/src/commands/**/*.ts",
     "!**/node_modules/**",
     "!**/vendor/**"
   ],
