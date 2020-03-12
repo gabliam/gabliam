@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import * as yargs from 'yargs';
 import {
   gabliamBuilder,
@@ -51,6 +52,10 @@ export class StartCommand implements yargs.CommandModule<{}, StartCommandArgs> {
       });
     });
 
-    gabliam.buildAndStart();
+    await gabliam.buildAndStart();
+    const app = new application();
+    if (_.isFunction(app.run)) {
+      app.run(gabliam);
+    }
   }
 }
