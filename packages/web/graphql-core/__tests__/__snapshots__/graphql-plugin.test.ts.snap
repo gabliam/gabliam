@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`without config gabliam build 1`] = `[Error: Empty \`resolvers\` array property found in \`buildSchema\` options!]`;

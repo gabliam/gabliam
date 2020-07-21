@@ -72,7 +72,7 @@ export class Parser {
   private parseObject(node: ObjectExpression, vars: object) {
     const obj = {};
     for (let i = 0; i < node.properties.length; i++) {
-      const prop = node.properties[i];
+      const prop: any = node.properties[i];
       const value: any =
         prop.value === null ? prop.value : this.walk(prop.value, vars);
       if (value === FAIL) {
@@ -89,7 +89,7 @@ export class Parser {
 
   private parseLeftRight(
     node: BinaryExpression | LogicalExpression,
-    vars: object
+    vars: object,
   ) {
     const l = this.walk(node.left, vars);
     if (l === FAIL) {
@@ -299,7 +299,7 @@ export class Parser {
       ...vars,
     };
 
-    node.params.forEach(key => {
+    node.params.forEach((key) => {
       if (key.type === 'Identifier') {
         (<any>newVars)[key.name] = null;
       }
@@ -312,12 +312,12 @@ export class Parser {
     }
 
     const keys = Object.keys(vars);
-    const vals = keys.map(key => {
+    const vals = keys.map((key) => {
       return (<any>vars)[key];
     });
     return Function(keys.join(', '), 'return ' + generate(node)).apply(
       null,
-      vals
+      vals,
     );
   }
 
@@ -335,8 +335,8 @@ export class Parser {
   private parseTaggedTemplate(node: TaggedTemplateExpression, vars: object) {
     const tag = this.walk(node.tag, vars);
     const quasi = node.quasi;
-    const strings = quasi.quasis.map(q => this.walk(q, vars));
-    const values = quasi.expressions.map(e => this.walk(e, vars));
+    const strings = quasi.quasis.map((q) => this.walk(q, vars));
+    const values = quasi.expressions.map((e) => this.walk(e, vars));
     return tag.apply(null, [strings].concat(values));
   }
 
@@ -350,7 +350,7 @@ export class Parser {
       | Statement
       | null
       | undefined,
-    vars: object
+    vars: object,
   ): any {
     if (!node) {
       return FAIL;

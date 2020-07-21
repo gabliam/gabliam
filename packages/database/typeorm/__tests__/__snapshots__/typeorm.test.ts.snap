@@ -4,7 +4,7 @@ exports[`must fail when CUnit not found 1`] = `[TypeormCUnitNotFoundError: CUnit
 
 exports[`must fail when getConnection not found 1`] = `"Connection notfound not found"`;
 
-exports[`with bad config 1`] = `[MissingDriverError: Wrong driver: "undefined" given. Supported drivers are: "cordova", "expo", "mariadb", "mongodb", "mssql", "mysql", "oracle", "postgres", "sqlite", "sqljs", "react-native".]`;
+exports[`with bad config 1`] = `[MissingDriverError: Wrong driver: "undefined" given. Supported drivers are: "cordova", "expo", "mariadb", "mongodb", "mssql", "mysql", "oracle", "postgres", "sqlite", "sqljs", "react-native", "aurora-data-api", "aurora-data-api-pg".]`;
 
 exports[`with config 1`] = `true`;
 
@@ -126,4 +126,4 @@ Array [
 ]
 `;
 
-exports[`without config folder 1`] = `[Error: No connection options were found in any of configurations file.]`;
+exports[`without config folder 1`] = `[Error: No connection options were found in any orm configuration files.]`;
