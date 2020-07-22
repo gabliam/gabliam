@@ -123,26 +123,6 @@ export class WebConfiguration<T = any> {
     }
   }
 
-  addwebConfig(webConfig: Configuration<T>) {
-    this._webconfig.push(webConfig);
-  }
-
-  addWebConfigAfterCtrl(webConfig: Configuration<T>) {
-    this._webconfigAfterCtrl.push(webConfig);
-  }
-
-  useGlobalInterceptor(...ids: inversifyInterfaces.ServiceIdentifier<any>[]) {
-    this._globalInterceptors.push(...ids);
-  }
-
-  useGlobalPipes(...ids: inversifyInterfaces.ServiceIdentifier<any>[]) {
-    this._globalPipes.push(...ids);
-  }
-
-  addServerConfigs(...configs: ServerConfig[]) {
-    this._serverConfigs.push(...configs);
-  }
-
   get webConfigs() {
     return this._webconfig.slice();
   }
@@ -165,5 +145,25 @@ export class WebConfiguration<T = any> {
 
   get serverStarter() {
     return this._serverStarter;
+  }
+
+  addwebConfig(webConfig: Configuration<T>) {
+    this._webconfig.push(webConfig);
+  }
+
+  addWebConfigAfterCtrl(webConfig: Configuration<T>) {
+    this._webconfigAfterCtrl.push(webConfig);
+  }
+
+  useGlobalInterceptor(...ids: inversifyInterfaces.ServiceIdentifier<any>[]) {
+    this._globalInterceptors.push(...ids);
+  }
+
+  useGlobalPipes(...ids: inversifyInterfaces.ServiceIdentifier<any>[]) {
+    this._globalPipes.push(...ids);
+  }
+
+  addServerConfigs(...configs: ServerConfig[]) {
+    this._serverConfigs.push(...configs);
   }
 }

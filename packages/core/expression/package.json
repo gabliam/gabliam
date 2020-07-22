@@ -37,7 +37,7 @@
     "escodegen": "^1.12.0",
     "esprima": "^4.0.1",
     "is-valid-path": "^0.1.1",
-    "tslib": "^1.10.0"
+    "tslib": "^2.0.0"
   },
   "engines": {
     "node": ">=8.9.0"

@@ -5,13 +5,6 @@ import { koa } from './koa';
 
 /* istanbul ignore next */
 export class KoaRequest implements GabRequest<koa.Request> {
-  /**
-   * Return the original request
-   */
-  get originalRequest() {
-    return this.request;
-  }
-
   @alias(['request', 'body'])
   // body
   body: object;
@@ -150,6 +143,13 @@ export class KoaRequest implements GabRequest<koa.Request> {
 
   // @ts-ignore : context use with property-tunnel
   constructor(private context: koa.Context, private request: koa.Request) {}
+
+  /**
+   * Return the original request
+   */
+  get originalRequest() {
+    return this.request;
+  }
 
   /**
    * Get parsed query-string.

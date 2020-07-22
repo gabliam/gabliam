@@ -5,10 +5,6 @@ import { alias } from 'property-tunnel';
 
 /* istanbul ignore next */
 export class KoaResponse implements GabResponse<koa.Response> {
-  get originalResponse() {
-    return this.response;
-  }
-
   /**
    * Check if a header has been written to the socket.
    */
@@ -52,6 +48,10 @@ export class KoaResponse implements GabResponse<koa.Response> {
   type: string;
 
   constructor(private context: koa.Context, private response: koa.Response) {}
+
+  get originalResponse() {
+    return this.response;
+  }
 
   /**
    * Redirect to the given `url` with optional response `status`
@@ -154,7 +154,7 @@ export class KoaResponse implements GabResponse<koa.Response> {
    */
   set(
     field: { [key: string]: string } | string,
-    val?: string | string[]
+    val?: string | string[],
   ): void {
     if (typeof field === 'string') {
       // cast to any (ts prob)

@@ -6,13 +6,6 @@ import { express } from './express';
 
 /* istanbul ignore next */
 export class ExpressRequest implements GabRequest<express.Request> {
-  /**
-   * Return the original request
-   */
-  get originalRequest() {
-    return this.request;
-  }
-
   @alias(['request', 'body'])
   // body
   body: object;
@@ -152,6 +145,30 @@ export class ExpressRequest implements GabRequest<express.Request> {
   constructor(private request: express.Request) {}
 
   /**
+   * Return the original request
+   */
+  get originalRequest() {
+    return this.request;
+  }
+
+  /**
+   * Get/Set query string.
+   */
+  get querystring() {
+    let search = url.parse(this.request.url, true).search || '';
+    if (search && search[0] === '?') {
+      search = search.slice(1);
+    }
+    return search;
+  }
+
+  set querystring(querystring: string) {
+    if (querystring) {
+      this.request.query = qs.parse(querystring);
+    }
+  }
+
+  /**
    * Check if the given `type(s)` is acceptable, returning
    * the best match when true, otherwise `undefined`, in which
    * case you should respond with 406 "Not Acceptable".
@@ -283,23 +300,7 @@ export class ExpressRequest implements GabRequest<express.Request> {
    *       // => false
    */
   is(type: string): string | false {
-    return this.request.is(type);
-  }
-
-  /**
-   * Get/Set query string.
-   */
-  get querystring() {
-    let search = url.parse(this.request.url, true).search || '';
-    if (search && search[0] === '?') {
-      search = search.slice(1);
-    }
-    return search;
-  }
-
-  set querystring(querystring: string) {
-    if (querystring) {
-      this.request.query = qs.parse(querystring);
-    }
+    const is = this.request.is(type);
+    return is === null ? false : is;
   }
 }

@@ -42,7 +42,7 @@
     "debug": "^4.1.1",
     "mongodb-uri": "^0.9.7",
     "mongoose": "^5.8.3",
-    "tslib": "^1.10.0"
+    "tslib": "^2.0.0"
   },
   "engines": {
     "node": ">=8.9.0"

@@ -45,7 +45,7 @@
   "dependencies": {
     "class-transformer": "^0.2.3",
     "class-validator": "^0.11.0",
-    "tslib": "^1.10.0"
+    "tslib": "^2.0.0"
   },
   "engines": {
     "node": ">=8.9.0"

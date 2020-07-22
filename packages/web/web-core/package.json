@@ -48,7 +48,7 @@
     "http-status-codes": "^1.4.0",
     "property-tunnel": "^1.2.2",
     "statuses": "^1.5.0",
-    "tslib": "^1.10.0"
+    "tslib": "^2.0.0"
   },
   "engines": {
     "node": ">=8.9.0"
