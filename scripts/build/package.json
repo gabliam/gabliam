@@ -12,7 +12,7 @@
     "fs-extra": "^8.1.0",
     "globby": "^10.0.1",
     "graph-data-structure": "^1.8.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "ora": "^3.4.0",
     "rimraf": "^2.6.3"
   }
