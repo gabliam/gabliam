@@ -13,7 +13,7 @@ describe('with config', () => {
     const g = new GabliamTest(
       new Gabliam({ scanPath: path.resolve(__dirname, './fixtures') })
         .addPlugin(ExpressPlugin)
-        .addPlugin(GraphqlPlugin)
+        .addPlugin(GraphqlPlugin),
     );
     gab = g.gab;
 
@@ -43,6 +43,6 @@ describe('without config', () => {
   });
 
   test('gabliam build', async () => {
-    expect(gab.build()).rejects.toMatchSnapshot();
+    await expect(gab.build()).rejects.toMatchSnapshot();
   });
 });
