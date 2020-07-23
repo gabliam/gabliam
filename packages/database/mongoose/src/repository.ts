@@ -10,7 +10,7 @@ export class Repository<T>
   }
 
   create(item: T): Promise<T & mongoose.Document> {
-    return this.model.create(item);
+    return this.model.create(<any>item);
   }
 
   findAll(): Promise<(T & mongoose.Document)[]> {
@@ -18,29 +18,31 @@ export class Repository<T>
   }
 
   update(_id: string | mongoose.Types.ObjectId, item: Object): Promise<any> {
-    return this.model.updateOne({ _id: this.toObjectId(_id) }, item).exec();
+    return this.model
+      .updateOne(<any>{ _id: this.toObjectId(_id) }, <any>item)
+      .exec();
   }
 
   delete(_id: string | mongoose.Types.ObjectId): Promise<void> {
     return (this.model
-      .deleteOne({ _id: this.toObjectId(_id) })
+      .deleteOne(<any>{ _id: this.toObjectId(_id) })
       .exec() as unknown) as Promise<void>;
   }
 
-  findById(_id: string): Promise<T & mongoose.Document | null> {
+  findById(_id: string): Promise<(T & mongoose.Document) | null> {
     return this.model.findById(_id).exec();
   }
 
-  findOne(cond?: Object): mongoose.Query<T & mongoose.Document | null> {
-    return this.model.findOne(cond);
+  findOne(cond?: Object): mongoose.Query<(T & mongoose.Document) | null> {
+    return this.model.findOne(<any>cond);
   }
 
   find(
     conditions: Object,
     projection?: Object,
-    options?: Object
+    options?: Object,
   ): mongoose.Query<(T & mongoose.Document)[]> {
-    return this.model.find(conditions, projection!, options!);
+    return this.model.find(<any>conditions, projection!, options!);
   }
 
   deleteAll() {
@@ -48,7 +50,7 @@ export class Repository<T>
   }
 
   private toObjectId(
-    _id: string | mongoose.Types.ObjectId
+    _id: string | mongoose.Types.ObjectId,
   ): mongoose.Types.ObjectId {
     if (mongoose.Types.ObjectId.isValid(_id)) {
       return <mongoose.Types.ObjectId>_id;

@@ -20,7 +20,7 @@ export type ExpressInterceptorType = 'RequestHandler' | 'intercept';
 export const isValidInterceptor = (target: any) => {
   const meta = Reflect.getOwnMetadata(
     METADATA_KEY.specialInterceptor,
-    target.constructor || target
+    target.constructor || target,
   );
 
   return meta === undefined || meta === 'express';
@@ -39,7 +39,7 @@ const ExpressInterceptor = () => (target: any) => {
  * Convert a Express middleware to an express interceptor
  */
 export const toInterceptor = (
-  mid: express.RequestHandler
+  mid: express.RequestHandler,
 ): InterceptorConstructor => {
   const clazz: InterceptorConstructor = class implements Interceptor {
     async intercept(context: GabContext, next: nextFn) {
@@ -49,7 +49,7 @@ export const toInterceptor = (
         // with callback
         case 3:
           return new Promise((resolve, reject) => {
-            (<express.RequestHandler>mid)(req, res, err => {
+            (<express.RequestHandler>mid)(req, res, (err: any) => {
               if (err) {
                 reject(err);
               } else {
@@ -76,13 +76,13 @@ export const toInterceptor = (
     'design:paramtypes',
     [Function, Function],
     clazz.prototype,
-    'intercept'
+    'intercept',
   );
   Reflect.defineMetadata(
     'design:returntype',
     Promise,
     clazz.prototype,
-    'intercept'
+    'intercept',
   );
   return clazz;
 };
@@ -92,4 +92,4 @@ export const toInterceptor = (
  * /!\ Use it for RequestHandler
  */
 export const UseExpressInterceptors = (...mids: express.RequestHandler[]) =>
-  UseInterceptors(...mids.map(m => toInterceptor(m)));
+  UseInterceptors(...mids.map((m) => toInterceptor(m)));
