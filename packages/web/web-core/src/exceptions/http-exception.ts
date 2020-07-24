@@ -24,7 +24,7 @@ export class HttpException extends Error {
   public getJson(): string | object {
     return {
       statusCode: this.statusCode,
-      error: this.error || statuses[this.statusCode],
+      error: this.error || statuses.message[this.statusCode],
       ...(<object>(
         (isObject(this.response) ? this.response : { message: this.response })
       )),

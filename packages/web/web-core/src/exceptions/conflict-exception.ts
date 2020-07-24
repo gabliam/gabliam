@@ -5,7 +5,7 @@ import { HttpException } from './http-exception';
 export class ConflictException extends HttpException {
   constructor(
     message?: string | object | any,
-    error = statuses[HttpStatus.CONFLICT],
+    error = statuses.message[HttpStatus.CONFLICT],
     otherFields = {}
   ) {
     super(message, HttpStatus.CONFLICT, error, otherFields);

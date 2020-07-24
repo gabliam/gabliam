@@ -38,7 +38,7 @@ export interface PluginCacheConfig {
   options?: Object;
 }
 
-const stringOrClass = Joi.alternatives().try([Joi.string(), Joi.func()]);
+const stringOrClass = Joi.alternatives().try(Joi.string(), Joi.func());
 
 const cacheValidator = Joi.object({
   cache: stringOrClass,

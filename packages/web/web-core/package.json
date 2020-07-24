@@ -40,14 +40,14 @@
   "devDependencies": {
     "@gabliam/core": "0.0.0-PLACEHOLDER",
     "@types/cookies": "^0.7.4",
-    "@types/escape-html": "^0.0.20",
-    "@types/statuses": "^1.5.0"
+    "@types/escape-html": "^1.0.0",
+    "@types/statuses": "^2.0.0"
   },
   "dependencies": {
     "cookies": "^0.8.0",
     "http-status-codes": "^1.4.0",
     "property-tunnel": "^1.2.2",
-    "statuses": "^1.5.0",
+    "statuses": "^2.0.0",
     "tslib": "^2.0.0"
   },
   "engines": {

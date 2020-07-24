@@ -37,17 +37,17 @@
     "@gabliam/core": "0.0.0-PLACEHOLDER",
     "@types/debug": "^4.1.5",
     "@types/graphql": "^14.5.0",
-    "@types/lodash": "^4.14.149",
-    "@types/node": "^13.1.0"
+    "@types/lodash": "^4.14.158",
+    "@types/node": "^14.0.24"
   },
   "dependencies": {
     "apollo-server-core": "^2.9.14",
     "caller": "^1.0.1",
     "debug": "^4.1.1",
-    "graphql": "^14.5.8",
+    "graphql": "^15.3.0",
     "lodash": "^4.17.15",
     "tslib": "^2.0.0",
-    "type-graphql": "^0.17.6"
+    "type-graphql": "^1.0.0-rc.3"
   },
   "engines": {
     "node": ">=8.9.0"

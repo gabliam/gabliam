@@ -1,27 +1,28 @@
-import { reflection, ValueExtractor, toPromise } from '@gabliam/core';
+import { reflection, toPromise, ValueExtractor } from '@gabliam/core';
 import { log4js } from '@gabliam/log4js';
 import * as amqp from 'amqp-connection-manager';
 import { ConfirmChannel, ConsumeMessage, Message } from 'amqplib';
 import * as PromiseB from 'bluebird';
 import * as _ from 'lodash';
-import * as uuid from 'uuid';
+import { v4 as uuid } from 'uuid';
+import { gunzip, gzip } from 'zlib';
 import {
   AmqpConnectionError,
-  AmqpTimeoutError,
-  AmqpQueueDoesntExistError,
-  AmqpMessageIsNullError,
-  AmqpReplytoIsMissingError,
+
+
+  AmqpMessageIsNullError, AmqpQueueDoesntExistError,
+
+  AmqpReplytoIsMissingError, AmqpTimeoutError
 } from './errors';
 import {
   ConsumeConfig,
   ConsumeOptions,
   ConsumerHandler,
   Controller,
-  SendOptions,
+  SendOptions
 } from './interfaces';
 import { RabbitHandler, RabbitParamDecorator } from './metadatas';
 import { Queue } from './queue';
-import { gzip, gunzip } from 'zlib';
 
 type ExtractArgsFn = (msg: Message) => Promise<any>;
 

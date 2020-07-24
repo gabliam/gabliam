@@ -5,7 +5,7 @@ import { HttpException } from './http-exception';
 export class NotImplementedException extends HttpException {
   constructor(
     message?: string | object | any,
-    error = statuses[HttpStatus.NOT_IMPLEMENTED],
+    error = statuses.message[HttpStatus.NOT_IMPLEMENTED],
     otherFields = {}
   ) {
     super(message, HttpStatus.NOT_IMPLEMENTED, error, otherFields);

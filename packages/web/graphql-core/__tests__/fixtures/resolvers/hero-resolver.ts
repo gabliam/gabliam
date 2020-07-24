@@ -4,7 +4,6 @@ import {
   Publisher,
   PubSub,
   Query,
-  Resolver,
   Root,
   Subscription,
 } from 'type-graphql';
@@ -12,8 +11,9 @@ import { Hero } from '../entities/hero';
 import { Paginate } from './array-util';
 import { HeroInput } from './types/hero-input';
 import { PaginatedHero } from './types/paginated-hero';
+import { GabResolver } from '@gabliam/graphql-core';
 
-@Resolver(of => Hero)
+@GabResolver(of => Hero)
 export class HeroResolver {
   public heroRepository: Hero[] = [
     { id: 1, name: 'spiderman', power: 'spider', amountPeopleSaved: 10 },

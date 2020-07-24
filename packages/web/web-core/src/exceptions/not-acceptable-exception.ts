@@ -5,7 +5,7 @@ import { HttpException } from './http-exception';
 export class NotAcceptableException extends HttpException {
   constructor(
     message?: string | object | any,
-    error = statuses[HttpStatus.NOT_ACCEPTABLE],
+    error = statuses.message[HttpStatus.NOT_ACCEPTABLE],
     otherFields = {}
   ) {
     super(message, HttpStatus.NOT_ACCEPTABLE, error, otherFields);

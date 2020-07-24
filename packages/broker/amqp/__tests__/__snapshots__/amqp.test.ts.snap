@@ -60,11 +60,11 @@ Array [
 ]
 `;
 
-exports[`Errors with bad config 1`] = `[Error: Error for 'application.amqp' value{"isJoi":true,"name":"ValidationError","details":[{"message":"/"value/" must be an object","path":[],"type":"object.base","context":{"value":"bad","label":"value"}},{"message":"/"value/" must be an array","path":[],"type":"array.base","context":{"label":"value"}}],"_object":"bad"}]`;
+exports[`Errors with bad config 1`] = `[Error: Error for 'application.amqp' value{"_original":"bad","details":[{"message":"/"value/" must be one of [object, array]","path":[],"type":"alternatives.types","context":{"types":["object","array"],"label":"value","value":"bad"}}]}]`;
 
 exports[`Errors without config folder 1`] = `[AmqpConfigIsMandatoryError: AmqpConfig is mandatory]`;
 
-exports[`Errors without queueName 1`] = `[Error: Error for 'application.amqp' value{"isJoi":true,"name":"ValidationError","details":[{"message":"/"queueName/" is required","path":["queues","queueTest","queueName"],"type":"any.required","context":{"key":"queueName","label":"queueName"}},{"message":"/"name/" is not allowed","path":["queues","queueTest","name"],"type":"object.allowUnknown","context":{"child":"name","value":"lol","key":"name","label":"name"}},{"message":"/"value/" must be an array","path":[],"type":"array.base","context":{"label":"value"}}],"_object":{"url":"amqp://bad","queues":{"queueTest":{"name":"lol"}}}}]`;
+exports[`Errors without queueName 1`] = `[Error: Error for 'application.amqp' value{"_original":{"url":"amqp://bad","queues":{"queueTest":{"name":"lol"}}},"details":[{"message":"/"value/" does not match any of the allowed types","path":[],"type":"alternatives.match","context":{"message":"/"queues.queueTest.queueName/" is required. /"queues.queueTest.name/" is not allowed. /"value/" must be an array","details":[{"message":"/"queues.queueTest.queueName/" is required","path":["queues","queueTest","queueName"],"type":"any.required","context":{"label":"queues.queueTest.queueName","key":"queueName"}},{"message":"/"queues.queueTest.name/" is not allowed","path":["queues","queueTest","name"],"type":"object.unknown","context":{"child":"name","label":"queues.queueTest.name","value":"lol","key":"name"}},{"message":"/"value/" must be an array","path":[],"type":"array.base","context":{"label":"value","value":{"url":"amqp://bad","queues":{"queueTest":{"name":"lol"}}}}}],"label":"value","value":{"url":"amqp://bad","queues":{"queueTest":{"name":"lol"}}}}}]}]`;
 
 exports[`Listener test with buffer object 1`] = `
 Object {

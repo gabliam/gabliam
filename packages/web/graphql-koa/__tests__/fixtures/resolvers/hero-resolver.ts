@@ -1,10 +1,10 @@
+import { GabResolver } from '@gabliam/graphql-core/src';
 import {
   Arg,
   Mutation,
   Publisher,
   PubSub,
   Query,
-  Resolver,
   Root,
   Subscription,
 } from 'type-graphql';
@@ -13,7 +13,7 @@ import { Paginate } from './array-util';
 import { HeroInput } from './types/hero-input';
 import { PaginatedHero } from './types/paginated-hero';
 
-@Resolver(of => Hero)
+@GabResolver((of) => Hero)
 export class HeroResolver {
   public heroRepository: Hero[] = [
     { id: 1, name: 'spiderman', power: 'spider', amountPeopleSaved: 10 },
@@ -27,10 +27,10 @@ export class HeroResolver {
 
   private nextId = this.heroRepository.length + 2;
 
-  @Mutation(returns => Hero)
+  @Mutation((returns) => Hero)
   async submitHero(
     @PubSub('heroAdded') publish: Publisher<Hero>,
-    @Arg('heroInput') heroInput: HeroInput
+    @Arg('heroInput') heroInput: HeroInput,
   ) {
     const hero: Hero = {
       id: this.nextId++,
@@ -42,7 +42,7 @@ export class HeroResolver {
     return hero;
   }
 
-  @Query(returns => [Hero])
+  @Query((returns) => [Hero])
   async heroes() {
     const heroes = this.heroRepository;
     if (heroes.length > 0) {
@@ -56,14 +56,14 @@ export class HeroResolver {
     return hero;
   }
 
-  @Query(returns => PaginatedHero)
+  @Query((returns) => PaginatedHero)
   async getPageOfHeroes(
-    @Arg('sortField', type => String, { nullable: true })
+    @Arg('sortField', (type) => String, { nullable: true })
     sortField: keyof Hero | undefined,
-    @Arg('sortOrder', type => String, { nullable: true })
+    @Arg('sortOrder', (type) => String, { nullable: true })
     sortOrder: 'ASC' | 'DESC' | undefined,
     @Arg('page', { defaultValue: 0 }) page: number,
-    @Arg('perPage', { defaultValue: 10 }) perPage: number
+    @Arg('perPage', { defaultValue: 10 }) perPage: number,
   ): Promise<PaginatedHero> {
     if (page < 0) {
       page = 0;

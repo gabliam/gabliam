@@ -5,7 +5,7 @@ import { HttpException } from './http-exception';
 export class UnauthorizedException extends HttpException {
   constructor(
     message?: string | object | any,
-    error = statuses[HttpStatus.UNAUTHORIZED],
+    error = statuses.message[HttpStatus.UNAUTHORIZED],
     otherFields = {}
   ) {
     super(message, HttpStatus.UNAUTHORIZED, error, otherFields);

@@ -12,7 +12,7 @@ export abstract class GraphqlCorePlugin implements GabliamPlugin {
     const graphqlPluginConfig = container.get<GraphqlConfig>(GRAPHQL_CONFIG);
     const controllerIds = registry.get(TYPE.Controller).map(val => val.target);
     const schema = await buildSchema({
-      resolvers: controllerIds,
+      resolvers: controllerIds as [Function, ...Function[]],
       container: {
         get(someClass) {
           return container.get(someClass);

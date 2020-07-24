@@ -8,7 +8,7 @@ import { GraphqlPlugin } from './graphql-plugin';
 const build = sinon.spy(GraphqlPlugin.prototype, 'build');
 let gab: Gabliam;
 
-describe('with config', () => {
+describe.only('with config', () => {
   beforeAll(() => {
     const g = new GabliamTest(
       new Gabliam({ scanPath: path.resolve(__dirname, './fixtures') })
@@ -26,7 +26,7 @@ describe('with config', () => {
     build.resetHistory();
   });
 
-  test('gabliam build', async () => {
+  test.only('gabliam build', async () => {
     await gab.build();
     expect(build.calledOnce).toBe(true);
   });

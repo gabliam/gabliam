@@ -18,7 +18,8 @@ function valueValidator(path: string, value: any, validator: ValueValidator) {
     abortEarly: false,
     ...(validator.options || {}),
   };
-  const validate = Joi.validate(value, validator.schema, options);
+
+  const validate = validator.schema.validate(value, options);
   if (validate.error) {
     if (validator.throwError) {
       const msg = validator.customErrorMsg || `Error for '${path}' value`;

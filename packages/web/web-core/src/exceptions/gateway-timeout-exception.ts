@@ -5,7 +5,7 @@ import { HttpException } from './http-exception';
 export class GatewayTimeoutException extends HttpException {
   constructor(
     message?: string | object | any,
-    error = statuses[HttpStatus.GATEWAY_TIMEOUT],
+    error = statuses.message[HttpStatus.GATEWAY_TIMEOUT],
     otherFields = {}
   ) {
     super(message, HttpStatus.GATEWAY_TIMEOUT, error, otherFields);
