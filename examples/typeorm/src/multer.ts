@@ -1,6 +1,6 @@
-import * as multer from 'multer';
-import * as multer2 from 'koa-multer';
+import multer from 'multer';
+const multer2 = require('@koa/multer');
 
-export const expressMulter = multer({ dest: 'uploads/' });
+export const expressMulter = <any> multer({ dest: 'uploads/' });
 
 export const koaMulter = multer2({ dest: 'uploads/' });

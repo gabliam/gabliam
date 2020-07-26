@@ -12,11 +12,11 @@ import {
   ResponseEntity,
   RestController,
 } from '@gabliam/web-core';
-import * as Boom from 'boom';
+import Boom from 'boom';
 import { Photo } from '../entities/photo';
 import { expressMulter, koaMulter } from '../multer';
 
-@RestController('/photos/lol/lol')
+@RestController('/photos')
 export class PhotoController {
   private photoRepository: Repository<Photo>;
 
@@ -69,6 +69,6 @@ export class PhotoController {
   @UseExpressInterceptors(expressMulter.single('avatar'))
   @Post('/upload')
   async upload(@Request() req: GabRequest) {
-    return req.file;
+      return req.file;
   }
 }

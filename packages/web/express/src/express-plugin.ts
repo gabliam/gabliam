@@ -4,7 +4,7 @@ import {
   Plugin,
   Registry,
   Scan,
-  toPromise,
+  toPromise
 } from '@gabliam/core';
 import {
   APP,
@@ -20,7 +20,7 @@ import {
   WebConfigurationContructor,
   WebPluginBase,
   WebPluginConfig,
-  WEB_PLUGIN_CONFIG,
+  WEB_PLUGIN_CONFIG
 } from '@gabliam/web-core';
 import d from 'debug';
 import http from 'http';
@@ -111,7 +111,7 @@ export class ExpressPlugin extends WebPluginBase<express.Application>
         const execCtx = new ExecutionContext(controller, methodInfo);
 
         const interceptors = methodInfo.interceptors.filter(i =>
-          isValidInterceptor(i)
+          isValidInterceptor(i.instance)
         );
 
         // create handler

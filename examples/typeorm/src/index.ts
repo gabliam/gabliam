@@ -2,15 +2,24 @@ import { Gabliam } from '@gabliam/core';
 import dbPlugin from '@gabliam/typeorm';
 import * as path from 'path';
 import 'reflect-metadata';
+import { WebConfigurationContructor } from '@gabliam/web-core';
+import { BoomInterceptor } from './boom-interceptor';
 
 const bootstrap = async () => {
   const plugins = [dbPlugin];
+
+  const config: Partial<WebConfigurationContructor<any>> = {
+    globalInterceptors: [
+      BoomInterceptor
+    ]
+  };
+
   if (process.env.SERVER_TYPE === 'koa') {
     console.log('start with koa');
-    plugins.push(require('@gabliam/koa').default);
+    plugins.push(new (require('@gabliam/koa').default as any)(config));
   } else {
     console.log('start with express');
-    plugins.push(require('@gabliam/express').default);
+    plugins.push(new (require('@gabliam/express').default as any)(config));
   }
 
   return new Gabliam({

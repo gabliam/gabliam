@@ -1,3 +1,4 @@
+import { GabResolver } from '@gabliam/graphql-core';
 import { Connection, Repository } from '@gabliam/typeorm';
 import {
   Arg,
@@ -5,7 +6,6 @@ import {
   Publisher,
   PubSub,
   Query,
-  Resolver,
   Root,
   Subscription,
 } from 'type-graphql';
@@ -13,7 +13,7 @@ import { Photo } from '../entities/photo';
 import { PaginatedPhoto } from './types/paginated-photo';
 import { PhotoInput } from './types/photo-input';
 
-@Resolver(of => Photo)
+@GabResolver((of) => Photo)
 export class PhotoResolver {
   private photoRepository: Repository<Photo>;
 
@@ -26,10 +26,10 @@ export class PhotoResolver {
     return photo;
   }
 
-  @Mutation(returns => Photo)
+  @Mutation((returns) => Photo)
   async submitPhoto(
     @PubSub('photoAdded') publish: Publisher<Photo>,
-    @Arg('photoInput') photoInput: PhotoInput
+    @Arg('photoInput') photoInput: PhotoInput,
   ) {
     const photo = await this.photoRepository.save(photoInput);
     await publish(photo);
@@ -37,7 +37,7 @@ export class PhotoResolver {
     return photo;
   }
 
-  @Query(returns => [Photo])
+  @Query((returns) => [Photo])
   async photos() {
     const photos = await this.photoRepository.find();
     if (photos.length > 0) {
@@ -46,14 +46,14 @@ export class PhotoResolver {
     return [];
   }
 
-  @Query(returns => PaginatedPhoto)
+  @Query((returns) => PaginatedPhoto)
   async getPageOfPhotos(
-    @Arg('sortField', type => String, { nullable: true })
+    @Arg('sortField', (type) => String, { nullable: true })
     sortField: keyof Photo | undefined,
-    @Arg('sortOrder', type => String, { nullable: true })
+    @Arg('sortOrder', (type) => String, { nullable: true })
     sortOrder: 'ASC' | 'DESC' | undefined,
     @Arg('page', { defaultValue: 0 }) page: number,
-    @Arg('perPage', { defaultValue: 10 }) perPage: number
+    @Arg('perPage', { defaultValue: 10 }) perPage: number,
   ): Promise<PaginatedPhoto> {
     if (page < 0) {
       page = 0;

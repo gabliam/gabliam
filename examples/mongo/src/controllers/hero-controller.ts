@@ -10,7 +10,7 @@ import {
   ResponseEntity,
   RestController,
 } from '@gabliam/web-core';
-import * as Boom from 'boom';
+import Boom from 'boom';
 import { Hero } from '../entities/hero';
 
 @RestController('/heroes')

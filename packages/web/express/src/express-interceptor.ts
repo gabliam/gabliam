@@ -22,7 +22,7 @@ export const isValidInterceptor = (target: any) => {
     METADATA_KEY.specialInterceptor,
     target.constructor || target,
   );
-
+  console.log({target, meta});
   return meta === undefined || meta === 'express';
 };
 

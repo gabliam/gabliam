@@ -121,7 +121,7 @@ export class KoaPlugin extends WebPluginBase<koa> implements GabliamPlugin {
         };
 
         const interceptors = methodInfo.interceptors.filter(i =>
-          isValidInterceptor(i)
+          isValidInterceptor(i.instance)
         );
 
         // create handler
