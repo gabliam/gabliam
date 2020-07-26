@@ -1,4 +1,4 @@
-import * as ora from 'ora';
+import ora from 'ora';
 import { build, removeOld } from './utils/dist-utils';
 const run = async () => {
   const spinner = ora('Remove old build').start();

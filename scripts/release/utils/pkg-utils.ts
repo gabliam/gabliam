@@ -1,8 +1,8 @@
 const findPkg = require('find-pkg');
-import * as fs from 'fs-extra';
+import execa from 'execa';
+import fs from 'fs-extra';
+import semver from 'semver';
 import { APP_DIR, monoRepo } from '../constant';
-import * as execa from 'execa';
-import * as semver from 'semver';
 
 export const getRootPkgPath = () => findPkg.sync(APP_DIR);
 

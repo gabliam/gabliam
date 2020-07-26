@@ -1,4 +1,4 @@
-import * as ora from 'ora';
+import ora from 'ora';
 import { build, removeOld } from './utils/dist-utils';
 import { parseParams } from './utils/parse-params-release';
 import { confirm } from './utils/prompt-utils';

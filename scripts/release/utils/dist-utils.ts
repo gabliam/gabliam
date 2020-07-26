@@ -1,13 +1,13 @@
-import * as execa from 'execa';
-import * as fs from 'fs-extra';
-import * as Graph from 'graph-data-structure';
-import * as _ from 'lodash';
-import * as path from 'path';
-import * as rimraf from 'rimraf';
+import execa from 'execa';
+import fs from 'fs-extra';
+import Graph from 'graph-data-structure';
+import _ from 'lodash';
+import path from 'path';
+import rimraf from 'rimraf';
 import { promisify } from 'util';
 import { APP_DIR, DIST_DIR, monoRepo } from '../constant';
 import { updatePkg, updateRootPkg } from './pkg-utils';
-import * as ora from 'ora';
+import ora from 'ora';
 
 const rimrafAsync = promisify(rimraf);
 

@@ -1,6 +1,6 @@
-import * as execa from 'execa';
-import * as ora from 'ora';
-import * as path from 'path';
+import execa from 'execa';
+import ora from 'ora';
+import path from 'path';
 import { APP_DIR, DIST_DIR, monoRepo } from '../constant';
 import { ReleaseParams } from './parse-params-release';
 

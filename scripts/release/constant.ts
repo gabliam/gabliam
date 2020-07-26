@@ -1,4 +1,4 @@
-import * as path from 'path';
+import path from 'path';
 import { findMonorepoConfig } from './utils/workspace-utils';
 
 export const APP_DIR = path.resolve(__dirname, '../../');

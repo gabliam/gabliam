@@ -1,4 +1,4 @@
-import * as execa from 'execa';
+import execa from 'execa';
 import { APP_DIR } from '../constant';
 
 export const describeRef = async () => {
