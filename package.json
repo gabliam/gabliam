@@ -4,18 +4,19 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "changelog": "conventional-changelog -i  CHANGELOG.md -p angular  -s -r 0",
-    "lint": "tslint --project tsconfig.json './packages/**/**/{src,__tests__}/**/*.ts' --exclude './packages/**/**/node_modules/**/*.ts' --exclude './packages,examples/**/**/{src,__tests__}/**/*.d.ts'",
+    "bootstrap": "yarn --cwd \"scripts/build\" && yarn --cwd \"scripts/release\"",
     "build": "ts-node ./scripts/build/build.ts",
-    "test": "jest --runInBand",
-    "test:ci": "jest --runInBand --coverage",
-    "prettier": "prettier --single-quote --write --parser typescript \"./{packages,examples}/**/src/**/*.ts\"",
+    "changelog": "conventional-changelog -i  CHANGELOG.md -p angular  -s -r 0",
     "example:graphql": "lerna run --scope graphql-sample start --stream",
     "example:mongo": "lerna run --scope mongo-sample start --stream",
-    "example:typeorm": "lerna run --scope typeorm-sample start --stream",
     "example:express:passport": "lerna run --scope express-passport-sample start --stream",
+    "example:typeorm": "lerna run --scope typeorm-sample start --stream",
+    "lint": "tslint --project tsconfig.json './packages/**/**/{src,__tests__}/**/*.ts' --exclude './packages/**/**/node_modules/**/*.ts' --exclude './packages,examples/**/**/{src,__tests__}/**/*.d.ts'",
+    "prettier": "prettier --single-quote --write --parser typescript \"./{packages,examples}/**/src/**/*.ts\"",
     "release": "ts-node ./scripts/release/release.ts",
-    "release:canary": "ts-node ./scripts/release/release.ts --canary"
+    "release:canary": "ts-node ./scripts/release/release.ts --canary",
+    "test": "jest --runInBand",
+    "test:ci": "jest --runInBand --coverage"
   },
   "devDependencies": {
     "@gabliam/tslint": "^1.0.2",
