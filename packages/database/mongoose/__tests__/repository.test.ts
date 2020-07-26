@@ -1,6 +1,6 @@
 import { MongoosePluginTest } from './mongoose-plugin-test';
 import { Document, MongooseConnection } from '../src';
-import * as mongoose from 'mongoose';
+import mongoose from 'mongoose';
 
 interface HeroModel {
   name: string;

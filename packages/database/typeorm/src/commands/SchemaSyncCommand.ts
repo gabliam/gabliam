@@ -1,7 +1,7 @@
 import { createConnection } from '../index';
 import { Connection } from 'typeorm';
 import { CommandUtils } from './CommandUtils';
-import * as yargs from 'yargs';
+import yargs from 'yargs';
 const chalk = require('chalk');
 
 export interface SchemaSyncCommandArgs {

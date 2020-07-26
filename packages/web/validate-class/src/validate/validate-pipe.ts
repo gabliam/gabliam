@@ -1,6 +1,6 @@
 import { isNil, Service, Type } from '@gabliam/core';
 import { Pipe } from '@gabliam/web-core';
-import * as classTransformer from 'class-transformer';
+import * as  classTransformer from 'class-transformer';
 import * as classValidator from 'class-validator';
 import { Validate } from '../metadatas';
 

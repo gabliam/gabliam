@@ -1,5 +1,5 @@
 import { LoaderConfig, LoaderConfigOptions } from '../loaders';
-import * as _ from 'lodash';
+import _ from 'lodash';
 
 export class LoaderConfigTest extends LoaderConfig {
   conf = {};

@@ -9,7 +9,7 @@ import {
   RequestListenerCreator,
   REQUEST_LISTENER_CREATOR,
 } from '@gabliam/web-core';
-import * as supertest from 'supertest';
+import supertest from 'supertest';
 
 const SUPERTEST = Symbol('SUPERTEST');
 

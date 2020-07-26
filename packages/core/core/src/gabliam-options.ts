@@ -1,5 +1,5 @@
 import { GabliamConfig } from './interfaces';
-import * as _ from 'lodash';
+import _ from 'lodash';
 
 const DEFAULT_CONFIG: GabliamConfig = {
   config: process.env.GABLIAM_CONFIG_PATH,

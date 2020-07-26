@@ -1,7 +1,7 @@
 import { createConnection, Connection } from '../index';
 import { CommandUtils } from './CommandUtils';
 import { highlight } from 'cli-highlight';
-import * as yargs from 'yargs';
+import yargs from 'yargs';
 
 const chalk = require('chalk');
 

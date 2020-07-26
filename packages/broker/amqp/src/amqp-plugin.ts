@@ -6,7 +6,7 @@ import {
   Registry,
   Scan,
 } from '@gabliam/core';
-import * as d from 'debug';
+import d from 'debug';
 import { AmqpConnectionManager } from './amqp-manager';
 import { TYPE } from './constants';
 import {

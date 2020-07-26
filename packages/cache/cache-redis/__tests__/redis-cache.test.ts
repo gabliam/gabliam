@@ -1,5 +1,5 @@
+import Redis from 'ioredis';
 import RedisCache from '../src/index';
-import * as Redis from 'ioredis';
 
 let cache: RedisCache;
 let cache2: RedisCache;
@@ -83,7 +83,7 @@ test('clear', async () => {
 });
 
 function sleep(sec: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, sec * 1000));
+  return new Promise((resolve) => setTimeout(resolve, sec * 1000));
 }
 
 test('put with duration', async () => {

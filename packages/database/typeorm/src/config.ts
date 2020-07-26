@@ -11,7 +11,7 @@ import {
   ValueExtractor,
   VALUE_EXTRACTOR,
 } from '@gabliam/core';
-import * as d from 'debug';
+import d from 'debug';
 import { ConnectionManager } from './connection-manager';
 import { GabliamConnectionOptionsReader } from './connection-options-reader';
 import {

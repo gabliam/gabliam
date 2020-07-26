@@ -1,5 +1,5 @@
 import { ValueRegistry } from './interfaces';
-import * as _ from 'lodash';
+import _ from 'lodash';
 
 /**
  * Registry of all classes in gabliam instance

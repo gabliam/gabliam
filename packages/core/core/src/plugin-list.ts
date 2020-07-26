@@ -1,5 +1,5 @@
-import * as Graph from 'graph-data-structure';
-import * as _ from 'lodash';
+import Graph from 'graph-data-structure';
+import _ from 'lodash';
 import { InvalidPluginError, PluginDependencyIsMissingError } from './errors';
 import {
   GabliamAddPlugin,

@@ -1,7 +1,7 @@
 // tslint:disable:one-line
 // tslint:disable:no-unused-expression
 import { LoaderModule } from '../src/loaders';
-import * as path from 'path';
+import path from 'path';
 import { Scan } from '../src/index';
 import { METADATA_KEY } from '../src/constants';
 

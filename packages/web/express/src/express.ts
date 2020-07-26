@@ -1,4 +1,4 @@
-import * as express from 'express';
+import express from 'express';
 import { GabContext } from '@gabliam/web-core';
 
 export { express };

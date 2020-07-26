@@ -1,6 +1,6 @@
-import * as d from 'debug';
-import * as glob from 'glob';
-import * as _ from 'lodash';
+import d from 'debug';
+import glob from 'glob';
+import _ from 'lodash';
 import { isObject } from '../../common';
 import { TYPE } from '../../constants';
 import { GabliamPlugin, ValueRegistry } from '../../interfaces';

@@ -1,9 +1,9 @@
 // tslint:disable:one-line
 // tslint:disable:no-unused-expression
 import { LoaderConfig, FileLoader } from '../src/loaders';
-// import * as mock from 'mock-fs';
+// import mock from 'mock-fs';
 import { MockFs } from './mock-fs';
-import * as path from 'path';
+import path from 'path';
 
 let loader: LoaderConfig;
 beforeEach(async () => {

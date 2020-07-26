@@ -1,2 +1,2 @@
-import * as Cookie from 'cookies';
+import Cookie from 'cookies';
 export { Cookie };

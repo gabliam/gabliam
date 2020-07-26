@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import 'reflect-metadata';
-import * as yargs from 'yargs';
+import yargs from 'yargs';
 import { StartCommand } from './src/commands/start-command';
 
 // tslint:disable-next-line:no-unused-expression

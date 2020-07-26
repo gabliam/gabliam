@@ -19,7 +19,7 @@ In your main, add amqp plugin
 
 ```ts
 import 'reflect-metadata';
-import * as path from 'path';
+import path from 'path';
 import { Gabliam } from '@gabliam/core';
 import amqpPlugin from '@gabliam/amqp';
 

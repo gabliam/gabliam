@@ -1,7 +1,7 @@
 import { GabRequest } from '@gabliam/web-core';
 import { alias } from 'property-tunnel';
-import * as qs from 'qs';
-import * as url from 'url';
+import qs from 'qs';
+import url from 'url';
 import { express } from './express';
 
 /* istanbul ignore next */

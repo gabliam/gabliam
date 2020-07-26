@@ -1,7 +1,7 @@
 import { createConnection, Connection } from '../index';
 import { CommandUtils } from './CommandUtils';
-import * as process from 'process';
-import * as yargs from 'yargs';
+import process from 'process';
+import yargs from 'yargs';
 const chalk = require('chalk');
 
 export interface MigrationRunCommandArgs {

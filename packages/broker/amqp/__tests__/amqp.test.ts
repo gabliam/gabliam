@@ -1,21 +1,21 @@
-import { AmqpPluginTest } from './amqp-plugin-test';
+import { Gabliam } from '@gabliam/core';
+import sinon from 'sinon';
+import { AmqpConnection } from '../src/amqp-connection';
 import {
-  RabbitController,
-  RabbitListener,
-  RabbitConsumer,
   AmqpConnectionManager,
   CUnit,
+  RabbitConsumer,
+  RabbitController,
+  RabbitListener,
 } from '../src/index';
+import { AmqpPluginTest } from './amqp-plugin-test';
 import {
   config,
-  configWithName,
   configWith2Connection,
   configWithDuplicateConnection,
+  configWithName,
 } from './conf';
-import { AmqpConnection } from '../src/amqp-connection';
-import { Gabliam } from '@gabliam/core';
 import { Deferred } from './defered';
-import * as sinon from 'sinon';
 
 let appTest: AmqpPluginTest;
 beforeEach(async () => {
@@ -91,7 +91,7 @@ describe('Listener test', () => {
       name: 'with undefined',
       content: undefined,
     },
-  ].forEach(testCase => {
+  ].forEach((testCase) => {
     test(testCase.name, async () => {
       const d = new Deferred();
       @RabbitController()
@@ -107,7 +107,7 @@ describe('Listener test', () => {
       appTest.addConf('application.amqp', config);
       appTest.addClass(ControllerTest);
       await expect(appTest.gab.buildAndStart()).resolves.toBeInstanceOf(
-        Gabliam
+        Gabliam,
       );
       const connection = appTest.gab.container.get(AmqpConnection);
       connection.sendToQueue('listenerTest', testCase.content);
@@ -138,7 +138,7 @@ describe('Consumer test', () => {
       name: 'with object',
       content: { test: 'cool' },
     },
-  ].forEach(testCase => {
+  ].forEach((testCase) => {
     test(testCase.name, async () => {
       @RabbitController()
       class ControllerTest {
@@ -153,12 +153,12 @@ describe('Consumer test', () => {
       appTest.addConf('application.amqp', config);
       appTest.addClass(ControllerTest);
       await expect(appTest.gab.buildAndStart()).resolves.toBeInstanceOf(
-        Gabliam
+        Gabliam,
       );
       const connection = appTest.gab.container.get(AmqpConnection);
       const resp = await connection.sendAndReceive(
         'consumerTest',
-        testCase.content
+        testCase.content,
       );
       expect(resp).toMatchSnapshot();
       expect(spy.callCount).toMatchSnapshot();
@@ -197,7 +197,7 @@ test('sendAndReceive timeout', async () => {
   await expect(appTest.gab.buildAndStart()).resolves.toBeInstanceOf(Gabliam);
   const connection = appTest.gab.container.get(AmqpConnection);
   await expect(
-    connection.sendAndReceive('consumerTest', 'test', {}, 100)
+    connection.sendAndReceive('consumerTest', 'test', {}, 100),
   ).rejects.toMatchSnapshot();
 });
 
@@ -233,7 +233,7 @@ test('start 2 times', async () => {
   const connection = appTest.gab.container.get(AmqpConnection);
   const resp = await connection.sendAndReceive(
     'consumerTest',
-    'testCase.content'
+    'testCase.content',
   );
   expect(resp).toMatchSnapshot();
   expect(spy.callCount).toMatchSnapshot();
@@ -256,7 +256,7 @@ test('must fail when getConnection not found', async () => {
   await expect(appTest.startPlugins('AmqpPlugin'));
   const connection = appTest.gab.container.get(AmqpConnectionManager);
   await expect(() =>
-    connection.getConnection('notfound')
+    connection.getConnection('notfound'),
   ).toThrowErrorMatchingSnapshot();
 });
 
@@ -278,7 +278,7 @@ test('with one connection with name and entity without cunit', async () => {
   const connection = appTest.gab.container.get(AmqpConnection);
   const resp = await connection.sendAndReceive(
     'consumerTest',
-    'testCase.content'
+    'testCase.content',
   );
   expect(resp).toMatchSnapshot();
   expect(spy.callCount).toMatchSnapshot();

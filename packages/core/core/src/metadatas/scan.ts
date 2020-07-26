@@ -1,4 +1,4 @@
-import * as caller from 'caller';
+import caller from 'caller';
 import { dirname } from 'path';
 import { METADATA_KEY } from '../constants';
 import { makeDecorator } from '../decorator';

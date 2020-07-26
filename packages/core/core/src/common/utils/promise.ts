@@ -1,4 +1,4 @@
-import * as co from 'co';
+import co from 'co';
 
 export type gabliamValue<T = any> =
   | Observable

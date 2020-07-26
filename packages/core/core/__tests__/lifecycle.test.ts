@@ -1,6 +1,6 @@
 import { Gabliam } from '../src';
-import * as path from 'path';
-import * as sinon from 'sinon';
+import path from 'path';
+import sinon from 'sinon';
 import { Test } from './fixtures/lifecycle/test';
 import { Test2 } from './fixtures/lifecycle/test2';
 

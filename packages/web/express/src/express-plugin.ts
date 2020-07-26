@@ -22,8 +22,8 @@ import {
   WebPluginConfig,
   WEB_PLUGIN_CONFIG,
 } from '@gabliam/web-core';
-import * as d from 'debug';
-import * as http from 'http';
+import d from 'debug';
+import http from 'http';
 import { CUSTOM_ROUTER_CREATOR } from './constants';
 import { converterValue, send } from './converter-value';
 import { express } from './express';

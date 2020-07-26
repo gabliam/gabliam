@@ -8,7 +8,7 @@ import {
   PluginConfig,
   Value,
 } from '@gabliam/core';
-import * as d from 'debug';
+import d from 'debug';
 import { configurationValidator } from './configuration-validator';
 import { MongooseConnectionManager } from './connection-manager';
 import { LIST_DOCUMENT } from './constants';

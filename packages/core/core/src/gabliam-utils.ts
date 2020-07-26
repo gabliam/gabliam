@@ -1,6 +1,6 @@
-import * as bluebird from 'bluebird';
-import * as g from 'glob';
-import * as _ from 'lodash';
+import bluebird from 'bluebird';
+import g from 'glob';
+import _ from 'lodash';
 import { promisify } from 'util';
 import { Type } from './common';
 import { TYPE } from './constants';

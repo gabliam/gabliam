@@ -1,6 +1,6 @@
 import { Expression as AstExpression } from 'estree';
 import { Parser, IS_STRING } from './parser';
-import * as _ from 'lodash';
+import _ from 'lodash';
 const validPath = require('is-valid-path');
 
 export class Expression {

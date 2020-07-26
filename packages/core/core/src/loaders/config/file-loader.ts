@@ -1,6 +1,6 @@
-import * as d from 'debug';
-import * as fs from 'fs';
-import * as _ from 'lodash';
+import d from 'debug';
+import fs from 'fs';
+import _ from 'lodash';
 import { promisify } from 'util';
 import { LoaderConfigParseError } from '../../errors';
 import { configResolver, Resolver } from './config-resolver';

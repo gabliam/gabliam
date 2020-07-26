@@ -1,5 +1,5 @@
+import LRU from 'lru-cache';
 import { Cache } from '../cache';
-import * as LRU from 'lru-cache';
 
 export class MemoryCache implements Cache {
   private name: string;
@@ -33,7 +33,7 @@ export class MemoryCache implements Cache {
 
   async putIfAbsent<T>(
     key: string,
-    value: T | null | undefined
+    value: T | null | undefined,
   ): Promise<T | null | undefined> {
     if (!this.store.has(key)) {
       this.store.set(key, value);

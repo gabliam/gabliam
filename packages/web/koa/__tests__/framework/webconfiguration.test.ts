@@ -8,7 +8,7 @@ import {
   Next,
 } from '@gabliam/web-core';
 import { WebPluginTest } from '@gabliam/web-core/src/testing';
-import * as sinon from 'sinon';
+import sinon from 'sinon';
 import KoaPlugin, { toInterceptor } from '../../src';
 
 let appTest: WebPluginTest;

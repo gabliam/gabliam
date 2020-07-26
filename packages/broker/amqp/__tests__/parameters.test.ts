@@ -1,18 +1,18 @@
-import { AmqpPluginTest } from './amqp-plugin-test';
+import { Gabliam } from '@gabliam/core';
+import sinon from 'sinon';
+import { AmqpConnection } from '../src/amqp-connection';
 import {
+  Content,
+  Fields,
+  Message,
+  Properties,
+  RabbitConsumer,
   RabbitController,
   RabbitListener,
-  RabbitConsumer,
-  Message,
-  Content,
-  Properties,
-  Fields,
 } from '../src/index';
+import { AmqpPluginTest } from './amqp-plugin-test';
 import { config, configWithGzip } from './conf';
-import { AmqpConnection } from '../src/amqp-connection';
-import { Gabliam } from '@gabliam/core';
 import { Deferred } from './defered';
-import * as sinon from 'sinon';
 
 let appTest: AmqpPluginTest;
 
@@ -29,7 +29,7 @@ afterEach(async () => {
   } catch (e) {}
 });
 
-[config, configWithGzip].forEach(conf => {
+[config, configWithGzip].forEach((conf) => {
   const describeName = conf.gzipEnabled ? 'Parameters gzip:' : 'Parameters:';
   describe(describeName, () => {
     test('should bind a method parameter to message', async () => {
@@ -53,13 +53,13 @@ afterEach(async () => {
       appTest.addConf('application.amqp', conf);
       appTest.addClass(ControllerTest);
       await expect(appTest.gab.buildAndStart()).resolves.toBeInstanceOf(
-        Gabliam
+        Gabliam,
       );
       const connection = appTest.gab.container.get(AmqpConnection);
 
       const respConsumer = await connection.sendAndReceive(
         'consumerTest',
-        'TEST'
+        'TEST',
       );
 
       expect(respConsumer).toMatchSnapshot<any>({
@@ -133,7 +133,7 @@ afterEach(async () => {
         content: { test: 'cool' },
         args: 'testlol',
       },
-    ].forEach(testCase => {
+    ].forEach((testCase) => {
       test(`should bind a method parameter ${testCase.name}`, async () => {
         const d = new Deferred();
 
@@ -155,13 +155,13 @@ afterEach(async () => {
         appTest.addConf('application.amqp', conf);
         appTest.addClass(ControllerTest);
         await expect(appTest.gab.buildAndStart()).resolves.toBeInstanceOf(
-          Gabliam
+          Gabliam,
         );
         const connection = appTest.gab.container.get(AmqpConnection);
 
         const respConsumer = await connection.sendAndReceive(
           'consumerTest',
-          testCase.content
+          testCase.content,
         );
         expect(respConsumer).toMatchSnapshot();
         expect(spyConsumer.callCount).toMatchSnapshot();
@@ -196,13 +196,13 @@ afterEach(async () => {
       appTest.addConf('application.amqp', conf);
       appTest.addClass(ControllerTest);
       await expect(appTest.gab.buildAndStart()).resolves.toBeInstanceOf(
-        Gabliam
+        Gabliam,
       );
       const connection = appTest.gab.container.get(AmqpConnection);
 
       const respConsumer = await connection.sendAndReceive(
         'consumerTest',
-        'test'
+        'test',
       );
       expect(respConsumer).toMatchSnapshot({
         correlationId: expect.any(String),
@@ -239,7 +239,7 @@ afterEach(async () => {
       appTest.addConf('application.amqp', conf);
       appTest.addClass(ControllerTest);
       await expect(appTest.gab.buildAndStart()).resolves.toBeInstanceOf(
-        Gabliam
+        Gabliam,
       );
       const connection = appTest.gab.container.get(AmqpConnection);
 
@@ -250,7 +250,7 @@ afterEach(async () => {
           headers: {
             'api-auth': 'aze&ée((("a&é"&é"',
           },
-        }
+        },
       );
       expect(respConsumer).toMatchSnapshot();
       expect(spyConsumer.callCount).toMatchSnapshot();
@@ -288,13 +288,13 @@ afterEach(async () => {
       appTest.addConf('application.amqp', conf);
       appTest.addClass(ControllerTest);
       await expect(appTest.gab.buildAndStart()).resolves.toBeInstanceOf(
-        Gabliam
+        Gabliam,
       );
       const connection = appTest.gab.container.get(AmqpConnection);
 
       const respConsumer = await connection.sendAndReceive(
         'consumerTest',
-        'test'
+        'test',
       );
       expect(respConsumer).toMatchSnapshot({
         consumerTag: expect.any(String),
@@ -338,13 +338,13 @@ afterEach(async () => {
       appTest.addConf('application.amqp', conf);
       appTest.addClass(ControllerTest);
       await expect(appTest.gab.buildAndStart()).resolves.toBeInstanceOf(
-        Gabliam
+        Gabliam,
       );
       const connection = appTest.gab.container.get(AmqpConnection);
 
       const respConsumer = await connection.sendAndReceive(
         'consumerTest',
-        'test'
+        'test',
       );
       expect(respConsumer).toMatchSnapshot();
       expect(spyConsumer.callCount).toMatchSnapshot();

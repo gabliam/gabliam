@@ -1,5 +1,5 @@
 import { Bean, Joi, PluginConfig, Value } from '@gabliam/core';
-import * as koaBody from 'koa-body';
+import koaBody from 'koa-body';
 import { KOA_PLUGIN_CONFIG } from './constants';
 
 const koaBodyFormidableOptions = Joi.object()

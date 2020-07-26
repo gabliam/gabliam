@@ -1,5 +1,5 @@
-import * as shortstop from 'shortstop';
-import * as handlers from 'shortstop-handlers';
+import shortstop from 'shortstop';
+import handlers from 'shortstop-handlers';
 
 export type Resolver = (config: any) => Promise<Object>;
 

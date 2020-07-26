@@ -1,6 +1,6 @@
 import { Joi } from '@gabliam/core';
 import { BadRequestException } from '@gabliam/web-core';
-import * as EscapeHtml from 'escape-html';
+import EscapeHtml from 'escape-html';
 import { ValidationOptions } from '../metadatas';
 
 const getKeys = (error: Joi.ValidationError, options: ValidationOptions) => {

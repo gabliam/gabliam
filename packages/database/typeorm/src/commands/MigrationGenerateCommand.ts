@@ -2,7 +2,7 @@ import { CommandUtils } from './CommandUtils';
 import { Connection, createConnection } from '../index';
 import { MysqlDriver } from 'typeorm/driver/mysql/MysqlDriver';
 import { camelCase } from '../string-utils';
-import * as yargs from 'yargs';
+import yargs from 'yargs';
 import { AuroraDataApiDriver } from 'typeorm/driver/aurora-data-api/AuroraDataApiDriver';
 const chalk = require('chalk');
 

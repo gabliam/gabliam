@@ -1,6 +1,6 @@
 import { Service } from '@gabliam/core';
-import * as escapeHtml from 'escape-html';
-import * as statuses from 'statuses';
+import escapeHtml from 'escape-html';
+import statuses from 'statuses';
 import { HttpException } from '../exceptions';
 import { ExecutionContext } from '../execution-context';
 import { GabResponse } from '../gab-response';
@@ -110,7 +110,7 @@ function getErrorMessage(err: any, status: number, env: string, json: boolean) {
     }
   }
 
-  return msg || statuses[status] || '';
+  return msg || statuses.message[status] || '';
 }
 
 function createHtmlDocument(message: string) {

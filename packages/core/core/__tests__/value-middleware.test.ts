@@ -4,7 +4,7 @@ import { createContainer } from '../src/container';
 import { APP_CONFIG } from '../src/constants';
 import { Config, Value } from '../src/metadatas';
 import { inject, optional, Container } from '../src/index';
-import * as Joi from 'joi';
+import Joi from 'joi';
 
 let container: Container;
 

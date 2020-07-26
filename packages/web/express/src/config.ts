@@ -1,5 +1,5 @@
 import { Bean, Joi, PluginConfig, Value } from '@gabliam/core';
-import * as bodyParser from 'body-parser';
+import bodyParser from 'body-parser';
 import { EXPRESS_PLUGIN_CONFIG } from './constants';
 
 const options = Joi.object().keys({

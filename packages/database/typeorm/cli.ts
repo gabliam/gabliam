@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import 'reflect-metadata';
-import * as yargs from 'yargs';
+import yargs from 'yargs';
 import { CacheClearCommand } from './src/commands/CacheClearCommand';
 import { EntityCreateCommand } from './src/commands/EntityCreateCommand';
 import { MigrationCreateCommand } from './src/commands/MigrationCreateCommand';

@@ -1,5 +1,5 @@
 import { Gabliam, APP_CONFIG, CORE_CONFIG } from '../src';
-import * as path from 'path';
+import path from 'path';
 import { TestService } from './fixtures/gabliam/service';
 import { DbConfig } from './fixtures/gabliam/db-config';
 import { TYPE } from '../src/constants';

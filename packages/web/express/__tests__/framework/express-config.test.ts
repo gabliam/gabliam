@@ -6,7 +6,7 @@ import {
   WebConfigAfterControllers,
 } from '@gabliam/web-core';
 import { WebPluginTest } from '@gabliam/web-core/src/testing';
-import * as sinon from 'sinon';
+import sinon from 'sinon';
 import ExpressConfig, { express as e } from '../../src';
 
 let appTest: WebPluginTest;

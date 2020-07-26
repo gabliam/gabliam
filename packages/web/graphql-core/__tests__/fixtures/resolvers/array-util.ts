@@ -1,5 +1,5 @@
-import * as _ from 'lodash';
-import * as assert from 'assert';
+import _ from 'lodash';
+import assert from 'assert';
 
 export class Paginate<T> {
   private array: T[];

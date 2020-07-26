@@ -1,15 +1,15 @@
-import { Bean, InjectContainer, PluginConfig, Value, Joi } from '@gabliam/core';
-import { CACHE_MANAGER } from './constant';
-import { ConstructableCacheManager, ICacheGroup } from './cache-manager';
+import { Bean, InjectContainer, Joi, PluginConfig, Value } from '@gabliam/core';
+import d from 'debug';
+import _ from 'lodash';
 import { ConstructableCache } from './cache';
-import * as d from 'debug';
-import { SimpleCacheManager } from './simple-cache-manager';
-import {
-  CachePgkNotInstalledError,
-  CacheManagerPgkNotInstalledError,
-} from './error';
+import { ConstructableCacheManager, ICacheGroup } from './cache-manager';
 import { MemoryCache, NoOpCache } from './caches';
-import * as _ from 'lodash';
+import { CACHE_MANAGER } from './constant';
+import {
+  CacheManagerPgkNotInstalledError,
+  CachePgkNotInstalledError,
+} from './error';
+import { SimpleCacheManager } from './simple-cache-manager';
 const debug = d('Gabliam:Plugin:CachePlugin');
 
 export interface PluginConfig {
@@ -55,7 +55,7 @@ const pluginValidator = Joi.object().keys({
         defaultCache: stringOrClass,
         defaultOptionsCache: Joi.object(),
         caches: Joi.object().pattern(/.*/, cacheValidator),
-      })
+      }),
     )
     .default(undefined),
   defaultCache: stringOrClass.default('NoOpCache'),
@@ -89,37 +89,37 @@ export class CachePluginConfig {
         if (caches) {
           for (const [cacheKey, { cache, options }] of Object.entries(caches)) {
             const CacheConstruc = this.getCacheConstruct(
-              cache || defaultCache || this.cacheConfig.defaultCache
+              cache || defaultCache || this.cacheConfig.defaultCache,
             );
             const cacheOptions = _.merge(
               {},
               this.cacheConfig.defaultOptionsCache || {},
               defaultOptionsCache || {},
-              options || {}
+              options || {},
             );
 
             groupCache.caches.set(
               cacheKey,
-              new CacheConstruc(cacheKey, cacheOptions)
+              new CacheConstruc(cacheKey, cacheOptions),
             );
           }
         }
       }
     }
     const CacheManagerConstruct = this.getCacheManagerConstruct(
-      this.cacheConfig.cacheManager
+      this.cacheConfig.cacheManager,
     );
 
     return new CacheManagerConstruct(
       groups,
       this.cacheConfig.dynamic,
       this.getCacheConstruct(this.cacheConfig.defaultCache),
-      this.cacheConfig.defaultOptionsCache
+      this.cacheConfig.defaultOptionsCache,
     );
   }
 
   private getCacheManagerConstruct(
-    cacheManager: string | ConstructableCacheManager
+    cacheManager: string | ConstructableCacheManager,
   ): ConstructableCacheManager {
     if (typeof cacheManager === 'string') {
       switch (cacheManager) {
@@ -137,7 +137,7 @@ export class CachePluginConfig {
   }
 
   private getCacheConstruct(
-    cache: string | ConstructableCache
+    cache: string | ConstructableCache,
   ): ConstructableCache {
     if (typeof cache === 'string') {
       switch (cache) {

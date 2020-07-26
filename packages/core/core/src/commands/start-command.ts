@@ -1,5 +1,5 @@
-import * as _ from 'lodash';
-import * as yargs from 'yargs';
+import _ from 'lodash';
+import yargs from 'yargs';
 import {
   gabliamBuilder,
   gabliamFindApp,

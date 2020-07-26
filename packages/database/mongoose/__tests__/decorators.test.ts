@@ -1,5 +1,5 @@
 import { reflection } from '@gabliam/core';
-import * as mongoose from 'mongoose';
+import mongoose from 'mongoose';
 import { Document, MUnit } from '../src';
 
 test(`@Document('Hero') decorator`, () => {

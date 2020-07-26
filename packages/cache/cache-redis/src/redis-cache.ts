@@ -1,7 +1,7 @@
 import { Cache } from '@gabliam/cache';
-import * as Redis from 'ioredis';
-import { gzip, gunzip } from 'zlib';
+import Redis from 'ioredis';
 import { promisify } from 'util';
+import { gunzip, gzip } from 'zlib';
 
 const gzipAsync = promisify(gzip);
 const gunzipAsync = promisify(gunzip);
@@ -89,7 +89,7 @@ export class RedisCache implements Cache {
             realKey,
             await this.serialize(value),
             this.options.mode,
-            this.options.duration
+            this.options.duration,
           );
         } else {
           await this.client.set(realKey, await this.serialize(value));
@@ -106,7 +106,7 @@ export class RedisCache implements Cache {
   async putIfAbsent<T>(
     key: string,
     value: T | null | undefined,
-    addTimeout = true
+    addTimeout = true,
   ): Promise<T | undefined | null> {
     const putIfAbsent = (async () => {
       if (!(await this.hasKey(key, false))) {
@@ -143,7 +143,7 @@ export class RedisCache implements Cache {
         await this.client.eval(
           `return redis.call('del', unpack(redis.call('keys', ARGV[1])))`,
           0,
-          `${this.name}:*`
+          `${this.name}:*`,
         );
       } catch {}
     })();

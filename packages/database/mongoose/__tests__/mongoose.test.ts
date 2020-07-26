@@ -6,7 +6,7 @@ import {
   MongooseConnectionManager,
 } from '../src';
 import { Gabliam } from '@gabliam/core';
-import * as mongoose from 'mongoose';
+import mongoose from 'mongoose';
 
 interface HeroModel {
   name: string;

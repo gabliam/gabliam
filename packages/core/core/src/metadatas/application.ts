@@ -1,5 +1,5 @@
-import * as caller from 'caller';
-import * as _ from 'lodash';
+import caller from 'caller';
+import _ from 'lodash';
 import { dirname } from 'path';
 import { ERRORS_MSGS, METADATA_KEY, TYPE } from '../constants';
 import { makeDecorator } from '../decorator';

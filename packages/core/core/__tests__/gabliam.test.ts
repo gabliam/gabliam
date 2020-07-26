@@ -1,24 +1,24 @@
 // tslint:disable:one-line
 // tslint:disable:no-unused-expression
+import path from 'path';
+import sinon from 'sinon';
 import {
-  Gabliam,
   APP_CONFIG,
-  CORE_CONFIG,
-  Container,
-  Registry,
+  Bean,
+  BeforeCreate,
   Config,
-  Plugin,
+  Container,
+  CORE_CONFIG,
+  Gabliam,
   GabliamPlugin,
   Init,
-  Bean,
   OnMissingBean,
-  BeforeCreate,
+  Plugin,
+  Registry,
 } from '../src';
-import * as path from 'path';
-import { TestService } from './fixtures/gabliam/service';
-import { DbConfig } from './fixtures/gabliam/db-config';
-import * as sinon from 'sinon';
 import { GabliamTest } from '../src/testing/gabliam';
+import { DbConfig } from './fixtures/gabliam/db-config';
+import { TestService } from './fixtures/gabliam/service';
 
 test('gabliam instance', async () => {
   const gab = new Gabliam({

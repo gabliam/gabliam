@@ -1,6 +1,6 @@
 import { ExpressionParser } from '@gabliam/expression';
-import * as d from 'debug';
-import * as _ from 'lodash';
+import d from 'debug';
+import _ from 'lodash';
 import { callInstance, toPromise } from './common';
 import { APP_CONFIG, CORE_CONFIG, TYPE, VALUE_EXTRACTOR } from './constants';
 import { Container, createContainer } from './container';

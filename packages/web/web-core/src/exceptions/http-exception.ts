@@ -1,4 +1,4 @@
-import * as statuses from 'statuses';
+import statuses from 'statuses';
 import { isObject } from '@gabliam/core';
 
 /**

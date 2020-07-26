@@ -6,7 +6,7 @@ import {
   Container,
 } from '@gabliam/core';
 import { TYPE, LIST_DOCUMENT } from './constants';
-import * as d from 'debug';
+import d from 'debug';
 const debug = d('Gabliam:Plugin:mongoose');
 import { MongooseConnectionManager } from './connection-manager';
 

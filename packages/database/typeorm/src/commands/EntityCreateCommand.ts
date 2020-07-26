@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import * as yargs from 'yargs';
+import yargs from 'yargs';
 import { camelCase } from '../string-utils';
 import { CommandUtils } from './CommandUtils';
 const chalk = require('chalk');

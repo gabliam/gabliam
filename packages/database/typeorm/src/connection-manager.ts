@@ -2,7 +2,7 @@ import { createConnections } from 'typeorm';
 import { GabliamConnectionOptionsReader } from './connection-options-reader';
 import { TypeormConnectionNotFoundError } from './errors';
 import { Connection } from './typeorm';
-import * as d from 'debug';
+import d from 'debug';
 
 const debug = d('Gabliam:Plugin:Typeorm:ConnectionManager');
 

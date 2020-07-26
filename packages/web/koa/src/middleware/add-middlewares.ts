@@ -1,5 +1,5 @@
 import { ConfigFunction } from '@gabliam/web-core';
-import * as bodyParser from 'koa-body';
+import bodyParser from 'koa-body';
 import { KoaConfig } from '../config';
 import { KOA_PLUGIN_CONFIG } from '../constants';
 import { koa } from '../koa';

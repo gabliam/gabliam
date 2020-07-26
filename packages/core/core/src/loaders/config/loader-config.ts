@@ -1,5 +1,5 @@
-import * as _ from 'lodash';
-import * as d from 'debug';
+import _ from 'lodash';
+import d from 'debug';
 import { FileLoader } from './file-loader';
 import { LoaderConfigPgkNotInstalledError } from '../../errors';
 

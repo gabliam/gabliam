@@ -1,7 +1,7 @@
 import { Config, Gabliam } from '@gabliam/core';
 import { GabliamTest } from '@gabliam/core/src/testing';
-import * as path from 'path';
-import * as sinon from 'sinon';
+import path from 'path';
+import sinon from 'sinon';
 import { ExpressPlugin } from '../src/express-plugin';
 
 describe('test plugin', () => {

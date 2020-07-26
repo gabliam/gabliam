@@ -1,6 +1,6 @@
 import { Container, reflection } from '@gabliam/core';
 import { Expression, ExpressionParser } from '@gabliam/expression';
-import * as d from 'debug';
+import d from 'debug';
 import { Cache } from '../cache';
 import { CacheManager } from '../cache-manager';
 import { CACHE_MANAGER } from '../constant';
@@ -110,7 +110,7 @@ export const getCacheGroup = (target: Object) => {
 };
 
 export function extractCacheInternalOptions(
-  value?: string | string[] | CacheOptions
+  value?: string | string[] | CacheOptions,
 ): CacheInternalOptions {
   const cacheNames: string[] = [];
   let keyGenerator = defaultKeyGenerator;
@@ -151,7 +151,7 @@ export function extractCacheInternalOptions(
 export async function createCacheConfig(
   cacheGroup: string,
   container: Container,
-  cacheInternalOptions: CacheInternalOptions
+  cacheInternalOptions: CacheInternalOptions,
 ): Promise<CacheConfig> {
   const { cacheNames, condition, key, unless } = cacheInternalOptions;
 
@@ -171,7 +171,7 @@ export async function createCacheConfig(
     })(
       container
         .get<ExpressionParser>(ExpressionParser)
-        .parseExpression(condition)
+        .parseExpression(condition),
     );
   }
 
@@ -188,7 +188,7 @@ export async function createCacheConfig(
         }
       }
     })(
-      container.get<ExpressionParser>(ExpressionParser).parseExpression(unless)
+      container.get<ExpressionParser>(ExpressionParser).parseExpression(unless),
     );
   }
 

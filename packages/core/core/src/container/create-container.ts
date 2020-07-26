@@ -1,5 +1,5 @@
 import { makeLoggerMiddleware } from 'inversify-logger-middleware';
-import * as _ from 'lodash';
+import _ from 'lodash';
 import { Container } from './container';
 import { makeActivationInject } from './inject-container-activation';
 import { ContainerActivationHook } from './interfaces';

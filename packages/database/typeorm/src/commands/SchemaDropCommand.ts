@@ -1,6 +1,6 @@
 import { createConnection, Connection } from '../index';
 import { CommandUtils } from './CommandUtils';
-import * as yargs from 'yargs';
+import yargs from 'yargs';
 const chalk = require('chalk');
 
 interface SchemaDropCommandArgs {

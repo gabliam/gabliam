@@ -1,6 +1,6 @@
 // tslint:disable:one-line
 // tslint:disable:no-unused-expression
-import * as Joi from 'joi';
+import Joi from 'joi';
 import {
   Bean,
   BeforeCreate,
@@ -32,7 +32,7 @@ describe('@init', () => {
     }
 
     expect(
-      reflection.propMetadataOfDecorator(TestBean, Init)
+      reflection.propMetadataOfDecorator(TestBean, Init),
     ).toMatchSnapshot();
   });
 });
@@ -49,7 +49,7 @@ describe('@BeforeCreate', () => {
     }
 
     expect(
-      reflection.propMetadataOfDecorator(TestBean, BeforeCreate)
+      reflection.propMetadataOfDecorator(TestBean, BeforeCreate),
     ).toMatchSnapshot();
   });
 });
@@ -61,7 +61,7 @@ describe('@InjectContainer', () => {
     class TestBean {}
 
     expect(
-      reflection.annotationsOfDecorator(TestBean, InjectContainer)
+      reflection.annotationsOfDecorator(TestBean, InjectContainer),
     ).toMatchSnapshot();
   });
 });
@@ -76,7 +76,7 @@ describe('@Bean', () => {
       test2Method() {}
     }
     expect(
-      reflection.propMetadataOfDecorator(TestBean, Bean)
+      reflection.propMetadataOfDecorator(TestBean, Bean),
     ).toMatchSnapshot();
   });
 
@@ -91,7 +91,7 @@ describe('@Bean', () => {
     }
 
     expect(
-      reflection.propMetadataOfDecorator(TestBean, Bean)
+      reflection.propMetadataOfDecorator(TestBean, Bean),
     ).toMatchSnapshot();
   });
 }); // end describe @Bean
@@ -109,7 +109,7 @@ describe('@OnMissingBean', () => {
     }
 
     expect(
-      reflection.propMetadataOfDecorator(TestBean, OnMissingBean)
+      reflection.propMetadataOfDecorator(TestBean, OnMissingBean),
     ).toMatchSnapshot();
   });
 
@@ -127,7 +127,7 @@ describe('@OnMissingBean', () => {
     }
 
     expect(
-      reflection.propMetadataOfDecorator(TestBean, OnMissingBean)
+      reflection.propMetadataOfDecorator(TestBean, OnMissingBean),
     ).toMatchSnapshot();
   });
 }); // end describe @Bean
@@ -148,7 +148,7 @@ describe('@Config', () => {
   });
 
   test('should fail when decorated multiple times with @Config', () => {
-    expect(function() {
+    expect(function () {
       @Config()
       @Config()
       class TestBean {}
@@ -174,7 +174,7 @@ describe('@PluginConfig', () => {
   });
 
   test('should fail when decorated multiple times with @Config', () => {
-    expect(function() {
+    expect(function () {
       @PluginConfig()
       @PluginConfig()
       class TestBean {}
@@ -200,7 +200,7 @@ describe('@CoreConfig', () => {
   });
 
   test('should fail when decorated multiple times with @CoreConfig', () => {
-    expect(function() {
+    expect(function () {
       @CoreConfig()
       @CoreConfig()
       class TestBean {}
@@ -216,7 +216,7 @@ describe('@Register', () => {
     class TestBean {}
 
     expect(
-      reflection.annotationsOfDecorator(TestBean, Register)
+      reflection.annotationsOfDecorator(TestBean, Register),
     ).toMatchSnapshot();
   });
 }); // end describe @Register
@@ -304,13 +304,13 @@ describe('@Value', () => {
       }
 
       expect(
-        reflection.propMetadataOfDecorator(TestBean, Value)
+        reflection.propMetadataOfDecorator(TestBean, Value),
       ).toMatchSnapshot();
     });
   }); // end @Value(options: ValueOptions)
 
   test('should fail whit bad value', () => {
-    expect(function() {
+    expect(function () {
       class TestBean {
         @Value(<any>{ lol: 'application.name' })
         name: string;
@@ -326,7 +326,7 @@ describe('@Plugin', () => {
     @Plugin()
     class TestBean {}
     expect(
-      reflection.annotationsOfDecorator(TestBean, Plugin)
+      reflection.annotationsOfDecorator(TestBean, Plugin),
     ).toMatchSnapshot();
   });
 
@@ -334,7 +334,7 @@ describe('@Plugin', () => {
     @Plugin('TestPlugin')
     class TestBean {}
     expect(
-      reflection.annotationsOfDecorator(TestBean, Plugin)
+      reflection.annotationsOfDecorator(TestBean, Plugin),
     ).toMatchSnapshot();
   });
 
@@ -342,7 +342,7 @@ describe('@Plugin', () => {
     @Plugin({ dependencies: ['TestPlugin'] })
     class TestBean {}
     expect(
-      reflection.annotationsOfDecorator(TestBean, Plugin)
+      reflection.annotationsOfDecorator(TestBean, Plugin),
     ).toMatchSnapshot();
   });
 
@@ -350,7 +350,7 @@ describe('@Plugin', () => {
     @Plugin({ name: 'TestPlugin' })
     class TestBean {}
     expect(
-      reflection.annotationsOfDecorator(TestBean, Plugin)
+      reflection.annotationsOfDecorator(TestBean, Plugin),
     ).toMatchSnapshot();
   });
 
@@ -358,12 +358,12 @@ describe('@Plugin', () => {
     @Plugin({ name: 'TestPlugin', dependencies: ['TestPlugin2'] })
     class TestBean {}
     expect(
-      reflection.annotationsOfDecorator(TestBean, Plugin)
+      reflection.annotationsOfDecorator(TestBean, Plugin),
     ).toMatchSnapshot();
   });
 
   test('should fail when decorated multiple times with @Plugin', () => {
-    expect(function() {
+    expect(function () {
       @Plugin()
       @Plugin()
       class TestBean {}
@@ -373,7 +373,7 @@ describe('@Plugin', () => {
   });
 
   test('should fail whit bad value', () => {
-    expect(function() {
+    expect(function () {
       @Plugin(<any>{ lol: 'application.name' })
       class TestBean {}
 
@@ -392,7 +392,7 @@ describe('@preDestroy', () => {
       preDestroy2() {}
     }
     expect(
-      reflection.propMetadataOfDecorator(TestBean, PreDestroy)
+      reflection.propMetadataOfDecorator(TestBean, PreDestroy),
     ).toMatchSnapshot();
   });
 });

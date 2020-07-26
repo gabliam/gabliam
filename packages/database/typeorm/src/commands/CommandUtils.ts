@@ -1,7 +1,7 @@
 import { gabliamBuilder, gabliamFindApp, setupTsProject } from '@gabliam/core';
 import { GabliamConnectionOptionsReader } from '../connection-options-reader';
-import * as fs from 'fs';
-import * as path from 'path';
+import fs from 'fs';
+import path from 'path';
 const mkdirp = require('mkdirp');
 
 /**

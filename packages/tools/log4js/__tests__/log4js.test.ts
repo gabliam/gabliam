@@ -1,8 +1,8 @@
 import { Log4jsPluginTest } from './log4js-plugin-test';
 import { Service } from '@gabliam/core';
 import { log4js } from '../src/index';
-import * as path from 'path';
-import * as sinon from 'sinon';
+import path from 'path';
+import sinon from 'sinon';
 
 let appTest: Log4jsPluginTest;
 const p = sinon.spy(process.stdout, 'write');

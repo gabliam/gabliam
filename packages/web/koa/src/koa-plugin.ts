@@ -20,8 +20,8 @@ import {
   WebPluginBase,
   WebConfigurationContructor,
 } from '@gabliam/web-core';
-import * as d from 'debug';
-import * as http from 'http';
+import d from 'debug';
+import http from 'http';
 import { CUSTOM_ROUTER_CREATOR } from './constants';
 import { converterValue } from './converter-value';
 import { KoaMethods, RouterCreator } from './interfaces';

@@ -1,6 +1,6 @@
 import { GabResponse } from '@gabliam/web-core';
 import { koa } from './koa';
-import * as send from 'koa-send';
+import send from 'koa-send';
 import { alias } from 'property-tunnel';
 
 /* istanbul ignore next */

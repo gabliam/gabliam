@@ -1,5 +1,5 @@
 import { ExpressionParser } from '@gabliam/expression';
-import * as _ from 'lodash';
+import _ from 'lodash';
 import { APP_CONFIG } from './constants';
 import { Container } from './container';
 import { ValueValidationError } from './errors';

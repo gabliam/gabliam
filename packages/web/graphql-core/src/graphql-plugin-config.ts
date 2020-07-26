@@ -1,6 +1,6 @@
 import { Bean, Joi, PluginConfig, Value } from '@gabliam/core';
 import { PlaygroundConfig } from 'apollo-server-core';
-import * as d from 'debug';
+import d from 'debug';
 import { DEBUG_PATH, DEFAULT_END_POINT_URL, GRAPHQL_CONFIG } from './constants';
 import { GraphqlConfig } from './interfaces';
 

@@ -1,5 +1,5 @@
-import * as HttpStatus from 'http-status-codes';
-import * as statuses from 'statuses';
+import HttpStatus from 'http-status-codes';
+import statuses from 'statuses';
 import { HttpException } from './http-exception';
 
 export class ServiceUnavailableException extends HttpException {

@@ -1,25 +1,24 @@
 import { reflection, toPromise, ValueExtractor } from '@gabliam/core';
 import { log4js } from '@gabliam/log4js';
-import * as amqp from 'amqp-connection-manager';
+import amqp from 'amqp-connection-manager';
 import { ConfirmChannel, ConsumeMessage, Message } from 'amqplib';
-import * as PromiseB from 'bluebird';
-import * as _ from 'lodash';
+import PromiseB from 'bluebird';
+import _ from 'lodash';
 import { v4 as uuid } from 'uuid';
 import { gunzip, gzip } from 'zlib';
 import {
   AmqpConnectionError,
-
-
-  AmqpMessageIsNullError, AmqpQueueDoesntExistError,
-
-  AmqpReplytoIsMissingError, AmqpTimeoutError
+  AmqpMessageIsNullError,
+  AmqpQueueDoesntExistError,
+  AmqpReplytoIsMissingError,
+  AmqpTimeoutError,
 } from './errors';
 import {
   ConsumeConfig,
   ConsumeOptions,
   ConsumerHandler,
   Controller,
-  SendOptions
+  SendOptions,
 } from './interfaces';
 import { RabbitHandler, RabbitParamDecorator } from './metadatas';
 import { Queue } from './queue';
@@ -59,7 +58,7 @@ export class AmqpConnection {
     private undefinedValue: string,
     private queues: Queue[],
     private valueExtractor: ValueExtractor,
-    private gzipEnabled: boolean
+    private gzipEnabled: boolean,
   ) {}
 
   /**
@@ -112,7 +111,7 @@ export class AmqpConnection {
   addConsume(
     queue: string,
     handler: ConsumerHandler,
-    options?: ConsumeOptions
+    options?: ConsumeOptions,
   ) {
     const queueName = this.getQueueName(queue);
     if (!this.queueExist(queueName)) {
@@ -127,7 +126,7 @@ export class AmqpConnection {
   constructAndAddConsume(
     propKey: string,
     handlerMetadata: RabbitHandler,
-    controller: Controller
+    controller: Controller,
   ) {
     let consumeHandler: ConsumerHandler;
     if (handlerMetadata.type === 'Listener') {
@@ -136,14 +135,14 @@ export class AmqpConnection {
       consumeHandler = this.constructConsumer(
         propKey,
         handlerMetadata,
-        controller
+        controller,
       );
     }
 
     this.addConsume(
       handlerMetadata.queue,
       consumeHandler,
-      handlerMetadata.consumeOptions
+      handlerMetadata.consumeOptions,
     );
   }
 
@@ -173,7 +172,7 @@ export class AmqpConnection {
     queue: string,
     content: any,
     msg: Message,
-    options?: SendOptions
+    options?: SendOptions,
   ) {
     const queueName = this.getQueueName(queue);
     const channel = this.getChannel();
@@ -198,7 +197,7 @@ export class AmqpConnection {
     queue: string,
     content: any,
     options: SendOptions = {},
-    timeout: number = 5000
+    timeout: number = 5000,
   ): Promise<T> {
     let onTimeout = false;
     let chan: ConfirmChannel | null;
@@ -265,14 +264,14 @@ export class AmqpConnection {
                 await chan!.deleteQueue(replyTo);
               } catch {}
             }
-          }
+          },
         );
     });
 
     if (timeout) {
       promise = promise
         .timeout(timeout)
-        .catch(PromiseB.TimeoutError, async e => {
+        .catch(PromiseB.TimeoutError, async (e) => {
           onTimeout = true;
           if (chan) {
             try {
@@ -328,15 +327,13 @@ export class AmqpConnection {
 
     if (this.valueExtractor(`application.amqp[0] ? true : false`, false)) {
       return this.valueExtractor(
-        `application.amqp[${
-          this.indexConfig
-        }].queues['${queueName}'].queueName`,
-        defaultValue
+        `application.amqp[${this.indexConfig}].queues['${queueName}'].queueName`,
+        defaultValue,
       );
     } else {
       return this.valueExtractor(
         `application.amqp.queues['${queueName}'].queueName`,
-        defaultValue
+        defaultValue,
       );
     }
   }
@@ -360,7 +357,7 @@ export class AmqpConnection {
     }
 
     if (this.gzipEnabled) {
-      return new Promise<Buffer>(resolve => {
+      return new Promise<Buffer>((resolve) => {
         gzip(Buffer.from(data), (err, res) => {
           if (err) {
             resolve(undefined);
@@ -380,7 +377,7 @@ export class AmqpConnection {
   async parseContent(msg: Message) {
     let data: any;
     if (this.gzipEnabled) {
-      data = await new Promise<any>(resolve => {
+      data = await new Promise<any>((resolve) => {
         gunzip(msg.content, (err, res) => {
           if (err) {
             resolve(msg.content.toString());
@@ -406,7 +403,7 @@ export class AmqpConnection {
 
   private constructListener(
     propKey: string,
-    controller: Controller
+    controller: Controller,
   ): ConsumerHandler {
     return async (msg: ConsumeMessage | null) => {
       /* istanbul ignore next */
@@ -425,7 +422,7 @@ export class AmqpConnection {
   private constructConsumer(
     propKey: string,
     handlerMetadata: RabbitHandler,
-    controller: Controller
+    controller: Controller,
   ): ConsumerHandler {
     return async (msg: Message | null) => {
       if (msg === null) {
@@ -469,18 +466,18 @@ export class AmqpConnection {
     const params = reflection.parameters(<any>controller.constructor, propKey);
 
     if (params.length === 0) {
-      return (this.extractArgs[k] = async msg => [
+      return (this.extractArgs[k] = async (msg) => [
         await this.parseContent(msg),
       ]);
     }
 
     const parameters: RabbitParamDecorator[] = params.map(
-      meta => meta.slice(-1)[0]
+      (meta) => meta.slice(-1)[0],
     );
 
-    return (this.extractArgs[k] = async msg => {
+    return (this.extractArgs[k] = async (msg) => {
       const content = await this.parseContent(msg);
-      return parameters.map(p => p.handler(p.args, msg, content));
+      return parameters.map((p) => p.handler(p.args, msg, content));
     });
   }
 

@@ -1,5 +1,5 @@
 import { Connection } from 'typeorm';
-import * as yargs from 'yargs';
+import yargs from 'yargs';
 import { createConnection } from '../index';
 import { CommandUtils } from './CommandUtils';
 const chalk = require('chalk');

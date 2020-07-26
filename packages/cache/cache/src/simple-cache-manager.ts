@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import _ from 'lodash';
 import { ConstructableCache } from './cache';
 import { CacheManager, ICacheGroup } from './cache-manager';
 import { NoOpCache } from './caches/no-op-cache';
@@ -9,7 +9,7 @@ export class SimpleCacheManager implements CacheManager {
     private group: Map<string, ICacheGroup>,
     private dynamic: boolean,
     private defaultCache: ConstructableCache = NoOpCache,
-    private defaultOptionsCache?: object
+    private defaultOptionsCache?: object,
   ) {}
 
   async getCache(name: string, groupName = 'default') {
@@ -59,7 +59,7 @@ export class SimpleCacheManager implements CacheManager {
     const optionsCache = _.merge(
       {},
       this.defaultOptionsCache || {},
-      group.defaultOptionsCache || {}
+      group.defaultOptionsCache || {},
     );
     return new defaultCache(name, optionsCache);
   }

@@ -5,7 +5,7 @@ import {
   RestController,
 } from '@gabliam/web-core';
 import { WebPluginTest } from '@gabliam/web-core/src/testing';
-import * as HttpStatus from 'http-status-codes';
+import HttpStatus from 'http-status-codes';
 import KoaPlugin from '../../src';
 
 let appTest: WebPluginTest;

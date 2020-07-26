@@ -1,5 +1,5 @@
 import { ConfigFunction } from '@gabliam/web-core';
-import * as bodyParser from 'body-parser';
+import bodyParser from 'body-parser';
 import { ExpressConfig } from '../config';
 import { EXPRESS_PLUGIN_CONFIG } from '../constants';
 import { express } from '../express';

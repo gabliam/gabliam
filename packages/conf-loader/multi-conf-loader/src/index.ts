@@ -3,10 +3,10 @@ import {
   LoaderConfigParseError,
   Resolver,
 } from '@gabliam/core';
-import * as d from 'debug';
-import * as fs from 'fs';
-import * as yaml from 'js-yaml';
-import * as _ from 'lodash';
+import d from 'debug';
+import fs from 'fs';
+import yaml from 'js-yaml';
+import _ from 'lodash';
 import { inspect, promisify } from 'util';
 
 // Promisify
@@ -19,7 +19,7 @@ async function loadConstant(
   folder: string,
   projectName: string,
   resolver: Resolver,
-  profile?: string
+  profile?: string,
 ) {
   const files: string[] = await glob(`**/constants?(-+([a-zA-Z])).@(yml)`, {
     cwd: folder,
@@ -31,23 +31,25 @@ async function loadConstant(
     return constants;
   }
 
-  const defaultProfileFile = files.find(file => file === `constants.yml`);
+  const defaultProfileFile = files.find((file) => file === `constants.yml`);
   if (defaultProfileFile) {
     constants = _.merge(
       {},
       constants,
-      await loadFile(`${folder}/${defaultProfileFile}`, resolver)
+      await loadFile(`${folder}/${defaultProfileFile}`, resolver),
     );
   }
 
   if (profile) {
-    const profileFile = files.find(file => file === `constants-${profile}.yml`);
+    const profileFile = files.find(
+      (file) => file === `constants-${profile}.yml`,
+    );
 
     if (profileFile) {
       constants = _.merge(
         {},
         constants,
-        await loadFile(`${folder}/${profileFile}`, resolver)
+        await loadFile(`${folder}/${profileFile}`, resolver),
       );
     }
   }
@@ -59,7 +61,7 @@ async function loadConstant(
  */
 const multiConfLoader = async (
   { folder, projectName }: { folder: string; projectName: string },
-  profile?: string
+  profile?: string,
 ) => {
   debug('loadConfig', folder);
   const resolver = configResolver(folder);
@@ -68,7 +70,7 @@ const multiConfLoader = async (
   // create tag config
   const ConfigYamlType = new yaml.Type('!config', {
     kind: 'scalar',
-    construct: function(data) {
+    construct: function (data) {
       return _.get(constants, data, {});
     },
     instanceOf: Object,
@@ -86,7 +88,7 @@ const multiConfLoader = async (
     return config;
   }
 
-  const defaultProfileFile = files.find(file => file === `application.yml`);
+  const defaultProfileFile = files.find((file) => file === `application.yml`);
   if (defaultProfileFile) {
     config = _.merge(
       {},
@@ -95,14 +97,14 @@ const multiConfLoader = async (
         `${folder}/${defaultProfileFile}`,
         projectName,
         GAB_SCHEMA,
-        resolver
-      )
+        resolver,
+      ),
     );
   }
 
   if (profile) {
     const profileFile = files.find(
-      file => file === `application-${profile}.yml`
+      (file) => file === `application-${profile}.yml`,
     );
 
     if (profileFile) {
@@ -113,8 +115,8 @@ const multiConfLoader = async (
           `${folder}/${profileFile}`,
           projectName,
           GAB_SCHEMA,
-          resolver
-        )
+          resolver,
+        ),
       );
     }
   }
@@ -126,7 +128,7 @@ async function loadConfigProject(
   filePath: string,
   projectName: string,
   schema: yaml.Schema,
-  resolver: Resolver
+  resolver: Resolver,
 ) {
   const data = await readFile(filePath, 'utf8');
   try {

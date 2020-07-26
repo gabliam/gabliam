@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import _ from 'lodash';
 import { Gabliam } from '../gabliam';
 import { Register } from '../metadatas';
 import { reflection } from '../reflection';

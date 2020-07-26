@@ -9,7 +9,7 @@ import { express } from '@gabliam/express';
 import { GraphqlConfig, GraphqlCorePlugin } from '@gabliam/graphql-core';
 import { ConfigFunction, WebConfiguration } from '@gabliam/web-core';
 import { ApolloServer } from 'apollo-server-express';
-import * as d from 'debug';
+import d from 'debug';
 import { GraphQLSchema } from 'graphql';
 
 const debug = d('Gabliam:Plugin:GraphqlPluginExpress');

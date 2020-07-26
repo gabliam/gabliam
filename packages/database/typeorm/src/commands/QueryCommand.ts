@@ -1,6 +1,6 @@
 import { createConnection, QueryRunner, Connection } from '../index';
 import { CommandUtils } from './CommandUtils';
-import * as yargs from 'yargs';
+import yargs from 'yargs';
 import { PlatformTools } from 'typeorm/platform/PlatformTools';
 const chalk = require('chalk');
 
