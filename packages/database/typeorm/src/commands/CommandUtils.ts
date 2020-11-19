@@ -12,8 +12,8 @@ export class CommandUtils {
    * Creates directories recursively.
    */
   static createDirectories(directory: string) {
-    return new Promise((ok, fail) =>
-      mkdirp(directory, (err: any) => (err ? fail(err) : ok()))
+    return new Promise<void>((ok, fail) =>
+      mkdirp(directory, (err: any) => (err ? fail(err) : ok())),
     );
   }
 
@@ -23,7 +23,7 @@ export class CommandUtils {
   static async createFile(
     filePath: string,
     content: string,
-    override: boolean = true
+    override: boolean = true,
   ): Promise<void> {
     await CommandUtils.createDirectories(path.dirname(filePath));
     return new Promise<void>((ok, fail) => {
@@ -31,7 +31,7 @@ export class CommandUtils {
         return ok();
       }
 
-      fs.writeFile(filePath, content, err => (err ? fail(err) : ok()));
+      fs.writeFile(filePath, content, (err) => (err ? fail(err) : ok()));
     });
   }
 
@@ -41,7 +41,7 @@ export class CommandUtils {
   static async readFile(filePath: string): Promise<string> {
     return new Promise<string>((ok, fail) => {
       fs.readFile(filePath, (err, data) =>
-        err ? fail(err) : ok(data.toString())
+        err ? fail(err) : ok(data.toString()),
       );
     });
   }
@@ -62,13 +62,13 @@ export class CommandUtils {
        */
       configName?: string | undefined;
     },
-    appName?: string
+    appName?: string,
   ) {
     await setupTsProject(process.cwd());
     const application = await gabliamFindApp(process.cwd(), appName);
     const gabliam = await gabliamBuilder(application)().build();
     const connectionOptions = gabliam.container.get(
-      GabliamConnectionOptionsReader
+      GabliamConnectionOptionsReader,
     );
     return connectionOptions.buildNew(options);
   }

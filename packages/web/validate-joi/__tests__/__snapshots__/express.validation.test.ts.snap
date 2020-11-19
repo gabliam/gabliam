@@ -29,7 +29,6 @@ Object {
   "connection": "close",
   "id": 12,
   "secret-header": "@@@@@@",
-  "user-agent": "node-superagent/3.8.3",
 }
 `;
 
@@ -115,7 +114,6 @@ Object {
   "connection": "close",
   "id": 12,
   "secret-header": "@@@@@@",
-  "user-agent": "node-superagent/3.8.3",
 }
 `;
 

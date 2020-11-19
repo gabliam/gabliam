@@ -40,22 +40,21 @@
     "@gabliam/web-core": "0.0.0-PLACEHOLDER",
     "@types/cookie-parser": "^1.4.2",
     "@types/debug": "^4.1.5",
-    "@types/koa": "2.11.3",
+    "@types/koa": "2.11.6",
     "@types/koa-router": "^7.0.40",
-    "@types/koa-send": "^4.1.2"
+    "@types/koa-send": "^4.1.2",
+    "@types/send": "^0.14.5"
   },
   "dependencies": {
-    "@types/send": "^0.14.5",
     "cookie-parser": "^1.4.3",
-    "graphql": "^15.3.0",
-    "http-status-codes": "^1.4.0",
+    "http-status-codes": "^2.1.4",
     "koa": "^2.11.0",
     "koa-body": "^4.1.1",
-    "koa-router": "^9.1.0",
+    "koa-router": "^10.0.0",
     "koa-send": "^5.0.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.20",
     "send": "^0.17.1",
-    "tslib": "^2.0.0"
+    "tslib": "^2.0.3"
   },
   "engines": {
     "node": ">=8.9.0"

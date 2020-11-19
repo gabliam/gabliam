@@ -1,3 +1,0 @@
-application:
-    mongoose:
-        uri: mongodb://localhost/heroes

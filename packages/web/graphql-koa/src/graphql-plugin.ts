@@ -21,11 +21,11 @@ export class GraphqlPlugin extends GraphqlCorePlugin implements GabliamPlugin {
     container: Container,
     registry: Registry,
     graphqlPluginConfig: GraphqlConfig,
-    schema: GraphQLSchema
+    schema: GraphQLSchema,
   ) {
     debug('register Middleware', graphqlPluginConfig);
     const webConfiguration = container.get<WebConfiguration<koa>>(
-      WebConfiguration
+      WebConfiguration,
     );
 
     const apolloServer = new ApolloServer({
@@ -36,7 +36,8 @@ export class GraphqlPlugin extends GraphqlCorePlugin implements GabliamPlugin {
     const instance: ConfigFunction<koa> = (app, _container) => {
       apolloServer.applyMiddleware({
         path: graphqlPluginConfig.endpointUrl,
-        app,
+        // cast to any apolloserver use koa-bodyserver for koa definition ><
+        app: app as any,
       });
     };
 

@@ -118,6 +118,7 @@ test('errors get timeout', async () => {
 
 test('put timeout', async () => {
   client.debug('sleep', 3);
+  await sleep(1);
   await expect(cache3.put('test', 'test')).rejects.toMatchSnapshot();
-  await sleep(3);
+  await sleep(2);
 });

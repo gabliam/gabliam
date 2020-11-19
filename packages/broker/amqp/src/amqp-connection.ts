@@ -82,9 +82,12 @@ export class AmqpConnection {
       },
     });
 
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       this.connection.once('disconnect', (err: any) => {
-        if (_.get(err, 'err.errno', undefined) === 'ENOTFOUND') {
+        if (
+          _.get(err, 'err.errno', undefined) === 'ENOTFOUND' ||
+          _.get(err, 'err.code', undefined) === 'ENOTFOUND'
+        ) {
           this.connection.close();
           this.channel.removeAllListeners('connect');
           this.channel.removeAllListeners('error');
@@ -360,7 +363,7 @@ export class AmqpConnection {
       return new Promise<Buffer>((resolve) => {
         gzip(Buffer.from(data), (err, res) => {
           if (err) {
-            resolve(undefined);
+            resolve(Buffer.from(''));
           } else {
             resolve(res);
           }

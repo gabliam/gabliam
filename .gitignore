@@ -10,3 +10,5 @@ lol/
 uploads/
 examples/express-passport/config/test.json
 dist/
+.yarn
+.yarnrc

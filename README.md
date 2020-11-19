@@ -12,11 +12,11 @@
 <p align="center">
   <a href="https://www.npmjs.com/package/@gabliam/core"><img src="https://img.shields.io/npm/v/@gabliam/core.svg?style=flat-square"></a>
   <a href="https://www.npmjs.com/package/@gabliam/core"><img src="https://img.shields.io/npm/dm/@gabliam/core.svg?style=flat-square"></a>
-  <a href="https://travis-ci.org/gabliam/gabliam"><img src="https://img.shields.io/travis/gabliam/gabliam/master.svg?style=flat-square"></a>
+  <a href="https://circleci.com/gh/gabliam/gabliam"><img src="https://img.shields.io/circleci/build/github/gabliam/gabliam"></a>
   <a href="https://coveralls.io/github/gabliam/gabliam?branch=master"><img src="https://img.shields.io/coveralls/github/gabliam/gabliam.svg?style=flat-square"></a>
 </p>
 
-## Description
+
 Gabliam is a framework for building Node.js server-side applications. It use TypeScript.
 
 Under the hood, gabliam makes use of Inversify. All plugin use a great Node.js package. For example, for server, gabliam use express or koa. For dabase, gabliam use typeorm
