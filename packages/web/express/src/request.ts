@@ -147,7 +147,7 @@ export class ExpressRequest implements GabRequest<express.Request> {
   /**
    * Return the original request
    */
-  get originalRequest() {
+  get originalRequest(): express.Request {
     return this.request;
   }
 
