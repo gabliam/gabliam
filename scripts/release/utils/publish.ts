@@ -7,7 +7,7 @@ import { ReleaseParams } from './parse-params-release';
 export const publish = async (
   spinner: ora.Ora,
   params: ReleaseParams,
-  version: string
+  version: string,
 ) => {
   const publishArgs = ['publish', '--access=public'];
   if (params.canary) {
@@ -29,7 +29,7 @@ export const publish = async (
     cwd: APP_DIR,
   });
   spinner.text = `Git tag`;
-  await execa(`git`, `tag -s "v${version}" -m "v${version}"`.split(' '), {
+  await execa(`git`, `tag -a "v${version}"`.split(' '), {
     cwd: APP_DIR,
   });
 };
