@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`express integration RestController validations constructor req.headers 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "190",
+    "content-type": "application/json; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "accept": "application/json",
+    },
+    "method": "GET",
+  },
+  "status": 400,
+  "text": "{\\"statusCode\\":400,\\"error\\":\\"Bad Request\\",\\"message\\":\\"/\\"accept/\\" with value /\\"application/json/\\" fails to match the required pattern: /xml/\\",\\"validation\\":{\\"source\\":\\"headers\\",\\"keys\\":[\\"accept\\"]}}",
+}
+`;
+
+exports[`express integration RestController validations constructor req.headers 2`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "190",
+    "content-type": "application/json; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "accept": "application/json",
+    },
+    "method": "GET",
+  },
+  "status": 400,
+  "text": "{\\"statusCode\\":400,\\"error\\":\\"Bad Request\\",\\"message\\":\\"/\\"accept/\\" with value /\\"application/json/\\" fails to match the required pattern: /xml/\\",\\"validation\\":{\\"source\\":\\"headers\\",\\"keys\\":[\\"accept\\"]}}",
+}
+`;
+
+exports[`koa integration RestController validations constructor req.headers 1`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "190",
+    "content-type": "application/json; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "accept": "application/json",
+    },
+    "method": "GET",
+  },
+  "status": 400,
+  "text": "{\\"statusCode\\":400,\\"error\\":\\"Bad Request\\",\\"message\\":\\"/\\"accept/\\" with value /\\"application/json/\\" fails to match the required pattern: /xml/\\",\\"validation\\":{\\"source\\":\\"headers\\",\\"keys\\":[\\"accept\\"]}}",
+}
+`;
+
+exports[`koa integration RestController validations constructor req.headers 2`] = `
+Object {
+  "header": Object {
+    "connection": "close",
+    "content-length": "190",
+    "content-type": "application/json; charset=utf-8",
+  },
+  "req": Object {
+    "data": undefined,
+    "headers": Object {
+      "accept": "application/json",
+    },
+    "method": "GET",
+  },
+  "status": 400,
+  "text": "{\\"statusCode\\":400,\\"error\\":\\"Bad Request\\",\\"message\\":\\"/\\"accept/\\" with value /\\"application/json/\\" fails to match the required pattern: /xml/\\",\\"validation\\":{\\"source\\":\\"headers\\",\\"keys\\":[\\"accept\\"]}}",
+}
+`;

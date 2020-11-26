@@ -1,4 +1,11 @@
-import { reflection, Service } from '@gabliam/core';
+import {
+  inject,
+  Joi,
+  reflection,
+  Service,
+  ValueExtractor,
+  VALUE_EXTRACTOR,
+} from '@gabliam/core';
 import {
   ExecContext,
   ExecutionContext,
@@ -6,14 +13,23 @@ import {
   Interceptor,
   Request,
 } from '@gabliam/web-core';
-import { listParamToValidate, Validate } from '../metadatas';
+import {
+  constructValidator,
+  listParamToValidate,
+  Validate,
+  ValidatorType,
+} from '../metadatas';
 import { createValidateRequest, NO_VALIDATION } from './validate-request';
 
 @Service()
 export class ValidateInterceptor implements Interceptor {
+  constructor(
+    @inject(VALUE_EXTRACTOR) private valueExtractor: ValueExtractor,
+  ) {}
+
   async intercept(
     @ExecContext() execCtx: ExecutionContext,
-    @Request() req: GabRequest
+    @Request() req: GabRequest,
   ) {
     const target = execCtx.getConstructor();
     const key = execCtx.getHandlerName();
@@ -27,11 +43,27 @@ export class ValidateInterceptor implements Interceptor {
     if (!metadata) {
       return;
     }
+    let rules: Map<ValidatorType, Joi.Schema>;
+    let validationOptions = metadata.validationOptions;
 
-    const validateRequest = createValidateRequest(
-      metadata.rules,
-      metadata.validationOptions
-    );
+    if (metadata.rules === undefined && metadata.validatorCreator) {
+      const validator = constructValidator(
+        metadata.validatorCreator(this.valueExtractor),
+      );
+      rules = validator.rules;
+      validationOptions = {
+        ...validationOptions,
+        ...validator.validationOptions,
+      };
+
+      // save rules and validationOptions in metadata for prevent validator construct on each call
+      metadata.rules = rules;
+      metadata.validationOptions = validationOptions;
+    } else {
+      rules = metadata.rules!;
+    }
+
+    const validateRequest = createValidateRequest(rules, validationOptions);
 
     for (const paramToValidate of listParamToValidate) {
       const val = validateRequest(paramToValidate, req[paramToValidate]);
