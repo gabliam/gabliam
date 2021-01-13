@@ -17,7 +17,6 @@ export class HttpException extends Error {
     // Set the prototype explicitly.
     Object.setPrototypeOf(this, HttpException.prototype);
 
-    // tslint:disable-next-line:max-line-length
     this.message = response;
   }
 

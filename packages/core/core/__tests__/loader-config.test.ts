@@ -1,5 +1,3 @@
-// tslint:disable:one-line
-// tslint:disable:no-unused-expression
 import { LoaderConfig, FileLoader } from '../src/loaders';
 // import mock from 'mock-fs';
 import { MockFs } from './mock-fs';
@@ -34,7 +32,6 @@ test(`with application.yml empty`, async () => {
 test(`with application.yml with nothing`, async () => {
   const mock = new MockFs({
     'test/config': {
-      // tslint:disable-next-line:no-trailing-whitespace
       'application.yml': `
 
               `,
@@ -190,7 +187,6 @@ test(`with application.json empty`, async () => {
 test(`with application.json with nothing`, async () => {
   const mock = new MockFs({
     'test/config': {
-      // tslint:disable-next-line:no-trailing-whitespace
       'application.json': `
 
               `,
@@ -234,7 +230,6 @@ test(`with bad loader`, async () => {
 test(`with toml`, async () => {
   const mock = new MockFs({
     'test/config': {
-      // tslint:disable-next-line:no-trailing-whitespace
       'application.toml': `
 [application]
 host = "127.0.0.1"
@@ -259,7 +254,6 @@ testPath = "path:./test.json"`,
 test(`with bad toml`, async () => {
   const mock = new MockFs({
     'test/config': {
-      // tslint:disable-next-line:no-trailing-whitespace
       'application.toml': `
 ;;;;[application]
 host = "127.0.0.1"
@@ -284,7 +278,6 @@ testPath = "path:./test.json"`,
 test(`with properties`, async () => {
   const mock = new MockFs({
     'test/config': {
-      // tslint:disable-next-line:no-trailing-whitespace
       'application.properties': `
 application.host = 127.0.0.1
 application.db = test
@@ -307,7 +300,6 @@ testPath = path:./test.json`,
 test.skip(`with bad properties`, async () => {
   const mock = new MockFs({
     'test/config': {
-      // tslint:disable-next-line:no-trailing-whitespace
       'application.properties': `
     ####😁😁$$$[application]
       host = "127.0.0.1"

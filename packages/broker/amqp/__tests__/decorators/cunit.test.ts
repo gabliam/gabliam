@@ -15,7 +15,6 @@ describe('Cunit decorators', () => {
       @CUnit('default2')
       class TestBean {}
 
-      // tslint:disable-next-line:no-unused-expression
       new TestBean();
     }).toThrowError();
   });

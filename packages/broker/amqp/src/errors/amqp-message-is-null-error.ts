@@ -7,7 +7,6 @@ export class AmqpMessageIsNullError extends Error {
     // Set the prototype explicitly.
     Object.setPrototypeOf(this, AmqpMessageIsNullError.prototype);
 
-    // tslint:disable-next-line:max-line-length
     this.message = `Message is null.`;
   }
 }

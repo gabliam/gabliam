@@ -39,8 +39,7 @@ describe('SimpleCacheManager with dynamic and whitout defaultCache', () => {
 
 describe('SimpleCacheManager with dynamic and defaultCache', () => {
   class NoOpCache2 extends NoOpCache {
-    // @ts-ignore
-    constructor(name: string, private options?: object) {
+    constructor(name: string) {
       super(name);
     }
   }

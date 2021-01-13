@@ -1,5 +1,3 @@
-// tslint:disable:one-line
-// tslint:disable:no-unused-expression
 import { reflection } from '@gabliam/core';
 import { GabResolver } from '@gabliam/graphql-core';
 import '../../src';

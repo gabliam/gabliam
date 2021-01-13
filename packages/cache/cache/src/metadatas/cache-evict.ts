@@ -94,7 +94,7 @@ export const CacheEvict: CacheEvictDecorator = makePropDecorator(
     return extractCacheEvictInternalOptions(value);
   },
   (
-    target: Object,
+    target: Record<string, unknown>,
     propertyKey: string | symbol,
     descriptor: TypedPropertyDescriptor<any>,
     cacheInternalOptions: CacheEvict

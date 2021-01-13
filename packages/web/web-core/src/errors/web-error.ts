@@ -9,7 +9,6 @@ export abstract class WebError extends Error {
     // Set the prototype explicitly.
     Object.setPrototypeOf(this, WebError.prototype);
 
-    // tslint:disable-next-line:max-line-length
     this.message = 'WebError';
   }
 

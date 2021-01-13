@@ -6,7 +6,6 @@ export class AmqpConfigIsMandatoryError extends Error {
     // Set the prototype explicitly.
     Object.setPrototypeOf(this, AmqpConfigIsMandatoryError.prototype);
 
-    // tslint:disable-next-line:max-line-length
     this.message = `AmqpConfig is mandatory`;
   }
 }

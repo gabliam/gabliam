@@ -1,4 +1,3 @@
-// tslint:disable:no-bitwise
 import { generate } from 'escodegen';
 import {
   Expression,
@@ -118,11 +117,9 @@ export class Parser {
 
     switch (node.operator) {
       case '==':
-        // tslint:disable-next-line:triple-equals
         return l == r;
 
       case '!=':
-        // tslint:disable-next-line:triple-equals
         return l != r;
 
       case '===':

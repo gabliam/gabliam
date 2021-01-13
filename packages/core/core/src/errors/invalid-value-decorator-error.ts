@@ -9,7 +9,6 @@ export class InvalidValueDecoratorError extends Error {
     // Set the prototype explicitly.
     Object.setPrototypeOf(this, InvalidValueDecoratorError.prototype);
 
-    // tslint:disable-next-line:max-line-length
     this.message = `Options of @Value decorator must be a string or a ValueOptions.`;
   }
 }

@@ -21,7 +21,6 @@ describe('expression evaluator', () => {
       });
 
       test('should evaluate a string', () => {
-        // tslint:disable-next-line:quotemark
         const stringSingle = ExpressionParser.eval("'hello world!'");
         const stringDouble = ExpressionParser.eval('"hello world!"');
 
@@ -32,7 +31,6 @@ describe('expression evaluator', () => {
       });
 
       test('should evaluate a string with embedded escaped single quotes', () => {
-        // tslint:disable-next-line:quotemark
         const stringSingle = ExpressionParser.eval("'hello world !'");
 
         const stringDouble = ExpressionParser.eval('"hello world !"');
@@ -44,7 +42,6 @@ describe('expression evaluator', () => {
       });
 
       test('should evaluate a string with embedded escaped double quotes', () => {
-        // tslint:disable-next-line:quotemark
         const stringSingle = ExpressionParser.eval("'hello world!'");
         const stringDouble = ExpressionParser.eval('"hello world!"');
 

@@ -10,7 +10,6 @@ export class PluginDependencyIsMissingError extends Error {
     // Set the prototype explicitly.
     Object.setPrototypeOf(this, PluginDependencyIsMissingError.prototype);
 
-    // tslint:disable-next-line:max-line-length
     this.message = `The plugin ${pluginName} need the plugin ${dependencyName}. Try to install it: npm install ${dependencyName} --save or yarn add ${dependencyName}`;
   }
 }

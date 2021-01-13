@@ -7,7 +7,6 @@ export class AmqpConnectionError extends Error {
     // Set the prototype explicitly.
     Object.setPrototypeOf(this, AmqpConnectionError.prototype);
 
-    // tslint:disable-next-line:max-line-length
     this.message = `An error occurred on connection`;
   }
 }

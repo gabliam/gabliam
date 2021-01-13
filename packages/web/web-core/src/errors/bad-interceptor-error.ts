@@ -13,7 +13,6 @@ export class BadInterceptorError extends Error {
       ? interceptor.constructor.name
       : interceptor;
 
-    // tslint:disable-next-line:max-line-length
     this.message = `${name} must implement Interceptor interface`;
   }
 }

@@ -1,4 +1,3 @@
-// tslint:disable:no-shadowed-variable member-ordering
 import { isType, Type } from '../common';
 import { ANNOTATIONS, PARAMETERS, PROP_METADATA } from '../decorator/util';
 

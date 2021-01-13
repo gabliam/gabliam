@@ -27,7 +27,6 @@ describe('Controller decorator', () => {
       })
       @Controller('/test')
       class TestConfig {}
-      // tslint:disable-next-line:no-unused-expression
       new TestConfig();
     }).toThrowError();
   });
@@ -59,7 +58,6 @@ describe('RestController decorator', () => {
       })
       @RestController('/test')
       class TestConfig {}
-      // tslint:disable-next-line:no-unused-expression
       new TestConfig();
     }).toThrowError();
   });

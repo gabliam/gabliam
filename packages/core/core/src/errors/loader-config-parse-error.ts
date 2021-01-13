@@ -9,7 +9,6 @@ export class LoaderConfigParseError extends Error {
     // Set the prototype explicitly.
     Object.setPrototypeOf(this, LoaderConfigParseError.prototype);
 
-    // tslint:disable-next-line:max-line-length
     this.message = `Error during parsing of file "${filePath}".
     ${e.name}: ${e.message}
     `;

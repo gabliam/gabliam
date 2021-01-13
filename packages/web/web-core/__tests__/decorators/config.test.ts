@@ -36,7 +36,6 @@ describe('WebConfig decorator', () => {
         @WebConfig(100)
         test2Method() {}
       }
-      // tslint:disable-next-line:no-unused-expression
       new TestConfig();
     }).toThrowError();
   });
@@ -77,7 +76,6 @@ describe('WebConfigAfterControllers decorator', () => {
         @WebConfigAfterControllers(100)
         test2Method() {}
       }
-      // tslint:disable-next-line:no-unused-expression
       new TestConfig();
     }).toThrowError();
   });

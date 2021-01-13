@@ -1,5 +1,3 @@
-// tslint:disable:one-line
-// tslint:disable:no-unused-expression
 import path from 'path';
 import sinon from 'sinon';
 import {

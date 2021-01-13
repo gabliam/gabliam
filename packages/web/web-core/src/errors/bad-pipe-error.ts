@@ -11,7 +11,6 @@ export class BadPipeError extends Error {
 
     const name = pipe.constructor ? pipe.constructor.name : pipe;
 
-    // tslint:disable-next-line:max-line-length
     this.message = `${name} must implement Pipe interface`;
   }
 }

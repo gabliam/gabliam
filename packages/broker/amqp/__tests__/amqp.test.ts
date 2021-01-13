@@ -172,7 +172,7 @@ test('consumer throw error', async () => {
   @RabbitController()
   class ControllerTest {
     @RabbitConsumer('consumerTest')
-    consumer(msg: any) {
+    consumer() {
       throw new Error('Consumer error');
     }
   }
@@ -205,7 +205,7 @@ test('bad queue', async () => {
   @RabbitController()
   class ControllerTest {
     @RabbitConsumer('consumerTestBad')
-    consumer(msg: any) {
+    consumer() {
       throw new Error('Consumer error');
     }
   }

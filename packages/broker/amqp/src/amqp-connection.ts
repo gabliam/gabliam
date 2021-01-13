@@ -156,10 +156,6 @@ export class AmqpConnection {
   async sendToQueue(queue: string, content: any, options?: SendOptions) {
     const queueName = this.getQueueName(queue);
     const channel = this.getChannel();
-    if (channel === null) {
-      /* istanbul ignore next */
-      throw new AmqpConnectionError();
-    }
     await channel.sendToQueue(queueName, await this.contentToBuffer(content), {
       contentEncoding: this.gzipEnabled ? 'gzip' : undefined,
       contentType: 'application/json',
@@ -200,10 +196,10 @@ export class AmqpConnection {
     queue: string,
     content: any,
     options: SendOptions = {},
-    timeout: number = 5000,
+    timeout = 5000,
   ): Promise<T> {
     let onTimeout = false;
-    let chan: ConfirmChannel | null;
+    let chan: ConfirmChannel;
     let replyTo: string;
     let promise = new PromiseB<T>((resolve, reject) => {
       const queueName = this.getQueueName(queue);
@@ -222,10 +218,7 @@ export class AmqpConnection {
 
       replyTo = options.replyTo;
       chan = this.getChannel();
-      if (chan === null) {
-        /* istanbul ignore next */
-        return reject(new AmqpConnectionError());
-      }
+
       // create new Queue for get the response
       chan
         .assertQueue(replyTo, {
@@ -234,7 +227,7 @@ export class AmqpConnection {
           durable: false,
         })
         .then(() => {
-          return chan!.consume(replyTo, async (msg: ConsumeMessage | null) => {
+          return chan.consume(replyTo, async (msg: ConsumeMessage | null) => {
             if (msg === null) {
               /* istanbul ignore next */
               return reject(new AmqpMessageIsNullError());
@@ -242,15 +235,15 @@ export class AmqpConnection {
             if (!onTimeout && msg.properties.correlationId === correlationId) {
               resolve(await this.parseContent(msg));
             }
-            chan!.ack(msg);
+            chan.ack(msg);
 
             try {
-              await chan!.deleteQueue(replyTo);
+              await chan.deleteQueue(replyTo);
             } catch {}
           });
         })
         .then(async () => {
-          chan!.sendToQueue(queueName, await this.contentToBuffer(content), {
+          chan.sendToQueue(queueName, await this.contentToBuffer(content), {
             contentEncoding: this.gzipEnabled ? 'gzip' : undefined,
             contentType: 'application/json',
             ...options,
@@ -264,7 +257,7 @@ export class AmqpConnection {
             reject(err);
             if (chan) {
               try {
-                await chan!.deleteQueue(replyTo);
+                await chan.deleteQueue(replyTo);
               } catch {}
             }
           },
@@ -278,7 +271,7 @@ export class AmqpConnection {
           onTimeout = true;
           if (chan) {
             try {
-              await chan!.deleteQueue(replyTo);
+              await chan.deleteQueue(replyTo);
             } catch {}
           }
           throw new AmqpTimeoutError((<any>e).message);
@@ -484,7 +477,10 @@ export class AmqpConnection {
     });
   }
 
-  private getChannel(): ConfirmChannel | null {
+  private getChannel(): ConfirmChannel {
+    if ((<any>this.channel)._channel === null) {
+      throw new AmqpConnectionError();
+    }
     return (<any>this.channel)._channel;
   }
 }

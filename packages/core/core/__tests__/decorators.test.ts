@@ -1,5 +1,3 @@
-// tslint:disable:one-line
-// tslint:disable:no-unused-expression
 import Joi from 'joi';
 import {
   Bean,

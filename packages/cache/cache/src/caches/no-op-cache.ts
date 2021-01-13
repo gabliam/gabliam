@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Cache } from '../cache';
 
 export class NoOpCache implements Cache {
   private name: string;
 
-  constructor(name: string, options?: object) {
+  constructor(name: string) {
     this.name = name;
   }
 
@@ -14,7 +16,7 @@ export class NoOpCache implements Cache {
   getName(): string {
     return this.name;
   }
-  getNativeCache(): object {
+  getNativeCache() {
     return this;
   }
   async get<T>(key: string): Promise<T | undefined | null> {

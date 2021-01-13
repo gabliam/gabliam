@@ -6,7 +6,6 @@ export class AmqpDuplicateConnectionError extends Error {
     // Set the prototype explicitly.
     Object.setPrototypeOf(this, AmqpDuplicateConnectionError.prototype);
 
-    // tslint:disable-next-line:max-line-length
     this.message = `Duplicate connection '${connectionName}'`;
   }
 }

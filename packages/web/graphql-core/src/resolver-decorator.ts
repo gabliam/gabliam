@@ -1,4 +1,3 @@
-// tslint:disable: unified-signatures
 import { injectable, Register } from '@gabliam/core';
 import { ClassType, Resolver } from 'type-graphql';
 import {

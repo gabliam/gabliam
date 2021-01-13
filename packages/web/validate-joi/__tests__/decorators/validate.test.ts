@@ -49,7 +49,6 @@ describe('Validate decorator', () => {
           return;
         }
       }
-      // tslint:disable-next-line:no-unused-expression
       new TestController();
     }).toThrowError();
   });

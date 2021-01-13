@@ -9,7 +9,7 @@ export class SimpleCacheManager implements CacheManager {
     private group: Map<string, ICacheGroup>,
     private dynamic: boolean,
     private defaultCache: ConstructableCache = NoOpCache,
-    private defaultOptionsCache?: object,
+    private defaultOptionsCache?: Record<string, unknown>,
   ) {}
 
   async getCache(name: string, groupName = 'default') {

@@ -1,5 +1,3 @@
-// tslint:disable:one-line
-// tslint:disable:no-unused-expression
 import { createContainer } from '../src/container';
 import { APP_CONFIG } from '../src/constants';
 import { Config, Value } from '../src/metadatas';

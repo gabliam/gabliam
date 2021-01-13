@@ -55,12 +55,13 @@ export class AmqpPlugin implements GabliamPlugin {
     });
   }
 
-  async start(container: Container, registry: Registry) {
+  async start(container: Container) {
     const connection = container.get(AmqpConnectionManager);
     await connection.start();
   }
 
-  async stop(container: Container, registry: Registry) {
+  async stop(container: Container) {
+    console.log('stop');
     const connection = container.get(AmqpConnectionManager);
     await connection.stop();
   }

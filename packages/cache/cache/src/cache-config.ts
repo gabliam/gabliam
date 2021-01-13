@@ -21,13 +21,13 @@ export interface PluginConfig {
 
   defaultCache: string | ConstructableCache;
 
-  defaultOptionsCache?: Object;
+  defaultOptionsCache?: Record<string, unknown>;
 }
 
 export interface PluginGroupConfig {
   defaultCache?: ConstructableCache;
 
-  defaultOptionsCache?: object;
+  defaultOptionsCache?: Record<string, unknown>;
 
   caches: { [k: string]: PluginCacheConfig } | undefined;
 }
@@ -35,7 +35,7 @@ export interface PluginGroupConfig {
 export interface PluginCacheConfig {
   cache?: string | ConstructableCache;
 
-  options?: Object;
+  options?: Record<string, unknown>;
 }
 
 const stringOrClass = Joi.alternatives().try(Joi.string(), Joi.func());

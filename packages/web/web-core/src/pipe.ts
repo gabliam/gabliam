@@ -45,7 +45,6 @@ export const createPipeResolver = (container: Container) =>
 
       try {
         // test if interceptor is constructable
-        // tslint:disable-next-line:no-unused-expression
         const t = new (<any>pipe)();
 
         if (!isPipe(t)) {

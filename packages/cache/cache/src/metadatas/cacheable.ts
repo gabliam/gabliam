@@ -44,7 +44,6 @@ export interface CacheableDecorator {
 /**
  * Type of metadata for an `Cacheable` property.
  */
-// tslint:disable-next-line:no-empty-interface
 interface Cacheable extends CacheInternalOptions {}
 
 export const Cacheable: CacheableDecorator = makePropDecorator(

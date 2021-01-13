@@ -1,4 +1,4 @@
-export type ConstructableCache = new (name: string, options?: object) => Cache;
+export type ConstructableCache = new (name: string, options?: Record<string, unknown>) => Cache;
 
 /**
  * Interface that defines common cache operations.
@@ -20,7 +20,7 @@ export interface Cache {
   /**
    * Return the underlying native cache provider.
    */
-  getNativeCache(): object;
+  getNativeCache(): any;
 
   /**
    * Return the value to which this cache maps the specified key,

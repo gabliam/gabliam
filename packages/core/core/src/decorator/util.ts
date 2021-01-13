@@ -211,7 +211,6 @@ function makeMetadataCtor(props?: (...args: any[]) => any): any {
   return function ctor(...args: any[]) {
     if (props) {
       const values = props(...args);
-      // tslint:disable-next-line:forin
       for (const propName in values) {
         // @ts-ignore
         this[propName] = values[propName];

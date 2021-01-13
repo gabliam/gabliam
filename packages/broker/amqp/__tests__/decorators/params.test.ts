@@ -8,8 +8,8 @@ describe('params decorators', () => {
       public test(
         @Message() msg: ConsumeMessage,
         @Content('cat') content: string,
-        @Properties('headers') req: {},
-        @Fields('consumerTag') res: object
+        @Properties('headers') req: unknown,
+        @Fields('consumerTag') res: unknown
       ) {
         return;
       }
@@ -27,8 +27,8 @@ describe('params decorators', () => {
       public test(
         @Message() msg: ConsumeMessage,
         @Content('cat') content: string,
-        @Properties('headers') req: {},
-        @Fields('consumerTag') res: object
+        @Properties('headers') req: unknown,
+        @Fields('consumerTag') res: unknown
       ) {
         return;
       }

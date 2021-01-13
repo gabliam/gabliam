@@ -43,7 +43,6 @@ export interface CachePutDecorator {
 /**
  * Type of metadata for an `CachePut` property.
  */
-// tslint:disable-next-line:no-empty-interface
 interface CachePut extends CacheInternalOptions {}
 
 export const CachePut: CachePutDecorator = makePropDecorator(

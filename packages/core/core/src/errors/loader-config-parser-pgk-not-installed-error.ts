@@ -13,7 +13,6 @@ export class LoaderConfigParserPgkNotInstalledError extends Error {
       LoaderConfigParserPgkNotInstalledError.prototype
     );
 
-    // tslint:disable-next-line:max-line-length
     this.message = `${loaderName} package has not been found installed. Try to install it: npm install ${pkgName} --save or yarn add ${pkgName}`;
   }
 }

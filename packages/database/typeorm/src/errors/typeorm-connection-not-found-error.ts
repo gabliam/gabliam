@@ -6,7 +6,6 @@ export class TypeormConnectionNotFoundError extends Error {
     // Set the prototype explicitly.
     Object.setPrototypeOf(this, TypeormConnectionNotFoundError.prototype);
 
-    // tslint:disable-next-line:max-line-length
     this.message = `Connection ${connectionName} not found`;
   }
 }

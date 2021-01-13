@@ -17,7 +17,6 @@ test('should fail when decorated multiple times the same class with @RabbitContr
     @RabbitController()
     @RabbitController()
     class RabbitControllerTest {}
-    // tslint:disable-next-line:no-unused-expression
     new RabbitControllerTest();
   }).toThrowError();
 });

@@ -1,4 +1,3 @@
-// tslint:disable:no-unused-expression
 import { GabliamTest } from '@gabliam/core/src/testing';
 import {
   SimpleCacheManager,

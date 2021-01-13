@@ -37,7 +37,6 @@ export class HttpServerStarter implements ServerStarter {
 
     /* istanbul ignore next */
     function onError(error: NodeJS.ErrnoException): void {
-      // tslint:disable-next-line:curly
       if (error.syscall !== 'listen') throw error;
       const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
       switch (error.code) {

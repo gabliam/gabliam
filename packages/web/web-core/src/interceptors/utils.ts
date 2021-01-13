@@ -38,7 +38,6 @@ export const createInterceptorResolver = (container: Container) =>
     } catch {
       try {
         // test if interceptor is constructable
-        // tslint:disable-next-line:no-unused-expression
         const t = new (<any>interceptor)();
 
         if (!isInterceptor(t)) {

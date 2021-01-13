@@ -1,5 +1,3 @@
-// tslint:disable:one-line
-// tslint:disable:no-unused-expression
 import { LoaderModule } from '../src/loaders';
 import path from 'path';
 import { Scan } from '../src/index';

@@ -9,7 +9,6 @@ export class NextCalledMulipleError extends Error {
     // Set the prototype explicitly.
     Object.setPrototypeOf(this, NextCalledMulipleError.prototype);
 
-    // tslint:disable-next-line:max-line-length
     this.message = 'next() called multiple times';
   }
 }

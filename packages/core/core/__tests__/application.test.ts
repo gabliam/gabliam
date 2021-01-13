@@ -1,5 +1,3 @@
-// tslint:disable:one-line
-// tslint:disable:no-unused-expression
 import { gabliamFinder, gabliamBuilder, gabliamFindApp } from '../src';
 import { resolve } from 'path';
 

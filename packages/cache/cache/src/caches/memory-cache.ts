@@ -21,7 +21,7 @@ export class MemoryCache implements Cache {
   getName(): string {
     return this.name;
   }
-  getNativeCache(): object {
+  getNativeCache() {
     return this;
   }
   async get<T>(key: string): Promise<T | null | undefined> {

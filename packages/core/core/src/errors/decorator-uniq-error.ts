@@ -9,7 +9,6 @@ export class DecoratorUniqError extends Error {
     // Set the prototype explicitly.
     Object.setPrototypeOf(this, DecoratorUniqError.prototype);
 
-    // tslint:disable-next-line:max-line-length
     this.message = uniqError;
   }
 }
