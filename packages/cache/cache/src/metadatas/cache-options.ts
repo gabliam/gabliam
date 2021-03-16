@@ -155,7 +155,7 @@ export async function createCacheConfig(
 ): Promise<CacheConfig> {
   const { cacheNames, condition, key, unless } = cacheInternalOptions;
 
-  let passCondition = (...vals: any[]) => true;
+  let passCondition = () => true;
 
   if (condition !== undefined) {
     passCondition = ((e: Expression) => (...vals: any[]) => {
@@ -175,7 +175,7 @@ export async function createCacheConfig(
     );
   }
 
-  let veto = (args: any[], result: any) => false;
+  let veto = () => false;
   if (unless !== undefined) {
     veto = ((e: Expression) => (args: any[], result: any) => {
       try {

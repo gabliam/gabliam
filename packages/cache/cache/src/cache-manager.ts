@@ -32,5 +32,5 @@ export type ConstructableCacheManager = new (
   groups: Map<string, ICacheGroup>,
   dynamic: boolean,
   defaultCache: ConstructableCache,
-  defaultOptionsCache?: object
+  defaultOptionsCache?: Record<string, unknown>
 ) => CacheManager;

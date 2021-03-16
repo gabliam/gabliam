@@ -127,6 +127,7 @@ export class CachePluginConfig {
           return SimpleCacheManager;
         default:
           try {
+            // eslint-disable-next-line @typescript-eslint/no-var-requires
             return <ConstructableCacheManager>require(cacheManager).default;
           } catch {
             throw new CacheManagerPgkNotInstalledError(cacheManager);
@@ -147,6 +148,7 @@ export class CachePluginConfig {
           return NoOpCache;
         default:
           try {
+            // eslint-disable-next-line @typescript-eslint/no-var-requires
             return <ConstructableCache>require(cache).default;
           } catch {
             throw new CachePgkNotInstalledError(cache);
