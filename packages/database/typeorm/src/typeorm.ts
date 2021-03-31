@@ -6,6 +6,16 @@ import {
   Entity,
   EventSubscriber,
   MigrationEntity,
+  ViewEntity,
+  ViewEntityOptions,
 } from './metadatas';
 
-export { Entity, ChildEntity, CUnit, MigrationEntity, EventSubscriber };
+export {
+  Entity,
+  ChildEntity,
+  CUnit,
+  MigrationEntity,
+  EventSubscriber,
+  ViewEntity,
+  ViewEntityOptions,
+};
