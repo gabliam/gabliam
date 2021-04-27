@@ -24,7 +24,7 @@ aliases:
   - &install_deps
     run:
       name: Install Packages
-      command: yarn --immutable --cache-folder ~/.cache/yarn
+      command: yarn config set cacheFolder ~/.cache/yarn  && yarn --immutable
 
   - &run_unit_tests
     run:
