@@ -24,7 +24,7 @@ aliases:
   - &install_deps
     run:
       name: Install Packages
-      command: yarn --frozen-lockfile --cache-folder ~/.cache/yarn
+      command: yarn --immutable --cache-folder ~/.cache/yarn
 
   - &run_unit_tests
     run:
