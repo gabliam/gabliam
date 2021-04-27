@@ -5,9 +5,10 @@ import { promisify } from 'util';
 import { LoaderConfigParseError } from '../../errors';
 import { configResolver, Resolver } from './config-resolver';
 import { getParser } from './parsers';
+import g from 'glob';
 
 // Promisify
-const glob = promisify(require('glob')); // require and no import for typings bug
+const glob = promisify(g); // require and no import for typings bug
 const readFile = promisify(fs.readFile);
 
 const debug = d('Gabliam:FileLoader');
@@ -17,7 +18,7 @@ const debug = d('Gabliam:FileLoader');
  */
 export async function FileLoader(
   { folder, types }: { folder: string; types?: string[] },
-  profile?: string
+  profile?: string,
 ) {
   /**
    * If no type is present we load just yml
@@ -33,7 +34,7 @@ export async function FileLoader(
     `**/application?(-+([a-zA-Z])).@(${types.join('|')})`,
     {
       cwd: folder,
-    }
+    },
   );
 
   let config: Object = {};
@@ -44,26 +45,26 @@ export async function FileLoader(
 
   for (const type of types) {
     const defaultProfileFile = files.find(
-      file => file === `application.${type}`
+      (file) => file === `application.${type}`,
     );
     if (defaultProfileFile) {
       config = _.merge(
         {},
         config,
-        await loadFile(type, `${folder}/${defaultProfileFile}`, resolver)
+        await loadFile(type, `${folder}/${defaultProfileFile}`, resolver),
       );
     }
 
     if (profile) {
       const profileFile = files.find(
-        file => file === `application-${profile}.${type}`
+        (file) => file === `application-${profile}.${type}`,
       );
 
       if (profileFile) {
         config = _.merge(
           {},
           config,
-          await loadFile(type, `${folder}/${profileFile}`, resolver)
+          await loadFile(type, `${folder}/${profileFile}`, resolver),
         );
       }
     }
@@ -75,7 +76,7 @@ export async function FileLoader(
 async function loadFile(
   parserName: string,
   filePath: string,
-  resolver: Resolver
+  resolver: Resolver,
 ): Promise<Object> {
   const data = await readFile(filePath, 'utf8');
   let config = {};

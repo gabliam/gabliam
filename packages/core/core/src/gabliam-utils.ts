@@ -36,7 +36,7 @@ export const gabliamFindApp = async (scanPath: string, appName?: string) => {
     for (const value of list) {
       const metadata = reflection.annotationsOfDecorator<Application>(
         value.target,
-        Application
+        Application,
       )[0];
 
       if (metadata) {
@@ -50,7 +50,7 @@ export const gabliamFindApp = async (scanPath: string, appName?: string) => {
   } else {
     if (list.length > 1) {
       throw new Error(
-        `Too many app (${list.length}) found. You must select an application.`
+        `Too many app (${list.length}) found. You must select an application.`,
       );
     }
 
@@ -89,7 +89,7 @@ export const isGabliamBuilder = (val: any): val is GabliamBuilder =>
  * @param clazzOrValue  ValueRegistry or class of application
  */
 export const gabliamBuilder = <T = any>(
-  clazzOrValue: ValueRegistry<T> | Type<any>
+  clazzOrValue: ValueRegistry<T> | Type<any>,
 ) => () => {
   let clazz: any = clazzOrValue;
   if (isValueRegistry(clazzOrValue)) {
@@ -98,13 +98,14 @@ export const gabliamBuilder = <T = any>(
 
   const application = reflection.annotationsOfDecorator<Application>(
     clazz,
-    Application
+    Application,
   )[0];
   if (application) {
     const plugins = application.plugins
-      .filter(app => app.condition())
-      .map(app => {
+      .filter((app) => app.condition())
+      .map((app) => {
         if (typeof app.plugin === 'string') {
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
           return require(app.plugin).default;
         }
         return app.plugin;
@@ -120,10 +121,11 @@ export const setupTsProject = async (folder: string) => {
     glob('{*.@(|ts),!(git|svn|node_modules|dist|build)/**/*.@(ts)}', {
       cwd: folder,
     }),
-    file => !_.endsWith(file, '.d.ts') && !reg.test(file)
+    (file) => !_.endsWith(file, '.d.ts') && !reg.test(file),
   );
   if (files.length > 0) {
     console.log('Typescript project detected. Add ts-node');
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const tsnode = require('ts-node');
     tsnode.register({
       dir: process.cwd(),

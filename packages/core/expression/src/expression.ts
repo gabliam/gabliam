@@ -1,6 +1,7 @@
 import { Expression as AstExpression } from 'estree';
 import { Parser, IS_STRING } from './parser';
 import _ from 'lodash';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const validPath = require('is-valid-path');
 
 export class Expression {
@@ -9,7 +10,7 @@ export class Expression {
   constructor(
     ast: AstExpression | null,
     private context: object = {},
-    private input: string
+    private input: string,
   ) {
     if (ast) {
       this.parser = new Parser(ast);
@@ -31,7 +32,7 @@ export class Expression {
       },
       {
         $root: this.context,
-      }
+      },
     );
 
     try {

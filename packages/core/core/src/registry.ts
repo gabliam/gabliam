@@ -26,6 +26,7 @@ export class Registry {
       this.registry.set(type, []);
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return this.registry.get(type)!;
   }
   /**
@@ -35,7 +36,7 @@ export class Registry {
    */
   add<T extends ValueRegistry<T>>(
     type: symbol | string,
-    target: ValueRegistry<T>
+    target: ValueRegistry<T>,
   ) {
     const values = this.get(type);
     if (!_.find(values, target)) {
@@ -46,7 +47,7 @@ export class Registry {
   getAllAutoBind() {
     const autobinds: ValueRegistry[] = [];
     for (const [, values] of this.registry) {
-      autobinds.push(...values.filter(v => v.autoBind));
+      autobinds.push(...values.filter((v) => v.autoBind));
     }
 
     return autobinds;

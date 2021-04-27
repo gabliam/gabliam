@@ -2,7 +2,7 @@ import { Connection } from 'typeorm';
 import yargs from 'yargs';
 import { createConnection } from '../index';
 import { CommandUtils } from './CommandUtils';
-const chalk = require('chalk');
+import chalk from 'chalk';
 
 interface CacheClearCommandArgs {
   app?: string;
@@ -47,11 +47,11 @@ export class CacheClearCommand
           root: process.cwd(),
           configName: args.config,
         },
-        args.app
+        args.app,
       );
 
       const connectionOptions = await connectionOptionsReader.get(
-        args.connection
+        args.connection,
       );
 
       Object.assign(connectionOptions, {
@@ -66,8 +66,8 @@ export class CacheClearCommand
       if (!connection.queryResultCache) {
         console.log(
           chalk.black.bgRed(
-            'Cache is not enabled. To use cache enable it in connection configuration.'
-          )
+            'Cache is not enabled. To use cache enable it in connection configuration.',
+          ),
         );
         return;
       }

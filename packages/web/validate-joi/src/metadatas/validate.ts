@@ -166,6 +166,7 @@ export const constructValidator = (
 
   for (const paramToValidate of listParamToValidate) {
     if (realValidator[paramToValidate]) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       rules.set(paramToValidate, Joi.compile(realValidator[paramToValidate]!));
     }
   }

@@ -61,7 +61,7 @@ export class WebPluginBaseConfig {
   rootPath = '/';
 
   @Value('application.web.port', Joi.number().positive())
-  port: number = process.env.PORT ? parseInt(process.env.PORT!, 10) : 3000;
+  port: number = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 
   @Value('application.web.hostname', Joi.string())
   hostname: string;

@@ -60,6 +60,7 @@ export class ValidateInterceptor implements Interceptor {
       metadata.rules = rules;
       metadata.validationOptions = validationOptions;
     } else {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       rules = metadata.rules!;
     }
 

@@ -27,10 +27,10 @@ export class GabliamTest {
   async startPlugins(...pluginNames: string[]) {
     for (const pluginName of pluginNames) {
       const plugin = this.gab.pluginList.plugins.find(
-        p => p.constructor.name === pluginName && _.isFunction(p.start)
+        (p) => p.constructor.name === pluginName && _.isFunction(p.start),
       );
       if (plugin) {
-        await plugin.start!(this.gab.container, this.gab.registry);
+        await plugin.start?.(this.gab.container, this.gab.registry);
       }
     }
   }
@@ -46,7 +46,7 @@ export class GabliamTest {
   addClass(ctrl: any) {
     const metadatas = reflection.annotationsOfDecorator<Register>(
       ctrl,
-      Register
+      Register,
     );
     if (metadatas.length) {
       const [metadata] = metadatas.slice(-1);

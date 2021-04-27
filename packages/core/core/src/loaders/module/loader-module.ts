@@ -31,13 +31,13 @@ export class LoaderModule {
         if (isObject(current) && current.constructor) {
           const scanMetadatas = reflection.annotationsOfDecorator<Scan>(
             current.constructor,
-            Scan
+            Scan,
           );
-          prev.push(...scanMetadatas.map(s => s.path));
+          prev.push(...scanMetadatas.map((s) => s.path));
         }
         return prev;
       },
-      scan ? [scan] : []
+      scan ? [scan] : [],
     );
     debug('folders to load', folders);
     return this.loadFolders(...folders);
@@ -56,10 +56,11 @@ export class LoaderModule {
       .sync('{*.@(js|ts),!(git|svn|node_modules|dist|build)/**/*.@(js|ts)}', {
         cwd: folder,
       })
-      .filter(file => !_.endsWith(file, '.d.ts') && !reg.test(file))
-      .map(file => `${folder}/${file}`);
+      .filter((file) => !_.endsWith(file, '.d.ts') && !reg.test(file))
+      .map((file) => `${folder}/${file}`);
 
     for (const file of files) {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
       const modules = require(file);
 
       // for all exported
@@ -68,7 +69,7 @@ export class LoaderModule {
 
         const metadatas = reflection.annotationsOfDecorator<Register>(
           m,
-          Register
+          Register,
         );
         const scanMetadatas = reflection.annotationsOfDecorator<Scan>(m, Scan);
 
@@ -84,7 +85,7 @@ export class LoaderModule {
           });
 
           const preDestroys = Object.keys(
-            reflection.propMetadataOfDecorator(m, PreDestroy)
+            reflection.propMetadataOfDecorator(m, PreDestroy),
           );
 
           // if the module has preDestroy, registry this
@@ -102,7 +103,7 @@ export class LoaderModule {
         // if the module is an objet and has a scan metadata => add in registry and load paths
         if (scanMetadatas.length) {
           registry.addRegistry(
-            this.loadFolders(...scanMetadatas.map(s => s.path))
+            this.loadFolders(...scanMetadatas.map((s) => s.path)),
           );
         }
       }

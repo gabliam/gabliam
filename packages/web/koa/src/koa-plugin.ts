@@ -41,7 +41,7 @@ export class KoaPlugin extends WebPluginBase<koa> implements GabliamPlugin {
   bindApp(
     container: Container,
     registry: Registry,
-    webConfiguration: WebConfiguration
+    webConfiguration: WebConfiguration,
   ): void {
     container.bind(APP).toConstantValue(new koa());
     container.bind(REQUEST_LISTENER_CREATOR).toConstantValue(() => {
@@ -69,7 +69,7 @@ export class KoaPlugin extends WebPluginBase<koa> implements GabliamPlugin {
     try {
       // server can be undefined (if start is not called)
       const server = container.get<http.Server>(SERVER);
-      return new Promise<void>(resolve => {
+      return new Promise<void>((resolve) => {
         server.close(() => resolve());
       });
     } catch (e) {}
@@ -77,7 +77,7 @@ export class KoaPlugin extends WebPluginBase<koa> implements GabliamPlugin {
 
   async buildControllers(
     restMetadata: RestMetadata<KoaMethods>,
-    container: Container
+    container: Container,
   ) {
     // get the router creator
     let routerCreator: RouterCreator = (prefix?: string) =>
@@ -94,7 +94,7 @@ export class KoaPlugin extends WebPluginBase<koa> implements GabliamPlugin {
     ] of restMetadata.controllerInfo) {
       const controller = container.get<object>(controllerId);
       let routerPath: string | undefined = cleanPath(
-        `${restMetadata.rootPath}${controllerPath}`
+        `${restMetadata.rootPath}${controllerPath}`,
       );
 
       if (routerPath === '/') {
@@ -114,14 +114,14 @@ export class KoaPlugin extends WebPluginBase<koa> implements GabliamPlugin {
 
         const addJsonHandler = async (
           context: koaRouter.IRouterContext,
-          next: () => Promise<any>
+          next: () => Promise<any>,
         ) => {
           context.state.jsonHandler = methodInfo.json;
           await next();
         };
 
-        const interceptors = methodInfo.interceptors.filter(i =>
-          isValidInterceptor(i.instance)
+        const interceptors = methodInfo.interceptors.filter((i) =>
+          isValidInterceptor(i.instance),
         );
 
         // create handler
@@ -132,6 +132,7 @@ export class KoaPlugin extends WebPluginBase<koa> implements GabliamPlugin {
       }
       const app = container.get<koa>(APP);
 
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore koa-router bad definition
       app.use(router.routes()).use(router.allowedMethods());
     }
@@ -139,16 +140,13 @@ export class KoaPlugin extends WebPluginBase<koa> implements GabliamPlugin {
 
   private handlerFactory(
     execCtx: ExecutionContext,
-    interceptors: InterceptorInfo[]
+    interceptors: InterceptorInfo[],
   ): koaRouter.IMiddleware {
     return async (
       context: koaRouter.IRouterContext,
-      next: () => Promise<any>
+      next: () => Promise<any>,
     ) => {
-      const composeInterceptor = compose(
-        interceptors,
-        converterValue
-      );
+      const composeInterceptor = compose(interceptors, converterValue);
       const req = context.req;
       const ctx = getContext(req);
       const methodInfo = execCtx.getMethodInfo();

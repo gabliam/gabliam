@@ -8,21 +8,21 @@ export const PROP_METADATA = '__prop__metadata__';
 
 export type AdditionalProcessingAnnotation<T> = (
   type: Type<T>,
-  annotationInstance: any
+  annotationInstance: any,
 ) => void;
 
 export type AdditionalPropProcessing = (
   target: any,
   name: string,
   descriptor: TypedPropertyDescriptor<any>,
-  annotationInstance: any
+  annotationInstance: any,
 ) => void;
 
 export type AdditionalParamProcessing = (
   target: any,
   name: string,
   index: number,
-  annotationInstance: any
+  annotationInstance: any,
 ) => void;
 
 function createTypeDecorator<T = any>(
@@ -30,7 +30,7 @@ function createTypeDecorator<T = any>(
   uniq: boolean,
   uniqError: string,
   annotationInstance: any,
-  additionalProcessingAnnotation?: AdditionalProcessingAnnotation<T>
+  additionalProcessingAnnotation?: AdditionalProcessingAnnotation<T>,
 ) {
   return function typeDecorator(cls: Type<T>) {
     // Use of Object.defineProperty is important since it creates non-enumerable property which
@@ -39,7 +39,7 @@ function createTypeDecorator<T = any>(
       ? (cls as any)[ANNOTATIONS]
       : Object.defineProperty(cls, ANNOTATIONS, { value: [] })[ANNOTATIONS];
 
-    if (uniq && annotations.find(a => a.gabMetadataName === name)) {
+    if (uniq && annotations.find((a) => a.gabMetadataName === name)) {
       throw new DecoratorUniqError(uniqError);
     }
 
@@ -58,18 +58,18 @@ function createPropDecorator(
   uniq: boolean,
   uniqError: string,
   decoratorInstance: any,
-  additionalPropProcessing?: AdditionalPropProcessing
+  additionalPropProcessing?: AdditionalPropProcessing,
 ) {
   return function PropDecorator(
     target: any,
     key: string,
-    descriptor: TypedPropertyDescriptor<any>
+    descriptor: TypedPropertyDescriptor<any>,
   ) {
     const constructor = target.constructor;
     // Use of Object.defineProperty is important since it creates non-enumerable property which
     // prevents the property is copied during subclassing.
     const meta: { [k: string]: any[] } = constructor.hasOwnProperty(
-      PROP_METADATA
+      PROP_METADATA,
     )
       ? (constructor as any)[PROP_METADATA]
       : Object.defineProperty(constructor, PROP_METADATA, { value: {} })[
@@ -77,7 +77,7 @@ function createPropDecorator(
         ];
     meta[key] = (meta.hasOwnProperty(key) && meta[key]) || [];
 
-    if (uniq && meta[key].find(a => a.gabMetadataName === name)) {
+    if (uniq && meta[key].find((a) => a.gabMetadataName === name)) {
       throw new DecoratorUniqError(uniqError);
     }
     meta[key].unshift(decoratorInstance);
@@ -90,7 +90,7 @@ function createPropDecorator(
 
 function createParamDecorator(
   annotationInstance: any,
-  additionalParamProcessing?: AdditionalParamProcessing
+  additionalParamProcessing?: AdditionalParamProcessing,
 ) {
   function ParamDecorator(target: any, propertyKey: any, index: number): any {
     const cls = target.constructor;
@@ -130,22 +130,23 @@ export function makePropAndAnnotationDecorator<T>(
   additionalProcessingAnnotation?: AdditionalProcessingAnnotation<T>,
   additionalPropProcessing?: AdditionalPropProcessing,
   uniq = false,
-  uniqError = ERRORS_MSGS.DUPLICATED_DECORATOR
+  uniqError = ERRORS_MSGS.DUPLICATED_DECORATOR,
 ) {
   const metaCtor = makeMetadataCtor(props);
   function DecoratorFactory(this: any, ...args: any[]): any {
     if (this instanceof DecoratorFactory) {
       metaCtor.call(this, ...args);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       return this;
     }
 
     const annotationInstance = new (DecoratorFactory as any)(...args);
 
-    return function(
+    return function (
       target: any,
       key?: string,
-      descriptor?: TypedPropertyDescriptor<any>
+      descriptor?: TypedPropertyDescriptor<any>,
     ) {
       if (key && descriptor) {
         return createPropDecorator(
@@ -153,7 +154,7 @@ export function makePropAndAnnotationDecorator<T>(
           uniq,
           uniqError,
           annotationInstance,
-          additionalPropProcessing
+          additionalPropProcessing,
         )(target, key, descriptor);
       } else {
         return createTypeDecorator(
@@ -161,7 +162,7 @@ export function makePropAndAnnotationDecorator<T>(
           uniq,
           uniqError,
           annotationInstance,
-          additionalProcessingAnnotation
+          additionalProcessingAnnotation,
         )(target);
       }
     };
@@ -177,7 +178,7 @@ export function makeDecorator<T>(
   props?: (...args: any[]) => any,
   additionalProcessingAnnotation?: AdditionalProcessingAnnotation<T>,
   uniq = false,
-  uniqError = ERRORS_MSGS.DUPLICATED_DECORATOR
+  uniqError = ERRORS_MSGS.DUPLICATED_DECORATOR,
 ): {
   new (...args: any[]): any;
   (...args: any[]): any;
@@ -188,6 +189,7 @@ export function makeDecorator<T>(
   function DecoratorFactory(this: any, ...args: any[]): (cls: Type<T>) => any {
     if (this instanceof DecoratorFactory) {
       metaCtor.call(this, ...args);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       return this;
     }
@@ -198,7 +200,7 @@ export function makeDecorator<T>(
       uniq,
       uniqError,
       annotationInstance,
-      additionalProcessingAnnotation
+      additionalProcessingAnnotation,
     );
   }
 
@@ -212,6 +214,7 @@ function makeMetadataCtor(props?: (...args: any[]) => any): any {
     if (props) {
       const values = props(...args);
       for (const propName in values) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         this[propName] = values[propName];
       }
@@ -222,7 +225,7 @@ function makeMetadataCtor(props?: (...args: any[]) => any): any {
 export function makeParamDecorator(
   name: string,
   props?: (...args: any[]) => any,
-  additionalParamProcessing?: AdditionalParamProcessing
+  additionalParamProcessing?: AdditionalParamProcessing,
 ): any {
   const metaCtor = makeMetadataCtor(props);
   function ParamDecoratorFactory(this: any, ...args: any[]): any {
@@ -244,7 +247,7 @@ export function makePropDecorator(
   props?: (...args: any[]) => any,
   additionalPropProcessing?: AdditionalPropProcessing,
   uniq = false,
-  uniqError = ERRORS_MSGS.DUPLICATED_DECORATOR
+  uniqError = ERRORS_MSGS.DUPLICATED_DECORATOR,
 ): any {
   const metaCtor = makeMetadataCtor(props);
 
@@ -261,7 +264,7 @@ export function makePropDecorator(
       uniq,
       uniqError,
       decoratorInstance,
-      additionalPropProcessing
+      additionalPropProcessing,
     );
   }
 
@@ -280,27 +283,28 @@ export function makePropAndAnnotationAndParamDecorator<T>(
   additionalPropProcessing?: AdditionalPropProcessing,
   additionalParamProcessing?: AdditionalParamProcessing,
   uniq = false,
-  uniqError = ERRORS_MSGS.DUPLICATED_DECORATOR
+  uniqError = ERRORS_MSGS.DUPLICATED_DECORATOR,
 ) {
   const metaCtor = makeMetadataCtor(props);
   function DecoratorFactory(this: any, ...args: any[]): any {
     if (this instanceof DecoratorFactory) {
       metaCtor.call(this, ...args);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       return this;
     }
 
     const annotationInstance = new (DecoratorFactory as any)(...args);
-    return function(
+    return function (
       target: any,
       propertyKey?: string,
-      descriptorOrIndex?: TypedPropertyDescriptor<any> | number
+      descriptorOrIndex?: TypedPropertyDescriptor<any> | number,
     ) {
       if (propertyKey && descriptorOrIndex !== undefined) {
         if (typeof descriptorOrIndex === 'number') {
           return createParamDecorator(
             annotationInstance,
-            additionalParamProcessing
+            additionalParamProcessing,
           )(target, propertyKey, descriptorOrIndex);
         }
         return createPropDecorator(
@@ -308,7 +312,7 @@ export function makePropAndAnnotationAndParamDecorator<T>(
           uniq,
           uniqError,
           annotationInstance,
-          additionalPropProcessing
+          additionalPropProcessing,
         )(target, propertyKey, descriptorOrIndex);
       } else {
         return createTypeDecorator(
@@ -316,7 +320,7 @@ export function makePropAndAnnotationAndParamDecorator<T>(
           uniq,
           uniqError,
           annotationInstance,
-          additionalProcessingAnnotation
+          additionalProcessingAnnotation,
         )(target);
       }
     };

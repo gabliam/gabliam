@@ -1,7 +1,7 @@
 import { createConnection, Connection } from '../index';
 import { CommandUtils } from './CommandUtils';
 import yargs from 'yargs';
-const chalk = require('chalk');
+import chalk from 'chalk';
 
 interface SchemaDropCommandArgs {
   app?: string;
@@ -50,10 +50,10 @@ export class SchemaDropCommand
           root: process.cwd(),
           configName: args.config,
         },
-        args.app
+        args.app,
       );
       const connectionOptions = await connectionOptionsReader.get(
-        args.connection
+        args.connection,
       );
       Object.assign(connectionOptions, {
         synchronize: false,
@@ -66,7 +66,7 @@ export class SchemaDropCommand
       await connection.close();
 
       console.log(
-        chalk.green('Database schema has been successfully dropped.')
+        chalk.green('Database schema has been successfully dropped.'),
       );
     } catch (err) {
       if (connection) {

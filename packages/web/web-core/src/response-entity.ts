@@ -45,7 +45,7 @@ export class ResponseEntity<T = any> {
 
   private _body: T | null = null;
 
-  constructor(body: T, status: number = 200) {
+  constructor(body: T, status = 200) {
     this._body = body;
     this._status = status;
   }

@@ -62,10 +62,10 @@ export interface WebConfig {
 
 export const WebConfig: WebConfigDecorator = makePropDecorator(
   METADATA_KEY.webConfig,
-  (order: number = 1): WebConfig => ({ order }),
+  (order = 1): WebConfig => ({ order }),
   undefined,
   true,
-  ERRORS_MSGS.DUPLICATED_CONFIG_DECORATOR
+  ERRORS_MSGS.DUPLICATED_CONFIG_DECORATOR,
 );
 
 /**
@@ -118,8 +118,8 @@ export interface WebConfigAfterControllers {
 
 export const WebConfigAfterControllers: WebConfigAfterControllersDecorator = makePropDecorator(
   METADATA_KEY.webConfigAfterControllers,
-  (order: number = 1): WebConfigAfterControllers => ({ order }),
+  (order = 1): WebConfigAfterControllers => ({ order }),
   undefined,
   true,
-  ERRORS_MSGS.DUPLICATED_CONFIG_DECORATOR
+  ERRORS_MSGS.DUPLICATED_CONFIG_DECORATOR,
 );

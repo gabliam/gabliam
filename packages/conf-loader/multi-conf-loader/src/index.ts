@@ -9,8 +9,10 @@ import yaml from 'js-yaml';
 import _ from 'lodash';
 import { inspect, promisify } from 'util';
 
+import g from 'glob';
+
 // Promisify
-const glob = promisify(require('glob')); // require and no import for typings bug
+const glob = promisify(g); // require and no import for typings bug
 const readFile = promisify(fs.readFile);
 
 const debug = d('@gabliam/multi-conf-loader');

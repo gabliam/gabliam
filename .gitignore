@@ -10,5 +10,10 @@ lol/
 uploads/
 examples/express-passport/config/test.json
 dist/
-.yarn
-.yarnrc
+
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*

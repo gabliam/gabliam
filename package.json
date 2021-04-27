@@ -53,7 +53,7 @@
   "lint-staged": {
     "*.ts": [
       "prettier --single-quote --write",
-      "tslint --project tsconfig.json"
+      "eslint 'packages/**/**.ts'"
     ]
   },
   "workspaces": [

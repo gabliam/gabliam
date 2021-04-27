@@ -2,7 +2,7 @@ import { createConnection, QueryRunner, Connection } from '../index';
 import { CommandUtils } from './CommandUtils';
 import yargs from 'yargs';
 import { PlatformTools } from 'typeorm/platform/PlatformTools';
-const chalk = require('chalk');
+import chalk from 'chalk';
 
 interface QueryCommandArgs {
   app?: string;
@@ -51,10 +51,10 @@ export class QueryCommand implements yargs.CommandModule<{}, QueryCommandArgs> {
           root: process.cwd(),
           configName: args.config,
         },
-        args.app
+        args.app,
       );
       const connectionOptions = await connectionOptionsReader.get(
-        args.connection
+        args.connection,
       );
       Object.assign(connectionOptions, {
         synchronize: false,
@@ -67,12 +67,12 @@ export class QueryCommand implements yargs.CommandModule<{}, QueryCommandArgs> {
       // create a query runner and execute query using it
       queryRunner = connection.createQueryRunner('master');
       console.log(
-        chalk.green('Running query: ') + PlatformTools.highlightSql(args._[1])
+        chalk.green('Running query: ') + PlatformTools.highlightSql(args._[1]),
       );
       const queryResult = await queryRunner.query(args._[1]);
       console.log(chalk.green('Query has been executed. Result: '));
       console.log(
-        PlatformTools.highlightJson(JSON.stringify(queryResult, undefined, 2))
+        PlatformTools.highlightJson(JSON.stringify(queryResult, undefined, 2)),
       );
 
       await queryRunner.release();

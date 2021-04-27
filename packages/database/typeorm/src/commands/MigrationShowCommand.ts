@@ -2,7 +2,7 @@ import { createConnection, Connection } from '../index';
 import { CommandUtils } from './CommandUtils';
 import process from 'process';
 import yargs from 'yargs';
-const chalk = require('chalk');
+import chalk from 'chalk';
 
 export interface MigrationShowCommandArgs {
   app?: string;
@@ -49,10 +49,10 @@ export class MigrationShowCommand
           root: process.cwd(),
           configName: args.config,
         },
-        args.app
+        args.app,
       );
       const connectionOptions = await connectionOptionsReader.get(
-        args.connection
+        args.connection,
       );
       Object.assign(connectionOptions, {
         subscribers: [],

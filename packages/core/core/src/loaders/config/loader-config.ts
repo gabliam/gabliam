@@ -31,7 +31,7 @@ export class LoaderConfig {
    */
   async load(
     configOptions: string | LoaderConfigOptions[] | undefined,
-    profile = process.env.PROFILE || undefined
+    profile = process.env.PROFILE || undefined,
   ): Promise<any> {
     debug('load', configOptions);
 
@@ -62,6 +62,7 @@ export class LoaderConfig {
 
       if (typeof loader === 'string') {
         try {
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
           loaderFunc = require(loader).default;
         } catch {
           throw new LoaderConfigPgkNotInstalledError(loader);

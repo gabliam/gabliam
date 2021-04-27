@@ -3,7 +3,7 @@ import { CommandUtils } from './CommandUtils';
 import { highlight } from 'cli-highlight';
 import yargs from 'yargs';
 
-const chalk = require('chalk');
+import chalk from 'chalk';
 
 interface SchemaLogCommandArgs {
   app?: string;
@@ -53,11 +53,11 @@ export class SchemaLogCommand
           root: process.cwd(),
           configName: args.config,
         },
-        args.app
+        args.app,
       );
 
       const connectionOptions = await connectionOptionsReader.get(
-        args.connection
+        args.connection,
       );
 
       Object.assign(connectionOptions, {
@@ -72,32 +72,32 @@ export class SchemaLogCommand
       if (sqlInMemory.upQueries.length === 0) {
         console.log(
           chalk.yellow(
-            'Your schema is up to date - there are no queries to be executed by schema syncronization.'
-          )
+            'Your schema is up to date - there are no queries to be executed by schema syncronization.',
+          ),
         );
       } else {
         const lengthSeparators = String(sqlInMemory.upQueries.length)
           .split('')
-          .map(char => '-')
+          .map((char) => '-')
           .join('');
         console.log(
           chalk.yellow(
             '---------------------------------------------------------------' +
-              lengthSeparators
-          )
+              lengthSeparators,
+          ),
         );
         console.log(
           chalk.yellow.bold(
             `-- Schema syncronization will execute following sql queries (${chalk.white(
-              sqlInMemory.upQueries.length
-            )}):`
-          )
+              sqlInMemory.upQueries.length,
+            )}):`,
+          ),
         );
         console.log(
           chalk.yellow(
             '---------------------------------------------------------------' +
-              lengthSeparators
-          )
+              lengthSeparators,
+          ),
         );
 
         sqlInMemory.upQueries.forEach((upQuery: any) => {

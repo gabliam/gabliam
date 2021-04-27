@@ -4,7 +4,7 @@ import { MysqlDriver } from 'typeorm/driver/mysql/MysqlDriver';
 import { camelCase } from '../string-utils';
 import yargs from 'yargs';
 import { AuroraDataApiDriver } from 'typeorm/driver/aurora-data-api/AuroraDataApiDriver';
-const chalk = require('chalk');
+import chalk from 'chalk';
 
 export interface MigrationGenerateCommandArgs {
   app?: string;
@@ -35,7 +35,7 @@ export class MigrationGenerateCommand
     timestamp: number,
     upSqls: string[],
     downSqls: string[],
-    connection: string
+    connection: string,
   ): string {
     const migrationName = `${camelCase(name, true)}${timestamp}`;
 
@@ -109,7 +109,7 @@ ${downSqls.join(`
 
     const connectionOptionsReaderBuilder = await CommandUtils.getGabliamConnectionOptionsReader(
       undefined,
-      args.app
+      args.app,
     );
 
     // if directory is not set then try to open tsconfig and find default path there
@@ -119,10 +119,10 @@ ${downSqls.join(`
           {
             root: process.cwd(),
             configName: args.config,
-          }
+          },
         );
         const connectionOptions = await connectionOptionsReader.get(
-          args.connection
+          args.connection,
         );
         directory = connectionOptions.cli
           ? connectionOptions.cli.migrationsDir
@@ -137,7 +137,7 @@ ${downSqls.join(`
         configName: args.config,
       });
       const connectionOptions = await connectionOptionsReader.get(
-        args.connection
+        args.connection,
       );
       Object.assign(connectionOptions, {
         synchronize: false,
@@ -156,41 +156,41 @@ ${downSqls.join(`
         connection.driver instanceof MysqlDriver ||
         connection.driver instanceof AuroraDataApiDriver
       ) {
-        sqlInMemory.upQueries.forEach(upQuery => {
+        sqlInMemory.upQueries.forEach((upQuery) => {
           upSqls.push(
             '        await queryRunner.query("' +
               upQuery.query.replace(new RegExp(`"`, 'g'), `\\"`) +
               '", ' +
               JSON.stringify(upQuery.parameters) +
-              ');'
+              ');',
           );
         });
-        sqlInMemory.downQueries.forEach(downQuery => {
+        sqlInMemory.downQueries.forEach((downQuery) => {
           downSqls.push(
             '        await queryRunner.query("' +
               downQuery.query.replace(new RegExp(`"`, 'g'), `\\"`) +
               '", ' +
               JSON.stringify(downQuery.parameters) +
-              ');'
+              ');',
           );
         });
       } else {
-        sqlInMemory.upQueries.forEach(upQuery => {
+        sqlInMemory.upQueries.forEach((upQuery) => {
           upSqls.push(
             '        await queryRunner.query(`' +
               upQuery.query.replace(new RegExp('`', 'g'), '\\`') +
               '`, ' +
               JSON.stringify(upQuery.parameters) +
-              ');'
+              ');',
           );
         });
-        sqlInMemory.downQueries.forEach(downQuery => {
+        sqlInMemory.downQueries.forEach((downQuery) => {
           downSqls.push(
             '        await queryRunner.query(`' +
               downQuery.query.replace(new RegExp('`', 'g'), '\\`') +
               '`, ' +
               JSON.stringify(downQuery.parameters) +
-              ');'
+              ');',
           );
         });
       }
@@ -202,7 +202,7 @@ ${downSqls.join(`
             timestamp,
             upSqls,
             downSqls.reverse(),
-            args.connection
+            args.connection,
           );
           const path =
             process.cwd() + '/' + (directory ? directory + '/' : '') + filename;
@@ -210,8 +210,8 @@ ${downSqls.join(`
 
           console.log(
             chalk.green(
-              `Migration ${chalk.blue(path)} has been generated successfully.`
-            )
+              `Migration ${chalk.blue(path)} has been generated successfully.`,
+            ),
           );
         } else {
           console.log(chalk.yellow('Please specify migration name'));
@@ -219,8 +219,8 @@ ${downSqls.join(`
       } else {
         console.log(
           chalk.yellow(
-            `No changes in database schema were found - cannot generate a migration. To create a new empty migration use "typeorm migration:create" command`
-          )
+            `No changes in database schema were found - cannot generate a migration. To create a new empty migration use "typeorm migration:create" command`,
+          ),
         );
       }
       await connection.close();

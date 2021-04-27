@@ -1,7 +1,7 @@
 import { CommandUtils } from './CommandUtils';
 import yargs from 'yargs';
 import { camelCase } from '../string-utils';
-const chalk = require('chalk');
+import chalk from 'chalk';
 
 export interface SubscriberCreateCommandArgs {
   app?: string;
@@ -36,7 +36,7 @@ ${
 @EventSubscriber()
 export class ${camelCase(
       name + 'Subscriber',
-      true
+      true,
     )} implements EntitySubscriberInterface<any> {
 
 }
@@ -82,7 +82,7 @@ export class ${camelCase(
     try {
       const fileContent = SubscriberCreateCommand.getTemplate(
         args.name,
-        args.connection
+        args.connection,
       );
       const filename = args.name + '.ts';
       let directory = args.dir;
@@ -95,10 +95,10 @@ export class ${camelCase(
               root: process.cwd(),
               configName: args.config,
             },
-            args.app
+            args.app,
           );
           const connectionOptions = await connectionOptionsReader.get(
-            args.connection
+            args.connection,
           );
           directory = connectionOptions.cli
             ? connectionOptions.cli.subscribersDir
@@ -111,8 +111,8 @@ export class ${camelCase(
       await CommandUtils.createFile(path, fileContent);
       console.log(
         chalk.green(
-          `Subscriber ${chalk.blue(path)} has been created successfully.`
-        )
+          `Subscriber ${chalk.blue(path)} has been created successfully.`,
+        ),
       );
     } catch (err) {
       console.log(chalk.black.bgRed('Error during subscriber creation:'));

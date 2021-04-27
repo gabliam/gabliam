@@ -312,6 +312,7 @@ export class Parser {
     const vals = keys.map((key) => {
       return (<any>vars)[key];
     });
+    // eslint-disable-next-line prefer-spread
     return Function(keys.join(', '), 'return ' + generate(node)).apply(
       null,
       vals,
@@ -334,6 +335,7 @@ export class Parser {
     const quasi = node.quasi;
     const strings = quasi.quasis.map((q) => this.walk(q, vars));
     const values = quasi.expressions.map((e) => this.walk(e, vars));
+    // eslint-disable-next-line prefer-spread
     return tag.apply(null, [strings].concat(values));
   }
 

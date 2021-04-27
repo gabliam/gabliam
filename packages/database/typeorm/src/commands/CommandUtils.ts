@@ -2,7 +2,7 @@ import { gabliamBuilder, gabliamFindApp, setupTsProject } from '@gabliam/core';
 import { GabliamConnectionOptionsReader } from '../connection-options-reader';
 import fs from 'fs';
 import path from 'path';
-const mkdirp = require('mkdirp');
+import mkdirp from 'mkdirp';
 
 /**
  * Command line utils functions.
@@ -13,7 +13,7 @@ export class CommandUtils {
    */
   static createDirectories(directory: string) {
     return new Promise<void>((ok, fail) =>
-      mkdirp(directory, (err: any) => (err ? fail(err) : ok())),
+      (mkdirp as any)(directory, (err: any) => (err ? fail(err) : ok())),
     );
   }
 
@@ -23,7 +23,7 @@ export class CommandUtils {
   static async createFile(
     filePath: string,
     content: string,
-    override: boolean = true,
+    override = true,
   ): Promise<void> {
     await CommandUtils.createDirectories(path.dirname(filePath));
     return new Promise<void>((ok, fail) => {

@@ -36,6 +36,7 @@ yargs
   .help('h')
   .alias('h', 'help').argv;
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 require('yargonaut')
   .style('blue')
   .style('yellow', 'required')

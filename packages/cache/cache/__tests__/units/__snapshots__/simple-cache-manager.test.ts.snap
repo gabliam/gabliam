@@ -3,9 +3,6 @@
 exports[`SimpleCacheManager with dynamic and defaultCache must create and return cache 1`] = `
 NoOpCache2 {
   "name": "test2",
-  "options": Object {
-    "options": "any",
-  },
 }
 `;
 

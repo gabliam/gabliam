@@ -141,6 +141,7 @@ export class KoaRequest implements GabRequest<koa.Request> {
    */
   private _query: any = {};
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore : context use with property-tunnel
   constructor(private context: koa.Context, private request: koa.Request) {}
 

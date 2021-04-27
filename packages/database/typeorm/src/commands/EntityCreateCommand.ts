@@ -2,7 +2,7 @@ import { resolve } from 'path';
 import yargs from 'yargs';
 import { camelCase } from '../string-utils';
 import { CommandUtils } from './CommandUtils';
-const chalk = require('chalk');
+import chalk from 'chalk';
 
 export interface EntityCreateCommandArgs {
   app?: string;
@@ -77,7 +77,7 @@ export class ${camelCase(name, true)} {
     try {
       const fileContent = EntityCreateCommand.getTemplate(
         args.name,
-        args.connection
+        args.connection,
       );
       const filename = args.name + '.ts';
       let directory = args.dir;
@@ -90,10 +90,10 @@ export class ${camelCase(name, true)} {
               root: process.cwd(),
               configName: args.config,
             },
-            args.app
+            args.app,
           );
           const connectionOptions = await connectionOptionsReader.get(
-            args.connection
+            args.connection,
           );
           directory = connectionOptions.cli
             ? connectionOptions.cli.entitiesDir
@@ -104,7 +104,7 @@ export class ${camelCase(name, true)} {
       const path = resolve(
         process.cwd() + '/',
         directory ? directory + '/' : '',
-        filename
+        filename,
       );
 
       const fileExists = await CommandUtils.fileExists(path);
@@ -113,7 +113,9 @@ export class ${camelCase(name, true)} {
       }
       await CommandUtils.createFile(path, fileContent);
       console.log(
-        chalk.green(`Entity ${chalk.blue(path)} has been created successfully.`)
+        chalk.green(
+          `Entity ${chalk.blue(path)} has been created successfully.`,
+        ),
       );
     } catch (err) {
       console.log(chalk.black.bgRed('Error during entity creation:'));

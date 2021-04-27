@@ -2,7 +2,7 @@ import { createConnection } from '../index';
 import { Connection } from 'typeorm';
 import { CommandUtils } from './CommandUtils';
 import yargs from 'yargs';
-const chalk = require('chalk');
+import chalk from 'chalk';
 
 export interface SchemaSyncCommandArgs {
   app?: string;
@@ -50,10 +50,10 @@ export class SchemaSyncCommand
           root: process.cwd(),
           configName: args.config,
         },
-        args.app
+        args.app,
       );
       const connectionOptions = await connectionOptionsReader.get(
-        args.connection
+        args.connection,
       );
       Object.assign(connectionOptions, {
         synchronize: false,

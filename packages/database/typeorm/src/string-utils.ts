@@ -3,7 +3,7 @@
  *
  * @see http://stackoverflow.com/questions/2970525/converting-any-string-into-camel-case
  */
-export function camelCase(str: string, firstCapital: boolean = false): string {
+export function camelCase(str: string, firstCapital = false): string {
   str = str.replace(/^([A-Z])|[\s-_]+(\w)/g, (_, p1, p2) => {
     if (p2) {
       return p2.toUpperCase();

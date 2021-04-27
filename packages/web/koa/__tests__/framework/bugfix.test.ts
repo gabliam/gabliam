@@ -18,7 +18,7 @@ describe('Bugfix', () => {
       @Controller('/')
       class TestController {
         @Get('/')
-        public getTest(@QueryParam('id') id: number = 10) {
+        public getTest(@QueryParam('id') id = 10) {
           expect(id).toEqual(10);
           return [typeof id, id];
         }
@@ -26,10 +26,7 @@ describe('Bugfix', () => {
 
       appTest.addClass(TestController);
       await appTest.buildAndStart();
-      const response = await appTest
-        .supertest()
-        .get('/')
-        .expect(200);
+      const response = await appTest.supertest().get('/').expect(200);
       expect(response).toMatchSnapshot();
     });
   });

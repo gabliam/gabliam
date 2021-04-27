@@ -1,7 +1,7 @@
 import yargs from 'yargs';
 import { camelCase } from '../string-utils';
 import { CommandUtils } from './CommandUtils';
-const chalk = require('chalk');
+import chalk from 'chalk';
 
 export interface MigrationCreateCommandArgs {
   app?: string;
@@ -30,7 +30,7 @@ export class MigrationCreateCommand
   protected static getTemplate(
     name: string,
     timestamp: number,
-    connection: string
+    connection: string,
   ): string {
     return `import { MigrationInterface, QueryRunner, MigrationEntity${
       connection === 'default' ? ' ' : ', CUnit '
@@ -44,7 +44,7 @@ ${
 @MigrationEntity()
 export class ${camelCase(
       name,
-      true
+      true,
     )}${timestamp} implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {
@@ -98,7 +98,7 @@ export class ${camelCase(
       const fileContent = MigrationCreateCommand.getTemplate(
         args.name,
         timestamp,
-        args.connection
+        args.connection,
       );
       const filename = timestamp + '-' + args.name + '.ts';
       let directory = args.dir;
@@ -111,10 +111,10 @@ export class ${camelCase(
               root: process.cwd(),
               configName: args.config,
             },
-            args.app
+            args.app,
           );
           const connectionOptions = await connectionOptionsReader.get(
-            args.connection
+            args.connection,
           );
           directory = connectionOptions.cli
             ? connectionOptions.cli.migrationsDir
@@ -126,7 +126,7 @@ export class ${camelCase(
         process.cwd() + '/' + (directory ? directory + '/' : '') + filename;
       await CommandUtils.createFile(path, fileContent);
       console.log(
-        `Migration ${chalk.blue(path)} has been generated successfully.`
+        `Migration ${chalk.blue(path)} has been generated successfully.`,
       );
     } catch (err) {
       console.log(chalk.black.bgRed('Error during migration creation:'));

@@ -42,7 +42,7 @@ const getPluginDefinition = (
     plugin = new ctor();
   }
 
-  if (ctor === undefined) {
+  if (ctor === undefined || plugin === undefined) {
     throw new InvalidPluginError();
   }
 
@@ -60,7 +60,7 @@ const getPluginDefinition = (
     [],
   );
 
-  return { plugin: plugin!, name, dependencies, beforeAll };
+  return { plugin, name, dependencies, beforeAll };
 };
 
 /**
@@ -189,6 +189,7 @@ export class PluginList {
 
     const listPlugin = graph
       .topologicalSort()
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       .map<GabliamPluginDefinition>((p) => this.findByName(p)!);
 
     this._plugins = listPlugin;
