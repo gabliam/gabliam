@@ -175,7 +175,7 @@ export async function createCacheConfig(
     );
   }
 
-  let veto = () => false;
+  let veto = (args: any[], result: any) => false;
   if (unless !== undefined) {
     veto = ((e: Expression) => (args: any[], result: any) => {
       try {
