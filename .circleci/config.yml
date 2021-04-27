@@ -19,7 +19,7 @@ aliases:
         - dependency-cache-{{ arch }}-{{ .Branch }}-{{ checksum "yarn.lock" }}-{{ checksum "workspace_info.txt" }}-node-modules
 
   - &workspace_info
-    run: yarn workspaces info | head -n -1 > workspace_info.txt
+    run: yarn workspaces list --json -v | head -n -1 > workspace_info.txt
 
   - &install_deps
     run:
