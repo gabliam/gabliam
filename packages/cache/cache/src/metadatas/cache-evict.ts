@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import {
   Container,
   InjectContainer,
@@ -27,11 +28,14 @@ export interface CacheEvictOptions extends CacheOptions {
 }
 
 function isCacheEvictOptions(obj: any): obj is CacheEvictOptions {
-  return typeof obj === 'object' && obj.hasOwnProperty('cacheNames');
+  return (
+    typeof obj === 'object' &&
+    Object.prototype.hasOwnProperty.call(obj, 'cacheNames')
+  );
 }
 
 function extractCacheEvictInternalOptions(
-  value?: string | string[] | CacheEvictOptions
+  value?: string | string[] | CacheEvictOptions,
 ): CacheEvict {
   let allEntries = false;
   let beforeInvocation = false;
@@ -88,22 +92,34 @@ interface CacheEvict extends CacheInternalOptions {
   beforeInvocation: boolean;
 }
 
+async function evict(caches: Cache[], cacheKey: string, allEntries: boolean) {
+  for (const cache of caches) {
+    if (allEntries) {
+      // eslint-disable-next-line no-await-in-loop
+      await cache.clear();
+    } else {
+      // eslint-disable-next-line no-await-in-loop
+      await cache.evict(cacheKey);
+    }
+  }
+}
+
 export const CacheEvict: CacheEvictDecorator = makePropDecorator(
   'CacheEvict',
-  (value?: string | string[] | CacheEvictOptions): CacheEvict => {
-    return extractCacheEvictInternalOptions(value);
-  },
+  (value?: string | string[] | CacheEvictOptions): CacheEvict =>
+    extractCacheEvictInternalOptions(value),
   (
     target: Record<string, unknown>,
     propertyKey: string | symbol,
     descriptor: TypedPropertyDescriptor<any>,
-    cacheInternalOptions: CacheEvict
+    cacheInternalOptions: CacheEvict,
   ) => {
     InjectContainer()(target.constructor);
     const method = descriptor.value;
     let cacheGroup: string;
     let cacheConfig: CacheConfig;
-    descriptor.value = async function(...args: any[]) {
+    // eslint-disable-next-line no-param-reassign
+    descriptor.value = async function desc(...args: any[]) {
       if (!cacheGroup) {
         cacheGroup = getCacheGroup(target.constructor);
       }
@@ -112,7 +128,7 @@ export const CacheEvict: CacheEvictDecorator = makePropDecorator(
         cacheConfig = await createCacheConfig(
           cacheGroup,
           container,
-          cacheInternalOptions
+          cacheInternalOptions,
         );
       }
 
@@ -127,7 +143,7 @@ export const CacheEvict: CacheEvictDecorator = makePropDecorator(
       }
 
       const cacheKey = cacheInternalOptions.keyGenerator(
-        ...cacheConfig.extractArgs(...args)
+        ...cacheConfig.extractArgs(...args),
       );
 
       // cacheKey is undefined so we skip cache
@@ -140,7 +156,7 @@ export const CacheEvict: CacheEvictDecorator = makePropDecorator(
         await evict(
           cacheConfig.caches,
           cacheKey,
-          cacheInternalOptions.allEntries
+          cacheInternalOptions.allEntries,
         );
       }
 
@@ -152,21 +168,11 @@ export const CacheEvict: CacheEvictDecorator = makePropDecorator(
         await evict(
           cacheConfig.caches,
           cacheKey,
-          cacheInternalOptions.allEntries
+          cacheInternalOptions.allEntries,
         );
       }
 
       return result;
     };
-  }
+  },
 );
-
-async function evict(caches: Cache[], cacheKey: string, allEntries: boolean) {
-  for (const cache of caches) {
-    if (allEntries) {
-      await cache.clear();
-    } else {
-      await cache.evict(cacheKey);
-    }
-  }
-}

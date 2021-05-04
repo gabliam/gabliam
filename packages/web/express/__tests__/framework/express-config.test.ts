@@ -12,33 +12,23 @@ import ExpressConfig, { express as e } from '../../src';
 let appTest: WebPluginTest;
 let result: string;
 const middleware: any = {
-  a: function(req: e.Request, res: e.Response, nextFunc: e.NextFunction) {
+  a(req: e.Request, res: e.Response, nextFunc: e.NextFunction) {
     result += 'a';
     nextFunc();
   },
-  b: function(req: e.Request, res: e.Response, nextFunc: e.NextFunction) {
+  b(req: e.Request, res: e.Response, nextFunc: e.NextFunction) {
     result += 'b';
     nextFunc();
   },
-  c: function(req: e.Request, res: e.Response, nextFunc: e.NextFunction) {
+  c(req: e.Request, res: e.Response, nextFunc: e.NextFunction) {
     result += 'c';
     nextFunc();
   },
-  e: function(
-    error: any,
-    req: e.Request,
-    res: e.Response,
-    nextFunc: e.NextFunction
-  ) {
+  e(error: any, req: e.Request, res: e.Response, nextFunc: e.NextFunction) {
     result += 'e';
     res.status(500).send('error');
   },
-  d: function(
-    error: any,
-    req: e.Request,
-    res: e.Response,
-    nextFunc: e.NextFunction
-  ) {
+  d(error: any, req: e.Request, res: e.Response, nextFunc: e.NextFunction) {
     result += 'd';
     nextFunc(error);
   },
@@ -86,10 +76,7 @@ test('@ExpressConfig', async () => {
   appTest.addClass(ServerConfig);
   await appTest.buildAndStart();
 
-  const response = await appTest
-    .supertest()
-    .get('/')
-    .expect(200);
+  const response = await appTest.supertest().get('/').expect(200);
   expect(spyA.calledOnce).toBe(true);
   expect(spyB.calledOnce).toBe(true);
   expect(spyC.calledOnce).toBe(true);
@@ -128,10 +115,7 @@ test('@ExpressConfig Order', async () => {
   appTest.addClass(ServerConfig);
   await appTest.buildAndStart();
 
-  const response = await appTest
-    .supertest()
-    .get('/')
-    .expect(200);
+  const response = await appTest.supertest().get('/').expect(200);
   expect(spyA.calledOnce).toBe(true);
   expect(spyB.calledOnce).toBe(true);
   expect(spyC.calledOnce).toBe(true);
@@ -160,10 +144,7 @@ test('ErrorConfig', async () => {
   appTest.addClass(ServerConfig);
   await appTest.buildAndStart();
 
-  const response = await appTest
-    .supertest()
-    .get('/')
-    .expect(500);
+  const response = await appTest.supertest().get('/').expect(500);
   expect(spyE.calledOnce).toBe(true);
   expect(response).toMatchSnapshot();
   expect(result).toMatchSnapshot();
@@ -195,10 +176,7 @@ test('ErrorConfig order', async () => {
   appTest.addClass(ServerConfig);
   await appTest.buildAndStart();
 
-  const response = await appTest
-    .supertest()
-    .get('/')
-    .expect(500);
+  const response = await appTest.supertest().get('/').expect(500);
   expect(spyE.calledOnce).toBe(true);
   expect(spyD.calledOnce).toBe(true);
   expect(response).toMatchSnapshot();

@@ -9,7 +9,7 @@ import { express } from './express';
 export const converterValue: convertValueFn = (
   ctx: GabContext,
   execCtx: ExecutionContext,
-  result: any
+  result: any,
 ) => {
   // response handler if the result is a ResponseEntity
   function convertEntity(value: ResponseEntity) {
@@ -24,12 +24,10 @@ export const converterValue: convertValueFn = (
     if (result !== undefined) {
       if (result instanceof ResponseEntity) {
         convertEntity(result);
+      } else if (typeof result === 'string' || typeof result === 'object') {
+        ctx.body = result;
       } else {
-        if (typeof result === 'string' || typeof result === 'object') {
-          ctx.body = result;
-        } else {
-          ctx.body = '' + result;
-        }
+        ctx.body = `${result}`;
       }
     }
   }

@@ -292,7 +292,7 @@ test('with config 2 database', async () => {
   class ControllerTestConnection1 {
     @RabbitConsumer('consummer')
     consumer(msg: any) {
-      return 'connection1' + msg;
+      return `connection1${msg}`;
     }
   }
 
@@ -301,7 +301,7 @@ test('with config 2 database', async () => {
   class ControllerTestConnection2 {
     @RabbitConsumer('consummer')
     consumer(msg: any) {
-      return 'connection2' + msg;
+      return `connection2${msg}`;
     }
   }
 

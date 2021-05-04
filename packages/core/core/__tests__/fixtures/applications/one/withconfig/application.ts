@@ -1,5 +1,5 @@
-import { Application } from '../../../../../src';
 import TypeormPlugin from '@gabliam/typeorm';
+import { Application } from '../../../../../src';
 
 @Application({
   name: 'MyApp',

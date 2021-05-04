@@ -136,6 +136,7 @@ export class ExpressRequest implements GabRequest<express.Request> {
    */
   @alias(['request', 'subdomains'], { access: 'readonly' })
   readonly subdomains: string[];
+
   /**
    * Check if the request was an _XMLHttpRequest_.
    */

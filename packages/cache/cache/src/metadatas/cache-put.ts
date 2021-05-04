@@ -45,22 +45,23 @@ export interface CachePutDecorator {
  */
 interface CachePut extends CacheInternalOptions {}
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const CachePut: CachePutDecorator = makePropDecorator(
   'CachePut',
-  (value?: string | string[] | CacheOptions): CachePut => {
-    return extractCacheInternalOptions(value);
-  },
+  (value?: string | string[] | CacheOptions): CachePut =>
+    extractCacheInternalOptions(value),
   (
     target: Object,
     propertyKey: string | symbol,
     descriptor: TypedPropertyDescriptor<any>,
-    cacheInternalOptions: CachePut
+    cacheInternalOptions: CachePut,
   ) => {
     InjectContainer()(target.constructor);
     const method = descriptor.value;
     let cacheGroup: string;
     let cacheConfig: CacheConfig;
-    descriptor.value = async function(...args: any[]) {
+    // eslint-disable-next-line no-param-reassign
+    descriptor.value = async function desc(...args: any[]) {
       if (!cacheGroup) {
         cacheGroup = getCacheGroup(target.constructor);
       }
@@ -69,7 +70,7 @@ export const CachePut: CachePutDecorator = makePropDecorator(
         cacheConfig = await createCacheConfig(
           cacheGroup,
           container,
-          cacheInternalOptions
+          cacheInternalOptions,
         );
       }
 
@@ -85,7 +86,7 @@ export const CachePut: CachePutDecorator = makePropDecorator(
       }
 
       const cacheKey = cacheInternalOptions.keyGenerator(
-        ...cacheConfig.extractArgs(...args)
+        ...cacheConfig.extractArgs(...args),
       );
 
       // cacheKey is undefined so we skip cache
@@ -98,11 +99,12 @@ export const CachePut: CachePutDecorator = makePropDecorator(
 
       if (!cacheConfig.veto(args, result)) {
         for (const cache of cacheConfig.caches) {
+          // eslint-disable-next-line no-await-in-loop
           await cache.put(cacheKey, result);
         }
       }
 
       return result;
     };
-  }
+  },
 );

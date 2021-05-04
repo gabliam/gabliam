@@ -1,9 +1,9 @@
 import { Joi, ValueExtractor } from '@gabliam/core';
 import ExpressPlugin from '@gabliam/express';
+import KoaPlugin from '@gabliam/koa';
 import { Controller, Get, RestController } from '@gabliam/web-core';
 import { WebPluginTest } from '@gabliam/web-core/src/testing';
 import { Validate, Validator, ValidatorOptionsConstructor } from '../src';
-import KoaPlugin from '@gabliam/koa';
 
 let appTest: WebPluginTest;
 
@@ -40,16 +40,14 @@ let appTest: WebPluginTest;
       describe(`${decorator.name} validations constructor`, () => {
         const construct = (
           value: ValueExtractor,
-        ): Validator | ValidatorOptionsConstructor => {
-          return {
-            validator: {
-              headers: {
-                accept: Joi.string().regex(value('app.accept', 'json')),
-              },
+        ): Validator | ValidatorOptionsConstructor => ({
+          validator: {
+            headers: {
+              accept: Joi.string().regex(value('app.accept', 'json')),
             },
-            options: { allowUnknown: true },
-          };
-        };
+          },
+          options: { allowUnknown: true },
+        });
 
         it('req.headers', async () => {
           @decorator.deco('/')

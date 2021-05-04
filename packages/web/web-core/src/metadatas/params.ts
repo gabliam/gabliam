@@ -18,7 +18,7 @@ export type HandlerFn = <V>(
   ctx: GabContext,
   type: Type<any> | undefined,
   execCtx: ExecutionContext | null | undefined,
-  next: V
+  next: V,
 ) => any;
 
 export interface WebParamDecorator<T = any> {
@@ -59,12 +59,11 @@ export interface WebParamDecorator<T = any> {
  * }
  * ```
  */
-export const makeWebParamDecorator = (type: string, handler: HandlerFn) => {
-  return makeParamDecorator(
+export const makeWebParamDecorator = (type: string, handler: HandlerFn) =>
+  makeParamDecorator(
     METADATA_KEY.controllerParameter,
-    (...args: any[]): WebParamDecorator => ({ args, handler, type })
+    (...args: any[]): WebParamDecorator => ({ args, handler, type }),
   );
-};
 
 /**
  * Type of the `ExecContext` decorator / constructor function.
@@ -95,7 +94,7 @@ export interface ExecContextDecorator {
 
 export const ExecContext: ExecContextDecorator = makeWebParamDecorator(
   PARAMETER_TYPE.EXEC_CONTEXT,
-  (_, __, ___, execCtx) => execCtx
+  (_, __, ___, execCtx) => execCtx,
 );
 
 /**
@@ -148,7 +147,7 @@ export const Context: ContextDecorator = makeWebParamDecorator(
       return get(ctx, path);
     }
     return ctx;
-  }
+  },
 );
 
 /**
@@ -201,7 +200,7 @@ export const Request: RequestDecorator = makeWebParamDecorator(
       return get(ctx.request, path);
     }
     return ctx.request;
-  }
+  },
 );
 
 /**
@@ -254,7 +253,7 @@ export const Response: ResponseDecorator = makeWebParamDecorator(
       return get(ctx.response, path);
     }
     return ctx.response;
-  }
+  },
 );
 
 /**
@@ -312,11 +311,12 @@ export const RequestParam: RequestParamDecorator = makeWebParamDecorator(
       try {
         // parseFloat for compatibility with integer and float
         res = Number.parseFloat(res);
+        // eslint-disable-next-line no-empty
       } catch {}
     }
 
     return res;
-  }
+  },
 );
 
 /**
@@ -374,11 +374,12 @@ export const QueryParam: QueryParamDecorator = makeWebParamDecorator(
       try {
         // parseFloat for compatibility with integer and float
         res = Number.parseFloat(res);
+        // eslint-disable-next-line no-empty
       } catch {}
     }
 
     return res;
-  }
+  },
 );
 
 /**
@@ -431,7 +432,7 @@ export const RequestBody: RequestBodyDecorator = makeWebParamDecorator(
       return get(ctx.request.body, path);
     }
     return ctx.request.body;
-  }
+  },
 );
 
 /**
@@ -484,7 +485,7 @@ export const RequestHeaders: RequestHeadersDecorator = makeWebParamDecorator(
       return get(ctx.request.headers, path);
     }
     return ctx.request.headers;
-  }
+  },
 );
 
 /**
@@ -537,7 +538,7 @@ export const Cookies: CookiesDecorator = makeWebParamDecorator(
       return ctx.cookies.get(path);
     }
     return ctx.cookies;
-  }
+  },
 );
 
 /**
@@ -569,5 +570,5 @@ export interface NextDecorator {
 
 export const Next: NextDecorator = makeWebParamDecorator(
   PARAMETER_TYPE.NEXT,
-  (_, __, ___, ____, next) => next
+  (_, __, ___, ____, next) => next,
 );

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import { METADATA_KEY } from '../constants';
 import { makePropDecorator } from '../decorator';
 import { InvalidValueDecoratorError } from '../errors';
@@ -141,7 +142,9 @@ export interface ValueOptions {
  * @returns boolean
  */
 function isValueOptions(obj: any): obj is ValueOptions {
-  return typeof obj === 'object' && obj.hasOwnProperty('path');
+  return (
+    typeof obj === 'object' && Object.prototype.hasOwnProperty.call(obj, 'path')
+  );
 }
 
 /**
@@ -152,27 +155,14 @@ function isValueOptions(obj: any): obj is ValueOptions {
 function isValueValidator(obj: any): obj is ValueValidator {
   return (
     typeof obj === 'object' &&
-    obj.hasOwnProperty('schema') &&
-    !obj.hasOwnProperty('isJoi')
+    Object.prototype.hasOwnProperty.call(obj, 'schema') &&
+    !Object.prototype.hasOwnProperty.call(obj, 'isJoi')
   );
 }
 
-export const Value: ValueDecorator = makePropDecorator(
-  METADATA_KEY.value,
-  (value: any, schema?: Joi.Schema): Value => {
-    if (typeof value === 'string') {
-      return valueProperty(value, schema);
-    } else if (isValueOptions(value)) {
-      return valueProperty(value.path, value.validator);
-    } else {
-      throw new InvalidValueDecoratorError();
-    }
-  }
-);
-
 function valueProperty(
   path: string,
-  schema: Joi.Schema | ValueValidator | undefined
+  schema: Joi.Schema | ValueValidator | undefined,
 ): Value {
   let validator: ValueValidator | null = null;
   if (schema) {
@@ -188,3 +178,16 @@ function valueProperty(
 
   return { path, validator };
 }
+
+export const Value: ValueDecorator = makePropDecorator(
+  METADATA_KEY.value,
+  (value: any, schema?: Joi.Schema): Value => {
+    if (typeof value === 'string') {
+      return valueProperty(value, schema);
+    }
+    if (isValueOptions(value)) {
+      return valueProperty(value.path, value.validator);
+    }
+    throw new InvalidValueDecoratorError();
+  },
+);

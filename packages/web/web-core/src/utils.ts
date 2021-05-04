@@ -26,15 +26,13 @@ import {
 import { MethodInfo, RestMetadata, WebPluginConfig } from './plugin-config';
 import { extractPipes, PipeFn } from './pipe';
 
-export const cleanPath = (path: string) => {
-  return path.replace(/\/+/gi, '/');
-};
+export const cleanPath = (path: string) => path.replace(/\/+/gi, '/');
 
 export const getExtractArgs = (
   container: Container,
   controller: any,
   propKey: string,
-  isInterceptor: boolean
+  isInterceptor: boolean,
 ): extractArgsFn => {
   const params = reflection.parameters(<any>controller.constructor, propKey);
 
@@ -42,7 +40,7 @@ export const getExtractArgs = (
     return (
       ctx: GabContext,
       execCtx: ExecutionContext | null | undefined,
-      next: any
+      next: any,
     ) => Promise.resolve([ctx.request, ctx.response, next]);
   }
 
@@ -57,11 +55,11 @@ export const getExtractArgs = (
         controller,
         propKey,
         index,
-        !isInterceptor
+        !isInterceptor,
       );
       const webParamDecorator: WebParamDecorator = meta
         .slice(-1)
-        .filter(m => typeof m.handler === 'function' && m.args)[0];
+        .filter((m) => typeof m.handler === 'function' && m.args)[0];
 
       // if there is no webParamDecorator => error
       if (webParamDecorator === undefined) {
@@ -74,15 +72,12 @@ export const getExtractArgs = (
   return async (
     ctx: GabContext,
     execCtx: ExecutionContext | null | undefined,
-    next: any
+    next: any,
   ) => {
     const extractedParams = await Promise.all(
       parameters.map(([type, decorator, pipe]) =>
-        pipe(
-          decorator.handler(decorator.args, ctx, type, execCtx, next),
-          type
-        )
-      )
+        pipe(decorator.handler(decorator.args, ctx, type, execCtx, next), type),
+      ),
     );
 
     return extractedParams;
@@ -97,7 +92,7 @@ export const getExtractArgs = (
  */
 export const extractControllerMetadata = (
   container: Container,
-  registry: Registry
+  registry: Registry,
 ) => {
   const restConfig = container.get<WebPluginConfig>(WEB_PLUGIN_CONFIG);
   const valueExtractor = container.get<ValueExtractor>(VALUE_EXTRACTOR);
@@ -111,27 +106,30 @@ export const extractControllerMetadata = (
   controllerIds.forEach(({ id: controllerId }) => {
     const controller = container.get<object>(controllerId);
 
-    const [controllerMetadata] = reflection
+    const [
+      controllerMetadata,
+    ] = reflection
       .annotationsOfDecorator<ControllerMetadata>(
         controller.constructor,
-        METADATA_KEY.controller
+        METADATA_KEY.controller,
       )
       .slice(-1);
 
     const controllerInterceptors = extractInterceptors(
       container,
-      controller.constructor
+      controller.constructor,
     );
 
-    const methodMetadatas = reflection.propMetadataOfDecorator<
-      ControllerMethod
-    >(controller.constructor, METADATA_KEY.controllerMethod);
+    const methodMetadatas = reflection.propMetadataOfDecorator<ControllerMethod>(
+      controller.constructor,
+      METADATA_KEY.controllerMethod,
+    );
 
     // if the controller has controllerMetadata and methodMetadatas
     if (controllerMetadata && methodMetadatas) {
       const controllerPath = valueExtractor(
         controllerMetadata.path,
-        controllerMetadata.path
+        controllerMetadata.path,
       );
 
       const methods: MethodInfo[] = [];
@@ -144,17 +142,17 @@ export const extractControllerMetadata = (
       for (const [methodName, metas] of Object.entries(methodMetadatas)) {
         const [methodMetadata] = metas.slice(-1);
         let methodPath = cleanPath(
-          valueExtractor(methodMetadata.path, methodMetadata.path)
+          valueExtractor(methodMetadata.path, methodMetadata.path),
         );
 
         if (methodPath[0] !== '/') {
-          methodPath = '/' + methodPath;
+          methodPath = `/${methodPath}`;
         }
 
         const methodInterceptors = extractInterceptors(
           container,
           controller.constructor,
-          methodName
+          methodName,
         );
 
         const globalInterceptors = getGlobalInterceptors(container);
@@ -162,7 +160,7 @@ export const extractControllerMetadata = (
         const methodJson =
           reflection.propMetadataOfDecorator<{}>(
             controller.constructor,
-            ResponseBody
+            ResponseBody,
           )[methodName] !== undefined
             ? true
             : undefined;
@@ -193,9 +191,7 @@ export const extractControllerMetadata = (
   return restMetadata;
 };
 
-export const getContext = (req: any) => {
-  return <GabContext>(<any>req)[CONTEXT];
-};
+export const getContext = (req: any) => <GabContext>(<any>req)[CONTEXT];
 
 export const setContext = (req: any, context: GabContext) => {
   (<any>req)[CONTEXT] = context;
@@ -203,12 +199,12 @@ export const setContext = (req: any, context: GabContext) => {
 
 export function compose(
   interceptors: InterceptorInfo[],
-  converterValue: convertValueFn
+  converterValue: convertValueFn,
 ) {
-  return async function(
+  return async function composed(
     ctx: GabContext,
     execCtx: ExecutionContext,
-    next: () => Promise<any>
+    next: () => Promise<any>,
   ) {
     let index = -1;
     async function dispatch(i: number) {
@@ -237,7 +233,7 @@ export function compose(
       };
 
       const interceptorArgs = await toPromise(
-        extractArgs(ctx, execCtx, nextFn)
+        extractArgs(ctx, execCtx, nextFn),
       );
 
       const res = await toPromise(instance.intercept(...interceptorArgs));
@@ -246,6 +242,7 @@ export function compose(
       if (!wasCalled) {
         await callNext();
       }
+      return Promise.resolve();
     }
 
     return dispatch(0);

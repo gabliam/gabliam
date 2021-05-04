@@ -33,6 +33,7 @@ export class HeroResolver {
     @Arg('heroInput') heroInput: HeroInput,
   ) {
     const hero: Hero = {
+      // eslint-disable-next-line no-plusplus
       id: this.nextId++,
       ...heroInput,
     };

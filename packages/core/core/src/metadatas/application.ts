@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import caller from 'caller';
 import _ from 'lodash';
 import { dirname } from 'path';
@@ -56,10 +57,11 @@ export interface Application extends GabliamConfig {
 }
 
 const isGabliamAddPluginCondition = (
-  val: any
-): val is GabliamAddPluginCondition => {
-  return val && typeof val === 'object' && val.hasOwnProperty('condition');
-};
+  val: any,
+): val is GabliamAddPluginCondition =>
+  val &&
+  typeof val === 'object' &&
+  Object.prototype.hasOwnProperty.call(val, 'condition');
 
 export const Application: ApplicationDecorator = makeDecorator(
   METADATA_KEY.application,
@@ -77,7 +79,7 @@ export const Application: ApplicationDecorator = makeDecorator(
     const plugins: GabliamAddPluginCondition[] = [];
     if (options?.plugins && Array.isArray(options?.plugins)) {
       plugins.push(
-        ...options.plugins.map<GabliamAddPluginCondition>(p => {
+        ...options.plugins.map<GabliamAddPluginCondition>((p) => {
           if (isGabliamAddPluginCondition(p)) {
             return p;
           }
@@ -86,7 +88,7 @@ export const Application: ApplicationDecorator = makeDecorator(
             plugin: p,
             condition: () => true,
           };
-        })
+        }),
       );
     }
 
@@ -96,9 +98,9 @@ export const Application: ApplicationDecorator = makeDecorator(
       plugins,
     };
   },
-  cls => {
+  (cls) => {
     Register({ type: TYPE.Application, id: cls, autobind: false })(cls);
   },
   true,
-  ERRORS_MSGS.DUPLICATED_APPLICATION_DECORATOR
+  ERRORS_MSGS.DUPLICATED_APPLICATION_DECORATOR,
 );

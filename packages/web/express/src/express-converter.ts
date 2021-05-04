@@ -32,12 +32,12 @@ export class ExpressConverter {
     return async (
       req: express.Request,
       res: express.Response,
-      next: express.NextFunction
+      next: express.NextFunction,
     ) => {
       const args = await extractArgs(getContext(req), null, next);
 
       try {
-        await toPromise((instance['intercept'] as any)(...args));
+        await toPromise(instance.intercept(...args));
         next();
       } catch (err) {
         next(err);

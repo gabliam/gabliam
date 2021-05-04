@@ -17,6 +17,30 @@ const readFile = promisify(fs.readFile);
 
 const debug = d('@gabliam/multi-conf-loader');
 
+async function loadConfigProject(
+  filePath: string,
+  projectName: string,
+  schema: yaml.Schema,
+  resolver: Resolver,
+) {
+  const data = await readFile(filePath, 'utf8');
+  try {
+    const vals = yaml.loadAll(data, undefined, { schema }) || [];
+    return await resolver(_.find(vals, <any>{ projectName }) || {});
+  } catch (e) {
+    throw new LoaderConfigParseError(filePath, e);
+  }
+}
+
+async function loadFile(filePath: string, resolver: Resolver): Promise<Object> {
+  const data = await readFile(filePath, 'utf8');
+  try {
+    return await resolver(yaml.load(data) || {});
+  } catch (e) {
+    throw new LoaderConfigParseError(filePath, e);
+  }
+}
+
 async function loadConstant(
   folder: string,
   projectName: string,
@@ -72,7 +96,7 @@ const multiConfLoader = async (
   // create tag config
   const ConfigYamlType = new yaml.Type('!config', {
     kind: 'scalar',
-    construct: function (data) {
+    construct(data) {
       return _.get(constants, data, {});
     },
     instanceOf: Object,
@@ -125,29 +149,5 @@ const multiConfLoader = async (
   debug('loadedConfig', inspect(config, { depth: null }));
   return config;
 };
-
-async function loadConfigProject(
-  filePath: string,
-  projectName: string,
-  schema: yaml.Schema,
-  resolver: Resolver,
-) {
-  const data = await readFile(filePath, 'utf8');
-  try {
-    const vals = yaml.loadAll(data, undefined, { schema }) || [];
-    return await resolver(_.find(vals, <any>{ projectName }) || {});
-  } catch (e) {
-    throw new LoaderConfigParseError(filePath, e);
-  }
-}
-
-async function loadFile(filePath: string, resolver: Resolver): Promise<Object> {
-  const data = await readFile(filePath, 'utf8');
-  try {
-    return await resolver(yaml.load(data) || {});
-  } catch (e) {
-    throw new LoaderConfigParseError(filePath, e);
-  }
-}
 
 export default multiConfLoader;

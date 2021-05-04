@@ -158,22 +158,27 @@ describe('Integration Tests:', () => {
           public getTest() {
             return 'GET';
           }
+
           @Post('/')
           public postTest() {
             return 'POST';
           }
+
           @Put('/')
           public putTest() {
             return 'PUT';
           }
+
           @Patch('/')
           public patchTest() {
             return 'PATCH';
           }
+
           @Head('/')
           public headTest() {
             return 'HEAD';
           }
+
           @Delete('/')
           public deleteTest() {
             return 'DELETE';

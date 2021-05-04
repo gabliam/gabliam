@@ -87,9 +87,8 @@ export class WebConfiguration<T = any> {
 
   private _webconfigAfterCtrl: Configuration<T>[] = [];
 
-  private _globalInterceptors: inversifyInterfaces.ServiceIdentifier<
-    any
-  >[] = [];
+  private _globalInterceptors: inversifyInterfaces.ServiceIdentifier<any>[] = [];
+
   private _globalPipes: PipeId[] = [];
 
   private _serverConfigs: ServerConfig[] = [];

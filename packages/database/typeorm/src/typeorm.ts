@@ -1,5 +1,3 @@
-export * from 'typeorm';
-
 import {
   ChildEntity,
   CUnit,
@@ -10,6 +8,7 @@ import {
   ViewEntityOptions,
 } from './metadatas';
 
+export * from 'typeorm';
 export {
   Entity,
   ChildEntity,

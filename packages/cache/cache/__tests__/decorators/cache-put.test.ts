@@ -1,11 +1,11 @@
+import { Bean, Config, Service } from '@gabliam/core';
 import { GabliamTest } from '@gabliam/core/src/testing';
 import {
-  SimpleCacheManager,
-  MemoryCache,
-  CACHE_MANAGER,
   CachePut,
+  CACHE_MANAGER,
+  MemoryCache,
+  SimpleCacheManager,
 } from '../../src/index';
-import { Bean, Config, Service } from '@gabliam/core';
 
 let g: GabliamTest;
 let cache: SimpleCacheManager;

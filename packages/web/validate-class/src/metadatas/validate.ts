@@ -48,7 +48,7 @@ export interface Validate {
 
   exceptionFactory: (
     errors: ValidationError[],
-    disableErrorMessages: boolean
+    disableErrorMessages: boolean,
   ) => any;
 }
 
@@ -63,21 +63,20 @@ const defaultOptions: Validate = {
   transformOptions: {},
   exceptionFactory: (
     errors: ValidationError[],
-    disableErrorMessages: boolean
+    disableErrorMessages: boolean,
   ) =>
     new BadRequestException(
-      disableErrorMessages ? undefined : { validation: errors }
+      disableErrorMessages ? undefined : { validation: errors },
     ),
 };
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const Validate: ValidateDecorator = makePropAndAnnotationAndParamDecorator(
   METADATA_KEY.validate,
-  (options: ValidationOptions = {}): Validate => {
-    return {
-      ...defaultOptions,
-      ...options,
-    };
-  },
+  (options: ValidationOptions = {}): Validate => ({
+    ...defaultOptions,
+    ...options,
+  }),
   (cls, annotationInstance: Validate) => {
     UsePipes(new ValidatePipe(annotationInstance))(cls);
   },
@@ -85,7 +84,7 @@ export const Validate: ValidateDecorator = makePropAndAnnotationAndParamDecorato
     target: Object,
     propertyKey: string | symbol,
     descriptor: TypedPropertyDescriptor<any>,
-    instance: Validate
+    instance: Validate,
   ) => {
     UsePipes(new ValidatePipe(instance))(target, propertyKey, descriptor);
   },
@@ -93,10 +92,10 @@ export const Validate: ValidateDecorator = makePropAndAnnotationAndParamDecorato
     target: Object,
     propertyKey: string | symbol,
     index: number,
-    instance: Validate
+    instance: Validate,
   ) => {
     UsePipes(new ValidatePipe(instance))(target, propertyKey, index);
   },
   true,
-  ERRORS_MSGS.DUPLICATED_VALIDATE_DECORATOR
+  ERRORS_MSGS.DUPLICATED_VALIDATE_DECORATOR,
 );

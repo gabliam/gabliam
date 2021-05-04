@@ -1,8 +1,9 @@
+/* eslint-disable no-console */
+import chalk from 'chalk';
 import { resolve } from 'path';
 import yargs from 'yargs';
 import { camelCase } from '../string-utils';
 import { CommandUtils } from './CommandUtils';
-import chalk from 'chalk';
 
 export interface EntityCreateCommandArgs {
   app?: string;
@@ -40,7 +41,9 @@ export class ${camelCase(name, true)} {
 }
 `;
   }
+
   command = 'entity:create';
+
   describe = 'Generates a new entity.';
 
   builder(args: yargs.Argv) {
@@ -79,7 +82,7 @@ export class ${camelCase(name, true)} {
         args.name,
         args.connection,
       );
-      const filename = args.name + '.ts';
+      const filename = `${args.name}.ts`;
       let directory = args.dir;
 
       // if directory is not set then try to open tsconfig and find default path there
@@ -98,12 +101,13 @@ export class ${camelCase(name, true)} {
           directory = connectionOptions.cli
             ? connectionOptions.cli.entitiesDir
             : undefined;
+          // eslint-disable-next-line no-empty
         } catch (err) {}
       }
 
       const path = resolve(
-        process.cwd() + '/',
-        directory ? directory + '/' : '',
+        `${process.cwd()}/`,
+        directory ? `${directory}/` : '',
         filename,
       );
 

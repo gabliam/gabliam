@@ -35,7 +35,10 @@ function createTypeDecorator<T = any>(
   return function typeDecorator(cls: Type<T>) {
     // Use of Object.defineProperty is important since it creates non-enumerable property which
     // prevents the property is copied during subclassing.
-    const annotations: any[] = cls.hasOwnProperty(ANNOTATIONS)
+    const annotations: any[] = Object.prototype.hasOwnProperty.call(
+      cls,
+      ANNOTATIONS,
+    )
       ? (cls as any)[ANNOTATIONS]
       : Object.defineProperty(cls, ANNOTATIONS, { value: [] })[ANNOTATIONS];
 
@@ -68,14 +71,16 @@ function createPropDecorator(
     const constructor = target.constructor;
     // Use of Object.defineProperty is important since it creates non-enumerable property which
     // prevents the property is copied during subclassing.
-    const meta: { [k: string]: any[] } = constructor.hasOwnProperty(
+    const meta: { [k: string]: any[] } = Object.prototype.hasOwnProperty.call(
+      constructor,
       PROP_METADATA,
     )
       ? (constructor as any)[PROP_METADATA]
       : Object.defineProperty(constructor, PROP_METADATA, { value: {} })[
           PROP_METADATA
         ];
-    meta[key] = (meta.hasOwnProperty(key) && meta[key]) || [];
+    meta[key] =
+      (Object.prototype.hasOwnProperty.call(meta, key) && meta[key]) || [];
 
     if (uniq && meta[key].find((a) => a.gabMetadataName === name)) {
       throw new DecoratorUniqError(uniqError);
@@ -96,10 +101,11 @@ function createParamDecorator(
     const cls = target.constructor;
     // Use of Object.defineProperty is important since it creates non-enumerable property which
     // prevents the property is copied during subclassing.
-    const parametersMap = cls.hasOwnProperty(PARAMETERS)
+    const parametersMap = Object.prototype.hasOwnProperty.call(cls, PARAMETERS)
       ? (cls as any)[PARAMETERS]
       : Object.defineProperty(cls, PARAMETERS, { value: {} })[PARAMETERS];
 
+    // eslint-disable-next-line no-multi-assign
     const parameters = (parametersMap[propertyKey] =
       parametersMap[propertyKey] || []);
 
@@ -119,6 +125,18 @@ function createParamDecorator(
   }
   (<any>ParamDecorator).annotation = annotationInstance;
   return ParamDecorator;
+}
+
+function makeMetadataCtor(props?: (...args: any[]) => any): any {
+  return function ctor(this: any, ...args: any[]) {
+    if (props) {
+      const values = props(...args);
+      // eslint-disable-next-line guard-for-in
+      for (const propName in values) {
+        this[propName] = values[propName];
+      }
+    }
+  };
 }
 
 /**
@@ -143,7 +161,7 @@ export function makePropAndAnnotationDecorator<T>(
 
     const annotationInstance = new (DecoratorFactory as any)(...args);
 
-    return function (
+    return function decorator(
       target: any,
       key?: string,
       descriptor?: TypedPropertyDescriptor<any>,
@@ -156,15 +174,14 @@ export function makePropAndAnnotationDecorator<T>(
           annotationInstance,
           additionalPropProcessing,
         )(target, key, descriptor);
-      } else {
-        return createTypeDecorator(
-          name,
-          uniq,
-          uniqError,
-          annotationInstance,
-          additionalProcessingAnnotation,
-        )(target);
       }
+      return createTypeDecorator(
+        name,
+        uniq,
+        uniqError,
+        annotationInstance,
+        additionalProcessingAnnotation,
+      )(target);
     };
   }
 
@@ -207,19 +224,6 @@ export function makeDecorator<T>(
   DecoratorFactory.prototype.gabMetadataName = name;
   (DecoratorFactory as any).annotationCls = DecoratorFactory;
   return DecoratorFactory as any;
-}
-
-function makeMetadataCtor(props?: (...args: any[]) => any): any {
-  return function ctor(...args: any[]) {
-    if (props) {
-      const values = props(...args);
-      for (const propName in values) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        this[propName] = values[propName];
-      }
-    }
-  };
 }
 
 export function makeParamDecorator(
@@ -295,7 +299,7 @@ export function makePropAndAnnotationAndParamDecorator<T>(
     }
 
     const annotationInstance = new (DecoratorFactory as any)(...args);
-    return function (
+    return function decorator(
       target: any,
       propertyKey?: string,
       descriptorOrIndex?: TypedPropertyDescriptor<any> | number,
@@ -314,15 +318,14 @@ export function makePropAndAnnotationAndParamDecorator<T>(
           annotationInstance,
           additionalPropProcessing,
         )(target, propertyKey, descriptorOrIndex);
-      } else {
-        return createTypeDecorator(
-          name,
-          uniq,
-          uniqError,
-          annotationInstance,
-          additionalProcessingAnnotation,
-        )(target);
       }
+      return createTypeDecorator(
+        name,
+        uniq,
+        uniqError,
+        annotationInstance,
+        additionalProcessingAnnotation,
+      )(target);
     };
   }
 

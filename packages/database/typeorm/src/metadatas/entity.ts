@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import { makeDecorator, Register } from '@gabliam/core';
 import { Entity as typeormEntity, EntityOptions } from 'typeorm';
 import { TYPE } from '../constant';
@@ -57,5 +58,5 @@ export const Entity: EntityDecorator = makeDecorator(
   (cls, annotationInstance: Entity) => {
     Register({ type: TYPE.Entity, id: cls, autobind: false })(cls);
     typeormEntity(annotationInstance.name, annotationInstance.options)(cls);
-  }
+  },
 );

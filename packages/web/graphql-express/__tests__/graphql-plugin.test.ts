@@ -1,9 +1,9 @@
 import { Config, Gabliam } from '@gabliam/core';
-import sinon from 'sinon';
-import { GraphqlPlugin } from '../src/graphql-plugin';
 import { GabliamTest } from '@gabliam/core/src/testing';
 import ExpressPlugin from '@gabliam/express';
 import path from 'path';
+import sinon from 'sinon';
+import { GraphqlPlugin } from '../src/graphql-plugin';
 import { HeroResolver } from './fixtures/resolvers/hero-resolver';
 
 const build = sinon.spy(GraphqlPlugin.prototype, 'build');
@@ -12,7 +12,7 @@ let gab: Gabliam;
 describe('with config', () => {
   beforeAll(() => {
     const g = new GabliamTest(
-      new Gabliam().addPlugin(ExpressPlugin).addPlugin(GraphqlPlugin)
+      new Gabliam().addPlugin(ExpressPlugin).addPlugin(GraphqlPlugin),
     );
     gab = g.gab;
 
@@ -40,7 +40,7 @@ describe('without config', () => {
         config: path.resolve(__dirname, './fixtures/gabliam/config'),
       })
         .addPlugin(ExpressPlugin)
-        .addPlugin(GraphqlPlugin)
+        .addPlugin(GraphqlPlugin),
     );
     gab = g.gab;
     g.addClass(HeroResolver);

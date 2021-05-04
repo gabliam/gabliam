@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import { makeDecorator, Register } from '@gabliam/core';
 import {
   Connection,

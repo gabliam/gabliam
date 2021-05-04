@@ -31,10 +31,12 @@
   },
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/web/graphql-core#readme",
   "peerDependencies": {
-    "@gabliam/core": "0.0.0-PLACEHOLDER"
+    "@gabliam/core": "0.0.0-PLACEHOLDER",
+    "@gabliam/web-core": "0.0.0-PLACEHOLDER"
   },
   "devDependencies": {
     "@gabliam/core": "0.0.0-PLACEHOLDER",
+    "@gabliam/web-core": "0.0.0-PLACEHOLDER",
     "@types/debug": "^4.1.5",
     "@types/graphql": "^14.5.0",
     "@types/lodash": "^4.14.165",

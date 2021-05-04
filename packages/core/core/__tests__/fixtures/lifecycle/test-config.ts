@@ -1,5 +1,5 @@
-import { Bean } from '../../../src';
 import { Config } from '@gabliam/core';
+import { Bean } from '../../../src';
 import { Test2 } from './test2';
 
 @Config()

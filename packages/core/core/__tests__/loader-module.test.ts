@@ -1,7 +1,7 @@
-import { LoaderModule } from '../src/loaders';
 import path from 'path';
-import { Scan } from '../src/index';
 import { METADATA_KEY } from '../src/constants';
+import { Scan } from '../src/index';
+import { LoaderModule } from '../src/loaders';
 
 let loader: LoaderModule;
 beforeEach(() => {
@@ -11,7 +11,7 @@ beforeEach(() => {
 test('whitout other scan', () => {
   const registry = loader.load(
     path.resolve(__dirname, './fixtures/loader/withoutscan'),
-    []
+    [],
   );
   expect(registry).toMatchSnapshot();
   expect(loader).toMatchSnapshot();
@@ -20,7 +20,7 @@ test('whitout other scan', () => {
 test('with scan', () => {
   const registry = loader.load(
     path.resolve(__dirname, './fixtures/loader/withscan'),
-    []
+    [],
   );
   expect(registry).toMatchSnapshot();
   expect(loader).toMatchSnapshot();
@@ -32,7 +32,7 @@ test('with plugin', () => {
 
   const registry = loader.load(
     path.resolve(__dirname, './fixtures/loader/withoutscan'),
-    [new Plugin()]
+    [new Plugin()],
   );
   expect(registry).toMatchSnapshot();
   expect(loader).toMatchSnapshot();
@@ -45,7 +45,7 @@ test('with plugin and false scan path', () => {
 
   const registry = loader.load(
     path.resolve(__dirname, './fixtures/loader/withoutscan'),
-    [new Plugin()]
+    [new Plugin()],
   );
   expect(registry).toMatchSnapshot();
   expect(loader).toMatchSnapshot();

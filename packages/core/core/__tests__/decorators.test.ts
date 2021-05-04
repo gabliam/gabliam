@@ -279,13 +279,16 @@ describe('@Value', () => {
       class TestBean {
         @Value({ path: 'application.name' })
         name: string;
+
         @Value({ path: 'application.surname', validator: Joi.string() })
         surname: string;
+
         @Value({
           path: 'application.surname',
           validator: { schema: Joi.string() },
         })
         firstname: string;
+
         @Value({
           path: 'application.postalcode',
           validator: {
@@ -294,6 +297,7 @@ describe('@Value', () => {
           },
         })
         postalcode: string;
+
         @Value({
           path: 'application.address',
           validator: Joi.string().required(),

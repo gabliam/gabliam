@@ -7,7 +7,7 @@ export class ResponseEntity<T = any> {
    * A shortcut for creating a ResponseEntity with the given body and the status set to OK.
    * @param body
    */
-  static ok<T = any>(body?: T) {
+  static ok<U = any>(body?: U) {
     return new ResponseEntity(body, HttpStatus.OK);
   }
 

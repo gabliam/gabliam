@@ -1,6 +1,6 @@
-import { PluginConfig, Value, Bean } from '@gabliam/core';
-import { log4js } from './log4js';
+import { Bean, PluginConfig, Value } from '@gabliam/core';
 import { Configuration } from 'log4js';
+import { log4js } from './log4js';
 
 @PluginConfig()
 export class LoggerConfig {

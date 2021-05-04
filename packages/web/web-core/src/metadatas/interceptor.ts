@@ -45,9 +45,10 @@ export interface UseInterceptors {
   ids: inversifyInterfaces.ServiceIdentifier<any>[];
 }
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const UseInterceptors: UseInterceptorsDecorator = makePropAndAnnotationDecorator(
   METADATA_KEY.interceptor,
   (...ids: inversifyInterfaces.ServiceIdentifier<any>[]): UseInterceptors => ({
     ids,
-  })
+  }),
 );

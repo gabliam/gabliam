@@ -5,6 +5,7 @@ import { Joi } from '../joi';
  */
 export class ValueValidationError extends Error {
   constructor(msg: string, validationError: Joi.ValidationError) {
+    // eslint-disable-next-line no-param-reassign
     msg += JSON.stringify(validationError);
     super(msg);
     // Set the prototype explicitly.

@@ -1,8 +1,8 @@
-import { Gabliam, APP_CONFIG, CORE_CONFIG } from '../src';
 import path from 'path';
-import { TestService } from './fixtures/gabliam/service';
-import { DbConfig } from './fixtures/gabliam/db-config';
+import { APP_CONFIG, CORE_CONFIG, Gabliam } from '../src';
 import { TYPE } from '../src/constants';
+import { DbConfig } from './fixtures/gabliam/db-config';
+import { TestService } from './fixtures/gabliam/service';
 
 test('gabliam instance', async () => {
   const gab = new Gabliam({

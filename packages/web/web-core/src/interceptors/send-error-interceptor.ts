@@ -9,44 +9,6 @@ import { ExecContext, Next, Response } from '../metadatas';
 import { ResponseEntity } from '../response-entity';
 import { Interceptor } from './utils';
 
-@Service()
-export class SendErrorInterceptor implements Interceptor {
-  async intercept(
-    @Next() next: nextFn,
-    @ExecContext() exec: ExecutionContext,
-    @Response() res: GabResponse
-  ) {
-    const env = process.env.NODE_ENV || 'development';
-    try {
-      await next();
-    } catch (err) {
-      if (exec.getMethodInfo().json) {
-        if (err instanceof HttpException) {
-          return new ResponseEntity(err.getJson(), err.getStatus());
-        }
-        // respect status code from error
-        const status = getErrorStatusCode(err) || getResponseStatusCode(res);
-
-        // get error message
-        const msg = getErrorMessage(err, status, env, true);
-
-        return createResponse({ status, error: msg }, status);
-      }
-
-      if (err instanceof HttpException) {
-        const status = err.getStatus();
-        const msg = getErrorMessage(err, status, env, false);
-        const body = createHtmlDocument(msg);
-
-        return createResponse(body, status);
-      }
-
-      // let default error handler of express js
-      throw err;
-    }
-  }
-}
-
 const DOUBLE_SPACE_REGEXP = /\x20{2}/g;
 const NEWLINE_REGEXP = /\n/g;
 
@@ -119,17 +81,56 @@ function createHtmlDocument(message: string) {
     .replace(DOUBLE_SPACE_REGEXP, ' &nbsp;');
 
   return (
-    '<!DOCTYPE html>\n' +
-    '<html lang="en">\n' +
-    '<head>\n' +
-    '<meta charset="utf-8">\n' +
-    '<title>Error</title>\n' +
-    '</head>\n' +
-    '<body>\n' +
-    '<pre>' +
-    body +
-    '</pre>\n' +
-    '</body>\n' +
-    '</html>\n'
+    `${
+      '<!DOCTYPE html>\n' +
+      '<html lang="en">\n' +
+      '<head>\n' +
+      '<meta charset="utf-8">\n' +
+      '<title>Error</title>\n' +
+      '</head>\n' +
+      '<body>\n' +
+      '<pre>'
+    }${body}</pre>\n` +
+    `</body>\n` +
+    `</html>\n`
   );
+}
+
+@Service()
+export class SendErrorInterceptor implements Interceptor {
+  async intercept(
+    @Next() next: nextFn,
+    @ExecContext() exec: ExecutionContext,
+    @Response() res: GabResponse,
+  ) {
+    const env = process.env.NODE_ENV || 'development';
+    try {
+      await next();
+      return undefined;
+    } catch (err) {
+      if (exec.getMethodInfo().json) {
+        if (err instanceof HttpException) {
+          return new ResponseEntity(err.getJson(), err.getStatus());
+        }
+        // respect status code from error
+        const status = getErrorStatusCode(err) || getResponseStatusCode(res);
+
+        // get error message
+        const msg = getErrorMessage(err, status, env, true);
+
+        return createResponse({ status, error: msg }, status);
+      }
+
+      if (err instanceof HttpException) {
+        const status = err.getStatus();
+        const msg = getErrorMessage(err, status, env, false);
+        const body = createHtmlDocument(msg);
+
+        return createResponse(body, status);
+      }
+
+      // let default error handler of express js
+      throw err;
+    }
+  }
 }

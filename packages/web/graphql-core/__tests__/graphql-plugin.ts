@@ -6,10 +6,11 @@ export class GraphqlPlugin extends GraphqlCorePlugin {
   getApolloServer() {
     return <any>null;
   }
+
   registerMiddleware(
     container: Container,
     registry: Registry,
     graphqlPluginConfig: GraphqlConfig,
-    schema: GraphQLSchema
+    schema: GraphQLSchema,
   ): void {}
 }

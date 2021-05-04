@@ -15,6 +15,7 @@ import { SchemaSyncCommand } from './src/commands/SchemaSyncCommand';
 import { SubscriberCreateCommand } from './src/commands/SubscriberCreateCommand';
 import { VersionCommand } from './src/commands/VersionCommand';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 yargs
   .usage('Usage: $0 <command> [options]')
   .command(new SchemaSyncCommand())

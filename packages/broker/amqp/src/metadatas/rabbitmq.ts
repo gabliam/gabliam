@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import {
   injectable,
   makeDecorator,
@@ -43,12 +44,12 @@ export interface RabbitControllerDecorator {
 export const RabbitController: RabbitControllerDecorator = makeDecorator(
   METADATA_KEY.RabbitController,
   undefined,
-  cls => {
+  (cls) => {
     injectable()(cls);
     Register({ type: TYPE.RabbitController, id: cls })(cls);
   },
   true,
-  ERRORS_MSGS.DUPLICATED_CONTROLLER_DECORATOR
+  ERRORS_MSGS.DUPLICATED_CONTROLLER_DECORATOR,
 );
 
 export interface RabbitHandler {
@@ -108,7 +109,7 @@ export const RabbitListener: RabbitListenerDecorator = makePropDecorator(
     queue,
     ...options,
     type: 'Listener',
-  })
+  }),
 );
 
 /**
@@ -157,5 +158,5 @@ export const RabbitConsumer: RabbitListenerDecorator = makePropDecorator(
     queue,
     ...options,
     type: 'Consumer',
-  })
+  }),
 );

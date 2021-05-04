@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import { injectable, interfaces } from 'inversify';
 import { METADATA_KEY, TYPE } from '../constants';
 import { makeDecorator } from '../decorator';
@@ -65,5 +66,5 @@ export const Service: ServiceDecorator = makeDecorator(
       : cls;
     injectable()(cls);
     Register({ type: TYPE.Service, id })(cls);
-  }
+  },
 );

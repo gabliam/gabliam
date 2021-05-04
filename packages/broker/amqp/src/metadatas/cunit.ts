@@ -1,5 +1,6 @@
-import { METADATA_KEY, ERRORS_MSGS } from '../constants';
+/* eslint-disable @typescript-eslint/no-redeclare */
 import { makeDecorator } from '@gabliam/core';
+import { ERRORS_MSGS, METADATA_KEY } from '../constants';
 
 /**
  * Type of the `CUnit` decorator / constructor function.
@@ -44,5 +45,5 @@ export const CUnit: CUnitDecorator = makeDecorator(
   (name: string): CUnit => ({ name }),
   undefined,
   true,
-  ERRORS_MSGS.DUPLICATED_CUNIT_DECORATOR
+  ERRORS_MSGS.DUPLICATED_CUNIT_DECORATOR,
 );

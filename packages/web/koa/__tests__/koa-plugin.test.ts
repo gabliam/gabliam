@@ -1,8 +1,8 @@
 import { Config, Gabliam } from '@gabliam/core';
-import sinon from 'sinon';
-import { KoaPlugin } from '../src/koa-plugin';
 import { GabliamTest } from '@gabliam/core/src/testing';
 import path from 'path';
+import sinon from 'sinon';
+import { KoaPlugin } from '../src/koa-plugin';
 
 describe('test plugin', () => {
   const bind = sinon.spy(KoaPlugin.prototype, 'bind');

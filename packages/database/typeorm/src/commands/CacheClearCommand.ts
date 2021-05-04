@@ -1,8 +1,9 @@
+/* eslint-disable no-console */
+import chalk from 'chalk';
 import { Connection } from 'typeorm';
 import yargs from 'yargs';
 import { createConnection } from '../index';
 import { CommandUtils } from './CommandUtils';
-import chalk from 'chalk';
 
 interface CacheClearCommandArgs {
   app?: string;
@@ -18,6 +19,7 @@ interface CacheClearCommandArgs {
 export class CacheClearCommand
   implements yargs.CommandModule<{}, CacheClearCommandArgs> {
   command = 'cache:clear';
+
   describe = 'Clears all data stored in query runner cache.';
 
   builder(args: yargs.Argv) {
@@ -40,7 +42,7 @@ export class CacheClearCommand
   }
 
   async handler(args: yargs.Arguments<CacheClearCommandArgs>) {
-    let connection: Connection | undefined = undefined;
+    let connection: Connection | undefined;
     try {
       const connectionOptionsReader = await CommandUtils.getGabliamConnectionOptionsReader(
         {

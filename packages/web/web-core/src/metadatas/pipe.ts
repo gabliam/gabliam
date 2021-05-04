@@ -46,9 +46,10 @@ export interface UsePipes {
   ids: PipeId[];
 }
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const UsePipes: UsePipesDecorator = makePropAndAnnotationAndParamDecorator(
   METADATA_KEY.pipe,
   (...ids: PipeId[]): UsePipes => ({
     ids,
-  })
+  }),
 );

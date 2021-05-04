@@ -1,7 +1,7 @@
-import { LoaderConfig, FileLoader } from '../src/loaders';
+import path from 'path';
+import { FileLoader, LoaderConfig } from '../src/loaders';
 // import mock from 'mock-fs';
 import { MockFs } from './mock-fs';
-import path from 'path';
 
 let loader: LoaderConfig;
 beforeEach(async () => {
@@ -44,7 +44,7 @@ test(`with application.yml with nothing`, async () => {
 
 test(`with application.yml`, async () => {
   const config = await loader.load(
-    path.resolve(__dirname, './fixtures/config')
+    path.resolve(__dirname, './fixtures/config'),
   );
   expect(config).toMatchSnapshot();
 });

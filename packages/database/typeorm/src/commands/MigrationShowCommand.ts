@@ -1,8 +1,9 @@
-import { createConnection, Connection } from '../index';
-import { CommandUtils } from './CommandUtils';
+/* eslint-disable no-console */
+import chalk from 'chalk';
 import process from 'process';
 import yargs from 'yargs';
-import chalk from 'chalk';
+import { Connection, createConnection } from '../index';
+import { CommandUtils } from './CommandUtils';
 
 export interface MigrationShowCommandArgs {
   app?: string;
@@ -18,6 +19,7 @@ export interface MigrationShowCommandArgs {
 export class MigrationShowCommand
   implements yargs.CommandModule<{}, MigrationShowCommandArgs> {
   command = 'migration:show';
+
   describe = 'Show all migrations and whether they have been run or not';
 
   builder(args: yargs.Argv) {
@@ -42,7 +44,7 @@ export class MigrationShowCommand
   }
 
   async handler(args: yargs.Arguments<MigrationShowCommandArgs>) {
-    let connection: Connection | undefined = undefined;
+    let connection: Connection | undefined;
     try {
       const connectionOptionsReader = await CommandUtils.getGabliamConnectionOptionsReader(
         {

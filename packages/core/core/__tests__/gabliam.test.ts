@@ -445,6 +445,7 @@ test('test BeforeCreate & init', async () => {
     constructor() {
       res += '|Conf';
     }
+
     @Init()
     init() {
       res += '|InitCreateConf';

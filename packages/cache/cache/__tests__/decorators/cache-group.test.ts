@@ -1,13 +1,13 @@
+import { Bean, Config, Service } from '@gabliam/core';
 import { GabliamTest } from '@gabliam/core/src/testing';
 import {
-  SimpleCacheManager,
-  MemoryCache,
-  CACHE_MANAGER,
-  CachePut,
   CacheEvict,
   CacheGroup,
+  CachePut,
+  CACHE_MANAGER,
+  MemoryCache,
+  SimpleCacheManager,
 } from '../../src/index';
-import { Bean, Config, Service } from '@gabliam/core';
 
 let g: GabliamTest;
 let cache: SimpleCacheManager;
@@ -52,7 +52,7 @@ describe('cache group', () => {
 });
 
 test('should fail when decorated multiple times with @CacheGroup', () => {
-  expect(function() {
+  expect(function () {
     @CacheGroup('test')
     @CacheGroup('test2')
     class TestBean {}
@@ -62,7 +62,7 @@ test('should fail when decorated multiple times with @CacheGroup', () => {
 });
 
 test('should fail when cachename is missing', async () => {
-  expect(function() {
+  expect(function () {
     @CacheGroup('test')
     class TestBean {
       @CachePut()

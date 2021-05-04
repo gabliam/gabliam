@@ -18,7 +18,7 @@ import { koaRouter } from './koa';
 export const isValidInterceptor = (target: any) => {
   const meta = Reflect.getOwnMetadata(
     METADATA_KEY.specialInterceptor,
-    target.constructor || target
+    target.constructor || target,
   );
 
   return meta === undefined || meta === 'koa';
@@ -37,11 +37,12 @@ const KoaInterceptor = () => (target: any) => {
  * Convert a Koa router middleware to a gabliam interceptor
  */
 export const toInterceptor = (
-  mid: koaRouter.IMiddleware
+  mid: koaRouter.IMiddleware,
 ): InterceptorConstructor => {
   const clazz: InterceptorConstructor = class implements Interceptor {
     async intercept(context: GabContext, next: nextFn) {
       const ctx: koaRouter.IRouterContext = context.state.context;
+      // eslint-disable-next-line @typescript-eslint/return-await
       return await mid(ctx, next);
     }
   };
@@ -56,13 +57,13 @@ export const toInterceptor = (
     'design:paramtypes',
     [Function, Function],
     clazz.prototype,
-    'intercept'
+    'intercept',
   );
   Reflect.defineMetadata(
     'design:returntype',
     Promise,
     clazz.prototype,
-    'intercept'
+    'intercept',
   );
   return clazz;
 };
@@ -71,4 +72,4 @@ export const toInterceptor = (
  * Alias for evict to use: UseInterceptors(toInterceptor(koaMid))
  */
 export const UseKoaInterceptors = (...mids: koaRouter.IMiddleware[]) =>
-  UseInterceptors(...mids.map(m => toInterceptor(m)));
+  UseInterceptors(...mids.map((m) => toInterceptor(m)));

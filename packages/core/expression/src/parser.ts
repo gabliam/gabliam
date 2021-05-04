@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { generate } from 'escodegen';
 import {
   Expression,

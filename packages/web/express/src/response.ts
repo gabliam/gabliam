@@ -1,6 +1,6 @@
 import { GabResponse } from '@gabliam/web-core';
-import { express } from './express';
 import { alias } from 'property-tunnel';
+import { express } from './express';
 
 /* istanbul ignore next */
 export class ExpressResponse implements GabResponse<express.Response> {

@@ -39,6 +39,7 @@ const getPluginDefinition = (
     }
   } else {
     ctor = <GabliamPluginConstructor>definition;
+    // eslint-disable-next-line new-cap
     plugin = new ctor();
   }
 
@@ -162,6 +163,7 @@ export class PluginList {
         for (const deps of plugin.dependencies) {
           if (typeof deps.name !== 'string') {
             const def = this.add(deps.name);
+            // eslint-disable-next-line default-case
             switch (deps.order) {
               case 'after':
                 graph.addEdge(def.name, plugin.name);
@@ -174,6 +176,7 @@ export class PluginList {
             if (!this.has(deps.name)) {
               throw new PluginDependencyIsMissingError(plugin.name, deps.name);
             }
+            // eslint-disable-next-line default-case
             switch (deps.order) {
               case 'after':
                 graph.addEdge(deps.name, plugin.name);

@@ -1,10 +1,11 @@
-import { CommandUtils } from './CommandUtils';
-import { Connection, createConnection } from '../index';
-import { MysqlDriver } from 'typeorm/driver/mysql/MysqlDriver';
-import { camelCase } from '../string-utils';
-import yargs from 'yargs';
-import { AuroraDataApiDriver } from 'typeorm/driver/aurora-data-api/AuroraDataApiDriver';
+/* eslint-disable no-console */
 import chalk from 'chalk';
+import { AuroraDataApiDriver } from 'typeorm/driver/aurora-data-api/AuroraDataApiDriver';
+import { MysqlDriver } from 'typeorm/driver/mysql/MysqlDriver';
+import yargs from 'yargs';
+import { Connection, createConnection } from '../index';
+import { camelCase } from '../string-utils';
+import { CommandUtils } from './CommandUtils';
 
 export interface MigrationGenerateCommandArgs {
   app?: string;
@@ -67,6 +68,7 @@ ${downSqls.join(`
   }
 
   command = 'migration:generate';
+
   describe =
     'Generates a new migration file with sql needs to be executed to update schema.';
 
@@ -104,7 +106,7 @@ ${downSqls.join(`
 
   async handler(args: yargs.Arguments<MigrationGenerateCommandArgs>) {
     const timestamp = new Date().getTime();
-    const filename = timestamp + '-' + args.name + '.ts';
+    const filename = `${timestamp}-${args.name}.ts`;
     let directory = args.dir;
 
     const connectionOptionsReaderBuilder = await CommandUtils.getGabliamConnectionOptionsReader(
@@ -127,10 +129,11 @@ ${downSqls.join(`
         directory = connectionOptions.cli
           ? connectionOptions.cli.migrationsDir
           : undefined;
+        // eslint-disable-next-line no-empty
       } catch (err) {}
     }
 
-    let connection: Connection | undefined = undefined;
+    let connection: Connection | undefined;
     try {
       const connectionOptionsReader = connectionOptionsReaderBuilder.buildNew({
         root: process.cwd(),
@@ -147,8 +150,8 @@ ${downSqls.join(`
       });
       connection = await createConnection(connectionOptions);
       const sqlInMemory = await connection.driver.createSchemaBuilder().log();
-      const upSqls: string[] = [],
-        downSqls: string[] = [];
+      const upSqls: string[] = [];
+      const downSqls: string[] = [];
 
       // mysql is exceptional here because it uses ` character in to escape names in queries, that's why for mysql
       // we are using simple quoted string instead of template string syntax
@@ -158,39 +161,35 @@ ${downSqls.join(`
       ) {
         sqlInMemory.upQueries.forEach((upQuery) => {
           upSqls.push(
-            '        await queryRunner.query("' +
-              upQuery.query.replace(new RegExp(`"`, 'g'), `\\"`) +
-              '", ' +
-              JSON.stringify(upQuery.parameters) +
-              ');',
+            `        await queryRunner.query("${upQuery.query.replace(
+              new RegExp(`"`, 'g'),
+              `\\"`,
+            )}", ${JSON.stringify(upQuery.parameters)});`,
           );
         });
         sqlInMemory.downQueries.forEach((downQuery) => {
           downSqls.push(
-            '        await queryRunner.query("' +
-              downQuery.query.replace(new RegExp(`"`, 'g'), `\\"`) +
-              '", ' +
-              JSON.stringify(downQuery.parameters) +
-              ');',
+            `        await queryRunner.query("${downQuery.query.replace(
+              new RegExp(`"`, 'g'),
+              `\\"`,
+            )}", ${JSON.stringify(downQuery.parameters)});`,
           );
         });
       } else {
         sqlInMemory.upQueries.forEach((upQuery) => {
           upSqls.push(
-            '        await queryRunner.query(`' +
-              upQuery.query.replace(new RegExp('`', 'g'), '\\`') +
-              '`, ' +
-              JSON.stringify(upQuery.parameters) +
-              ');',
+            `        await queryRunner.query(\`${upQuery.query.replace(
+              new RegExp('`', 'g'),
+              '\\`',
+            )}\`, ${JSON.stringify(upQuery.parameters)});`,
           );
         });
         sqlInMemory.downQueries.forEach((downQuery) => {
           downSqls.push(
-            '        await queryRunner.query(`' +
-              downQuery.query.replace(new RegExp('`', 'g'), '\\`') +
-              '`, ' +
-              JSON.stringify(downQuery.parameters) +
-              ');',
+            `        await queryRunner.query(\`${downQuery.query.replace(
+              new RegExp('`', 'g'),
+              '\\`',
+            )}\`, ${JSON.stringify(downQuery.parameters)});`,
           );
         });
       }
@@ -204,8 +203,9 @@ ${downSqls.join(`
             downSqls.reverse(),
             args.connection,
           );
-          const path =
-            process.cwd() + '/' + (directory ? directory + '/' : '') + filename;
+          const path = `${process.cwd()}/${
+            directory ? `${directory}/` : ''
+          }${filename}`;
           await CommandUtils.createFile(path, fileContent);
 
           console.log(

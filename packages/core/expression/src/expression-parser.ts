@@ -1,7 +1,7 @@
 import * as esprima from 'esprima';
 import { ExpressionStatement } from 'estree';
-import { Expression } from './expression';
 import _ from 'lodash';
+import { Expression } from './expression';
 
 export class ExpressionParser {
   static eval(input: string, vars: object = {}) {

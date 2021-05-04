@@ -1,8 +1,8 @@
-import { Log4jsPluginTest } from './log4js-plugin-test';
 import { Service } from '@gabliam/core';
-import { log4js } from '../src/index';
 import path from 'path';
 import sinon from 'sinon';
+import { log4js } from '../src/index';
+import { Log4jsPluginTest } from './log4js-plugin-test';
 
 let appTest: Log4jsPluginTest;
 const p = sinon.spy(process.stdout, 'write');
@@ -42,7 +42,7 @@ describe('without config folder', () => {
 describe('with config folder', () => {
   beforeEach(async () => {
     appTest = new Log4jsPluginTest(
-      path.resolve(__dirname, './fixtures/config')
+      path.resolve(__dirname, './fixtures/config'),
     );
   });
 

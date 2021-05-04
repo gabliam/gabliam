@@ -1,8 +1,8 @@
+import d from 'debug';
 import { createConnections } from 'typeorm';
 import { GabliamConnectionOptionsReader } from './connection-options-reader';
 import { TypeormConnectionNotFoundError } from './errors';
 import { Connection } from './typeorm';
-import d from 'debug';
 
 const debug = d('Gabliam:Plugin:Typeorm:ConnectionManager');
 
@@ -18,11 +18,11 @@ export class ConnectionManager {
   }
 
   async close() {
-    await Promise.all(this.connections.map(c => c.close()));
+    await Promise.all(this.connections.map((c) => c.close()));
   }
 
   getConnection(name: string) {
-    const connection = this.connections.find(c => c.name === name);
+    const connection = this.connections.find((c) => c.name === name);
     if (!connection) {
       throw new TypeormConnectionNotFoundError(name);
     }
@@ -30,11 +30,10 @@ export class ConnectionManager {
   }
 
   getDefaultConnection() {
-    const connection = this.connections.find(c => c.name === 'default');
+    const connection = this.connections.find((c) => c.name === 'default');
     if (connection === undefined) {
       return this.connections[0];
-    } else {
-      return connection;
     }
+    return connection;
   }
 }

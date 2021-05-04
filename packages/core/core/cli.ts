@@ -3,6 +3,7 @@ import 'reflect-metadata';
 import yargs from 'yargs';
 import { StartCommand } from './src/commands/start-command';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 yargs
   .usage('Usage $0 <command> [options]')
   .command(new StartCommand())

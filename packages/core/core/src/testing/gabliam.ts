@@ -17,6 +17,7 @@ export class GabliamTest {
       this.gab = new Gabliam();
     }
 
+    // eslint-disable-next-line no-multi-assign
     this.loaderConfig = this.gab.loaderConfig = new LoaderConfigTest();
   }
 
@@ -30,6 +31,7 @@ export class GabliamTest {
         (p) => p.constructor.name === pluginName && _.isFunction(p.start),
       );
       if (plugin) {
+        // eslint-disable-next-line no-await-in-loop
         await plugin.start?.(this.gab.container, this.gab.registry);
       }
     }

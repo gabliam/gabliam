@@ -1,8 +1,8 @@
-import { createContainer } from '../src/container';
-import { APP_CONFIG } from '../src/constants';
-import { Config, Value } from '../src/metadatas';
-import { inject, optional, Container } from '../src/index';
 import Joi from 'joi';
+import { APP_CONFIG } from '../src/constants';
+import { createContainer } from '../src/container';
+import { Container, inject, optional } from '../src/index';
+import { Config, Value } from '../src/metadatas';
 
 let container: Container;
 
@@ -26,10 +26,7 @@ describe('@Value(path: string) Value without others options', () => {
       @Value('application.express.hostname') hostname: string;
     }
 
-    container
-      .bind(Conf)
-      .to(Conf)
-      .inSingletonScope();
+    container.bind(Conf).to(Conf).inSingletonScope();
     const conf = container.get<Conf>(Conf);
     expect(conf).toMatchSnapshot();
   }); // end all value in config
@@ -44,10 +41,7 @@ describe('@Value(path: string) Value without others options', () => {
       @Value('application.express.hostname') hostname: string;
     }
 
-    container
-      .bind(Conf)
-      .to(Conf)
-      .inSingletonScope();
+    container.bind(Conf).to(Conf).inSingletonScope();
     const conf = container.get<Conf>(Conf);
     expect(conf).toMatchSnapshot();
   }); // end default value in property
@@ -64,10 +58,7 @@ describe('@Value(path: string) Value without others options', () => {
       @Value('application.express.hostname') hostname: string;
     }
 
-    container
-      .bind(Conf)
-      .to(Conf)
-      .inSingletonScope();
+    container.bind(Conf).to(Conf).inSingletonScope();
     const conf = container.get<Conf>(Conf);
     expect(conf).toMatchSnapshot();
   }); // end whith value undefined
@@ -86,10 +77,7 @@ describe('@Value(path: string) Value without others options', () => {
       }
     }
 
-    container
-      .bind(Conf)
-      .to(Conf)
-      .inSingletonScope();
+    container.bind(Conf).to(Conf).inSingletonScope();
     const conf = container.get<Conf>(Conf);
     expect(conf).toMatchSnapshot();
   }); // end default value in constructor
@@ -108,10 +96,7 @@ describe('@Value(path: string) Value without others options', () => {
       }
     }
 
-    container
-      .bind(Conf)
-      .to(Conf)
-      .inSingletonScope();
+    container.bind(Conf).to(Conf).inSingletonScope();
     const conf = container.get<Conf>(Conf);
     expect(conf).toMatchSnapshot();
   }); // end default value in constructor
@@ -131,10 +116,7 @@ describe('@Value(path: string) Value without others options', () => {
       }
     }
 
-    container
-      .bind(Conf)
-      .to(Conf)
-      .inSingletonScope();
+    container.bind(Conf).to(Conf).inSingletonScope();
     const conf = container.get<Conf>(Conf);
     expect(conf).toMatchSnapshot();
   }); // end default value in constructor
@@ -149,16 +131,13 @@ describe('@Value(path: string) Value without others options', () => {
       constructor(
         @inject('ROOT_CONFIG')
         @optional()
-        rootPath: string
+        rootPath: string,
       ) {
         this.rootPath = rootPath;
       }
     }
 
-    container
-      .bind(Conf)
-      .to(Conf)
-      .inSingletonScope();
+    container.bind(Conf).to(Conf).inSingletonScope();
     const conf = container.get<Conf>(Conf);
     expect(conf).toMatchSnapshot();
   }); // end default value and optional bean
@@ -186,10 +165,7 @@ describe('@Value(path: string, schema: Joi.Schema) Value with Schema', () => {
       hostname: string;
     }
 
-    container
-      .bind(Conf)
-      .to(Conf)
-      .inSingletonScope();
+    container.bind(Conf).to(Conf).inSingletonScope();
     const conf = container.get<Conf>(Conf);
     expect(conf).toMatchSnapshot();
   }); // end all value in config
@@ -207,10 +183,7 @@ describe('@Value(path: string, schema: Joi.Schema) Value with Schema', () => {
       hostname: string;
     }
 
-    container
-      .bind(Conf)
-      .to(Conf)
-      .inSingletonScope();
+    container.bind(Conf).to(Conf).inSingletonScope();
     const conf = container.get<Conf>(Conf);
     expect(conf).toMatchSnapshot();
   }); // end default value in property
@@ -222,10 +195,7 @@ describe('@Value(path: string, schema: Joi.Schema) Value with Schema', () => {
       rootPath: string;
     }
 
-    container
-      .bind(Conf)
-      .to(Conf)
-      .inSingletonScope();
+    container.bind(Conf).to(Conf).inSingletonScope();
     expect(() => {
       container.get<Conf>(Conf);
     }).toThrow();
@@ -241,10 +211,7 @@ describe('@Value(path: string, schema: Joi.Schema) Value with Schema', () => {
       port: number;
     }
 
-    container
-      .bind(Conf)
-      .to(Conf)
-      .inSingletonScope();
+    container.bind(Conf).to(Conf).inSingletonScope();
     expect(() => {
       container.get<Conf>(Conf);
     }).toThrow();
@@ -267,10 +234,7 @@ describe('@Value(path: string, schema: Joi.Schema) Value with Schema', () => {
       }
     }
 
-    container
-      .bind(Conf)
-      .to(Conf)
-      .inSingletonScope();
+    container.bind(Conf).to(Conf).inSingletonScope();
     const conf = container.get<Conf>(Conf);
     expect(conf).toMatchSnapshot();
   }); // end default value in constructor
@@ -288,10 +252,7 @@ describe('@Value(path: string, schema: Joi.Schema) Value with Schema', () => {
       hostname: string;
     }
 
-    container
-      .bind(Conf)
-      .to(Conf)
-      .inSingletonScope();
+    container.bind(Conf).to(Conf).inSingletonScope();
     const conf = container.get<Conf>(Conf);
     expect(conf).toMatchSnapshot();
   }); // end default value in constructor
@@ -325,10 +286,7 @@ describe('@Value(options: ValueOptions) Value with Schema', () => {
       hostname: string;
     }
 
-    container
-      .bind(Conf)
-      .to(Conf)
-      .inSingletonScope();
+    container.bind(Conf).to(Conf).inSingletonScope();
     const conf = container.get<Conf>(Conf);
     expect(conf).toMatchSnapshot();
   }); // end all value in config
@@ -355,10 +313,7 @@ describe('@Value(options: ValueOptions) Value with Schema', () => {
       hostname: string;
     }
 
-    container
-      .bind(Conf)
-      .to(Conf)
-      .inSingletonScope();
+    container.bind(Conf).to(Conf).inSingletonScope();
     const conf = container.get<Conf>(Conf);
     expect(conf).toMatchSnapshot();
   }); // end default value in property
@@ -373,10 +328,7 @@ describe('@Value(options: ValueOptions) Value with Schema', () => {
       rootPath: string;
     }
 
-    container
-      .bind(Conf)
-      .to(Conf)
-      .inSingletonScope();
+    container.bind(Conf).to(Conf).inSingletonScope();
     expect(() => {
       container.get<Conf>(Conf);
     }).toThrow();
@@ -395,10 +347,7 @@ describe('@Value(options: ValueOptions) Value with Schema', () => {
       rootPath: string;
     }
 
-    container
-      .bind(Conf)
-      .to(Conf)
-      .inSingletonScope();
+    container.bind(Conf).to(Conf).inSingletonScope();
     expect(() => {
       container.get<Conf>(Conf);
     }).toThrow('custom');
@@ -417,10 +366,7 @@ describe('@Value(options: ValueOptions) Value with Schema', () => {
       rootPath: string;
     }
 
-    container
-      .bind(Conf)
-      .to(Conf)
-      .inSingletonScope();
+    container.bind(Conf).to(Conf).inSingletonScope();
     const conf = container.get<Conf>(Conf);
     expect(conf).toMatchSnapshot();
   }); // end bad format
@@ -441,10 +387,7 @@ describe('@Value(options: ValueOptions) Value with Schema', () => {
       port: number;
     }
 
-    container
-      .bind(Conf)
-      .to(Conf)
-      .inSingletonScope();
+    container.bind(Conf).to(Conf).inSingletonScope();
     expect(() => {
       container.get<Conf>(Conf);
     }).toThrow();
@@ -476,10 +419,7 @@ describe('@Value(options: ValueOptions) Value with Schema', () => {
       }
     }
 
-    container
-      .bind(Conf)
-      .to(Conf)
-      .inSingletonScope();
+    container.bind(Conf).to(Conf).inSingletonScope();
     const conf = container.get<Conf>(Conf);
     expect(conf).toMatchSnapshot();
   }); // end default value in constructor
@@ -506,10 +446,7 @@ describe('@Value(options: ValueOptions) Value with Schema', () => {
       hostname: string;
     }
 
-    container
-      .bind(Conf)
-      .to(Conf)
-      .inSingletonScope();
+    container.bind(Conf).to(Conf).inSingletonScope();
     const conf = container.get<Conf>(Conf);
     expect(conf).toMatchSnapshot();
   }); // end default value in constructor

@@ -22,6 +22,35 @@ import {
 } from './web-configuration';
 
 /**
+ * Build express middleware
+ *
+ * @param  {Container} container
+ * @param  {Registry} registry
+ */
+const buildWebConfig = (container: Container, registry: Registry) => {
+  const middlewareConfig = container.get(WebConfiguration);
+  const app = container.get(APP);
+  middlewareConfig.webConfigs
+    .sort((a, b) => a.order - b.order)
+    .forEach(({ instance }) => instance(app, container));
+};
+
+/**
+ * Build express error middleware
+ *
+ * @param  {Container} container
+ * @param  {Registry} registry
+ */
+const buildWebConfigAfterCtrl = (container: Container, registry: Registry) => {
+  const middlewareConfig = container.get(WebConfiguration);
+
+  const app = container.get(APP);
+  middlewareConfig.WebConfigAfterCtrls.sort(
+    (a, b) => a.order - b.order,
+  ).forEach(({ instance }) => instance(app, container));
+};
+
+/**
  * Base class for web plugin.
  */
 @Scan()
@@ -43,12 +72,12 @@ export abstract class WebPluginBase<T> {
   abstract bindApp(
     container: Container,
     registry: Registry,
-    webConfiguration: WebConfiguration
+    webConfiguration: WebConfiguration,
   ): gabliamValue<void>;
 
   abstract buildControllers(
     restMetadata: RestMetadata,
-    container: Container
+    container: Container,
   ): gabliamValue<void>;
 
   /**
@@ -75,7 +104,7 @@ export abstract class WebPluginBase<T> {
 
     const webConfigList = reflection.propMetadataOfDecorator<WebConfig>(
       confInstance.constructor,
-      WebConfig
+      WebConfig,
     );
     for (const [key, webConfigs] of Object.entries(webConfigList)) {
       const [{ order }] = webConfigs.slice(-1);
@@ -85,9 +114,10 @@ export abstract class WebPluginBase<T> {
       });
     }
 
-    const webConfigAfterCtlsList = reflection.propMetadataOfDecorator<
-      WebConfigAfterControllers
-    >(confInstance.constructor, WebConfigAfterControllers);
+    const webConfigAfterCtlsList = reflection.propMetadataOfDecorator<WebConfigAfterControllers>(
+      confInstance.constructor,
+      WebConfigAfterControllers,
+    );
     for (const [key, webConfigs] of Object.entries(webConfigAfterCtlsList)) {
       const [{ order }] = webConfigs.slice(-1);
       webConfig.addWebConfigAfterCtrl({
@@ -99,61 +129,32 @@ export abstract class WebPluginBase<T> {
 
   abstract destroy(
     container: Container,
-    registry: Registry
+    registry: Registry,
   ): gabliamValue<void>;
 
   async start(container: Container, registry: Registry) {
-    this.buildWebConfig(container, registry);
+    buildWebConfig(container, registry);
     await toPromise(
       this.buildControllers(
         extractControllerMetadata(container, registry),
-        container
-      )
+        container,
+      ),
     );
-    this.buildWebConfigAfterCtrl(container, registry);
+    buildWebConfigAfterCtrl(container, registry);
 
     const restConfig = container.get<WebPluginConfig>(WEB_PLUGIN_CONFIG);
     const webConfiguration = container.get(WebConfiguration);
     const serverStarter = webConfiguration.serverStarter;
 
     const listenerCreator = container.get<RequestListenerCreator>(
-      REQUEST_LISTENER_CREATOR
+      REQUEST_LISTENER_CREATOR,
     );
 
     const server = await toPromise(
-      serverStarter.start(restConfig, webConfiguration, listenerCreator)
+      serverStarter.start(restConfig, webConfiguration, listenerCreator),
     );
     container.bind(SERVER).toConstantValue(server);
   }
 
   abstract stop(container: Container, registry: Registry): gabliamValue<void>;
-
-  /**
-   * Build express middleware
-   *
-   * @param  {Container} container
-   * @param  {Registry} registry
-   */
-  private buildWebConfig(container: Container, registry: Registry) {
-    const middlewareConfig = container.get(WebConfiguration);
-    const app = container.get(APP);
-    middlewareConfig.webConfigs
-      .sort((a, b) => a.order - b.order)
-      .forEach(({ instance }) => instance(app, container));
-  }
-
-  /**
-   * Build express error middleware
-   *
-   * @param  {Container} container
-   * @param  {Registry} registry
-   */
-  private buildWebConfigAfterCtrl(container: Container, registry: Registry) {
-    const middlewareConfig = container.get(WebConfiguration);
-
-    const app = container.get(APP);
-    middlewareConfig.WebConfigAfterCtrls.sort(
-      (a, b) => a.order - b.order
-    ).forEach(({ instance }) => instance(app, container));
-  }
 }

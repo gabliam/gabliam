@@ -44,7 +44,7 @@ export class PluginTypeormConfig {
     connectionOptions: ConnectionOptions | ConnectionOptions[],
     @inject(ENTITIES_TYPEORM) entities: Function[],
     @inject(MIGRATIONS_TYPEORM) migrations: Function[],
-    @inject(SUBSCRIBERS_TYPEORM) subscribers: Function[]
+    @inject(SUBSCRIBERS_TYPEORM) subscribers: Function[],
   ) {
     debug('constructor PluginTypeormConfig', connectionOptions);
     this.connectionOptions = connectionOptions;
@@ -67,7 +67,7 @@ export class PluginTypeormConfig {
   createGabliamConnectionOptionsReader() {
     debug('connectionOptions', this.connectionOptions);
 
-    let connectionOptions: ConnectionOptions[] | undefined = undefined;
+    let connectionOptions: ConnectionOptions[] | undefined;
     if (Array.isArray(this.connectionOptions)) {
       connectionOptions = this.connectionOptions;
     } else if (this.connectionOptions) {
@@ -80,7 +80,7 @@ export class PluginTypeormConfig {
     return new GabliamConnectionOptionsReader(
       connectionOptions,
       this.entities,
-      valueExtractor
+      valueExtractor,
     );
   }
 

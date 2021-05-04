@@ -15,6 +15,7 @@ interface StartCommandArgs {
 
 export class StartCommand implements yargs.CommandModule<{}, StartCommandArgs> {
   command = 'start';
+
   describe = 'Start a gabliam application';
 
   builder(args: yargs.Argv) {
@@ -46,6 +47,7 @@ export class StartCommand implements yargs.CommandModule<{}, StartCommandArgs> {
       process.on(sig, async () => {
         try {
           await gabliam.stopAndDestroy();
+          // eslint-disable-next-line no-empty
         } catch {}
 
         process.exit();
@@ -53,6 +55,7 @@ export class StartCommand implements yargs.CommandModule<{}, StartCommandArgs> {
     });
 
     await gabliam.buildAndStart();
+    // eslint-disable-next-line new-cap
     const app = new application();
     if (_.isFunction(app.run)) {
       app.run(gabliam);

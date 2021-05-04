@@ -1,7 +1,8 @@
-import { createConnection, Connection } from '../index';
-import { CommandUtils } from './CommandUtils';
-import yargs from 'yargs';
+/* eslint-disable no-console */
 import chalk from 'chalk';
+import yargs from 'yargs';
+import { Connection, createConnection } from '../index';
+import { CommandUtils } from './CommandUtils';
 
 interface SchemaDropCommandArgs {
   app?: string;
@@ -17,6 +18,7 @@ interface SchemaDropCommandArgs {
 export class SchemaDropCommand
   implements yargs.CommandModule<{}, SchemaDropCommandArgs> {
   command = 'schema:drop';
+
   describe =
     'Drops all tables in the database on your default connection. ' +
     `To drop table of a concrete connection's database use -c option.`;
@@ -43,7 +45,7 @@ export class SchemaDropCommand
   }
 
   async handler(args: yargs.Arguments<SchemaDropCommandArgs>) {
-    let connection: Connection | undefined = undefined;
+    let connection: Connection | undefined;
     try {
       const connectionOptionsReader = await CommandUtils.getGabliamConnectionOptionsReader(
         {

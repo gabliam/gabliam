@@ -40,7 +40,7 @@ exports[`clear 8`] = `undefined`;
 
 exports[`clear 9`] = `undefined`;
 
-exports[`errors get timeout 1`] = `"timeout"`;
+exports[`errors get timeout 1`] = `[Error: timeout]`;
 
 exports[`evict 1`] = `null`;
 
@@ -66,7 +66,7 @@ exports[`get & put with timeout 6`] = `undefined`;
 
 exports[`get & put with timeout 7`] = `null`;
 
-exports[`put timeout 1`] = `"timeout"`;
+exports[`put timeout 1`] = `[Error: timeout]`;
 
 exports[`put with duration 1`] = `"test"`;
 

@@ -30,9 +30,11 @@ export class AmqpPlugin implements GabliamPlugin {
       const controller = container.get<any>(controllerId);
       debug('controller', controller);
 
-      const handlerMetadatas = reflection.propMetadataOfDecorator<
-        RabbitHandler
-      >(controller.constructor, RabbitConsumer, RabbitListener);
+      const handlerMetadatas = reflection.propMetadataOfDecorator<RabbitHandler>(
+        controller.constructor,
+        RabbitConsumer,
+        RabbitListener,
+      );
 
       const [cunit] = reflection
         .annotationsOfDecorator<CUnit>(controller.constructor, CUnit)
@@ -61,7 +63,6 @@ export class AmqpPlugin implements GabliamPlugin {
   }
 
   async stop(container: Container) {
-    console.log('stop');
     const connection = container.get(AmqpConnectionManager);
     await connection.stop();
   }

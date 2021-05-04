@@ -66,10 +66,7 @@ describe('pipes', () => {
     appTest.addClass(TestController);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .get('/lol')
-      .expect(200);
+    const response = await appTest.supertest().get('/lol').expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);
@@ -88,10 +85,7 @@ describe('pipes', () => {
     appTest.addClass(TestController);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .get('/lol')
-      .expect(200);
+    const response = await appTest.supertest().get('/lol').expect(200);
 
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
@@ -121,10 +115,7 @@ describe('pipes', () => {
     appTest.addClass(ServerConfig);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .get('/lol')
-      .expect(200);
+    const response = await appTest.supertest().get('/lol').expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);
     expect(response).toMatchSnapshot();
@@ -154,10 +145,7 @@ describe('pipes', () => {
     appTest.addClass(ServerConfig);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .get('/lol')
-      .expect(200);
+    const response = await appTest.supertest().get('/lol').expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);
@@ -180,20 +168,11 @@ describe('pipes', () => {
     }
 
     appTest.addClass(TestController);
-    appTest.gab.container
-      .bind(symbolId)
-      .to(A)
-      .inSingletonScope();
-    appTest.gab.container
-      .bind(strId)
-      .to(B)
-      .inSingletonScope();
+    appTest.gab.container.bind(symbolId).to(A).inSingletonScope();
+    appTest.gab.container.bind(strId).to(B).inSingletonScope();
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .get('/lol')
-      .expect(200);
+    const response = await appTest.supertest().get('/lol').expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(response).toMatchSnapshot();
@@ -213,20 +192,11 @@ describe('pipes', () => {
     }
 
     appTest.addClass(TestController);
-    appTest.gab.container
-      .bind(symbolId)
-      .to(A)
-      .inSingletonScope();
-    appTest.gab.container
-      .bind(strId)
-      .to(B)
-      .inSingletonScope();
+    appTest.gab.container.bind(symbolId).to(A).inSingletonScope();
+    appTest.gab.container.bind(strId).to(B).inSingletonScope();
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .get('/lol')
-      .expect(200);
+    const response = await appTest.supertest().get('/lol').expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(response).toMatchSnapshot();
@@ -249,20 +219,11 @@ describe('pipes', () => {
     }
 
     appTest.addClass(TestController);
-    appTest.gab.container
-      .bind(symbolId)
-      .to(A)
-      .inSingletonScope();
-    appTest.gab.container
-      .bind(strId)
-      .to(B)
-      .inSingletonScope();
+    appTest.gab.container.bind(symbolId).to(A).inSingletonScope();
+    appTest.gab.container.bind(strId).to(B).inSingletonScope();
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .get('/lol')
-      .expect(200);
+    const response = await appTest.supertest().get('/lol').expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(response).toMatchSnapshot();
@@ -271,8 +232,9 @@ describe('pipes', () => {
   test('should compose controller- and method-level pipe and can use an instance', async () => {
     class D implements Pipe {
       constructor(private prefix: string) {}
+
       transform(value: any) {
-        return (value += this.prefix + 'c');
+        return (value += `${this.prefix}c`);
       }
     }
 
@@ -291,10 +253,7 @@ describe('pipes', () => {
     appTest.addClass(TestController);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .get('/lol')
-      .expect(200);
+    const response = await appTest.supertest().get('/lol').expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);

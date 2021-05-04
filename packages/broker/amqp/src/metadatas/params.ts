@@ -11,12 +11,11 @@ export interface RabbitParamDecorator<T = any> {
   args: T[];
 }
 
-export const makeRabbitParamDecorator = (handler: HandlerFn) => {
-  return makeParamDecorator(
+export const makeRabbitParamDecorator = (handler: HandlerFn) =>
+  makeParamDecorator(
     METADATA_KEY.RabbitcontrollerParameter,
-    (...args: any[]): RabbitParamDecorator => ({ args, handler })
+    (...args: any[]): RabbitParamDecorator => ({ args, handler }),
   );
-};
 
 /**
  * Type of the `Message` decorator / constructor function.
@@ -47,7 +46,7 @@ export interface MessageDecorator {
 }
 
 export const Message: MessageDecorator = makeRabbitParamDecorator(
-  (args, msg) => msg
+  (args, msg) => msg,
 );
 
 /**
@@ -102,7 +101,7 @@ export const Content: ContentDecorator = makeRabbitParamDecorator(
       return get(content, path);
     }
     return content;
-  }
+  },
 );
 
 /**
@@ -157,7 +156,7 @@ export const Properties: PropertiesDecorator = makeRabbitParamDecorator(
       return get(msg.properties, path);
     }
     return msg.properties;
-  }
+  },
 );
 
 /**
@@ -212,5 +211,5 @@ export const Fields: FieldsDecorator = makeRabbitParamDecorator(
       return get(msg.fields, path);
     }
     return msg.fields;
-  }
+  },
 );

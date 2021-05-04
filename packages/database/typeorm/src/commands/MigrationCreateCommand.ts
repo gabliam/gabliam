@@ -1,7 +1,8 @@
+/* eslint-disable no-console */
+import chalk from 'chalk';
 import yargs from 'yargs';
 import { camelCase } from '../string-utils';
 import { CommandUtils } from './CommandUtils';
-import chalk from 'chalk';
 
 export interface MigrationCreateCommandArgs {
   app?: string;
@@ -58,6 +59,7 @@ export class ${camelCase(
   }
 
   command = 'migration:create';
+
   describe = 'Creates a new migration file.';
 
   builder(args: yargs.Argv) {
@@ -100,7 +102,7 @@ export class ${camelCase(
         timestamp,
         args.connection,
       );
-      const filename = timestamp + '-' + args.name + '.ts';
+      const filename = `${timestamp}-${args.name}.ts`;
       let directory = args.dir;
 
       // if directory is not set then try to open tsconfig and find default path there
@@ -119,11 +121,13 @@ export class ${camelCase(
           directory = connectionOptions.cli
             ? connectionOptions.cli.migrationsDir
             : undefined;
+          // eslint-disable-next-line no-empty
         } catch (err) {}
       }
 
-      const path =
-        process.cwd() + '/' + (directory ? directory + '/' : '') + filename;
+      const path = `${process.cwd()}/${
+        directory ? `${directory}/` : ''
+      }${filename}`;
       await CommandUtils.createFile(path, fileContent);
       console.log(
         `Migration ${chalk.blue(path)} has been generated successfully.`,

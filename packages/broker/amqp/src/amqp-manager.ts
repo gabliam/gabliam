@@ -1,24 +1,24 @@
-import { ConnectionConfig, QueueDictionnary } from './interfaces';
-import { AmqpConnection } from './amqp-connection';
-import { Queue } from './queue';
 import { ValueExtractor } from '@gabliam/core';
+import { AmqpConnection } from './amqp-connection';
 import {
-  AmqpDuplicateConnectionError,
   AmqpConnectionNotFoundError,
+  AmqpDuplicateConnectionError,
 } from './errors';
+import { ConnectionConfig, QueueDictionnary } from './interfaces';
+import { Queue } from './queue';
 
 export class AmqpConnectionManager {
   private connections: AmqpConnection[] = [];
 
   constructor(
     connectionConfigs: ConnectionConfig[],
-    valueExtractor: ValueExtractor
+    valueExtractor: ValueExtractor,
   ) {
     for (const [
       index,
       { name, url, queues, undefinedValue, gzipEnabled },
     ] of connectionConfigs.entries()) {
-      if (this.connections.find(c => c.name === name) !== undefined) {
+      if (this.connections.find((c) => c.name === name) !== undefined) {
         throw new AmqpDuplicateConnectionError(name);
       }
 
@@ -30,22 +30,22 @@ export class AmqpConnectionManager {
           undefinedValue,
           this.createQueue(queues),
           valueExtractor,
-          gzipEnabled
-        )
+          gzipEnabled,
+        ),
       );
     }
   }
 
   async start() {
-    await Promise.all(this.connections.map(c => c.start()));
+    await Promise.all(this.connections.map((c) => c.start()));
   }
 
   async stop() {
-    await Promise.all(this.connections.map(c => c.stop()));
+    await Promise.all(this.connections.map((c) => c.stop()));
   }
 
   getConnection(name: string) {
-    const connection = this.connections.find(c => c.name === name);
+    const connection = this.connections.find((c) => c.name === name);
     if (!connection) {
       throw new AmqpConnectionNotFoundError(name);
     }
@@ -53,12 +53,11 @@ export class AmqpConnectionManager {
   }
 
   getDefaultConnection() {
-    const connection = this.connections.find(c => c.name === 'default');
+    const connection = this.connections.find((c) => c.name === 'default');
     if (connection === undefined) {
       return this.connections[0];
-    } else {
-      return connection;
     }
+    return connection;
   }
 
   private createQueue(queueConfig: QueueDictionnary = {}) {

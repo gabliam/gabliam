@@ -37,7 +37,7 @@ export class KoaConverter {
       };
 
       const args = await extractArgs(getContext(context.req), null, nextWrap);
-      await toPromise((instance['intercept'] as any)(...args));
+      await toPromise(instance.intercept(...args));
 
       if (!wasCalled) {
         await next();

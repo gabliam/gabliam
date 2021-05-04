@@ -1,7 +1,7 @@
 import { makePropDecorator } from '@gabliam/core';
 import { METADATA_KEY } from '../constants';
 
-export type defaultMethods =
+export type DefaultMethods =
   | 'all'
   | 'get'
   | 'post'
@@ -26,12 +26,11 @@ export interface ControllerMethod {
   method: string;
 }
 
-const makeWebMethodDecorator = (method: string) => {
-  return makePropDecorator(
+const makeWebMethodDecorator = (method: string) =>
+  makePropDecorator(
     METADATA_KEY.controllerMethod,
-    (path: string): ControllerMethod => ({ path, method })
+    (path: string): ControllerMethod => ({ path, method }),
   );
-};
 
 /**
  * Type of the `All` decorator / constructor function.
@@ -289,5 +288,5 @@ export interface CustomMethodDecorator {
 
 export const CustomMethod: CustomMethodDecorator = makePropDecorator(
   METADATA_KEY.controllerMethod,
-  (method: string, path: string): ControllerMethod => ({ path, method })
+  (method: string, path: string): ControllerMethod => ({ path, method }),
 );

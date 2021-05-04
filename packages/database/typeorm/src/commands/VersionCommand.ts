@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import yargs from 'yargs';
 import { exec } from 'child_process';
 
@@ -17,17 +18,18 @@ export class VersionCommand implements yargs.CommandModule {
         if (error) {
           return fail(error);
         }
-        ok('');
+        return ok('');
       });
     });
   }
 
   command = 'version';
+
   describe = 'Prints TypeORM version this project uses.';
 
   async handler() {
     const localNpmList = await VersionCommand.executeCommand(
-      'npm list --depth=1'
+      'npm list --depth=1',
     );
     const localMatches = localNpmList.match(/ typeorm@(.*)\n/);
     const localNpmVersion = (localMatches && localMatches[1]
@@ -38,7 +40,7 @@ export class VersionCommand implements yargs.CommandModule {
       .trim();
 
     const globalNpmList = await VersionCommand.executeCommand(
-      'npm list -g --depth=0'
+      'npm list -g --depth=0',
     );
     const globalMatches = globalNpmList.match(/ typeorm@(.*)\n/);
     const globalNpmVersion = (globalMatches && globalMatches[1]
@@ -66,7 +68,7 @@ export class VersionCommand implements yargs.CommandModule {
     ) {
       console.log(
         'To avoid issues with CLI please make sure your global and local TypeORM versions match, ' +
-          'or you are using locally installed TypeORM instead of global one.'
+          'or you are using locally installed TypeORM instead of global one.',
       );
     }
   }

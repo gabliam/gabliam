@@ -40,10 +40,7 @@ describe('Parameters:', () => {
     }
     appTest.addClass(TestController);
     await appTest.buildAndStart();
-    const response = await appTest
-      .supertest()
-      .get('/0')
-      .expect(200);
+    const response = await appTest.supertest().get('/0').expect(200);
 
     expect(response).toMatchSnapshot();
   });
@@ -58,10 +55,7 @@ describe('Parameters:', () => {
     }
     appTest.addClass(TestController);
     await appTest.buildAndStart();
-    const response = await appTest
-      .supertest()
-      .get('/foo')
-      .expect(200);
+    const response = await appTest.supertest().get('/foo').expect(200);
     expect(response).toMatchSnapshot();
   });
 
@@ -75,10 +69,7 @@ describe('Parameters:', () => {
     }
     appTest.addClass(TestController);
     await appTest.buildAndStart();
-    const response = await appTest
-      .supertest()
-      .get('/42')
-      .expect(200);
+    const response = await appTest.supertest().get('/42').expect(200);
     expect(response).toMatchSnapshot();
   });
 
@@ -92,10 +83,7 @@ describe('Parameters:', () => {
     }
     appTest.addClass(TestController);
     await appTest.buildAndStart();
-    const response = await appTest
-      .supertest()
-      .get('/GET')
-      .expect(200);
+    const response = await appTest.supertest().get('/GET').expect(200);
     expect(response).toMatchSnapshot();
   });
 
@@ -110,10 +98,7 @@ describe('Parameters:', () => {
 
     appTest.addClass(TestController);
     await appTest.buildAndStart();
-    const response = await appTest
-      .supertest()
-      .get('/')
-      .expect(200);
+    const response = await appTest.supertest().get('/').expect(200);
     expect(response).toMatchSnapshot();
   });
 
@@ -200,9 +185,8 @@ describe('Parameters:', () => {
       public getCookie(@Cookies('cookie') cookie: any) {
         if (cookie) {
           return cookie;
-        } else {
-          return ':(';
         }
+        return ':(';
       }
     }
 
@@ -220,10 +204,7 @@ describe('Parameters:', () => {
     appTest.addClass(ServiceConfig);
     appTest.addClass(TestController);
     await appTest.buildAndStart();
-    const response = await appTest
-      .supertest()
-      .get('/')
-      .expect(200);
+    const response = await appTest.supertest().get('/').expect(200);
     expect(response).toMatchSnapshot();
   });
 
@@ -246,10 +227,7 @@ describe('Parameters:', () => {
 
     appTest.addClass(TestController);
     await appTest.buildAndStart();
-    const response = await appTest
-      .supertest()
-      .get('/')
-      .expect(200);
+    const response = await appTest.supertest().get('/').expect(200);
     expect(spy.calledOnce).toBe(true);
     expect(response).toMatchSnapshot();
   });

@@ -1,11 +1,12 @@
+/* eslint-disable no-plusplus */
+import { Bean, Config, Service } from '@gabliam/core';
 import { GabliamTest } from '@gabliam/core/src/testing';
 import {
-  SimpleCacheManager,
-  MemoryCache,
-  CACHE_MANAGER,
   Cacheable,
+  CACHE_MANAGER,
+  MemoryCache,
+  SimpleCacheManager,
 } from '../../src/index';
-import { Bean, Config, Service } from '@gabliam/core';
 
 let g: GabliamTest;
 beforeEach(async () => {
@@ -213,17 +214,17 @@ describe('cacheable', () => {
 
     const s = g.gab.container.get(TestService);
     expect(
-      await s.nextYear({ name: 'test', id: 1, age: 15 })
+      await s.nextYear({ name: 'test', id: 1, age: 15 }),
     ).toMatchSnapshot();
     expect(
-      await s.nextYear({ name: 'test2', id: 2, age: 18 })
+      await s.nextYear({ name: 'test2', id: 2, age: 18 }),
     ).toMatchSnapshot();
     expect(call).toBe(2);
     expect(
-      await s.nextYear({ name: 'test', id: 1, age: 15 })
+      await s.nextYear({ name: 'test', id: 1, age: 15 }),
     ).toMatchSnapshot();
     expect(
-      await s.nextYear({ name: 'test2', id: 2, age: 18 })
+      await s.nextYear({ name: 'test2', id: 2, age: 18 }),
     ).toMatchSnapshot();
     expect(call).toBe(3);
   });
@@ -252,17 +253,17 @@ describe('cacheable', () => {
 
     const s = g.gab.container.get(TestService);
     expect(
-      await s.nextYear({ name: 'test', id: 1, age: 15 })
+      await s.nextYear({ name: 'test', id: 1, age: 15 }),
     ).toMatchSnapshot();
     expect(
-      await s.nextYear({ name: 'test2', id: 2, age: 18 })
+      await s.nextYear({ name: 'test2', id: 2, age: 18 }),
     ).toMatchSnapshot();
     expect(call).toBe(2);
     expect(
-      await s.nextYear({ name: 'test', id: 1, age: 15 })
+      await s.nextYear({ name: 'test', id: 1, age: 15 }),
     ).toMatchSnapshot();
     expect(
-      await s.nextYear({ name: 'test2', id: 2, age: 18 })
+      await s.nextYear({ name: 'test2', id: 2, age: 18 }),
     ).toMatchSnapshot();
     expect(call).toBe(3);
   });

@@ -1,8 +1,9 @@
-import { createConnection, QueryRunner, Connection } from '../index';
-import { CommandUtils } from './CommandUtils';
-import yargs from 'yargs';
-import { PlatformTools } from 'typeorm/platform/PlatformTools';
+/* eslint-disable no-console */
 import chalk from 'chalk';
+import { PlatformTools } from 'typeorm/platform/PlatformTools';
+import yargs from 'yargs';
+import { Connection, createConnection, QueryRunner } from '../index';
+import { CommandUtils } from './CommandUtils';
 
 interface QueryCommandArgs {
   app?: string;
@@ -17,6 +18,7 @@ interface QueryCommandArgs {
  */
 export class QueryCommand implements yargs.CommandModule<{}, QueryCommandArgs> {
   command = 'query';
+
   describe =
     'Executes given SQL query on a default connection. Specify connection name to run query on a specific connection.';
 
@@ -42,8 +44,8 @@ export class QueryCommand implements yargs.CommandModule<{}, QueryCommandArgs> {
   }
 
   async handler(args: yargs.Arguments<QueryCommandArgs>) {
-    let connection: Connection | undefined = undefined;
-    let queryRunner: QueryRunner | undefined = undefined;
+    let connection: Connection | undefined;
+    let queryRunner: QueryRunner | undefined;
     try {
       // create a connection
       const connectionOptionsReader = await CommandUtils.getGabliamConnectionOptionsReader(

@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 import { Container, reflection } from '@gabliam/core';
 import { Expression, ExpressionParser } from '@gabliam/expression';
 import d from 'debug';
@@ -6,6 +7,7 @@ import { CacheManager } from '../cache-manager';
 import { CACHE_MANAGER } from '../constant';
 import { CacheNameIsMandatoryError } from '../error';
 import { CacheGroup } from './cache-group';
+
 const debug = d('Gabliam:Plugin:CachePlugin:CacheOptions');
 
 export type KeyGenerator = (...args: any[]) => string | undefined;
@@ -60,7 +62,10 @@ export interface CacheConfig {
 }
 
 export function isCacheOptions(obj: any): obj is CacheOptions {
-  return typeof obj === 'object' && obj.hasOwnProperty('cacheNames');
+  return (
+    typeof obj === 'object' &&
+    Object.prototype.hasOwnProperty.call(obj, 'cacheNames')
+  );
 }
 
 /**
@@ -108,6 +113,26 @@ export const getCacheGroup = (target: Object) => {
     .slice(-1);
   return cacheGroup ? cacheGroup.cacheGroupName || 'default' : 'default';
 };
+
+function defaultKeyGenerator(...args: any[]) {
+  const k = [];
+
+  /* istanbul ignore next */
+  if (args === undefined) {
+    return undefined;
+  }
+  for (const arg of args) {
+    try {
+      if (typeof arg === 'string') {
+        k.push(arg);
+      } else {
+        k.push(JSON.stringify(arg));
+      }
+      // eslint-disable-next-line no-empty
+    } catch {}
+  }
+  return k.join('');
+}
 
 export function extractCacheInternalOptions(
   value?: string | string[] | CacheOptions,
@@ -162,9 +187,9 @@ export async function createCacheConfig(
       try {
         const res = e.getValue<boolean>({ args: vals });
         return typeof res === 'boolean' ? res : false;
-      } catch (e) {
+      } catch (error) {
         /* istanbul ignore next */ {
-          debug('error condition', e);
+          debug('error condition', error);
           return false;
         }
       }
@@ -181,9 +206,9 @@ export async function createCacheConfig(
       try {
         const res = e.getValue<boolean>({ args, result });
         return typeof res === 'boolean' ? res : false;
-      } catch (e) {
+      } catch (error) {
         /* istanbul ignore next */ {
-          debug('error condition', e);
+          debug('error condition', error);
           return false;
         }
       }
@@ -206,9 +231,9 @@ export async function createCacheConfig(
             : [extractedArgs];
         }
         return extractedArgs;
-      } catch (e) {
+      } catch (error) {
         /* istanbul ignore next */ {
-          debug('cache Error', e);
+          debug('cache Error', error);
           return undefined;
         }
       }
@@ -219,6 +244,7 @@ export async function createCacheConfig(
 
   const caches: Cache[] = [];
   for (const cacheName of cacheNames) {
+    // eslint-disable-next-line no-await-in-loop
     const cache = await cacheManager.getCache(cacheName, cacheGroup);
     if (cache) {
       caches.push(cache);
@@ -231,23 +257,4 @@ export async function createCacheConfig(
     caches,
     veto,
   };
-}
-
-function defaultKeyGenerator(...args: any[]) {
-  const k = [];
-
-  /* istanbul ignore next */
-  if (args === undefined) {
-    return undefined;
-  }
-  for (const arg of args) {
-    try {
-      if (typeof arg === 'string') {
-        k.push(arg);
-      } else {
-        k.push(JSON.stringify(arg));
-      }
-    } catch {}
-  }
-  return k.join('');
 }

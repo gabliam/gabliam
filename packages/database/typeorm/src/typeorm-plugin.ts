@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import {
   Container,
   GabliamPlugin,
@@ -9,9 +10,9 @@ import {
 import { ConnectionManager } from './connection-manager';
 import {
   ENTITIES_TYPEORM,
-  TYPE,
   MIGRATIONS_TYPEORM,
   SUBSCRIBERS_TYPEORM,
+  TYPE,
 } from './constant';
 import { ContainedType, ContainerInterface, useContainer } from './typeorm';
 
@@ -24,7 +25,7 @@ const defaultContainer: ContainerInterface = new (class
   public instances: { type: Function; object: any }[] = [];
 
   get<T>(someClass: ContainedType<T>): T {
-    let instance = this.instances.find(i => i.type === someClass);
+    let instance = this.instances.find((i) => i.type === someClass);
     if (!instance) {
       instance = { type: someClass, object: new (someClass as new () => T)() };
       this.instances.push(instance);
@@ -43,26 +44,21 @@ export class TypeOrmPlugin implements GabliamPlugin {
     const connection = container.get(ConnectionManager);
     await connection.open();
   }
+
   bind(container: Container, registry: Registry) {
     const entities = registry
       .get<ValueRegistry>(TYPE.Entity)
-      .map(({ target }) => {
-        return target;
-      });
+      .map(({ target }) => target);
     container.bind<any>(ENTITIES_TYPEORM).toConstantValue(entities);
 
     const migrations = registry
       .get<ValueRegistry>(TYPE.Migration)
-      .map(({ target }) => {
-        return target;
-      });
+      .map(({ target }) => target);
     container.bind<any>(MIGRATIONS_TYPEORM).toConstantValue(migrations);
 
     const subscribers = registry
       .get<ValueRegistry>(TYPE.EventSubscriber)
-      .map(({ target }) => {
-        return target;
-      });
+      .map(({ target }) => target);
     container.bind<any>(SUBSCRIBERS_TYPEORM).toConstantValue(subscribers);
   }
 

@@ -1,13 +1,13 @@
 import { Service } from '@gabliam/core';
 import {
+  Context,
+  GabContext,
   Interceptor,
   InterceptorConstructor,
-  UseInterceptors,
   METADATA_KEY,
-  GabContext,
-  Context,
   Next,
   nextFn,
+  UseInterceptors,
 } from '@gabliam/web-core';
 import { express } from './express';
 
@@ -42,7 +42,7 @@ export const toInterceptor = (
   mid: express.RequestHandler,
 ): InterceptorConstructor => {
   const clazz: InterceptorConstructor = class implements Interceptor {
-    async intercept(context: GabContext, next: nextFn) {
+    async intercept(context: GabContext, next: nextFn): Promise<any> {
       const req = context.request.originalRequest;
       const res = context.response.originalResponse;
       switch (mid.length) {
@@ -62,6 +62,7 @@ export const toInterceptor = (
         default:
           (<any>mid)(req, res);
           await next();
+          return Promise.resolve();
       }
     }
   };

@@ -46,13 +46,14 @@ export function configureValueExtractor(container: Container): ValueExtractor {
   return (
     path: string,
     defaultValue: any,
-    validator?: ValueValidator | null
+    validator?: ValueValidator | null,
   ): any => {
-    let value = undefined;
+    let value;
     const config = container.get<object>(APP_CONFIG);
     try {
       const expression = new ExpressionParser(config).parseExpression(path);
       value = expression.getValue();
+      // eslint-disable-next-line no-empty
     } catch {}
 
     if (value === undefined) {
@@ -63,11 +64,11 @@ export function configureValueExtractor(container: Container): ValueExtractor {
       if (validator) {
         value = valueValidator(path, value, validator);
       }
-      return value;
     } catch (err) {
       if (err instanceof ValueValidationError) {
         throw err;
       }
     }
+    return value;
   };
 }

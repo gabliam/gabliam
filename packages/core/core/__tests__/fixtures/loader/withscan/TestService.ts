@@ -1,5 +1,5 @@
-import { Service, Scan } from '../../../../src';
 import path from 'path';
+import { Scan, Service } from '../../../../src';
 
 @Scan(path.resolve(__dirname, '../subfoldertoscan'))
 @Service()

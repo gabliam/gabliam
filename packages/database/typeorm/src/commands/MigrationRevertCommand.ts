@@ -1,7 +1,8 @@
-import { createConnection, Connection } from '../index';
-import { CommandUtils } from './CommandUtils';
-import yargs from 'yargs';
+/* eslint-disable no-console */
 import chalk from 'chalk';
+import yargs from 'yargs';
+import { Connection, createConnection } from '../index';
+import { CommandUtils } from './CommandUtils';
 
 export interface MigrationRevertCommandArgs {
   app?: string;
@@ -19,6 +20,7 @@ export interface MigrationRevertCommandArgs {
 export class MigrationRevertCommand
   implements yargs.CommandModule<{}, MigrationRevertCommandArgs> {
   command = 'migration:revert';
+
   describe = 'Reverts last executed migration.';
 
   builder(args: yargs.Argv) {
@@ -47,7 +49,7 @@ export class MigrationRevertCommand
   }
 
   async handler(args: yargs.Arguments<MigrationRevertCommandArgs>) {
-    let connection: Connection | undefined = undefined;
+    let connection: Connection | undefined;
     try {
       const connectionOptionsReader = await CommandUtils.getGabliamConnectionOptionsReader(
         {

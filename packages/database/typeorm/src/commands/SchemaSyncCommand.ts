@@ -1,8 +1,9 @@
-import { createConnection } from '../index';
-import { Connection } from 'typeorm';
-import { CommandUtils } from './CommandUtils';
-import yargs from 'yargs';
+/* eslint-disable no-console */
 import chalk from 'chalk';
+import { Connection } from 'typeorm';
+import yargs from 'yargs';
+import { createConnection } from '../index';
+import { CommandUtils } from './CommandUtils';
 
 export interface SchemaSyncCommandArgs {
   app?: string;
@@ -18,6 +19,7 @@ export interface SchemaSyncCommandArgs {
 export class SchemaSyncCommand
   implements yargs.CommandModule<{}, SchemaSyncCommandArgs> {
   command = 'schema:sync';
+
   describe =
     'Synchronizes your entities with database schema. It runs schema update queries on all connections you have. ' +
     'To run update queries on a concrete connection use -c option.';
@@ -43,7 +45,7 @@ export class SchemaSyncCommand
   }
 
   async handler(args: yargs.Arguments<SchemaSyncCommandArgs>) {
-    let connection: Connection | undefined = undefined;
+    let connection: Connection | undefined;
     try {
       const connectionOptionsReader = await CommandUtils.getGabliamConnectionOptionsReader(
         {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import { Bean, InjectContainer, Joi, PluginConfig, Value } from '@gabliam/core';
 import d from 'debug';
 import _ from 'lodash';
@@ -10,6 +11,7 @@ import {
   CachePgkNotInstalledError,
 } from './error';
 import { SimpleCacheManager } from './simple-cache-manager';
+
 const debug = d('Gabliam:Plugin:CachePlugin');
 
 export interface PluginConfig {
@@ -127,7 +129,7 @@ export class CachePluginConfig {
           return SimpleCacheManager;
         default:
           try {
-            // eslint-disable-next-line @typescript-eslint/no-var-requires
+            // eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-dynamic-require, global-require
             return <ConstructableCacheManager>require(cacheManager).default;
           } catch {
             throw new CacheManagerPgkNotInstalledError(cacheManager);
@@ -148,7 +150,7 @@ export class CachePluginConfig {
           return NoOpCache;
         default:
           try {
-            // eslint-disable-next-line @typescript-eslint/no-var-requires
+            // eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-dynamic-require, global-require
             return <ConstructableCache>require(cache).default;
           } catch {
             throw new CachePgkNotInstalledError(cache);

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import { ERRORS_MSGS, METADATA_KEY } from '../constants';
 import { makeDecorator } from '../decorator';
 import { GabliamPluginConstructor, PluginDependency } from '../interfaces';
@@ -63,14 +64,16 @@ export interface Plugin {
 function isPluginDependency(obj: any): obj is PluginDependency {
   return (
     typeof obj === 'object' &&
-    (obj.hasOwnProperty('name') || obj.hasOwnProperty('order'))
+    (Object.prototype.hasOwnProperty.call(obj, 'name') ||
+      Object.prototype.hasOwnProperty.call(obj, 'order'))
   );
 }
 
 function isPluginOptions(obj: any): obj is PluginOptions {
   return (
     typeof obj === 'object' &&
-    (obj.hasOwnProperty('name') || obj.hasOwnProperty('dependencies'))
+    (Object.prototype.hasOwnProperty.call(obj, 'name') ||
+      Object.prototype.hasOwnProperty.call(obj, 'dependencies'))
   );
 }
 
@@ -85,7 +88,7 @@ export const Plugin: PluginDecorator = makeDecorator(
       } else if (isPluginOptions(value)) {
         name = value.name ? value.name : name;
         if (value.dependencies) {
-          value.dependencies.forEach(dep => {
+          value.dependencies.forEach((dep) => {
             if (isPluginDependency(dep)) {
               dependencies.push(dep);
             } else {
@@ -102,5 +105,5 @@ export const Plugin: PluginDecorator = makeDecorator(
   },
   undefined,
   true,
-  ERRORS_MSGS.DUPLICATED_PLUGIN_DECORATOR
+  ERRORS_MSGS.DUPLICATED_PLUGIN_DECORATOR,
 );

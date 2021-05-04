@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import { makeDecorator } from '@gabliam/core';
 import { ERRORS_MSGS, METADATA_KEY } from '../constant';
 
@@ -43,5 +44,5 @@ export const CacheGroup: CacheGroupDecorator = makeDecorator(
   (cacheGroupName: string): CacheGroup => ({ cacheGroupName }),
   undefined,
   true,
-  ERRORS_MSGS.DUPLICATED_CACHE_DECORATOR
+  ERRORS_MSGS.DUPLICATED_CACHE_DECORATOR,
 );

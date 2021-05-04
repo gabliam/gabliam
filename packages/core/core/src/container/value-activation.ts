@@ -9,7 +9,7 @@ import { ContainerActivationHook } from './interfaces';
  *  Intercept all creation, if the class as a Value decorator then inject the value
  */
 export function makeActivationValue(
-  container: Container
+  container: Container,
 ): ContainerActivationHook {
   const valueExtractor = configureValueExtractor(container);
 
@@ -17,7 +17,7 @@ export function makeActivationValue(
     if (instance && instance.constructor) {
       const valueMetadatas = reflection.propMetadataOfDecorator<Value>(
         instance.constructor,
-        Value
+        Value,
       );
 
       for (const [key, values] of Object.entries(valueMetadatas)) {
@@ -25,6 +25,7 @@ export function makeActivationValue(
           // get the last definition of metadata
           const [{ path, validator }] = values.slice(-1);
           const defaultValue = instance[key];
+          // eslint-disable-next-line no-param-reassign
           instance[key] = valueExtractor(path, defaultValue, validator);
         }
       }

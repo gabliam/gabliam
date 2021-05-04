@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import caller from 'caller';
 import { dirname } from 'path';
 import { METADATA_KEY } from '../constants';
@@ -42,5 +43,5 @@ export const Scan: ScanDecorator = makeDecorator(
       pathToAdd = resolvePath(p, fileDir);
     }
     return { path: pathToAdd };
-  }
+  },
 );

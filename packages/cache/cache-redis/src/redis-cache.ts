@@ -20,6 +20,7 @@ export interface RedisCacheOptions {
 
 export class RedisCache implements Cache {
   private client!: Redis.Redis;
+
   private addTimeout: (promiseFn: Promise<any>) => Promise<any>;
 
   constructor(private name: string, private options: RedisCacheOptions = {}) {
@@ -29,7 +30,7 @@ export class RedisCache implements Cache {
           promiseFn,
           new Promise((resolve, reject) => {
             setTimeout(() => {
-              reject('timeout');
+              reject(new Error('timeout'));
             }, options.timeout);
           }),
         ]);
@@ -49,6 +50,7 @@ export class RedisCache implements Cache {
   getName(): string {
     return this.name;
   }
+
   getNativeCache(): RedisCache {
     return this;
   }
@@ -60,8 +62,9 @@ export class RedisCache implements Cache {
       }
       const realKey = this.getKey(key);
       try {
-        return this.deserialize(await this.client.getBuffer(realKey));
+        return await this.deserialize(await this.client.getBuffer(realKey));
       } catch {
+        // eslint-disable-next-line no-lone-blocks
         /* istanbul ignore next */ {
           return Promise.resolve(undefined);
         }
@@ -73,6 +76,7 @@ export class RedisCache implements Cache {
 
     return get;
   }
+
   async put(key: string, value: any, addTimeout = true): Promise<void> {
     const put = (async () => {
       const realKey = this.getKey(key);
@@ -94,6 +98,7 @@ export class RedisCache implements Cache {
         } else {
           await this.client.set(realKey, await this.serialize(value));
         }
+        // eslint-disable-next-line no-empty
       } catch {}
     })();
     if (addTimeout) {
@@ -114,7 +119,7 @@ export class RedisCache implements Cache {
         return null;
       }
 
-      return await this.get<T>(key, false);
+      return this.get<T>(key, false);
     })();
 
     if (addTimeout) {
@@ -123,10 +128,12 @@ export class RedisCache implements Cache {
 
     return putIfAbsent;
   }
+
   async evict(key: string, addTimeout = true): Promise<void> {
     const evict = (async () => {
       try {
         await this.client.del(this.getKey(key));
+        // eslint-disable-next-line no-empty
       } catch {}
     })();
 
@@ -145,6 +152,7 @@ export class RedisCache implements Cache {
           0,
           `${this.name}:*`,
         );
+        // eslint-disable-next-line no-empty
       } catch {}
     })();
 
@@ -160,6 +168,7 @@ export class RedisCache implements Cache {
       try {
         return (await this.client.exists(this.getKey(key))) === 1;
       } catch {
+        // eslint-disable-next-line no-lone-blocks
         /* istanbul ignore next */ {
           return false;
         }
@@ -181,9 +190,8 @@ export class RedisCache implements Cache {
     try {
       if (this.options.gzipEnabled === true) {
         return <any>await gzipAsync(JSON.stringify(value));
-      } else {
-        return JSON.stringify(value);
       }
+      return JSON.stringify(value);
     } catch {
       return undefined;
     }
@@ -193,9 +201,8 @@ export class RedisCache implements Cache {
     try {
       if (this.options.gzipEnabled === true) {
         return JSON.parse(<string>await gunzipAsync(value));
-      } else {
-        return JSON.parse(value.toString());
       }
+      return JSON.parse(value.toString());
     } catch {
       return undefined;
     }

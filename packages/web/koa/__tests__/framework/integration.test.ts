@@ -52,10 +52,7 @@ describe('Integration Tests:', () => {
           get: '/',
         });
         await appTest.buildAndStart();
-        const response = await appTest
-          .supertest()
-          .get('/test')
-          .expect(200);
+        const response = await appTest.supertest().get('/test').expect(200);
         expect(response).toMatchSnapshot();
       });
 
@@ -64,17 +61,14 @@ describe('Integration Tests:', () => {
         class TestController {
           @Get('/')
           async getTest() {
-            return new Promise(resolve => {
+            return new Promise((resolve) => {
               setTimeout(resolve, 100, 'GET');
             });
           }
         }
         appTest.addClass(TestController);
         await appTest.buildAndStart();
-        const response = await appTest
-          .supertest()
-          .get('/')
-          .expect(200);
+        const response = await appTest.supertest().get('/').expect(200);
         expect(response).toMatchSnapshot();
       });
 
@@ -90,10 +84,7 @@ describe('Integration Tests:', () => {
         }
         appTest.addClass(TestController);
         await appTest.buildAndStart();
-        const response = await appTest
-          .supertest()
-          .get('/')
-          .expect(500);
+        const response = await appTest.supertest().get('/').expect(500);
         expect(response).toMatchSnapshot();
       });
 
@@ -113,10 +104,7 @@ describe('Integration Tests:', () => {
 
         appTest.addClass(TestController);
         await appTest.buildAndStart();
-        const response = await appTest
-          .supertest()
-          .get('/')
-          .expect(200);
+        const response = await appTest.supertest().get('/').expect(200);
         expect(response).toMatchSnapshot();
       });
 
@@ -125,13 +113,13 @@ describe('Integration Tests:', () => {
         class TestController {
           @Get('/')
           public getTest(@Next() nextFunc: nextFn) {
-            return new Promise(resolve => {
+            return new Promise((resolve) => {
               setTimeout(
                 () => {
                   resolve(nextFunc());
                 },
                 100,
-                'GET'
+                'GET',
               );
             });
           }
@@ -143,10 +131,7 @@ describe('Integration Tests:', () => {
         }
         appTest.addClass(TestController);
         await appTest.buildAndStart();
-        const response = await appTest
-          .supertest()
-          .get('/')
-          .expect(200);
+        const response = await appTest.supertest().get('/').expect(200);
         expect(response).toMatchSnapshot();
       });
 
@@ -160,17 +145,14 @@ describe('Integration Tests:', () => {
 
           @Get('/')
           public getTest2() {
-            return new Promise(resolve => {
+            return new Promise((resolve) => {
               setTimeout(resolve, 100, 'GET');
             });
           }
         }
         appTest.addClass(TestController);
         await appTest.buildAndStart();
-        const response = await appTest
-          .supertest()
-          .get('/')
-          .expect(200);
+        const response = await appTest.supertest().get('/').expect(200);
         expect(response).toMatchSnapshot();
       });
 
@@ -181,22 +163,27 @@ describe('Integration Tests:', () => {
           public getTest(@Context() ctx: GabContext) {
             ctx.body = 'GET';
           }
+
           @Post('/')
           public postTest(@Context() ctx: GabContext) {
             ctx.body = 'POST';
           }
+
           @Put('/')
           public putTest(@Context() ctx: GabContext) {
             ctx.body = 'PUT';
           }
+
           @Patch('/')
           public patchTest(@Context() ctx: GabContext) {
             ctx.body = 'PATCH';
           }
+
           @Head('/')
           public headTest(@Context() ctx: GabContext) {
             ctx.body = 'HEAD';
           }
+
           @Delete('/')
           public deleteTest(@Context() ctx: GabContext) {
             ctx.body = 'DELETE';
@@ -237,10 +224,7 @@ describe('Integration Tests:', () => {
         appTest.addClass(TestController);
         await appTest.buildAndStart();
 
-        const response = await appTest
-          .supertest()
-          .propfind('/')
-          .expect(200);
+        const response = await appTest.supertest().propfind('/').expect(200);
         expect(response).toMatchSnapshot();
       });
 
@@ -256,10 +240,7 @@ describe('Integration Tests:', () => {
         appTest.addClass(TestController);
         await appTest.buildAndStart();
 
-        const response = await appTest
-          .supertest()
-          .get('/')
-          .expect(200);
+        const response = await appTest.supertest().get('/').expect(200);
         expect(response).toMatchSnapshot();
       });
 
@@ -277,6 +258,7 @@ describe('Integration Tests:', () => {
           @Bean(CUSTOM_ROUTER_CREATOR)
           custom() {
             return (prefix: string) =>
+              // eslint-disable-next-line new-cap
               new koaRouter({
                 prefix,
                 sensitive: true,

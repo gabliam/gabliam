@@ -21,12 +21,15 @@ export class MemoryCache implements Cache {
   getName(): string {
     return this.name;
   }
+
   getNativeCache() {
     return this;
   }
+
   async get<T>(key: string): Promise<T | null | undefined> {
     return this.store.get(key);
   }
+
   async put(key: string, value: any): Promise<void> {
     this.store.set(key, value);
   }
@@ -41,9 +44,11 @@ export class MemoryCache implements Cache {
     }
     return this.store.get(key);
   }
+
   async evict(key: string): Promise<void> {
     this.store.del(key);
   }
+
   async clear(): Promise<void> {
     this.store.reset();
   }

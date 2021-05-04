@@ -62,7 +62,7 @@ export class LoaderConfig {
 
       if (typeof loader === 'string') {
         try {
-          // eslint-disable-next-line @typescript-eslint/no-var-requires
+          // eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-dynamic-require, global-require
           loaderFunc = require(loader).default;
         } catch {
           throw new LoaderConfigPgkNotInstalledError(loader);
@@ -71,6 +71,7 @@ export class LoaderConfig {
         loaderFunc = loader;
       }
       debug('loaderFunc', { loaderFunc });
+      // eslint-disable-next-line no-await-in-loop
       const loadedConfig = await loaderFunc(options, profile);
 
       config = _.merge({}, config, loadedConfig);

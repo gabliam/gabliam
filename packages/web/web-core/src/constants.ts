@@ -6,7 +6,7 @@ export const TYPE = {
 export const APP = Symbol('GABLIAM/WEB_APP');
 
 export const REQUEST_LISTENER_CREATOR = Symbol(
-  'GABLIAM/REQUEST_LISTENER_CREATOR'
+  'GABLIAM/REQUEST_LISTENER_CREATOR',
 );
 
 export const SERVER = Symbol('GABLIAM/WEB_APP_SERVER');
@@ -30,6 +30,7 @@ export const METADATA_KEY = {
 
 export enum PARAMETER_TYPE {
   EXEC_CONTEXT = 'ExecContext',
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   CONTEXT = 'context',
   REQUEST = 'request',
   RESPONSE = 'response',

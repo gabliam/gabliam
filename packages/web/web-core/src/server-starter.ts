@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { gabliamValue } from '@gabliam/core';
 import { createServer, Server } from 'http';
 import { RequestListenerCreator } from './interface';
@@ -8,7 +9,7 @@ export interface ServerStarter {
   start(
     restConfig: WebPluginConfig,
     webConfiguration: WebConfiguration,
-    listenerCreator: RequestListenerCreator
+    listenerCreator: RequestListenerCreator,
   ): gabliamValue<Server>;
 }
 
@@ -22,23 +23,17 @@ export class HttpServerStarter implements ServerStarter {
   start(
     restConfig: WebPluginConfig,
     webConfiguration: WebConfiguration,
-    listenerCreator: RequestListenerCreator
+    listenerCreator: RequestListenerCreator,
   ) {
     const { port, verbose } = restConfig;
 
     let server = createServer(listenerCreator());
     server.listen(port, restConfig.hostname);
-    server.on('error', onError);
-    server.on('listening', onListening);
-
-    for (const serverConfig of webConfiguration.serverConfigs) {
-      server = serverConfig(server);
-    }
 
     /* istanbul ignore next */
     function onError(error: NodeJS.ErrnoException): void {
       if (error.syscall !== 'listen') throw error;
-      const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
+      const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
       switch (error.code) {
         case 'EACCES':
           if (verbose) {
@@ -69,6 +64,13 @@ export class HttpServerStarter implements ServerStarter {
         }
         console.log(`Listening on ${bind}`);
       }
+    }
+
+    server.on('error', onError);
+    server.on('listening', onListening);
+
+    for (const serverConfig of webConfiguration.serverConfigs) {
+      server = serverConfig(server);
     }
 
     return server;

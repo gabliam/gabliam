@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import { interfaces } from 'inversify';
 import { METADATA_KEY } from '../constants';
 import { makeDecorator } from '../decorator';
@@ -42,5 +43,5 @@ export const Register: RegisterDecorator = makeDecorator(
   (obj: OptionnalOne<Register, 'autobind'>): Register => ({
     autobind: true,
     ...obj,
-  })
+  }),
 );

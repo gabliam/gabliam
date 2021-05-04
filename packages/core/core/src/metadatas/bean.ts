@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import { interfaces } from 'inversify';
 import { METADATA_KEY } from '../constants';
 import { makePropDecorator } from '../decorator';
@@ -59,7 +60,7 @@ export interface Bean {
 
 export const Bean: BeanDecorator = makePropDecorator(
   METADATA_KEY.bean,
-  (id: interfaces.ServiceIdentifier<any>) => ({ id })
+  (id: interfaces.ServiceIdentifier<any>) => ({ id }),
 );
 
 /**
@@ -120,5 +121,5 @@ export interface OnMissingBean {
 
 export const OnMissingBean: OnMissingBeanDecorator = makePropDecorator(
   METADATA_KEY.onMissingBean,
-  (id: interfaces.ServiceIdentifier<any>) => ({ id })
+  (id: interfaces.ServiceIdentifier<any>) => ({ id }),
 );

@@ -1,9 +1,9 @@
-import { createConnection, Connection } from '../index';
-import { CommandUtils } from './CommandUtils';
+/* eslint-disable no-console */
+import chalk from 'chalk';
 import { highlight } from 'cli-highlight';
 import yargs from 'yargs';
-
-import chalk from 'chalk';
+import { Connection, createConnection } from '../index';
+import { CommandUtils } from './CommandUtils';
 
 interface SchemaLogCommandArgs {
   app?: string;
@@ -19,6 +19,7 @@ interface SchemaLogCommandArgs {
 export class SchemaLogCommand
   implements yargs.CommandModule<{}, SchemaLogCommandArgs> {
   command = 'schema:log';
+
   describe =
     'Shows sql to be executed by schema:sync command. It shows sql log only for your default connection. ' +
     'To run update queries on a concrete connection use -c option.';
@@ -46,7 +47,7 @@ export class SchemaLogCommand
   }
 
   async handler(args: yargs.Arguments<SchemaLogCommandArgs>) {
-    let connection: Connection | undefined = undefined;
+    let connection: Connection | undefined;
     try {
       const connectionOptionsReader = await CommandUtils.getGabliamConnectionOptionsReader(
         {
@@ -82,8 +83,7 @@ export class SchemaLogCommand
           .join('');
         console.log(
           chalk.yellow(
-            '---------------------------------------------------------------' +
-              lengthSeparators,
+            `---------------------------------------------------------------${lengthSeparators}`,
           ),
         );
         console.log(
@@ -95,8 +95,7 @@ export class SchemaLogCommand
         );
         console.log(
           chalk.yellow(
-            '---------------------------------------------------------------' +
-              lengthSeparators,
+            `---------------------------------------------------------------${lengthSeparators}`,
           ),
         );
 
@@ -104,7 +103,7 @@ export class SchemaLogCommand
           let sqlString = upQuery.query;
           sqlString = sqlString.trim();
           sqlString =
-            sqlString.substr(-1) === ';' ? sqlString : sqlString + ';';
+            sqlString.substr(-1) === ';' ? sqlString : `${sqlString};`;
           console.log(highlight(sqlString));
         });
       }

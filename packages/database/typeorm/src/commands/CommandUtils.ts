@@ -1,8 +1,8 @@
 import { gabliamBuilder, gabliamFindApp, setupTsProject } from '@gabliam/core';
-import { GabliamConnectionOptionsReader } from '../connection-options-reader';
 import fs from 'fs';
-import path from 'path';
 import mkdirp from 'mkdirp';
+import path from 'path';
+import { GabliamConnectionOptionsReader } from '../connection-options-reader';
 
 /**
  * Command line utils functions.
@@ -28,10 +28,10 @@ export class CommandUtils {
     await CommandUtils.createDirectories(path.dirname(filePath));
     return new Promise<void>((ok, fail) => {
       if (override === false && fs.existsSync(filePath)) {
-        return ok();
+        ok();
+      } else {
+        fs.writeFile(filePath, content, (err) => (err ? fail(err) : ok()));
       }
-
-      fs.writeFile(filePath, content, (err) => (err ? fail(err) : ok()));
     });
   }
 

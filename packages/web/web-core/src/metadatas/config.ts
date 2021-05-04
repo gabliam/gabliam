@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import { makePropDecorator } from '@gabliam/core';
 import { ERRORS_MSGS, METADATA_KEY } from '../constants';
 

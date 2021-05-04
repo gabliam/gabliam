@@ -28,11 +28,11 @@ const getKeys = (error: Joi.ValidationError, options: ValidationOptions) => {
 export const createValidationException = (
   error: Joi.ValidationError,
   source: string,
-  options: ValidationOptions
+  options: ValidationOptions,
 ) =>
   new BadRequestException(error.message, undefined, {
     validation: {
-      source: source,
+      source,
       keys: getKeys(error, options),
     },
   });

@@ -18,7 +18,6 @@ import {
   SERVER,
   WebConfiguration,
   WebPluginBase,
-  WebConfigurationContructor,
 } from '@gabliam/web-core';
 import d from 'debug';
 import http from 'http';
@@ -34,15 +33,12 @@ const debug = d('Gabliam:Plugin:ExpressPlugin');
 @Plugin('KoaPlugin')
 @Scan()
 export class KoaPlugin extends WebPluginBase<koa> implements GabliamPlugin {
-  constructor(config?: Partial<WebConfigurationContructor<koa>>) {
-    super(config);
-  }
-
   bindApp(
     container: Container,
     registry: Registry,
     webConfiguration: WebConfiguration,
   ): void {
+    // eslint-disable-next-line new-cap
     container.bind(APP).toConstantValue(new koa());
     container.bind(REQUEST_LISTENER_CREATOR).toConstantValue(() => {
       const app = container.get<koa>(APP);
@@ -69,10 +65,12 @@ export class KoaPlugin extends WebPluginBase<koa> implements GabliamPlugin {
     try {
       // server can be undefined (if start is not called)
       const server = container.get<http.Server>(SERVER);
-      return new Promise<void>((resolve) => {
+      return await new Promise<void>((resolve) => {
         server.close(() => resolve());
       });
-    } catch (e) {}
+    } catch (e) {
+      return Promise.resolve();
+    }
   }
 
   async buildControllers(
@@ -81,11 +79,13 @@ export class KoaPlugin extends WebPluginBase<koa> implements GabliamPlugin {
   ) {
     // get the router creator
     let routerCreator: RouterCreator = (prefix?: string) =>
+      // eslint-disable-next-line new-cap
       new koaRouter({
         prefix,
       });
     try {
       routerCreator = container.get<RouterCreator>(CUSTOM_ROUTER_CREATOR);
+      // eslint-disable-next-line no-empty
     } catch (e) {}
 
     for (const [
@@ -109,7 +109,7 @@ export class KoaPlugin extends WebPluginBase<koa> implements GabliamPlugin {
 
         let methodMetadataPath = methodInfo.methodPath;
         if (methodMetadataPath[0] !== '/') {
-          methodMetadataPath = '/' + methodMetadataPath;
+          methodMetadataPath = `/${methodMetadataPath}`;
         }
 
         const addJsonHandler = async (
@@ -154,7 +154,7 @@ export class KoaPlugin extends WebPluginBase<koa> implements GabliamPlugin {
 
       const callNext = async () => {
         const args = await methodInfo.extractArgs(ctx, execCtx, next);
-        return await toPromise(controller[methodInfo.methodName](...args));
+        return toPromise(controller[methodInfo.methodName](...args));
       };
 
       await composeInterceptor(ctx, execCtx, callNext);

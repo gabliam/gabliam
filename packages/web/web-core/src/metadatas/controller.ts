@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import {
   injectable,
   inversifyInterfaces,
@@ -107,7 +108,7 @@ export const Controller: ControllerDecorator = makeDecorator(
     Register({ type: TYPE.Controller, id })(cls);
   },
   true,
-  ERRORS_MSGS.DUPLICATED_CONTROLLER_DECORATOR
+  ERRORS_MSGS.DUPLICATED_CONTROLLER_DECORATOR,
 );
 /**
  * Type of the `RestController` decorator / constructor function.
@@ -180,5 +181,5 @@ export const RestController: RestControllerDecorator = makeDecorator(
     Register({ type: TYPE.Controller, id })(cls);
   },
   true,
-  ERRORS_MSGS.DUPLICATED_CONTROLLER_DECORATOR
+  ERRORS_MSGS.DUPLICATED_CONTROLLER_DECORATOR,
 );

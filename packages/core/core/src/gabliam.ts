@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 import { ExpressionParser } from '@gabliam/expression';
 import d from 'debug';
 import _ from 'lodash';
@@ -68,6 +69,7 @@ export class Gabliam {
      */
     this.container.bind(CORE_CONFIG).toConstantValue(this.options);
   }
+
   /**
    * Add a plugin
    * @param  {GabliamPluginConstructor} plugin
@@ -77,6 +79,7 @@ export class Gabliam {
     this.pluginList.add(plugin);
     return this;
   }
+
   /**
    * Add any plugins
    * @param  {GabliamPluginConstructor[]} ...plugins
@@ -105,7 +108,7 @@ export class Gabliam {
      * Loading phase
      */
     this.registry.addRegistry(
-      this.loaderModule.load(this.options.scanPath, this.pluginList.plugins)
+      this.loaderModule.load(this.options.scanPath, this.pluginList.plugins),
     );
 
     /**
@@ -187,7 +190,7 @@ export class Gabliam {
     const values = this.registry.get<PreDestroyRegistry>(TYPE.PreDestroy);
 
     const instanceToDestroy = async (
-      value: ValueRegistry<PreDestroyRegistry>
+      value: ValueRegistry<PreDestroyRegistry>,
     ) => {
       if (value.options) {
         const instance = this.container.get(value.id);
@@ -230,12 +233,11 @@ export class Gabliam {
   private async _bind() {
     debug('_bind');
 
-    this.registry.getAllAutoBind().forEach(({ id, target }) =>
-      this.container
-        .bind(id)
-        .to(target)
-        .inSingletonScope()
-    );
+    this.registry
+      .getAllAutoBind()
+      .forEach(({ id, target }) =>
+        this.container.bind(id).to(target).inSingletonScope(),
+      );
 
     for (const plugin of this.pluginList.pluginsWithBind) {
       await toPromise(plugin.bind(this.container, this.registry));
@@ -263,20 +265,21 @@ export class Gabliam {
         // get all bean metadata in config classes
         const beanMetadatas = reflection.propMetadataOfDecorator<Bean>(
           ctor,
-          Bean
+          Bean,
         );
 
         // get on missing bean metadata
-        const onMissingBeanMetadatas = reflection.propMetadataOfDecorator<
-          OnMissingBean
-        >(ctor, OnMissingBean);
+        const onMissingBeanMetadatas = reflection.propMetadataOfDecorator<OnMissingBean>(
+          ctor,
+          OnMissingBean,
+        );
 
         const beforeCreateMetas = Object.keys(
-          reflection.propMetadataOfDecorator(ctor, BeforeCreate)
+          reflection.propMetadataOfDecorator(ctor, BeforeCreate),
         );
 
         const initMetadas = Object.keys(
-          reflection.propMetadataOfDecorator(ctor, Init)
+          reflection.propMetadataOfDecorator(ctor, Init),
         );
 
         // call all beforeCreate method if exist
@@ -301,6 +304,7 @@ export class Gabliam {
               try {
                 this.container.getAll(onMissingBean.id);
                 allMissing = false;
+                // eslint-disable-next-line no-empty
               } catch {}
             }
 
@@ -310,14 +314,15 @@ export class Gabliam {
                 const bean = await callInstance(confInstance, key);
                 this.container.bind(id).toConstantValue(bean);
                 if (bean === undefined || bean.constructor === undefined) {
+                  // eslint-disable-next-line no-continue
                   continue;
                 }
 
                 const preDestroys = Object.keys(
                   reflection.propMetadataOfDecorator(
                     bean.constructor,
-                    PreDestroy
-                  )
+                    PreDestroy,
+                  ),
                 );
 
                 // bean can return undefined or can be a constant value
@@ -344,7 +349,7 @@ export class Gabliam {
 
         for (const plugin of this.pluginList.pluginWithConfig) {
           await toPromise(
-            plugin.config(this.container, this.registry, confInstance)
+            plugin.config(this.container, this.registry, confInstance),
           );
         }
       }

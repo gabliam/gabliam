@@ -1,5 +1,5 @@
-import { ValueRegistry } from './interfaces';
 import _ from 'lodash';
+import { ValueRegistry } from './interfaces';
 
 /**
  * Registry of all classes in gabliam instance
@@ -16,6 +16,7 @@ export class Registry {
       this.get(type).push(...value);
     }
   }
+
   /**
    * Get values of type in  a registry
    * @param  {symbol|string} type
@@ -29,6 +30,7 @@ export class Registry {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return this.registry.get(type)!;
   }
+
   /**
    * Add value in registry for a type
    * @param  {symbol|string} type

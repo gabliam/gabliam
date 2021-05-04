@@ -1,6 +1,21 @@
 import { isType, Type } from '../common';
 import { ANNOTATIONS, PARAMETERS, PROP_METADATA } from '../decorator/util';
 
+const getGabMetadataName = (decoratorOrMetadataName: any): string =>
+  isType(decoratorOrMetadataName)
+    ? (decoratorOrMetadataName as any).prototype.gabMetadataName
+    : decoratorOrMetadataName;
+
+function getParentCtor(ctor: Function): Type<any> {
+  const parentProto = ctor.prototype
+    ? Object.getPrototypeOf(ctor.prototype)
+    : null;
+  const parentCtor = parentProto ? parentProto.constructor : null;
+  // Note: We always use `Object` as the null value
+  // to simplify checking later on.
+  return parentCtor || Object;
+}
+
 export class Reflection {
   constructor(private _reflect: any = Reflect) {}
 
@@ -33,7 +48,7 @@ export class Reflection {
   private _ownParameters(type: Type<any>, propertyKey: string): any[][] | null {
     // API for metadata created by invoking the decorators.
     const paramAnnotations =
-      type.hasOwnProperty(PARAMETERS) &&
+      Object.prototype.hasOwnProperty.call(type, PARAMETERS) &&
       (type as any)[PARAMETERS] &&
       (type as any)[PARAMETERS][propertyKey]
         ? (type as any)[PARAMETERS][propertyKey]
@@ -42,7 +57,7 @@ export class Reflection {
     const paramTypes = this._reflect.getOwnMetadata(
       'design:paramtypes',
       type.prototype,
-      propertyKey
+      propertyKey,
     );
 
     if (paramTypes && paramAnnotations) {
@@ -87,10 +102,10 @@ export class Reflection {
 
   private _ownAnnotations(
     typeOrFunc: Type<any>,
-    parentCtor: any
+    parentCtor: any,
   ): any[] | null {
     // API for metadata created by invoking the decorators.
-    if (typeOrFunc.hasOwnProperty(ANNOTATIONS)) {
+    if (Object.prototype.hasOwnProperty.call(typeOrFunc, ANNOTATIONS)) {
       return (typeOrFunc as any)[ANNOTATIONS];
     }
     return null;
@@ -118,7 +133,7 @@ export class Reflection {
 
   private _ownPropMetadata(typeOrFunc: any): { [key: string]: any[] } | null {
     // API for metadata created by invoking the decorators.
-    if (typeOrFunc.hasOwnProperty(PROP_METADATA)) {
+    if (Object.prototype.hasOwnProperty.call(typeOrFunc, PROP_METADATA)) {
       return (typeOrFunc as any)[PROP_METADATA];
     }
     return null;
@@ -137,15 +152,15 @@ export class Reflection {
     const propMetadata: { [key: string]: any[] } = {};
     if (parentCtor !== Object) {
       const parentPropMetadata = this.propMetadata(parentCtor);
-      Object.keys(parentPropMetadata).forEach(propName => {
+      Object.keys(parentPropMetadata).forEach((propName) => {
         propMetadata[propName] = parentPropMetadata[propName];
       });
     }
     const ownPropMetadata = this._ownPropMetadata(typeOrFunc);
     if (ownPropMetadata) {
-      Object.keys(ownPropMetadata).forEach(propName => {
+      Object.keys(ownPropMetadata).forEach((propName) => {
         const decorators: any[] = [];
-        if (propMetadata.hasOwnProperty(propName)) {
+        if (Object.prototype.hasOwnProperty.call(propMetadata, propName)) {
           decorators.push(...propMetadata[propName]);
         }
         decorators.push(...ownPropMetadata[propName]);
@@ -164,11 +179,10 @@ export class Reflection {
     }
 
     const gabMetadataNames: string[] = decoratorOrMetadataNames.map(
-      decoratorOrMetadataName => {
-        return isType(decoratorOrMetadataName)
+      (decoratorOrMetadataName) =>
+        isType(decoratorOrMetadataName)
           ? (decoratorOrMetadataName as any).prototype.gabMetadataName
-          : decoratorOrMetadataName;
-      }
+          : decoratorOrMetadataName,
     );
 
     const propMetadatas = this.propMetadata(typeOrFunc);
@@ -192,7 +206,7 @@ export class Reflection {
   annotationsOfDecorator<T = {}>(
     typeOrFunc: any,
     decoratorOrMetadataName: any,
-    includeParent = true
+    includeParent = true,
   ): T[] {
     if (!isType(typeOrFunc)) {
       return [];
@@ -202,13 +216,13 @@ export class Reflection {
 
     const annotations = this.annotations(typeOrFunc, includeParent);
 
-    return annotations.filter(a => a.gabMetadataName === gabMetadataName);
+    return annotations.filter((a) => a.gabMetadataName === gabMetadataName);
   }
 
   parametersOfDecorator(
     type: Type<any>,
     property: string,
-    decoratorOrMetadataName: any
+    decoratorOrMetadataName: any,
   ): any[][] {
     if (!isType(type)) {
       return [];
@@ -218,28 +232,13 @@ export class Reflection {
 
     const parameters = this.parameters(type, property);
 
-    const res = parameters.map(([type, ...metas]) => [
-      type,
-      metas.filter(a => a.gabMetadataName === gabMetadataName),
+    const res = parameters.map(([t, ...metas]) => [
+      t,
+      metas.filter((a) => a.gabMetadataName === gabMetadataName),
     ]);
 
     return res;
   }
-}
-
-const getGabMetadataName = (decoratorOrMetadataName: any): string =>
-  isType(decoratorOrMetadataName)
-    ? (decoratorOrMetadataName as any).prototype.gabMetadataName
-    : decoratorOrMetadataName;
-
-function getParentCtor(ctor: Function): Type<any> {
-  const parentProto = ctor.prototype
-    ? Object.getPrototypeOf(ctor.prototype)
-    : null;
-  const parentCtor = parentProto ? parentProto.constructor : null;
-  // Note: We always use `Object` as the null value
-  // to simplify checking later on.
-  return parentCtor || Object;
 }
 
 export const reflection = new Reflection();

@@ -74,15 +74,17 @@ export class AmqpConnection {
     this.channel = this.connection.createChannel({
       setup: async (channel: ConfirmChannel) => {
         for (const queue of this.queues) {
+          // eslint-disable-next-line no-await-in-loop
           await channel.assertQueue(queue.queueName, queue.queueOptions);
         }
         for (const { queueName, handler, options } of this.consumerList) {
+          // eslint-disable-next-line no-await-in-loop
           await channel.consume(queueName, handler, options);
         }
       },
     });
 
-    return new Promise<void>((resolve, reject) => {
+    await new Promise<void>((resolve, reject) => {
       this.connection.once('disconnect', (err: any) => {
         if (
           _.get(err, 'err.errno', undefined) === 'ENOTFOUND' ||
@@ -204,16 +206,19 @@ export class AmqpConnection {
     let promise = new PromiseB<T>((resolve, reject) => {
       const queueName = this.getQueueName(queue);
       if (!options.correlationId) {
+        // eslint-disable-next-line no-param-reassign
         options.correlationId = uuid();
       }
       const correlationId = options.correlationId;
 
       if (!options.replyTo) {
+        // eslint-disable-next-line no-param-reassign
         options.replyTo = `amqpSendAndReceive${uuid()}`;
       }
 
       if (!options.expiration) {
-        options.expiration = '' + timeout;
+        // eslint-disable-next-line no-param-reassign
+        options.expiration = `${timeout}`;
       }
 
       replyTo = options.replyTo;
@@ -226,11 +231,12 @@ export class AmqpConnection {
           autoDelete: true,
           durable: false,
         })
-        .then(() => {
-          return chan.consume(replyTo, async (msg: ConsumeMessage | null) => {
+        .then(() =>
+          chan.consume(replyTo, async (msg: ConsumeMessage | null) => {
             if (msg === null) {
               /* istanbul ignore next */
-              return reject(new AmqpMessageIsNullError());
+              reject(new AmqpMessageIsNullError());
+              return;
             }
             if (!onTimeout && msg.properties.correlationId === correlationId) {
               resolve(await this.parseContent(msg));
@@ -239,9 +245,10 @@ export class AmqpConnection {
 
             try {
               await chan.deleteQueue(replyTo);
+              // eslint-disable-next-line no-empty
             } catch {}
-          });
-        })
+          }),
+        )
         .then(async () => {
           chan.sendToQueue(queueName, await this.contentToBuffer(content), {
             contentEncoding: this.gzipEnabled ? 'gzip' : undefined,
@@ -258,6 +265,7 @@ export class AmqpConnection {
             if (chan) {
               try {
                 await chan.deleteQueue(replyTo);
+              // eslint-disable-next-line no-empty
               } catch {}
             }
           },
@@ -272,6 +280,7 @@ export class AmqpConnection {
           if (chan) {
             try {
               await chan.deleteQueue(replyTo);
+              // eslint-disable-next-line no-empty
             } catch {}
           }
           throw new AmqpTimeoutError((<any>e).message);
@@ -294,6 +303,7 @@ export class AmqpConnection {
       this.channel.removeAllListeners('connect');
       this.channel.removeAllListeners('error');
       await this.connection.close();
+      // eslint-disable-next-line no-empty
     } catch {}
 
     this.state = ConnectionState.stopped;
@@ -326,12 +336,11 @@ export class AmqpConnection {
         `application.amqp[${this.indexConfig}].queues['${queueName}'].queueName`,
         defaultValue,
       );
-    } else {
-      return this.valueExtractor(
-        `application.amqp.queues['${queueName}'].queueName`,
-        defaultValue,
-      );
     }
+    return this.valueExtractor(
+      `application.amqp.queues['${queueName}'].queueName`,
+      defaultValue,
+    );
   }
 
   /**
@@ -388,6 +397,7 @@ export class AmqpConnection {
 
     try {
       data = JSON.parse(data);
+      // eslint-disable-next-line no-empty
     } catch {}
 
     if (data === this.undefinedValue) {
@@ -462,6 +472,7 @@ export class AmqpConnection {
     const params = reflection.parameters(<any>controller.constructor, propKey);
 
     if (params.length === 0) {
+      // eslint-disable-next-line no-return-assign
       return (this.extractArgs[k] = async (msg) => [
         await this.parseContent(msg),
       ]);
@@ -471,6 +482,7 @@ export class AmqpConnection {
       (meta) => meta.slice(-1)[0],
     );
 
+    // eslint-disable-next-line no-return-assign
     return (this.extractArgs[k] = async (msg) => {
       const content = await this.parseContent(msg);
       return parameters.map((p) => p.handler(p.args, msg, content));
@@ -478,9 +490,11 @@ export class AmqpConnection {
   }
 
   private getChannel(): ConfirmChannel {
+    // eslint-disable-next-line no-underscore-dangle
     if ((<any>this.channel)._channel === null) {
       throw new AmqpConnectionError();
     }
+    // eslint-disable-next-line no-underscore-dangle
     return (<any>this.channel)._channel;
   }
 }

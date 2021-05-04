@@ -1,7 +1,7 @@
 import { GabResponse } from '@gabliam/web-core';
-import { koa } from './koa';
 import send from 'koa-send';
 import { alias } from 'property-tunnel';
+import { koa } from './koa';
 
 /* istanbul ignore next */
 export class KoaResponse implements GabResponse<koa.Response> {

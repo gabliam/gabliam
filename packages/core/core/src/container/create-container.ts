@@ -14,7 +14,7 @@ export function createContainer(
   const container = new Container();
   activationHooks.unshift(
     makeActivationInject(container),
-    makeActivationValue(container)
+    makeActivationValue(container),
   );
 
   // add custom onActivation hooks
@@ -22,12 +22,13 @@ export function createContainer(
     container.bind,
     (originalBind, ...rest: any[]) => {
       const binding = originalBind.apply(container, rest);
+      // eslint-disable-next-line no-underscore-dangle
       binding._binding.onActivation = (context: any, instance: any) => {
         const wires = _.flow(activationHooks);
         return wires(instance);
       };
       return binding;
-    }
+    },
   );
 
   const middlewares = [];

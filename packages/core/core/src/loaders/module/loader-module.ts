@@ -60,7 +60,7 @@ export class LoaderModule {
       .map((file) => `${folder}/${file}`);
 
     for (const file of files) {
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      // eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-dynamic-require, global-require
       const modules = require(file);
 
       // for all exported

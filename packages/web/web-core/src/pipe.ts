@@ -9,15 +9,12 @@ import { BadPipeError } from './errors/bad-pipe-error';
 import { WebConfiguration } from './web-configuration';
 import { UsePipes, PipeId } from './metadatas';
 
-const composePipe = (...fns: PipeFn[]): PipeFn => {
-  return async (val, type) => {
-    return fns.reduce(
-      (prevFn, nextFn) =>
-        toPromise(prevFn).then((v: any) => toPromise(nextFn(v, type))),
-      <any>Promise.resolve(val)
-    );
-  };
-};
+const composePipe = (...fns: PipeFn[]): PipeFn => async (val, type) =>
+  fns.reduce(
+    (prevFn, nextFn) =>
+      toPromise(prevFn).then((v: any) => toPromise(nextFn(v, type))),
+    <any>Promise.resolve(val),
+  );
 
 export type PipeFn = Pipe['transform'];
 
@@ -51,10 +48,7 @@ export const createPipeResolver = (container: Container) =>
           throw new BadPipeError(t);
         }
 
-        container
-          .bind(pipe)
-          .to(pipe)
-          .inSingletonScope();
+        container.bind(pipe).to(pipe).inSingletonScope();
         return container.get(pipe);
       } catch (e) {
         if (e instanceof BadPipeError) {
@@ -66,14 +60,14 @@ export const createPipeResolver = (container: Container) =>
     }
   };
 
-const defaultPipe: PipeFn = value => Promise.resolve(value);
+const defaultPipe: PipeFn = (value) => Promise.resolve(value);
 
 export const extractPipes = (
   container: Container,
   controller: any,
   key: string,
   index: number,
-  addGlobal = true
+  addGlobal = true,
 ): PipeFn => {
   const pipeIds: PipeId[] = [];
   const target = controller.constructor;
@@ -84,20 +78,20 @@ export const extractPipes = (
   }
 
   (reflection.annotationsOfDecorator<UsePipes>(target, UsePipes) || []).forEach(
-    pipe => {
+    (pipe) => {
       pipeIds.push(...pipe.ids);
-    }
+    },
   );
 
   (
     reflection.propMetadataOfDecorator<UsePipes>(target, UsePipes)[key] || []
-  ).forEach(pipe => pipeIds.push(...pipe.ids));
+  ).forEach((pipe) => pipeIds.push(...pipe.ids));
 
   (
     (
       reflection.parametersOfDecorator(target, key, UsePipes)[index] || []
     ).slice(-1) || []
-  ).forEach(deco => {
+  ).forEach((deco) => {
     deco.forEach((d: any) => pipeIds.push(...d.ids));
   });
 

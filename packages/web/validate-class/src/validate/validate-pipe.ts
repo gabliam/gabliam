@@ -1,6 +1,6 @@
 import { isNil, Service, Type } from '@gabliam/core';
 import { Pipe } from '@gabliam/web-core';
-import * as  classTransformer from 'class-transformer';
+import * as classTransformer from 'class-transformer';
 import * as classValidator from 'class-validator';
 import { Validate } from '../metadatas';
 
@@ -15,23 +15,31 @@ export class ValidatePipe implements Pipe {
     const entity = classTransformer.plainToClass<any, any>(
       type,
       this.toEmptyIfNil(value),
-      this.options.transformOptions
+      this.options.transformOptions,
     );
     const errors = await classValidator.validate(
       entity,
-      this.options.validatorOptions
+      this.options.validatorOptions,
     );
     if (errors.length > 0) {
       throw this.options.exceptionFactory(
         errors,
-        this.options.disableErrorMessages
+        this.options.disableErrorMessages,
       );
     }
-    return this.options.transform
-      ? entity
-      : Object.keys(this.options.validatorOptions).length > 0
-      ? classTransformer.classToPlain(entity, this.options.transformOptions)
-      : value;
+
+    if (this.options.transform) {
+      return entity;
+    }
+
+    if (Object.keys(this.options.validatorOptions).length > 0) {
+      return classTransformer.classToPlain(
+        entity,
+        this.options.transformOptions,
+      );
+    }
+
+    return value;
   }
 
   toEmptyIfNil<T = any, R = any>(value: T): R | {} {
@@ -40,6 +48,6 @@ export class ValidatePipe implements Pipe {
 
   private toValidate(type: Type<any>) {
     const types = [String, Boolean, Number, Array, Object];
-    return !types.some(t => type === t) && !isNil(type);
+    return !types.some((t) => type === t) && !isNil(type);
   }
 }

@@ -1,6 +1,7 @@
+/* eslint-disable no-param-reassign */
 import { Expression as AstExpression } from 'estree';
-import { Parser, IS_STRING } from './parser';
 import _ from 'lodash';
+import { IS_STRING, Parser } from './parser';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const validPath = require('is-valid-path');
 

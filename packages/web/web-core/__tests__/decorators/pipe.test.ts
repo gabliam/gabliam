@@ -1,5 +1,5 @@
 import { reflection } from '@gabliam/core';
-import { UsePipes } from '@gabliam/web-core';
+import { UsePipes } from '../..';
 
 describe('transformer decorators', () => {
   test('should add Bean metadata to a prop when decorated with @UseTransformers', () => {
@@ -26,12 +26,12 @@ describe('transformer decorators', () => {
       testMethod(
         testBefore: string,
         @UsePipes('test') test: string,
-        testAfter: string
+        testAfter: string,
       ) {}
     }
 
     expect(
-      reflection.parameters(TestMiddleware, 'testMethod')
+      reflection.parameters(TestMiddleware, 'testMethod'),
     ).toMatchSnapshot();
   });
 
@@ -44,7 +44,7 @@ describe('transformer decorators', () => {
     expect(reflection.annotations(TestMiddleware)).toMatchSnapshot();
     expect(reflection.propMetadata(TestMiddleware)).toMatchSnapshot();
     expect(
-      reflection.parameters(TestMiddleware, 'testMethod')
+      reflection.parameters(TestMiddleware, 'testMethod'),
     ).toMatchSnapshot();
   });
 });

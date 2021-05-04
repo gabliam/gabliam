@@ -8,7 +8,7 @@ import {
 export const converterValue: convertValueFn = (
   ctx: GabContext,
   execCtx: ExecutionContext,
-  result: any
+  result: any,
 ) => {
   const methodInfo = execCtx.getMethodInfo();
   const sendJsonValue = (value: any = '') => {
@@ -25,8 +25,8 @@ export const converterValue: convertValueFn = (
   // response handler if the result is a ResponseEntity
   function responseEntityHandler(value: ResponseEntity) {
     if (value.hasHeader()) {
-      Object.keys(value.headers).forEach(k =>
-        ctx.set(k, '' + value.headers[k])
+      Object.keys(value.headers).forEach((k) =>
+        ctx.set(k, `${value.headers[k]}`),
       );
     }
 

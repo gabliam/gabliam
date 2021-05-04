@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import {
   Container,
   InjectContainer,
@@ -48,20 +49,20 @@ interface Cacheable extends CacheInternalOptions {}
 
 export const Cacheable: CacheableDecorator = makePropDecorator(
   'Cacheable',
-  (value?: string | string[] | CacheOptions): Cacheable => {
-    return extractCacheInternalOptions(value);
-  },
+  (value?: string | string[] | CacheOptions): Cacheable =>
+    extractCacheInternalOptions(value),
   (
     target: Object,
     propertyKey: string | symbol,
     descriptor: TypedPropertyDescriptor<any>,
-    cacheInternalOptions: Cacheable
+    cacheInternalOptions: Cacheable,
   ) => {
     InjectContainer()(target.constructor);
     const method = descriptor.value;
     let cacheGroup: string;
     let cacheConfig: CacheConfig;
-    descriptor.value = async function(...args: any[]) {
+    // eslint-disable-next-line no-param-reassign
+    descriptor.value = async function desc(...args: any[]) {
       if (!cacheGroup) {
         cacheGroup = getCacheGroup(target.constructor);
       }
@@ -70,7 +71,7 @@ export const Cacheable: CacheableDecorator = makePropDecorator(
         cacheConfig = await createCacheConfig(
           cacheGroup,
           container,
-          cacheInternalOptions
+          cacheInternalOptions,
         );
       }
 
@@ -86,7 +87,7 @@ export const Cacheable: CacheableDecorator = makePropDecorator(
       }
 
       const cacheKey = cacheInternalOptions.keyGenerator(
-        ...cacheConfig.extractArgs(...args)
+        ...cacheConfig.extractArgs(...args),
       );
 
       // cacheKey is undefined so we skip cache
@@ -97,6 +98,7 @@ export const Cacheable: CacheableDecorator = makePropDecorator(
 
       let result: any = NO_RESULT;
       for (const cache of cacheConfig.caches) {
+        // eslint-disable-next-line no-await-in-loop
         const val = await cache.get(cacheKey);
         if (val !== undefined && val !== NO_RESULT) {
           result = val;
@@ -110,11 +112,12 @@ export const Cacheable: CacheableDecorator = makePropDecorator(
 
       if (!cacheConfig.veto(args, result)) {
         for (const cache of cacheConfig.caches) {
+          // eslint-disable-next-line no-await-in-loop
           await cache.putIfAbsent(cacheKey, result);
         }
       }
 
       return result;
     };
-  }
+  },
 );

@@ -5,6 +5,7 @@ import { NoOpCache } from './caches/no-op-cache';
 
 export class SimpleCacheManager implements CacheManager {
   private startedCache: Map<string, boolean> = new Map();
+
   constructor(
     private group: Map<string, ICacheGroup>,
     private dynamic: boolean,
@@ -43,6 +44,7 @@ export class SimpleCacheManager implements CacheManager {
 
     return cache;
   }
+
   getCacheNames() {
     const names: string[] = [];
     for (const [, group] of this.group.entries()) {
@@ -61,6 +63,7 @@ export class SimpleCacheManager implements CacheManager {
       this.defaultOptionsCache || {},
       group.defaultOptionsCache || {},
     );
+    // eslint-disable-next-line new-cap
     return new defaultCache(name, optionsCache);
   }
 }

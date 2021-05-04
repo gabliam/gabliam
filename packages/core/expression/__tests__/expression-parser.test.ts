@@ -249,7 +249,7 @@ describe('expression evaluator', () => {
         c: true,
         d: false,
         e: null,
-        f: function(val: any) {
+        f(val: any) {
           return val;
         },
       });
@@ -283,12 +283,8 @@ describe('expression evaluator', () => {
     let expressionParser: ExpressionParser;
     beforeAll(() => {
       expressionParser = new ExpressionParser({
-        funky: () => {
-          return 'fresh';
-        },
-        argumentative: (arg: any) => {
-          return arg;
-        },
+        funky: () => 'fresh',
+        argumentative: (arg: any) => arg,
         name: 'ben',
       });
     });

@@ -1,8 +1,9 @@
-import { createConnection, Connection } from '../index';
-import { CommandUtils } from './CommandUtils';
+/* eslint-disable no-console */
+import chalk from 'chalk';
 import process from 'process';
 import yargs from 'yargs';
-import chalk from 'chalk';
+import { Connection, createConnection } from '../index';
+import { CommandUtils } from './CommandUtils';
 
 export interface MigrationRunCommandArgs {
   app?: string;
@@ -20,6 +21,7 @@ export interface MigrationRunCommandArgs {
 export class MigrationRunCommand
   implements yargs.CommandModule<{}, MigrationRunCommandArgs> {
   command = 'migration:run';
+
   describe = 'Runs all pending migrations.';
 
   builder(args: yargs.Argv) {
@@ -51,7 +53,7 @@ export class MigrationRunCommand
   }
 
   async handler(args: yargs.Arguments<MigrationRunCommandArgs>) {
-    let connection: Connection | undefined = undefined;
+    let connection: Connection | undefined;
     try {
       const connectionOptionsReader = await CommandUtils.getGabliamConnectionOptionsReader(
         {

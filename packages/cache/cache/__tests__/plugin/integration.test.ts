@@ -1,12 +1,12 @@
-import { CachePluginTest } from './cache-plugin-test';
+import { Service } from '@gabliam/core';
 import {
-  CACHE_MANAGER,
   CacheManager,
   CachePut,
-  SimpleCacheManager,
+  CACHE_MANAGER,
   NoOpCache,
+  SimpleCacheManager,
 } from '../../src/index';
-import { Service } from '@gabliam/core';
+import { CachePluginTest } from './cache-plugin-test';
 
 let appTest: CachePluginTest;
 

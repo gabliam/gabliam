@@ -8,7 +8,8 @@ export const isObject = (val?: any): val is Object => {
 export const isUndefined = (obj: any): obj is undefined =>
   typeof obj === 'undefined';
 export const validatePath = (path?: string): string =>
-  path ? (path.charAt(0) !== '/' ? '/' + path : path) : '';
+  // eslint-disable-next-line no-nested-ternary
+  path ? (path.charAt(0) !== '/' ? `/${path}` : path) : '';
 export const isFunction = (fn: any): boolean => typeof fn === 'function';
 export const isString = (fn: any): fn is string => typeof fn === 'string';
 export const isConstructor = (fn: any): boolean => fn === 'constructor';

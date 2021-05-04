@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import { injectable } from 'inversify';
 import { Type } from '../common';
 import { ERRORS_MSGS, METADATA_KEY, ORDER_CONFIG, TYPE } from '../constants';
@@ -56,8 +57,8 @@ export interface Config {
   order: number;
 }
 
-const configDecorator = (defaultOrder: number): ConfigDecorator => {
-  return makeDecorator(
+const configDecorator = (defaultOrder: number): ConfigDecorator =>
+  makeDecorator(
     METADATA_KEY.config,
     (order = defaultOrder) => ({ order }),
     (cls: Type<any>, annotationInstance: Config) => {
@@ -68,14 +69,13 @@ const configDecorator = (defaultOrder: number): ConfigDecorator => {
       })(cls);
     },
     true,
-    ERRORS_MSGS.DUPLICATED_CONFIG_DECORATOR
+    ERRORS_MSGS.DUPLICATED_CONFIG_DECORATOR,
   );
-};
 
 export const CoreConfig: ConfigDecorator = configDecorator(ORDER_CONFIG.Core);
 
 export const PluginConfig: ConfigDecorator = configDecorator(
-  ORDER_CONFIG.Plugin
+  ORDER_CONFIG.Plugin,
 );
 
 export const Config: ConfigDecorator = configDecorator(ORDER_CONFIG.Config);

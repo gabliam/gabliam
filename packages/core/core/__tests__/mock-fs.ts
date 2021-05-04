@@ -14,6 +14,7 @@ export class MockFs {
   private dir: string;
 
   constructor(config: MockFsConfig) {
+    // eslint-disable-next-line no-multi-assign
     const dir = (this.dir = path.resolve(tmpdir(), 'mock-fs-test'));
     fs.mkdirpSync(dir);
     for (const [folderName, fileConfig] of Object.entries(config)) {

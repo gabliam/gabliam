@@ -10,27 +10,26 @@ export type gabliamValue<T = any> =
  * Check if `obj` is a generator.
  */
 function isGenerator(obj: any) {
-  return 'function' === typeof obj.next && 'function' === typeof obj.throw;
+  return typeof obj.next === 'function' && typeof obj.throw === 'function';
 }
 
 interface Observable {
   subscribe(
     success: (val: any) => void,
     error: (error: any) => void,
-    finish: () => void
+    finish: () => void,
   ): void;
 }
 
 /**
  * Check if `obj` is an observable
  */
-const isObservable = (obj: any): obj is Observable => {
-  return Boolean(
+const isObservable = (obj: any): obj is Observable =>
+  Boolean(
     obj &&
       typeof obj.subscribe === 'function' &&
-      obj.constructor.name === 'Observable'
+      obj.constructor.name === 'Observable',
   );
-};
 
 /**
  * Convert observable to promise
@@ -38,7 +37,12 @@ const isObservable = (obj: any): obj is Observable => {
 function observableToPromise<T>(obs: Observable): Promise<T> {
   return new Promise((resolve, reject) => {
     let val: any;
-    obs.subscribe((x: any) => (val = x), reject, () => resolve(val));
+    obs.subscribe(
+      // eslint-disable-next-line no-return-assign
+      (x: any) => (val = x),
+      reject,
+      () => resolve(val),
+    );
   });
 }
 
@@ -48,7 +52,7 @@ function observableToPromise<T>(obs: Observable): Promise<T> {
  * Stream isn't compatible
  */
 export function toPromise<T = any>(
-  value: gabliamValue
+  value: gabliamValue,
 ): Promise<T | undefined> {
   if (value === undefined) {
     return Promise.resolve(undefined);

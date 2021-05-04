@@ -40,9 +40,11 @@
     "@gabliam/core": "0.0.0-PLACEHOLDER",
     "@gabliam/express": "0.0.0-PLACEHOLDER",
     "@gabliam/koa": "0.0.0-PLACEHOLDER",
-    "@gabliam/web-core": "0.0.0-PLACEHOLDER"
+    "@gabliam/web-core": "0.0.0-PLACEHOLDER",
+    "@types/escape-html": "^1.0.0"
   },
   "dependencies": {
+    "escape-html": "^1.0.3",
     "tslib": "^2.0.3"
   },
   "engines": {

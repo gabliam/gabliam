@@ -4,7 +4,7 @@ import {
   Plugin,
   Registry,
   Scan,
-  toPromise
+  toPromise,
 } from '@gabliam/core';
 import {
   APP,
@@ -17,10 +17,9 @@ import {
   RestMetadata,
   SERVER,
   WebConfiguration,
-  WebConfigurationContructor,
   WebPluginBase,
   WebPluginConfig,
-  WEB_PLUGIN_CONFIG
+  WEB_PLUGIN_CONFIG,
 } from '@gabliam/web-core';
 import d from 'debug';
 import http from 'http';
@@ -35,18 +34,13 @@ const debug = d('Gabliam:Plugin:ExpressPlugin');
 
 @Plugin('ExpressPlugin')
 @Scan()
-export class ExpressPlugin extends WebPluginBase<express.Application>
+export class ExpressPlugin
+  extends WebPluginBase<express.Application>
   implements GabliamPlugin {
-  constructor(
-    config?: Partial<WebConfigurationContructor<express.Application>>
-  ) {
-    super(config);
-  }
-
   bindApp(
     container: Container,
     registry: Registry,
-    webConfiguration: WebConfiguration
+    webConfiguration: WebConfiguration,
   ): void {
     container.bind(APP).toConstantValue(express());
     container.bind(REQUEST_LISTENER_CREATOR).toConstantValue(() => {
@@ -72,10 +66,12 @@ export class ExpressPlugin extends WebPluginBase<express.Application>
     try {
       // server can be undefined (if start is not called)
       const server = container.get<http.Server>(SERVER);
-      return new Promise<void>(resolve => {
+      return await new Promise<void>((resolve) => {
         server.close(() => resolve());
       });
-    } catch (e) {}
+    } catch (e) {
+      return undefined;
+    }
   }
 
   async start(container: Container, registry: Registry) {
@@ -87,7 +83,7 @@ export class ExpressPlugin extends WebPluginBase<express.Application>
 
   async buildControllers(
     restMetadata: RestMetadata<ExpressMethods>,
-    container: Container
+    container: Container,
   ) {
     const app = container.get<express.Application>(APP);
 
@@ -95,6 +91,7 @@ export class ExpressPlugin extends WebPluginBase<express.Application>
     let routerCreator: RouterCreator = () => express.Router();
     try {
       routerCreator = container.get<RouterCreator>(CUSTOM_ROUTER_CREATOR);
+      // eslint-disable-next-line no-empty
     } catch (e) {}
 
     for (const [
@@ -110,8 +107,8 @@ export class ExpressPlugin extends WebPluginBase<express.Application>
       for (const methodInfo of methods) {
         const execCtx = new ExecutionContext(controller, methodInfo);
 
-        const interceptors = methodInfo.interceptors.filter(i =>
-          isValidInterceptor(i.instance)
+        const interceptors = methodInfo.interceptors.filter((i) =>
+          isValidInterceptor(i.instance),
         );
 
         // create handler
@@ -126,17 +123,14 @@ export class ExpressPlugin extends WebPluginBase<express.Application>
 
   private handlerFactory(
     execCtx: ExecutionContext,
-    interceptors: InterceptorInfo[]
+    interceptors: InterceptorInfo[],
   ): express.RequestHandler {
     return async (
       req: express.Request,
       res: express.Response,
-      next: express.NextFunction
+      next: express.NextFunction,
     ) => {
-      const composeInterceptor = compose(
-        interceptors,
-        converterValue
-      );
+      const composeInterceptor = compose(interceptors, converterValue);
       const ctx = getContext(req);
       const methodInfo = execCtx.getMethodInfo();
       const controller = execCtx.getClass();
@@ -149,9 +143,9 @@ export class ExpressPlugin extends WebPluginBase<express.Application>
 
       const callNext = async () => {
         const args = await toPromise(
-          methodInfo.extractArgs(ctx, execCtx, expressNext)
+          methodInfo.extractArgs(ctx, execCtx, expressNext),
         );
-        return await toPromise(controller[methodInfo.methodName](...args));
+        return toPromise(controller[methodInfo.methodName](...args));
       };
 
       try {

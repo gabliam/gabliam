@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import { makeDecorator } from '@gabliam/core';
 import { METADATA_KEY } from '../constant';
 
@@ -52,5 +53,5 @@ export interface CUnit {
 export const CUnit: CUnitDecorator = makeDecorator(
   METADATA_KEY.cunit,
   (name: string): CUnit => ({ name }),
-  undefined
+  undefined,
 );

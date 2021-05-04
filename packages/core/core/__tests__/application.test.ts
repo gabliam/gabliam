@@ -1,11 +1,11 @@
-import { gabliamFinder, gabliamBuilder, gabliamFindApp } from '../src';
 import { resolve } from 'path';
+import { gabliamBuilder, gabliamFindApp, gabliamFinder } from '../src';
 
 describe('gabliamFinder', () => {
   describe('one application', () => {
     test('app without config', async () => {
       const apps = await gabliamFinder(
-        resolve(__dirname, './fixtures/applications/one/withoutconfig')
+        resolve(__dirname, './fixtures/applications/one/withoutconfig'),
       );
       expect(apps).toMatchSnapshot();
       const gab = gabliamBuilder(apps[0])();
@@ -14,7 +14,7 @@ describe('gabliamFinder', () => {
 
     test('app with config', async () => {
       const apps = await gabliamFinder(
-        resolve(__dirname, './fixtures/applications/one/withconfig')
+        resolve(__dirname, './fixtures/applications/one/withconfig'),
       );
       expect(apps).toMatchSnapshot();
       const gab = gabliamBuilder(apps[0])();
@@ -23,7 +23,7 @@ describe('gabliamFinder', () => {
 
     test('no app found', async () => {
       const apps = await gabliamFinder(
-        resolve(__dirname, './fixtures/applications/one/gabliam')
+        resolve(__dirname, './fixtures/applications/one/gabliam'),
       );
       expect(apps).toMatchSnapshot();
       expect(gabliamBuilder(apps[0])).toThrowErrorMatchingSnapshot();
@@ -33,7 +33,7 @@ describe('gabliamFinder', () => {
   describe('2 applications', () => {
     test('app', async () => {
       const apps = await gabliamFinder(
-        resolve(__dirname, './fixtures/applications/two')
+        resolve(__dirname, './fixtures/applications/two'),
       );
       expect(apps).toMatchSnapshot();
       expect(gabliamBuilder(apps[0])()).toMatchSnapshot();
@@ -47,7 +47,7 @@ describe('gabliamFindApp', () => {
     describe('one application', () => {
       test('app without config', async () => {
         const apps = await gabliamFindApp(
-          resolve(__dirname, './fixtures/applications/one/withoutconfig')
+          resolve(__dirname, './fixtures/applications/one/withoutconfig'),
         );
         expect(apps).toMatchSnapshot();
         const gab = gabliamBuilder(apps)();
@@ -56,7 +56,7 @@ describe('gabliamFindApp', () => {
 
       test('app with config', async () => {
         const apps = await gabliamFindApp(
-          resolve(__dirname, './fixtures/applications/one/withconfig')
+          resolve(__dirname, './fixtures/applications/one/withconfig'),
         );
         expect(apps).toMatchSnapshot();
         const gab = gabliamBuilder(apps)();
@@ -66,8 +66,8 @@ describe('gabliamFindApp', () => {
       test('no app found', async () => {
         expect(
           gabliamFindApp(
-            resolve(__dirname, './fixtures/applications/one/gabliam')
-          )
+            resolve(__dirname, './fixtures/applications/one/gabliam'),
+          ),
         ).rejects.toMatchSnapshot();
       });
     });
@@ -75,7 +75,7 @@ describe('gabliamFindApp', () => {
     describe('2 applications', () => {
       test('too many', async () => {
         expect(
-          gabliamFindApp(resolve(__dirname, './fixtures/applications/two'))
+          gabliamFindApp(resolve(__dirname, './fixtures/applications/two')),
         ).rejects.toMatchSnapshot();
       });
     });
@@ -86,7 +86,7 @@ describe('gabliamFindApp', () => {
       test('app without config', async () => {
         const apps = await gabliamFindApp(
           resolve(__dirname, './fixtures/applications/one/withoutconfig'),
-          'MyApp'
+          'MyApp',
         );
         expect(apps).toMatchSnapshot();
         const gab = gabliamBuilder(apps)();
@@ -96,7 +96,7 @@ describe('gabliamFindApp', () => {
       test('app with config', async () => {
         const apps = await gabliamFindApp(
           resolve(__dirname, './fixtures/applications/one/withconfig'),
-          'MyApp'
+          'MyApp',
         );
         expect(apps).toMatchSnapshot();
         const gab = gabliamBuilder(apps)();
@@ -107,8 +107,8 @@ describe('gabliamFindApp', () => {
         expect(
           gabliamFindApp(
             resolve(__dirname, './fixtures/applications/one/withconfig'),
-            'lolApp'
-          )
+            'lolApp',
+          ),
         ).rejects.toMatchSnapshot();
       });
     });
@@ -117,7 +117,7 @@ describe('gabliamFindApp', () => {
       test('app', async () => {
         const apps = await gabliamFindApp(
           resolve(__dirname, './fixtures/applications/two'),
-          'MyApp'
+          'MyApp',
         );
         expect(apps).toMatchSnapshot();
         expect(apps.name).toMatchSnapshot();

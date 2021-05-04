@@ -1,10 +1,14 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 import { Joi, makePropDecorator, ValueExtractor } from '@gabliam/core';
 import { UseInterceptors } from '@gabliam/web-core';
 import { ERRORS_MSGS, METADATA_KEY } from '../constants';
 import { ValidateInterceptor } from '../validate';
 
 export function isValidatorOptions(value: any): value is ValidatorOptions {
-  return typeof value === 'object' && value.hasOwnProperty('validator');
+  return (
+    typeof value === 'object' &&
+    Object.prototype.hasOwnProperty.call(value, 'validator')
+  );
 }
 
 export function isValidatorConstructor(
@@ -44,6 +48,7 @@ export interface ValidationOptions extends Joi.ValidationOptions {
   escapeHtml?: boolean;
 }
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 const DEFAULT_VAlIDATION_OPTIONS = {
   escapeHtml: true,
 };
@@ -54,6 +59,35 @@ export const listParamToValidate: ValidatorType[] = [
   'query',
   'body',
 ];
+
+export const constructValidator = (
+  validator: Validator | ValidatorOptions,
+  options: ValidationOptions = {},
+) => {
+  const rules = new Map<ValidatorType, Joi.Schema>();
+
+  let realValidator: Validator;
+  if (isValidatorOptions(validator)) {
+    realValidator = validator.validator;
+    // eslint-disable-next-line no-param-reassign
+    options = validator.options || {};
+  } else {
+    realValidator = validator;
+  }
+
+  const validationOptions = {
+    ...DEFAULT_VAlIDATION_OPTIONS,
+    ...options,
+  };
+
+  for (const paramToValidate of listParamToValidate) {
+    if (realValidator[paramToValidate]) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      rules.set(paramToValidate, Joi.compile(realValidator[paramToValidate]!));
+    }
+  }
+  return { rules, validationOptions };
+};
 
 /**
  * Type of the `Validate` decorator / constructor function.
@@ -117,6 +151,7 @@ export const Validate: ValidateDecorator = makePropDecorator(
     useInterceptors = true,
   ): Validate => {
     if (isValidatorOptions(validator)) {
+      // eslint-disable-next-line no-param-reassign
       useInterceptors = validator.useInterceptors ?? useInterceptors;
     }
 
@@ -144,31 +179,3 @@ export const Validate: ValidateDecorator = makePropDecorator(
   true,
   ERRORS_MSGS.DUPLICATED_VALIDATE_DECORATOR,
 );
-
-export const constructValidator = (
-  validator: Validator | ValidatorOptions,
-  options: ValidationOptions = {},
-) => {
-  const rules = new Map<ValidatorType, Joi.Schema>();
-
-  let realValidator: Validator;
-  if (isValidatorOptions(validator)) {
-    realValidator = validator.validator;
-    options = validator.options || {};
-  } else {
-    realValidator = validator;
-  }
-
-  const validationOptions = {
-    ...DEFAULT_VAlIDATION_OPTIONS,
-    ...options,
-  };
-
-  for (const paramToValidate of listParamToValidate) {
-    if (realValidator[paramToValidate]) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      rules.set(paramToValidate, Joi.compile(realValidator[paramToValidate]!));
-    }
-  }
-  return { rules, validationOptions };
-};

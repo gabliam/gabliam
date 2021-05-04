@@ -10,6 +10,7 @@ import { LoaderModule } from './loaders';
 import { Application } from './metadatas';
 import { reflection } from './reflection';
 import { Registry } from './registry';
+
 const glob = promisify(g);
 
 const reg = /^.*(git|svn|node_modules|dist|build).*/;
@@ -69,15 +70,12 @@ export const gabliamFindApp = async (scanPath: string, appName?: string) => {
   return app;
 };
 
-const isValueRegistry = (val: any): val is ValueRegistry<any> => {
-  return (
-    val &&
-    typeof val === 'object' &&
-    val.hasOwnProperty('id') &&
-    val.hasOwnProperty('target') &&
-    val.hasOwnProperty('autoBind')
-  );
-};
+const isValueRegistry = (val: any): val is ValueRegistry<any> =>
+  val &&
+  typeof val === 'object' &&
+  Object.prototype.hasOwnProperty.call(val, 'id') &&
+  Object.prototype.hasOwnProperty.call(val, 'target') &&
+  Object.prototype.hasOwnProperty.call(val, 'autoBind');
 
 export type GabliamBuilder = ReturnType<typeof gabliamBuilder>;
 
@@ -105,7 +103,7 @@ export const gabliamBuilder = <T = any>(
       .filter((app) => app.condition())
       .map((app) => {
         if (typeof app.plugin === 'string') {
-          // eslint-disable-next-line @typescript-eslint/no-var-requires
+          // eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-dynamic-require, global-require
           return require(app.plugin).default;
         }
         return app.plugin;
@@ -124,8 +122,9 @@ export const setupTsProject = async (folder: string) => {
     (file) => !_.endsWith(file, '.d.ts') && !reg.test(file),
   );
   if (files.length > 0) {
+    // eslint-disable-next-line no-console
     console.log('Typescript project detected. Add ts-node');
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    // eslint-disable-next-line @typescript-eslint/no-var-requires, global-require, import/no-extraneous-dependencies
     const tsnode = require('ts-node');
     tsnode.register({
       dir: process.cwd(),

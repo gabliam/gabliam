@@ -1,7 +1,17 @@
-import { ConnectionOptionsReader, ConnectionOptions } from 'typeorm';
 import { reflection, ValueExtractor } from '@gabliam/core';
+import { ConnectionOptions, ConnectionOptionsReader } from 'typeorm';
 import { TypeormCUnitNotFoundError } from './errors';
 import { CUnit } from './metadatas';
+
+const getCunits = (cls: any) => {
+  const cunits = reflection.annotationsOfDecorator<CUnit>(cls, CUnit);
+
+  if (cunits.length) {
+    return cunits.map((c) => c.name || 'default');
+  }
+
+  return ['default'];
+};
 
 export class GabliamConnectionOptionsReader extends ConnectionOptionsReader {
   constructor(
@@ -22,7 +32,7 @@ export class GabliamConnectionOptionsReader extends ConnectionOptionsReader {
        * Filename of the ormconfig configuration. By default its equal to "ormconfig".
        */
       configName?: string | undefined;
-    }
+    },
   ) {
     super(options);
   }
@@ -30,19 +40,17 @@ export class GabliamConnectionOptionsReader extends ConnectionOptionsReader {
   async load(): Promise<ConnectionOptions[] | undefined> {
     let connectionOptions = await super.load();
     if (connectionOptions === undefined && this.connectionOptions) {
-      connectionOptions = this.connectionOptions.map(c => {
-        return {
-          ...c,
-          entities: Array.isArray(c.entities) ? c.entities : [],
-          migrations: Array.isArray(c.migrations) ? c.migrations : [],
-          subscribers: Array.isArray(c.subscribers) ? c.subscribers : [],
-          name: c.name ? c.name : 'default',
-        };
-      });
+      connectionOptions = this.connectionOptions.map((c) => ({
+        ...c,
+        entities: Array.isArray(c.entities) ? c.entities : [],
+        migrations: Array.isArray(c.migrations) ? c.migrations : [],
+        subscribers: Array.isArray(c.subscribers) ? c.subscribers : [],
+        name: c.name ? c.name : 'default',
+      }));
     }
 
     if (connectionOptions) {
-      connectionOptions = connectionOptions.map(c => ({
+      connectionOptions = connectionOptions.map((c) => ({
         ...c,
         entities: Array.isArray(c.entities) ? c.entities : [],
         migrations: Array.isArray(c.migrations) ? c.migrations : [],
@@ -53,17 +61,17 @@ export class GabliamConnectionOptionsReader extends ConnectionOptionsReader {
       this.populateConnectionOptions(
         this.classes.entities,
         connectionOptions,
-        'entities'
+        'entities',
       );
       this.populateConnectionOptions(
         this.classes.migrations,
         connectionOptions,
-        'migrations'
+        'migrations',
       );
       this.populateConnectionOptions(
         this.classes.subscribers,
         connectionOptions,
-        'subscribers'
+        'subscribers',
       );
     }
     return connectionOptions;
@@ -84,21 +92,21 @@ export class GabliamConnectionOptionsReader extends ConnectionOptionsReader {
       this.connectionOptions,
       this.classes,
       this.valueExtractor,
-      options
+      options,
     );
   }
 
   private populateConnectionOptions(
     classes: Function[],
     connectionOptions: ConnectionOptions[],
-    type: 'entities' | 'migrations' | 'subscribers'
+    type: 'entities' | 'migrations' | 'subscribers',
   ) {
     for (const clazz of classes) {
       const cunits = getCunits(clazz);
 
       for (let cunit of cunits) {
         cunit = this.valueExtractor(cunit, cunit);
-        let index = connectionOptions.findIndex(c => c.name === cunit);
+        let index = connectionOptions.findIndex((c) => c.name === cunit);
 
         if (index === -1 && cunit === 'default') {
           index = 0;
@@ -112,13 +120,3 @@ export class GabliamConnectionOptionsReader extends ConnectionOptionsReader {
     }
   }
 }
-
-const getCunits = (cls: any) => {
-  const cunits = reflection.annotationsOfDecorator<CUnit>(cls, CUnit);
-
-  if (cunits.length) {
-    return cunits.map(c => c.name || 'default');
-  }
-
-  return ['default'];
-};
