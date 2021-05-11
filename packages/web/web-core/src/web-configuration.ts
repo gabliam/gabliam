@@ -2,6 +2,7 @@ import { Container, inversifyInterfaces } from '@gabliam/core';
 import { SendErrorInterceptor } from './interceptors';
 import { ServerConfig } from './interface';
 import { PipeId } from './metadatas';
+// eslint-disable-next-line import/no-cycle
 import { HttpServerStarter, ServerStarter } from './server-starter';
 
 /**

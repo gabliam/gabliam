@@ -3,7 +3,6 @@ import { Container } from '../container';
 import { LoaderConfigOptions } from '../loaders';
 import { ValueValidator } from '../metadatas';
 import { Registry } from '../registry';
-import { PluginDependency } from './metadata';
 
 /**
  * Config for gabliam
@@ -21,6 +20,15 @@ export interface GabliamConfig {
 }
 
 export type GabliamAddPlugin = GabliamPluginConstructor | GabliamPlugin;
+
+/**
+ * Plugin dependency
+ */
+export interface PluginDependency {
+  name: string | GabliamPluginConstructor;
+
+  order: 'before' | 'after';
+}
 
 /**
  * Interface of plugin constructor
@@ -51,7 +59,7 @@ export interface GabliamPlugin {
   config?(
     container: Container,
     registry: Registry,
-    confInstance: any
+    confInstance: any,
   ): gabliamValue<void>;
 
   start?(container: Container, registry: Registry): gabliamValue<void>;
@@ -88,5 +96,5 @@ export type GabliamPluginWithDestroy = RequireOnlyOne<GabliamPlugin, 'destroy'>;
 export type ValueExtractor = (
   path: string,
   defaultValue: any,
-  validator?: ValueValidator | null
+  validator?: ValueValidator | null,
 ) => any;

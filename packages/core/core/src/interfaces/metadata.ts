@@ -1,5 +1,4 @@
 import { interfaces } from 'inversify';
-import { GabliamPluginConstructor } from './interfaces';
 
 /**
  * Represents a value in the registry
@@ -23,13 +22,4 @@ export interface ConfigRegistry {
 
 export interface PreDestroyRegistry {
   preDestroys: Array<string | symbol>;
-}
-
-/**
- * Plugin dependency
- */
-export interface PluginDependency {
-  name: string | GabliamPluginConstructor;
-
-  order: 'before' | 'after';
 }

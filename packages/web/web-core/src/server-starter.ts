@@ -3,6 +3,7 @@ import { gabliamValue } from '@gabliam/core';
 import { createServer, Server } from 'http';
 import { RequestListenerCreator } from './interface';
 import { WebPluginConfig } from './plugin-config';
+// eslint-disable-next-line import/no-cycle
 import { WebConfiguration } from './web-configuration';
 
 export interface ServerStarter {

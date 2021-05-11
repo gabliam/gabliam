@@ -20,7 +20,7 @@ module.exports = {
     node: true,
   },
   rules: {
-    'import/no-cycle': 'off', // [2, { ignoreExternal: true }],
+    'import/no-cycle': ['error', { maxDepth: 1, ignoreExternal: true }],
     'prefer-destructuring': 'off',
     'import/prefer-default-export': 'off',
     'class-methods-use-this': 'off',
