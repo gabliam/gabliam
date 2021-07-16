@@ -1,13 +1,16 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-continue */
 import execa from 'execa';
 import fs from 'fs-extra';
 import Graph from 'graph-data-structure';
 import _ from 'lodash';
+import ora from 'ora';
 import path from 'path';
 import rimraf from 'rimraf';
 import { promisify } from 'util';
 import { APP_DIR, DIST_DIR, monoRepo } from '../constant';
 import { updatePkg, updateRootPkg } from './pkg-utils';
-import ora from 'ora';
 
 const rimrafAsync = promisify(rimraf);
 
@@ -40,12 +43,12 @@ export const build = async (spinner: ora.Ora, newVersion: string) => {
     const pkgDist = path.resolve(
       DIST_DIR,
       path.relative(APP_DIR, folder),
-      'package.json'
+      'package.json',
     );
     const licenseDist = path.resolve(
       DIST_DIR,
       path.relative(APP_DIR, folder),
-      'LICENSE'
+      'LICENSE',
     );
     pkg.version = newVersion;
     updatePkg(pkg, 'peerDependencies', newVersion);
@@ -59,12 +62,12 @@ export const build = async (spinner: ora.Ora, newVersion: string) => {
       path.resolve(
         DIST_DIR,
         path.relative(APP_DIR, monoRepo[pkgName].folder),
-        'README.md'
-      )
+        'README.md',
+      ),
     );
   }
 
   await updateRootPkg(newVersion);
 };
 
-export const removeOld = async () => await rimrafAsync(DIST_DIR);
+export const removeOld = async () => rimrafAsync(DIST_DIR);
