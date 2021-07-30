@@ -1,5 +1,5 @@
 import { Config } from '@gabliam/core';
-import * as passport from 'passport';
+import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { LokiDatabase } from './loki-database';
 /**

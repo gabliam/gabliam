@@ -13,7 +13,7 @@ import { Hero } from '../entities/hero';
 import { HeroInput } from './types/hero-input';
 import { PaginatedHero } from './types/paginated-hero';
 
-@GabResolver((of) => Hero)
+@GabResolver(() => Hero)
 export class HeroResolver {
   private heroRepository: Repository<Hero>;
 
@@ -47,17 +47,19 @@ export class HeroResolver {
 
   @Query((returns) => PaginatedHero)
   async getPageOfHeroes(
-    @Arg('sortField', (type) => String, { nullable: true })
+    @Arg('sortField', () => String, { nullable: true })
     sortField: keyof Hero | undefined,
-    @Arg('sortOrder', (type) => String, { nullable: true })
+    @Arg('sortOrder', () => String, { nullable: true })
     sortOrder: 'ASC' | 'DESC' | undefined,
     @Arg('page', { defaultValue: 0 }) page: number,
     @Arg('perPage', { defaultValue: 10 }) perPage: number,
   ): Promise<PaginatedHero> {
     if (page < 0) {
+      // eslint-disable-next-line no-param-reassign
       page = 0;
     }
     if (perPage < 1) {
+      // eslint-disable-next-line no-param-reassign
       perPage = 1;
     }
     const qb = this.heroRepository

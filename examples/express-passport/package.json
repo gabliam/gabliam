@@ -19,6 +19,7 @@
   "dependencies": {
     "@gabliam/core": "0.0.0-PLACEHOLDER",
     "@gabliam/express": "0.0.0-PLACEHOLDER",
+    "@gabliam/validate-joi": "0.0.0-PLACEHOLDER",
     "@gabliam/web-core": "0.0.0-PLACEHOLDER",
     "boom": "^7.3.0",
     "cerialize": "^0.1.18",

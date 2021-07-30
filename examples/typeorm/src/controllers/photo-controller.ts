@@ -62,7 +62,7 @@ export class PhotoController {
     if (photos.length > 0) {
       return photos;
     }
-    throw Boom.notFound();
+    return [];
   }
 
   @UseKoaInterceptors(koaMulter.single('avatar'))

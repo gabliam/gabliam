@@ -56,9 +56,11 @@ export class PhotoResolver {
     @Arg('perPage', { defaultValue: 10 }) perPage: number,
   ): Promise<PaginatedPhoto> {
     if (page < 0) {
+      // eslint-disable-next-line no-param-reassign
       page = 0;
     }
     if (perPage < 1) {
+      // eslint-disable-next-line no-param-reassign
       perPage = 1;
     }
     const qb = this.photoRepository

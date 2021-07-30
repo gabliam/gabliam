@@ -7,5 +7,7 @@ export interface User {
 
 export class UserSerialize {
   @serialize username: string;
+
   @serialize password: string;
+
 }

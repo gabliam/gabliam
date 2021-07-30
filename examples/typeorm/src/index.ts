@@ -1,3 +1,5 @@
+/* eslint-disable global-require */
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { Gabliam } from '@gabliam/core';
 import dbPlugin from '@gabliam/typeorm';
 import * as path from 'path';

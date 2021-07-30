@@ -9,7 +9,7 @@ import {
   Response,
   ResponseEntity,
 } from '@gabliam/web-core';
-import * as Boom from 'boom';
+import Boom from 'boom';
 
 function isBoom(val: any): val is Boom<any> {
   return val && val.isBoom;
@@ -24,6 +24,7 @@ export class BoomInterceptor implements Interceptor {
   ) {
     try {
       await next();
+      return undefined;
     } catch (err) {
       if (isBoom(err)) {
         return new ResponseEntity(err.output.payload, err.output.statusCode);

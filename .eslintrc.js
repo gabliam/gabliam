@@ -62,7 +62,7 @@ module.exports = {
         selector: 'function',
         format: ['camelCase', 'PascalCase'],
       },
-    ],
+    ]
   },
   overrides: [
     {

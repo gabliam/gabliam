@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { Config } from '@gabliam/core';
 import { express } from '@gabliam/express';
-import * as helmet from 'helmet';
-import * as passport from 'passport';
+import helmet from 'helmet';
+import passport from 'passport';
 import { WebConfig, WebConfigAfterControllers } from '@gabliam/web-core';
-import * as Boom from 'boom';
+import Boom from 'boom';
+
 const AuthenticationError = require('passport/lib/errors/authenticationerror');
 
 function isBoom(val: any): val is Boom<any> {
@@ -16,6 +18,7 @@ export class ServerConfig {
   addExpressConfig(app: express.Application) {
     // init session
     app.use(
+      // eslint-disable-next-line global-require
       require('express-session')({
         secret: 'keyboard cat',
         resave: false,
@@ -33,12 +36,13 @@ export class ServerConfig {
 
   @WebConfigAfterControllers()
   addExpressConfigError(app: express.Application) {
-    app.use(function(
+    app.use((
       err: any,
-      req: express.Request,
+      _: express.Request,
       res: express.Response,
       next: express.NextFunction
-    ) {
+    // eslint-disable-next-line consistent-return
+    ) => {
       let error = err;
       if (err instanceof AuthenticationError) {
         error = Boom.boomify(err, {

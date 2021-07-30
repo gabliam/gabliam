@@ -1,3 +1,5 @@
+/* eslint-disable global-require */
+/* eslint-disable @typescript-eslint/no-var-requires */
 import 'reflect-metadata';
 import * as path from 'path';
 import { Gabliam } from '@gabliam/core';
@@ -29,7 +31,9 @@ const bootstrap = async () => {
     .buildAndStart();
 };
 
-bootstrap();
+bootstrap().then((app) => {
+  console.log('GO to http://localhost:3000/graphql');
+});
 
 process.on('unhandledRejection', (err: any, p: any) => {
   console.error('An unhandledRejection occurred');

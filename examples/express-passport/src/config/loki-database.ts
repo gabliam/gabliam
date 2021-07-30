@@ -1,4 +1,4 @@
-import * as lokijs from 'lokijs';
+import Lokijs from 'lokijs';
 import { User } from '../entities/user';
 
 export class LokiDatabase {
@@ -8,11 +8,11 @@ export class LokiDatabase {
 
   start() {
     return new Promise(resolve => {
-      this.db = new lokijs(this.dbPath, {
+      this.db = new Lokijs(this.dbPath, {
         autoload: true,
         autoloadCallback: () => {
           this.initialize();
-          resolve();
+          resolve(true);
         },
         autosave: true,
         autosaveInterval: 4000
