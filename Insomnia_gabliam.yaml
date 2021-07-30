@@ -1,0 +1,700 @@
+_type: export
+__export_format: 4
+__export_date: 2021-07-30T16:35:23.828Z
+__export_source: insomnia.desktop.app:v2021.4.1
+resources:
+  - _id: req_1a6a2c828252469f926be45e2944ec23
+    parentId: fld_f5080c0a0e1f421fac9fc0c3d3d95ca9
+    modified: 1627662786507
+    created: 1627662783249
+    url: http://localhost:3000/photos/1
+    name: get by id
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1627662783249
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_f5080c0a0e1f421fac9fc0c3d3d95ca9
+    parentId: fld_ae1db7d95cbb424c8273d0792eb6ecc5
+    modified: 1627662551679
+    created: 1627662551679
+    name: typeorm
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1627662551679
+    _type: request_group
+  - _id: fld_ae1db7d95cbb424c8273d0792eb6ecc5
+    parentId: wrk_5461e0d7ed7349c7b7555ce5f9a6319a
+    modified: 1627662535230
+    created: 1627662535230
+    name: koa
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1627662535230
+    _type: request_group
+  - _id: wrk_5461e0d7ed7349c7b7555ce5f9a6319a
+    parentId: null
+    modified: 1627660525636
+    created: 1627660525636
+    name: Gabliam
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_79508452430b495aac7d7ecbdc6bd6de
+    parentId: fld_f5080c0a0e1f421fac9fc0c3d3d95ca9
+    modified: 1627662812350
+    created: 1627662809374
+    url: http://localhost:3000/photos/1
+    name: delete by id
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1627662751171.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_8c9fb008377b4edf9f4b6a8477892280
+    parentId: fld_f5080c0a0e1f421fac9fc0c3d3d95ca9
+    modified: 1627662763984
+    created: 1627662719094
+    url: http://localhost:3000/photos
+    name: create photo
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: >-
+        {
+        	"description": "Pretty cool photo",
+        		"fileName": "https://images.unsplash.com/photo-1511044568932-338cba0ad803?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
+        		"isPublished": true,
+        		"name": "cat photo",
+        		"views": 2
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_ab74d360cf13489daa582b603ef19887
+    authentication: {}
+    metaSortKey: -1627662719094
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_4eb6e21c40c446d9bed693f9a5cc2ae4
+    parentId: fld_f5080c0a0e1f421fac9fc0c3d3d95ca9
+    modified: 1627662614751
+    created: 1627662580262
+    url: http://localhost:3000/photos
+    name: getAll
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1627662580262
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_efc1d00e2b1c4e7481b2f2748c5fce10
+    parentId: fld_f840975db316445d943899b12df1f182
+    modified: 1627661897792
+    created: 1627661897792
+    url: " http://localhost:3000/graphql"
+    name: Create heroes
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation CreateHero($hero: HeroInput!)
+        {\n  submitHero(heroInput: $hero) {id,
+        name}\n}","variables":{"hero":{"name":"Spiderman2","power":"spider"}},"operationName":"CreateHero"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_6ff448ae28264bd29d55f680e2768723
+    authentication: {}
+    metaSortKey: -1627661138723
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_f840975db316445d943899b12df1f182
+    parentId: fld_ae1db7d95cbb424c8273d0792eb6ecc5
+    modified: 1627662543040
+    created: 1627661897785
+    name: graphql
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1627660729864
+    _type: request_group
+  - _id: req_3099cf7f9d1e428fa03ec6e8671ba43d
+    parentId: fld_f840975db316445d943899b12df1f182
+    modified: 1627661897803
+    created: 1627661897803
+    url: " http://localhost:3000/graphql"
+    name: Create photo
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation CreatePhoto($photo: PhotoInput!)
+        {\n  submitPhoto(photoInput: $photo)
+        {\n    id,\n    name,\n    description\n  }\n}","variables":{"photo":{"description":"Pretty
+        cool
+        photo","fileName":"https://images.unsplash.com/photo-1511044568932-338cba0ad803?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80","isPublished":true,"name":"cat
+        photo","views":2}},"operationName":"CreatePhoto"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_6ff448ae28264bd29d55f680e2768723
+    authentication: {}
+    metaSortKey: -1627661054760.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e380fd2fc083485b8751baddcc71dc5c
+    parentId: fld_f840975db316445d943899b12df1f182
+    modified: 1627661897787
+    created: 1627661897787
+    url: " http://localhost:3000/graphql"
+    name: query heroes
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query heroes {\n  heroes
+        {\n    id\n    name\n  }\n}","operationName":"heroes"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_c04dda7405a94397a3115c8ddb1fb2cd
+    authentication: {}
+    metaSortKey: -1627660970798
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_042c8b1bd0334167b3b50317cf3ad414
+    parentId: fld_f840975db316445d943899b12df1f182
+    modified: 1627661897797
+    created: 1627661897797
+    url: " http://localhost:3000/graphql"
+    name: query photos
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query photos {\n  photos
+        {\n    id\n    name\n    description\n  }\n}","operationName":"photos"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_c04dda7405a94397a3115c8ddb1fb2cd
+    authentication: {}
+    metaSortKey: -1627660756397.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_013b6c00715044f3946c29256a715837
+    parentId: fld_f840975db316445d943899b12df1f182
+    modified: 1627661916372
+    created: 1627661897810
+    url: " http://localhost:3000/graphql"
+    name: query photos & heroes
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query photos {\n  photos
+        {\n    id\n    name\n    description\n  }\n  \n  heroes
+        {\n    id\n    name\n  }\n}","operationName":"photos"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_c04dda7405a94397a3115c8ddb1fb2cd
+    authentication: {}
+    metaSortKey: -1627660649197.25
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_a724facc9c904018a21e6de96dfe52b3
+    parentId: fld_cfc3d4b6c04c469f962287f0a06c60ea
+    modified: 1627662849079
+    created: 1627662849079
+    url: http://localhost:3000/photos/1
+    name: get by id
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1627662783249
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_cfc3d4b6c04c469f962287f0a06c60ea
+    parentId: fld_6711d04496224fe1b5b001579ff5da19
+    modified: 1627662856450
+    created: 1627662849065
+    name: typeorm
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1627662458311
+    _type: request_group
+  - _id: fld_6711d04496224fe1b5b001579ff5da19
+    parentId: wrk_5461e0d7ed7349c7b7555ce5f9a6319a
+    modified: 1627662441841
+    created: 1627662441841
+    name: express
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1627662441841
+    _type: request_group
+  - _id: req_e7aed641fd1e44f89a993295fffabd11
+    parentId: fld_cfc3d4b6c04c469f962287f0a06c60ea
+    modified: 1627662849082
+    created: 1627662849082
+    url: http://localhost:3000/photos/1
+    name: delete by id
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1627662751171.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_faeaafb6c9e14686b17d8aa5cc32cc81
+    parentId: fld_cfc3d4b6c04c469f962287f0a06c60ea
+    modified: 1627662849076
+    created: 1627662849076
+    url: http://localhost:3000/photos
+    name: create photo
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: >-
+        {
+        	"description": "Pretty cool photo",
+        		"fileName": "https://images.unsplash.com/photo-1511044568932-338cba0ad803?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
+        		"isPublished": true,
+        		"name": "cat photo",
+        		"views": 2
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_ab74d360cf13489daa582b603ef19887
+    authentication: {}
+    metaSortKey: -1627662719094
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_10b1f54992d544fd8889808e28c47efb
+    parentId: fld_cfc3d4b6c04c469f962287f0a06c60ea
+    modified: 1627662849070
+    created: 1627662849070
+    url: http://localhost:3000/photos
+    name: getAll
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1627662580262
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_133b374260ae478f8f906fd7adf7ae57
+    parentId: fld_e25fde634a8c4d4393458101cd10f722
+    modified: 1627660541997
+    created: 1627660541997
+    url: http://localhost:3000/test/hi
+    name: hi_connected
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1627660541997
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_e25fde634a8c4d4393458101cd10f722
+    parentId: fld_6711d04496224fe1b5b001579ff5da19
+    modified: 1627662526130
+    created: 1627660545129
+    name: passport
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1627662458261
+    _type: request_group
+  - _id: req_945c493f1f094ed78e7327f71747cfe3
+    parentId: fld_e25fde634a8c4d4393458101cd10f722
+    modified: 1627660541996
+    created: 1627660541996
+    url: http://localhost:3000/login
+    name: login user
+    description: ""
+    method: POST
+    body:
+      mimeType: ""
+      text: |-
+        {
+            "username": "user",
+            "password": "user"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1627660541996
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_5f8330ff24e34d5c962c47550690851d
+    parentId: fld_e25fde634a8c4d4393458101cd10f722
+    modified: 1627660541994
+    created: 1627660541994
+    url: http://localhost:3000/login
+    name: login admin
+    description: ""
+    method: POST
+    body:
+      mimeType: ""
+      text: |-
+        {
+            "username": "admin",
+            "password": "admin"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1627660541995
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_3ac74c0d980b44d5bc11572d63d27eb4
+    parentId: fld_e25fde634a8c4d4393458101cd10f722
+    modified: 1627660541992
+    created: 1627660541992
+    url: http://localhost:3000/login
+    name: login bad
+    description: ""
+    method: POST
+    body:
+      mimeType: ""
+      text: |-
+        {
+            "username": "admin",
+            "password": "z"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1627660541992
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_72db76418ba942a58b59c88f5603d839
+    parentId: fld_871117667c5e44a89ed51b3bdbb09ccc
+    modified: 1627662559725
+    created: 1627661138723
+    url: " http://localhost:3000/graphql"
+    name: Create heroes
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation CreateHero($hero: HeroInput!)
+        {\n  submitHero(heroInput: $hero) {id,
+        name}\n}","variables":{"hero":{"name":"Spiderman2","power":"spider"}},"operationName":"CreateHero"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_6ff448ae28264bd29d55f680e2768723
+    authentication: {}
+    metaSortKey: -1627661054810.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_871117667c5e44a89ed51b3bdbb09ccc
+    parentId: fld_6711d04496224fe1b5b001579ff5da19
+    modified: 1627662515016
+    created: 1627660914599
+    name: graphql
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1627662458211
+    _type: request_group
+  - _id: req_a4c2c09b95874cadb72713ae6244c0b9
+    parentId: fld_871117667c5e44a89ed51b3bdbb09ccc
+    modified: 1627662757124
+    created: 1627661659604
+    url: " http://localhost:3000/graphql"
+    name: Create photo
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation CreatePhoto($photo: PhotoInput!)
+        {\n  submitPhoto(photoInput: $photo)
+        {\n    id,\n    name,\n    description\n  }\n}","variables":{"photo":{"description":"Pretty
+        cool
+        photo","fileName":"https://images.unsplash.com/photo-1511044568932-338cba0ad803?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80","isPublished":true,"name":"cat
+        photo","views":2}},"operationName":"CreatePhoto"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_6ff448ae28264bd29d55f680e2768723
+    authentication: {}
+    metaSortKey: -1627661054760.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_33f0e17de5a5474da4e645621b398bfe
+    parentId: fld_871117667c5e44a89ed51b3bdbb09ccc
+    modified: 1627661867788
+    created: 1627660970798
+    url: " http://localhost:3000/graphql"
+    name: query heroes
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query heroes {\n  heroes
+        {\n    id\n    name\n  }\n}","operationName":"heroes"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_c04dda7405a94397a3115c8ddb1fb2cd
+    authentication: {}
+    metaSortKey: -1627660970798
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_3fc94957881b4b8c9384da4821ad4ccd
+    parentId: fld_871117667c5e44a89ed51b3bdbb09ccc
+    modified: 1627661867385
+    created: 1627661635820
+    url: " http://localhost:3000/graphql"
+    name: query photos
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query photos {\n  photos
+        {\n    id\n    name\n    description\n  }\n}","operationName":"photos"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_c04dda7405a94397a3115c8ddb1fb2cd
+    authentication: {}
+    metaSortKey: -1627660756397.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_bddf4a1b318e4bc48a311bc2da4e5b2e
+    parentId: fld_871117667c5e44a89ed51b3bdbb09ccc
+    modified: 1627662477798
+    created: 1627661862448
+    url: " http://localhost:3000/graphql"
+    name: query photos & heroes
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query photos {\n  photos
+        {\n    id\n    name\n    description\n  }\n  \n  heroes
+        {\n    id\n    name\n  }\n}","operationName":"photos"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_c04dda7405a94397a3115c8ddb1fb2cd
+    authentication: {}
+    metaSortKey: -1627660649197.25
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_c755ac165f6dbe3de55b28d3646641f5b67e70a1
+    parentId: wrk_5461e0d7ed7349c7b7555ce5f9a6319a
+    modified: 1627660526149
+    created: 1627660526149
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1627660526149
+    _type: environment
+  - _id: jar_c755ac165f6dbe3de55b28d3646641f5b67e70a1
+    parentId: wrk_5461e0d7ed7349c7b7555ce5f9a6319a
+    modified: 1627660553599
+    created: 1627660526150
+    name: Default Jar
+    cookies:
+      - key: connect.sid
+        value: s%3AutHvynTve0f8Ota5xR8GcmapPphXyHq1.IMuSnKOd75nCUoO3aAjBhLHtHEQjq%2BuF%2F9%2FXkuzr5Ww
+        domain: localhost
+        path: /
+        httpOnly: true
+        hostOnly: true
+        creation: 2021-07-30T15:55:53.596Z
+        lastAccessed: 2021-07-30T15:55:53.596Z
+        id: "6503346766694764"
+    _type: cookie_jar
+  - _id: spc_a0b76daf5d9548558f1d98314f844daf
+    parentId: wrk_5461e0d7ed7349c7b7555ce5f9a6319a
+    modified: 1627660525639
+    created: 1627660525639
+    fileName: Gabliam
+    contents: ""
+    contentType: yaml
+    _type: api_spec
