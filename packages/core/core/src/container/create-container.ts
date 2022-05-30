@@ -11,7 +11,7 @@ import { makeActivationValue } from './value-activation';
 export function createContainer(
   ...activationHooks: ContainerActivationHook[]
 ): Container {
-  const container = new Container();
+  const container = new Container({ skipBaseClassChecks: true });
   activationHooks.unshift(
     makeActivationInject(container),
     makeActivationValue(container),
