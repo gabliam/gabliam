@@ -38,7 +38,7 @@ Gabliam {
     "options": Object {
       "autoBindInjectable": false,
       "defaultScope": "Transient",
-      "skipBaseClassChecks": false,
+      "skipBaseClassChecks": true,
     },
     "parent": null,
   },
@@ -99,7 +99,7 @@ Gabliam {
     "options": Object {
       "autoBindInjectable": false,
       "defaultScope": "Transient",
-      "skipBaseClassChecks": false,
+      "skipBaseClassChecks": true,
     },
     "parent": null,
   },
@@ -167,7 +167,7 @@ Gabliam {
     "options": Object {
       "autoBindInjectable": false,
       "defaultScope": "Transient",
-      "skipBaseClassChecks": false,
+      "skipBaseClassChecks": true,
     },
     "parent": null,
   },
@@ -232,7 +232,7 @@ Gabliam {
     "options": Object {
       "autoBindInjectable": false,
       "defaultScope": "Transient",
-      "skipBaseClassChecks": false,
+      "skipBaseClassChecks": true,
     },
     "parent": null,
   },
@@ -300,7 +300,7 @@ Gabliam {
     "options": Object {
       "autoBindInjectable": false,
       "defaultScope": "Transient",
-      "skipBaseClassChecks": false,
+      "skipBaseClassChecks": true,
     },
     "parent": null,
   },
@@ -373,7 +373,7 @@ Gabliam {
     "options": Object {
       "autoBindInjectable": false,
       "defaultScope": "Transient",
-      "skipBaseClassChecks": false,
+      "skipBaseClassChecks": true,
     },
     "parent": null,
   },
@@ -427,7 +427,7 @@ Gabliam {
     "options": Object {
       "autoBindInjectable": false,
       "defaultScope": "Transient",
-      "skipBaseClassChecks": false,
+      "skipBaseClassChecks": true,
     },
     "parent": null,
   },
@@ -497,7 +497,7 @@ Gabliam {
     "options": Object {
       "autoBindInjectable": false,
       "defaultScope": "Transient",
-      "skipBaseClassChecks": false,
+      "skipBaseClassChecks": true,
     },
     "parent": null,
   },
@@ -574,7 +574,7 @@ Gabliam {
     "options": Object {
       "autoBindInjectable": false,
       "defaultScope": "Transient",
-      "skipBaseClassChecks": false,
+      "skipBaseClassChecks": true,
     },
     "parent": null,
   },
