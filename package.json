@@ -1,6 +1,6 @@
 {
   "name": "gabliam-sources",
-  "version": "0.0.0-BUILD-VERSION",
+  "version": "8.11.1",
   "private": true,
   "license": "MIT",
   "scripts": {
