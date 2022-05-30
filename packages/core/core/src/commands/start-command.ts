@@ -39,26 +39,33 @@ export class StartCommand implements yargs.CommandModule<{}, StartCommandArgs> {
       dirToScan = resolvePath(args.dir, process.cwd());
     }
 
-    await setupTsProject(dirToScan);
+    try {
+      await setupTsProject(dirToScan);
 
-    const application = await gabliamFindApp(dirToScan, appName);
-    const gabliam = gabliamBuilder(application)();
-    ['SIGINT', 'SIGTERM'].forEach((sig: any) => {
-      process.on(sig, async () => {
-        try {
-          await gabliam.stopAndDestroy();
-          // eslint-disable-next-line no-empty
-        } catch {}
+      const application = await gabliamFindApp(dirToScan, appName);
+      const gabliam = gabliamBuilder(application)();
+      ['SIGINT', 'SIGTERM'].forEach((sig: any) => {
+        process.on(sig, async () => {
+          try {
+            await gabliam.stopAndDestroy();
+            // eslint-disable-next-line no-empty
+          } catch {}
 
-        process.exit();
+          process.exit();
+        });
       });
-    });
 
-    await gabliam.buildAndStart();
-    // eslint-disable-next-line new-cap
-    const app = new application();
-    if (_.isFunction(app.run)) {
-      app.run(gabliam);
+      await gabliam.buildAndStart();
+      // eslint-disable-next-line new-cap
+      const app = new application();
+      if (_.isFunction(app.run)) {
+        app.run(gabliam);
+      }
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error('Gabliam start error', e);
+      // eslint-disable-next-line no-console
+      console.error((e as Error).stack);
     }
   }
 }
