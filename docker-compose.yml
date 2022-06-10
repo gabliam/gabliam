@@ -8,5 +8,9 @@ services:
 
   redis-server:
     image: redis
+    volumes:
+      - ./tests/conf:/usr/local/etc/redis
+    command:
+      - /usr/local/etc/redis/redis.conf
     ports:
       - "6379:6379"
