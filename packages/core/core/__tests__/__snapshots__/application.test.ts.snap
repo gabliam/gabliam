@@ -7,6 +7,9 @@ exports[`gabliamFindApp with appName 2 applications app 2`] = `"Application2"`;
 exports[`gabliamFindApp with appName 2 applications app 3`] = `
 Gabliam {
   "container": Container {
+    "_activations": Lookup {
+      "_map": Map {},
+    },
     "_bindingDictionary": Lookup {
       "_map": Map {
         Symbol(CORE_CONFIG) => Array [
@@ -22,16 +25,23 @@ Gabliam {
             "id": 17,
             "implementationType": null,
             "onActivation": [Function],
+            "onDeactivation": null,
             "provider": null,
-            "scope": "Transient",
+            "scope": "Singleton",
             "serviceIdentifier": Symbol(CORE_CONFIG),
             "type": "ConstantValue",
           },
         ],
       },
     },
+    "_deactivations": Lookup {
+      "_map": Map {},
+    },
     "_metadataReader": MetadataReader {},
     "_middleware": [Function],
+    "_moduleActivationStore": ModuleActivationStore {
+      "_map": Map {},
+    },
     "_snapshots": Array [],
     "bind": [Function],
     "id": 16,
@@ -64,6 +74,9 @@ exports[`gabliamFindApp with appName one application app with config 1`] = `[Fun
 exports[`gabliamFindApp with appName one application app with config 2`] = `
 Gabliam {
   "container": Container {
+    "_activations": Lookup {
+      "_map": Map {},
+    },
     "_bindingDictionary": Lookup {
       "_map": Map {
         Symbol(CORE_CONFIG) => Array [
@@ -83,16 +96,23 @@ Gabliam {
             "id": 15,
             "implementationType": null,
             "onActivation": [Function],
+            "onDeactivation": null,
             "provider": null,
-            "scope": "Transient",
+            "scope": "Singleton",
             "serviceIdentifier": Symbol(CORE_CONFIG),
             "type": "ConstantValue",
           },
         ],
       },
     },
+    "_deactivations": Lookup {
+      "_map": Map {},
+    },
     "_metadataReader": MetadataReader {},
     "_middleware": [Function],
+    "_moduleActivationStore": ModuleActivationStore {
+      "_map": Map {},
+    },
     "_snapshots": Array [],
     "bind": [Function],
     "id": 14,
@@ -136,6 +156,9 @@ exports[`gabliamFindApp with appName one application app without config 1`] = `[
 exports[`gabliamFindApp with appName one application app without config 2`] = `
 Gabliam {
   "container": Container {
+    "_activations": Lookup {
+      "_map": Map {},
+    },
     "_bindingDictionary": Lookup {
       "_map": Map {
         Symbol(CORE_CONFIG) => Array [
@@ -151,16 +174,23 @@ Gabliam {
             "id": 13,
             "implementationType": null,
             "onActivation": [Function],
+            "onDeactivation": null,
             "provider": null,
-            "scope": "Transient",
+            "scope": "Singleton",
             "serviceIdentifier": Symbol(CORE_CONFIG),
             "type": "ConstantValue",
           },
         ],
       },
     },
+    "_deactivations": Lookup {
+      "_map": Map {},
+    },
     "_metadataReader": MetadataReader {},
     "_middleware": [Function],
+    "_moduleActivationStore": ModuleActivationStore {
+      "_map": Map {},
+    },
     "_snapshots": Array [],
     "bind": [Function],
     "id": 12,
@@ -197,6 +227,9 @@ exports[`gabliamFindApp without appName one application app with config 1`] = `[
 exports[`gabliamFindApp without appName one application app with config 2`] = `
 Gabliam {
   "container": Container {
+    "_activations": Lookup {
+      "_map": Map {},
+    },
     "_bindingDictionary": Lookup {
       "_map": Map {
         Symbol(CORE_CONFIG) => Array [
@@ -216,16 +249,23 @@ Gabliam {
             "id": 11,
             "implementationType": null,
             "onActivation": [Function],
+            "onDeactivation": null,
             "provider": null,
-            "scope": "Transient",
+            "scope": "Singleton",
             "serviceIdentifier": Symbol(CORE_CONFIG),
             "type": "ConstantValue",
           },
         ],
       },
     },
+    "_deactivations": Lookup {
+      "_map": Map {},
+    },
     "_metadataReader": MetadataReader {},
     "_middleware": [Function],
+    "_moduleActivationStore": ModuleActivationStore {
+      "_map": Map {},
+    },
     "_snapshots": Array [],
     "bind": [Function],
     "id": 10,
@@ -269,6 +309,9 @@ exports[`gabliamFindApp without appName one application app without config 1`] =
 exports[`gabliamFindApp without appName one application app without config 2`] = `
 Gabliam {
   "container": Container {
+    "_activations": Lookup {
+      "_map": Map {},
+    },
     "_bindingDictionary": Lookup {
       "_map": Map {
         Symbol(CORE_CONFIG) => Array [
@@ -284,16 +327,23 @@ Gabliam {
             "id": 9,
             "implementationType": null,
             "onActivation": [Function],
+            "onDeactivation": null,
             "provider": null,
-            "scope": "Transient",
+            "scope": "Singleton",
             "serviceIdentifier": Symbol(CORE_CONFIG),
             "type": "ConstantValue",
           },
         ],
       },
     },
+    "_deactivations": Lookup {
+      "_map": Map {},
+    },
     "_metadataReader": MetadataReader {},
     "_middleware": [Function],
+    "_moduleActivationStore": ModuleActivationStore {
+      "_map": Map {},
+    },
     "_snapshots": Array [],
     "bind": [Function],
     "id": 8,
@@ -343,6 +393,9 @@ Array [
 exports[`gabliamFinder 2 applications app 2`] = `
 Gabliam {
   "container": Container {
+    "_activations": Lookup {
+      "_map": Map {},
+    },
     "_bindingDictionary": Lookup {
       "_map": Map {
         Symbol(CORE_CONFIG) => Array [
@@ -357,16 +410,23 @@ Gabliam {
             "id": 5,
             "implementationType": null,
             "onActivation": [Function],
+            "onDeactivation": null,
             "provider": null,
-            "scope": "Transient",
+            "scope": "Singleton",
             "serviceIdentifier": Symbol(CORE_CONFIG),
             "type": "ConstantValue",
           },
         ],
       },
     },
+    "_deactivations": Lookup {
+      "_map": Map {},
+    },
     "_metadataReader": MetadataReader {},
     "_middleware": [Function],
+    "_moduleActivationStore": ModuleActivationStore {
+      "_map": Map {},
+    },
     "_snapshots": Array [],
     "bind": [Function],
     "id": 4,
@@ -396,6 +456,9 @@ Gabliam {
 exports[`gabliamFinder 2 applications app 3`] = `
 Gabliam {
   "container": Container {
+    "_activations": Lookup {
+      "_map": Map {},
+    },
     "_bindingDictionary": Lookup {
       "_map": Map {
         Symbol(CORE_CONFIG) => Array [
@@ -411,16 +474,23 @@ Gabliam {
             "id": 7,
             "implementationType": null,
             "onActivation": [Function],
+            "onDeactivation": null,
             "provider": null,
-            "scope": "Transient",
+            "scope": "Singleton",
             "serviceIdentifier": Symbol(CORE_CONFIG),
             "type": "ConstantValue",
           },
         ],
       },
     },
+    "_deactivations": Lookup {
+      "_map": Map {},
+    },
     "_metadataReader": MetadataReader {},
     "_middleware": [Function],
+    "_moduleActivationStore": ModuleActivationStore {
+      "_map": Map {},
+    },
     "_snapshots": Array [],
     "bind": [Function],
     "id": 6,
@@ -462,6 +532,9 @@ Array [
 exports[`gabliamFinder one application app with config 2`] = `
 Gabliam {
   "container": Container {
+    "_activations": Lookup {
+      "_map": Map {},
+    },
     "_bindingDictionary": Lookup {
       "_map": Map {
         Symbol(CORE_CONFIG) => Array [
@@ -481,16 +554,23 @@ Gabliam {
             "id": 3,
             "implementationType": null,
             "onActivation": [Function],
+            "onDeactivation": null,
             "provider": null,
-            "scope": "Transient",
+            "scope": "Singleton",
             "serviceIdentifier": Symbol(CORE_CONFIG),
             "type": "ConstantValue",
           },
         ],
       },
     },
+    "_deactivations": Lookup {
+      "_map": Map {},
+    },
     "_metadataReader": MetadataReader {},
     "_middleware": [Function],
+    "_moduleActivationStore": ModuleActivationStore {
+      "_map": Map {},
+    },
     "_snapshots": Array [],
     "bind": [Function],
     "id": 2,
@@ -543,6 +623,9 @@ Array [
 exports[`gabliamFinder one application app without config 2`] = `
 Gabliam {
   "container": Container {
+    "_activations": Lookup {
+      "_map": Map {},
+    },
     "_bindingDictionary": Lookup {
       "_map": Map {
         Symbol(CORE_CONFIG) => Array [
@@ -558,16 +641,23 @@ Gabliam {
             "id": 1,
             "implementationType": null,
             "onActivation": [Function],
+            "onDeactivation": null,
             "provider": null,
-            "scope": "Transient",
+            "scope": "Singleton",
             "serviceIdentifier": Symbol(CORE_CONFIG),
             "type": "ConstantValue",
           },
         ],
       },
     },
+    "_deactivations": Lookup {
+      "_map": Map {},
+    },
     "_metadataReader": MetadataReader {},
     "_middleware": [Function],
+    "_moduleActivationStore": ModuleActivationStore {
+      "_map": Map {},
+    },
     "_snapshots": Array [],
     "bind": [Function],
     "id": 0,
