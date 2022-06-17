@@ -146,7 +146,7 @@ export class PluginList {
    */
   sort() {
     const graph = Graph();
-    const beforeAll = [];
+    const beforeAll: string[] = [];
     for (const plugin of this._plugins) {
       if (plugin.beforeAll) {
         beforeAll.push(plugin.name);
@@ -156,7 +156,9 @@ export class PluginList {
     for (const plugin of this._plugins) {
       graph.addNode(plugin.name);
 
-      beforeAll.forEach((def) => graph.addEdge(def, plugin.name));
+      beforeAll
+        .filter((def) => def !== plugin.name)
+        .forEach((def) => graph.addEdge(def, plugin.name));
 
       // const orderedPlugin = [plugin.name];
       if (plugin.dependencies) {

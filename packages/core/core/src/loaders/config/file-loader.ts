@@ -25,7 +25,7 @@ async function loadFile(
   try {
     config = await parser(data);
   } catch (e) {
-    throw new LoaderConfigParseError(filePath, e);
+    throw new LoaderConfigParseError(filePath, e as Error);
   }
 
   return resolver(config);

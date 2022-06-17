@@ -26,14 +26,14 @@
     "@gabliam/koa": "0.0.0-PLACEHOLDER",
     "@gabliam/typeorm": "0.0.0-PLACEHOLDER",
     "@gabliam/web-core": "0.0.0-PLACEHOLDER",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "reflect-metadata": "^0.1.9",
     "sqlite3": "^5.0.8",
     "tslib": "^2.4.0",
     "type-graphql": "^1.1.1"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.165",
+    "@types/lodash": "^4.14.182",
     "nodemon": "^2.0.6"
   }
 }

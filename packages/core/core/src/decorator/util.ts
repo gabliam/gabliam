@@ -40,7 +40,9 @@ function createTypeDecorator<T = any>(
       ANNOTATIONS,
     )
       ? (cls as any)[ANNOTATIONS]
-      : Object.defineProperty(cls, ANNOTATIONS, { value: [] })[ANNOTATIONS];
+      : (Object.defineProperty(cls, ANNOTATIONS, { value: [] }) as any)[
+          ANNOTATIONS
+        ];
 
     if (uniq && annotations.find((a) => a.gabMetadataName === name)) {
       throw new DecoratorUniqError(uniqError);

@@ -28,7 +28,7 @@ async function loadConfigProject(
     const vals = yaml.loadAll(data, undefined, { schema }) || [];
     return await resolver(_.find(vals, <any>{ projectName }) || {});
   } catch (e) {
-    throw new LoaderConfigParseError(filePath, e);
+    throw new LoaderConfigParseError(filePath, e as Error);
   }
 }
 
@@ -37,7 +37,7 @@ async function loadFile(filePath: string, resolver: Resolver): Promise<Object> {
   try {
     return await resolver(yaml.load(data) || {});
   } catch (e) {
-    throw new LoaderConfigParseError(filePath, e);
+    throw new LoaderConfigParseError(filePath, e as Error);
   }
 }
 
