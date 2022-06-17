@@ -1,6 +1,9 @@
 import { reflection, toPromise, ValueExtractor } from '@gabliam/core';
 import { log4js } from '@gabliam/log4js';
-import amqp from 'amqp-connection-manager';
+import amqp, {
+  AmqpConnectionManager,
+  ChannelWrapper,
+} from 'amqp-connection-manager';
 import { ConfirmChannel, ConsumeMessage, Message } from 'amqplib';
 import PromiseB from 'bluebird';
 import _ from 'lodash';
@@ -43,9 +46,9 @@ export class AmqpConnection {
 
   private state = ConnectionState.stopped;
 
-  private connection: amqp.AmqpConnectionManager;
+  private connection: AmqpConnectionManager;
 
-  private channel: amqp.ChannelWrapper;
+  private channel: ChannelWrapper;
 
   private consumerList: ConsumeConfig[] = [];
 
@@ -85,12 +88,11 @@ export class AmqpConnection {
     });
 
     await new Promise<void>((resolve, reject) => {
-      this.connection.once('disconnect', (err: any) => {
+      const onConnectFailed = (err: any) => {
         if (
           _.get(err, 'err.errno', undefined) === 'ENOTFOUND' ||
           _.get(err, 'err.code', undefined) === 'ENOTFOUND'
         ) {
-          this.connection.close();
           this.channel.removeAllListeners('connect');
           this.channel.removeAllListeners('error');
           reject(err.err);
@@ -98,11 +100,12 @@ export class AmqpConnection {
           /* istanbul ignore next */
           this.logger.error(`Amqp error %O`, err);
         }
-      });
+      };
+      this.connection.once('connectFailed', onConnectFailed);
 
       this.state = ConnectionState.running;
       const isConnect = () => {
-        this.connection.removeAllListeners('disconnect');
+        this.connection.removeListener('connectFailed', onConnectFailed);
         resolve();
       };
       this.channel.once('connect', isConnect);

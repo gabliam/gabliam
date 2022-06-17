@@ -638,20 +638,20 @@ __metadata:
   dependencies:
     "@gabliam/core": 0.0.0-PLACEHOLDER
     "@gabliam/log4js": 0.0.0-PLACEHOLDER
-    "@types/amqp-connection-manager": ^2.0.4
-    "@types/amqplib": ^0.5.16
-    "@types/bluebird": ^3.5.33
+    "@types/amqp-connection-manager": ^3.4.0
+    "@types/amqplib": ^0.8.2
+    "@types/bluebird": ^3.5.36
     "@types/debug": ^4.1.7
     "@types/lodash": ^4.14.182
     "@types/node": ^18.0.0
-    "@types/uuid": ^8.3.0
-    amqp-connection-manager: ^3.2.1
-    amqplib: ^0.6.0
+    "@types/uuid": ^8.3.4
+    amqp-connection-manager: ^4.1.3
+    amqplib: ^0.10.0
     bluebird: ^3.7.2
     debug: ^4.3.4
     lodash: ^4.17.21
     tslib: ^2.4.0
-    uuid: ^8.3.1
+    uuid: ^8.3.2
   peerDependencies:
     "@gabliam/core": 0.0.0-PLACEHOLDER
     "@gabliam/log4js": 0.0.0-PLACEHOLDER
@@ -2534,32 +2534,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/amqp-connection-manager@npm:^2.0.4":
-  version: 2.0.10
-  resolution: "@types/amqp-connection-manager@npm:2.0.10"
+"@types/amqp-connection-manager@npm:^3.4.0":
+  version: 3.4.0
+  resolution: "@types/amqp-connection-manager@npm:3.4.0"
   dependencies:
-    "@types/amqplib": "*"
-  checksum: bd854e5d3def296121c6440db079801036b34a70ca07b81ed86353c1dc3551d74f6c0382ee5b1ffd1bb68840ae33f20248eff481d0d514bcde52769ba65d3dad
+    amqp-connection-manager: "*"
+  checksum: 96a6d35a58d230ddecce4d5f7ece5bff3f5af4bd9927c04c569a4d2a7ae084d7bbac4f1fbe7f59b0fc802c2593cbf923826eae20191afdda81bc2e3390cae812
   languageName: node
   linkType: hard
 
-"@types/amqplib@npm:*":
-  version: 0.5.13
-  resolution: "@types/amqplib@npm:0.5.13"
+"@types/amqplib@npm:^0.8.2":
+  version: 0.8.2
+  resolution: "@types/amqplib@npm:0.8.2"
   dependencies:
     "@types/bluebird": "*"
     "@types/node": "*"
-  checksum: d353c4a0cb680bf00734fa5d18bd3a189b7f421d1e8f7872ed4be1199cb85f4f8fa7bd1bd48259efc04fdf0f3f58266005faf3e7f513a751880e31b57b3b5b9e
-  languageName: node
-  linkType: hard
-
-"@types/amqplib@npm:^0.5.16":
-  version: 0.5.16
-  resolution: "@types/amqplib@npm:0.5.16"
-  dependencies:
-    "@types/bluebird": "*"
-    "@types/node": "*"
-  checksum: e8b0f02dca162e9f3e56ddb483ca308a1b5f22f7864646ef41d2cba6782a5aaaa9c4c49e8b01702df13fd056b92183f83cbfc4c82bec2896acbc28b2b0430fd0
+  checksum: 8b30e22cf890631637ad40fa8eda3323d3ca156c18f23a59c10befd96beab0c046f3f7c2c0a196fc36a669d848b09999ca1f5a0fa2620009656f028667e2bdb8
   languageName: node
   linkType: hard
 
@@ -2620,10 +2610,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/bluebird@npm:^3.5.33":
-  version: 3.5.33
-  resolution: "@types/bluebird@npm:3.5.33"
-  checksum: 80e81272c4e39a686f194a044d7e5441272e47f28694a31fe9e11f5b10a560040aad083bbb5106614604dde7ca237d6f0c830dc897e69c7eef812924437054b9
+"@types/bluebird@npm:^3.5.36":
+  version: 3.5.36
+  resolution: "@types/bluebird@npm:3.5.36"
+  checksum: efe7484e1f6c3443c083f052efb7688b461a9f43899b1891c10b1faf92e4932d686265d10c3e02b8c8fe0c8c371774e6a55ff6eec5e79525390a1ddeee7eb41b
   languageName: node
   linkType: hard
 
@@ -3452,10 +3442,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/uuid@npm:^8.3.0":
-  version: 8.3.0
-  resolution: "@types/uuid@npm:8.3.0"
-  checksum: 0f46b15020b9c252473fb327a6491fd7d238c7b5bbaebd32195a0de178db040f6abb96902507ba25dd4a673cdd9cc28b8880512dba54561e8bc60d8f326c1e30
+"@types/uuid@npm:^8.3.4":
+  version: 8.3.4
+  resolution: "@types/uuid@npm:8.3.4"
+  checksum: 6f11f3ff70f30210edaa8071422d405e9c1d4e53abbe50fdce365150d3c698fe7bbff65c1e71ae080cbfb8fded860dbb5e174da96fdbbdfcaa3fb3daa474d20f
   languageName: node
   linkType: hard
 
@@ -3920,28 +3910,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"amqp-connection-manager@npm:^3.2.1":
-  version: 3.2.1
-  resolution: "amqp-connection-manager@npm:3.2.1"
+"amqp-connection-manager@npm:*, amqp-connection-manager@npm:^4.1.3":
+  version: 4.1.3
+  resolution: "amqp-connection-manager@npm:4.1.3"
   dependencies:
     promise-breaker: ^5.0.0
   peerDependencies:
     amqplib: "*"
-  checksum: fe6c20c52c614ead1304c444d5a1eedcdaf0cd8260bad383b42e55b97621d0e6cbf09392a593a3c1cba73688f2f15051c9b6f544a4075d7f5054ba77cf8a4906
+  checksum: 8e0b3f7d53f9959c4560ca4638d98b8ae8e319f74a5fdda0da2c2d410da2c7c9665d19c7413ae9e44f92904afa33e0907dc46254983c3be5900c92f29e50e5cd
   languageName: node
   linkType: hard
 
-"amqplib@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "amqplib@npm:0.6.0"
+"amqplib@npm:^0.10.0":
+  version: 0.10.0
+  resolution: "amqplib@npm:0.10.0"
   dependencies:
     bitsyntax: ~0.1.0
-    bluebird: ^3.5.2
     buffer-more-ints: ~1.0.0
     readable-stream: 1.x >=1.1.9
-    safe-buffer: ~5.1.2
-    url-parse: ~1.4.3
-  checksum: 96c0fceb6b6dbbd7291e3a3af6fca1895f05ab3089b5ca9d7971987aea2a361035f2c302fc28a08f31444511c0cd9a34a1ba6375a06922dba2b130bdc8cf3282
+    url-parse: ~1.5.10
+  checksum: d4273af395e4fbb0c0c17b9b93ef6f8e64394788a01e9722f785ef17e6062c4caad07824d610e879fcd2e4098e317492a876ae26cd4a08aa956c927050ab6cb3
   languageName: node
   linkType: hard
 
@@ -4775,7 +4763,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bluebird@npm:^3.5.1, bluebird@npm:^3.5.2, bluebird@npm:^3.5.3, bluebird@npm:^3.5.5, bluebird@npm:^3.7.2":
+"bluebird@npm:^3.5.1, bluebird@npm:^3.5.3, bluebird@npm:^3.5.5, bluebird@npm:^3.7.2":
   version: 3.7.2
   resolution: "bluebird@npm:3.7.2"
   checksum: 869417503c722e7dc54ca46715f70e15f4d9c602a423a02c825570862d12935be59ed9c7ba34a9b31f186c017c23cac6b54e35446f8353059c101da73eac22ef
@@ -16593,13 +16581,13 @@ typescript@^2.5.0:
   languageName: node
   linkType: hard
 
-"url-parse@npm:~1.4.3":
-  version: 1.4.7
-  resolution: "url-parse@npm:1.4.7"
+"url-parse@npm:~1.5.10":
+  version: 1.5.10
+  resolution: "url-parse@npm:1.5.10"
   dependencies:
     querystringify: ^2.1.1
     requires-port: ^1.0.0
-  checksum: 3ede937508436c9685a60c90634894aaf745d75160c0092c7f36335c79563effedf1a9fe0181f98e9c5165af73ba5f8fe1dc6e274c6556ae170be01f6e54c67f
+  checksum: fbdba6b1d83336aca2216bbdc38ba658d9cfb8fc7f665eb8b17852de638ff7d1a162c198a8e4ed66001ddbf6c9888d41e4798912c62b4fd777a31657989f7bdf
   languageName: node
   linkType: hard
 
@@ -16663,12 +16651,21 @@ typescript@^2.5.0:
   languageName: node
   linkType: hard
 
-"uuid@npm:^8.3.0, uuid@npm:^8.3.1":
+"uuid@npm:^8.3.0":
   version: 8.3.1
   resolution: "uuid@npm:8.3.1"
   bin:
     uuid: dist/bin/uuid
   checksum: e60e1d571d85f17a0c5a68010a300cf68c7bda976c2e9ae9ff672ee62556e62fd4e7d9e8d8712ec225056caacce28661b11f372c7977c4a2d23fbdada4d7d49a
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^8.3.2":
+  version: 8.3.2
+  resolution: "uuid@npm:8.3.2"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 5575a8a75c13120e2f10e6ddc801b2c7ed7d8f3c8ac22c7ed0c7b2ba6383ec0abda88c905085d630e251719e0777045ae3236f04c812184b7c765f63a70e58df
   languageName: node
   linkType: hard
 
