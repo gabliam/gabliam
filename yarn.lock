@@ -643,7 +643,7 @@ __metadata:
     "@types/bluebird": ^3.5.33
     "@types/debug": ^4.1.7
     "@types/lodash": ^4.14.182
-    "@types/node": ^14.14.9
+    "@types/node": ^18.0.0
     "@types/uuid": ^8.3.0
     amqp-connection-manager: ^3.2.1
     amqplib: ^0.6.0
@@ -666,7 +666,7 @@ __metadata:
     "@gabliam/core": 0.0.0-PLACEHOLDER
     "@types/debug": ^4.1.7
     "@types/ioredis": ^4.17.8
-    "@types/node": ^14.14.9
+    "@types/node": ^18.0.0
     debug: ^4.3.4
     ioredis: ^4.19.2
     tslib: ^2.4.0
@@ -685,7 +685,7 @@ __metadata:
     "@types/debug": ^4.1.7
     "@types/lodash": ^4.14.182
     "@types/lru-cache": ^5.1.0
-    "@types/node": ^14.14.9
+    "@types/node": ^18.0.0
     debug: ^4.3.4
     lodash: ^4.17.21
     lru-cache: ^6.0.0
@@ -775,10 +775,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@gabliam/expression@workspace:packages/core/expression"
   dependencies:
-    "@types/escodegen": ^0.0.6
-    "@types/esprima": ^4.0.2
-    "@types/lodash": ^4
-    "@types/node": ^14.14.9
+    "@types/escodegen": ^0.0.7
+    "@types/esprima": ^4.0.3
+    "@types/lodash": ^4.14.182
+    "@types/node": ^18.0.0
     escodegen: ^2.0.0
     esprima: ^4.0.1
     is-valid-path: ^0.1.1
@@ -796,7 +796,7 @@ __metadata:
     "@types/debug": ^4.1.7
     "@types/graphql": ^14.5.0
     "@types/lodash": ^4.14.182
-    "@types/node": ^14.14.9
+    "@types/node": ^18.0.0
     apollo-server-core: ^2.19.0
     caller: ^1.1.0
     debug: ^4.3.4
@@ -819,7 +819,7 @@ __metadata:
     "@gabliam/graphql-core": 0.0.0-PLACEHOLDER
     "@gabliam/web-core": 0.0.0-PLACEHOLDER
     "@types/debug": ^4.1.7
-    "@types/node": ^14.14.9
+    "@types/node": ^18.0.0
     apollo-server-express: ^2.19.0
     debug: ^4.3.4
     graphql: ^15.4.0
@@ -841,7 +841,7 @@ __metadata:
     "@gabliam/koa": 0.0.0-PLACEHOLDER
     "@gabliam/web-core": 0.0.0-PLACEHOLDER
     "@types/debug": ^4.1.7
-    "@types/node": ^14.14.9
+    "@types/node": ^18.0.0
     apollo-server-koa: ^2.19.0
     debug: ^4.3.4
     graphql: ^15.4.0
@@ -904,7 +904,7 @@ __metadata:
     "@types/glob": ^7.2.0
     "@types/js-yaml": ^4.0.5
     "@types/lodash": ^4.14.182
-    "@types/node": ^14.14.9
+    "@types/node": ^18.0.0
     debug: ^4.3.4
     glob: ^8.0.3
     js-yaml: ^3.14.1
@@ -922,7 +922,7 @@ __metadata:
     "@gabliam/core": 0.0.0-PLACEHOLDER
     "@types/debug": ^4.1.7
     "@types/mkdirp": ^1
-    "@types/node": ^14.14.9
+    "@types/node": ^18.0.0
     chalk: ^4.1.1
     cli-highlight: ^2.1.11
     debug: ^4.3.4
@@ -981,7 +981,7 @@ __metadata:
     "@gabliam/core": 0.0.0-PLACEHOLDER
     "@types/cookies": ^0.7.5
     "@types/escape-html": ^1.0.0
-    "@types/lodash": ^4
+    "@types/lodash": ^4.14.182
     "@types/statuses": ^2.0.0
     cookies: ^0.8.0
     escape-html: ^1.0.3
@@ -2748,19 +2748,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/escodegen@npm:^0.0.6":
-  version: 0.0.6
-  resolution: "@types/escodegen@npm:0.0.6"
-  checksum: 7b25aeedd48dbef68345224082c6bc774845cbfc1d9b2ce91a477130fe7ccabf33da126c1d6d55e5dfd838db429a7c80890628a167e5aa55b6a4620974da38d3
+"@types/escodegen@npm:^0.0.7":
+  version: 0.0.7
+  resolution: "@types/escodegen@npm:0.0.7"
+  checksum: 19625e3f61096e989c851e5db9758636618fb841d6adb295494a46613f68b025cb79474401e7b25508506799f94adcb17bb04b4f355862671caf8002ca77af0d
   languageName: node
   linkType: hard
 
-"@types/esprima@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "@types/esprima@npm:4.0.2"
+"@types/esprima@npm:^4.0.3":
+  version: 4.0.3
+  resolution: "@types/esprima@npm:4.0.3"
   dependencies:
     "@types/estree": "*"
-  checksum: 2f07d127353072a11eb1aab2fe0f0b9fad45ee75bb89428dec1efd41db3a1d94a92f3cc99c5991ab61b0258e0d2e3013ca83653d4ec651f63cee880b166bc343
+  checksum: 266d1f87a9469688af0f143dec47caae25e6f689194da0d57d03d796cf8bdbfb99593717885e98d9538f1beff967a642f126d693e0e4b5fa4f4605fb55866919
   languageName: node
   linkType: hard
 
@@ -3139,13 +3139,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4":
-  version: 4.14.168
-  resolution: "@types/lodash@npm:4.14.168"
-  checksum: 3326966ee089debde7a7d819e13b64991756e879945852c3357df14a7be837130f697c2cb451be9dd599eb7213fed0975bc9ca0f8f56b46fa73c46a83815b79c
-  languageName: node
-  linkType: hard
-
 "@types/lodash@npm:^4.14.136":
   version: 4.14.171
   resolution: "@types/lodash@npm:4.14.171"
@@ -3251,10 +3244,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^14.14.9":
-  version: 14.14.9
-  resolution: "@types/node@npm:14.14.9"
-  checksum: fbda42840aadc5b979f438a2e4c79c1d85d16222d758e58f7a2355a94b06be9da6b2b35603e0daeac115c69d3e3b334d03a5da40ab9c5ba48b75a3946a9854d8
+"@types/node@npm:^18.0.0":
+  version: 18.0.0
+  resolution: "@types/node@npm:18.0.0"
+  checksum: aab2b325727a2599f6d25ebe0dedf58c40fb66a51ce4ca9c0226ceb70fcda2d3afccdca29db5942eb48b158ee8585a274a1e3750c718bbd5399d7f41d62dfdcc
   languageName: node
   linkType: hard
 

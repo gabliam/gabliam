@@ -29,10 +29,10 @@
   },
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/core/expression#readme",
   "devDependencies": {
-    "@types/escodegen": "^0.0.6",
-    "@types/esprima": "^4.0.2",
-    "@types/lodash": "^4",
-    "@types/node": "^14.14.9"
+    "@types/escodegen": "^0.0.7",
+    "@types/esprima": "^4.0.3",
+    "@types/lodash": "^4.14.182",
+    "@types/node": "^18.0.0"
   },
   "dependencies": {
     "escodegen": "^2.0.0",
