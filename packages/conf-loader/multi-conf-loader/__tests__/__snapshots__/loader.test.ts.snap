@@ -4,17 +4,29 @@ exports[`error bad path 1`] = `Object {}`;
 
 exports[`error with bad application 1`] = `
 [LoaderConfigParseError: Error during parsing of file "<PROJECT_ROOT>/packages/conf-loader/multi-conf-loader/__tests__/fixture/badapplication/application.yml".
-    YAMLException: bad indentation of a mapping entry at line 5, column 18:
-          application:
-                     ^
+    YAMLException: bad indentation of a mapping entry (5:18)
+
+ 2 | projectName: test
+ 3 | testBDD: &testBDD !config config.testBDD
+ 4 | logger: &logger !config config.logger
+ 5 |       application:
+----------------------^
+ 6 |   << : *logger
+ 7 |   << : *testBDD
     ]
 `;
 
 exports[`error with bad constant 1`] = `
 [LoaderConfigParseError: Error during parsing of file "<PROJECT_ROOT>/packages/conf-loader/multi-conf-loader/__tests__/fixture/badconstant/constants.yml".
-    YAMLException: bad indentation of a mapping entry at line 12, column 19:
-                  host: *pgHost
-                      ^
+    YAMLException: bad indentation of a mapping entry (12:19)
+
+  9 |     typeorm:
+ 10 |       connectionOptions:
+ 11 |       - type: postgres
+ 12 |               host: *pgHost
+------------------------^
+ 13 |     name: test-default
+ 14 |           username: test-default
     ]
 `;
 

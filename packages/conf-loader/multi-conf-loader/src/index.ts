@@ -102,7 +102,7 @@ const multiConfLoader = async (
     instanceOf: Object,
   });
 
-  const GAB_SCHEMA = yaml.Schema.create([ConfigYamlType]);
+  const GAB_SCHEMA = yaml.DEFAULT_SCHEMA.extend([ConfigYamlType]);
 
   const files: string[] = await glob(`**/application?(-+([a-zA-Z])).@(yml)`, {
     cwd: folder,
