@@ -3,7 +3,7 @@ import { MemoryCache } from '../../../src/index';
 let cache: MemoryCache;
 
 beforeAll(async () => {
-  cache = new MemoryCache('test');
+  cache = new MemoryCache('test', { max: 8 });
   await cache.start();
 });
 

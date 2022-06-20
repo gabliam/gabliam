@@ -28,6 +28,9 @@ describe('config test', () => {
   it('with config', async () => {
     appTest.addConf('application.cacheConfig', {
       defaultCache: 'MemoryCache',
+      defaultOptionsCache: {
+        max: 1,
+      },
     });
     await appTest.build();
     const cacheManager = appTest.gab.container.get<CacheManager>(CACHE_MANAGER);
@@ -63,6 +66,9 @@ describe('integrations', () => {
     appTest.addClass(TestService);
     appTest.addConf('application.cacheConfig', {
       defaultCache: 'MemoryCache',
+      defaultOptionsCache: {
+        max: 5,
+      },
     });
     await appTest.build();
     const s = appTest.gab.container.get(TestService);
@@ -92,6 +98,9 @@ describe('integrations', () => {
           caches: {
             test: {
               cache: 'MemoryCache',
+              options: {
+                max: 5,
+              },
             },
             test2: {
               cache: NoOpCache,

@@ -16,7 +16,7 @@ beforeEach(async () => {
   class CacheConfig {
     @Bean(CACHE_MANAGER)
     createCache() {
-      return new SimpleCacheManager(new Map(), true, MemoryCache);
+      return new SimpleCacheManager(new Map(), true, MemoryCache, { max: 6 });
     }
   }
 

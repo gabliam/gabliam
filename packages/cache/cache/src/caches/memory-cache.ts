@@ -1,12 +1,22 @@
 import LRU from 'lru-cache';
 import { Cache } from '../cache';
 
+const DEFAULT_OPTIONS = {
+  max: 50,
+};
+
 export class MemoryCache implements Cache {
   private name: string;
 
-  private store: any;
+  private store: LRU<any, any>;
 
-  constructor(name: string, private options?: LRU.Options<any, any>) {
+  private options: LRU.Options<any, any>;
+
+  constructor(name: string, options: Partial<LRU.Options<any, any>> = {}) {
+    this.options = {
+      ...DEFAULT_OPTIONS,
+      ...options,
+    };
     this.name = name;
   }
 
@@ -15,7 +25,7 @@ export class MemoryCache implements Cache {
   }
 
   async stop() {
-    this.store.reset();
+    this.store.clear();
   }
 
   getName(): string {
@@ -46,10 +56,10 @@ export class MemoryCache implements Cache {
   }
 
   async evict(key: string): Promise<void> {
-    this.store.del(key);
+    this.store.delete(key);
   }
 
   async clear(): Promise<void> {
-    this.store.reset();
+    this.store.clear();
   }
 }

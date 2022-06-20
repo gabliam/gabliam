@@ -7,61 +7,60 @@ exports[`cache group simple cache 2`] = `"hi test test"`;
 exports[`cache group simple cache 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {},
+  "options": Object {
+    "max": 3,
+  },
   "store": LRUCache {
-    Symbol(max): Infinity,
-    Symbol(lengthCalculator): [Function],
-    Symbol(allowStale): false,
-    Symbol(maxAge): 0,
-    Symbol(dispose): undefined,
-    Symbol(noDisposeOnSet): false,
-    Symbol(updateAgeOnGet): false,
-    Symbol(cache): Map {
-      "testtest" => Node {
-        "list": Yallist {
-          "head": [Circular],
-          "length": 1,
-          "tail": [Circular],
-        },
-        "next": null,
-        "prev": null,
-        "value": Entry {
-          "key": "testtest",
-          "length": 1,
-          "maxAge": 0,
-          "now": 0,
-          "value": "hi test test",
-        },
-      },
+    "allowStale": false,
+    "disposeAfter": null,
+    "disposed": null,
+    "fetchMethod": null,
+    "free": Stack {
+      "heap": Uint8Array [
+        0,
+        0,
+        0,
+      ],
+      "length": 0,
     },
-    Symbol(lruList): Yallist {
-      "head": Node {
-        "list": [Circular],
-        "next": null,
-        "prev": null,
-        "value": Entry {
-          "key": "testtest",
-          "length": 1,
-          "maxAge": 0,
-          "now": 0,
-          "value": "hi test test",
-        },
-      },
-      "length": 1,
-      "tail": Node {
-        "list": [Circular],
-        "next": null,
-        "prev": null,
-        "value": Entry {
-          "key": "testtest",
-          "length": 1,
-          "maxAge": 0,
-          "now": 0,
-          "value": "hi test test",
-        },
-      },
+    "head": 0,
+    "initialFill": 1,
+    "keyList": Array [
+      "testtest",
+      null,
+      null,
+    ],
+    "keyMap": Map {
+      "testtest" => 0,
     },
-    Symbol(length): 1,
+    "max": 3,
+    "maxSize": 0,
+    "next": Uint8Array [
+      0,
+      0,
+      0,
+    ],
+    "noDeleteOnFetchRejection": false,
+    "noDisposeOnSet": false,
+    "noUpdateTTL": false,
+    "prev": Uint8Array [
+      0,
+      0,
+      0,
+    ],
+    "size": 1,
+    "sizeCalculation": undefined,
+    "tail": 0,
+    "ttl": 0,
+    "ttlAutopurge": false,
+    "ttlResolution": 1,
+    "updateAgeOnGet": false,
+    "updateAgeOnHas": false,
+    "valList": Array [
+      "hi test test",
+      null,
+      null,
+    ],
   },
 }
 `;
@@ -71,22 +70,59 @@ exports[`cache group simple cache 4`] = `undefined`;
 exports[`cache group simple cache 5`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {},
+  "options": Object {
+    "max": 3,
+  },
   "store": LRUCache {
-    Symbol(max): Infinity,
-    Symbol(lengthCalculator): [Function],
-    Symbol(allowStale): false,
-    Symbol(maxAge): 0,
-    Symbol(dispose): undefined,
-    Symbol(noDisposeOnSet): false,
-    Symbol(updateAgeOnGet): false,
-    Symbol(cache): Map {},
-    Symbol(lruList): Yallist {
-      "head": null,
+    "allowStale": false,
+    "calculatedSize": 0,
+    "disposeAfter": null,
+    "disposed": null,
+    "fetchMethod": null,
+    "free": Stack {
+      "heap": Uint8Array [
+        0,
+        0,
+        0,
+      ],
       "length": 0,
-      "tail": null,
     },
-    Symbol(length): 0,
+    "head": 0,
+    "initialFill": 1,
+    "keyList": Array [
+      null,
+      null,
+      null,
+    ],
+    "keyMap": Map {},
+    "max": 3,
+    "maxSize": 0,
+    "next": Uint8Array [
+      0,
+      0,
+      0,
+    ],
+    "noDeleteOnFetchRejection": false,
+    "noDisposeOnSet": false,
+    "noUpdateTTL": false,
+    "prev": Uint8Array [
+      0,
+      0,
+      0,
+    ],
+    "size": 0,
+    "sizeCalculation": undefined,
+    "tail": 0,
+    "ttl": 0,
+    "ttlAutopurge": false,
+    "ttlResolution": 1,
+    "updateAgeOnGet": false,
+    "updateAgeOnHas": false,
+    "valList": Array [
+      null,
+      null,
+      null,
+    ],
   },
 }
 `;
