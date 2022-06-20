@@ -9,8 +9,8 @@ export class Query {
 export class Query2 {
   @IsString()
   @Transform(
-    value => (typeof value === 'string' ? value.toUpperCase() : value),
-    { toClassOnly: true }
+    ({ value }) => (typeof value === 'string' ? value.toUpperCase() : value),
+    { toClassOnly: true },
   )
   name: string;
 

@@ -23,8 +23,8 @@ export class Body2 {
 
   @IsString()
   @Transform(
-    value => (typeof value === 'string' ? value.toUpperCase() : value),
-    { toClassOnly: true }
+    ({ value }) => (typeof value === 'string' ? value.toUpperCase() : value),
+    { toClassOnly: true },
   )
   role: string;
 
