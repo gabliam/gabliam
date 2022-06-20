@@ -36,12 +36,12 @@
     "@gabliam/cache": "0.0.0-PLACEHOLDER",
     "@gabliam/core": "0.0.0-PLACEHOLDER",
     "@types/debug": "^4.1.7",
-    "@types/ioredis": "^4.17.8",
-    "@types/node": "^14.14.9"
+    "@types/ioredis": "^4.28.10",
+    "@types/node": "^18.0.0"
   },
   "dependencies": {
     "debug": "^4.3.4",
-    "ioredis": "^4.19.2",
+    "ioredis": "^5.0.6",
     "tslib": "^2.4.0"
   },
   "engines": {
