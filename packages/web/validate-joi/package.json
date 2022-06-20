@@ -41,7 +41,7 @@
     "@gabliam/express": "0.0.0-PLACEHOLDER",
     "@gabliam/koa": "0.0.0-PLACEHOLDER",
     "@gabliam/web-core": "0.0.0-PLACEHOLDER",
-    "@types/escape-html": "^1.0.0"
+    "@types/escape-html": "^1.0.2"
   },
   "dependencies": {
     "escape-html": "^1.0.3",
