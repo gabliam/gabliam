@@ -58,11 +58,11 @@ export function toPromise<T = any>(
     return Promise.resolve(undefined);
   }
 
-  if (isObservable(value)) {
+  if (value && isObservable(value)) {
     return observableToPromise<T>(value);
   }
 
-  if (!isGenerator(value)) {
+  if (value && !isGenerator(value)) {
     return Promise.resolve<T>(value);
   }
   return co<T>(value);
