@@ -37,7 +37,7 @@
     "@gabliam/core": "0.0.0-PLACEHOLDER",
     "@types/debug": "^4.1.7",
     "@types/ioredis": "^4.28.10",
-    "@types/node": "^18.0.0"
+    "@types/node": "^18.0.3"
   },
   "dependencies": {
     "debug": "^4.3.4",
