@@ -41,12 +41,14 @@
   },
   "devDependencies": {
     "@iarna/toml": "^2.2.5",
+    "@types/bluebird": "^3.5.36",
     "@types/debug": "^4.1.7",
     "@types/fs-extra": "^9.0.13",
     "@types/glob": "^7.2.0",
     "@types/joi": "^17.2.3",
     "@types/js-yaml": "^4.0.5",
     "@types/lodash": "^4.14.182",
+    "@types/node": "^18.0.3",
     "fs-extra": "^10.1.0",
     "properties": "^1.2.1",
     "rxjs": "^7.5.5"
