@@ -22,7 +22,7 @@ import {
 } from './web-configuration';
 
 /**
- * Build express middleware
+ * Build Webconfig before controller
  *
  * @param  {Container} container
  * @param  {Registry} registry
@@ -36,7 +36,7 @@ const buildWebConfig = (container: Container, registry: Registry) => {
 };
 
 /**
- * Build express error middleware
+ * Build Webconfig after controller
  *
  * @param  {Container} container
  * @param  {Registry} registry
