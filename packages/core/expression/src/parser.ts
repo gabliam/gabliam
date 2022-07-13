@@ -261,7 +261,7 @@ export class Parser {
     if (node.property.type === 'Identifier') {
       return obj[node.property.name];
     }
-    const prop = this.walk(node.property, vars);
+    const prop = this.walk(node.property as any, vars);
     if (prop === FAIL) {
       return FAIL;
     }
