@@ -1,4 +1,4 @@
-import { Field, InputType, Int } from 'type-graphql';
+import { Field, InputType, Int }  from '@gabliam/graphql-core';
 import { Hero } from '../../entities/hero';
 
 @InputType()

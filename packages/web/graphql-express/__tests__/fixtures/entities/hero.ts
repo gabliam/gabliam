@@ -1,9 +1,9 @@
-import { Field, ID, Int, ObjectType } from 'type-graphql';
+import { Field, ID, Int, ObjectType } from '@gabliam/graphql-core';
 
 @ObjectType()
 export class Hero {
   @Field(type => ID)
-  readonly id: number;
+  id: number;
 
   @Field()
   name: string;

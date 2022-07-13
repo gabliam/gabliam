@@ -1,4 +1,4 @@
-import { ObjectType } from 'type-graphql';
+import { ObjectType }  from '@gabliam/graphql-core';
 import { Photo } from '../../entities/photo';
 import PaginatedResponse from './paginated-reponse';
 

@@ -8,7 +8,7 @@ import {
   Query,
   Root,
   Subscription,
-} from 'type-graphql';
+} from '@gabliam/graphql-core';
 import { Photo } from '../entities/photo';
 import { PaginatedPhoto } from './types/paginated-photo';
 import { PhotoInput } from './types/photo-input';

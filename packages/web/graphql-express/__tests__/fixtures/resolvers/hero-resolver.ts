@@ -7,13 +7,13 @@ import {
   Query,
   Root,
   Subscription,
-} from 'type-graphql';
+} from '@gabliam/graphql-core';
 import { Hero } from '../entities/hero';
 import { Paginate } from './array-util';
 import { HeroInput } from './types/hero-input';
 import { PaginatedHero } from './types/paginated-hero';
 
-@GabResolver((of) => Hero)
+@GabResolver(Hero)
 export class HeroResolver {
   public heroRepository: Hero[] = [
     { id: 1, name: 'spiderman', power: 'spider', amountPeopleSaved: 10 },

@@ -1,37 +1,25 @@
-import {
-  Container,
-  GabliamPlugin,
-  Plugin,
-  Registry,
-  Scan,
-} from '@gabliam/core';
+import { Container, GabliamPlugin, Plugin, Scan } from '@gabliam/core';
 import { GraphqlConfig, GraphqlCorePlugin } from '@gabliam/graphql-core';
 import { koa } from '@gabliam/koa';
 import { ConfigFunction, WebConfiguration } from '@gabliam/web-core';
-import { ApolloServer } from 'apollo-server-koa';
+import { ApolloServer, Config } from 'apollo-server-koa';
 import d from 'debug';
-import { GraphQLSchema } from 'graphql';
 
 const debug = d('Gabliam:Plugin:GraphqlPluginKoa');
 
 @Plugin({ dependencies: [{ name: 'KoaPlugin', order: 'before' }] })
 @Scan()
 export class GraphqlPlugin extends GraphqlCorePlugin implements GabliamPlugin {
-  getApolloServer(
+  async setUpAppolloServer(
     container: Container,
-    registry: Registry,
     graphqlPluginConfig: GraphqlConfig,
-    schema: GraphQLSchema,
+    apolloServer: ApolloServer,
   ) {
     debug('register Middleware', graphqlPluginConfig);
-    const webConfiguration = container.get<WebConfiguration<koa>>(
-      WebConfiguration,
-    );
+    const webConfiguration =
+      container.get<WebConfiguration<koa>>(WebConfiguration);
 
-    const apolloServer = new ApolloServer({
-      schema,
-      playground: graphqlPluginConfig.playground,
-    });
+    await apolloServer.start();
 
     const instance: ConfigFunction<koa> = (app, _container) => {
       apolloServer.applyMiddleware({
@@ -45,7 +33,9 @@ export class GraphqlPlugin extends GraphqlCorePlugin implements GabliamPlugin {
       order: 50,
       instance,
     });
+  }
 
-    return apolloServer;
+  getApolloServer(config: Config) {
+    return new ApolloServer(config) as any;
   }
 }

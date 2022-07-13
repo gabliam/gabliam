@@ -1,4 +1,4 @@
-import { PlaygroundConfig } from 'apollo-server-core';
+import { ApolloServerPluginLandingPageGraphQLPlaygroundOptions } from 'apollo-server-core';
 import { GraphQLResolveInfo } from 'graphql';
 
 export type extractArgsFn = (
@@ -10,5 +10,6 @@ export type extractArgsFn = (
 
 export interface GraphqlConfig {
   endpointUrl: string;
-  playground: PlaygroundConfig;
+  playground: ApolloServerPluginLandingPageGraphQLPlaygroundOptions;
+  playgroundEnabled: boolean;
 }

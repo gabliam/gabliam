@@ -1,5 +1,5 @@
 import { Bean, Joi, PluginConfig, Value } from '@gabliam/core';
-import { PlaygroundConfig } from 'apollo-server-core';
+import { ApolloServerPluginLandingPageGraphQLPlaygroundOptions } from 'apollo-server-core';
 import d from 'debug';
 import { DEBUG_PATH, DEFAULT_END_POINT_URL, GRAPHQL_CONFIG } from './constants';
 import { GraphqlConfig } from './interfaces';
@@ -21,14 +21,18 @@ export class GraphqlPluginConfig {
   @Value('application.graphql.endpointUrl', Joi.string())
   private endpointUrl: string = DEFAULT_END_POINT_URL;
 
+  @Value('application.graphql.playground.enabled', Joi.boolean())
+  private playgroundEnabled = false;
+
   @Value('application.graphql.playground.config', GraphiqlOptionsValidator)
-  private playground: PlaygroundConfig;
+  private playground: ApolloServerPluginLandingPageGraphQLPlaygroundOptions;
 
   @Bean(GRAPHQL_CONFIG)
   creatreConfig(): GraphqlConfig {
     const graphqlConfig: GraphqlConfig = {
       endpointUrl: this.endpointUrl,
       playground: this.playground,
+      playgroundEnabled: this.playgroundEnabled,
     };
     debug('GraphqlConfig', graphqlConfig);
 

@@ -32,7 +32,7 @@
     "@types/escodegen": "^0.0.7",
     "@types/esprima": "^4.0.3",
     "@types/lodash": "^4.14.182",
-    "@types/node": "^18.0.0"
+    "@types/node": "^18.0.3"
   },
   "dependencies": {
     "escodegen": "^2.0.0",

@@ -1,4 +1,4 @@
-import { ClassType, ObjectType, Field, Int } from 'type-graphql';
+import { ClassType, ObjectType, Field, Int }  from '@gabliam/graphql-core';
 
 export type IPaginatedResponseConstruct<TItem> = new () => IPaginatedResponse<
   TItem

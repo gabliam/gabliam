@@ -1,36 +1,25 @@
-import {
-  Container,
-  GabliamPlugin,
-  Plugin,
-  Registry,
-  Scan,
-} from '@gabliam/core';
+import { Container, GabliamPlugin, Plugin, Scan } from '@gabliam/core';
 import { express } from '@gabliam/express';
 import { GraphqlConfig, GraphqlCorePlugin } from '@gabliam/graphql-core';
 import { ConfigFunction, WebConfiguration } from '@gabliam/web-core';
-import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer, Config, ExpressContext } from 'apollo-server-express';
 import d from 'debug';
-import { GraphQLSchema } from 'graphql';
 
 const debug = d('Gabliam:Plugin:GraphqlPluginExpress');
 
 @Plugin({ dependencies: [{ name: 'ExpressPlugin', order: 'before' }] })
 @Scan()
 export class GraphqlPlugin extends GraphqlCorePlugin implements GabliamPlugin {
-  getApolloServer(
+  async setUpAppolloServer(
     container: Container,
-    registry: Registry,
     graphqlPluginConfig: GraphqlConfig,
-    schema: GraphQLSchema
+    apolloServer: ApolloServer<ExpressContext>,
   ) {
     debug('register Middleware', graphqlPluginConfig);
-    const webConfiguration = container.get<
-      WebConfiguration<express.Application>
-    >(WebConfiguration);
-    const apolloServer = new ApolloServer({
-      schema,
-      playground: graphqlPluginConfig.playground,
-    });
+    const webConfiguration =
+      container.get<WebConfiguration<express.Application>>(WebConfiguration);
+
+    await apolloServer.start();
 
     const instance: ConfigFunction<express.Application> = (app, _container) => {
       apolloServer.applyMiddleware({
@@ -43,7 +32,9 @@ export class GraphqlPlugin extends GraphqlCorePlugin implements GabliamPlugin {
       order: 50,
       instance,
     });
+  }
 
-    return apolloServer;
+  getApolloServer(config: Config<ExpressContext>) {
+    return new ApolloServer(config);
   }
 }
