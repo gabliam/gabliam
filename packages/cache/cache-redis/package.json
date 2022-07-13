@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "debug": "^4.3.4",
-    "ioredis": "^5.0.6",
+    "ioredis": "^5.2.0",
     "tslib": "^2.4.0"
   },
   "engines": {

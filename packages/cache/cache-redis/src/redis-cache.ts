@@ -1,5 +1,5 @@
 import { Cache } from '@gabliam/cache';
-import Redis from 'ioredis';
+import Redis, { RedisOptions } from 'ioredis';
 import { promisify } from 'util';
 import { gunzip, gzip } from 'zlib';
 
@@ -15,11 +15,11 @@ export interface RedisCacheOptions {
 
   gzipEnabled?: boolean;
 
-  redisOptions?: Redis.RedisOptions;
+  redisOptions?: RedisOptions;
 }
 
 export class RedisCache implements Cache {
-  private client!: Redis.Redis;
+  private client!: Redis;
 
   private addTimeout: (promiseFn: Promise<any>) => Promise<any>;
 
@@ -40,7 +40,7 @@ export class RedisCache implements Cache {
   }
 
   async start() {
-    this.client = new Redis(this.options.redisOptions);
+    this.client = new Redis(this.options.redisOptions ?? {});
   }
 
   async stop() {
@@ -92,7 +92,7 @@ export class RedisCache implements Cache {
           await this.client.set(
             realKey,
             await this.serialize(value),
-            this.options.mode,
+            this.options.mode as any,
             this.options.duration,
           );
         } else {
@@ -200,7 +200,7 @@ export class RedisCache implements Cache {
   private async deserialize(value: any) {
     try {
       if (this.options.gzipEnabled === true) {
-        return JSON.parse(<string>await gunzipAsync(value));
+        return JSON.parse((await gunzipAsync(value)).toString());
       }
       return JSON.parse(value.toString());
     } catch {

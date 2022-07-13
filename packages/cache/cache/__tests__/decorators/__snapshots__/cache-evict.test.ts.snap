@@ -16,6 +16,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -60,6 +61,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -107,6 +109,7 @@ MemoryCache {
     "calculatedSize": 0,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -147,6 +150,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -195,6 +199,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -237,6 +242,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -284,6 +290,7 @@ MemoryCache {
     "calculatedSize": 0,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -324,6 +331,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -374,6 +382,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -418,6 +427,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -464,6 +474,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -507,6 +518,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -555,6 +567,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -598,6 +611,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -644,6 +658,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -687,6 +702,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -733,6 +749,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -775,6 +792,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -823,6 +841,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -866,6 +885,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -912,6 +932,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -954,6 +975,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -1006,6 +1028,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -1048,6 +1071,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -1092,6 +1116,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -1134,6 +1159,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -1180,6 +1206,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -1222,6 +1249,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -1266,6 +1294,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -1308,6 +1337,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -1352,6 +1382,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -1394,6 +1425,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -1438,6 +1470,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -1480,6 +1513,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -1526,6 +1560,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -1568,6 +1603,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -1612,6 +1648,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -1654,6 +1691,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -1704,6 +1742,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -1748,6 +1787,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -1794,6 +1834,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -1838,6 +1879,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -1884,6 +1926,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -1928,6 +1971,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -1974,6 +2018,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -2017,6 +2062,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -2065,6 +2111,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -2108,6 +2155,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -2154,6 +2202,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -2197,6 +2246,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -2243,6 +2293,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -2285,6 +2336,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -2333,6 +2385,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -2376,6 +2429,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -2422,6 +2476,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -2465,6 +2520,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -2511,6 +2567,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -2553,6 +2610,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -2601,6 +2659,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -2641,6 +2700,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -2687,6 +2747,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -2727,6 +2788,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -2775,6 +2837,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -2815,6 +2878,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -2861,6 +2925,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -2901,6 +2966,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -2949,6 +3015,7 @@ MemoryCache {
     "allowStale": false,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -2991,6 +3058,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [
@@ -3038,6 +3106,7 @@ MemoryCache {
     "calculatedSize": 0,
     "disposeAfter": null,
     "disposed": null,
+    "fetchContext": undefined,
     "fetchMethod": null,
     "free": Stack {
       "heap": Uint8Array [
@@ -3078,6 +3147,7 @@ MemoryCache {
       0,
     ],
     "noDeleteOnFetchRejection": false,
+    "noDeleteOnStaleGet": false,
     "noDisposeOnSet": false,
     "noUpdateTTL": false,
     "prev": Uint8Array [

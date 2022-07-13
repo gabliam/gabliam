@@ -4,7 +4,7 @@ import RedisCache from '../src/index';
 let cache: RedisCache;
 let cache2: RedisCache;
 let cache3: RedisCache;
-let client: Redis.Redis;
+let client: Redis;
 
 beforeAll(async () => {
   cache = new RedisCache('test');
