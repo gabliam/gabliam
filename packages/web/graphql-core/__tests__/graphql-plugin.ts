@@ -4,7 +4,7 @@ import { GraphqlConfig, GraphqlCorePlugin } from '../src/index';
 
 @Plugin()
 export class GraphqlPlugin extends GraphqlCorePlugin {
-  setUpGraphql(container: Container, graphqlPluginConfig: GraphqlConfig, apolloServer: ApolloServerBase<any>): gabliamValue<void> {}
+  setUpAppolloServer(container: Container, graphqlPluginConfig: GraphqlConfig, apolloServer: ApolloServerBase<any>): gabliamValue<void> {}
 
   getApolloServer() {
     return <any>null;
