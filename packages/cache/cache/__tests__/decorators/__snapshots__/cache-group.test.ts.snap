@@ -35,6 +35,7 @@ MemoryCache {
       "testtest" => 0,
     },
     "max": 3,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       0,
@@ -99,6 +100,7 @@ MemoryCache {
     ],
     "keyMap": Map {},
     "max": 3,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       0,

@@ -32,23 +32,22 @@
   "homepage": "https://github.com/gabliam/gabliam/tree/master/packages/web/graphql-core#readme",
   "peerDependencies": {
     "@gabliam/core": "0.0.0-PLACEHOLDER",
-    "@gabliam/web-core": "0.0.0-PLACEHOLDER",
-    "graphql": "^15"
+    "@gabliam/web-core": "0.0.0-PLACEHOLDER"
   },
   "devDependencies": {
     "@gabliam/core": "0.0.0-PLACEHOLDER",
     "@gabliam/web-core": "0.0.0-PLACEHOLDER",
     "@types/debug": "^4.1.7",
-    "@types/lodash": "^4.14.182",
-    "@types/node": "^18.0.3",
-    "graphql": "^15"
+    "@types/lodash": "^4.14.189",
+    "@types/node": "^18.11.9"
   },
   "dependencies": {
-    "apollo-server-core": "^3.9.0",
+    "apollo-server-core": "^3.11.1",
     "caller": "^1.1.0",
     "debug": "^4.3.4",
+    "graphql": "^15.3.0",
     "lodash": "^4.17.21",
-    "tslib": "^2.4.0",
+    "tslib": "^2.4.1",
     "type-graphql": "^1.1.1"
   },
   "engines": {

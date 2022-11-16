@@ -43,13 +43,13 @@
     "@gabliam/koa": "0.0.0-PLACEHOLDER",
     "@gabliam/web-core": "0.0.0-PLACEHOLDER",
     "@types/debug": "^4.1.7",
-    "@types/node": "^18.0.3"
+    "@types/node": "^18.11.9"
   },
   "dependencies": {
     "apollo-server-koa": "^3.9.0",
     "debug": "^4.3.4",
-    "graphql": "^15",
-    "tslib": "^2.4.0"
+    "graphql": "^16.6.0",
+    "tslib": "^2.4.1"
   },
   "engines": {
     "node": ">=8.9.0"

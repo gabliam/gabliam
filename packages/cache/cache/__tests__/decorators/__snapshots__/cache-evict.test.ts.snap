@@ -49,6 +49,7 @@ MemoryCache {
       "test3" => 2,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       1,
@@ -138,6 +139,7 @@ MemoryCache {
     ],
     "keyMap": Map {},
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       1,
@@ -230,6 +232,7 @@ MemoryCache {
       "{\\"name\\":\\"test\\"}" => 0,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       0,
@@ -319,6 +322,7 @@ MemoryCache {
     ],
     "keyMap": Map {},
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       0,
@@ -415,6 +419,7 @@ MemoryCache {
       "test3" => 2,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       1,
@@ -506,6 +511,7 @@ MemoryCache {
       "test2" => 1,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       1,
@@ -599,6 +605,7 @@ MemoryCache {
       "{\\"name\\":\\"test\\",\\"id\\":2}" => 1,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       1,
@@ -690,6 +697,7 @@ MemoryCache {
       "{\\"name\\":\\"test\\",\\"id\\":2}" => 1,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       1,
@@ -780,6 +788,7 @@ MemoryCache {
       "{\\"name\\":\\"test\\",\\"id\\":1}" => 0,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       1,
@@ -873,6 +882,7 @@ MemoryCache {
       "2" => 1,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       1,
@@ -963,6 +973,7 @@ MemoryCache {
       "2" => 1,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       1,
@@ -1059,6 +1070,7 @@ MemoryCache {
       "test" => 0,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       0,
@@ -1147,6 +1159,7 @@ MemoryCache {
       "test" => 0,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       0,
@@ -1237,6 +1250,7 @@ MemoryCache {
       "test" => 0,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       0,
@@ -1325,6 +1339,7 @@ MemoryCache {
       "test" => 0,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       0,
@@ -1413,6 +1428,7 @@ MemoryCache {
       "test" => 0,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       0,
@@ -1501,6 +1517,7 @@ MemoryCache {
       "test" => 0,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       0,
@@ -1591,6 +1608,7 @@ MemoryCache {
       "test" => 0,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       0,
@@ -1679,6 +1697,7 @@ MemoryCache {
       "test" => 0,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       0,
@@ -1775,6 +1794,7 @@ MemoryCache {
       "3" => 2,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       1,
@@ -1867,6 +1887,7 @@ MemoryCache {
       "3" => 2,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       1,
@@ -1959,6 +1980,7 @@ MemoryCache {
       "3" => 2,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       1,
@@ -2050,6 +2072,7 @@ MemoryCache {
       "2" => 1,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       1,
@@ -2143,6 +2166,7 @@ MemoryCache {
       "2" => 1,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       1,
@@ -2234,6 +2258,7 @@ MemoryCache {
       "2" => 1,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       1,
@@ -2324,6 +2349,7 @@ MemoryCache {
       "1" => 0,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       1,
@@ -2417,6 +2443,7 @@ MemoryCache {
       "{\\"name\\":\\"test\\",\\"id\\":2}" => 1,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       1,
@@ -2508,6 +2535,7 @@ MemoryCache {
       "{\\"name\\":\\"test\\",\\"id\\":2}" => 1,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       1,
@@ -2598,6 +2626,7 @@ MemoryCache {
       "{\\"name\\":\\"test\\",\\"id\\":1}" => 0,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       1,
@@ -2688,6 +2717,7 @@ MemoryCache {
     ],
     "keyMap": Map {},
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       0,
@@ -2776,6 +2806,7 @@ MemoryCache {
     ],
     "keyMap": Map {},
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       0,
@@ -2866,6 +2897,7 @@ MemoryCache {
     ],
     "keyMap": Map {},
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       0,
@@ -2954,6 +2986,7 @@ MemoryCache {
     ],
     "keyMap": Map {},
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       0,
@@ -3046,6 +3079,7 @@ MemoryCache {
       "testtest" => 0,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       0,
@@ -3135,6 +3169,7 @@ MemoryCache {
     ],
     "keyMap": Map {},
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       0,

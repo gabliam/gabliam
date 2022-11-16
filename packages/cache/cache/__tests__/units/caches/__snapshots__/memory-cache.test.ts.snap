@@ -41,6 +41,7 @@ MemoryCache {
     ],
     "keyMap": Map {},
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       0,
@@ -148,6 +149,7 @@ MemoryCache {
       "test3" => 2,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       1,
@@ -249,6 +251,7 @@ MemoryCache {
       "test3" => 2,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       1,
@@ -336,6 +339,7 @@ MemoryCache {
     ],
     "keyMap": Map {},
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       1,
@@ -433,6 +437,7 @@ MemoryCache {
       "test3" => 2,
     },
     "max": 8,
+    "maxEntrySize": 0,
     "maxSize": 0,
     "next": Uint8Array [
       1,
