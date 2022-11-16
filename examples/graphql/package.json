@@ -24,7 +24,6 @@
     "@gabliam/graphql-express": "0.0.0-PLACEHOLDER",
     "@gabliam/graphql-koa": "0.0.0-PLACEHOLDER",
     "@gabliam/koa": "0.0.0-PLACEHOLDER",
-    "@gabliam/typeorm": "0.0.0-PLACEHOLDER",
     "@gabliam/web-core": "0.0.0-PLACEHOLDER",
     "lodash": "^4.17.21",
     "reflect-metadata": "^0.1.9",

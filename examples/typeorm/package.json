@@ -21,14 +21,14 @@
     "@gabliam/core": "0.0.0-PLACEHOLDER",
     "@gabliam/express": "0.0.0-PLACEHOLDER",
     "@gabliam/koa": "0.0.0-PLACEHOLDER",
-    "@gabliam/typeorm": "0.0.0-PLACEHOLDER",
     "@gabliam/web-core": "0.0.0-PLACEHOLDER",
     "@koa/multer": "^3.0.0",
     "boom": "^7.3.0",
     "multer": "^1.4.2",
     "reflect-metadata": "^0.1.9",
     "sqlite3": "^5.0.8",
-    "tslib": "^2.4.1"
+    "tslib": "^2.4.1",
+    "typeorm": "^0.3.10"
   },
   "devDependencies": {
     "@types/boom": "^7.3.0",

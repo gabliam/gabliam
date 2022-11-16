@@ -1,6 +1,5 @@
 import { UseExpressInterceptors } from '@gabliam/express';
 import { UseKoaInterceptors } from '@gabliam/koa';
-import { Connection, Repository } from '@gabliam/typeorm';
 import {
   Delete,
   GabRequest,
@@ -13,6 +12,7 @@ import {
   RestController,
 } from '@gabliam/web-core';
 import Boom from 'boom';
+import { DataSource, Repository } from 'typeorm';
 import { Photo } from '../entities/photo';
 import { expressMulter, koaMulter } from '../multer';
 
@@ -20,8 +20,8 @@ import { expressMulter, koaMulter } from '../multer';
 export class PhotoController {
   private photoRepository: Repository<Photo>;
 
-  constructor(connection: Connection) {
-    this.photoRepository = connection.getRepository<Photo>('Photo');
+  constructor(datasource: DataSource) {
+    this.photoRepository = datasource.getRepository(Photo);
   }
 
   @Post('/')
@@ -29,27 +29,27 @@ export class PhotoController {
     try {
       return await this.photoRepository.save(photo);
     } catch (err) {
-      throw Boom.internal(err);
+      throw Boom.internal(err as string);
     }
   }
 
   @Delete('/:id')
-  async del(@RequestParam('id') id: string) {
-    const photo = await this.photoRepository.findOne(id);
+  async del(@RequestParam('id') id: number) {
+    const photo = await this.photoRepository.findOneBy({ id });
     if (photo) {
       try {
         await this.photoRepository.remove(photo);
         return ResponseEntity.noContent();
       } catch (err) {
-        throw Boom.internal(err);
+        throw Boom.internal(err as string);
       }
     }
     throw Boom.notFound();
   }
 
   @Get('/:id')
-  async getById(@RequestParam('id') id: string) {
-    const photo = await this.photoRepository.findOne(id);
+  async getById(@RequestParam('id') id: number) {
+    const photo = await this.photoRepository.findOneBy({ id });
     if (photo) {
       return photo;
     }
@@ -69,6 +69,6 @@ export class PhotoController {
   @UseExpressInterceptors(expressMulter.single('avatar'))
   @Post('/upload')
   async upload(@Request() req: GabRequest) {
-      return req.file;
+    return req.file;
   }
 }

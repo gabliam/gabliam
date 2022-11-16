@@ -1,14 +1,14 @@
 /* eslint-disable global-require */
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { Gabliam } from '@gabliam/core';
-import dbPlugin from '@gabliam/typeorm';
-import * as path from 'path';
 import 'reflect-metadata';
+
+import { Gabliam } from '@gabliam/core';
+import * as path from 'path';
 import { WebConfigurationContructor } from '@gabliam/web-core';
 import { BoomInterceptor } from './boom-interceptor';
 
 const bootstrap = async () => {
-  const plugins = [dbPlugin];
+  const plugins = [];
 
   const config: Partial<WebConfigurationContructor<any>> = {
     globalInterceptors: [
