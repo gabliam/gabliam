@@ -1,5 +1,5 @@
 import { Bean, Joi, PluginConfig, Value } from '@gabliam/core';
-import koaBody from 'koa-body';
+import { KoaBodyMiddlewareOptions } from 'koa-body';
 import { KOA_PLUGIN_CONFIG } from './constants';
 
 const koaBodyFormidableOptions = Joi.object()
@@ -132,13 +132,13 @@ const koaBodyOptions = Joi.object().keys({
 });
 
 export interface KoaConfig {
-  koaBodyOptions: koaBody.IKoaBodyOptions;
+  koaBodyOptions: KoaBodyMiddlewareOptions;
 }
 
 @PluginConfig()
 export class KoaPluginConfig implements KoaConfig {
   @Value('application.web.koaBodyOptions', koaBodyOptions)
-  koaBodyOptions: koaBody.IKoaBodyOptions;
+  koaBodyOptions: KoaBodyMiddlewareOptions;
 
   @Bean(KOA_PLUGIN_CONFIG)
   restConfig(): KoaConfig {
