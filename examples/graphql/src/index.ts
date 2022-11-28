@@ -3,12 +3,9 @@
 import 'reflect-metadata';
 import * as path from 'path';
 import { Gabliam } from '@gabliam/core';
-// import expressPlugin from '@gabliam/express';
-import dbPlugin from '@gabliam/typeorm';
-// import graphqlPlugin from '@gabliam/graphql-express';
 
 const bootstrap = async () => {
-  const plugins = [dbPlugin];
+  const plugins = [];
   if (process.env.SERVER_TYPE === 'koa') {
     console.log('start with koa');
     plugins.push(

@@ -1,5 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from '@gabliam/typeorm';
-import { Field, ID, Int, ObjectType } from 'type-graphql';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Field, ID, Int, ObjectType } from '@gabliam/graphql-core';
 
 @ObjectType()
 @Entity()

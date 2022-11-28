@@ -1,14 +1,14 @@
-import { GabResolver } from '@gabliam/graphql-core';
-import { Connection, Repository } from '@gabliam/typeorm';
 import {
   Arg,
+  GabResolver,
   Mutation,
   Publisher,
   PubSub,
   Query,
   Root,
   Subscription,
-} from 'type-graphql';
+} from '@gabliam/graphql-core';
+import { DataSource, Repository } from 'typeorm';
 import { Hero } from '../entities/hero';
 import { HeroInput } from './types/hero-input';
 import { PaginatedHero } from './types/paginated-hero';
@@ -17,8 +17,8 @@ import { PaginatedHero } from './types/paginated-hero';
 export class HeroResolver {
   private heroRepository: Repository<Hero>;
 
-  constructor(connection: Connection) {
-    this.heroRepository = connection.getRepository<Hero>('Hero');
+  constructor(datasSource: DataSource) {
+    this.heroRepository = datasSource.getRepository<Hero>('Hero');
   }
 
   @Mutation((returns) => Hero)

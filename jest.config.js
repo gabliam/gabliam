@@ -9,7 +9,6 @@ module.exports = {
     "!packages/**/src/testing/**",
     "!packages/**/src/typings/**",
     "!packages/core/expression/src/**/*.ts",
-    "!packages/database/typeorm/src/commands/**/*.ts",
     "!packages/core/core/src/commands/*.ts",
     "!**/node_modules/**",
     "!**/vendor/**"
@@ -22,8 +21,6 @@ module.exports = {
     "@gabliam/cache-redis": "<rootDir>/packages/cache/cache-redis/src/index.ts",
     "@gabliam/core": "<rootDir>/packages/core/core/src/index.ts",
     "@gabliam/expression": "<rootDir>/packages/core/expression/src/index.ts",
-    "@gabliam/mongoose": "<rootDir>/packages/database/mongoose/src/index.ts",
-    "@gabliam/typeorm": "<rootDir>/packages/database/typeorm/src/index.ts",
     "@gabliam/log4js": "<rootDir>/packages/tools/log4js/src/index.ts",
     "@gabliam/express": "<rootDir>/packages/web/express/src/index.ts",
     "@gabliam/graphql-core": "<rootDir>/packages/web/graphql-core/src/index.ts",

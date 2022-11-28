@@ -1,4 +1,4 @@
-import { Field, InputType, Int } from 'type-graphql';
+import { Field, InputType, Int } from '@gabliam/graphql-core';
 import { Photo } from '../../entities/photo';
 
 @InputType()

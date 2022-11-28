@@ -1,6 +1,6 @@
-import { GabResolver } from '@gabliam/graphql-core';
-import { Connection, Repository } from '@gabliam/typeorm';
+import { DataSource, Repository } from 'typeorm';
 import {
+  GabResolver,
   Arg,
   Mutation,
   Publisher,
@@ -8,7 +8,7 @@ import {
   Query,
   Root,
   Subscription,
-} from 'type-graphql';
+} from '@gabliam/graphql-core';
 import { Photo } from '../entities/photo';
 import { PaginatedPhoto } from './types/paginated-photo';
 import { PhotoInput } from './types/photo-input';
@@ -17,8 +17,8 @@ import { PhotoInput } from './types/photo-input';
 export class PhotoResolver {
   private photoRepository: Repository<Photo>;
 
-  constructor(connection: Connection) {
-    this.photoRepository = connection.getRepository<Photo>('Photo');
+  constructor(dataSource: DataSource) {
+    this.photoRepository = dataSource.getRepository<Photo>('Photo');
   }
 
   @Subscription({ topics: 'photoAdded' })
