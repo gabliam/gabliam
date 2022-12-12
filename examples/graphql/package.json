@@ -33,6 +33,6 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.189",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.20"
   }
 }

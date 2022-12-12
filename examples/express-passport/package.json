@@ -37,6 +37,6 @@
     "@types/lokijs": "^1.2.30",
     "@types/passport": "^1.0.2",
     "@types/passport-local": "^1.0.33",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.20"
   }
 }
