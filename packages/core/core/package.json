@@ -16,12 +16,8 @@
     "cli.js",
     "cli.d.ts"
   ],
-  "bin": {
-    "gabliam": "./cli.js"
-  },
   "dependencies": {
     "@gabliam/expression": "0.0.0-PLACEHOLDER",
-    "bluebird": "^3.7.2",
     "caller": "^1.1.0",
     "co": "^4.6.0",
     "debug": "^4.3.4",
@@ -35,13 +31,10 @@
     "reflect-metadata": "^0.1.13",
     "shortstop": "^1.0.3",
     "shortstop-handlers": "^1.1.1",
-    "tslib": "^2.4.1",
-    "yargonaut": "^1.1.4",
-    "yargs": "^17.6.2"
+    "tslib": "^2.4.1"
   },
   "devDependencies": {
     "@iarna/toml": "^2.2.5",
-    "@types/bluebird": "^3.5.37",
     "@types/debug": "^4.1.7",
     "@types/fs-extra": "^9.0.13",
     "@types/glob": "^8.0.0",

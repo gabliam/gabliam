@@ -3,11 +3,9 @@ export const TYPE = {
   Service: 'ServiceType',
   Config: 'ConfigType',
   PreDestroy: 'PreDestroy',
-  Application: 'ApplicationType',
 };
 
 export const METADATA_KEY = {
-  application: '_application',
   bean: '_bean',
   onMissingBean: '_onMissingBean',
   init: '_init',

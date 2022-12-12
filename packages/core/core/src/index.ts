@@ -25,7 +25,6 @@ export * from './decorator';
 export * from './errors';
 export * from './gabliam';
 export * from './gabliam-options';
-export * from './gabliam-utils';
 export * from './interfaces';
 export * from './joi';
 export { configResolver, FileLoader, Loader, Resolver } from './loaders';

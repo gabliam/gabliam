@@ -1,4 +1,3 @@
-export * from './application';
 export * from './bean';
 export { Config, PluginConfig } from './config';
 export * from './init';

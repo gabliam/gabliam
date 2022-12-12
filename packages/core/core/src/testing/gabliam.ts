@@ -3,16 +3,15 @@ import { Gabliam } from '../gabliam';
 import { Register } from '../metadatas';
 import { reflection } from '../reflection';
 import { LoaderConfigTest } from './loader';
-import { GabliamBuilder, isGabliamBuilder } from '../gabliam-utils';
 
 export class GabliamTest {
   public gab: Gabliam;
 
   public loaderConfig: LoaderConfigTest;
 
-  constructor(gab?: Gabliam | GabliamBuilder) {
+  constructor(gab?: Gabliam) {
     if (gab) {
-      this.gab = isGabliamBuilder(gab) ? gab() : gab;
+      this.gab = gab;
     } else {
       this.gab = new Gabliam();
     }

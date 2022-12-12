@@ -1,12 +1,10 @@
 import { GraphqlPluginTest } from './graphql-plugin-test';
 import { HeroResolver } from './fixtures/resolvers/hero-resolver';
-import { PhotoResolver } from './fixtures/resolvers/photo-resolver';
 
 let appTest: GraphqlPluginTest;
 beforeEach(async () => {
   appTest = new GraphqlPluginTest();
   appTest.addClass(HeroResolver);
-  appTest.addClass(PhotoResolver);
   await appTest.buildAndStart();
 });
 
