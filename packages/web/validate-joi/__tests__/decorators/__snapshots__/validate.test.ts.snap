@@ -1,21 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Validate decorator should add Validate metadata to a method when decorated with @Validate 1`] = `
-Object {
-  "test": Array [
+{
+  "test": [
     PropDecoratorFactory {
       "method": "get",
       "path": "/",
     },
     DecoratorFactory {
-      "ids": Array [
+      "ids": [
         [Function],
       ],
     },
     PropDecoratorFactory {
       "rules": Map {
-        "body" => Object {
-          "$_root": Object {
+        "body" => {
+          "$_root": {
             "ValidationError": [Function],
             "_types": Set {
               "alternatives",
@@ -42,7 +42,7 @@ Object {
             "bool": [Function],
             "boolean": [Function],
             "build": [Function],
-            "cache": Object {
+            "cache": {
               "provision": [Function],
             },
             "checkPreferences": [Function],
@@ -88,38 +88,38 @@ Object {
             "x": [Function],
             Symbol(@hapi/lab/coverage/initialize): [Function],
           },
-          "$_super": Object {},
-          "$_temp": Object {
+          "$_super": {},
+          "$_temp": {
             "ruleset": false,
-            "whens": Object {},
+            "whens": {},
           },
-          "$_terms": Object {
+          "$_terms": {
             "alterations": null,
             "examples": null,
             "externals": null,
-            "metas": Array [],
-            "notes": Array [],
+            "metas": [],
+            "notes": [],
             "shared": null,
-            "tags": Array [],
+            "tags": [],
             "whens": null,
           },
           "_cache": null,
-          "_flags": Object {
+          "_flags": {
             "only": true,
           },
-          "_ids": Object {
+          "_ids": {
             "_byId": Map {},
             "_byKey": Map {},
             "_schemaChain": false,
           },
           "_invalids": null,
           "_preferences": null,
-          "_refs": Object {
-            "refs": Array [],
+          "_refs": {
+            "refs": [],
           },
-          "_rules": Array [],
+          "_rules": [],
           "_singleRules": Map {},
-          "_valids": Object {
+          "_valids": {
             "_lowercase": Map {},
             "_override": true,
             "_refs": Set {},
@@ -131,7 +131,7 @@ Object {
         },
       },
       "useInterceptors": true,
-      "validationOptions": Object {
+      "validationOptions": {
         "escapeHtml": true,
       },
     },
@@ -140,21 +140,21 @@ Object {
 `;
 
 exports[`Validate decorator should add Validate metadata to a method when decorated with @Validate(validatorOptions) 1`] = `
-Object {
-  "test": Array [
+{
+  "test": [
     PropDecoratorFactory {
       "method": "get",
       "path": "/",
     },
     DecoratorFactory {
-      "ids": Array [
+      "ids": [
         [Function],
       ],
     },
     PropDecoratorFactory {
       "rules": Map {
-        "body" => Object {
-          "$_root": Object {
+        "body" => {
+          "$_root": {
             "ValidationError": [Function],
             "_types": Set {
               "alternatives",
@@ -181,7 +181,7 @@ Object {
             "bool": [Function],
             "boolean": [Function],
             "build": [Function],
-            "cache": Object {
+            "cache": {
               "provision": [Function],
             },
             "checkPreferences": [Function],
@@ -227,38 +227,38 @@ Object {
             "x": [Function],
             Symbol(@hapi/lab/coverage/initialize): [Function],
           },
-          "$_super": Object {},
-          "$_temp": Object {
+          "$_super": {},
+          "$_temp": {
             "ruleset": false,
-            "whens": Object {},
+            "whens": {},
           },
-          "$_terms": Object {
+          "$_terms": {
             "alterations": null,
             "examples": null,
             "externals": null,
-            "metas": Array [],
-            "notes": Array [],
+            "metas": [],
+            "notes": [],
             "shared": null,
-            "tags": Array [],
+            "tags": [],
             "whens": null,
           },
           "_cache": null,
-          "_flags": Object {
+          "_flags": {
             "only": true,
           },
-          "_ids": Object {
+          "_ids": {
             "_byId": Map {},
             "_byKey": Map {},
             "_schemaChain": false,
           },
           "_invalids": null,
           "_preferences": null,
-          "_refs": Object {
-            "refs": Array [],
+          "_refs": {
+            "refs": [],
           },
-          "_rules": Array [],
+          "_rules": [],
           "_singleRules": Map {},
-          "_valids": Object {
+          "_valids": {
             "_lowercase": Map {},
             "_override": true,
             "_refs": Set {},
@@ -270,7 +270,7 @@ Object {
         },
       },
       "useInterceptors": true,
-      "validationOptions": Object {
+      "validationOptions": {
         "escapeHtml": true,
       },
     },

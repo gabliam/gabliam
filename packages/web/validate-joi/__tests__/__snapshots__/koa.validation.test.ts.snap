@@ -1,18 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`express integration Controller update req values req.body 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
-    "data": Object {
+  "req": {
+    "data": {
       "first": "john",
       "role": "admin",
     },
-    "headers": Object {
+    "headers": {
       "content-type": "application/json",
     },
     "method": "POST",
@@ -23,7 +23,7 @@ Object {
 `;
 
 exports[`express integration Controller update req values req.headers 1`] = `
-Object {
+{
   "accept": "application/json",
   "accept-encoding": "gzip, deflate",
   "connection": "close",
@@ -33,15 +33,15 @@ Object {
 `;
 
 exports[`express integration Controller update req values req.headers 2`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "1",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {
+    "headers": {
       "accept": "application/json",
     },
     "method": "GET",
@@ -52,15 +52,15 @@ Object {
 `;
 
 exports[`express integration Controller update req values req.params 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "1",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -69,15 +69,15 @@ Object {
 `;
 
 exports[`express integration Controller update req values req.query 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "1",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -86,29 +86,29 @@ Object {
 `;
 
 exports[`express integration RestController update req values req.body 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "5",
     "content-type": "application/json; charset=utf-8",
   },
-  "req": Object {
-    "data": Object {
+  "req": {
+    "data": {
       "first": "john",
       "role": "admin",
     },
-    "headers": Object {
+    "headers": {
       "content-type": "application/json",
     },
     "method": "POST",
   },
   "status": 200,
-  "text": "\\"lol\\"",
+  "text": ""lol"",
 }
 `;
 
 exports[`express integration RestController update req values req.headers 1`] = `
-Object {
+{
   "accept": "application/json",
   "accept-encoding": "gzip, deflate",
   "connection": "close",
@@ -118,129 +118,129 @@ Object {
 `;
 
 exports[`express integration RestController update req values req.headers 2`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "application/json; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {
+    "headers": {
       "accept": "application/json",
     },
     "method": "GET",
   },
   "status": 200,
-  "text": "\\"k\\"",
+  "text": ""k"",
 }
 `;
 
 exports[`express integration RestController update req values req.params 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "application/json; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
-  "text": "\\"k\\"",
+  "text": ""k"",
 }
 `;
 
 exports[`express integration RestController update req values req.query 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "application/json; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
-  "text": "\\"k\\"",
+  "text": ""k"",
 }
 `;
 
 exports[`express integration RestController validations req.body 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "125",
     "content-type": "application/json; charset=utf-8",
   },
-  "req": Object {
-    "data": Object {
+  "req": {
+    "data": {
       "first": "john",
       "last": 123,
     },
-    "headers": Object {
+    "headers": {
       "content-type": "application/json",
     },
     "method": "POST",
   },
   "status": 400,
-  "text": "{\\"statusCode\\":400,\\"error\\":\\"Bad Request\\",\\"message\\":\\"/\\"last/\\" must be a string\\",\\"validation\\":{\\"source\\":\\"body\\",\\"keys\\":[\\"last\\"]}}",
+  "text": "{"statusCode":400,"error":"Bad Request","message":"/"last/" must be a string","validation":{"source":"body","keys":["last"]}}",
 }
 `;
 
 exports[`express integration RestController validations req.headers 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "190",
     "content-type": "application/json; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {
+    "headers": {
       "accept": "application/json",
     },
     "method": "GET",
   },
   "status": 400,
-  "text": "{\\"statusCode\\":400,\\"error\\":\\"Bad Request\\",\\"message\\":\\"/\\"accept/\\" with value /\\"application/json/\\" fails to match the required pattern: /xml/\\",\\"validation\\":{\\"source\\":\\"headers\\",\\"keys\\":[\\"accept\\"]}}",
+  "text": "{"statusCode":400,"error":"Bad Request","message":"/"accept/" with value /"application/json/" fails to match the required pattern: /xml/","validation":{"source":"headers","keys":["accept"]}}",
 }
 `;
 
 exports[`express integration RestController validations req.params 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "164",
     "content-type": "application/json; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 400,
-  "text": "{\\"statusCode\\":400,\\"error\\":\\"Bad Request\\",\\"message\\":\\"/\\"id/\\" must only contain alpha-numeric and underscore characters\\",\\"validation\\":{\\"source\\":\\"params\\",\\"keys\\":[\\"id\\"]}}",
+  "text": "{"statusCode":400,"error":"Bad Request","message":"/"id/" must only contain alpha-numeric and underscore characters","validation":{"source":"params","keys":["id"]}}",
 }
 `;
 
 exports[`express integration RestController validations req.query 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "122",
     "content-type": "application/json; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 400,
-  "text": "{\\"statusCode\\":400,\\"error\\":\\"Bad Request\\",\\"message\\":\\"/\\"end/\\" is not allowed\\",\\"validation\\":{\\"source\\":\\"query\\",\\"keys\\":[\\"end\\"]}}",
+  "text": "{"statusCode":400,"error":"Bad Request","message":"/"end/" is not allowed","validation":{"source":"query","keys":["end"]}}",
 }
 `;
