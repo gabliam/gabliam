@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`error bad path 1`] = `Object {}`;
+exports[`error bad path 1`] = `{}`;
 
 exports[`error with bad application 1`] = `
 [LoaderConfigParseError: Error during parsing of file "<PROJECT_ROOT>/packages/conf-loader/multi-conf-loader/__tests__/fixture/badapplication/application.yml".
@@ -31,17 +31,17 @@ exports[`error with bad constant 1`] = `
 `;
 
 exports[`must load the good project with profile load test 1`] = `
-Object {
-  "application": Object {
-    "loggerConfig": Object {
-      "appenders": Object {
-        "out": Object {
+{
+  "application": {
+    "loggerConfig": {
+      "appenders": {
+        "out": {
           "type": "stdout",
         },
       },
-      "categories": Object {
-        "default": Object {
-          "appenders": Array [
+      "categories": {
+        "default": {
+          "appenders": [
             "out",
           ],
           "level": "debug",
@@ -49,9 +49,9 @@ Object {
       },
     },
     "profile": "dev",
-    "typeorm": Object {
-      "connectionOptions": Array [
-        Object {
+    "typeorm": {
+      "connectionOptions": [
+        {
           "database": "test-dev",
           "host": "localhost",
           "name": "test-dev",
@@ -64,16 +64,16 @@ Object {
       ],
     },
   },
-  "logger": Object {
-    "loggerConfig": Object {
-      "appenders": Object {
-        "out": Object {
+  "logger": {
+    "loggerConfig": {
+      "appenders": {
+        "out": {
           "type": "stdout",
         },
       },
-      "categories": Object {
-        "default": Object {
-          "appenders": Array [
+      "categories": {
+        "default": {
+          "appenders": [
             "out",
           ],
           "level": "debug",
@@ -82,10 +82,10 @@ Object {
     },
   },
   "projectName": "test",
-  "testBDD": Object {
-    "typeorm": Object {
-      "connectionOptions": Array [
-        Object {
+  "testBDD": {
+    "typeorm": {
+      "connectionOptions": [
+        {
           "database": "test-dev",
           "host": "localhost",
           "name": "test-dev",
@@ -102,17 +102,17 @@ Object {
 `;
 
 exports[`must load the good project with profile load test2 1`] = `
-Object {
-  "application": Object {
-    "loggerConfig": Object {
-      "appenders": Object {
-        "out": Object {
+{
+  "application": {
+    "loggerConfig": {
+      "appenders": {
+        "out": {
           "type": "stdout",
         },
       },
-      "categories": Object {
-        "default": Object {
-          "appenders": Array [
+      "categories": {
+        "default": {
+          "appenders": [
             "out",
           ],
           "level": "debug",
@@ -120,9 +120,9 @@ Object {
       },
     },
     "profile": "dev",
-    "typeorm": Object {
-      "connectionOptions": Array [
-        Object {
+    "typeorm": {
+      "connectionOptions": [
+        {
           "database": "test-dev",
           "host": "localhost",
           "name": "test-dev",
@@ -135,16 +135,16 @@ Object {
       ],
     },
   },
-  "logger": Object {
-    "loggerConfig": Object {
-      "appenders": Object {
-        "out": Object {
+  "logger": {
+    "loggerConfig": {
+      "appenders": {
+        "out": {
           "type": "stdout",
         },
       },
-      "categories": Object {
-        "default": Object {
-          "appenders": Array [
+      "categories": {
+        "default": {
+          "appenders": [
             "out",
           ],
           "level": "debug",
@@ -153,10 +153,10 @@ Object {
     },
   },
   "projectName": "test2",
-  "testBDD": Object {
-    "typeorm": Object {
-      "connectionOptions": Array [
-        Object {
+  "testBDD": {
+    "typeorm": {
+      "connectionOptions": [
+        {
           "database": "test-dev",
           "host": "localhost",
           "name": "test-dev",
@@ -173,26 +173,26 @@ Object {
 `;
 
 exports[`must load the good project without profile load test 1`] = `
-Object {
-  "application": Object {
-    "loggerConfig": Object {
-      "appenders": Object {
-        "out": Object {
+{
+  "application": {
+    "loggerConfig": {
+      "appenders": {
+        "out": {
           "type": "stdout",
         },
       },
-      "categories": Object {
-        "default": Object {
-          "appenders": Array [
+      "categories": {
+        "default": {
+          "appenders": [
             "out",
           ],
           "level": "debug",
         },
       },
     },
-    "typeorm": Object {
-      "connectionOptions": Array [
-        Object {
+    "typeorm": {
+      "connectionOptions": [
+        {
           "database": "test-default",
           "host": "localhost",
           "name": "test-default",
@@ -205,16 +205,16 @@ Object {
       ],
     },
   },
-  "logger": Object {
-    "loggerConfig": Object {
-      "appenders": Object {
-        "out": Object {
+  "logger": {
+    "loggerConfig": {
+      "appenders": {
+        "out": {
           "type": "stdout",
         },
       },
-      "categories": Object {
-        "default": Object {
-          "appenders": Array [
+      "categories": {
+        "default": {
+          "appenders": [
             "out",
           ],
           "level": "debug",
@@ -223,10 +223,10 @@ Object {
     },
   },
   "projectName": "test",
-  "testBDD": Object {
-    "typeorm": Object {
-      "connectionOptions": Array [
-        Object {
+  "testBDD": {
+    "typeorm": {
+      "connectionOptions": [
+        {
           "database": "test-default",
           "host": "localhost",
           "name": "test-default",
@@ -243,26 +243,26 @@ Object {
 `;
 
 exports[`must load the good project without profile load test2 1`] = `
-Object {
-  "application": Object {
-    "loggerConfig": Object {
-      "appenders": Object {
-        "out": Object {
+{
+  "application": {
+    "loggerConfig": {
+      "appenders": {
+        "out": {
           "type": "stdout",
         },
       },
-      "categories": Object {
-        "default": Object {
-          "appenders": Array [
+      "categories": {
+        "default": {
+          "appenders": [
             "out",
           ],
           "level": "debug",
         },
       },
     },
-    "typeorm": Object {
-      "connectionOptions": Array [
-        Object {
+    "typeorm": {
+      "connectionOptions": [
+        {
           "database": "test-default",
           "host": "localhost",
           "name": "test-default",
@@ -275,16 +275,16 @@ Object {
       ],
     },
   },
-  "logger": Object {
-    "loggerConfig": Object {
-      "appenders": Object {
-        "out": Object {
+  "logger": {
+    "loggerConfig": {
+      "appenders": {
+        "out": {
           "type": "stdout",
         },
       },
-      "categories": Object {
-        "default": Object {
-          "appenders": Array [
+      "categories": {
+        "default": {
+          "appenders": [
             "out",
           ],
           "level": "debug",
@@ -293,10 +293,10 @@ Object {
     },
   },
   "projectName": "test2",
-  "testBDD": Object {
-    "typeorm": Object {
-      "connectionOptions": Array [
-        Object {
+  "testBDD": {
+    "typeorm": {
+      "connectionOptions": [
+        {
           "database": "test-default",
           "host": "localhost",
           "name": "test-default",
