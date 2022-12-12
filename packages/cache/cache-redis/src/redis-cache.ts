@@ -200,7 +200,8 @@ export class RedisCache implements Cache {
   private async deserialize(value: any) {
     try {
       if (this.options.gzipEnabled === true) {
-        return JSON.parse((await gunzipAsync(value) as string).toString());
+        const unzip = await gunzipAsync(value);
+        return JSON.parse(unzip.toString());
       }
       return JSON.parse(value.toString());
     } catch {
