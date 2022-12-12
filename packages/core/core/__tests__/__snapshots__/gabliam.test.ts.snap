@@ -7,8 +7,8 @@ exports[`@onMissingBean 2 1`] = `"|constructConf|conf1|constructConf2"`;
 exports[`@onMissingBean with multiple missing but just one is missing 1`] = `"|constructConf|conf1|constructConf2"`;
 
 exports[`gabliam instance 1`] = `
-Object {
-  "application": Object {
+{
+  "application": {
     "db": "test",
     "host": "127.0.0.1",
   },
@@ -16,7 +16,7 @@ Object {
 `;
 
 exports[`gabliam instance 2`] = `
-Object {
+{
   "config": "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/gabliam/config",
   "scanPath": "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/gabliam",
 }
@@ -39,14 +39,14 @@ DbConfig {
 `;
 
 exports[`gabliam instance with config path 1`] = `
-Object {
+{
   "config": "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/gabliam/config",
 }
 `;
 
 exports[`gabliam instance with path 1`] = `
-Object {
-  "application": Object {
+{
+  "application": {
     "db": "test",
     "host": "127.0.0.1",
   },
@@ -54,7 +54,7 @@ Object {
 `;
 
 exports[`gabliam instance with path 2`] = `
-Object {
+{
   "config": "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/gabliam/config",
   "scanPath": "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/gabliam",
 }
@@ -77,9 +77,9 @@ DbConfig {
 `;
 
 exports[`plugin findByName 1`] = `
-Object {
+{
   "beforeAll": false,
-  "dependencies": Array [],
+  "dependencies": [],
   "name": "BadPlugin",
   "plugin": BadPlugin {},
 }

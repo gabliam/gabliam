@@ -3,25 +3,25 @@
 exports[`whitout other scan 1`] = `
 Registry {
   "registry": Map {
-    "ServiceType" => Array [
-      Object {
+    "ServiceType" => [
+      {
         "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
       },
-      Object {
+      {
         "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
       },
     ],
-    "ConfigType" => Array [
-      Object {
+    "ConfigType" => [
+      {
         "autoBind": true,
         "id": [Function],
-        "options": Object {
+        "options": {
           "order": 150,
         },
         "target": [Function],
@@ -33,7 +33,7 @@ Registry {
 
 exports[`whitout other scan 2`] = `
 LoaderModule {
-  "loadedFolder": Array [
+  "loadedFolder": [
     "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/loader/withoutscan",
   ],
 }
@@ -42,51 +42,51 @@ LoaderModule {
 exports[`with plugin 1`] = `
 Registry {
   "registry": Map {
-    "ServiceType" => Array [
-      Object {
+    "ServiceType" => [
+      {
         "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
       },
-      Object {
+      {
         "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
       },
-      Object {
+      {
         "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
       },
-      Object {
+      {
         "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
       },
-      Object {
+      {
         "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
       },
     ],
-    "ConfigType" => Array [
-      Object {
+    "ConfigType" => [
+      {
         "autoBind": true,
         "id": [Function],
-        "options": Object {
+        "options": {
           "order": 150,
         },
         "target": [Function],
       },
-      Object {
+      {
         "autoBind": true,
         "id": [Function],
-        "options": Object {
+        "options": {
           "order": 50,
         },
         "target": [Function],
@@ -98,7 +98,7 @@ Registry {
 
 exports[`with plugin 2`] = `
 LoaderModule {
-  "loadedFolder": Array [
+  "loadedFolder": [
     "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/loader/withoutscan",
     "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/loader/withscan",
     "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/loader/subfoldertoscan",
@@ -109,25 +109,25 @@ LoaderModule {
 exports[`with plugin and false scan path 1`] = `
 Registry {
   "registry": Map {
-    "ServiceType" => Array [
-      Object {
+    "ServiceType" => [
+      {
         "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
       },
-      Object {
+      {
         "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
       },
     ],
-    "ConfigType" => Array [
-      Object {
+    "ConfigType" => [
+      {
         "autoBind": true,
         "id": [Function],
-        "options": Object {
+        "options": {
           "order": 150,
         },
         "target": [Function],
@@ -139,7 +139,7 @@ Registry {
 
 exports[`with plugin and false scan path 2`] = `
 LoaderModule {
-  "loadedFolder": Array [
+  "loadedFolder": [
     "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/loader/withoutscan",
   ],
 }
@@ -148,31 +148,31 @@ LoaderModule {
 exports[`with scan 1`] = `
 Registry {
   "registry": Map {
-    "ServiceType" => Array [
-      Object {
+    "ServiceType" => [
+      {
         "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
       },
-      Object {
+      {
         "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
       },
-      Object {
+      {
         "autoBind": true,
         "id": [Function],
         "options": undefined,
         "target": [Function],
       },
     ],
-    "ConfigType" => Array [
-      Object {
+    "ConfigType" => [
+      {
         "autoBind": true,
         "id": [Function],
-        "options": Object {
+        "options": {
           "order": 50,
         },
         "target": [Function],
@@ -184,7 +184,7 @@ Registry {
 
 exports[`with scan 2`] = `
 LoaderModule {
-  "loadedFolder": Array [
+  "loadedFolder": [
     "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/loader/withscan",
     "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/loader/subfoldertoscan",
   ],

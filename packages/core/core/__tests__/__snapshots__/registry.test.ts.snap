@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`gabliam instance 1`] = `
-Object {
-  "application": Object {
+{
+  "application": {
     "db": "test",
     "host": "127.0.0.1",
   },
@@ -10,7 +10,7 @@ Object {
 `;
 
 exports[`gabliam instance 2`] = `
-Object {
+{
   "config": "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/gabliam/config",
   "scanPath": "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/gabliam",
 }
@@ -35,18 +35,18 @@ DbConfig {
 exports[`gabliam instance 5`] = `
 Registry {
   "registry": Map {
-    "ConfigType" => Array [
-      Object {
+    "ConfigType" => [
+      {
         "autoBind": true,
         "id": [Function],
-        "options": Object {
+        "options": {
           "order": 150,
         },
         "target": [Function],
       },
     ],
-    "ServiceType" => Array [
-      Object {
+    "ServiceType" => [
+      {
         "autoBind": true,
         "id": [Function],
         "options": undefined,
@@ -60,11 +60,11 @@ Registry {
 exports[`gabliam instance 6`] = `
 Registry {
   "registry": Map {
-    "ConfigType" => Array [
-      Object {
+    "ConfigType" => [
+      {
         "autoBind": true,
         "id": [Function],
-        "options": Object {
+        "options": {
           "order": 150,
         },
         "target": [Function],

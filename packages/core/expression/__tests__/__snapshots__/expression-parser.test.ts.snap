@@ -3,7 +3,7 @@
 exports[`expression evaluator compile should compile an expression an return an evaluator 1`] = `1234`;
 
 exports[`expression evaluator locals should refer to the root context 1`] = `
-Object {
+{
   "myString": "global context",
 }
 `;

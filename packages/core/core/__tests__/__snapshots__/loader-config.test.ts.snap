@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`with application.json 1`] = `
-Object {
-  "application": Object {
+{
+  "application": {
     "host": "prod.app.json",
     "json": true,
-    "mongoose": Object {
-      "mongoose": Object {
+    "mongoose": {
+      "mongoose": {
         "url": "mongo://localhost",
       },
     },
@@ -27,11 +27,11 @@ exports[`with application.json with nothing 1`] = `
 `;
 
 exports[`with application.yml 1`] = `
-Object {
-  "application": Object {
+{
+  "application": {
     "host": "prod.app.yml",
-    "mongoose": Object {
-      "mongoose": Object {
+    "mongoose": {
+      "mongoose": {
         "url": "mongo://localhost",
       },
     },
@@ -40,11 +40,11 @@ Object {
 }
 `;
 
-exports[`with application.yml empty 1`] = `Object {}`;
+exports[`with application.yml empty 1`] = `{}`;
 
 exports[`with application.yml load application.yml 1`] = `
-Object {
-  "application": Object {
+{
+  "application": {
     "db": "test",
     "host": "127.0.0.1",
   },
@@ -53,8 +53,8 @@ Object {
 `;
 
 exports[`with application.yml load with bad profile 1`] = `
-Object {
-  "application": Object {
+{
+  "application": {
     "db": "test",
     "host": "127.0.0.1",
   },
@@ -63,8 +63,8 @@ Object {
 `;
 
 exports[`with application.yml load with prod profile 1`] = `
-Object {
-  "application": Object {
+{
+  "application": {
     "db": "test",
     "host": "prod.app.com",
   },
@@ -74,7 +74,7 @@ Object {
 
 exports[`with application.yml with bad handler must throw error 1`] = `[Error: ENOENT: no such file or directory, open '<TEMP_DIR>/mock-fs-test/test/config/test.json']`;
 
-exports[`with application.yml with nothing 1`] = `Object {}`;
+exports[`with application.yml with nothing 1`] = `{}`;
 
 exports[`with bad application.json 1`] = `
 [LoaderConfigParseError: Error during parsing of file "<PROJECT_ROOT>/packages/core/core/__tests__/fixtures/badjson/application.json".
@@ -111,15 +111,15 @@ exports[`with bad toml 1`] = `
     ]
 `;
 
-exports[`with config folder doesn't exist 1`] = `Object {}`;
+exports[`with config folder doesn't exist 1`] = `{}`;
 
 exports[`with json and yml 1`] = `
-Object {
-  "application": Object {
+{
+  "application": {
     "host": "prod.app.yml",
     "json": true,
-    "mongoose": Object {
-      "mongoose": Object {
+    "mongoose": {
+      "mongoose": {
         "url": "mongo://localhost",
       },
     },
@@ -129,7 +129,7 @@ Object {
 `;
 
 exports[`with properties 1`] = `
-Object {
+{
   "application.db": "test",
   "application.host": "127.0.0.1",
   "testPath": "<TEMP_DIR>/mock-fs-test/test/config/test.json",
@@ -137,8 +137,8 @@ Object {
 `;
 
 exports[`with toml 1`] = `
-Object {
-  "application": Object {
+{
+  "application": {
     "db": "test",
     "host": "127.0.0.1",
     "testPath": "<TEMP_DIR>/mock-fs-test/test/config/test.json",
@@ -147,12 +147,12 @@ Object {
 `;
 
 exports[`with yml and json 1`] = `
-Object {
-  "application": Object {
+{
+  "application": {
     "host": "prod.app.json",
     "json": true,
-    "mongoose": Object {
-      "mongoose": Object {
+    "mongoose": {
+      "mongoose": {
         "url": "mongo://localhost",
       },
     },
