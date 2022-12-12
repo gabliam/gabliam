@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Consumer test with buffer object 1`] = `
-Object {
+{
   "test": "buffertest",
 }
 `;
@@ -9,9 +9,9 @@ Object {
 exports[`Consumer test with buffer object 2`] = `1`;
 
 exports[`Consumer test with buffer object 3`] = `
-Array [
-  Array [
-    Object {
+[
+  [
+    {
       "test": "buffertest",
     },
   ],
@@ -23,15 +23,15 @@ exports[`Consumer test with buffer string 1`] = `"buffertest"`;
 exports[`Consumer test with buffer string 2`] = `1`;
 
 exports[`Consumer test with buffer string 3`] = `
-Array [
-  Array [
+[
+  [
     "buffertest",
   ],
 ]
 `;
 
 exports[`Consumer test with object 1`] = `
-Object {
+{
   "test": "cool",
 }
 `;
@@ -39,9 +39,9 @@ Object {
 exports[`Consumer test with object 2`] = `1`;
 
 exports[`Consumer test with object 3`] = `
-Array [
-  Array [
-    Object {
+[
+  [
+    {
       "test": "cool",
     },
   ],
@@ -53,8 +53,8 @@ exports[`Consumer test with string 1`] = `"test"`;
 exports[`Consumer test with string 2`] = `1`;
 
 exports[`Consumer test with string 3`] = `
-Array [
-  Array [
+[
+  [
     "test",
   ],
 ]
@@ -67,7 +67,7 @@ exports[`Errors without config folder 1`] = `[AmqpConfigIsMandatoryError: AmqpCo
 exports[`Errors without queueName 1`] = `[Error: Error for 'application.amqp' value{"_original":{"url":"amqp://bad","queues":{"queueTest":{"name":"lol"}}},"details":[{"message":"/"value/" does not match any of the allowed types","path":[],"type":"alternatives.match","context":{"message":"/"queues.queueTest.queueName/" is required. /"queues.queueTest.name/" is not allowed. /"value/" must be an array","details":[{"message":"/"queues.queueTest.queueName/" is required","path":["queues","queueTest","queueName"],"type":"any.required","context":{"label":"queues.queueTest.queueName","key":"queueName"}},{"message":"/"queues.queueTest.name/" is not allowed","path":["queues","queueTest","name"],"type":"object.unknown","context":{"child":"name","label":"queues.queueTest.name","value":"lol","key":"name"}},{"message":"/"value/" must be an array","path":[],"type":"array.base","context":{"label":"value","value":{"url":"amqp://bad","queues":{"queueTest":{"name":"lol"}}}}}],"label":"value","value":{"url":"amqp://bad","queues":{"queueTest":{"name":"lol"}}}}}]}]`;
 
 exports[`Listener test with buffer object 1`] = `
-Object {
+{
   "test": "buffertest",
 }
 `;
@@ -75,9 +75,9 @@ Object {
 exports[`Listener test with buffer object 2`] = `1`;
 
 exports[`Listener test with buffer object 3`] = `
-Array [
-  Array [
-    Object {
+[
+  [
+    {
       "test": "buffertest",
     },
   ],
@@ -89,15 +89,15 @@ exports[`Listener test with buffer string 1`] = `"buffertest"`;
 exports[`Listener test with buffer string 2`] = `1`;
 
 exports[`Listener test with buffer string 3`] = `
-Array [
-  Array [
+[
+  [
     "buffertest",
   ],
 ]
 `;
 
 exports[`Listener test with object 1`] = `
-Object {
+{
   "test": "cool",
 }
 `;
@@ -105,9 +105,9 @@ Object {
 exports[`Listener test with object 2`] = `1`;
 
 exports[`Listener test with object 3`] = `
-Array [
-  Array [
-    Object {
+[
+  [
+    {
       "test": "cool",
     },
   ],
@@ -119,8 +119,8 @@ exports[`Listener test with string 1`] = `"test"`;
 exports[`Listener test with string 2`] = `1`;
 
 exports[`Listener test with string 3`] = `
-Array [
-  Array [
+[
+  [
     "test",
   ],
 ]
@@ -131,8 +131,8 @@ exports[`Listener test with undefined 1`] = `undefined`;
 exports[`Listener test with undefined 2`] = `1`;
 
 exports[`Listener test with undefined 3`] = `
-Array [
-  Array [
+[
+  [
     undefined,
   ],
 ]
@@ -141,7 +141,7 @@ Array [
 exports[`bad queue 1`] = `[AmqpQueueDoesntExistError: Queue "consumerTestBad" doesn't exist.]`;
 
 exports[`consumer throw error 1`] = `
-Object {
+{
   "message": "Consumer error",
   "stack": Any<String>,
 }
@@ -150,8 +150,8 @@ Object {
 exports[`consumer throw error 2`] = `1`;
 
 exports[`consumer throw error 3`] = `
-Array [
-  Array [
+[
+  [
     "test",
   ],
 ]
@@ -170,8 +170,8 @@ exports[`start 2 times 1`] = `"testCase.content"`;
 exports[`start 2 times 2`] = `1`;
 
 exports[`start 2 times 3`] = `
-Array [
-  Array [
+[
+  [
     "testCase.content",
   ],
 ]
@@ -186,8 +186,8 @@ exports[`with one connection with name and entity without cunit 1`] = `"testCase
 exports[`with one connection with name and entity without cunit 2`] = `1`;
 
 exports[`with one connection with name and entity without cunit 3`] = `
-Array [
-  Array [
+[
+  [
     "testCase.content",
   ],
 ]

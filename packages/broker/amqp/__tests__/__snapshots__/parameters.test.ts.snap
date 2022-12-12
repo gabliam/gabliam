@@ -1,21 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Parameters gzip: should bind a method parameter to message 1`] = `
-Object {
+{
   "content": Any<Object>,
-  "fields": Object {
+  "fields": {
     "consumerTag": Any<String>,
     "deliveryTag": 1,
     "exchange": "",
     "redelivered": false,
     "routingKey": "consumerTest",
   },
-  "properties": Object {
+  "properties": {
     "contentEncoding": "gzip",
     "contentType": "application/json",
     "correlationId": Any<String>,
     "expiration": "5000",
-    "headers": Object {},
+    "headers": {},
     "replyTo": Any<String>,
   },
 }
@@ -24,16 +24,16 @@ Object {
 exports[`Parameters gzip: should bind a method parameter to message 2`] = `1`;
 
 exports[`Parameters gzip: should bind a method parameter to message 3`] = `
-Object {
+{
   "content": Any<Object>,
-  "fields": Object {
+  "fields": {
     "consumerTag": Any<String>,
     "deliveryTag": 3,
     "exchange": "",
     "redelivered": false,
     "routingKey": "listenerTest",
   },
-  "properties": Object {
+  "properties": {
     "appId": undefined,
     "clusterId": undefined,
     "contentEncoding": "gzip",
@@ -41,7 +41,7 @@ Object {
     "correlationId": undefined,
     "deliveryMode": undefined,
     "expiration": undefined,
-    "headers": Object {},
+    "headers": {},
     "messageId": undefined,
     "priority": undefined,
     "replyTo": undefined,
@@ -103,7 +103,7 @@ exports[`Parameters gzip: should bind a method parameter to the content object a
 exports[`Parameters gzip: should bind a method parameter to the content object and call with buffer string 4`] = `1`;
 
 exports[`Parameters gzip: should bind a method parameter to the content object and with buffer object 1`] = `
-Object {
+{
   "test": "buffertest",
 }
 `;
@@ -111,7 +111,7 @@ Object {
 exports[`Parameters gzip: should bind a method parameter to the content object and with buffer object 2`] = `1`;
 
 exports[`Parameters gzip: should bind a method parameter to the content object and with buffer object 3`] = `
-Object {
+{
   "test": "buffertest",
 }
 `;
@@ -119,7 +119,7 @@ Object {
 exports[`Parameters gzip: should bind a method parameter to the content object and with buffer object 4`] = `1`;
 
 exports[`Parameters gzip: should bind a method parameter to the content object and with object 1`] = `
-Object {
+{
   "test": "cool",
 }
 `;
@@ -127,7 +127,7 @@ Object {
 exports[`Parameters gzip: should bind a method parameter to the content object and with object 2`] = `1`;
 
 exports[`Parameters gzip: should bind a method parameter to the content object and with object 3`] = `
-Object {
+{
   "test": "cool",
 }
 `;
@@ -143,7 +143,7 @@ exports[`Parameters gzip: should bind a method parameter to the content object a
 exports[`Parameters gzip: should bind a method parameter to the content object and with string 4`] = `1`;
 
 exports[`Parameters gzip: should bind a method to Fields object 1`] = `
-Object {
+{
   "consumerTag": Any<String>,
   "deliveryTag": Any<Number>,
   "exchange": Any<String>,
@@ -155,7 +155,7 @@ Object {
 exports[`Parameters gzip: should bind a method to Fields object 2`] = `1`;
 
 exports[`Parameters gzip: should bind a method to Fields object 3`] = `
-Object {
+{
   "consumerTag": Any<String>,
   "deliveryTag": Any<Number>,
   "exchange": Any<String>,
@@ -175,28 +175,28 @@ exports[`Parameters gzip: should bind a method to Fields routingKey  3`] = `"lis
 exports[`Parameters gzip: should bind a method to Fields routingKey  4`] = `1`;
 
 exports[`Parameters gzip: should bind a method to Properties headers  1`] = `
-Object {
-  "api-auth": "aze&ée(((\\"a&é\\"&é\\"",
+{
+  "api-auth": "aze&ée((("a&é"&é"",
 }
 `;
 
 exports[`Parameters gzip: should bind a method to Properties headers  2`] = `1`;
 
 exports[`Parameters gzip: should bind a method to Properties headers  3`] = `
-Object {
-  "api-auth": "aze&ée(((\\"a&é\\"&é\\"",
+{
+  "api-auth": "aze&ée((("a&é"&é"",
 }
 `;
 
 exports[`Parameters gzip: should bind a method to Properties headers  4`] = `1`;
 
 exports[`Parameters gzip: should bind a method to Properties object 1`] = `
-Object {
+{
   "contentEncoding": "gzip",
   "contentType": "application/json",
   "correlationId": Any<String>,
   "expiration": "5000",
-  "headers": Object {},
+  "headers": {},
   "replyTo": Any<String>,
 }
 `;
@@ -204,7 +204,7 @@ Object {
 exports[`Parameters gzip: should bind a method to Properties object 2`] = `1`;
 
 exports[`Parameters gzip: should bind a method to Properties object 3`] = `
-Object {
+{
   "appId": undefined,
   "clusterId": undefined,
   "contentEncoding": "gzip",
@@ -212,7 +212,7 @@ Object {
   "correlationId": undefined,
   "deliveryMode": undefined,
   "expiration": undefined,
-  "headers": Object {},
+  "headers": {},
   "messageId": undefined,
   "priority": undefined,
   "replyTo": undefined,
@@ -225,20 +225,20 @@ Object {
 exports[`Parameters gzip: should bind a method to Properties object 4`] = `1`;
 
 exports[`Parameters: should bind a method parameter to message 1`] = `
-Object {
+{
   "content": Any<Object>,
-  "fields": Object {
+  "fields": {
     "consumerTag": Any<String>,
     "deliveryTag": 1,
     "exchange": "",
     "redelivered": false,
     "routingKey": "consumerTest",
   },
-  "properties": Object {
+  "properties": {
     "contentType": "application/json",
     "correlationId": Any<String>,
     "expiration": "5000",
-    "headers": Object {},
+    "headers": {},
     "replyTo": Any<String>,
   },
 }
@@ -247,16 +247,16 @@ Object {
 exports[`Parameters: should bind a method parameter to message 2`] = `1`;
 
 exports[`Parameters: should bind a method parameter to message 3`] = `
-Object {
+{
   "content": Any<Object>,
-  "fields": Object {
+  "fields": {
     "consumerTag": Any<String>,
     "deliveryTag": 3,
     "exchange": "",
     "redelivered": false,
     "routingKey": "listenerTest",
   },
-  "properties": Object {
+  "properties": {
     "appId": undefined,
     "clusterId": undefined,
     "contentEncoding": undefined,
@@ -264,7 +264,7 @@ Object {
     "correlationId": undefined,
     "deliveryMode": undefined,
     "expiration": undefined,
-    "headers": Object {},
+    "headers": {},
     "messageId": undefined,
     "priority": undefined,
     "replyTo": undefined,
@@ -326,7 +326,7 @@ exports[`Parameters: should bind a method parameter to the content object and ca
 exports[`Parameters: should bind a method parameter to the content object and call with buffer string 4`] = `1`;
 
 exports[`Parameters: should bind a method parameter to the content object and with buffer object 1`] = `
-Object {
+{
   "test": "buffertest",
 }
 `;
@@ -334,7 +334,7 @@ Object {
 exports[`Parameters: should bind a method parameter to the content object and with buffer object 2`] = `1`;
 
 exports[`Parameters: should bind a method parameter to the content object and with buffer object 3`] = `
-Object {
+{
   "test": "buffertest",
 }
 `;
@@ -342,7 +342,7 @@ Object {
 exports[`Parameters: should bind a method parameter to the content object and with buffer object 4`] = `1`;
 
 exports[`Parameters: should bind a method parameter to the content object and with object 1`] = `
-Object {
+{
   "test": "cool",
 }
 `;
@@ -350,7 +350,7 @@ Object {
 exports[`Parameters: should bind a method parameter to the content object and with object 2`] = `1`;
 
 exports[`Parameters: should bind a method parameter to the content object and with object 3`] = `
-Object {
+{
   "test": "cool",
 }
 `;
@@ -366,7 +366,7 @@ exports[`Parameters: should bind a method parameter to the content object and wi
 exports[`Parameters: should bind a method parameter to the content object and with string 4`] = `1`;
 
 exports[`Parameters: should bind a method to Fields object 1`] = `
-Object {
+{
   "consumerTag": Any<String>,
   "deliveryTag": Any<Number>,
   "exchange": Any<String>,
@@ -378,7 +378,7 @@ Object {
 exports[`Parameters: should bind a method to Fields object 2`] = `1`;
 
 exports[`Parameters: should bind a method to Fields object 3`] = `
-Object {
+{
   "consumerTag": Any<String>,
   "deliveryTag": Any<Number>,
   "exchange": Any<String>,
@@ -398,27 +398,27 @@ exports[`Parameters: should bind a method to Fields routingKey  3`] = `"listener
 exports[`Parameters: should bind a method to Fields routingKey  4`] = `1`;
 
 exports[`Parameters: should bind a method to Properties headers  1`] = `
-Object {
-  "api-auth": "aze&ée(((\\"a&é\\"&é\\"",
+{
+  "api-auth": "aze&ée((("a&é"&é"",
 }
 `;
 
 exports[`Parameters: should bind a method to Properties headers  2`] = `1`;
 
 exports[`Parameters: should bind a method to Properties headers  3`] = `
-Object {
-  "api-auth": "aze&ée(((\\"a&é\\"&é\\"",
+{
+  "api-auth": "aze&ée((("a&é"&é"",
 }
 `;
 
 exports[`Parameters: should bind a method to Properties headers  4`] = `1`;
 
 exports[`Parameters: should bind a method to Properties object 1`] = `
-Object {
+{
   "contentType": "application/json",
   "correlationId": Any<String>,
   "expiration": "5000",
-  "headers": Object {},
+  "headers": {},
   "replyTo": Any<String>,
 }
 `;
@@ -426,7 +426,7 @@ Object {
 exports[`Parameters: should bind a method to Properties object 2`] = `1`;
 
 exports[`Parameters: should bind a method to Properties object 3`] = `
-Object {
+{
   "appId": undefined,
   "clusterId": undefined,
   "contentEncoding": undefined,
@@ -434,7 +434,7 @@ Object {
   "correlationId": undefined,
   "deliveryMode": undefined,
   "expiration": undefined,
-  "headers": Object {},
+  "headers": {},
   "messageId": undefined,
   "priority": undefined,
   "replyTo": undefined,

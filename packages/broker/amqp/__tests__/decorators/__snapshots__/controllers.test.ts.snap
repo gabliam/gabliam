@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`@RabbitConsumer() decorator 1`] = `
-Array [
+[
   DecoratorFactory {},
   DecoratorFactory {
     "autobind": true,
@@ -12,8 +12,8 @@ Array [
 `;
 
 exports[`@RabbitConsumer() decorator 2`] = `
-Object {
-  "consumer": Array [
+{
+  "consumer": [
     PropDecoratorFactory {
       "queue": "consumerTest",
       "type": "Consumer",
@@ -23,7 +23,7 @@ Object {
 `;
 
 exports[`@RabbitController() decorator 1`] = `
-Array [
+[
   DecoratorFactory {},
   DecoratorFactory {
     "autobind": true,
@@ -34,7 +34,7 @@ Array [
 `;
 
 exports[`@RabbitListener() & @RabbitConsumer() decorator 1`] = `
-Array [
+[
   DecoratorFactory {},
   DecoratorFactory {
     "autobind": true,
@@ -45,14 +45,14 @@ Array [
 `;
 
 exports[`@RabbitListener() & @RabbitConsumer() decorator 2`] = `
-Object {
-  "consumer": Array [
+{
+  "consumer": [
     PropDecoratorFactory {
       "queue": "consumerTest",
       "type": "Consumer",
     },
   ],
-  "listener": Array [
+  "listener": [
     PropDecoratorFactory {
       "queue": "listenerTest",
       "type": "Listener",
@@ -62,7 +62,7 @@ Object {
 `;
 
 exports[`@RabbitListener() decorator 1`] = `
-Array [
+[
   DecoratorFactory {},
   DecoratorFactory {
     "autobind": true,
@@ -73,8 +73,8 @@ Array [
 `;
 
 exports[`@RabbitListener() decorator 2`] = `
-Object {
-  "listener": Array [
+{
+  "listener": [
     PropDecoratorFactory {
       "queue": "listenerTest",
       "type": "Listener",

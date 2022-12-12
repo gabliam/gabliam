@@ -1,36 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`params decorators should add parameter metadata to a class when decorated with @params 1`] = `
-Array [
-  Array [
+[
+  [
     [Function],
     ParamDecoratorFactory {
-      "args": Array [],
+      "args": [],
       "handler": [Function],
     },
   ],
-  Array [
+  [
     [Function],
     ParamDecoratorFactory {
-      "args": Array [
+      "args": [
         "cat",
       ],
       "handler": [Function],
     },
   ],
-  Array [
+  [
     [Function],
     ParamDecoratorFactory {
-      "args": Array [
+      "args": [
         "headers",
       ],
       "handler": [Function],
     },
   ],
-  Array [
+  [
     [Function],
     ParamDecoratorFactory {
-      "args": Array [
+      "args": [
         "consumerTag",
       ],
       "handler": [Function],
@@ -40,11 +40,11 @@ Array [
 `;
 
 exports[`params decorators should add parameter metadata to a class when decorated with @params 2`] = `
-Array [
-  Array [
+[
+  [
     [Function],
     ParamDecoratorFactory {
-      "args": Array [],
+      "args": [],
       "handler": [Function],
     },
   ],
@@ -52,36 +52,36 @@ Array [
 `;
 
 exports[`params decorators should add parameter metadata to a class when decorated with @params and inherit 1`] = `
-Array [
-  Array [
+[
+  [
     [Function],
     ParamDecoratorFactory {
-      "args": Array [],
+      "args": [],
       "handler": [Function],
     },
   ],
-  Array [
+  [
     [Function],
     ParamDecoratorFactory {
-      "args": Array [
+      "args": [
         "cat",
       ],
       "handler": [Function],
     },
   ],
-  Array [
+  [
     [Function],
     ParamDecoratorFactory {
-      "args": Array [
+      "args": [
         "headers",
       ],
       "handler": [Function],
     },
   ],
-  Array [
+  [
     [Function],
     ParamDecoratorFactory {
-      "args": Array [
+      "args": [
         "consumerTag",
       ],
       "handler": [Function],
@@ -91,11 +91,11 @@ Array [
 `;
 
 exports[`params decorators should add parameter metadata to a class when decorated with @params and inherit 2`] = `
-Array [
-  Array [
+[
+  [
     [Function],
     ParamDecoratorFactory {
-      "args": Array [
+      "args": [
         "lollol",
       ],
       "handler": [Function],
