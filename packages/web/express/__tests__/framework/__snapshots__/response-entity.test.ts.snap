@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Response entity Tests: decorator Controller responseEntitie accepted() 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "0",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 202,
@@ -17,14 +17,14 @@ Object {
 `;
 
 exports[`Response entity Tests: decorator Controller responseEntitie badRequest() 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "0",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 400,
@@ -33,13 +33,13 @@ Object {
 `;
 
 exports[`Response entity Tests: decorator Controller responseEntitie noContent() 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 204,
@@ -48,14 +48,14 @@ Object {
 `;
 
 exports[`Response entity Tests: decorator Controller responseEntitie notFound() 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "0",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 404,
@@ -64,14 +64,14 @@ Object {
 `;
 
 exports[`Response entity Tests: decorator Controller responseEntitie ok() 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "0",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -80,84 +80,84 @@ Object {
 `;
 
 exports[`Response entity Tests: decorator Controller responseEntitie ok({get: 'get'}) 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "13",
     "content-type": "application/json; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
-  "text": "{\\"get\\":\\"get\\"}",
+  "text": "{"get":"get"}",
 }
 `;
 
 exports[`Response entity Tests: decorator Controller should work for async responseEntitie controller methods 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "13",
     "content-type": "application/json; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
-  "text": "{\\"get\\":\\"GET\\"}",
+  "text": "{"get":"GET"}",
 }
 `;
 
 exports[`Response entity Tests: decorator Controller should work for responseEntitie and custom Header controller methods 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "13",
     "content-type": "application/json; charset=utf-8",
     "x-test": "tests",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
-  "text": "{\\"get\\":\\"GET\\"}",
+  "text": "{"get":"GET"}",
 }
 `;
 
 exports[`Response entity Tests: decorator Controller should work for responseEntitie controller methods 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "13",
     "content-type": "application/json; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
-  "text": "{\\"get\\":\\"GET\\"}",
+  "text": "{"get":"GET"}",
 }
 `;
 
 exports[`Response entity Tests: decorator RestController responseEntitie accepted() 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "0",
     "content-type": "application/json; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 202,
@@ -166,15 +166,15 @@ Object {
 `;
 
 exports[`Response entity Tests: decorator RestController responseEntitie badRequest() 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "0",
     "content-type": "application/json; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 400,
@@ -183,13 +183,13 @@ Object {
 `;
 
 exports[`Response entity Tests: decorator RestController responseEntitie noContent() 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 204,
@@ -198,15 +198,15 @@ Object {
 `;
 
 exports[`Response entity Tests: decorator RestController responseEntitie notFound() 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "0",
     "content-type": "application/json; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 404,
@@ -215,15 +215,15 @@ Object {
 `;
 
 exports[`Response entity Tests: decorator RestController responseEntitie ok() 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "0",
     "content-type": "application/json; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -232,70 +232,70 @@ Object {
 `;
 
 exports[`Response entity Tests: decorator RestController responseEntitie ok({get: 'get'}) 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "13",
     "content-type": "application/json; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
-  "text": "{\\"get\\":\\"get\\"}",
+  "text": "{"get":"get"}",
 }
 `;
 
 exports[`Response entity Tests: decorator RestController should work for async responseEntitie controller methods 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "13",
     "content-type": "application/json; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
-  "text": "{\\"get\\":\\"GET\\"}",
+  "text": "{"get":"GET"}",
 }
 `;
 
 exports[`Response entity Tests: decorator RestController should work for responseEntitie and custom Header controller methods 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "13",
     "content-type": "application/json; charset=utf-8",
     "x-test": "tests",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
-  "text": "{\\"get\\":\\"GET\\"}",
+  "text": "{"get":"GET"}",
 }
 `;
 
 exports[`Response entity Tests: decorator RestController should work for responseEntitie controller methods 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "13",
     "content-type": "application/json; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
-  "text": "{\\"get\\":\\"GET\\"}",
+  "text": "{"get":"GET"}",
 }
 `;

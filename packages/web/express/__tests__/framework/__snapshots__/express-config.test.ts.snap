@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`@ExpressConfig 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/html; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -20,15 +20,15 @@ Object {
 exports[`@ExpressConfig 2`] = `"abc"`;
 
 exports[`@ExpressConfig Order 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/html; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -39,15 +39,15 @@ Object {
 exports[`@ExpressConfig Order 2`] = `"abc"`;
 
 exports[`ErrorConfig 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "5",
     "content-type": "text/html; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 500,
@@ -58,15 +58,15 @@ Object {
 exports[`ErrorConfig 2`] = `"e"`;
 
 exports[`ErrorConfig order 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "5",
     "content-type": "text/html; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 500,
