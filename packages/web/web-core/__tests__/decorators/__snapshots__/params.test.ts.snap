@@ -1,39 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`params decorators should add parameter metadata to a class when decorated with @params 1`] = `
-Array [
-  Array [
+[
+  [
     [Function],
     ParamDecoratorFactory {
-      "args": Array [
+      "args": [
         "id",
       ],
       "handler": [Function],
       "type": "params",
     },
   ],
-  Array [
+  [
     [Function],
     ParamDecoratorFactory {
-      "args": Array [
+      "args": [
         "cat",
       ],
       "handler": [Function],
       "type": "query",
     },
   ],
-  Array [
+  [
     [Function],
     ParamDecoratorFactory {
-      "args": Array [],
+      "args": [],
       "handler": [Function],
       "type": "request",
     },
   ],
-  Array [
+  [
     [Function],
     ParamDecoratorFactory {
-      "args": Array [],
+      "args": [],
       "handler": [Function],
       "type": "response",
     },
@@ -42,11 +42,11 @@ Array [
 `;
 
 exports[`params decorators should add parameter metadata to a class when decorated with @params 2`] = `
-Array [
-  Array [
+[
+  [
     [Function],
     ParamDecoratorFactory {
-      "args": Array [
+      "args": [
         "dog",
       ],
       "handler": [Function],
@@ -57,29 +57,29 @@ Array [
 `;
 
 exports[`params decorators should add parameter metadata to a class when decorated with @params 3`] = `
-Array [
-  Array [
+[
+  [
     [Function],
     ParamDecoratorFactory {
-      "args": Array [
+      "args": [
         "Auth",
       ],
       "handler": [Function],
       "type": "headers",
     },
   ],
-  Array [
+  [
     [Function],
     ParamDecoratorFactory {
-      "args": Array [],
+      "args": [],
       "handler": [Function],
       "type": "cookies",
     },
   ],
-  Array [
+  [
     [Function],
     ParamDecoratorFactory {
-      "args": Array [],
+      "args": [],
       "handler": [Function],
       "type": "next",
     },

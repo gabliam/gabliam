@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`interceptors decorators should add Bean metadata to a class when decorated with @UseInterceptors 1`] = `
-Object {
-  "test2Method": Array [
+{
+  "test2Method": [
     DecoratorFactory {
-      "ids": Array [
+      "ids": [
         "test2",
       ],
     },
   ],
-  "testMethod": Array [
+  "testMethod": [
     DecoratorFactory {
-      "ids": Array [
+      "ids": [
         "test",
       ],
     },

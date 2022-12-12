@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`WebConfig decorator should add WebConfig metadata to a class when decorated with @WebConfig 1`] = `
-Object {
-  "test2Method": Array [
+{
+  "test2Method": [
     PropDecoratorFactory {
       "order": 1,
     },
   ],
-  "testMethod": Array [
+  "testMethod": [
     PropDecoratorFactory {
       "order": 1,
     },
@@ -16,13 +16,13 @@ Object {
 `;
 
 exports[`WebConfig decorator should add WebConfig metadata to a class when decorated with @WebConfig(order) 1`] = `
-Object {
-  "test2Method": Array [
+{
+  "test2Method": [
     PropDecoratorFactory {
       "order": 100,
     },
   ],
-  "testMethod": Array [
+  "testMethod": [
     PropDecoratorFactory {
       "order": 50,
     },
@@ -31,13 +31,13 @@ Object {
 `;
 
 exports[`WebConfigAfterControllers decorator should add WebConfigAfterControllers metadata to a class when decorated with @WebConfigAfterControllers 1`] = `
-Object {
-  "test2Method": Array [
+{
+  "test2Method": [
     PropDecoratorFactory {
       "order": 1,
     },
   ],
-  "testMethod": Array [
+  "testMethod": [
     PropDecoratorFactory {
       "order": 1,
     },
@@ -46,13 +46,13 @@ Object {
 `;
 
 exports[`WebConfigAfterControllers decorator should add WebConfigAfterControllers metadata to a class when decorated with @WebConfigAfterControllers(order) 1`] = `
-Object {
-  "test2Method": Array [
+{
+  "test2Method": [
     PropDecoratorFactory {
       "order": 100,
     },
   ],
-  "testMethod": Array [
+  "testMethod": [
     PropDecoratorFactory {
       "order": 50,
     },

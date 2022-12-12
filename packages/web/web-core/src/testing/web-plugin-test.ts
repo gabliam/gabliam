@@ -1,8 +1,6 @@
 import {
   Gabliam,
-  GabliamAddPlugin,
-  GabliamBuilder,
-  isGabliamBuilder,
+  GabliamAddPlugin
 } from '@gabliam/core';
 import { GabliamTest } from '@gabliam/core/src/testing';
 import supertest from 'supertest';
@@ -13,11 +11,11 @@ const SUPERTEST = Symbol('SUPERTEST');
 export class WebPluginTest extends GabliamTest {
   constructor(
     plugins: GabliamAddPlugin[] = [],
-    gab?: Gabliam | GabliamBuilder,
+    gab?: Gabliam,
   ) {
     let gabliam: Gabliam;
     if (gab) {
-      gabliam = isGabliamBuilder(gab) ? gab() : gab;
+      gabliam = gab;
     } else {
       gabliam = new Gabliam();
     }

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Controller decorator should add Controller metadata to a class when decorated with @Controller(ControllerOptions) 1`] = `
-Array [
+[
   DecoratorFactory {
     "json": false,
     "name": "TestControllerName",
@@ -16,7 +16,7 @@ Array [
 `;
 
 exports[`Controller decorator should add Controller metadata to a class when decorated with @Controller(string) 1`] = `
-Array [
+[
   DecoratorFactory {
     "json": false,
     "name": undefined,
@@ -31,7 +31,7 @@ Array [
 `;
 
 exports[`RestController decorator should add Controller metadata to a class when decorated with @RestController(ControllerOptions) 1`] = `
-Array [
+[
   DecoratorFactory {
     "json": true,
     "name": "TestControllerName",
@@ -46,7 +46,7 @@ Array [
 `;
 
 exports[`RestController decorator should add Controller metadata to a class when decorated with @RestController(string) 1`] = `
-Array [
+[
   DecoratorFactory {
     "json": true,
     "name": undefined,
