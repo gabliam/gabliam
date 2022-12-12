@@ -62,11 +62,11 @@ exports[`cacheable cache unless 1`] = `16`;
 
 exports[`cacheable cache unless 2`] = `19`;
 
-exports[`cacheable cache unless 2 1`] = `Array []`;
+exports[`cacheable cache unless 2 1`] = `[]`;
 
 exports[`cacheable cache unless 2 2`] = `19`;
 
-exports[`cacheable cache unless 2 3`] = `Array []`;
+exports[`cacheable cache unless 2 3`] = `[]`;
 
 exports[`cacheable cache unless 2 4`] = `19`;
 

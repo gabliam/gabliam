@@ -7,7 +7,7 @@ exports[`cache put cache args object 2`] = `"hi test"`;
 exports[`cache put cache args object 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -26,13 +26,13 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
-      "{\\"name\\":\\"test\\"}",
+    "keyList": [
+      "{"name":"test"}",
       null,
       null,
     ],
     "keyMap": Map {
-      "{\\"name\\":\\"test\\"}" => 0,
+      "{"name":"test"}" => 0,
     },
     "max": 3,
     "maxEntrySize": 0,
@@ -59,7 +59,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "hi test",
       null,
       null,
@@ -77,7 +77,7 @@ exports[`cache put cache condition + key 3`] = `"hi test"`;
 exports[`cache put cache condition + key 4`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -96,7 +96,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
+    "keyList": [
       "test",
       null,
       null,
@@ -129,7 +129,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "hi test",
       null,
       null,
@@ -143,7 +143,7 @@ exports[`cache put cache condition + key 5`] = `"hi test"`;
 exports[`cache put cache condition + key 6`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -162,7 +162,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
+    "keyList": [
       "test",
       null,
       null,
@@ -195,7 +195,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "hi test",
       null,
       null,
@@ -211,7 +211,7 @@ exports[`cache put cache condition 2`] = `"hi test"`;
 exports[`cache put cache condition 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -230,13 +230,13 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
-      "{\\"name\\":\\"test\\",\\"id\\":2}",
+    "keyList": [
+      "{"name":"test","id":2}",
       null,
       null,
     ],
     "keyMap": Map {
-      "{\\"name\\":\\"test\\",\\"id\\":2}" => 0,
+      "{"name":"test","id":2}" => 0,
     },
     "max": 3,
     "maxEntrySize": 0,
@@ -263,7 +263,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "hi test",
       null,
       null,
@@ -277,7 +277,7 @@ exports[`cache put cache condition 4`] = `"hi test"`;
 exports[`cache put cache condition 5`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -296,13 +296,13 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
-      "{\\"name\\":\\"test\\",\\"id\\":2}",
+    "keyList": [
+      "{"name":"test","id":2}",
       null,
       null,
     ],
     "keyMap": Map {
-      "{\\"name\\":\\"test\\",\\"id\\":2}" => 0,
+      "{"name":"test","id":2}" => 0,
     },
     "max": 3,
     "maxEntrySize": 0,
@@ -329,7 +329,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "hi test",
       null,
       null,
@@ -345,7 +345,7 @@ exports[`cache put cache key 2`] = `"hi test"`;
 exports[`cache put cache key 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -364,7 +364,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 2,
-    "keyList": Array [
+    "keyList": [
       "1",
       "2",
       null,
@@ -398,7 +398,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "hi test",
       "hi test",
       null,
@@ -412,7 +412,7 @@ exports[`cache put cache key 4`] = `"hi test"`;
 exports[`cache put cache key 5`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -431,7 +431,7 @@ MemoryCache {
     },
     "head": 1,
     "initialFill": 2,
-    "keyList": Array [
+    "keyList": [
       "1",
       "2",
       null,
@@ -465,7 +465,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "hi test",
       "hi test",
       null,
@@ -481,7 +481,7 @@ exports[`cache put cache key array 2`] = `"hi test"`;
 exports[`cache put cache key array 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -500,7 +500,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 2,
-    "keyList": Array [
+    "keyList": [
       "1",
       "2",
       null,
@@ -534,7 +534,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "hi test",
       "hi test",
       null,
@@ -548,7 +548,7 @@ exports[`cache put cache key array 4`] = `"hi test"`;
 exports[`cache put cache key array 5`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -567,7 +567,7 @@ MemoryCache {
     },
     "head": 1,
     "initialFill": 2,
-    "keyList": Array [
+    "keyList": [
       "1",
       "2",
       null,
@@ -601,7 +601,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "hi test",
       "hi test",
       null,
@@ -617,7 +617,7 @@ exports[`cache put cache muliple cachenames 2`] = `"hi test"`;
 exports[`cache put cache muliple cachenames 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -636,7 +636,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
+    "keyList": [
       "test",
       null,
       null,
@@ -669,7 +669,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "hi test",
       null,
       null,
@@ -681,7 +681,7 @@ MemoryCache {
 exports[`cache put cache muliple cachenames 4`] = `
 MemoryCache {
   "name": "hi2",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -700,7 +700,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
+    "keyList": [
       "test",
       null,
       null,
@@ -733,7 +733,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "hi test",
       null,
       null,
@@ -747,7 +747,7 @@ exports[`cache put cache muliple cachenames 5`] = `"hi test2"`;
 exports[`cache put cache muliple cachenames 6`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -766,7 +766,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 2,
-    "keyList": Array [
+    "keyList": [
       "test",
       "test2",
       null,
@@ -800,7 +800,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "hi test",
       "hi test2",
       null,
@@ -812,7 +812,7 @@ MemoryCache {
 exports[`cache put cache muliple cachenames 7`] = `
 MemoryCache {
   "name": "hi2",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -831,7 +831,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 2,
-    "keyList": Array [
+    "keyList": [
       "test",
       "test2",
       null,
@@ -865,7 +865,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "hi test",
       "hi test2",
       null,
@@ -881,7 +881,7 @@ exports[`cache put cache muliple cachenames 9`] = `"hi test"`;
 exports[`cache put cache muliple cachenames 10`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -900,7 +900,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
+    "keyList": [
       "test",
       null,
       null,
@@ -933,7 +933,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "hi test",
       null,
       null,
@@ -945,7 +945,7 @@ MemoryCache {
 exports[`cache put cache muliple cachenames 11`] = `
 MemoryCache {
   "name": "hi2",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -964,7 +964,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
+    "keyList": [
       "test",
       null,
       null,
@@ -997,7 +997,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "hi test",
       null,
       null,
@@ -1011,7 +1011,7 @@ exports[`cache put cache muliple cachenames 12`] = `"hi test2"`;
 exports[`cache put cache muliple cachenames 13`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -1030,7 +1030,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 2,
-    "keyList": Array [
+    "keyList": [
       "test",
       "test2",
       null,
@@ -1064,7 +1064,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "hi test",
       "hi test2",
       null,
@@ -1076,7 +1076,7 @@ MemoryCache {
 exports[`cache put cache muliple cachenames 14`] = `
 MemoryCache {
   "name": "hi2",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -1095,7 +1095,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 2,
-    "keyList": Array [
+    "keyList": [
       "test",
       "test2",
       null,
@@ -1129,7 +1129,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "hi test",
       "hi test2",
       null,
@@ -1147,7 +1147,7 @@ exports[`cache put cache unless + key + condition 3`] = `3`;
 exports[`cache put cache unless + key + condition 4`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -1166,7 +1166,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
+    "keyList": [
       "3",
       null,
       null,
@@ -1199,7 +1199,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       3,
       null,
       null,
@@ -1213,7 +1213,7 @@ exports[`cache put cache unless + key + condition 5`] = `1`;
 exports[`cache put cache unless + key + condition 6`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -1232,7 +1232,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
+    "keyList": [
       "3",
       null,
       null,
@@ -1265,7 +1265,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       3,
       null,
       null,
@@ -1281,7 +1281,7 @@ exports[`cache put cache unless + key 2`] = `2`;
 exports[`cache put cache unless + key 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -1300,7 +1300,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
+    "keyList": [
       "2",
       null,
       null,
@@ -1333,7 +1333,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       2,
       null,
       null,
@@ -1347,7 +1347,7 @@ exports[`cache put cache unless + key 4`] = `1`;
 exports[`cache put cache unless + key 5`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -1366,7 +1366,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
+    "keyList": [
       "2",
       null,
       null,
@@ -1399,7 +1399,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       2,
       null,
       null,
@@ -1415,7 +1415,7 @@ exports[`cache put cache unless 2`] = `2`;
 exports[`cache put cache unless 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -1434,13 +1434,13 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
-      "{\\"name\\":\\"test\\",\\"id\\":2}",
+    "keyList": [
+      "{"name":"test","id":2}",
       null,
       null,
     ],
     "keyMap": Map {
-      "{\\"name\\":\\"test\\",\\"id\\":2}" => 0,
+      "{"name":"test","id":2}" => 0,
     },
     "max": 3,
     "maxEntrySize": 0,
@@ -1467,7 +1467,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       2,
       null,
       null,
@@ -1481,7 +1481,7 @@ exports[`cache put cache unless 4`] = `1`;
 exports[`cache put cache unless 5`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -1500,13 +1500,13 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
-      "{\\"name\\":\\"test\\",\\"id\\":2}",
+    "keyList": [
+      "{"name":"test","id":2}",
       null,
       null,
     ],
     "keyMap": Map {
-      "{\\"name\\":\\"test\\",\\"id\\":2}" => 0,
+      "{"name":"test","id":2}" => 0,
     },
     "max": 3,
     "maxEntrySize": 0,
@@ -1533,7 +1533,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       2,
       null,
       null,
@@ -1549,7 +1549,7 @@ exports[`cache put errors error on condition 2`] = `"hi test test"`;
 exports[`cache put errors error on condition 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -1568,7 +1568,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
+    "keyList": [
       null,
       null,
       null,
@@ -1599,7 +1599,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       null,
       null,
       null,
@@ -1613,7 +1613,7 @@ exports[`cache put errors error on condition 4`] = `"hi test2 test2"`;
 exports[`cache put errors error on condition 5`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -1632,7 +1632,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
+    "keyList": [
       null,
       null,
       null,
@@ -1663,7 +1663,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       null,
       null,
       null,
@@ -1679,7 +1679,7 @@ exports[`cache put errors error on key 2`] = `"hi test test"`;
 exports[`cache put errors error on key 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -1698,7 +1698,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
+    "keyList": [
       null,
       null,
       null,
@@ -1729,7 +1729,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       null,
       null,
       null,
@@ -1743,7 +1743,7 @@ exports[`cache put errors error on key 4`] = `"hi test2 test2"`;
 exports[`cache put errors error on key 5`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -1762,7 +1762,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
+    "keyList": [
       null,
       null,
       null,
@@ -1793,7 +1793,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       null,
       null,
       null,
@@ -1809,7 +1809,7 @@ exports[`cache put simple cache 2`] = `"hi test test"`;
 exports[`cache put simple cache 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -1828,7 +1828,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
+    "keyList": [
       "testtest",
       null,
       null,
@@ -1861,7 +1861,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "hi test test",
       null,
       null,
@@ -1875,7 +1875,7 @@ exports[`cache put simple cache 4`] = `"hi test2 test2"`;
 exports[`cache put simple cache 5`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -1894,7 +1894,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 2,
-    "keyList": Array [
+    "keyList": [
       "testtest",
       "test2test2",
       null,
@@ -1928,7 +1928,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "hi test test",
       "hi test2 test2",
       null,

@@ -7,7 +7,7 @@ exports[`config test bad config bad defaultCache 1`] = `[CachePgkNotInstalledErr
 exports[`config test with config 1`] = `
 SimpleCacheManager {
   "defaultCache": [Function],
-  "defaultOptionsCache": Object {
+  "defaultOptionsCache": {
     "max": 1,
   },
   "dynamic": true,
@@ -33,7 +33,7 @@ exports[`integrations test cache 2`] = `"hi test test"`;
 exports[`integrations test cache 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 5,
   },
   "store": LRUCache {
@@ -54,7 +54,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
+    "keyList": [
       "testtest",
       null,
       null,
@@ -93,7 +93,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "hi test test",
       null,
       null,
@@ -109,7 +109,7 @@ exports[`integrations test cache 4`] = `"hi test2 test2"`;
 exports[`integrations test cache 5`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 5,
   },
   "store": LRUCache {
@@ -130,7 +130,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 2,
-    "keyList": Array [
+    "keyList": [
       "testtest",
       "test2test2",
       null,
@@ -170,7 +170,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "hi test test",
       "hi test2 test2",
       null,

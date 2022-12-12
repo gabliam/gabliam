@@ -5,7 +5,7 @@ exports[`cache 1`] = `"test"`;
 exports[`cache 2`] = `
 MemoryCache {
   "name": "test",
-  "options": Object {
+  "options": {
     "max": 8,
   },
   "store": LRUCache {
@@ -29,7 +29,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
+    "keyList": [
       null,
       null,
       null,
@@ -75,7 +75,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       null,
       null,
       null,
@@ -108,7 +108,7 @@ exports[`cache putIfAbsent 3`] = `null`;
 exports[`cache putIfAbsent 4`] = `
 MemoryCache {
   "name": "test",
-  "options": Object {
+  "options": {
     "max": 8,
   },
   "store": LRUCache {
@@ -133,7 +133,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 3,
-    "keyList": Array [
+    "keyList": [
       "test",
       "test2",
       "test3",
@@ -183,7 +183,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "test",
       "test2",
       "test3",
@@ -210,7 +210,7 @@ exports[`clear 3`] = `null`;
 exports[`clear 4`] = `
 MemoryCache {
   "name": "test",
-  "options": Object {
+  "options": {
     "max": 8,
   },
   "store": LRUCache {
@@ -235,7 +235,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 3,
-    "keyList": Array [
+    "keyList": [
       "test",
       "test2",
       "test3",
@@ -285,7 +285,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "testnew",
       "test2",
       "test3",
@@ -302,7 +302,7 @@ MemoryCache {
 exports[`clear 5`] = `
 MemoryCache {
   "name": "test",
-  "options": Object {
+  "options": {
     "max": 8,
   },
   "store": LRUCache {
@@ -327,7 +327,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
+    "keyList": [
       null,
       null,
       null,
@@ -373,7 +373,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       null,
       null,
       null,
@@ -396,7 +396,7 @@ exports[`evict 3`] = `null`;
 exports[`evict 4`] = `
 MemoryCache {
   "name": "test",
-  "options": Object {
+  "options": {
     "max": 8,
   },
   "store": LRUCache {
@@ -421,7 +421,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 3,
-    "keyList": Array [
+    "keyList": [
       "test",
       "test2",
       "test3",
@@ -471,7 +471,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "testnew",
       "test2",
       "test3",

@@ -7,7 +7,7 @@ exports[`cache group simple cache 2`] = `"hi test test"`;
 exports[`cache group simple cache 3`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -26,7 +26,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
+    "keyList": [
       "testtest",
       null,
       null,
@@ -59,7 +59,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       "hi test test",
       null,
       null,
@@ -73,7 +73,7 @@ exports[`cache group simple cache 4`] = `undefined`;
 exports[`cache group simple cache 5`] = `
 MemoryCache {
   "name": "hi",
-  "options": Object {
+  "options": {
     "max": 3,
   },
   "store": LRUCache {
@@ -93,7 +93,7 @@ MemoryCache {
     },
     "head": 0,
     "initialFill": 1,
-    "keyList": Array [
+    "keyList": [
       null,
       null,
       null,
@@ -124,7 +124,7 @@ MemoryCache {
     "ttlResolution": 1,
     "updateAgeOnGet": false,
     "updateAgeOnHas": false,
-    "valList": Array [
+    "valList": [
       null,
       null,
       null,
