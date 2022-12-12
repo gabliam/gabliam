@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Complex interceptor should call method-level interceptor correctly (GET) 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -20,15 +20,15 @@ Object {
 exports[`Complex interceptor should call method-level interceptor correctly (GET) 2`] = `"ab"`;
 
 exports[`Interceptor inject: should call all interceptor in correct order 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -41,15 +41,15 @@ exports[`Interceptor inject: should call all interceptor in correct order 2`] = 
 exports[`Interceptor inject: should call all interceptor in correct order 3`] = `"cargdeargdearg2"`;
 
 exports[`Interceptor inject: should call controller-level interceptor correctly 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -62,15 +62,15 @@ exports[`Interceptor inject: should call controller-level interceptor correctly 
 exports[`Interceptor inject: should call controller-level interceptor correctly 3`] = `""`;
 
 exports[`Interceptor inject: should call method-level interceptor correctly (ALL) 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -83,15 +83,15 @@ exports[`Interceptor inject: should call method-level interceptor correctly (ALL
 exports[`Interceptor inject: should call method-level interceptor correctly (ALL) 3`] = `"cargdeargdearg2"`;
 
 exports[`Interceptor inject: should call method-level interceptor correctly (DELETE) 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "6",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "DELETE",
   },
   "status": 200,
@@ -104,15 +104,15 @@ exports[`Interceptor inject: should call method-level interceptor correctly (DEL
 exports[`Interceptor inject: should call method-level interceptor correctly (DELETE) 3`] = `"cargdeargdearg2"`;
 
 exports[`Interceptor inject: should call method-level interceptor correctly (GET) 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -125,15 +125,15 @@ exports[`Interceptor inject: should call method-level interceptor correctly (GET
 exports[`Interceptor inject: should call method-level interceptor correctly (GET) 3`] = `"cargdeargdearg2"`;
 
 exports[`Interceptor inject: should call method-level interceptor correctly (HEAD) 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "4",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "HEAD",
   },
   "status": 200,
@@ -146,15 +146,15 @@ exports[`Interceptor inject: should call method-level interceptor correctly (HEA
 exports[`Interceptor inject: should call method-level interceptor correctly (HEAD) 3`] = `"cargdeargdearg2"`;
 
 exports[`Interceptor inject: should call method-level interceptor correctly (PATCH) 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "5",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "PATCH",
   },
   "status": 200,
@@ -167,15 +167,15 @@ exports[`Interceptor inject: should call method-level interceptor correctly (PAT
 exports[`Interceptor inject: should call method-level interceptor correctly (PATCH) 3`] = `"cargdeargdearg2"`;
 
 exports[`Interceptor inject: should call method-level interceptor correctly (POST) 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "4",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "POST",
   },
   "status": 200,
@@ -188,15 +188,15 @@ exports[`Interceptor inject: should call method-level interceptor correctly (POS
 exports[`Interceptor inject: should call method-level interceptor correctly (POST) 3`] = `"cargdeargdearg2"`;
 
 exports[`Interceptor inject: should call method-level interceptor correctly (PUT) 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "PUT",
   },
   "status": 200,
@@ -209,15 +209,15 @@ exports[`Interceptor inject: should call method-level interceptor correctly (PUT
 exports[`Interceptor inject: should call method-level interceptor correctly (PUT) 3`] = `"cargdeargdearg2"`;
 
 exports[`Interceptor: should call all interceptor in correct order 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -228,15 +228,15 @@ Object {
 exports[`Interceptor: should call all interceptor in correct order 2`] = `"abc"`;
 
 exports[`Interceptor: should call controller-level interceptor correctly 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -247,15 +247,15 @@ Object {
 exports[`Interceptor: should call controller-level interceptor correctly 2`] = `"abc"`;
 
 exports[`Interceptor: should call method-level interceptor correctly (ALL) 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -266,15 +266,15 @@ Object {
 exports[`Interceptor: should call method-level interceptor correctly (ALL) 2`] = `"abc"`;
 
 exports[`Interceptor: should call method-level interceptor correctly (DELETE) 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "6",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "DELETE",
   },
   "status": 200,
@@ -285,15 +285,15 @@ Object {
 exports[`Interceptor: should call method-level interceptor correctly (DELETE) 2`] = `"abc"`;
 
 exports[`Interceptor: should call method-level interceptor correctly (GET) 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -304,15 +304,15 @@ Object {
 exports[`Interceptor: should call method-level interceptor correctly (GET) 2`] = `"abc"`;
 
 exports[`Interceptor: should call method-level interceptor correctly (HEAD) 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "4",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "HEAD",
   },
   "status": 200,
@@ -323,15 +323,15 @@ Object {
 exports[`Interceptor: should call method-level interceptor correctly (HEAD) 2`] = `"abc"`;
 
 exports[`Interceptor: should call method-level interceptor correctly (PATCH) 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "5",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "PATCH",
   },
   "status": 200,
@@ -342,15 +342,15 @@ Object {
 exports[`Interceptor: should call method-level interceptor correctly (PATCH) 2`] = `"abc"`;
 
 exports[`Interceptor: should call method-level interceptor correctly (POST) 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "4",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "POST",
   },
   "status": 200,
@@ -361,15 +361,15 @@ Object {
 exports[`Interceptor: should call method-level interceptor correctly (POST) 2`] = `"abc"`;
 
 exports[`Interceptor: should call method-level interceptor correctly (PUT) 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "PUT",
   },
   "status": 200,
@@ -380,15 +380,15 @@ Object {
 exports[`Interceptor: should call method-level interceptor correctly (PUT) 2`] = `"abc"`;
 
 exports[`Interceptor: should call server-level interceptor correctly 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -399,15 +399,15 @@ Object {
 exports[`Interceptor: should call server-level interceptor correctly 2`] = `"abc"`;
 
 exports[`Interceptor: should compose controller- and method-level interceptor 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -418,15 +418,15 @@ Object {
 exports[`Interceptor: should compose controller- and method-level interceptor 2`] = `"ab"`;
 
 exports[`Interceptor: should resolve controller-level interceptor 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -437,15 +437,15 @@ Object {
 exports[`Interceptor: should resolve controller-level interceptor 2`] = `"ab"`;
 
 exports[`Interceptor: should resolve method-level interceptor 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,

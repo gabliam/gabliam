@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Parameters: bug parameter when value is number and passed 0 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "1",
     "content-type": "application/json; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -18,15 +18,15 @@ Object {
 `;
 
 exports[`Parameters: should bind a method parameter to a cookie 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {
+    "headers": {
       "cookie": "cookie=hey",
     },
     "method": "GET",
@@ -37,15 +37,15 @@ Object {
 `;
 
 exports[`Parameters: should bind a method parameter to a query parameter 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "7",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -54,32 +54,32 @@ Object {
 `;
 
 exports[`Parameters: should bind a method parameter to a query parameter and cast to number 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "13",
     "content-type": "application/json; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
-  "text": "[\\"number\\",12]",
+  "text": "["number",12]",
 }
 `;
 
 exports[`Parameters: should bind a method parameter to the Request object 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "4",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -88,15 +88,15 @@ Object {
 `;
 
 exports[`Parameters: should bind a method parameter to the ctx object 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -105,15 +105,15 @@ Object {
 `;
 
 exports[`Parameters: should bind a method parameter to the next function 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -122,36 +122,36 @@ Object {
 `;
 
 exports[`Parameters: should bind a method parameter to the request body 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "13",
     "content-type": "application/json; charset=utf-8",
   },
-  "req": Object {
-    "data": Object {
+  "req": {
+    "data": {
       "foo": "bar",
     },
-    "headers": Object {
+    "headers": {
       "content-type": "application/json",
     },
     "method": "POST",
   },
   "status": 200,
-  "text": "{\\"foo\\":\\"bar\\"}",
+  "text": "{"foo":"bar"}",
 }
 `;
 
 exports[`Parameters: should bind a method parameter to the request headers 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "11",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {
+    "headers": {
       "testhead": "fooTestHead",
     },
     "method": "GET",
@@ -162,15 +162,15 @@ Object {
 `;
 
 exports[`Parameters: should bind a method parameter to the response object 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -179,15 +179,15 @@ Object {
 `;
 
 exports[`Parameters: should bind a method parameter to the url parameter of the web request 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "3",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -196,18 +196,18 @@ Object {
 `;
 
 exports[`Parameters: should bind a method parameter to the url parameter of the web request and cast to number 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "13",
     "content-type": "application/json; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
-  "text": "[\\"number\\",42]",
+  "text": "["number",42]",
 }
 `;

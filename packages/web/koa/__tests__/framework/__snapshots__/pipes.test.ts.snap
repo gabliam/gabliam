@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`pipes should call all pipe in correct order 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "6",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -18,15 +18,15 @@ Object {
 `;
 
 exports[`pipes should call controller-level Pipe correctly 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "6",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -35,15 +35,15 @@ Object {
 `;
 
 exports[`pipes should call method-level Pipe correctly 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "6",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -52,15 +52,15 @@ Object {
 `;
 
 exports[`pipes should call server-level pipe correctly 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "6",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -69,15 +69,15 @@ Object {
 `;
 
 exports[`pipes should compose controller- and method-level pipe 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "5",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -86,15 +86,15 @@ Object {
 `;
 
 exports[`pipes should compose controller- and method-level pipe and can use an instance 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "9",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -103,15 +103,15 @@ Object {
 `;
 
 exports[`pipes should resolve controller-level pipe 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "5",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
@@ -120,15 +120,15 @@ Object {
 `;
 
 exports[`pipes should resolve method-level pipe 1`] = `
-Object {
-  "header": Object {
+{
+  "header": {
     "connection": "close",
     "content-length": "5",
     "content-type": "text/plain; charset=utf-8",
   },
-  "req": Object {
+  "req": {
     "data": undefined,
-    "headers": Object {},
+    "headers": {},
     "method": "GET",
   },
   "status": 200,
