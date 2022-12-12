@@ -42,7 +42,7 @@ export class ValidatePipe implements Pipe {
     return value;
   }
 
-  toEmptyIfNil<T = any, R = any>(value: T): R | {} {
+  toEmptyIfNil<T = any>(value: T): T | {} {
     return isNil(value) ? {} : value;
   }
 
