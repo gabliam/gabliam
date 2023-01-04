@@ -38,7 +38,7 @@ export const parseParams = (): ReleaseParams => {
   let showHelp = false;
   let params: ReleaseParams;
   try {
-    params = <ReleaseParams>commandLineArgs(paramDefinitions);
+    params = commandLineArgs(paramDefinitions) as ReleaseParams;
 
     if (params.canary) {
       params.tag = 'canary';

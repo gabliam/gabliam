@@ -1,4 +1,4 @@
-import { describeRef } from './describe-ref';
+import { describeRef } from './describe-ref.mjs';
 
 export const verifyWorkingTreeClean = async () => {
   const { isDirty } = await describeRef();

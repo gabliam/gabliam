@@ -1,4 +1,4 @@
-import * as inquirer from 'inquirer';
+import inquirer, { CheckboxQuestion, Question } from 'inquirer';
 
 type RequireOnlyOne<T, Keys extends keyof T = keyof T> = Pick<
   T,
@@ -6,14 +6,14 @@ type RequireOnlyOne<T, Keys extends keyof T = keyof T> = Pick<
 > &
   { [K in Keys]-?: Required<Pick<T, K>> }[Keys];
 
-export const select = async <T = any>(
+export const select = async <T extends unknown>(
   message: string,
   {
     choices,
     validate,
     filter,
   }: RequireOnlyOne<
-    Pick<inquirer.CheckboxQuestion, 'choices' | 'validate' | 'filter'>,
+    Pick<CheckboxQuestion, 'choices' | 'validate' | 'filter'>,
     'choices'
   >
 ): Promise<T> => {
@@ -23,7 +23,7 @@ export const select = async <T = any>(
       name: 'prompt',
       message,
       choices,
-      pageSize: (<any>choices).length,
+      pageSize: (choices as any).length,
       filter,
       validate,
     },
@@ -31,9 +31,9 @@ export const select = async <T = any>(
   return prompt;
 };
 
-export const input = async <T = any>(
+export const input = async <T extends unknown>(
   message: string,
-  { validate, filter }: Pick<inquirer.Question, 'validate' | 'filter'> = {}
+  { validate, filter }: Pick<Question, 'validate' | 'filter'> = {}
 ): Promise<T> => {
   const { prompt } = await inquirer.prompt<{ prompt: T }>([
     {
@@ -47,7 +47,7 @@ export const input = async <T = any>(
   return prompt;
 };
 
-export const confirm = async (message: string) => {
+export const confirm = async (message: string, aborting = true) => {
   const { prompt } = await inquirer.prompt<{ prompt: boolean }>([
     {
       type: 'expand',
@@ -60,5 +60,10 @@ export const confirm = async (message: string) => {
       ],
     },
   ]);
+  if (aborting && !prompt) {
+    console.log('Aborting');
+    process.exit(1);
+  }
+
   return prompt;
 };

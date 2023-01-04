@@ -1,8 +1,8 @@
-import execa from 'execa';
+import { execa } from 'execa';
 import ora from 'ora';
 import path from 'path';
-import { APP_DIR, DIST_DIR, monoRepo } from '../constant';
-import { ReleaseParams } from './parse-params-release';
+import { APP_DIR, DIST_DIR, monoRepo } from '../constant.mjs';
+import { ReleaseParams } from './parse-params-release.mjs';
 
 export const publish = async (
   spinner: ora.Ora,

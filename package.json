@@ -1,11 +1,10 @@
 {
   "name": "gabliam-sources",
-  "version": "8.11.1",
+  "version": "0.0.0-BUILD-VERSION",
   "private": true,
   "license": "MIT",
   "scripts": {
-    "bootstrap": "yarn --cwd \"scripts/build\" && yarn --cwd \"scripts/release\"",
-    "build": "ts-node ./scripts/build/build.ts",
+    "build": "npx gabliam-build",
     "changelog": "conventional-changelog -i  CHANGELOG.md -p angular  -s -r 0",
     "coverage": "cat ./coverage/lcov.info | coveralls",
     "example:express:graphql": "lerna run --scope graphql-sample start --stream",
@@ -18,7 +17,8 @@
     "release": "ts-node ./scripts/release/release.ts",
     "release:canary": "ts-node ./scripts/release/release.ts --canary",
     "test": "jest --runInBand",
-    "test:ci": "jest --runInBand --coverage"
+    "test:ci": "jest --runInBand --coverage",
+    "postinstall": "husky install"
   },
   "devDependencies": {
     "@types/jest": "^29.2.4",
@@ -71,11 +71,6 @@
   ],
   "engines": {
     "node": ">=8.9.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "packageManager": "yarn@3.3.0"
 }

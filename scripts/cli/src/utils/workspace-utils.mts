@@ -1,8 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 
-const findPkg = require('find-pkg');
-const globby = require('globby');
+import { sync } from 'find-pkg';
+import { globbySync } from 'globby';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
 export interface MonorepoConfigDictionnary {
   [k: string]: MonorepoConfig;
@@ -16,7 +18,7 @@ export interface MonorepoConfig {
 const findPkgs = (
   rootPath: string,
   globPatterns: string[],
-  appDir: string
+  appDir: string,
 ): MonorepoConfigDictionnary => {
   if (!globPatterns) {
     return {};
@@ -28,11 +30,11 @@ const findPkgs = (
   };
   return globPatterns
     .reduce(
-      (pkgs, pattern) =>
-        pkgs.concat(globby.sync(path.join(pattern, 'package.json'), globOpts)),
-      []
+      (pkgs: string[], pattern) =>
+        pkgs.concat(globbySync(path.join(pattern, 'package.json'), globOpts)),
+      [],
     )
-    .filter(f => fs.realpathSync(f) !== appDir)
+    .filter((f) => fs.realpathSync(f) !== appDir)
     .reduce<any>((pkgs, f) => {
       const pkg = require(f);
       pkgs[pkg.name] = {
@@ -44,9 +46,9 @@ const findPkgs = (
 };
 
 export const findMonorepoConfig = (
-  appDir: string
+  appDir: string,
 ): MonorepoConfigDictionnary => {
-  const monoPkgPath = findPkg.sync(appDir);
+  const monoPkgPath = sync(appDir);
   const monoPkg = monoPkgPath && require(monoPkgPath);
   const workspaces = monoPkg && monoPkg.workspaces;
   const patterns = (workspaces && workspaces.packages) || workspaces;

@@ -1,10 +1,10 @@
-const findPkg = require('find-pkg');
-import execa from 'execa';
+import { execa } from 'execa';
+import { sync } from 'find-pkg';
 import fs from 'fs-extra';
 import semver from 'semver';
-import { APP_DIR, monoRepo } from '../constant';
+import { APP_DIR, monoRepo } from '../constant.mjs';
 
-export const getRootPkgPath = () => findPkg.sync(APP_DIR);
+export const getRootPkgPath = () => sync(APP_DIR) || '';
 
 export const getInfoToNpm = async (tag: string) => {
   const { stdout } = await execa('npm', 'info @gabliam/core --json'.split(' '));

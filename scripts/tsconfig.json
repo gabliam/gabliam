@@ -2,8 +2,7 @@
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": {
-      "@gabliam-scripts/*": ["./*"]
-    }
+    "module": "ESNext",
+    "moduleResolution": "node"
   }
 }

@@ -1,20 +1,20 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-continue */
-import execa from 'execa';
+import { execa } from 'execa';
 import fs from 'fs-extra';
 import Graph from 'graph-data-structure';
 import _ from 'lodash';
-import ora from 'ora';
+import { Ora } from 'ora';
 import path from 'path';
 import rimraf from 'rimraf';
 import { promisify } from 'util';
-import { APP_DIR, DIST_DIR, monoRepo } from '../constant';
-import { updatePkg, updateRootPkg } from './pkg-utils';
+import { APP_DIR, DIST_DIR, monoRepo } from '../constant.mjs';
+import { updatePkg, updateRootPkg } from './pkg-utils.mjs';
 
 const rimrafAsync = promisify(rimraf);
 
-export const build = async (spinner: ora.Ora, newVersion: string) => {
+export const build = async (spinner: Ora, newVersion: string) => {
   const graph = Graph();
 
   for (const [pkgName, config] of Object.entries(monoRepo)) {
@@ -31,7 +31,7 @@ export const build = async (spinner: ora.Ora, newVersion: string) => {
     }
   }
 
-  const pkgs = graph.topologicalSort();
+  const pkgs = (graph as any).topologicalSort();
   const licensePath = path.resolve(APP_DIR, 'LICENSE');
 
   for (const pkgName of pkgs) {
