@@ -8,7 +8,7 @@ import {
   Next,
 } from '@gabliam/web-core';
 import { WebPluginTest } from '@gabliam/web-core/src/testing';
-import sinon from 'sinon';
+import { spy } from 'sinon';
 import KoaPlugin, { toInterceptor } from '../../src';
 
 let appTest: WebPluginTest;
@@ -40,8 +40,8 @@ describe('globalPipes', () => {
     }
   }
 
-  const spyA = sinon.spy(A.prototype, 'transform');
-  const spyB = sinon.spy(B.prototype, 'transform');
+  const spyA = spy(A.prototype, 'transform');
+  const spyB = spy(B.prototype, 'transform');
 
   beforeEach(() => {
     spyA.resetHistory();
@@ -92,9 +92,9 @@ describe('GlobalInterceptor', () => {
     }
   }
 
-  const spyA = sinon.spy(A.prototype, 'intercept');
-  const spyB = sinon.spy(B.prototype, 'intercept');
-  const spyC = sinon.spy(C.prototype, 'intercept');
+  const spyA = spy(A.prototype, 'intercept');
+  const spyB = spy(B.prototype, 'intercept');
+  const spyC = spy(C.prototype, 'intercept');
 
   beforeEach(() => {
     result = '';

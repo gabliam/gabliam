@@ -2,11 +2,11 @@ import { Config, Gabliam } from '@gabliam/core';
 import { GabliamTest } from '@gabliam/core/src/testing';
 import ExpressPlugin from '@gabliam/express';
 import path from 'path';
-import sinon from 'sinon';
+import { spy } from 'sinon';
 import { GraphqlPlugin } from '../src/graphql-plugin';
 import { HeroResolver } from './fixtures/resolvers/hero-resolver';
 
-const build = sinon.spy(GraphqlPlugin.prototype, 'build');
+const build = spy(GraphqlPlugin.prototype, 'build');
 let gab: Gabliam;
 
 describe('with config', () => {

@@ -9,7 +9,7 @@ import {
   WebConfiguration,
 } from '@gabliam/web-core';
 import { WebPluginTest } from '@gabliam/web-core/src/testing';
-import sinon from 'sinon';
+import { spy } from 'sinon';
 import KoaPlugin from '../../src';
 
 let appTest: WebPluginTest;
@@ -44,9 +44,9 @@ describe('pipes', () => {
     }
   }
 
-  const spyA = sinon.spy(A.prototype, 'transform');
-  const spyB = sinon.spy(B.prototype, 'transform');
-  const spyC = sinon.spy(C.prototype, 'transform');
+  const spyA = spy(A.prototype, 'transform');
+  const spyB = spy(B.prototype, 'transform');
+  const spyC = spy(C.prototype, 'transform');
 
   beforeEach(() => {
     spyA.resetHistory();

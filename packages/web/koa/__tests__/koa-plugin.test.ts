@@ -1,15 +1,15 @@
 import { Config, Gabliam } from '@gabliam/core';
 import { GabliamTest } from '@gabliam/core/src/testing';
 import path from 'path';
-import sinon from 'sinon';
+import { spy } from 'sinon';
 import { KoaPlugin } from '../src/koa-plugin';
 
 describe('test plugin', () => {
-  const bind = sinon.spy(KoaPlugin.prototype, 'bind');
-  const config = sinon.spy(KoaPlugin.prototype, 'config');
-  const start = sinon.spy(KoaPlugin.prototype, 'start');
-  const stop = sinon.spy(KoaPlugin.prototype, 'stop');
-  const destroy = sinon.spy(KoaPlugin.prototype, 'destroy');
+  const bind = spy(KoaPlugin.prototype, 'bind');
+  const config = spy(KoaPlugin.prototype, 'config');
+  const start = spy(KoaPlugin.prototype, 'start');
+  const stop = spy(KoaPlugin.prototype, 'stop');
+  const destroy = spy(KoaPlugin.prototype, 'destroy');
   let gab: Gabliam;
 
   describe('with config', () => {

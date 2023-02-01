@@ -23,7 +23,7 @@ import {
   WebConfig,
 } from '@gabliam/web-core';
 import { WebPluginTest } from '@gabliam/web-core/src/testing';
-import sinon from 'sinon';
+import { spy } from 'sinon';
 
 let appTest: WebPluginTest;
 
@@ -46,7 +46,7 @@ describe('Complex interceptor', () => {
     }
   }
 
-  const spyA = sinon.spy(A.prototype, 'intercept');
+  const spyA = spy(A.prototype, 'intercept');
   beforeEach(() => {
     result = '';
     spyA.resetHistory();
@@ -100,9 +100,9 @@ describe('Interceptor:', () => {
     }
   }
 
-  const spyA = sinon.spy(A.prototype, 'intercept');
-  const spyB = sinon.spy(B.prototype, 'intercept');
-  const spyC = sinon.spy(C.prototype, 'intercept');
+  const spyA = spy(A.prototype, 'intercept');
+  const spyB = spy(B.prototype, 'intercept');
+  const spyC = spy(C.prototype, 'intercept');
 
   beforeEach(() => {
     result = '';

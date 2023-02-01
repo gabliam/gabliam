@@ -16,7 +16,7 @@ import {
   WebConfig,
 } from '@gabliam/web-core';
 import { WebPluginTest } from '@gabliam/web-core/src/testing';
-import sinon from 'sinon';
+import { spy } from 'sinon';
 import ExpressPlugin, { express as e } from '../../src';
 
 let appTest: WebPluginTest;
@@ -209,13 +209,13 @@ describe('Parameters:', () => {
   });
 
   test('should bind a method parameter to the next function', async () => {
-    const spy = sinon.spy();
+    const sinonSpy = spy();
 
     @Controller('/')
     class TestController {
       @Get('/')
       public getTest(@Next() nextFunc: any) {
-        spy();
+        sinonSpy();
         return nextFunc();
       }
 
@@ -228,7 +228,7 @@ describe('Parameters:', () => {
     appTest.addClass(TestController);
     await appTest.buildAndStart();
     const response = await appTest.supertest().get('/').expect(200);
-    expect(spy.calledOnce).toBe(true);
+    expect(sinonSpy.calledOnce).toBe(true);
     expect(response).toMatchSnapshot();
   });
 });
