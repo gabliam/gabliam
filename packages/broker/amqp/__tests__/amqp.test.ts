@@ -1,5 +1,5 @@
 import { Gabliam } from '@gabliam/core';
-import sinon from 'sinon';
+import { spy } from 'sinon';
 import { AmqpConnection } from '../src/amqp-connection';
 import {
   AmqpConnectionManager,
@@ -102,7 +102,7 @@ describe('Listener test', () => {
         }
       }
 
-      const spy = sinon.spy(ControllerTest.prototype, 'listener');
+      const sinonSpy = spy(ControllerTest.prototype, 'listener');
 
       appTest.addConf('application.amqp', config);
       appTest.addClass(ControllerTest);
@@ -113,9 +113,9 @@ describe('Listener test', () => {
       connection.sendToQueue('listenerTest', testCase.content);
       const resp = await d.promise;
       expect(resp).toMatchSnapshot();
-      expect(spy.callCount).toMatchSnapshot();
-      expect(spy.args).toMatchSnapshot();
-      spy.resetHistory();
+      expect(sinonSpy.callCount).toMatchSnapshot();
+      expect(sinonSpy.args).toMatchSnapshot();
+      sinonSpy.resetHistory();
     });
   });
 });
@@ -148,7 +148,7 @@ describe('Consumer test', () => {
         }
       }
 
-      const spy = sinon.spy(ControllerTest.prototype, 'consumer');
+      const sinonSpy = spy(ControllerTest.prototype, 'consumer');
 
       appTest.addConf('application.amqp', config);
       appTest.addClass(ControllerTest);
@@ -161,9 +161,9 @@ describe('Consumer test', () => {
         testCase.content,
       );
       expect(resp).toMatchSnapshot();
-      expect(spy.callCount).toMatchSnapshot();
-      expect(spy.args).toMatchSnapshot();
-      spy.resetHistory();
+      expect(sinonSpy.callCount).toMatchSnapshot();
+      expect(sinonSpy.args).toMatchSnapshot();
+      sinonSpy.resetHistory();
     });
   });
 });
@@ -177,7 +177,7 @@ test('consumer throw error', async () => {
     }
   }
 
-  const spy = sinon.spy(ControllerTest.prototype, 'consumer');
+  const sinonSpy = spy(ControllerTest.prototype, 'consumer');
 
   appTest.addConf('application.amqp', config);
   appTest.addClass(ControllerTest);
@@ -187,9 +187,9 @@ test('consumer throw error', async () => {
   expect(resp).toMatchSnapshot<any>({
     stack: expect.any(String),
   });
-  expect(spy.callCount).toMatchSnapshot();
-  expect(spy.args).toMatchSnapshot();
-  spy.resetHistory();
+  expect(sinonSpy.callCount).toMatchSnapshot();
+  expect(sinonSpy.args).toMatchSnapshot();
+  sinonSpy.resetHistory();
 });
 
 test('sendAndReceive timeout', async () => {
@@ -224,7 +224,7 @@ test('start 2 times', async () => {
     }
   }
 
-  const spy = sinon.spy(ControllerTest.prototype, 'consumer');
+  const sinonSpy = spy(ControllerTest.prototype, 'consumer');
 
   appTest.addConf('application.amqp', config);
   appTest.addClass(ControllerTest);
@@ -236,9 +236,9 @@ test('start 2 times', async () => {
     'testCase.content',
   );
   expect(resp).toMatchSnapshot();
-  expect(spy.callCount).toMatchSnapshot();
-  expect(spy.args).toMatchSnapshot();
-  spy.resetHistory();
+  expect(sinonSpy.callCount).toMatchSnapshot();
+  expect(sinonSpy.args).toMatchSnapshot();
+  sinonSpy.resetHistory();
 });
 
 test('must fail when getConnection not found', async () => {
@@ -269,7 +269,7 @@ test('with one connection with name and entity without cunit', async () => {
     }
   }
 
-  const spy = sinon.spy(ControllerTest.prototype, 'consumer');
+  const sinonSpy = spy(ControllerTest.prototype, 'consumer');
 
   appTest.addConf('application.amqp', configWithName);
   appTest.addClass(ControllerTest);
@@ -281,9 +281,9 @@ test('with one connection with name and entity without cunit', async () => {
     'testCase.content',
   );
   expect(resp).toMatchSnapshot();
-  expect(spy.callCount).toMatchSnapshot();
-  expect(spy.args).toMatchSnapshot();
-  spy.resetHistory();
+  expect(sinonSpy.callCount).toMatchSnapshot();
+  expect(sinonSpy.args).toMatchSnapshot();
+  sinonSpy.resetHistory();
 });
 
 test('with config 2 database', async () => {

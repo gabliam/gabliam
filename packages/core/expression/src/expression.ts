@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { Expression as AstExpression } from 'estree';
+import type { Expression as AstExpression } from 'estree';
 import _ from 'lodash';
 import { IS_STRING, Parser } from './parser';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -10,7 +10,7 @@ export class Expression {
 
   constructor(
     ast: AstExpression | null,
-    private context: object = {},
+    private context: object,
     private input: string,
   ) {
     if (ast) {

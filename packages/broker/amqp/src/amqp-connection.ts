@@ -1,8 +1,9 @@
 import { reflection, toPromise, ValueExtractor } from '@gabliam/core';
 import { log4js } from '@gabliam/log4js';
-import amqp, {
+import {
   AmqpConnectionManager,
   ChannelWrapper,
+  connect,
 } from 'amqp-connection-manager';
 import { ConfirmChannel, ConsumeMessage, Message } from 'amqplib';
 import PromiseB from 'bluebird';
@@ -73,7 +74,7 @@ export class AmqpConnection {
     }
 
     this.state = ConnectionState.starting;
-    this.connection = amqp.connect([this.url]);
+    this.connection = connect([this.url]);
     this.channel = this.connection.createChannel({
       setup: async (channel: ConfirmChannel) => {
         for (const queue of this.queues) {

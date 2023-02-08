@@ -1,5 +1,5 @@
 import path from 'path';
-import sinon from 'sinon';
+import { spy } from 'sinon';
 import {
   APP_CONFIG,
   Bean,
@@ -82,12 +82,12 @@ describe('test plugin', () => {
     }
   }
 
-  const build = sinon.spy(PluginTest.prototype, 'build');
-  const bind = sinon.spy(PluginTest.prototype, 'bind');
-  const config = sinon.spy(PluginTest.prototype, 'config');
-  const start = sinon.spy(PluginTest.prototype, 'start');
-  const stop = sinon.spy(PluginTest.prototype, 'stop');
-  const destroy = sinon.spy(PluginTest.prototype, 'destroy');
+  const build = spy(PluginTest.prototype, 'build');
+  const bind = spy(PluginTest.prototype, 'bind');
+  const config = spy(PluginTest.prototype, 'config');
+  const start = spy(PluginTest.prototype, 'start');
+  const stop = spy(PluginTest.prototype, 'stop');
+  const destroy = spy(PluginTest.prototype, 'destroy');
   let gab: Gabliam;
 
   describe('with config', () => {

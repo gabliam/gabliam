@@ -1,15 +1,15 @@
 import { Config, Gabliam } from '@gabliam/core';
 import { GabliamTest } from '@gabliam/core/src/testing';
 import path from 'path';
-import sinon from 'sinon';
+import { spy } from 'sinon';
 import { ExpressPlugin } from '../src/express-plugin';
 
 describe('test plugin', () => {
-  const bind = sinon.spy(ExpressPlugin.prototype, 'bind');
-  const config = sinon.spy(ExpressPlugin.prototype, 'config');
-  const start = sinon.spy(ExpressPlugin.prototype, 'start');
-  const stop = sinon.spy(ExpressPlugin.prototype, 'stop');
-  const destroy = sinon.spy(ExpressPlugin.prototype, 'destroy');
+  const bind = spy(ExpressPlugin.prototype, 'bind');
+  const config = spy(ExpressPlugin.prototype, 'config');
+  const start = spy(ExpressPlugin.prototype, 'start');
+  const stop = spy(ExpressPlugin.prototype, 'stop');
+  const destroy = spy(ExpressPlugin.prototype, 'destroy');
   let gab: Gabliam;
 
   describe('with config', () => {

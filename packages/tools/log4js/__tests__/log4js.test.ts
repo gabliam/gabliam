@@ -1,11 +1,11 @@
 import { Service } from '@gabliam/core';
 import path from 'path';
-import sinon from 'sinon';
+import { spy } from 'sinon';
 import { log4js } from '../src/index';
 import { Log4jsPluginTest } from './log4js-plugin-test';
 
 let appTest: Log4jsPluginTest;
-const p = sinon.spy(process.stdout, 'write');
+const p = spy(process.stdout, 'write');
 
 describe('without config folder', () => {
   beforeEach(async () => {

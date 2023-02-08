@@ -1,15 +1,15 @@
 import path from 'path';
-import sinon from 'sinon';
+import { spy } from 'sinon';
 import { Gabliam } from '../src';
 import { Test } from './fixtures/lifecycle/test';
 import { Test2 } from './fixtures/lifecycle/test2';
 
 test('@preDestroy test', async () => {
   // Test with @Service
-  const testPreDestroy = sinon.spy(Test.prototype, 'testPreDestroy');
+  const testPreDestroy = spy(Test.prototype, 'testPreDestroy');
 
   // Test with @Bean
-  const testPreDestroy2 = sinon.spy(Test2.prototype, 'testPreDestroy2');
+  const testPreDestroy2 = spy(Test2.prototype, 'testPreDestroy2');
 
   const g = new Gabliam({
     scanPath: path.resolve(__dirname, './fixtures/lifecycle'),

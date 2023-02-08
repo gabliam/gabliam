@@ -1,5 +1,5 @@
 import * as esprima from 'esprima';
-import { ExpressionStatement } from 'estree';
+import type { ExpressionStatement } from 'estree';
 import _ from 'lodash';
 import { Expression } from './expression';
 

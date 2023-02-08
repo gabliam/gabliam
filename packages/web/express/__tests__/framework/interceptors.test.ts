@@ -27,7 +27,7 @@ import {
   WebConfiguration,
 } from '@gabliam/web-core';
 import { WebPluginTest } from '@gabliam/web-core/src/testing';
-import sinon from 'sinon';
+import { spy } from 'sinon';
 import ExpressPlugin, {
   express as e,
   ExpressConverter,
@@ -56,7 +56,7 @@ describe('Complex interceptor', () => {
     }
   }
 
-  const spyA = sinon.spy(A.prototype, 'intercept');
+  const spyA = spy(A.prototype, 'intercept');
   beforeEach(() => {
     result = '';
     spyA.resetHistory();
@@ -74,10 +74,7 @@ describe('Complex interceptor', () => {
     appTest.addClass(TestController);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .get('/')
-      .expect(200);
+    const response = await appTest.supertest().get('/').expect(200);
 
     expect(spyA.calledOnce).toBe(true);
     expect(response).toMatchSnapshot();
@@ -108,9 +105,9 @@ describe('Interceptors:', () => {
       result += 'c';
     }
   }
-  const spyA = sinon.spy(A.prototype, 'intercept');
-  const spyB = sinon.spy(B.prototype, 'intercept');
-  const spyC = sinon.spy(C.prototype, 'intercept');
+  const spyA = spy(A.prototype, 'intercept');
+  const spyB = spy(B.prototype, 'intercept');
+  const spyC = spy(C.prototype, 'intercept');
 
   beforeEach(() => {
     result = '';
@@ -134,10 +131,7 @@ describe('Interceptors:', () => {
     appTest.addClass(TestController);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .get('/')
-      .expect(200);
+    const response = await appTest.supertest().get('/').expect(200);
 
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
@@ -159,10 +153,7 @@ describe('Interceptors:', () => {
     appTest.addClass(TestController);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .post('/')
-      .expect(200);
+    const response = await appTest.supertest().post('/').expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);
@@ -182,10 +173,7 @@ describe('Interceptors:', () => {
     appTest.addClass(TestController);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .put('/')
-      .expect(200);
+    const response = await appTest.supertest().put('/').expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);
@@ -206,10 +194,7 @@ describe('Interceptors:', () => {
     appTest.addClass(TestController);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .patch('/')
-      .expect(200);
+    const response = await appTest.supertest().patch('/').expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);
@@ -229,10 +214,7 @@ describe('Interceptors:', () => {
     appTest.addClass(TestController);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .head('/')
-      .expect(200);
+    const response = await appTest.supertest().head('/').expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);
@@ -252,10 +234,7 @@ describe('Interceptors:', () => {
     appTest.addClass(TestController);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .delete('/')
-      .expect(200);
+    const response = await appTest.supertest().delete('/').expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);
@@ -275,10 +254,7 @@ describe('Interceptors:', () => {
     appTest.addClass(TestController);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .get('/')
-      .expect(200);
+    const response = await appTest.supertest().get('/').expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);
@@ -301,10 +277,7 @@ describe('Interceptors:', () => {
     appTest.addClass(TestController);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .get('/')
-      .expect(200);
+    const response = await appTest.supertest().get('/').expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);
@@ -336,10 +309,7 @@ describe('Interceptors:', () => {
     appTest.addClass(ServerConfig);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .get('/')
-      .expect(200);
+    const response = await appTest.supertest().get('/').expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);
     expect(response).toMatchSnapshot();
@@ -372,10 +342,7 @@ describe('Interceptors:', () => {
     appTest.addClass(ServerConfig);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .get('/')
-      .expect(200);
+    const response = await appTest.supertest().get('/').expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(spyC.calledOnce).toBe(true);
@@ -399,20 +366,11 @@ describe('Interceptors:', () => {
     }
 
     appTest.addClass(TestController);
-    appTest.gab.container
-      .bind(symbolId)
-      .to(A)
-      .inSingletonScope();
-    appTest.gab.container
-      .bind(strId)
-      .to(B)
-      .inSingletonScope();
+    appTest.gab.container.bind(symbolId).to(A).inSingletonScope();
+    appTest.gab.container.bind(strId).to(B).inSingletonScope();
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .get('/')
-      .expect(200);
+    const response = await appTest.supertest().get('/').expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(response).toMatchSnapshot();
@@ -433,20 +391,11 @@ describe('Interceptors:', () => {
     }
 
     appTest.addClass(TestController);
-    appTest.gab.container
-      .bind(symbolId)
-      .to(A)
-      .inSingletonScope();
-    appTest.gab.container
-      .bind(strId)
-      .to(B)
-      .inSingletonScope();
+    appTest.gab.container.bind(symbolId).to(A).inSingletonScope();
+    appTest.gab.container.bind(strId).to(B).inSingletonScope();
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .get('/')
-      .expect(200);
+    const response = await appTest.supertest().get('/').expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(response).toMatchSnapshot();
@@ -470,20 +419,11 @@ describe('Interceptors:', () => {
     }
 
     appTest.addClass(TestController);
-    appTest.gab.container
-      .bind(symbolId)
-      .to(A)
-      .inSingletonScope();
-    appTest.gab.container
-      .bind(strId)
-      .to(B)
-      .inSingletonScope();
+    appTest.gab.container.bind(symbolId).to(A).inSingletonScope();
+    appTest.gab.container.bind(strId).to(B).inSingletonScope();
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .get('/')
-      .expect(200);
+    const response = await appTest.supertest().get('/').expect(200);
     expect(spyA.calledOnce).toBe(true);
     expect(spyB.calledOnce).toBe(true);
     expect(response).toMatchSnapshot();
@@ -536,11 +476,7 @@ describe('Middleware inject:', () => {
   beforeEach(() => {
     result = '';
     args = '';
-    appTest
-      .addClass(A)
-      .addClass(B)
-      .addClass(C)
-      .addClass(D);
+    appTest.addClass(A).addClass(B).addClass(C).addClass(D);
   });
 
   test('should call method-level middleware correctly (GET)', async () => {
@@ -558,10 +494,7 @@ describe('Middleware inject:', () => {
     appTest.addClass(TestController);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .get('/')
-      .expect(200);
+    const response = await appTest.supertest().get('/').expect(200);
     expect(response).toMatchSnapshot();
     expect(result).toMatchSnapshot();
     expect(args).toMatchSnapshot();
@@ -582,10 +515,7 @@ describe('Middleware inject:', () => {
     appTest.addClass(TestController);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .post('/')
-      .expect(200);
+    const response = await appTest.supertest().post('/').expect(200);
     expect(response).toMatchSnapshot();
     expect(result).toMatchSnapshot();
     expect(args).toMatchSnapshot();
@@ -606,10 +536,7 @@ describe('Middleware inject:', () => {
     appTest.addClass(TestController);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .put('/')
-      .expect(200);
+    const response = await appTest.supertest().put('/').expect(200);
     expect(response).toMatchSnapshot();
     expect(result).toMatchSnapshot();
     expect(args).toMatchSnapshot();
@@ -630,10 +557,7 @@ describe('Middleware inject:', () => {
     appTest.addClass(TestController);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .patch('/')
-      .expect(200);
+    const response = await appTest.supertest().patch('/').expect(200);
     expect(response).toMatchSnapshot();
     expect(result).toMatchSnapshot();
     expect(args).toMatchSnapshot();
@@ -653,10 +577,7 @@ describe('Middleware inject:', () => {
     appTest.addClass(TestController);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .head('/')
-      .expect(200);
+    const response = await appTest.supertest().head('/').expect(200);
     expect(response).toMatchSnapshot();
     expect(result).toMatchSnapshot();
     expect(args).toMatchSnapshot();
@@ -677,10 +598,7 @@ describe('Middleware inject:', () => {
     appTest.addClass(TestController);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .delete('/')
-      .expect(200);
+    const response = await appTest.supertest().delete('/').expect(200);
     expect(response).toMatchSnapshot();
     expect(result).toMatchSnapshot();
     expect(args).toMatchSnapshot();
@@ -701,10 +619,7 @@ describe('Middleware inject:', () => {
     appTest.addClass(TestController);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .get('/')
-      .expect(200);
+    const response = await appTest.supertest().get('/').expect(200);
     expect(response).toMatchSnapshot();
     expect(result).toMatchSnapshot();
     expect(args).toMatchSnapshot();
@@ -727,10 +642,7 @@ describe('Middleware inject:', () => {
     appTest.addClass(TestController);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .get('/')
-      .expect(200);
+    const response = await appTest.supertest().get('/').expect(200);
     expect(response).toMatchSnapshot();
     expect(result).toMatchSnapshot();
     expect(args).toMatchSnapshot();
@@ -754,10 +666,7 @@ describe('Middleware inject:', () => {
     appTest.addClass(TestController);
     await appTest.buildAndStart();
 
-    const response = await appTest
-      .supertest()
-      .get('/')
-      .expect(200);
+    const response = await appTest.supertest().get('/').expect(200);
     expect(response).toMatchSnapshot();
     expect(result).toMatchSnapshot();
     expect(args).toMatchSnapshot();
@@ -791,10 +700,7 @@ describe('ToInterceptor', () => {
       appTest.addClass(TestController);
       await appTest.buildAndStart();
 
-      const response = await appTest
-        .supertest()
-        .get('/')
-        .expect(200);
+      const response = await appTest.supertest().get('/').expect(200);
       expect(response).toMatchSnapshot();
       expect(result).toMatchSnapshot();
     });
@@ -816,15 +722,12 @@ describe('ToInterceptor', () => {
         }
       }
 
-      const spyCtl = sinon.spy(TestController.prototype, 'getTest');
+      const spyCtl = spy(TestController.prototype, 'getTest');
 
       appTest.addClass(TestController);
       await appTest.buildAndStart();
 
-      await appTest
-        .supertest()
-        .get('/')
-        .expect(500);
+      await appTest.supertest().get('/').expect(500);
       expect(result).toMatchSnapshot();
       expect(spyCtl.notCalled).toBeTruthy();
     });
@@ -850,10 +753,7 @@ describe('ToInterceptor', () => {
       appTest.addClass(TestController);
       await appTest.buildAndStart();
 
-      const response = await appTest
-        .supertest()
-        .get('/')
-        .expect(200);
+      const response = await appTest.supertest().get('/').expect(200);
       expect(response).toMatchSnapshot();
       expect(result).toMatchSnapshot();
     });
@@ -875,15 +775,12 @@ describe('ToInterceptor', () => {
         }
       }
 
-      const spyCtl = sinon.spy(TestController.prototype, 'getTest');
+      const spyCtl = spy(TestController.prototype, 'getTest');
 
       appTest.addClass(TestController);
       await appTest.buildAndStart();
 
-      await appTest
-        .supertest()
-        .get('/')
-        .expect(500);
+      await appTest.supertest().get('/').expect(500);
       expect(result).toMatchSnapshot();
       expect(spyCtl.notCalled).toBeTruthy();
     });
@@ -909,10 +806,7 @@ describe('error next', () => {
     }
     appTest.addClass(TestController);
     await appTest.buildAndStart();
-    await appTest
-      .supertest()
-      .get('/0')
-      .expect(500);
+    await appTest.supertest().get('/0').expect(500);
   });
 });
 
@@ -972,8 +866,8 @@ describe('ExpressConverter errors', () => {
       }
     }
 
-    const spyA = sinon.spy(A.prototype, 'intercept');
-    const spyCtl = sinon.spy(TestController.prototype, 'getTest');
+    const spyA = spy(A.prototype, 'intercept');
+    const spyCtl = spy(TestController.prototype, 'getTest');
 
     appTest.addClass(TestController);
     appTest.addClass(ServerConfig);
@@ -1003,8 +897,8 @@ describe('ExpressConverter errors', () => {
       }
     }
 
-    const spyA = sinon.spy(A.prototype, 'intercept');
-    const spyCtl = sinon.spy(TestController.prototype, 'getTest');
+    const spyA = spy(A.prototype, 'intercept');
+    const spyCtl = spy(TestController.prototype, 'getTest');
 
     appTest.addClass(TestController);
     await appTest.build();
@@ -1012,10 +906,7 @@ describe('ExpressConverter errors', () => {
     appTest.gab.container.get(WebConfiguration).globalInterceptors.push(A);
     await appTest.start();
 
-    const response = await appTest
-      .supertest()
-      .get('/')
-      .expect(200);
+    const response = await appTest.supertest().get('/').expect(200);
     // const response = await appTest.supertest().get('/').expect(200);
     expect(response).toMatchSnapshot();
     expect(spyA.calledOnce).toMatchSnapshot();

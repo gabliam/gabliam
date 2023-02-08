@@ -6,7 +6,7 @@ import {
   WebConfigAfterControllers,
 } from '@gabliam/web-core';
 import { WebPluginTest } from '@gabliam/web-core/src/testing';
-import sinon from 'sinon';
+import { spy } from 'sinon';
 import ExpressConfig, { express as e } from '../../src';
 
 let appTest: WebPluginTest;
@@ -33,11 +33,11 @@ const middleware: any = {
     nextFunc(error);
   },
 };
-const spyA = sinon.spy(middleware, 'a');
-const spyB = sinon.spy(middleware, 'b');
-const spyC = sinon.spy(middleware, 'c');
-const spyE = sinon.spy(middleware, 'e');
-const spyD = sinon.spy(middleware, 'd');
+const spyA = spy(middleware, 'a');
+const spyB = spy(middleware, 'b');
+const spyC = spy(middleware, 'c');
+const spyE = spy(middleware, 'e');
+const spyD = spy(middleware, 'd');
 
 beforeEach(async () => {
   result = '';

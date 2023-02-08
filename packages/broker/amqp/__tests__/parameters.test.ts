@@ -1,5 +1,5 @@
 import { Gabliam } from '@gabliam/core';
-import sinon from 'sinon';
+import { spy } from 'sinon';
 import { AmqpConnection } from '../src/amqp-connection';
 import {
   Content,
@@ -47,8 +47,8 @@ afterEach(async () => {
           d.resolve(msg);
         }
       }
-      const spyConsumer = sinon.spy(ControllerTest.prototype, 'consumer');
-      const spyListener = sinon.spy(ControllerTest.prototype, 'listener');
+      const spyConsumer = spy(ControllerTest.prototype, 'consumer');
+      const spyListener = spy(ControllerTest.prototype, 'listener');
 
       appTest.addConf('application.amqp', conf);
       appTest.addClass(ControllerTest);
@@ -149,8 +149,8 @@ afterEach(async () => {
             d.resolve(content);
           }
         }
-        const spyConsumer = sinon.spy(ControllerTest.prototype, 'consumer');
-        const spyListener = sinon.spy(ControllerTest.prototype, 'listener');
+        const spyConsumer = spy(ControllerTest.prototype, 'consumer');
+        const spyListener = spy(ControllerTest.prototype, 'listener');
 
         appTest.addConf('application.amqp', conf);
         appTest.addClass(ControllerTest);
@@ -190,8 +190,8 @@ afterEach(async () => {
           d.resolve(content);
         }
       }
-      const spyConsumer = sinon.spy(ControllerTest.prototype, 'consumer');
-      const spyListener = sinon.spy(ControllerTest.prototype, 'listener');
+      const spyConsumer = spy(ControllerTest.prototype, 'consumer');
+      const spyListener = spy(ControllerTest.prototype, 'listener');
 
       appTest.addConf('application.amqp', conf);
       appTest.addClass(ControllerTest);
@@ -233,8 +233,8 @@ afterEach(async () => {
           d.resolve(content);
         }
       }
-      const spyConsumer = sinon.spy(ControllerTest.prototype, 'consumer');
-      const spyListener = sinon.spy(ControllerTest.prototype, 'listener');
+      const spyConsumer = spy(ControllerTest.prototype, 'consumer');
+      const spyListener = spy(ControllerTest.prototype, 'listener');
 
       appTest.addConf('application.amqp', conf);
       appTest.addClass(ControllerTest);
@@ -282,8 +282,8 @@ afterEach(async () => {
           d.resolve(content);
         }
       }
-      const spyConsumer = sinon.spy(ControllerTest.prototype, 'consumer');
-      const spyListener = sinon.spy(ControllerTest.prototype, 'listener');
+      const spyConsumer = spy(ControllerTest.prototype, 'consumer');
+      const spyListener = spy(ControllerTest.prototype, 'listener');
 
       appTest.addConf('application.amqp', conf);
       appTest.addClass(ControllerTest);
@@ -332,8 +332,8 @@ afterEach(async () => {
           d.resolve(content);
         }
       }
-      const spyConsumer = sinon.spy(ControllerTest.prototype, 'consumer');
-      const spyListener = sinon.spy(ControllerTest.prototype, 'listener');
+      const spyConsumer = spy(ControllerTest.prototype, 'consumer');
+      const spyListener = spy(ControllerTest.prototype, 'listener');
 
       appTest.addConf('application.amqp', conf);
       appTest.addClass(ControllerTest);
