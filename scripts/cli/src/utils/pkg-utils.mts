@@ -13,7 +13,7 @@ export const getInfoToNpm = async (tag: string) => {
 
 export const getCurrentVersion = async (tag: string) => {
   const rootPkgPath = getRootPkgPath();
-  const rootPkg = require(rootPkgPath);
+  const rootPkg = await fs.readJSON(rootPkgPath);
   const currentVersion = rootPkg.version;
   const npmVersion = await getInfoToNpm(tag);
   if (semver.gt(currentVersion, npmVersion)) {
