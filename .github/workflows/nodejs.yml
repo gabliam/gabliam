@@ -18,8 +18,6 @@ jobs:
 
       redis-server:
         image: redis
-        volumes:
-          - ./tests/conf:/usr/local/etc/redis
         options: >-
           --health-cmd "redis-cli ping"
           --health-interval 10s
