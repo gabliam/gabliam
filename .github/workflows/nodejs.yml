@@ -38,6 +38,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
+      - name: Cache NPM dependencies
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ matrix.node-version }}
       - name: Install Packages
         run: yarn install --immutable
       - name: Run lint
