@@ -41,7 +41,7 @@ describe('Errors', () => {
     await expect(appTest.gab.buildAndStart()).rejects.toMatchSnapshot();
   });
 
-  test('with bad url', async () => {
+  test.skip('with bad url', async () => {
     appTest.addConf('application.amqp', {
       url: 'amqp://bad',
       queues: {

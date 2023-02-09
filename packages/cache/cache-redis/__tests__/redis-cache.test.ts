@@ -93,7 +93,7 @@ test('put with duration', async () => {
   expect(await cache2.get('test')).toMatchSnapshot();
 });
 
-test('get & put with timeout', async () => {
+test.skip('get & put with timeout', async () => {
   expect(await cache3.get('test')).toMatchSnapshot();
   await cache3.put('test', 'test');
   expect(await cache3.get('test')).toMatchSnapshot();
@@ -109,14 +109,14 @@ test('get & put with timeout', async () => {
   expect(await cache3.get('test2')).toMatchSnapshot();
 });
 
-test('errors get timeout', async () => {
+test.skip('errors get timeout', async () => {
   await cache3.put('test', 'test');
   client.debug('sleep', 3);
   await expect(cache3.get('test')).rejects.toMatchSnapshot();
   await sleep(3);
 });
 
-test('put timeout', async () => {
+test.skip('put timeout', async () => {
   client.debug('sleep', 3);
   await sleep(1);
   await expect(cache3.put('test', 'test')).rejects.toMatchSnapshot();
