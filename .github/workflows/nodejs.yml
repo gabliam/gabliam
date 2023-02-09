@@ -2,14 +2,34 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ['master']
   pull_request:
-    branches: [ "master" ]
+    branches: ['master']
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+
+    services:
+      rabbitmq:
+        image: rabbitmq:alpine
+        ports:
+          - '5672:5672'
+
+      redis-server:
+        image: redis
+        volumes:
+          - ./tests/conf:/usr/local/etc/redis
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+          --protected-mode no
+          --enable-module-command yes
+          --enable-debug-command yes
+        ports:
+          - '6379:6379'
 
     strategy:
       matrix:
@@ -17,17 +37,17 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'yarn'
-    - name: Install Packages
-      run: yarn install --immutable
-    - name: Run lint
-      run: yarn run lint
-    - name: Run tests
-      run: yarn run test:ci
-    - name: Collect coverage
-      run: yarn coverage
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+      - name: Install Packages
+        run: yarn install --immutable
+      - name: Run lint
+        run: yarn run lint
+      - name: Run tests
+        run: yarn run test:ci
+      - name: Collect coverage
+        run: yarn coverage
