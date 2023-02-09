@@ -14,8 +14,8 @@
     "example:koa:typeorm": "SERVER_TYPE=koa lerna run --scope typeorm-sample start --stream",
     "lint": "eslint 'packages/**/**.ts'",
     "prettier": "prettier --single-quote --write --parser typescript \"./{packages,examples}/**/src/**/*.ts\"",
-    "release": "ts-node ./scripts/release/release.ts",
-    "release:canary": "ts-node ./scripts/release/release.ts --canary",
+    "release": "npx gabliam-release",
+    "release:canary": "npx gabliam-release --canary",
     "test": "jest --runInBand",
     "test:ci": "jest --runInBand --coverage",
     "postinstall": "husky install"
