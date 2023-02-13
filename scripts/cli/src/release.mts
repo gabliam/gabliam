@@ -16,6 +16,7 @@ export const releaseCommand = async () => {
   await removeOld();
   spinner.text = 'Build';
   await build(spinner, version);
+  spinner.succeed('Build success');
   await confirm(`BUILD OK, Confirm to publish version: ${version}`);
   await publish(spinner, params, version);
   spinner.succeed('Publish success');
